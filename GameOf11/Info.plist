@@ -20,10 +20,34 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+    
+    <key>FacebookAppID</key>
+    <string>1160491947459647</string>
+    <key>AccountKitClientToken</key>
+    <string>0c6ea9d5add77721bb45fc5e8f0c6fa1</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>ak1160491947459647</string>
+            </array>
+        </dict>
+    </array>
+    
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow $(PRODUCT_NAME) to access your camera so that you can capture an image and upload</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please Allow $(PRODUCT_NAME) to access your camera roll so that you can upload any photo from your photo album</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>Auth</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -39,14 +63,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Please allow $(PRODUCT_NAME) to access your camera so that you can capture an image and upload</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please Allow $(PRODUCT_NAME) to access your camera roll so that you can upload any photo from your photo album</string>
 </dict>
 </plist>

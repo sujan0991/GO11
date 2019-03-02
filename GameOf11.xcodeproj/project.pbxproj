@@ -55,6 +55,8 @@
 		0CE8836721DFDEDB0025A31E /* ContestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE8836521DFDEDB0025A31E /* ContestTableViewCell.xib */; };
 		0CE8836921DFE0AF0025A31E /* ContestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */; };
 		0CE8836B21E0000E0025A31E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8836A21E0000E0025A31E /* LoginViewController.swift */; };
+		641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E1768222A9A7D00302A19 /* SignUpViewController.swift */; };
+		641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */; };
 		B2D46F7F65669124A0E361D5 /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECBB971ED7EF347DF27EF25 /* Pods_GameOf11.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +111,8 @@
 		0CE8836521DFDEDB0025A31E /* ContestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContestTableViewCell.xib; sourceTree = "<group>"; };
 		0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestListViewController.swift; sourceTree = "<group>"; };
 		0CE8836A21E0000E0025A31E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		641E1768222A9A7D00302A19 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSignedProfileViewController.swift; sourceTree = "<group>"; };
 		BB3C0DFD4C09C2AC1FBB8A56 /* Pods-GameOf11.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameOf11.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11.debug.xcconfig"; sourceTree = "<group>"; };
 		CECBB971ED7EF347DF27EF25 /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA071A4862D02ED4B1736182 /* Pods-GameOf11.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameOf11.release.xcconfig"; path = "Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 				0C33367A21DF3AB100E6EB11 /* SplashViewController.swift */,
 				0C0BE62521DA293F00BE30CF /* BaseViewController.swift */,
 				0CE8836A21E0000E0025A31E /* LoginViewController.swift */,
+				641E1768222A9A7D00302A19 /* SignUpViewController.swift */,
 				0C3336CE21DF488D00E6EB11 /* HomeViewController.swift */,
 				0C3336D021DF489A00E6EB11 /* MyContestViewController.swift */,
 				0C78C1FE222450AB0068B5D6 /* MoreViewController.swift */,
@@ -162,6 +167,7 @@
 				0C78C1F622244F3B0068B5D6 /* RedeemCoinViewController.swift */,
 				0C78C1F722244F3C0068B5D6 /* VerifyAccountViewController.swift */,
 				0C78C1F822244F3D0068B5D6 /* WithdrawRequestViewController.swift */,
+				641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 				0C676CEA21B7E97E00F21072 /* Frameworks */,
 				0C676CEB21B7E97E00F21072 /* Resources */,
 				48E81D19CCDD50EE231FE7AD /* [CP] Embed Pods Frameworks */,
+				F003475949B4A88DD7D43832 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -436,6 +443,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F003475949B4A88DD7D43832 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11-resources.sh",
+				"${PODS_ROOT}/AccountKit/AccountKitStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccountKitStrings.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -453,6 +478,7 @@
 				0CE8836921DFE0AF0025A31E /* ContestListViewController.swift in Sources */,
 				0C3336C721DF419400E6EB11 /* Extension.swift in Sources */,
 				0C33368221DF3B0400E6EB11 /* CustomNavigationBar.swift in Sources */,
+				641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */,
 				0C8B95ED21E1144400ADE46B /* ValidationManager.swift in Sources */,
 				0C78C1FB22244F450068B5D6 /* RedeemCoinViewController.swift in Sources */,
 				0C78C1FC22244F450068B5D6 /* VerifyAccountViewController.swift in Sources */,
@@ -474,6 +500,7 @@
 				0CE8836221DFD5730025A31E /* PlayerTableViewCell.swift in Sources */,
 				0C3336CF21DF488D00E6EB11 /* HomeViewController.swift in Sources */,
 				0C33367B21DF3AB100E6EB11 /* SplashViewController.swift in Sources */,
+				641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

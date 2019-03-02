@@ -1,4 +1,5 @@
 PODS:
+  - AccountKit (4.35.0)
   - Alamofire (5.0.0.beta.1)
   - Bond (7.0.0):
     - Differ (~> 1.3)
@@ -20,6 +21,7 @@ PODS:
   - ViewUtils (1.1.2)
 
 DEPENDENCIES:
+  - AccountKit
   - Alamofire (~> 5.0.0.beta.1)
   - Bond
   - DTPagerController
@@ -35,6 +37,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AccountKit
     - Alamofire
     - Bond
     - Differ
@@ -52,6 +55,7 @@ SPEC REPOS:
     - ViewUtils
 
 SPEC CHECKSUMS:
+  AccountKit: 870ccaf5d33facda9408783e28fbe68c5211e069
   Alamofire: 2ef6d6c984c5d21c366e9b41a9ae7dfee2b67a44
   Bond: 7928751991aee53c1b746e82735a7214db2cb09f
   Differ: 9fcee7602542d7c6484ce05a0faec1c11258ed63
@@ -68,6 +72,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   ViewUtils: 68e42c708a4b3912e39691cef5080282dc5013fb
 
-PODFILE CHECKSUM: 1d6bc2a02570045dc90a6e356d6f62fe5bd3b22f
+PODFILE CHECKSUM: 56b9faa7166286c85b32f5f439bb2da2b7d30903
 
 COCOAPODS: 1.5.3

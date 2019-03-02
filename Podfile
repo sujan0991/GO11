@@ -19,5 +19,6 @@ target 'GameOf11' do
 	pod 'ViewUtils', '~> 1.1'
 	pod 'SnapKit', '~> 4.0.0'
     pod 'DTPagerController'
+    pod 'AccountKit'
 
 end
