@@ -612,6 +612,8 @@ class ContestData: Glossy {
     }
 }
 
+
+
 class FantaysTeamPreviewData: Glossy {
     
     var fantasyPlayersList: [Player] = []
@@ -751,4 +753,316 @@ class ProductModel:NSObject, Glossy,MKAnnotation {
     }
 }
 
+class LeaderBoardUserListData: Glossy {
+    
+    
+    var username: String?
+    var avatar: String?
+    var user_team_id:Int?
+    var rank:Int?
+    var team_name:String?
+    var team_earning_point:Float?
+    
+    required init?(json: Gloss.JSON) {
+        username = "username" <~~ json
+        avatar = "avatar" <~~ json
+        user_team_id = "user_team_id" <~~ json
+        rank = "rank" <~~ json
+        team_name = "team_name" <~~ json
+        team_earning_point = "team_earning_point" <~~ json
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "username" ~~> username,
+            "avatar" ~~> avatar,
+            "user_team_id" ~~> user_team_id,
+            "rank" ~~> rank,
+            "team_name" ~~> team_name,
+            "team_earning_point" ~~> team_earning_point,
+            ])
+    }
+}
 
+class LeaderBoardData: Glossy {
+    
+    var contest_id: Int?
+    var match_status_id:Int?
+    var user_rank:Int?
+    var username:String?
+    var user_team_id:Int?
+    var user_avatar:String?
+    var user_team_name:String?
+    var team_earning_point:Float?
+    var last_updated_time:String?
+    var total_page_number:Int?
+    var leaderboard: [LeaderBoardUserListData] = []
+    
+    
+    required init?(json: Gloss.JSON) {
+        contest_id = "contest_id" <~~ json
+        match_status_id = "match_status_id" <~~ json
+        user_rank = "user_rank" <~~ json
+        username = "username" <~~ json
+        user_team_id = "user_team_id" <~~ json
+        user_avatar = "user_avatar" <~~ json
+        user_team_name = "user_team_name" <~~ json
+        team_earning_point = "team_earning_point" <~~ json
+        last_updated_time = "last_updated_time" <~~ json
+        total_page_number = "total_page_number" <~~ json
+        leaderboard = "leaderboard" <~~ json ?? []
+        
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "contest_id" ~~> contest_id,
+            "match_status_id" ~~> match_status_id,
+            "user_rank" ~~> user_rank,
+            "subtiusernametle" ~~> username,
+            "user_team_id" ~~> user_team_id,
+            "user_avatar" ~~> user_avatar,
+            "user_team_name" ~~> user_team_name,
+            "team_earning_point" ~~> team_earning_point,
+            "last_updated_time" ~~> last_updated_time,
+            "total_page_number" ~~> total_page_number,
+            "leaderboard" ~~> leaderboard
+            ])
+    }
+}
+
+class TeamScoreData: Glossy {
+    
+    
+    var team_name:String?
+    var team_key:String?
+    var is_first_batting:Int?
+    var team_earning_point:Float?
+    var score:String?
+    
+    required init?(json: Gloss.JSON) {
+        team_name = "team_name" <~~ json
+        team_key = "team_key" <~~ json
+        is_first_batting = "is_first_batting" <~~ json
+        
+        score = "score" <~~ json
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "team_name" ~~> team_name,
+            "team_key" ~~> team_key,
+            "is_first_batting" ~~> is_first_batting,
+            
+            "score" ~~> score,
+            ])
+    }
+}
+
+class MatchScoreData: Glossy {
+    
+    
+    var match_id:Int?
+    var match_format:String?
+    var match_status_id:Int?
+    
+    var match_name:String?
+    var result:String?
+    var teams: [TeamScoreData] = []
+    
+    
+    required init?(json: Gloss.JSON) {
+        match_id = "match_id" <~~ json
+        match_format = "match_format" <~~ json
+        match_status_id = "match_status_id" <~~ json
+        match_name = "match_name" <~~ json
+        result = "result" <~~ json
+        teams = "teams" <~~ json ?? []
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "match_id" ~~> match_id ,
+            "match_format" ~~> match_format,
+            "match_status_id" ~~> match_status_id,
+            "match_name" ~~> match_name,
+            "result" ~~> result,
+            "teams" ~~> teams,
+            ])
+    }
+}
+
+
+class PointBreakDown: Glossy {
+    
+    
+    var player_id:Int?
+    var runs:Int?
+    var sixes:Int?
+    
+    var fours:Int?
+    var strike_rate:Double?
+    var dismissed:Int?
+
+    var wickets:Int?
+    var maiden_overs:Int?
+    var economy:Double?
+
+    var catches:Int?
+    var runouts:Int?
+    var stumbeds:Int?
+
+    
+    
+    required init?(json: Gloss.JSON) {
+        player_id = "player_id" <~~ json
+        runs = "runs" <~~ json
+        sixes = "sixes" <~~ json
+        
+        fours = "fours" <~~ json
+        strike_rate = "strike_rate" <~~ json
+        dismissed = "dismissed" <~~ json
+        
+        wickets = "wickets" <~~ json
+        maiden_overs = "maiden_overs" <~~ json
+        economy = "economy" <~~ json
+        
+        catches = "catches" <~~ json
+        runouts = "runouts" <~~ json
+        stumbeds = "stumbeds" <~~ json
+        
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "player_id" ~~> player_id ,
+            "runs" ~~> runs,
+            "sixes" ~~> sixes,
+            "fours" ~~> fours,
+            "strike_rate" ~~> strike_rate,
+            "dismissed" ~~> dismissed,
+            "wickets" ~~> wickets ,
+            "maiden_overs" ~~> maiden_overs,
+            "economy" ~~> economy,
+            "catches" ~~> catches,
+            "runouts" ~~> runouts,
+            "stumbeds" ~~> stumbeds,
+
+            ])
+    }
+}
+
+
+class PlayerInfoData: Glossy {
+    
+    
+    var player_id:Int?
+    var player_name:String?
+    var player_role:String?
+    
+    var player_image:String?
+    var is_captain:Int?
+    var is_vice_captain:Int?
+    
+    var player_earning_point:Float?
+    var last_updated_time:String?
+    var is_in_playing_xi:String?
+    var point_breakdown: PointBreakDown?
+    
+    
+    required init?(json: Gloss.JSON) {
+        player_id = "player_id" <~~ json
+        player_name = "player_name" <~~ json
+        player_role = "player_role" <~~ json
+        player_image = "player_image" <~~ json
+        is_captain = "is_captain" <~~ json
+        is_vice_captain = "is_vice_captain" <~~ json
+        player_earning_point = "player_earning_point" <~~ json
+        last_updated_time = "last_updated_time" <~~ json
+        is_in_playing_xi = "is_in_playing_xi" <~~ json
+        point_breakdown = "point_breakdown" <~~ json
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            
+            "player_id" ~~> player_id ,
+            "player_name" ~~> player_name,
+            "player_role" ~~> player_role,
+            "player_image" ~~> player_image,
+            "is_captain" ~~> is_captain,
+            "is_vice_captain" ~~> is_vice_captain,
+            "player_earning_point" ~~> player_earning_point ,
+            "last_updated_time" ~~> last_updated_time,
+            "is_in_playing_xi" ~~> is_in_playing_xi,
+            "point_breakdown" ~~> point_breakdown,
+            
+            ])
+    }
+}
+
+
+class TeamInfoData: Glossy {
+    
+    
+    var user_team_id:String?
+    var team_name:String?
+    var team_earning_point:Float?
+    
+    var player_info: [PlayerInfoData] = []
+    
+    
+    
+    required init?(json: Gloss.JSON) {
+        user_team_id = "user_team_id" <~~ json
+        team_name = "team_name" <~~ json
+        team_earning_point = "team_earning_point" <~~ json
+        player_info = "player_info" <~~ json ?? []
+        
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            
+            "user_team_id" ~~> user_team_id ,
+            "team_name" ~~> team_name,
+            "team_earning_point" ~~> team_earning_point,
+            "player_info" ~~> player_info,
+            
+            
+            ])
+    }
+}
+
+
+class BreakDownData: Glossy {
+    
+    
+    var match_id:String?
+    var match_status_id:Int?
+    var is_calculation_complete:Int?
+    
+    var team_info: TeamInfoData?
+    
+    
+    
+    required init?(json: Gloss.JSON) {
+        match_id = "match_id" <~~ json
+        match_status_id = "match_status_id" <~~ json
+        is_calculation_complete = "is_calculation_complete" <~~ json
+        team_info = "team_info" <~~ json
+        
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            
+            "match_id" ~~> match_id ,
+            "match_status_id" ~~> match_status_id,
+            "is_calculation_complete" ~~> is_calculation_complete,
+            "team_info" ~~> team_info,
+            
+            
+            ])
+    }
+}

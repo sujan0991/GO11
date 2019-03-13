@@ -28,6 +28,10 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
     @IBOutlet weak var statusLabel: UILabel!
     
     var parentMatch: MatchList? = nil
+    var type : MatchType = .upcomingContest
+    
+    var contest_id = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,22 +48,43 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
         contestTableView.dataSource = self
         contestTableView.removeEmptyCells()
         
+        print("type ",type);
         
-        
-        APIManager.manager.getActiveContestList(matchId: "\(parentMatch?.matchId ?? 0)") { (status, cm, msg) in
-            if status{
-                if cm != nil{
-                    
-                    // self.fill(u)
-                    self.activeContestList = (cm?.contests)!
-                    self.contestTableView.reloadData()
+        if type == .upcomingContest || type == .liveContest || type == .completedContest {
+            
+            APIManager.manager.getJoinedActiveContestList(matchId: "\(parentMatch?.matchId ?? 0)") { (status, cm, msg) in
+                if status{
+                    if cm != nil{
+                        
+                        // self.fill(u)
+                        self.activeContestList = (cm?.contests)!
+                        self.contestTableView.reloadData()
+                    }
+                }
+                else{
+                    self.showStatus(status, msg: msg)
                 }
             }
-            else{
-                self.showStatus(status, msg: msg)
+            
+            self.footerView.isHidden = true
+
+        }else{
+            
+            APIManager.manager.getActiveContestList(matchId: "\(parentMatch?.matchId ?? 0)") { (status, cm, msg) in
+                if status{
+                    if cm != nil{
+                        
+                        // self.fill(u)
+                        self.activeContestList = (cm?.contests)!
+                        self.contestTableView.reloadData()
+                    }
+                }
+                else{
+                    self.showStatus(status, msg: msg)
+                }
             }
+
         }
-        
         self.firstTeamName.text = self.parentMatch?.teams.item(at: 0).teamKey ?? ""
         self.secondTeamName.text = self.parentMatch?.teams.item(at: 1).teamKey ?? ""
         self.statusLabel.text = String.init(format: "Ends: %@",self.parentMatch?.joiningLastTime ?? "" )
@@ -71,23 +96,31 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
         self.firstTeamFlag.kf.setImage(with: url1)
         self.secondTeamFlag.kf.setImage(with: url2)
 
+        
+        print("AppSessionManager.shared.authToken ",AppSessionManager.shared.authToken ?? "")
     }
     
     override func viewDidAppear(_ animated: Bool) {
-       
-        APIManager.manager.getMatchSquad(matchId: "\(parentMatch?.matchId ?? 0)") { (status, matchSquad, msg) in
-            if status{
-                if matchSquad != nil{
-                    //self.activeContestList = (matchSquad?.contests)!
-                    self.nextButton.isEnabled = true
-                    self.squadData = matchSquad
-
+      
+        if type == .next {
+            
+            print("type ..",type)
+            
+            APIManager.manager.getMatchSquad(matchId: "\(parentMatch?.matchId ?? 0)") { (status, matchSquad, msg) in
+                if status{
+                    if matchSquad != nil{
+                        //self.activeContestList = (matchSquad?.contests)!
+                        self.nextButton.isEnabled = true
+                        self.squadData = matchSquad
+                        
+                    }
+                }
+                else{
+                    self.showStatus(status, msg: msg)
                 }
             }
-            else{
-                self.showStatus(status, msg: msg)
-            }
         }
+        
         
 //        APIManager.manager.getTeamForMatch(matchId: "\(parentMatch?.matchId ?? 0)") { (status, createdTeam, msg) in
 //            if status{
@@ -121,7 +154,25 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
   
+        print("didSelectRowAt")
         
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+
+        let VC = storyboard.instantiateViewController(withIdentifier: "ContestLeaderBoardViewController") as! ContestLeaderBoardViewController
+
+        let contest = activeContestList[indexPath.section]
+        
+        print("parentMatch?.matchId",parentMatch?.matchId ?? 0)
+        
+        VC.contest_id = contest.id
+        VC.match_id = parentMatch?.matchId
+        
+       // self.navigationController?.pushViewController(VC, animated: true)
+        
+        self.present(VC, animated: true) {
+            
+            print("open")
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130

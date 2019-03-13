@@ -31,7 +31,7 @@ enum RequestAction:String {
 struct API_K {
     static let DEVICE_TYPE = "iOS"
     static let API_KEY = "base64:8WGdd0uX3GtRtTxeOyuHd3864Mqfc6C/cbhzpEZUdxA="
-    static let BaseUrlStr:String = "http://159.65.128.173/"
+    static let BaseUrlStr:String = "http://13.58.193.155/"
 
     static let BaseURL = URL(string:"\(BaseUrlStr)api/")!
     
@@ -53,9 +53,16 @@ struct API_K {
     static let GET_MATCH_SQUAD = "get-team-players"//
     static let GET_USERS_TEAM_FOR_MATCH = "get-user-teams"//
     
-    static let GET_UPCOMING_CONTEST_MATCH_LIST = "upcoming-match-contests"//
-    static let GET_LIVE_CONTEST_MATCH_LIST = "live-match-contests"//
-    static let GET_COMPLETED_CONTEST_MATCH_LIST = "completed-match-contests"//
+    static let GET_UPCOMING_CONTEST_MATCH_LIST = "user/upcoming-match-contests"//
+    static let GET_LIVE_CONTEST_MATCH_LIST = "user/live-match-contests"//
+    static let GET_COMPLETED_CONTEST_MATCH_LIST = "user/completed-match-contests"//
+    static let GET_USER_JOINRD_CONTEST_LIST = "user/match/contests"//
+    
+    static let GET_LEADERBOARD_CONTEST = "contest/leaderboard"//
+    static let GET_LEADERBOARD_BREAKDOWN = "contest/leaderboard/point-breakdown"//
+    
+    static let GET_MATCH_SCORE = "live-match-score"//
+    
     
     static let CREATE_OTP = "createOtp"
     static let GET_PASSWORD = "retrievePassword"
@@ -710,6 +717,111 @@ class APIManager: NSObject {
         }
     }
     
+    func getJoinedActiveContestList(matchId:String,completion:(( _ status: Bool,_ user:ContestList?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["match_id":matchId]
+        getDataModel(params, method: API_K.GET_USER_JOINRD_CONTEST_LIST) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    if let histories = ContestList.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+    
+    func getLeaderBoardOfCntest(contestId:String,pageNo:String,completion:(( _ status: Bool,_ data:LeaderBoardData?, _ message: String?)->Void)?) {
+
+        let params:[String:String] = ["contest_id":contestId,"page_number":pageNo]
+
+        getDataModel(params, method: API_K.GET_LEADERBOARD_CONTEST) { (sts, dataModel,msg) in
+
+            if sts{
+
+                if let jsA = dataModel{
+                    if let histories = LeaderBoardData.init(json: jsA) {
+                        completion?(true,histories,msg)
+
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+    
+    func getMatchScore(matchId:String,completion:(( _ status: Bool,_ data:MatchScoreData?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["match_id":matchId]
+        
+        getDataModel(params, method: API_K.GET_MATCH_SCORE) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    if let histories = MatchScoreData.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+    
+    func getBreakDownOfCntest(match_id:String,user_team_id:String,completion:(( _ status: Bool,_ data:BreakDownData?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["match_id":match_id,"user_team_id":user_team_id]
+        
+        getDataModel(params, method: API_K.GET_LEADERBOARD_BREAKDOWN) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    if let histories = BreakDownData.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+    
+    
+    
     func getMatchSquad(matchId:String,completion:(( _ status: Bool,_ user:MatchSquadData?, _ message: String?)->Void)?) {
         
         let params:[String:String] = ["match_id":matchId]
@@ -836,7 +948,7 @@ class APIManager: NSObject {
             
             switch responseData.result {
             case .success(let value):
-                print(value)
+                print("responseData",value)
                 SVProgressHUD.dismiss()
                 let json = JSON(value)
                 

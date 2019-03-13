@@ -21,8 +21,8 @@ class LoginViewController: BaseViewController {
         // Do any additional setup after loading the view.
         
        // phoneField.text = "+8801715257212"
-        phoneField.text = "+8801686443334"
-        passwordField.text = "palash0802"
+        phoneField.text = "+8801729360267"
+        passwordField.text = "123456"
             
         
         signinButton.makeRound(5, borderWidth: 0, borderColor: .clear)
