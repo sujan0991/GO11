@@ -51,7 +51,7 @@ class ContestLeaderBoardViewController: BaseViewController,UITableViewDelegate,U
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        placeNavBar(withTitle: "POINT BREAKDOWN", isBackBtnVisible: true)
+        placeNavBar(withTitle: "LeaderBoard", isBackBtnVisible: true)
         
         print("contest_id",contest_id ?? 0,match_id ?? 0)
         
@@ -152,6 +152,7 @@ class ContestLeaderBoardViewController: BaseViewController,UITableViewDelegate,U
         
         vc?.matchId = matchData?.match_id ?? 0
         vc?.teamId = singleUser?.user_team_id ?? 0
+        vc?.matchType = matchData?.match_format
         
         self.present(vc!, animated: true) {
             

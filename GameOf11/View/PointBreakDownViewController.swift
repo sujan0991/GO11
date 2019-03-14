@@ -17,6 +17,9 @@ class PointBreakDownViewController: BaseViewController,UITableViewDelegate,UITab
     var leaderBoardData:BreakDownData?
     var playerInfo:PlayerInfoData?
     
+    var matchType:String?
+    
+    
     @IBOutlet weak var closeButton: UIButton!
     
     @IBOutlet weak var pointTableView: UITableView!
@@ -66,7 +69,7 @@ class PointBreakDownViewController: BaseViewController,UITableViewDelegate,UITab
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        placeNavBar(withTitle: "POINT BREAKDOWN", isBackBtnVisible: true)
+        placeNavBar(withTitle: "Point Brakdown", isBackBtnVisible: true)
         
         pointTableView.delegate = self
         pointTableView.dataSource = self
@@ -137,6 +140,48 @@ class PointBreakDownViewController: BaseViewController,UITableViewDelegate,UITab
         self.econValueLabel.text = "\(singlePlayerPoint?.economy ?? 0)"
         self.runOutValueLabel.text = "\(singlePlayerPoint?.runouts ?? 0)"
         self.stumpingValueLabel.text = "\(singlePlayerPoint?.stumbeds ?? 0)"
+        
+        if self.matchType == "one-day" {
+            
+            self.isInXIPointLabel.text = "2"
+            self.runsPointLabel.text = "\(Float((singlePlayerPoint?.runs)!) * 0.5)"
+            self.fourPointLabel.text = "\(Float((singlePlayerPoint?.fours)!) * 0.5)"
+            self.sixPointLabel.text = "\(Float((singlePlayerPoint?.sixes)!) * 1.0)"
+            
+            if Int((singlePlayerPoint?.strike_rate)!) < 40 {
+                
+                self.strikePointLabel.text = "\(Float((singlePlayerPoint?.strike_rate)!) * -3.0)"
+                
+            }else if (Float((singlePlayerPoint?.strike_rate)!) < 49.9 && Int((singlePlayerPoint?.strike_rate)!) > 40  ){
+                
+                self.strikePointLabel.text = "\(Float((singlePlayerPoint?.strike_rate)!) * -2.0)"
+                
+            
+            }else if (Float((singlePlayerPoint?.strike_rate)!) < 60 && Int((singlePlayerPoint?.strike_rate)!) > 50  ){
+                
+                self.strikePointLabel.text = "\(Float((singlePlayerPoint?.strike_rate)!) * -1.0)"
+                
+                
+            }else{
+            self.strikePointLabel.text = "\(Float((singlePlayerPoint?.strike_rate)!) * 0.0)"
+            }
+            
+            self.catchPointLabel.text = "\(Float((singlePlayerPoint?.catches)!) * 4.0)"
+            self.wicketPointLabel.text = "\(Float((singlePlayerPoint?.wickets)!) * 12.0)"
+            
+            self.maidenPointLabel.text = "\(Float((singlePlayerPoint?.maiden_overs)!) * 2.0)"
+            
+            //Have to calculate like strike rate
+           // self.econPointLabel.text = "\(Float((singlePlayerPoint?.sixes)!) * 1.0)"
+            
+            
+            self.runOutPointLabel.text = "\(Float((singlePlayerPoint?.runouts)!) * 6.0)"
+            self.stumpingPointLabel.text = "\(Float((singlePlayerPoint?.stumbeds)!) * 6.0)"
+            
+        }else if self.matchType == "t20"{
+            
+            
+        }
         
         
     }
