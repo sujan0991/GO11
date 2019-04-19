@@ -19,8 +19,6 @@ class SplashViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         if AppSessionManager.shared.authToken != nil{
-        
-            
             APIManager.manager.getMyProfile { (status, um, msg) in
                 if status{
                     if let u = um{
@@ -28,23 +26,21 @@ class SplashViewController: BaseViewController {
                         AppSessionManager.shared.currentUser = u
                         AppSessionManager.shared.save()
                        // self.fill(u)
-                        
                     }
                 }
                 else{
                     self.showStatus(status, msg: msg)
                 }
-                
                 self.performSegue(withIdentifier: "homeSegue", sender: self)
             }
            
-            
-          
         }
         else
         {
          //auth
             self.performSegue(withIdentifier: "authSegue", sender: self)
+          //  self.performSegue(withIdentifier: "homeSegue", sender: self)
+            
         }
         
     }

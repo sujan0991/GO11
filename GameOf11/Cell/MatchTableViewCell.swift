@@ -22,6 +22,7 @@ class MatchTableViewCell: UITableViewCell {
     @IBOutlet weak var secondTeamFlag: UIImageView!
     @IBOutlet weak var secondTeamName: UILabel!
     
+    @IBOutlet weak var contestNumberView: UIView!
     
     @IBOutlet weak var contestLabel: UILabel!
     @IBOutlet weak var seeContestButton: UIButton!
@@ -33,6 +34,8 @@ class MatchTableViewCell: UITableViewCell {
         
         vsLabel.makeCircular(borderWidth: 1, borderColor: UIColor.init(named: "HighlightGrey")!)
         self.containerView.layer.cornerRadius = 5
+        
+        self.contestNumberView.layer.cornerRadius = 5
         
         self.containerView.layer.applySketchShadow(
             color: UIColor.init(named: "ShadowColor")!,
@@ -50,6 +53,7 @@ class MatchTableViewCell: UITableViewCell {
         statusLabel.text = String.init(format: "Ends: %@",match.joiningLastTime ?? "" )
         
         contestMessageHeightConstraint.constant = 0
+        contestLabel.text = String.init(format: "Contest Joined : %d", match.totalJoinedContests ?? 0)
         
       //  let urlStr = "\(API_K.BaseUrlStr)public/images/blog/\(blog.image ?? "")"
         
@@ -62,7 +66,6 @@ class MatchTableViewCell: UITableViewCell {
 //
 //        secondTeamFlag?.kf.setImage(with: url2, placeholder: UIImage.init(named: "IndiaFlag"), options: nil, progressBlock: nil, completionHandler: nil)
 //
-        
         self.needsUpdateConstraints()
         self.setNeedsLayout()
         statusBackground.roundCorners([.bottomLeft,.bottomRight], radius: 5)

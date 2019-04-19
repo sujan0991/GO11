@@ -31,7 +31,9 @@ enum RequestAction:String {
 struct API_K {
     static let DEVICE_TYPE = "iOS"
     static let API_KEY = "base64:8WGdd0uX3GtRtTxeOyuHd3864Mqfc6C/cbhzpEZUdxA="
-    static let BaseUrlStr:String = "http://13.58.193.155/"
+    static let BaseUrlStr:String =  "http://18.224.1.221/" //"http://159.65.128.173/" //
+    //http://159.65.128.173/
+    //http://18.224.1.221/
 
     static let BaseURL = URL(string:"\(BaseUrlStr)api/")!
     
@@ -52,6 +54,9 @@ struct API_K {
     static let GET_ACTIVE_CONTEST_LIST = "active-contests"//
     static let GET_MATCH_SQUAD = "get-team-players"//
     static let GET_USERS_TEAM_FOR_MATCH = "get-user-teams"//
+    static let GET_USERS_TEAM_PLAYERS = "get-user-team-players"
+    static let POST_TEAM = "user-team/create"
+    static let JOIN_CONTEST = "user-contest/join"
     
     static let GET_UPCOMING_CONTEST_MATCH_LIST = "user/upcoming-match-contests"//
     static let GET_LIVE_CONTEST_MATCH_LIST = "user/live-match-contests"//
@@ -60,15 +65,13 @@ struct API_K {
     
     static let GET_LEADERBOARD_CONTEST = "contest/leaderboard"//
     static let GET_LEADERBOARD_BREAKDOWN = "contest/leaderboard/point-breakdown"//
-    
     static let GET_MATCH_SCORE = "live-match-score"//
-    
     
     static let CREATE_OTP = "createOtp"
     static let GET_PASSWORD = "retrievePassword"
   
-    static let  ADD_FRIEND = "addFriend"
-    static let  GET_FRIEND = "getFriend"
+    static let ADD_FRIEND = "addFriend"
+    static let GET_FRIEND = "getFriend"
     static let GET_WOULD_FRIEND = "getWouldBeFriend"
     static let ACCEPT_REJECT_FRIEND = "actionToFriendRequest"
     static let REMOVE_FRIEND = "removeFriend"
@@ -77,9 +80,7 @@ struct API_K {
 struct API_STRING {
     
     static let  PROPILE_REVIEW_ALERT = "Please set up your profile"
-    
     static let  LOGIN_VALIDATION_TEXT = "The duplicate key value is"
-    
     static let  NOTE_ADD_SUCCESS = "Note sent successfully"
     static let  COMMENT_ADD_SUCCESS = "Feedback sent successfully"
     static let  POST_ADD_SUCCESS = "Upload ad successful"
@@ -691,6 +692,30 @@ class APIManager: NSObject {
             }
         })
     }
+    func getTeamForMatch(matchId:String,completion:(( _ status: Bool,_ user:CreatedTeamList?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["match_id":matchId]
+        getResponseDataModel(params, method: API_K.GET_USERS_TEAM_FOR_MATCH) { (sts, dataModel,msg) in
+            
+            if sts{
+                if let jsA = dataModel{
+                    if let histories = CreatedTeamList.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+    
     
     func getActiveContestList(matchId:String,completion:(( _ status: Bool,_ user:ContestList?, _ message: String?)->Void)?) {
       
@@ -715,6 +740,82 @@ class APIManager: NSObject {
                 completion?(false,nil,msg)
             }
         }
+    }
+    
+    
+    func postTeam(params: UsersFantasyTeam, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
+        RequestForJson(.post, API_K.POST_TEAM, parameters: params.toJSON())?.responseJSON(completionHandler: { (responseData) in
+            
+            print("Created Team data", responseData)
+            
+            switch responseData.result {
+                
+            case .success(let value):
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,error.localizedDescription)
+            }
+        })
+    }
+    
+    func joinInContestWith(contestId:String, teamId:String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["contest_id":contestId,
+                                      "user_team_id":teamId,
+                                      ]
+        
+        Request(.post, API_K.JOIN_CONTEST, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    var isSuccess:Bool?
+                    
+                    isSuccess = jsonDic["status"] as? Bool ?? true
+                    
+                    if !isSuccess!{
+                        let msg:String? = json["message"].stringValue
+                        
+                        completion?(false,msg)
+                    }
+                    else{
+                        
+                        completion?(true,"Success")
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,error.localizedDescription)
+            }
+        })
     }
     
     func getJoinedActiveContestList(matchId:String,completion:(( _ status: Bool,_ user:ContestList?, _ message: String?)->Void)?) {
@@ -846,29 +947,6 @@ class APIManager: NSObject {
             }
         }
     }
-    func getTeamForMatch(matchId:String,completion:(( _ status: Bool,_ user:CreatedTeam?, _ message: String?)->Void)?) {
-        
-        let params:[String:String] = ["match_id":matchId]
-        getDataModel(params, method: API_K.GET_MATCH_SQUAD) { (sts, dataModel,msg) in
-            
-            if sts{
-                if let jsA = dataModel{
-                    if let histories = CreatedTeam.init(json: jsA) {
-                        completion?(true,histories,msg)
-                        
-                    } else {
-                        completion?(false,nil,msg)
-                    }
-                }
-                else{
-                    completion?(false,nil,msg)
-                }
-            }
-            else{
-                completion?(false,nil,msg)
-            }
-        }
-    }
     
     func inviteFriend(userId:String, withCompletionHandler completion:(( _ status: Bool, _ msg:String?)->Void)?) {
         
@@ -942,8 +1020,8 @@ class APIManager: NSObject {
     }
     
     func getDataModel(_ param:[String:Any]? = nil,method:String, withCompletionHandler completion:(( _ status: Bool, _ data: Gloss.JSON?,_ msg:String?)->Void)?) {
+      
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
-        
         Request(.get, method, parameters: param)?.responseJSON(completionHandler: { (responseData) in
             
             switch responseData.result {
@@ -956,11 +1034,12 @@ class APIManager: NSObject {
                     
                     let isSuccess:Bool = jsonDic["status"] as! Bool
                     let msg:String = json["message"].stringValue
-                    
+                   
                     if !isSuccess{
                         completion?(false,nil,msg)
                     }
                     else{
+                        
                         if let tempArray = json["data"].dictionaryObject {
                             completion?(true,tempArray,msg)
                         }
@@ -979,6 +1058,44 @@ class APIManager: NSObject {
         })
     }
 
+    func getResponseDataModel(_ param:[String:Any]? = nil,method:String, withCompletionHandler completion:(( _ status: Bool, _ data: Gloss.JSON?,_ msg:String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        Request(.get, method, parameters: param)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print("responseData",value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,nil,msg)
+                    }
+                    else{
+                        
+                        if let tempArray = json.dictionaryObject {
+                            completion?(true,tempArray,msg)
+                        }
+                        else{
+                            completion?(false,nil,msg)
+                        }
+                    }
+                }
+                else {
+                    completion?(false,nil,APP_STRING.SERVER_ERROR)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,nil,error.localizedDescription)
+            }
+        })
+    }
 }
 //
 //struct API_K_TRIP {

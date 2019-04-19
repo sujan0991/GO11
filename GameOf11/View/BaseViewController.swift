@@ -146,7 +146,6 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
         if (self.navigationController != nil)
         {
             self.navigationController?.popViewController(animated: true)
-        
         }
         else
         {

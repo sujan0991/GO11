@@ -101,8 +101,6 @@ class PointBreakDownViewController: BaseViewController,UITableViewDelegate,UITab
          let cell = tableView.dequeueReusableCell(withIdentifier:"playerCell") as! PointBreakDownTableViewCell
         
          let singlePlayerInfo = self.leaderBoardData?.team_info?.player_info[indexPath.row]
-
-        
         
          cell.setInfo(singlePlayerInfo!)
         
@@ -174,12 +172,99 @@ class PointBreakDownViewController: BaseViewController,UITableViewDelegate,UITab
             //Have to calculate like strike rate
            // self.econPointLabel.text = "\(Float((singlePlayerPoint?.sixes)!) * 1.0)"
             
-            
+            if Float((singlePlayerPoint?.economy)!) < 2.5 {
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * 3.0)"
+                
+            }else if (Float((singlePlayerPoint?.economy)!) < 3.49 && Float((singlePlayerPoint?.economy)!) > 2.5  ){
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * 2.0)"
+                
+                
+            }else if (Float((singlePlayerPoint?.economy)!) < 4.5 && Float((singlePlayerPoint?.economy)!) > 3.5  ){
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * 1)"
+                
+                
+            }
+            else if (Float((singlePlayerPoint?.economy)!) < 8 && Int((singlePlayerPoint?.economy)!) > 7  ){
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * -1.0)"
+                
+                
+            }else if (Float((singlePlayerPoint?.economy)!) < 9 && Float((singlePlayerPoint?.economy)!) > 8.1  ){
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * -2.0)"
+            }
+            else{
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * -3.0)"
+            }
             self.runOutPointLabel.text = "\(Float((singlePlayerPoint?.runouts)!) * 6.0)"
             self.stumpingPointLabel.text = "\(Float((singlePlayerPoint?.stumbeds)!) * 6.0)"
             
         }else if self.matchType == "t20"{
             
+            self.isInXIPointLabel.text = "2"
+            self.runsPointLabel.text = "\(Float((singlePlayerPoint?.runs)!) * 0.5)"
+            self.fourPointLabel.text = "\(Float((singlePlayerPoint?.fours)!) * 0.5)"
+            self.sixPointLabel.text = "\(Float((singlePlayerPoint?.sixes)!) * 1.0)"
+            
+            if Int((singlePlayerPoint?.strike_rate)!) < 50 {
+                
+                self.strikePointLabel.text = "\(Float((singlePlayerPoint?.strike_rate)!) * -3.0)"
+                
+            }else if (Float((singlePlayerPoint?.strike_rate)!) < 59.9 && Int((singlePlayerPoint?.strike_rate)!) > 50  ){
+                
+                self.strikePointLabel.text = "\(Float((singlePlayerPoint?.strike_rate)!) * -2.0)"
+                
+                
+            }else if (Float((singlePlayerPoint?.strike_rate)!) < 70 && Int((singlePlayerPoint?.strike_rate)!) > 60  ){
+                
+                self.strikePointLabel.text = "\(Float((singlePlayerPoint?.strike_rate)!) * -1.0)"
+                
+                
+            }else{
+                self.strikePointLabel.text = "\(Float((singlePlayerPoint?.strike_rate)!) * 0.0)"
+            }
+            
+            self.catchPointLabel.text = "\(Float((singlePlayerPoint?.catches)!) * 4.0)"
+            self.wicketPointLabel.text = "\(Float((singlePlayerPoint?.wickets)!) * 10.0)"
+            
+            self.maidenPointLabel.text = "\(Float((singlePlayerPoint?.maiden_overs)!) * 4.0)"
+            
+            //Have to calculate like strike rate
+            // self.econPointLabel.text = "\(Float((singlePlayerPoint?.sixes)!) * 1.0)"
+            
+            if Int((singlePlayerPoint?.economy)!) < 4 {
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * 3.0)"
+                
+            }else if (Float((singlePlayerPoint?.economy)!) < 4.9 && Int((singlePlayerPoint?.economy)!) > 4  ){
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * 2.0)"
+                
+                
+            }else if (Float((singlePlayerPoint?.economy)!) < 5.9 && Int((singlePlayerPoint?.economy)!) > 5  ){
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * 1)"
+                
+                
+            }
+            else if (Float((singlePlayerPoint?.economy)!) < 9.99 && Int((singlePlayerPoint?.economy)!) > 9  ){
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * -1.0)"
+                
+                
+            }else if (Float((singlePlayerPoint?.economy)!) < 11 && Int((singlePlayerPoint?.economy)!) > 10  ){
+                
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * -2.0)"
+            }
+            else{
+                self.econPointLabel.text = "\(Float((singlePlayerPoint?.economy)!) * -3.0)"
+            }
+            
+            self.runOutPointLabel.text = "\(Float((singlePlayerPoint?.runouts)!) * 6.0)"
+            self.stumpingPointLabel.text = "\(Float((singlePlayerPoint?.stumbeds)!) * 6.0)"
             
         }
         

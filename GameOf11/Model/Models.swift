@@ -192,6 +192,27 @@ class FantasySquadData: Glossy {
     }
 }
 
+class CreatedTeamList: Glossy {
+    
+    var status: Int?
+    var message: String?
+    var teams: [CreatedTeam] = []
+    
+    required init?(json: Gloss.JSON) {
+        status = "status" <~~ json
+        message = "message" <~~ json
+        teams = "data" <~~ json ?? []
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "status" ~~> status,
+            "message" ~~> message,
+            "data" ~~> teams
+            ])
+    }
+}
+
 
 class CreatedTeam: Glossy {
     
@@ -244,22 +265,22 @@ class FantasyPlayer: Glossy {
     
     required init?(json: Gloss.JSON) {
         playerId = "player_id" <~~ json
-        playerName = "playerName" <~~ json
-        playerKey = "playerKey" <~~ json
-        isCaptain = "isCaptain" <~~ json
-        isViceCaptain = "isViceCaptain" <~~ json
-        playerEarningPoint = "playerEarningPoint" <~~ json
+        playerName = "player_name" <~~ json
+        playerKey = "player_key" <~~ json
+        isCaptain = "is_captain" <~~ json
+        isViceCaptain = "is_vice_captain" <~~ json
+        playerEarningPoint = "player_earning_point" <~~ json
         
     }
     
     func toJSON() -> Gloss.JSON? {
         return jsonify([
             "player_id" ~~> playerId,
-            "playerName" ~~> playerName,
-            "playerKey" ~~> playerKey,
-            "playerEarningPoint" ~~> playerEarningPoint,
-            "isCaptain" ~~> isCaptain,
-            "isViceCaptain" ~~> isViceCaptain
+            "player_name" ~~> playerName,
+            "player_key" ~~> playerKey,
+            "player_earning_point" ~~> playerEarningPoint,
+            "is_captain" ~~> isCaptain,
+            "is_vice_captain" ~~> isViceCaptain
             
             ])
     }
@@ -268,21 +289,27 @@ class FantasyPlayer: Glossy {
 
 class UserFantasyPlayer: Glossy {
     
-    var player: Player?
-    var id: Int? {
-        return player?.playerId
-    }
+    var id: Int?
+    var isCaptain: Int?
+    var isViceCaptain: Int?
     
     required init?(json: Gloss.JSON) {
-        player = "player" <~~ json
+        
+        id = "id" <~~ json
+        isCaptain = "is_captain" <~~ json
+        isViceCaptain = "is_vice_captain" <~~ json
     }
-    
+
     func toJSON() -> Gloss.JSON? {
         return jsonify([
-            "id" ~~> id
+            "id" ~~> id,
+            "is_captain" ~~> isCaptain,
+            "is_vice_captain" ~~> isViceCaptain
+            
             ])
     }
 }
+
 
 class UsersFantasyTeam: Glossy {
     
@@ -294,7 +321,7 @@ class UsersFantasyTeam: Glossy {
     var batsman: [UserFantasyPlayer] = []
     var bowler: [UserFantasyPlayer] = []
     var allrounder: [UserFantasyPlayer] = []
-    var keeper: [UserFantasyPlayer] = []
+    var keeper : [UserFantasyPlayer] = []
     
     required init?(json: Gloss.JSON) {
       
@@ -305,7 +332,7 @@ class UsersFantasyTeam: Glossy {
         batsman = ("batsman" <~~ json) ?? []
         bowler = ("bowler" <~~ json) ?? []
         allrounder = ("allrounder" <~~ json) ?? []
-        keeper = ("keeper" <~~ json) ?? []
+        keeper = "keeper" <~~ json ?? []
         
     }
     
@@ -316,10 +343,10 @@ class UsersFantasyTeam: Glossy {
             "team_name" ~~> teamName,
             "captain" ~~> captain,
             "vice_captain" ~~> viceCaptain,
-            "batsman" ~~> batsman,
-            "bowler" ~~> bowler,
-            "allrounder" ~~> allrounder,
-            "keeper" ~~> keeper
+            "batsman" ~~> batsman.toJSONArray(),
+            "bowler" ~~> bowler.toJSONArray(),
+            "allrounder" ~~> allrounder.toJSONArray(),
+            "keeper" ~~> keeper.toJSONArray()
             ])
     }
 }
@@ -441,9 +468,9 @@ class ProfileMetaData: Glossy {
     
     var id: Int?
     var userId: Int?
-    var rating: Int?
-    var totalCoins: Int?
-    var totalCash: Int?
+    var rating: Float?
+    var totalCoins: Float?
+    var totalCash: Float?
     
     var totalContestParticipation: Int?
     var totalMatchParticipation: Int?
@@ -539,7 +566,6 @@ class ContestList: Glossy {
     var matchId: Int?
     var userTotalCoin: Int?
     var contests: [ContestData] = []
-    
     
     required init?(json: Gloss.JSON) {
         matchId = "match_id" <~~ json

@@ -42,10 +42,13 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonAction(_ sender: Any) {
+        
     }
     
 
     @IBAction func loginButtonAction(_ sender: Any) {
+        
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
 }

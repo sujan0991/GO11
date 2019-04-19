@@ -35,6 +35,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             matchListTableView.dataSource = self
             matchListTableView.removeEmptyCells()
         }
+        
         if type == .next
         {
             APIManager.manager.getUpcomingMatchList { (nextMatches) in
@@ -87,6 +88,14 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         let match = matches[indexPath.section]
         cell.setInfo(match)
         
+        if match.totalJoinedContests ?? 0 > 0 {
+            cell.contestMessageHeightConstraint.constant = 20
+        }
+        else
+        {
+             cell.contestMessageHeightConstraint.constant = 0
+        }
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -95,19 +104,22 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         
         let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ContestListViewController") as? ContestListViewController
-        
+        popupVC?.type = type
         popupVC?.parentMatch = match
         popupVC?.modalPresentationStyle = .overCurrentContext
         popupVC?.modalTransitionStyle = .crossDissolve
+      
+        let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
+        navigationController.isNavigationBarHidden = true
         
-        self.present(popupVC!, animated: true) {
+        self.present(navigationController, animated: true) {
             print("")
         }
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 125
+        return 145
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

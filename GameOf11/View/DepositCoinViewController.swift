@@ -1,5 +1,5 @@
 //
-//  DipositCoinViewController.swift
+//  DepositCoinViewController.swift
 //  DropDown
 //
 //  Created by MacBook Pro Retina on 2/19/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DipositCoinViewController: UIViewController,UITextFieldDelegate {
+class DepositCoinViewController: BaseViewController,UITextFieldDelegate {
     
     @IBOutlet weak var tkAmountLabel: UITextField!
     
@@ -16,8 +16,9 @@ class DipositCoinViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tkAmountLabel.delegate = self
+        placeNavBar(withTitle: "Add Coins", isBackBtnVisible: true)
         
+        tkAmountLabel.delegate = self
         tkAmountLabel.becomeFirstResponder()
         
     }

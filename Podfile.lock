@@ -4,16 +4,80 @@ PODS:
   - Bond (7.0.0):
     - Differ (~> 1.3)
     - ReactiveKit (~> 3.9)
+  - Crashlytics (3.12.0):
+    - Fabric (~> 1.9.0)
   - Differ (1.3.0)
   - DTPagerController (2.0.2)
+  - Fabric (1.9.0)
+  - Firebase/Core (5.15.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.4.0)
+  - Firebase/CoreOnly (5.15.0):
+    - FirebaseCore (= 5.1.10)
+  - Firebase/Messaging (5.15.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.2.2)
+  - FirebaseAnalytics (5.4.0):
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.3)
+    - GoogleAppMeasurement (= 5.4.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - FirebaseAnalyticsInterop (1.1.0)
+  - FirebaseCore (5.1.10):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseInstanceID (3.3.0):
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.3)
+    - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseMessaging (3.2.2):
+    - FirebaseAnalyticsInterop (~> 1.1)
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.0)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/Reachability (~> 5.2)
+    - Protobuf (~> 3.1)
   - Gloss (2.1.0)
+  - GoogleAppMeasurement (5.4.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities/AppDelegateSwizzler (5.3.6):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.3.6)
+  - GoogleUtilities/Logger (5.3.6):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.3.6):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.3.6):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.3.6)"
+  - GoogleUtilities/Reachability (5.3.6):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.3.6):
+    - GoogleUtilities/Logger
   - IQKeyboardManagerSwift (6.2.0)
   - Kingfisher (5.0.0)
   - MarqueeLabel/Swift (3.2.0)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
   - NotificationBannerSwift (1.8.0):
     - MarqueeLabel/Swift (~> 3.2.0)
     - SnapKit (~> 4.0.1)
   - ObjectMapper (3.4.1)
+  - Protobuf (3.6.1)
   - ReactiveKit (3.9.7)
   - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
@@ -24,7 +88,11 @@ DEPENDENCIES:
   - AccountKit
   - Alamofire (~> 5.0.0.beta.1)
   - Bond
+  - Crashlytics (~> 3.12.0)
   - DTPagerController
+  - Fabric (~> 1.9.0)
+  - Firebase/Core
+  - Firebase/Messaging
   - Gloss (~> 2.0)
   - IQKeyboardManagerSwift
   - Kingfisher (~> 5.0)
@@ -40,14 +108,26 @@ SPEC REPOS:
     - AccountKit
     - Alamofire
     - Bond
+    - Crashlytics
     - Differ
     - DTPagerController
+    - Fabric
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FirebaseMessaging
     - Gloss
+    - GoogleAppMeasurement
+    - GoogleUtilities
     - IQKeyboardManagerSwift
     - Kingfisher
     - MarqueeLabel
+    - nanopb
     - NotificationBannerSwift
     - ObjectMapper
+    - Protobuf
     - ReactiveKit
     - SnapKit
     - SVProgressHUD
@@ -58,20 +138,32 @@ SPEC CHECKSUMS:
   AccountKit: 870ccaf5d33facda9408783e28fbe68c5211e069
   Alamofire: 2ef6d6c984c5d21c366e9b41a9ae7dfee2b67a44
   Bond: 7928751991aee53c1b746e82735a7214db2cb09f
+  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   Differ: 9fcee7602542d7c6484ce05a0faec1c11258ed63
   DTPagerController: c462532a15498d168904ed5f6ded1674e34f1330
+  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
+  Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
+  FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
+  FirebaseAnalyticsInterop: e5f21be9af6548372e2f0815834ff909bff395a2
+  FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
+  FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
+  FirebaseMessaging: b412996f6a09337d232bb3a6676ce4d1f353d024
   Gloss: 13ab6b4b0ff4cb2448466edc957479b1bccea8ba
+  GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
+  GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Kingfisher: 2b0dd651e4fe5a07305b8242fde56f8e2d410f58
   MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NotificationBannerSwift: 49fc4be7fabada55b189b50e72184c92edd5f7f7
   ObjectMapper: 5311bd50ca732930959e7ca1a2de43ab823a5ced
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   ReactiveKit: 5f4c440715d671901c382ae6b42ed3337ce4699b
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   ViewUtils: 68e42c708a4b3912e39691cef5080282dc5013fb
 
-PODFILE CHECKSUM: 56b9faa7166286c85b32f5f439bb2da2b7d30903
+PODFILE CHECKSUM: 8fc53f28255a75db919ffe0d4a4b50c8f6fa2da5
 
 COCOAPODS: 1.5.3

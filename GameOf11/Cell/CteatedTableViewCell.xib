@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Rubik-Medium.ttf">
+            <string>Rubik-Medium</string>
+        </array>
+        <array key="Rubik-Regular.ttf">
+            <string>Rubik-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreatedTeamCell" rowHeight="170" id="KGk-i7-Jjw" customClass="CteatedTableViewCell" customModule="GameOf11" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="169.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9m-4j-Mds">
+                        <rect key="frame" x="20" y="5" width="280" height="159.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqA-pe-ddL">
+                                <rect key="frame" x="5" y="5" width="270" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
+                                <color key="textColor" name="DefaultTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wQM-EN-0Ja" userLabel="Team View">
+                                <rect key="frame" x="5" y="27.5" width="270" height="1"/>
+                                <color key="backgroundColor" name="GreyTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="K4l-Gl-nR7"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L19-yE-Kw7" userLabel="Captain">
+                                <rect key="frame" x="5" y="28.5" width="270" height="47"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="lpy-Xs-8gu">
+                                        <rect key="frame" x="0.0" y="5" width="85" height="37"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Captain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9B-aN-Hat">
+                                                <rect key="frame" x="0.0" y="0.0" width="85" height="17.5"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
+                                                <color key="textColor" name="GreenHighlight"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhS-ul-SYW">
+                                                <rect key="frame" x="0.0" y="20.5" width="85" height="16.5"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                                <color key="textColor" name="GreyTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="d90-q2-n7w">
+                                        <rect key="frame" x="135" y="5" width="85" height="37"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vice Captain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grD-rJ-tel">
+                                                <rect key="frame" x="0.0" y="0.0" width="85" height="17.5"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="15"/>
+                                                <color key="textColor" name="TabOrangeColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jj7-Jp-B9f">
+                                                <rect key="frame" x="0.0" y="20.5" width="85" height="16.5"/>
+                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
+                                                <color key="textColor" name="GreyTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2s-5u-lBd">
+                                        <rect key="frame" x="0.0" y="46" width="270" height="1"/>
+                                        <color key="backgroundColor" name="GreyTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="S2G-pE-GPR"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="d90-q2-n7w" firstAttribute="width" secondItem="lpy-Xs-8gu" secondAttribute="width" id="0b0-Eh-Oqh"/>
+                                    <constraint firstItem="d90-q2-n7w" firstAttribute="leading" secondItem="L19-yE-Kw7" secondAttribute="centerX" id="72h-FE-nKw"/>
+                                    <constraint firstAttribute="bottom" secondItem="W2s-5u-lBd" secondAttribute="bottom" id="8Ot-cj-TLF"/>
+                                    <constraint firstItem="d90-q2-n7w" firstAttribute="top" secondItem="L19-yE-Kw7" secondAttribute="top" constant="5" id="9zg-Uq-THf"/>
+                                    <constraint firstItem="W2s-5u-lBd" firstAttribute="leading" secondItem="L19-yE-Kw7" secondAttribute="leading" id="G9h-7a-u0S"/>
+                                    <constraint firstAttribute="bottom" secondItem="d90-q2-n7w" secondAttribute="bottom" constant="5" id="Jvh-f8-DLA"/>
+                                    <constraint firstItem="lpy-Xs-8gu" firstAttribute="top" secondItem="L19-yE-Kw7" secondAttribute="top" constant="5" id="Xtv-1b-dHh"/>
+                                    <constraint firstItem="lpy-Xs-8gu" firstAttribute="leading" secondItem="L19-yE-Kw7" secondAttribute="leading" id="f2c-rI-1BP"/>
+                                    <constraint firstAttribute="trailing" secondItem="W2s-5u-lBd" secondAttribute="trailing" id="h1X-fb-xir"/>
+                                    <constraint firstAttribute="bottom" secondItem="lpy-Xs-8gu" secondAttribute="bottom" constant="5" id="xgR-FW-xXO"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1c-lW-vUA" userLabel="Count View">
+                                <rect key="frame" x="5" y="75.5" width="270" height="46"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghq-uP-HwW">
+                                        <rect key="frame" x="0.0" y="0.0" width="270" height="45"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XdJ-oF-m8c">
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="45"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="VLf-rE-1tP">
+                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="45"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="WK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCP-Lm-Tfb">
+                                                                <rect key="frame" x="0.0" y="0.0" width="64" height="26.5"/>
+                                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
+                                                                <color key="textColor" name="GreyTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmE-io-x40">
+                                                                <rect key="frame" x="0.0" y="29.5" width="64" height="15.5"/>
+                                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
+                                                                <color key="textColor" name="GreyTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="SYp-V7-04p">
+                                                        <rect key="frame" x="69" y="0.0" width="63.5" height="45"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="BAT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNY-Lo-zEw">
+                                                                <rect key="frame" x="0.0" y="0.0" width="63.5" height="16.5"/>
+                                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
+                                                                <color key="textColor" name="GreyTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXX-g5-ljL">
+                                                                <rect key="frame" x="0.0" y="19.5" width="63.5" height="25.5"/>
+                                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
+                                                                <color key="textColor" name="GreyTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="vxZ-8Z-RtV">
+                                                        <rect key="frame" x="137.5" y="0.0" width="64" height="45"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="AR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHM-BI-bea">
+                                                                <rect key="frame" x="0.0" y="0.0" width="64" height="16.5"/>
+                                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
+                                                                <color key="textColor" name="GreyTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3V-jt-bEN">
+                                                                <rect key="frame" x="0.0" y="19.5" width="64" height="25.5"/>
+                                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
+                                                                <color key="textColor" name="GreyTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="mfG-o9-ZFr">
+                                                        <rect key="frame" x="206.5" y="0.0" width="63.5" height="45"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="BOWL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5W-9o-a04">
+                                                                <rect key="frame" x="0.0" y="0.0" width="63.5" height="16.5"/>
+                                                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="14"/>
+                                                                <color key="textColor" name="GreyTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXX-ZU-vhw">
+                                                                <rect key="frame" x="0.0" y="19.5" width="63.5" height="25.5"/>
+                                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
+                                                                <color key="textColor" name="GreyTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6m-kn-fge">
+                                                <rect key="frame" x="270" y="0.0" width="10" height="45"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ed-Vh-SWs">
+                                                        <rect key="frame" x="5" y="5" width="0.0" height="35"/>
+                                                        <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="14"/>
+                                                        <state key="normal" title="Select">
+                                                            <color key="titleColor" name="TabOrangeColor"/>
+                                                        </state>
+                                                        <state key="selected" title="Selected">
+                                                            <color key="titleColor" name="GreenHighlight"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="8Ed-Vh-SWs" firstAttribute="leading" secondItem="V6m-kn-fge" secondAttribute="leading" constant="5" id="ezk-PS-0gy"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8Ed-Vh-SWs" secondAttribute="trailing" constant="5" id="o41-Pg-06q"/>
+                                                    <constraint firstItem="8Ed-Vh-SWs" firstAttribute="top" secondItem="V6m-kn-fge" secondAttribute="top" constant="5" id="txN-bJ-hr4"/>
+                                                    <constraint firstAttribute="bottom" secondItem="8Ed-Vh-SWs" secondAttribute="bottom" constant="5" id="yf5-lX-enq"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xl6-zd-Oug">
+                                        <rect key="frame" x="0.0" y="45" width="270" height="1"/>
+                                        <color key="backgroundColor" name="GreyTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="ZxN-iM-VVV"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="xl6-zd-Oug" secondAttribute="trailing" id="5gg-G2-dou"/>
+                                    <constraint firstAttribute="bottom" secondItem="xl6-zd-Oug" secondAttribute="bottom" id="QJF-zK-Efh"/>
+                                    <constraint firstAttribute="trailing" secondItem="ghq-uP-HwW" secondAttribute="trailing" id="V50-Rr-o6k"/>
+                                    <constraint firstItem="xl6-zd-Oug" firstAttribute="top" secondItem="ghq-uP-HwW" secondAttribute="bottom" id="Zar-Zt-ELX"/>
+                                    <constraint firstItem="xl6-zd-Oug" firstAttribute="leading" secondItem="o1c-lW-vUA" secondAttribute="leading" id="cpL-Tm-E1X"/>
+                                    <constraint firstItem="ghq-uP-HwW" firstAttribute="leading" secondItem="o1c-lW-vUA" secondAttribute="leading" id="wRC-W5-lkx"/>
+                                    <constraint firstItem="ghq-uP-HwW" firstAttribute="top" secondItem="o1c-lW-vUA" secondAttribute="top" id="yni-24-IMt"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PCk-Hs-U1S" userLabel="Captain">
+                                <rect key="frame" x="5" y="121.5" width="270" height="38"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaR-0T-dw4">
+                                        <rect key="frame" x="15" y="5" width="93.5" height="28"/>
+                                        <color key="backgroundColor" name="GreenHighlight"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="WaR-0T-dw4" secondAttribute="height" multiplier="10:3" id="zFH-nJ-fE8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
+                                        <state key="normal" title="Edit Team"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnE-Xy-JfD">
+                                        <rect key="frame" x="161.5" y="5" width="93.5" height="28"/>
+                                        <color key="backgroundColor" name="GreenHighlight"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
+                                        <state key="normal" title="Preview"/>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7Z-rs-7xg">
+                                        <rect key="frame" x="83" y="5" width="104" height="28"/>
+                                        <color key="backgroundColor" name="GreenHighlight"/>
+                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
+                                        <state key="normal" title="Confirm &amp; Submit"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Z7Z-rs-7xg" firstAttribute="top" secondItem="WaR-0T-dw4" secondAttribute="top" id="1P5-ER-d28"/>
+                                    <constraint firstItem="Z7Z-rs-7xg" firstAttribute="centerX" secondItem="PCk-Hs-U1S" secondAttribute="centerX" id="IlO-C5-Tmb"/>
+                                    <constraint firstItem="NnE-Xy-JfD" firstAttribute="bottom" secondItem="WaR-0T-dw4" secondAttribute="bottom" id="MkX-Mk-Jxz"/>
+                                    <constraint firstItem="Z7Z-rs-7xg" firstAttribute="bottom" secondItem="WaR-0T-dw4" secondAttribute="bottom" id="SnO-OA-bCA"/>
+                                    <constraint firstItem="WaR-0T-dw4" firstAttribute="leading" secondItem="PCk-Hs-U1S" secondAttribute="leading" constant="15" id="UNz-cZ-ixB"/>
+                                    <constraint firstAttribute="trailing" secondItem="NnE-Xy-JfD" secondAttribute="trailing" constant="15" id="YuJ-1e-TNc"/>
+                                    <constraint firstAttribute="bottom" secondItem="WaR-0T-dw4" secondAttribute="bottom" constant="5" id="fkF-aD-klR"/>
+                                    <constraint firstItem="WaR-0T-dw4" firstAttribute="top" secondItem="PCk-Hs-U1S" secondAttribute="top" constant="5" id="rgx-Se-HCr"/>
+                                    <constraint firstItem="NnE-Xy-JfD" firstAttribute="width" secondItem="WaR-0T-dw4" secondAttribute="width" id="uF8-Ry-l0E"/>
+                                    <constraint firstItem="NnE-Xy-JfD" firstAttribute="top" secondItem="WaR-0T-dw4" secondAttribute="top" id="zfL-hP-fvX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fqA-pe-ddL" firstAttribute="top" secondItem="e9m-4j-Mds" secondAttribute="top" constant="5" id="CT9-1H-1eY"/>
+                            <constraint firstItem="fqA-pe-ddL" firstAttribute="leading" secondItem="e9m-4j-Mds" secondAttribute="leading" constant="5" id="Gr6-nw-iBG"/>
+                            <constraint firstItem="wQM-EN-0Ja" firstAttribute="top" secondItem="fqA-pe-ddL" secondAttribute="bottom" constant="5" id="HFP-46-Rsa"/>
+                            <constraint firstAttribute="trailing" secondItem="fqA-pe-ddL" secondAttribute="trailing" constant="5" id="LL8-nk-0c5"/>
+                            <constraint firstItem="PCk-Hs-U1S" firstAttribute="trailing" secondItem="o1c-lW-vUA" secondAttribute="trailing" id="PX2-TC-5Hk"/>
+                            <constraint firstItem="o1c-lW-vUA" firstAttribute="trailing" secondItem="L19-yE-Kw7" secondAttribute="trailing" id="R08-af-VLZ"/>
+                            <constraint firstItem="o1c-lW-vUA" firstAttribute="top" secondItem="L19-yE-Kw7" secondAttribute="bottom" id="bMQ-BR-epC"/>
+                            <constraint firstItem="L19-yE-Kw7" firstAttribute="top" secondItem="wQM-EN-0Ja" secondAttribute="bottom" id="h1w-aZ-wbh"/>
+                            <constraint firstAttribute="bottom" secondItem="PCk-Hs-U1S" secondAttribute="bottom" id="hSe-y8-Qqc"/>
+                            <constraint firstItem="PCk-Hs-U1S" firstAttribute="leading" secondItem="o1c-lW-vUA" secondAttribute="leading" id="o0C-iQ-sYj"/>
+                            <constraint firstItem="wQM-EN-0Ja" firstAttribute="trailing" secondItem="fqA-pe-ddL" secondAttribute="trailing" id="oFO-4X-pyG"/>
+                            <constraint firstItem="o1c-lW-vUA" firstAttribute="leading" secondItem="L19-yE-Kw7" secondAttribute="leading" id="okU-5T-TY2"/>
+                            <constraint firstItem="wQM-EN-0Ja" firstAttribute="leading" secondItem="fqA-pe-ddL" secondAttribute="leading" id="vbL-a3-ngJ"/>
+                            <constraint firstItem="PCk-Hs-U1S" firstAttribute="top" secondItem="o1c-lW-vUA" secondAttribute="bottom" id="vhZ-Z9-DtU"/>
+                            <constraint firstItem="L19-yE-Kw7" firstAttribute="leading" secondItem="wQM-EN-0Ja" secondAttribute="leading" id="wJi-6w-hcF"/>
+                            <constraint firstItem="L19-yE-Kw7" firstAttribute="trailing" secondItem="wQM-EN-0Ja" secondAttribute="trailing" id="x3E-rM-MTF"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="e9m-4j-Mds" secondAttribute="bottom" constant="5" id="3yL-F2-lYa"/>
+                    <constraint firstAttribute="trailing" secondItem="e9m-4j-Mds" secondAttribute="trailing" constant="20" id="4zZ-A8-Yzj"/>
+                    <constraint firstItem="e9m-4j-Mds" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="KuC-0v-D2r"/>
+                    <constraint firstItem="e9m-4j-Mds" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="mOL-UZ-8ry"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="allrounderCountLabel" destination="x3V-jt-bEN" id="6KK-La-BFc"/>
+                <outlet property="batsmanCountLabel" destination="KXX-g5-ljL" id="XAD-Tc-crr"/>
+                <outlet property="bowlerCountLabel" destination="bXX-ZU-vhw" id="pQ5-Ha-QFy"/>
+                <outlet property="captainName" destination="mhS-ul-SYW" id="VN2-P1-rKR"/>
+                <outlet property="confirmButton" destination="Z7Z-rs-7xg" id="fOy-wU-odm"/>
+                <outlet property="containerView" destination="e9m-4j-Mds" id="ced-7G-3eH"/>
+                <outlet property="editButton" destination="WaR-0T-dw4" id="U4H-Hc-hsi"/>
+                <outlet property="keeperCountLabel" destination="SmE-io-x40" id="QVb-qc-OaF"/>
+                <outlet property="previewButton" destination="NnE-Xy-JfD" id="9Iz-pd-ec6"/>
+                <outlet property="selectButton" destination="8Ed-Vh-SWs" id="eLQ-yq-mTg"/>
+                <outlet property="selectView" destination="V6m-kn-fge" id="Pqh-qu-VkJ"/>
+                <outlet property="teamName" destination="fqA-pe-ddL" id="Elu-ue-Pec"/>
+                <outlet property="viceCaptainName" destination="jj7-Jp-B9f" id="0S8-7e-H38"/>
+            </connections>
+            <point key="canvasLocation" x="96" y="30.134932533733135"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="DefaultTextColor">
+            <color red="0.21176470588235294" green="0.27843137254901962" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GreenHighlight">
+            <color red="0.18823529411764706" green="0.72156862745098038" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GreyTextColor">
+            <color red="0.41568627450980394" green="0.41568627450980394" blue="0.41568627450980394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TabOrangeColor">
+            <color red="0.94117647058823528" green="0.45490196078431372" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

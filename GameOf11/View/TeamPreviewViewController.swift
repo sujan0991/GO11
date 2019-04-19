@@ -8,12 +8,15 @@
 
 import UIKit
 
-class TeamPreviewViewController: UIViewController {
+class TeamPreviewViewController: BaseViewController {
 
+    @IBOutlet weak var previewTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
+         placeNavBar(withTitle: "Team Preview", isBackBtnVisible: true)
     }
     
 

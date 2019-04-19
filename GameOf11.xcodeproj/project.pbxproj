@@ -32,7 +32,7 @@
 		0C390AD721DF83E500FA6A15 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C390AD521DF83E500FA6A15 /* MatchTableViewCell.xib */; };
 		0C390AD921DFAAA900FA6A15 /* PositionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C390AD821DFAAA900FA6A15 /* PositionCollectionViewCell.swift */; };
 		0C676CF821B7E98600F21072 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C676CF721B7E98600F21072 /* Assets.xcassets */; };
-		0C78C1F922244F450068B5D6 /* DipositCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78C1F422244F390068B5D6 /* DipositCoinViewController.swift */; };
+		0C78C1F922244F450068B5D6 /* DepositCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78C1F422244F390068B5D6 /* DepositCoinViewController.swift */; };
 		0C78C1FA22244F450068B5D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78C1F522244F3A0068B5D6 /* EditProfileViewController.swift */; };
 		0C78C1FB22244F450068B5D6 /* RedeemCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78C1F622244F3B0068B5D6 /* RedeemCoinViewController.swift */; };
 		0C78C1FC22244F450068B5D6 /* VerifyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C78C1F722244F3C0068B5D6 /* VerifyAccountViewController.swift */; };
@@ -48,6 +48,11 @@
 		0C8B95EF21E1150A00ADE46B /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8B95EE21E1150900ADE46B /* AlertManager.swift */; };
 		0C8B95F721E120C300ADE46B /* HTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8B95F521E120C300ADE46B /* HTTPManager.swift */; };
 		0C8B95F921E1211800ADE46B /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8B95F821E1211700ADE46B /* APIManager.swift */; };
+		0CB1B8FC2266FF32003D6C56 /* CteatedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1B8FA2266FF32003D6C56 /* CteatedTableViewCell.swift */; };
+		0CB1B8FD2266FF32003D6C56 /* CteatedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CB1B8FB2266FF32003D6C56 /* CteatedTableViewCell.xib */; };
+		0CB1B8FF2266FF4C003D6C56 /* MyTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */; };
+		0CB1B90122686419003D6C56 /* TeamSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */; };
+		0CB1B9042268AC58003D6C56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CB1B9032268AC57003D6C56 /* GoogleService-Info.plist */; };
 		0CE8835F21DFB6730025A31E /* TeamCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8835E21DFB6730025A31E /* TeamCreateViewController.swift */; };
 		0CE8836221DFD5730025A31E /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8836021DFD5730025A31E /* PlayerTableViewCell.swift */; };
 		0CE8836321DFD5730025A31E /* PlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE8836121DFD5730025A31E /* PlayerTableViewCell.xib */; };
@@ -55,6 +60,8 @@
 		0CE8836721DFDEDB0025A31E /* ContestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE8836521DFDEDB0025A31E /* ContestTableViewCell.xib */; };
 		0CE8836921DFE0AF0025A31E /* ContestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */; };
 		0CE8836B21E0000E0025A31E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8836A21E0000E0025A31E /* LoginViewController.swift */; };
+		0CEB167A2264F73A002D0208 /* CaptainSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */; };
+		0CEB167C2265C102002D0208 /* TeamPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */; };
 		641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E1768222A9A7D00302A19 /* SignUpViewController.swift */; };
 		641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */; };
 		644526A02237D8320099FB37 /* ContestLeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */; };
@@ -92,7 +99,7 @@
 		0C676CED21B7E97F00F21072 /* GameOf11.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameOf11.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C676CF721B7E98600F21072 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C676CFC21B7E98600F21072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0C78C1F422244F390068B5D6 /* DipositCoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DipositCoinViewController.swift; sourceTree = "<group>"; };
+		0C78C1F422244F390068B5D6 /* DepositCoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositCoinViewController.swift; sourceTree = "<group>"; };
 		0C78C1F522244F3A0068B5D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		0C78C1F622244F3B0068B5D6 /* RedeemCoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemCoinViewController.swift; sourceTree = "<group>"; };
 		0C78C1F722244F3C0068B5D6 /* VerifyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyAccountViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +115,12 @@
 		0C8B95EE21E1150900ADE46B /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		0C8B95F521E120C300ADE46B /* HTTPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPManager.swift; sourceTree = "<group>"; };
 		0C8B95F821E1211700ADE46B /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		0CB1B8FA2266FF32003D6C56 /* CteatedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CteatedTableViewCell.swift; path = GameOf11/Cell/CteatedTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		0CB1B8FB2266FF32003D6C56 /* CteatedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CteatedTableViewCell.xib; path = GameOf11/Cell/CteatedTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamViewController.swift; sourceTree = "<group>"; };
+		0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectViewController.swift; sourceTree = "<group>"; };
+		0CB1B90222689D21003D6C56 /* GameOf11.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameOf11.entitlements; sourceTree = "<group>"; };
+		0CB1B9032268AC57003D6C56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CE8835E21DFB6730025A31E /* TeamCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCreateViewController.swift; sourceTree = "<group>"; };
 		0CE8836021DFD5730025A31E /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		0CE8836121DFD5730025A31E /* PlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerTableViewCell.xib; sourceTree = "<group>"; };
@@ -115,6 +128,8 @@
 		0CE8836521DFDEDB0025A31E /* ContestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContestTableViewCell.xib; sourceTree = "<group>"; };
 		0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContestListViewController.swift; sourceTree = "<group>"; };
 		0CE8836A21E0000E0025A31E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainSelectorViewController.swift; sourceTree = "<group>"; };
+		0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		641E1768222A9A7D00302A19 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSignedProfileViewController.swift; sourceTree = "<group>"; };
 		6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestLeaderBoardViewController.swift; sourceTree = "<group>"; };
@@ -170,7 +185,10 @@
 				0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */,
 				0CE8835E21DFB6730025A31E /* TeamCreateViewController.swift */,
 				0C85C3482225C5D800B6515C /* TeamPreviewViewController.swift */,
-				0C78C1F422244F390068B5D6 /* DipositCoinViewController.swift */,
+				0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */,
+				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
+				0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */,
+				0C78C1F422244F390068B5D6 /* DepositCoinViewController.swift */,
 				0C78C1F522244F3A0068B5D6 /* EditProfileViewController.swift */,
 				6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */,
 				6445269F2237D8300099FB37 /* PointBreakDownViewController.swift */,
@@ -239,10 +257,13 @@
 				0CE8836521DFDEDB0025A31E /* ContestTableViewCell.xib */,
 				0CE8836021DFD5730025A31E /* PlayerTableViewCell.swift */,
 				0CE8836121DFD5730025A31E /* PlayerTableViewCell.xib */,
-				644526A22237D83C0099FB37 /* PointBreakDownTableViewCell.swift */,
 				0C390AD421DF83E500FA6A15 /* MatchTableViewCell.swift */,
 				0C390AD521DF83E500FA6A15 /* MatchTableViewCell.xib */,
+				644526A22237D83C0099FB37 /* PointBreakDownTableViewCell.swift */,
 				6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */,
+				0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */,
+				0CB1B8FA2266FF32003D6C56 /* CteatedTableViewCell.swift */,
+				0CB1B8FB2266FF32003D6C56 /* CteatedTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -268,6 +289,7 @@
 		0C676CEF21B7E97F00F21072 /* GameOf11 */ = {
 			isa = PBXGroup;
 			children = (
+				0CB1B90222689D21003D6C56 /* GameOf11.entitlements */,
 				0C7F54F221DA6FBB00049571 /* AppDelegate.swift */,
 				0C390AD121DF7FDA00FA6A15 /* Cell */,
 				0C33369821DF406E00E6EB11 /* Utils */,
@@ -277,6 +299,7 @@
 				0C7F54F421DA70C900049571 /* CustomViews */,
 				0C676CF721B7E98600F21072 /* Assets.xcassets */,
 				0C676CFC21B7E98600F21072 /* Info.plist */,
+				0CB1B9032268AC57003D6C56 /* GoogleService-Info.plist */,
 				0C33368321DF3DBC00E6EB11 /* Font */,
 			);
 			path = GameOf11;
@@ -320,6 +343,7 @@
 				0C676CEB21B7E97E00F21072 /* Resources */,
 				48E81D19CCDD50EE231FE7AD /* [CP] Embed Pods Frameworks */,
 				F003475949B4A88DD7D43832 /* [CP] Copy Pods Resources */,
+				0CB1B9062268F490003D6C56 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -342,6 +366,14 @@
 				TargetAttributes = {
 					0C676CEC21B7E97E00F21072 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -379,9 +411,11 @@
 				0CE8836721DFDEDB0025A31E /* ContestTableViewCell.xib in Resources */,
 				0CE8836321DFD5730025A31E /* PlayerTableViewCell.xib in Resources */,
 				0C676CF821B7E98600F21072 /* Assets.xcassets in Resources */,
+				0CB1B9042268AC58003D6C56 /* GoogleService-Info.plist in Resources */,
 				0C33369021DF3DBD00E6EB11 /* Rubik-Light.ttf in Resources */,
 				0C33369321DF3DBD00E6EB11 /* Rubik-Italic.ttf in Resources */,
 				0C33369221DF3DBD00E6EB11 /* Rubik-Black.ttf in Resources */,
+				0CB1B8FD2266FF32003D6C56 /* CteatedTableViewCell.xib in Resources */,
 				0C33369621DF3DBD00E6EB11 /* Rubik-Regular.ttf in Resources */,
 				0C0BE64D21DA294000BE30CF /* LaunchScreen.storyboard in Resources */,
 				0C33369121DF3DBD00E6EB11 /* Rubik-Medium.ttf in Resources */,
@@ -391,6 +425,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0CB1B9062268F490003D6C56 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+		};
 		48E81D19CCDD50EE231FE7AD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -403,16 +455,19 @@
 				"${BUILT_PRODUCTS_DIR}/DTPagerController/DTPagerController.framework",
 				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
 				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveKit/ReactiveKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/ViewUtils/ViewUtils.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -421,16 +476,19 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTPagerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differ.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ViewUtils.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -482,9 +540,11 @@
 			files = (
 				0C78C1FA22244F450068B5D6 /* EditProfileViewController.swift in Sources */,
 				0C8B95F921E1211800ADE46B /* APIManager.swift in Sources */,
+				0CB1B8FC2266FF32003D6C56 /* CteatedTableViewCell.swift in Sources */,
 				0CE8836B21E0000E0025A31E /* LoginViewController.swift in Sources */,
 				0C390AD021DF5E0200FA6A15 /* MatchViewController.swift in Sources */,
-				0C78C1F922244F450068B5D6 /* DipositCoinViewController.swift in Sources */,
+				0CB1B8FF2266FF4C003D6C56 /* MyTeamViewController.swift in Sources */,
+				0C78C1F922244F450068B5D6 /* DepositCoinViewController.swift in Sources */,
 				0C78C1FD22244F450068B5D6 /* WithdrawRequestViewController.swift in Sources */,
 				0C7F54F321DA6FBC00049571 /* AppDelegate.swift in Sources */,
 				0CE8836921DFE0AF0025A31E /* ContestListViewController.swift in Sources */,
@@ -494,17 +554,20 @@
 				0C8B95ED21E1144400ADE46B /* ValidationManager.swift in Sources */,
 				0C78C1FB22244F450068B5D6 /* RedeemCoinViewController.swift in Sources */,
 				0C78C1FC22244F450068B5D6 /* VerifyAccountViewController.swift in Sources */,
+				0CEB167C2265C102002D0208 /* TeamPlayerTableViewCell.swift in Sources */,
 				0C78C201222450AB0068B5D6 /* ProfileViewController.swift in Sources */,
 				0C8B95F721E120C300ADE46B /* HTTPManager.swift in Sources */,
 				0C0BE68521DA2AD000BE30CF /* Models.swift in Sources */,
 				0C0BE66221DA294000BE30CF /* BaseViewController.swift in Sources */,
 				0C78C203222451980068B5D6 /* UIColorExtension.swift in Sources */,
 				0C390AD921DFAAA900FA6A15 /* PositionCollectionViewCell.swift in Sources */,
+				0CEB167A2264F73A002D0208 /* CaptainSelectorViewController.swift in Sources */,
 				0C8B95E921E1022200ADE46B /* AppSessionManager.swift in Sources */,
 				6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */,
 				0CE8835F21DFB6730025A31E /* TeamCreateViewController.swift in Sources */,
 				644526A32237D83C0099FB37 /* PointBreakDownTableViewCell.swift in Sources */,
 				0C8B95EF21E1150A00ADE46B /* AlertManager.swift in Sources */,
+				0CB1B90122686419003D6C56 /* TeamSelectViewController.swift in Sources */,
 				0C8B95EB21E103DC00ADE46B /* UIViewController_Extra.swift in Sources */,
 				0C78C200222450AB0068B5D6 /* MoreViewController.swift in Sources */,
 				644526A02237D8320099FB37 /* ContestLeaderBoardViewController.swift in Sources */,
@@ -663,6 +726,8 @@
 			baseConfigurationReference = BB3C0DFD4C09C2AC1FBB8A56 /* Pods-GameOf11.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tanvir Ahmad (T865CHJUU3)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 55E5R5585A;
 				INFOPLIST_FILE = GameOf11/Info.plist;
@@ -703,9 +768,9 @@
 					"\"ViewUtils\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.flowdigital.GameOf11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flowdigital.go11demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Flow Development Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "GO11 Devlopment";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -716,6 +781,8 @@
 			baseConfigurationReference = DA071A4862D02ED4B1736182 /* Pods-GameOf11.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tanvir Ahmad (T865CHJUU3)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 55E5R5585A;
 				INFOPLIST_FILE = GameOf11/Info.plist;
@@ -756,9 +823,9 @@
 					"\"ViewUtils\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.flowdigital.GameOf11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flowdigital.go11demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Flow Development Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "GO11 Devlopment";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

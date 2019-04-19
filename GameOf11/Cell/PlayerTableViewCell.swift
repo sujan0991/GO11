@@ -30,7 +30,7 @@ class PlayerTableViewCell: UITableViewCell {
     
     func setInfo( player:Player ,  squad : PlayingTeamsData)  {
         
-        print(player.toJSON())
+        //print(player.toJSON())
         
         playerName.text = player.name
         creditScore.text = "\(player.creditPoints ?? 0)"

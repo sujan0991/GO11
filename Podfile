@@ -20,5 +20,10 @@ target 'GameOf11' do
 	pod 'SnapKit', '~> 4.0.0'
     pod 'DTPagerController'
     pod 'AccountKit'
+    
+    pod 'Firebase/Core'
+    pod 'Firebase/Messaging'
+    pod 'Fabric', '~> 1.9.0'
+    pod 'Crashlytics', '~> 3.12.0'
 
 end

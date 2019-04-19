@@ -21,7 +21,7 @@ class LoginViewController: BaseViewController {
         // Do any additional setup after loading the view.
         
        // phoneField.text = "+8801715257212"
-        phoneField.text = "+8801729360267"
+        phoneField.text = "+8801676330929"
         passwordField.text = "123456"
             
         
@@ -40,14 +40,15 @@ class LoginViewController: BaseViewController {
         APIManager.manager.login(userName: phoneField.text!, password: passwordField.text!) { (status, token, msg) in
            
             if status{
-                SVProgressHUD.showSuccess(withStatus: msg)
+                self.showStatus(status, msg: msg)
+                
                 AppSessionManager.shared.authToken = token
                 AppSessionManager.shared.save()
                 
                self.navigationController?.popToRootViewController(animated: true)
             }
             else{
-                SVProgressHUD.showError(withStatus: msg)
+                self.showStatus(false, msg: msg)
             }
             
         }

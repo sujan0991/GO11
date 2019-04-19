@@ -58,11 +58,13 @@ class ContestTableViewCell: UITableViewCell {
         if (contest.isJoined != 0)
         {
             joinedButton.setTitle("Joined", for: UIControl.State.normal)
+            joinedButton.isEnabled = false
         }
         else
         {
             
             joinedButton.setTitle("Join", for: UIControl.State.normal)
+            joinedButton.isEnabled = true
         }
        
         self.needsUpdateConstraints()

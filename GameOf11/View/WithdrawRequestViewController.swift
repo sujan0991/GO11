@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WithdrawRequestViewController: UIViewController {
+class WithdrawRequestViewController: BaseViewController {
 
     
     
@@ -19,6 +19,9 @@ class WithdrawRequestViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        placeNavBar(withTitle: "Withdraw Request", isBackBtnVisible: true)
+        
     }
     
 

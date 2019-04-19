@@ -9,7 +9,7 @@
 import UIKit
 import AccountKit
 
-class UnSignedProfileViewController: UIViewController,AKFViewControllerDelegate {
+class UnSignedProfileViewController: BaseViewController,AKFViewControllerDelegate {
 
     
     @IBOutlet weak var signUpButton: UIButton!
@@ -19,6 +19,8 @@ class UnSignedProfileViewController: UIViewController,AKFViewControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+         placeNavBar(withTitle: "Sign UP", isBackBtnVisible: true)
+        
         // initialize Account Kit
         if _accountKit == nil {
             _accountKit = AKFAccountKit(responseType: .accessToken)
@@ -63,6 +65,7 @@ class UnSignedProfileViewController: UIViewController,AKFViewControllerDelegate 
                 print("Login successful")
         
                 let VC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
+        
         
                 self.navigationController?.pushViewController(VC!, animated: true)
 

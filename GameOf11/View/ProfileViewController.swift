@@ -17,7 +17,7 @@ class ProfileViewController: BaseViewController,UIImagePickerControllerDelegate,
     
     @IBOutlet var userNameLabel: UILabel!
     
-    @IBOutlet var dipositedCoinCountLabel: UILabel!
+    @IBOutlet var depositedCoinCountLabel: UILabel!
     
     @IBOutlet var winningAmountLabel: UILabel!
     
@@ -54,17 +54,21 @@ class ProfileViewController: BaseViewController,UIImagePickerControllerDelegate,
         
         if let um = AppSessionManager.shared.currentUser {
             
-            phoneNoLabel.text = "\(um.phone)"
-            userNameLabel.text = "\(um.name)"
-            emailLabel.text = "\(um.email)"
+            phoneNoLabel.text = String.init(format: "%@", um.phone ?? "")
+            userNameLabel.text = String.init(format: "%@", um.name ?? "")
+            emailLabel.text = String.init(format: "%@", um.email ?? "")
             
-           // dipositedCoinCountLabel.text = "\(um.name)"
-//            winningAmountLabel.text = "\(um.phone)"
-//            pendingReqCountLabel.text = "\(um.phone)"
-//            contestCountLabel.text = "\(um.phone)"
-//            topRankCountLabel.text = "\(um.phone)"
-//            matchCountLabel.text = "\(um.name)"
-//
+            depositedCoinCountLabel.text = String.init(format: "%.2f", um.metadata?.totalCoins ?? "")
+            winningAmountLabel.text = String.init(format: "%.2f", um.metadata?.totalCash ?? "")
+            pendingReqCountLabel.text = String.init(format: "%d", um.metadata?.totalPendingRequest ?? "")
+            contestCountLabel.text = String.init(format: "%d", um.metadata?.totalContestParticipation ?? "")
+            topRankCountLabel.text = String.init(format: "%d", um.metadata?.highestRank ?? "")
+            matchCountLabel.text = String.init(format: "%d", um.metadata?.totalMatchParticipation ?? "")
+
+            
+        }
+        else
+        {
             
         }
     }
@@ -144,12 +148,15 @@ class ProfileViewController: BaseViewController,UIImagePickerControllerDelegate,
             
              AppSessionManager.shared.logOut()
             if status{
-                SVProgressHUD.showSuccess(withStatus: msg)
-               
+               // SVProgressHUD.showSuccess(withStatus: msg)
+                self.showStatus(status, msg: msg)
+                
                 
             }
             else{
-                SVProgressHUD.showError(withStatus: msg)
+                self.showStatus(false, msg: msg)
+                
+                //SVProgressHUD.showError(withStatus: msg)
             }
             
         }

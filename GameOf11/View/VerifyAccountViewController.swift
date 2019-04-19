@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VerifyAccountViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class VerifyAccountViewController: BaseViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     var imagePicker = UIImagePickerController()
     var isFront = true;
@@ -21,6 +21,8 @@ class VerifyAccountViewController: UIViewController,UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        placeNavBar(withTitle: "Verify Account", isBackBtnVisible: true)
+        
         imagePicker.delegate = self
     }
     

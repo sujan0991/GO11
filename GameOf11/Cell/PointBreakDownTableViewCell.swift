@@ -18,8 +18,6 @@ class PointBreakDownTableViewCell: UITableViewCell {
     @IBOutlet weak var xLabel: UILabel!
     @IBOutlet weak var captainLabel: UILabel!
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,7 +26,6 @@ class PointBreakDownTableViewCell: UITableViewCell {
         xLabel.isHidden = true
         
     }
-
     
     func setInfo(_ playerInfo:PlayerInfoData)  {
         

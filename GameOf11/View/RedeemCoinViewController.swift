@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RedeemCoinViewController: UIViewController {
+class RedeemCoinViewController: BaseViewController {
     
     
     @IBOutlet weak var tkAmountTextField: UITextField!
@@ -17,6 +17,9 @@ class RedeemCoinViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        placeNavBar(withTitle: "Redeem Coin", isBackBtnVisible: true)
+        
     }
     
   

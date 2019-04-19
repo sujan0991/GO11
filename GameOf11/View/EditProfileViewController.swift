@@ -9,7 +9,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: BaseViewController {
     
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var nameTextField: UITextField!
@@ -39,6 +39,9 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        placeNavBar(withTitle: "Personal Details", isBackBtnVisible: true)
+        
+        
         let bottomView = stackView.arrangedSubviews[1]
         bottomView.isHidden = true
         

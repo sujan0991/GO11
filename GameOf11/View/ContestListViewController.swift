@@ -12,8 +12,8 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
 
     var activeContestList:[ContestData] = []
     var squadData: MatchSquadData!
+    var createdTeamList: [CreatedTeam] = []
     
-    @IBOutlet weak var matchSummaryView: UIView!
     
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var nextButton: UIButton!
@@ -24,8 +24,18 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
     @IBOutlet weak var secondTeamName: UILabel!
     @IBOutlet weak var secondTeamFlag: UIImageView!
     
+    
+    
     @IBOutlet weak var contestTableView: UITableView!
     @IBOutlet weak var statusLabel: UILabel!
+    
+    @IBOutlet weak var matchSummaryView: UIView!
+    
+    @IBOutlet weak var stateView: UIView!
+    @IBOutlet weak var teamCount: UILabel!
+    @IBOutlet weak var contestCount: UILabel!
+    
+    
     
     var parentMatch: MatchList? = nil
     var type : MatchType = .upcomingContest
@@ -48,7 +58,6 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
         contestTableView.dataSource = self
         contestTableView.removeEmptyCells()
         
-        print("type ",type);
         
         if type == .upcomingContest || type == .liveContest || type == .completedContest {
             
@@ -65,9 +74,6 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
                     self.showStatus(status, msg: msg)
                 }
             }
-            
-            self.footerView.isHidden = true
-
         }else{
             
             APIManager.manager.getActiveContestList(matchId: "\(parentMatch?.matchId ?? 0)") { (status, cm, msg) in
@@ -109,9 +115,30 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
             APIManager.manager.getMatchSquad(matchId: "\(parentMatch?.matchId ?? 0)") { (status, matchSquad, msg) in
                 if status{
                     if matchSquad != nil{
-                        //self.activeContestList = (matchSquad?.contests)!
+                      
                         self.nextButton.isEnabled = true
                         self.squadData = matchSquad
+                    }
+                }
+                else{
+                    self.showStatus(status, msg: msg)
+                }
+            }
+            
+            
+            APIManager.manager.getTeamForMatch(matchId: "\(parentMatch?.matchId ?? 0)") { (status, createdTeam, msg) in
+                if status{
+                    
+                    if createdTeam != nil{
+                        self.createdTeamList = (createdTeam?.teams)!
+                        
+                        if self.createdTeamList.count > 0
+                        {
+                            self.stateView.isHidden = false
+                            self.nextButton.isHidden = true
+                            
+                            self.teamCount.text = String.init(format: "%d\nCreated Team",self.createdTeamList.count)
+                        }
                         
                     }
                 }
@@ -120,19 +147,12 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
                 }
             }
         }
+        else
+        {
+            self.footerView.isHidden = true
+
+        }
         
-        
-//        APIManager.manager.getTeamForMatch(matchId: "\(parentMatch?.matchId ?? 0)") { (status, createdTeam, msg) in
-//            if status{
-//
-//                if createdTeam != nil{
-//                    //    self.activeContestList = (matchSquad?.contests)!
-//                }
-//            }
-//            else{
-//                self.showStatus(status, msg: msg)
-//            }
-//        }
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -149,30 +169,44 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
         let contest = activeContestList[indexPath.section]
         cell.setInfo(contest)
     
+        cell.joinedButton.tag = contest.id ?? 0
+        cell.joinedButton.addTarget(self, action: #selector(teamSelectAction(_:)), for: .touchUpInside)
+        
         return cell
     }
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
   
-        print("didSelectRowAt")
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-
-        let VC = storyboard.instantiateViewController(withIdentifier: "ContestLeaderBoardViewController") as! ContestLeaderBoardViewController
-
-        let contest = activeContestList[indexPath.section]
-        
-        print("parentMatch?.matchId",parentMatch?.matchId ?? 0)
-        
-        VC.contest_id = contest.id
-        VC.match_id = parentMatch?.matchId
-        
-       // self.navigationController?.pushViewController(VC, animated: true)
-        
-        self.present(VC, animated: true) {
-            
-            print("open")
+        print("didSelectRowAt ",self.tabBarController?.selectedIndex)
+    
+        if  type == .next
+        {
+            if self.createdTeamList.count > 0
+            {
+                
+            }
         }
+        else
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            
+            let VC = storyboard.instantiateViewController(withIdentifier: "ContestLeaderBoardViewController") as! ContestLeaderBoardViewController
+            
+            let contest = activeContestList[indexPath.section]
+            
+            print("parentMatch?.matchId",parentMatch?.matchId ?? 0)
+            
+            VC.contest_id = contest.id
+            VC.match_id = parentMatch?.matchId
+            
+            // self.navigationController?.pushViewController(VC, animated: true)
+            
+            self.present(VC, animated: true) {
+                
+                print("open")
+            }
+        }
+        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
@@ -190,11 +224,56 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
         popupVC?.modalTransitionStyle = .crossDissolve
         popupVC?.squadData = squadData 
         
+        self.navigationController?.pushViewController(popupVC ?? self, animated: true)
+        
+//        self.present(popupVC!, animated: true) {
+//            print("")
+//        }
+    }
+    @IBAction func teamSelectAction(_ sender: UIButton) {
+       
+        if self.createdTeamList.count > 0
+        {
+            let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
+            
+            popupVC?.modalPresentationStyle = .overCurrentContext
+            popupVC?.modalTransitionStyle = .crossDissolve
+            popupVC?.teams = self.createdTeamList
+            popupVC?.contestId = sender.tag
+            
+            self.present(popupVC!, animated: true) {
+                print("")
+            }
+        }
+        
+        
+       
+    }
+    
+    @IBAction func teamEditAction(_ sender: Any) {
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MyTeamViewController") as? MyTeamViewController
+        
+        popupVC?.modalPresentationStyle = .overCurrentContext
+        popupVC?.modalTransitionStyle = .crossDissolve
+        popupVC?.teams = self.createdTeamList
+        popupVC?.squadData = squadData
+        popupVC?.parentMatch = parentMatch
+        
         self.present(popupVC!, animated: true) {
             print("")
         }
-      
     }
+    
+    
+    @IBAction func showJoinedContestList(_ sender: Any) {
+        
+    }
+    
+    override func backButtonAction() {
+        self.navigationController?.dismiss(animated: true
+            , completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
