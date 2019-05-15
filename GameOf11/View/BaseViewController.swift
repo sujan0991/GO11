@@ -20,11 +20,8 @@ public enum MatchType:Int {
 
 class BaseViewController: UIViewController,NavigationBarDelegate {
    
-    
-   
+
     // Private variables
-    
-    
     
     private var navBar: CustomNavigationBar!
     var containerView: UIView!
@@ -119,7 +116,7 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
     {
         let someFloat = CGFloat(self.view.frame.height)
         
-        containerView = UIView(frame: CGRect(x: 0, y: extraTop()+navBar.frame.height ,width: UIScreen.main.bounds.size.width,height: someFloat - extraTop() - navBar.frame.height ))
+        containerView = UIView(frame: CGRect(x: 0, y: navBar.frame.height ,width: UIScreen.main.bounds.size.width,height: someFloat - navBar.frame.height ))
         containerView.backgroundColor = UIColor.init(named: "BackgroundColor")
 
         self.view.addSubview(containerView)

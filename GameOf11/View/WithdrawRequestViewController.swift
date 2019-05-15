@@ -28,7 +28,18 @@ class WithdrawRequestViewController: BaseViewController {
    
     @IBAction func sendRequestButtonAction(_ sender: Any) {
         
-        
+        APIManager.manager.postWithdrawRequest(amount: self.tkAmountTextField.text ?? "0", number: self.bKashNoTextField.text ?? "0") { (success, msg) in
+            if(success)
+            {
+                self.showStatus(true, msg: msg)
+                self.navigationController?.popViewController(animated: true)
+                
+            }
+            else{
+                self.showStatus(false, msg: msg)
+            }
+        }
+       
     }
     
   

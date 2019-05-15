@@ -13,6 +13,12 @@ class CaptainSelectorViewController: BaseViewController,UITableViewDelegate,UITa
     var userTeam : UsersFantasyTeam!
     var squadData : MatchSquadData!
     
+    var batsmanList:[Player] = []
+    var bowlerList:[Player] = []
+    var keeperList:[Player] = []
+    var allRounderList:[Player] = []
+    
+    
     var currentCaptain : Player!
     var currentViceCaptain : Player!
     
@@ -20,10 +26,6 @@ class CaptainSelectorViewController: BaseViewController,UITableViewDelegate,UITa
     var currentFantasyViceCaptain : UserFantasyPlayer!
     
     
-    var batsmanList:[Player] = []
-    var bowlerList:[Player] = []
-    var keeperList:[Player] = []
-    var allRounderList:[Player] = []
     
     @IBOutlet weak var teamNameTextField: UITextField!
     @IBOutlet weak var teamPlayerListView: UITableView!

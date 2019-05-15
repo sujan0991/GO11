@@ -34,7 +34,13 @@ class LoginViewController: BaseViewController {
         
     }
     
-
+    @IBAction func signUpButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func signinAction(_ sender: Any) {
         
         APIManager.manager.login(userName: phoneField.text!, password: passwordField.text!) { (status, token, msg) in

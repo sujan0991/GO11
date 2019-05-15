@@ -120,11 +120,12 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
                         self.squadData = matchSquad
                     }
                 }
-                else{
-                    self.showStatus(status, msg: msg)
-                }
+//                else{
+//                    self.showStatus(status, msg: msg)
+//                }
             }
             
+            //user's team
             
             APIManager.manager.getTeamForMatch(matchId: "\(parentMatch?.matchId ?? 0)") { (status, createdTeam, msg) in
                 if status{
@@ -142,9 +143,9 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
                         
                     }
                 }
-                else{
-                    self.showStatus(status, msg: msg)
-                }
+//                else{
+//                    self.showStatus(status, msg: msg)
+//                }
             }
         }
         else
@@ -169,8 +170,17 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
         let contest = activeContestList[indexPath.section]
         cell.setInfo(contest)
     
-        cell.joinedButton.tag = contest.id ?? 0
-        cell.joinedButton.addTarget(self, action: #selector(teamSelectAction(_:)), for: .touchUpInside)
+        if (type != .next)
+        {
+            cell.joinedButton.isHidden = true
+        }
+        else
+        {
+            
+            cell.joinedButton.isHidden = false
+            cell.joinedButton.tag = contest.id ?? 0
+            cell.joinedButton.addTarget(self, action: #selector(teamSelectAction(_:)), for: .touchUpInside)
+        }
         
         return cell
     }
@@ -218,13 +228,21 @@ class ContestListViewController: BaseViewController,UITableViewDelegate,UITableV
     }
     @IBAction func teamCreateAction(_ sender: Any) {
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamCreateViewController") as? TeamCreateViewController
+        if squadData != nil && squadData.playersList.count > 0
+        {
+            let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamCreateViewController") as? TeamCreateViewController
+            
+            popupVC?.modalPresentationStyle = .overCurrentContext
+            popupVC?.modalTransitionStyle = .crossDissolve
+            popupVC?.squadData = squadData
+            
+            self.navigationController?.pushViewController(popupVC ?? self, animated: true)
+        }
+        else
+        {
+            self.showStatus(false, msg: "No Squad Found, Please Refresh" )
+        }
         
-        popupVC?.modalPresentationStyle = .overCurrentContext
-        popupVC?.modalTransitionStyle = .crossDissolve
-        popupVC?.squadData = squadData 
-        
-        self.navigationController?.pushViewController(popupVC ?? self, animated: true)
         
 //        self.present(popupVC!, animated: true) {
 //            print("")

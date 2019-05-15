@@ -12,15 +12,10 @@ import SVProgressHUD
 class ProfileViewController: BaseViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     @IBOutlet var profilePicImageView: UIImageView!
-    
     @IBOutlet var cameraButton: UIButton!
-    
     @IBOutlet var userNameLabel: UILabel!
-    
     @IBOutlet var depositedCoinCountLabel: UILabel!
-    
     @IBOutlet var winningAmountLabel: UILabel!
-    
     @IBOutlet var pendingReqCountLabel: UILabel!
     
     @IBOutlet var contestCountLabel: UILabel!
@@ -52,50 +47,74 @@ class ProfileViewController: BaseViewController,UIImagePickerControllerDelegate,
     
     override func viewDidAppear(_ animated: Bool) {
         
-        if let um = AppSessionManager.shared.currentUser {
-            
-            phoneNoLabel.text = String.init(format: "%@", um.phone ?? "")
-            userNameLabel.text = String.init(format: "%@", um.name ?? "")
-            emailLabel.text = String.init(format: "%@", um.email ?? "")
-            
-            depositedCoinCountLabel.text = String.init(format: "%.2f", um.metadata?.totalCoins ?? "")
-            winningAmountLabel.text = String.init(format: "%.2f", um.metadata?.totalCash ?? "")
-            pendingReqCountLabel.text = String.init(format: "%d", um.metadata?.totalPendingRequest ?? "")
-            contestCountLabel.text = String.init(format: "%d", um.metadata?.totalContestParticipation ?? "")
-            topRankCountLabel.text = String.init(format: "%d", um.metadata?.highestRank ?? "")
-            matchCountLabel.text = String.init(format: "%d", um.metadata?.totalMatchParticipation ?? "")
-
-            
+        if AppSessionManager.shared.authToken != nil{
+            APIManager.manager.getMyProfile { (status, um, msg) in
+                if status{
+                    if let u = um{
+                        AppSessionManager.shared.currentUser = u
+                        AppSessionManager.shared.save()
+                        // self.fill(u)
+                        
+                        if let um = AppSessionManager.shared.currentUser {
+                            
+                            self.phoneNoLabel.text = String.init(format: "%@", um.phone ?? "")
+                            self.userNameLabel.text = String.init(format: "%@", um.name ?? "")
+                            self.emailLabel.text = String.init(format: "%@", um.email ?? "")
+                            
+                            self.depositedCoinCountLabel.text = String.init(format: "%.2f", um.metadata?.totalCoins ?? "")
+                            self.winningAmountLabel.text = String.init(format: "%.2f", um.metadata?.totalCash ?? "")
+                            self.pendingReqCountLabel.text = String.init(format: "%d", um.metadata?.totalPendingRequest ?? "")
+                            self.contestCountLabel.text = String.init(format: "%d", um.metadata?.totalContestParticipation ?? "")
+                            self.topRankCountLabel.text = String.init(format: "%d", um.metadata?.highestRank ?? "")
+                            self.matchCountLabel.text = String.init(format: "%d", um.metadata?.totalMatchParticipation ?? "")
+                            
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                }
+                else{
+                    self.showStatus(status, msg: msg)
+                }
+            }
         }
         else
         {
-            
+            self.performSegue(withIdentifier: "openSignUp", sender: self)
         }
+        
+        
     }
     
     @IBAction func cameraButtonAction(_ sender: UIButton) {
-        
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.openCamera()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            self.openGallary()
-        }))
-        
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        
-        switch UIDevice.current.userInterfaceIdiom {
-        case .pad:
-            alert.popoverPresentationController?.sourceView = sender
-            alert.popoverPresentationController?.sourceRect = sender.bounds
-            alert.popoverPresentationController?.permittedArrowDirections = .up
-        default:
-            break
+        //getAvatarList
+        APIManager.manager.getAvatarList { (avatars) in
+           print(avatars)
         }
-        
-        self.present(alert, animated: true, completion: nil)
+//
+//        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+//        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+//            self.openCamera()
+//        }))
+//
+//        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+//            self.openGallary()
+//        }))
+//
+//        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+//
+//        switch UIDevice.current.userInterfaceIdiom {
+//        case .pad:
+//            alert.popoverPresentationController?.sourceView = sender
+//            alert.popoverPresentationController?.sourceRect = sender.bounds
+//            alert.popoverPresentationController?.permittedArrowDirections = .up
+//        default:
+//            break
+//        }
+//
+//        self.present(alert, animated: true, completion: nil)
     
     }
     func openCamera()

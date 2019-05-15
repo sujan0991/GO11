@@ -79,6 +79,10 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         let singleTeam = teams[indexPath.section] as CreatedTeam
         cell.setInfo(singleTeam)
         
+        
+        cell.previewButton.addTarget(self, action: #selector(showPreview(_:)), for: .touchUpInside)
+        
+        
         return cell
     }
     
@@ -94,6 +98,20 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             print("")
         }
     }
+    
+    @objc func showPreview(_ sender: UIButton){
+    
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamPreviewViewController") as? TeamPreviewViewController
+        
+        popupVC?.modalPresentationStyle = .overCurrentContext
+        popupVC?.modalTransitionStyle = .crossDissolve
+        popupVC?.squadData = squadData
+        
+        self.navigationController?.pushViewController(popupVC ?? self, animated: true)
+    
+    }
+    
+    
     
     
     /*

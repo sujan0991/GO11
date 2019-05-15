@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DepositCoinViewController: BaseViewController,UITextFieldDelegate {
+class DepositCoinViewController: BaseViewController {
     
     @IBOutlet weak var tkAmountLabel: UITextField!
     
@@ -18,16 +18,10 @@ class DepositCoinViewController: BaseViewController,UITextFieldDelegate {
 
         placeNavBar(withTitle: "Add Coins", isBackBtnVisible: true)
         
-        tkAmountLabel.delegate = self
         tkAmountLabel.becomeFirstResponder()
         
     }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        tkAmountLabel.resignFirstResponder()
-        return true
-    }
+
 
     @IBAction func backButtonAction(_ sender: Any) {
         

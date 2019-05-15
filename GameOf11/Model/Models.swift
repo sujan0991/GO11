@@ -131,6 +131,24 @@ class PlayingTeamsData: Glossy {
     }
 }
 
+class Avatar: Glossy {
+    
+    var avaterId: Int?
+    var imagePath: String?
+    
+    required init?(json: Gloss.JSON) {
+        avaterId = "id" <~~ json
+        imagePath = "image_path" <~~ json
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "id" ~~> avaterId,
+            "image_path" ~~> imagePath
+            ])
+    }
+}
+
 class MatchSquadData: Glossy {
     
     var matchId: Int?
@@ -398,6 +416,12 @@ class Player: Glossy {
             
             ])
     }
+    func lastName() -> String {
+       
+        let firstWord = name?.components(separatedBy: " ").last
+        return firstWord ?? name ?? ""
+    }
+  
 }
 
 

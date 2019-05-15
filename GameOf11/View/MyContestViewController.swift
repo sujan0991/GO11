@@ -15,39 +15,48 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        placeNavBar(withTitle: "My Contest", isBackBtnVisible: false)
-        
-        // Do any additional setup after loading the view.
-        
-        placeContainer()
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let fixtureVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController") as! MatchViewController
-        fixtureVC.title = "Upcoming"
-        fixtureVC.type = .upcomingContest
-        
-        let liveVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController") as! MatchViewController
-        liveVC.title = "Live"
-        liveVC.type = .liveContest
         
         
-        let resultVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController")as! MatchViewController
-        resultVC.title = "Completed"
-        resultVC.type = .completedContest
-        
-        
-        let pagerController = DTPagerController(viewControllers: [fixtureVC, liveVC,resultVC])
-        customizeSegment(pagerController: pagerController)
-        
-        pagerController.delegate = self
-        
-        print(containerView)
-        addChild(pagerController)
-        pagerController.view.frame = containerView.bounds
-        print(pagerController.view)
-        containerView.addSubview(pagerController.view)
-        pagerController.didMove(toParent: self)
+        if AppSessionManager.shared.authToken == nil{
+            self.performSegue(withIdentifier: "openSignUpFromContest", sender: self)
+        }
+        else
+        {
+            placeNavBar(withTitle: "My Contest", isBackBtnVisible: false)
+            
+            // Do any additional setup after loading the view.
+            
+            placeContainer()
+            
+            
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let fixtureVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController") as! MatchViewController
+            fixtureVC.title = "Upcoming"
+            fixtureVC.type = .upcomingContest
+            
+            let liveVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController") as! MatchViewController
+            liveVC.title = "Live"
+            liveVC.type = .liveContest
+            
+            
+            let resultVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController")as! MatchViewController
+            resultVC.title = "Completed"
+            resultVC.type = .completedContest
+            
+            
+            let pagerController = DTPagerController(viewControllers: [fixtureVC, liveVC,resultVC])
+            customizeSegment(pagerController: pagerController)
+            
+            pagerController.delegate = self
+            
+            addChild(pagerController)
+            pagerController.view.frame = containerView.bounds
+            print(pagerController.view)
+            containerView.addSubview(pagerController.view)
+            pagerController.didMove(toParent: self)
+        }
     }
     
 

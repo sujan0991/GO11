@@ -110,22 +110,30 @@ class TeamCreateViewController: BaseViewController,UICollectionViewDelegate, UIC
     override func viewDidAppear(_ animated: Bool) {
         let selectedIndexPath = IndexPath(item: 0, section: 0)
         positionSelectorCollectionView.selectItem(at: selectedIndexPath, animated: true, scrollPosition: .top)
+        
+        positionSelectorCollectionView.reloadData()
+        
 
     }
     
-   
-    
     @IBAction func nextButtonAction(_ sender: Any) {
         
+        if (isGreen)
+        {
+            let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CaptainSelectorViewController") as? CaptainSelectorViewController
+            
+            popupVC?.modalPresentationStyle = .overCurrentContext
+            popupVC?.modalTransitionStyle = .crossDissolve
+            popupVC?.userTeam = userTeam
+            popupVC?.squadData = squadData
+            
+            self.navigationController?.pushViewController(popupVC ?? self, animated: true)
+        }
+        else
+        {
+             self.showStatus(false, msg: "Please complete the team first")
+        }
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CaptainSelectorViewController") as? CaptainSelectorViewController
-        
-        popupVC?.modalPresentationStyle = .overCurrentContext
-        popupVC?.modalTransitionStyle = .crossDissolve
-        popupVC?.userTeam = userTeam
-        popupVC?.squadData = squadData
-        
-        self.navigationController?.pushViewController(popupVC ?? self, animated: true)
         
 //        self.present(popupVC!, animated: true) {
 //            print("")
@@ -139,6 +147,7 @@ class TeamCreateViewController: BaseViewController,UICollectionViewDelegate, UIC
         
         popupVC?.modalPresentationStyle = .overCurrentContext
         popupVC?.modalTransitionStyle = .crossDissolve
+        popupVC?.squadData = squadData
         
         self.navigationController?.pushViewController(popupVC ?? self, animated: true)
         
@@ -368,7 +377,6 @@ class TeamCreateViewController: BaseViewController,UICollectionViewDelegate, UIC
                 if self.verify(player)
                 {
                     userTeam.batsman.append(userFantasyPlayer)
-                    
                 }
                 else
                 {

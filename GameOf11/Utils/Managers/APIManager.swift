@@ -40,13 +40,21 @@ struct API_K {
     static let LOGIN = "login"//
     static let LOGOUT = "logout"//
 
+    static let TOKEN_VALIDATION = "validate-token"
+
+ 
     static let REGISTER = "registration"
     static let MY_PROFILE = "user"//
     static let OTHER_PROFILE = "othersProfile"
     static let UPLOAD_PROFILE_PICTURE = "uploadProfilePicture"
     static let UPLOAD_COVER_PHOTO = "uploadCoverPhoto"
     static let UPDATE_PROFILE = "updateProfile"
-
+    static let GET_AVATAR_LIST = "avatars"
+    static let UPDATE_AVATAR = "update-avatar"
+    static let CHANGE_PASSWORD = "change-password"
+    static let FORGOT_PASSWORD = "forgot-password"
+    static let VERIFY_PROFILE = "user/profile-verify"
+    static let UPDATE_GCM_TOKEN = "update-gcm-registration-key"
     
     static let GET_NEXT_MATCH_LIST = "upcoming-matches"//
     static let GET_LIVE_MATCH_LIST = "live-matches"//
@@ -70,11 +78,13 @@ struct API_K {
     static let CREATE_OTP = "createOtp"
     static let GET_PASSWORD = "retrievePassword"
   
-    static let ADD_FRIEND = "addFriend"
-    static let GET_FRIEND = "getFriend"
-    static let GET_WOULD_FRIEND = "getWouldBeFriend"
-    static let ACCEPT_REJECT_FRIEND = "actionToFriendRequest"
-    static let REMOVE_FRIEND = "removeFriend"
+    static let REDEEM_COIN = "redeem-coin"
+    static let WITHDRAW_REQUEST = "withdraw-request"
+    static let GET_WITHDRAW_LIST = "withdrawals-list"
+    static let GET_CASH_EQ_COIN = "cash-equivalent-coin"
+    static let GET_COIN_PACKS = "coin-packs"
+   
+    
 }
 
 struct API_STRING {
@@ -334,6 +344,47 @@ class APIManager: NSObject {
             }
         }
     }
+    
+    
+    func getAvatarList(completion:(( _ avatars: [Avatar])->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        Request(.get, API_K.GET_AVATAR_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    if !isSuccess{
+                        completion?([])
+                    }
+                    else{
+                        if let avatarArray = json["data"].arrayObject as? [Gloss.JSON] {
+                            
+                            if let avatars = [Avatar].from(jsonArray: avatarArray) {
+                                
+                                completion?(avatars)
+                                
+                            } else {
+                                
+                                completion?([])
+                            }
+                        }
+                    }
+                }
+                else {
+                    completion?([])
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?([])
+            }
+        })
+    }
     func updateProfile(fullName:String,country:String,phone:String, aboutme:String, withCompletionHandler completion:(( _ status: Bool,_ token:String?, _ message: String?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
@@ -367,6 +418,187 @@ class APIManager: NSObject {
             case .failure(let error):
                 SVProgressHUD.dismiss()
                 completion?(false,nil,error.localizedDescription)
+            }
+        })
+    }
+    
+    
+    func updateAvatarWith(avatarId:String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["avatar_id":avatarId]
+        
+        Request(.patch, API_K.UPDATE_AVATAR, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+                
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false,nil)
+            }
+        })
+    }
+    
+    func updateGCMKey(key:String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["gcm_registration_key":key]
+        
+        Request(.patch, API_K.UPDATE_GCM_TOKEN, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+                
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false,nil)
+            }
+        })
+    }
+    
+    func redeemCoinForCash(amount:String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["amount":amount]
+        
+        Request(.post, API_K.REDEEM_COIN, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+                
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false,nil)
+            }
+        })
+    }
+    func postWithdrawRequest(amount:String, number : String , withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["amount":amount, "transaction_number": number ]
+        
+        Request(.post, API_K.WITHDRAW_REQUEST, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+                
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false,nil)
+            }
+        })
+    }
+    
+    
+    func changePasswordWith(oldPassword:String, newPassword : String , withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["old_password":oldPassword, "new_password": newPassword ]
+        
+        Request(.patch, API_K.CHANGE_PASSWORD, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+                
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false,nil)
             }
         })
     }
@@ -408,100 +640,7 @@ class APIManager: NSObject {
         })
     }
     
-    func getFriends(completion:(( _ friends: [UserModel])->Void)?) {
-        
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
-        
-        Request(.post, API_K.GET_FRIEND, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
-            switch responseData.result {
-            case .success(let value):
-                print(value)
-                SVProgressHUD.dismiss()
-                let json = JSON(value)
-                if let jsonDic = json.dictionaryObject {
-                    let isSuccess:Bool = jsonDic["success"] as! Bool
-                   // let msg:String = json["message"].stringValue
-                    
-                    if !isSuccess{
-                        completion?([])
-                    }
-                    else{
-                        if let locationsArray = json["data"].arrayObject as? [Gloss.JSON] {
-                            
-                            if let histories = [UserModel].from(jsonArray: locationsArray) {
-                                
-                                completion?(histories)
-                                
-                            } else {
-                                
-                                completion?([])
-                            }
-                        }
-                    }
-                }
-                else {
-                    completion?([])
-                }
-                
-                if let locationsArray = json["data"]["lists"].arrayObject as? [Gloss.JSON] {
-                    
-                    if let histories = [UserModel].from(jsonArray: locationsArray) {
-                        
-                        completion?(histories)
-                        
-                    } else {
-                        
-                        completion?([])
-                    }
-                }
-                
-            case .failure( _):
-                SVProgressHUD.dismiss()
-                completion?([])
-            }
-        })
-    }
     
-    func getListWouldFriends(completion:(( _ friends: [UserModel])->Void)?) {
-        
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
-        
-        Request(.post, API_K.GET_WOULD_FRIEND, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
-            switch responseData.result {
-            case .success(let value):
-                print(value)
-                SVProgressHUD.dismiss()
-                let json = JSON(value)
-                if let jsonDic = json.dictionaryObject {
-                    let isSuccess:Bool = jsonDic["success"] as! Bool
-                    // let msg:String = json["message"].stringValue
-                    
-                    if !isSuccess{
-                        completion?([])
-                    }
-                    else{
-                        if let locationsArray = json["data"].arrayObject as? [Gloss.JSON] {
-                            
-                            if let histories = [UserModel].from(jsonArray: locationsArray) {
-                                
-                                completion?(histories)
-                                
-                            } else {
-                                
-                                completion?([])
-                            }
-                        }
-                    }
-                }
-                else {
-                    completion?([])
-                }
-            case .failure( _):
-                SVProgressHUD.dismiss()
-                completion?([])
-            }
-        })
-    }
     
     func getUpcomingMatchList(completion:(( _ matches: [MatchList])->Void)?) {
         
@@ -948,76 +1087,6 @@ class APIManager: NSObject {
         }
     }
     
-    func inviteFriend(userId:String, withCompletionHandler completion:(( _ status: Bool, _ msg:String?)->Void)?) {
-        
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
-        
-        let params:[String:String] = ["friendId":userId]
-        
-        Request(.post, API_K.ADD_FRIEND, parameters: params )?.responseJSON(completionHandler: { (responseData) in
-            switch responseData.result {
-            case .success(let value):
-                print(value)
-                SVProgressHUD.dismiss()
-                let json = JSON(value)
-                if let jsonDic = json.dictionaryObject {
-                    
-                    let isSuccess:Bool = jsonDic["success"] as! Bool
-                    let msg:String = json["message"].stringValue
-                    
-                    if !isSuccess{
-                        completion?(false,msg)
-                    }
-                    else{
-                        
-                        completion?(true,msg)
-                    }
-                }
-                else {
-                    completion?(false,nil)
-                }
-            case .failure( _):
-                SVProgressHUD.dismiss()
-                completion?(false,nil)
-            }
-        })
-    }
-    
-    func performFriendRequestAction(userId:String,type:RequestActionType, withCompletionHandler completion:(( _ status: Bool, _ msg:String?)->Void)?) {
-        
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
-      
-        let params:[String:String] = ["friendId":userId,
-                                      "action":type.rawValue]
-        
-        Request(.post, type == .remove ? API_K.REMOVE_FRIEND : API_K.ACCEPT_REJECT_FRIEND, parameters: params )?.responseJSON(completionHandler: { (responseData) in
-            switch responseData.result {
-            case .success(let value):
-                print(value)
-                SVProgressHUD.dismiss()
-                let json = JSON(value)
-                if let jsonDic = json.dictionaryObject {
-                    
-                    let isSuccess:Bool = jsonDic["success"] as! Bool
-                    let msg:String = json["message"].stringValue
-                    
-                    if !isSuccess{
-                        completion?(false,msg)
-                    }
-                    else{
-                        
-                        completion?(true,msg)
-                    }
-                }
-                else {
-                    completion?(false,nil)
-                }
-            case .failure( _):
-                SVProgressHUD.dismiss()
-                completion?(false,nil)
-            }
-        })
-    }
     
     func getDataModel(_ param:[String:Any]? = nil,method:String, withCompletionHandler completion:(( _ status: Bool, _ data: Gloss.JSON?,_ msg:String?)->Void)?) {
       

@@ -19,18 +19,12 @@ class UnSignedProfileViewController: BaseViewController,AKFViewControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-         placeNavBar(withTitle: "Sign UP", isBackBtnVisible: true)
+        placeNavBar(withTitle: "Sign UP", isBackBtnVisible: true)
         
         // initialize Account Kit
         if _accountKit == nil {
             _accountKit = AKFAccountKit(responseType: .accessToken)
         }
-    }
-    
-
-    @IBAction func loginButtonAction(_ sender: Any) {
-        
-        
     }
     
     func prepareFBLoginViewController(loginViewController: AKFViewController) {
