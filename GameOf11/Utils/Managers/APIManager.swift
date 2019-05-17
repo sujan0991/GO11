@@ -38,6 +38,7 @@ struct API_K {
     static let BaseURL = URL(string:"\(BaseUrlStr)api/")!
     
     static let LOGIN = "login"//
+    static let SIGNUP = "signup"
     static let LOGOUT = "logout"//
 
     static let TOKEN_VALIDATION = "validate-token"
@@ -182,6 +183,65 @@ class APIManager: NSObject {
             case .failure(let error):
                 SVProgressHUD.dismiss()
                 completion?(false,nil,error.localizedDescription)
+            }
+        })
+    }
+    
+    func signup(phone:String,userName:String,email:String, password:String, withCompletionHandler completion:(( _ status: Double,_ authToken:String?, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["phone":phone,
+                                      "name":userName,
+                                      "email":email,
+                                      "password":password,
+                                      "gcm_registration_key":""
+        ]
+        
+        Request(.post, API_K.SIGNUP, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+//                    var isSuccess:Bool?
+//
+//                    isSuccess = jsonDic["status"] as? Double ?? 0
+                    
+                    if jsonDic["access_token"] != nil{
+                        
+                        print("success in apimanager")
+                        let token:String = json["access_token"].stringValue
+                        
+                        completion?(200,token,"Success")
+                        
+                    }else{
+                    
+                        let status = jsonDic["status"] as? Double ?? 0
+                        
+                        if jsonDic["status"]as? Double != 200{
+                            
+                            print("status not 200")
+                            
+                            let msg:String? = json["message"].stringValue
+                            
+                            completion?(status,nil,msg)
+                        }
+                    
+                        
+                    }
+                }
+                else {
+                    
+                    completion?(0,nil,nil)
+                }
+            case .failure(let error):
+                
+                print("failure")
+                SVProgressHUD.dismiss()
+                completion?(0,nil,error.localizedDescription)
             }
         })
     }

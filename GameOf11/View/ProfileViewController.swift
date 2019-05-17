@@ -36,6 +36,11 @@ class ProfileViewController: BaseViewController,UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if AppSessionManager.shared.authToken == nil{
+            
+            self.performSegue(withIdentifier: "openSignUp", sender: self)
+        }
+        
         placeNavBar(withTitle: "My Profile", isBackBtnVisible: false)
 
         addCoinButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
@@ -43,6 +48,8 @@ class ProfileViewController: BaseViewController,UIImagePickerControllerDelegate,
         redeemButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
         
         imagePicker.delegate = self
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -73,17 +73,13 @@ class ValidationManager: NSObject {
     }
     
     
-    func validateRegisterForm(userName:String, fullName:String,email:String,password:String,phone:String) -> String {
+    func validateRegisterForm(userName:String, email:String,password:String,phone:String) -> String {
         
         
         var msg: String = ""
         
         if userName.isEmpty {
             msg = ValidationStr.USERNAME_EMPTY_ERROR
-            return msg
-        }
-        if fullName.isEmpty {
-            msg = ValidationStr.FULLNAME_EMPTY_ERROR
             return msg
         }
         else if email.isEmpty{

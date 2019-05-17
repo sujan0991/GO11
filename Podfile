@@ -10,7 +10,7 @@ target 'GameOf11' do
   	pod 'NotificationBannerSwift'
   	pod 'IQKeyboardManagerSwift'
   	pod 'ObjectMapper', '~> 3.4'
-    pod 'Bond'
+        pod 'Bond', '~> 6.10.0' 
   	pod 'Alamofire', '~> 5.0.0.beta.1'
  	pod 'SVProgressHUD'
   	pod 'SwiftyJSON', '~> 4.0'
@@ -27,3 +27,4 @@ target 'GameOf11' do
     pod 'Crashlytics', '~> 3.12.0'
 
 end
+

@@ -44,12 +44,16 @@ class UnSignedProfileViewController: BaseViewController,AKFViewControllerDelegat
     
     @IBAction func signUpButtonAction(_ sender: Any) {
         
-        let vc = (_accountKit?.viewControllerForPhoneLogin(with: nil, state: nil))!
-        vc.enableSendToFacebook = true
-        self.prepareFBLoginViewController(loginViewController: vc)
-        self.present(vc as UIViewController, animated: true, completion: nil)
+//        let vc = (_accountKit?.viewControllerForPhoneLogin(with: nil, state: nil))!
+//        vc.enableSendToFacebook = true
+//        self.prepareFBLoginViewController(loginViewController: vc)
+//        self.present(vc as UIViewController, animated: true, completion: nil)
+        
+        //For testing
+        let VC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
         
         
+        self.navigationController?.pushViewController(VC!, animated: true)
     }
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {

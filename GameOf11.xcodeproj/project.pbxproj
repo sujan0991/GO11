@@ -452,7 +452,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bond/Bond.framework",
 				"${BUILT_PRODUCTS_DIR}/DTPagerController/DTPagerController.framework",
@@ -495,7 +495,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CECC40A6D6AA7D0098500A57 /* [CP] Check Pods Manifest.lock */ = {
@@ -522,7 +522,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-resources.sh",
 				"${PODS_ROOT}/AccountKit/AccountKitStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -531,7 +531,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
