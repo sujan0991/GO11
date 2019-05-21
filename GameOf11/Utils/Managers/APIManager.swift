@@ -84,6 +84,9 @@ struct API_K {
     static let GET_WITHDRAW_LIST = "withdrawals-list"
     static let GET_CASH_EQ_COIN = "cash-equivalent-coin"
     static let GET_COIN_PACKS = "coin-packs"
+    
+    static let PAYMENT_INVOICE = "user-invoice"
+    
    
     
 }
@@ -167,6 +170,7 @@ class APIManager: NSObject {
                     isSuccess = jsonDic["status"] as? Bool ?? true
                    
                     if !isSuccess!{
+                        
                         let msg:String? = json["message"].stringValue
 
                         completion?(false,nil,msg)
@@ -1145,6 +1149,55 @@ class APIManager: NSObject {
                 completion?(false,nil,msg)
             }
         }
+    }
+    
+    
+    func getInvoice(amount:Float?, withCompletionHandler completion:(( _ status: Bool,_ invoiceId:String?,_ invoiceUrl:String?, _ message: String?)->Void)?){
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
+        let params:[String:Float] = ["amount":amount!]
+        
+        print("param",params)
+        
+        Request(.get, API_K.PAYMENT_INVOICE, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    var isSuccess:Bool?
+                    
+                    isSuccess = jsonDic["status"] as? Bool ?? true
+                    
+                    if !isSuccess!{
+                        
+                        let msg:String? = json["message"].stringValue
+                        
+                        completion?(false,nil,nil,msg)
+                    }
+                    else{
+                       
+                        let id:String = json["paymentId"].stringValue
+                        
+                        let url:String = json["paymentUrl"].stringValue
+                        
+                        print("invoice id ",id)
+                        
+                        completion?(true,id,url,"Success")
+                    }
+                }
+                else {
+                    completion?(false,nil,nil,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,nil,nil,error.localizedDescription)
+            }
+        })
     }
     
     

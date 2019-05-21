@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,SFSafariViewControllerDelegate {
     
     
     
@@ -98,6 +98,7 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
             // UIApplication.shared.open(url, options: [:])
             let svc = SFSafariViewController(url: url)
             
+
             self.present(svc, animated: true) {
                 
                 print("open safari")
@@ -105,5 +106,8 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
     }
         
     }
+    
+    
+    
 
 }

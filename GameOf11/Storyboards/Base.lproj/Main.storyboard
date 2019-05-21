@@ -262,7 +262,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eET-H1-454">
-                                                <rect key="frame" x="101.5" y="11" width="88.5" height="28"/>
+                                                <rect key="frame" x="105" y="11" width="85" height="28"/>
                                                 <color key="backgroundColor" name="GreenHighlight"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
                                                 <state key="normal" title="Next">
@@ -273,13 +273,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="62.5/100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUl-PK-5IP">
-                                                <rect key="frame" x="12" y="10" width="59.5" height="17.5"/>
+                                                <rect key="frame" x="12" y="10" width="63" height="18"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credits left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rh-jq-SiX">
-                                                <rect key="frame" x="12" y="28" width="59.5" height="12"/>
+                                                <rect key="frame" x="12" y="28" width="63" height="12"/>
                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -361,14 +361,14 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55u-HS-B6v">
                                                 <rect key="frame" x="100" y="0.0" width="50" height="50"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="6/11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh1-Za-oWE">
-                                                        <rect key="frame" x="0.0" y="10" width="50" height="17.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6/11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh1-Za-oWE">
+                                                        <rect key="frame" x="0.0" y="10" width="50" height="18"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUo-H6-7RD">
-                                                        <rect key="frame" x="0.0" y="27.5" width="50" height="12.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUo-H6-7RD">
+                                                        <rect key="frame" x="0.0" y="28" width="50" height="12"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="10"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -1228,7 +1228,7 @@
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWithText" translatesAutoresizingMaskIntoConstraints="NO" id="3Wg-em-7wW">
-                                <rect key="frame" x="85" y="218" width="150" height="16"/>
+                                <rect key="frame" x="85" y="66" width="150" height="168"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2WH-1J-jbD">
                                 <rect key="frame" x="15" y="474" width="290" height="30"/>
@@ -2516,33 +2516,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 BDT = 50 Coins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjM-fS-Mfp">
-                                <rect key="frame" x="66" y="60" width="188" height="30"/>
+                                <rect key="frame" x="66" y="80" width="188" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.4549019608" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qt5-7U-tZc">
-                                <rect key="frame" x="20" y="110" width="280" height="243.5"/>
+                                <rect key="frame" x="20" y="130" width="280" height="243.5"/>
                                 <string key="text">You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. After that, required money will be deducted from your payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 20 BDT.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.28235294119999998" green="0.29803921570000003" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write amount in BDT to buy Coins" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tfq-U5-zcX">
-                                <rect key="frame" x="55" y="373.5" width="245" height="30"/>
+                                <rect key="frame" x="55" y="393.5" width="245" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tk_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Wc7-6f-eYW">
-                                <rect key="frame" x="20" y="376" width="25" height="25"/>
+                                <rect key="frame" x="20" y="396" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="EIB-yU-wvO"/>
                                     <constraint firstAttribute="width" constant="25" id="ec4-EJ-8Yv"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWR-le-ccq">
-                                <rect key="frame" x="110" y="423.5" width="100" height="30"/>
+                                <rect key="frame" x="110" y="443.5" width="100" height="30"/>
                                 <color key="backgroundColor" red="0.18823529410000001" green="0.72156862749999995" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="6GI-jt-1Kx"/>
@@ -2568,7 +2568,7 @@
                             <constraint firstItem="Tfq-U5-zcX" firstAttribute="leading" secondItem="Wc7-6f-eYW" secondAttribute="trailing" constant="10" id="8QB-c6-cPD"/>
                             <constraint firstItem="Tfq-U5-zcX" firstAttribute="top" secondItem="Qt5-7U-tZc" secondAttribute="bottom" constant="20" id="DDe-Jv-0KO"/>
                             <constraint firstItem="wWR-le-ccq" firstAttribute="centerX" secondItem="QeC-Jy-Xjs" secondAttribute="centerX" id="HKZ-fe-YA6"/>
-                            <constraint firstItem="JjM-fS-Mfp" firstAttribute="top" secondItem="Wdl-UA-5tB" secondAttribute="top" constant="40" id="J0H-4g-fqb"/>
+                            <constraint firstItem="JjM-fS-Mfp" firstAttribute="top" secondItem="Wdl-UA-5tB" secondAttribute="top" constant="60" id="J0H-4g-fqb"/>
                             <constraint firstItem="JjM-fS-Mfp" firstAttribute="centerX" secondItem="QeC-Jy-Xjs" secondAttribute="centerX" id="JVe-Mg-lGu"/>
                             <constraint firstItem="Qt5-7U-tZc" firstAttribute="top" secondItem="JjM-fS-Mfp" secondAttribute="bottom" constant="20" id="cOU-HN-hKs"/>
                             <constraint firstItem="Wdl-UA-5tB" firstAttribute="trailing" secondItem="Qt5-7U-tZc" secondAttribute="trailing" constant="20" id="eGi-ti-h3F"/>
@@ -2584,6 +2584,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FwT-M2-zGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5948" y="261"/>
+        </scene>
+        <!--Bkash Payment View Controller-->
+        <scene sceneID="xVL-Pl-YQ5">
+            <objects>
+                <viewController storyboardIdentifier="BkashPaymentViewController" id="gGE-w6-N2g" customClass="BkashPaymentViewController" customModule="GameOf11" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VIr-v3-yKb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OO8-MG-ZfC">
+                                <rect key="frame" x="0.0" y="50" width="320" height="518"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OO8-MG-ZfC" firstAttribute="trailing" secondItem="tCg-Dv-a0m" secondAttribute="trailing" id="E1c-nG-IY2"/>
+                            <constraint firstItem="OO8-MG-ZfC" firstAttribute="bottom" secondItem="tCg-Dv-a0m" secondAttribute="bottom" id="fXM-2M-nt8"/>
+                            <constraint firstItem="OO8-MG-ZfC" firstAttribute="top" secondItem="tCg-Dv-a0m" secondAttribute="top" constant="30" id="nYy-Fs-pyF"/>
+                            <constraint firstItem="OO8-MG-ZfC" firstAttribute="leading" secondItem="tCg-Dv-a0m" secondAttribute="leading" id="v84-p5-kb8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tCg-Dv-a0m"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="OO8-MG-ZfC" id="Ceb-MZ-pLp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T2G-CI-gP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6770.625" y="437.32394366197184"/>
         </scene>
         <!--Redeem Coin View Controller-->
         <scene sceneID="3KU-4q-wjN">
@@ -2724,7 +2758,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jed-py-Am0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6791" y="615"/>
+            <point key="canvasLocation" x="6763" y="1082"/>
         </scene>
         <!--Verify Account View Controller-->
         <scene sceneID="clv-h9-iSv">

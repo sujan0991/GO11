@@ -68,6 +68,7 @@
 		644526A02237D8320099FB37 /* ContestLeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */; };
 		644526A12237D8320099FB37 /* PointBreakDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445269F2237D8300099FB37 /* PointBreakDownViewController.swift */; };
 		644526A32237D83C0099FB37 /* PointBreakDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644526A22237D83C0099FB37 /* PointBreakDownTableViewCell.swift */; };
+		6448F5BF2293EDC400B31BFC /* BkashPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6448F5BE2293EDC400B31BFC /* BkashPaymentViewController.swift */; };
 		6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */; };
 		B2D46F7F65669124A0E361D5 /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CECBB971ED7EF347DF27EF25 /* Pods_GameOf11.framework */; };
 /* End PBXBuildFile section */
@@ -137,6 +138,7 @@
 		6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestLeaderBoardViewController.swift; sourceTree = "<group>"; };
 		6445269F2237D8300099FB37 /* PointBreakDownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointBreakDownViewController.swift; sourceTree = "<group>"; };
 		644526A22237D83C0099FB37 /* PointBreakDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointBreakDownTableViewCell.swift; sourceTree = "<group>"; };
+		6448F5BE2293EDC400B31BFC /* BkashPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BkashPaymentViewController.swift; sourceTree = "<group>"; };
 		6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCell.swift; sourceTree = "<group>"; };
 		BB3C0DFD4C09C2AC1FBB8A56 /* Pods-GameOf11.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameOf11.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11.debug.xcconfig"; sourceTree = "<group>"; };
 		CECBB971ED7EF347DF27EF25 /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,29 +177,30 @@
 		0C0BE62421DA293F00BE30CF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0C33367A21DF3AB100E6EB11 /* SplashViewController.swift */,
 				0C0BE62521DA293F00BE30CF /* BaseViewController.swift */,
-				0CE8836A21E0000E0025A31E /* LoginViewController.swift */,
-				641E1768222A9A7D00302A19 /* SignUpViewController.swift */,
-				0C3336CE21DF488D00E6EB11 /* HomeViewController.swift */,
-				0C3336D021DF489A00E6EB11 /* MyContestViewController.swift */,
-				0C78C1FE222450AB0068B5D6 /* MoreViewController.swift */,
-				0C78C1FF222450AB0068B5D6 /* ProfileViewController.swift */,
-				0C390ACF21DF5E0200FA6A15 /* MatchViewController.swift */,
-				0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */,
-				0CE8835E21DFB6730025A31E /* TeamCreateViewController.swift */,
-				0C85C3482225C5D800B6515C /* TeamPreviewViewController.swift */,
+				6448F5BE2293EDC400B31BFC /* BkashPaymentViewController.swift */,
 				0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */,
-				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
-				0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */,
+				6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */,
+				0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */,
 				0C78C1F422244F390068B5D6 /* DepositCoinViewController.swift */,
 				0C78C1F522244F3A0068B5D6 /* EditProfileViewController.swift */,
-				6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */,
+				0C3336CE21DF488D00E6EB11 /* HomeViewController.swift */,
+				0CE8836A21E0000E0025A31E /* LoginViewController.swift */,
+				0C390ACF21DF5E0200FA6A15 /* MatchViewController.swift */,
+				0C78C1FE222450AB0068B5D6 /* MoreViewController.swift */,
+				0C3336D021DF489A00E6EB11 /* MyContestViewController.swift */,
+				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
 				6445269F2237D8300099FB37 /* PointBreakDownViewController.swift */,
+				0C78C1FF222450AB0068B5D6 /* ProfileViewController.swift */,
 				0C78C1F622244F3B0068B5D6 /* RedeemCoinViewController.swift */,
+				641E1768222A9A7D00302A19 /* SignUpViewController.swift */,
+				0C33367A21DF3AB100E6EB11 /* SplashViewController.swift */,
+				0CE8835E21DFB6730025A31E /* TeamCreateViewController.swift */,
+				0C85C3482225C5D800B6515C /* TeamPreviewViewController.swift */,
+				0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */,
+				641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */,
 				0C78C1F722244F3C0068B5D6 /* VerifyAccountViewController.swift */,
 				0C78C1F822244F3D0068B5D6 /* WithdrawRequestViewController.swift */,
-				641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				0C390AD621DF83E500FA6A15 /* MatchTableViewCell.swift in Sources */,
 				0C85C3492225C5D800B6515C /* TeamPreviewViewController.swift in Sources */,
 				0C3336D121DF489A00E6EB11 /* MyContestViewController.swift in Sources */,
+				6448F5BF2293EDC400B31BFC /* BkashPaymentViewController.swift in Sources */,
 				0CE8836221DFD5730025A31E /* PlayerTableViewCell.swift in Sources */,
 				0C3336CF21DF488D00E6EB11 /* HomeViewController.swift in Sources */,
 				0C33367B21DF3AB100E6EB11 /* SplashViewController.swift in Sources */,
@@ -731,7 +735,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tanvir Ahmad (T865CHJUU3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Flowdigital Media01 (WJ9NTUZGL7)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 55E5R5585A;
 				INFOPLIST_FILE = GameOf11/Info.plist;
@@ -786,7 +790,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tanvir Ahmad (T865CHJUU3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Flowdigital Media01 (WJ9NTUZGL7)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 55E5R5585A;
 				INFOPLIST_FILE = GameOf11/Info.plist;

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class DepositCoinViewController: BaseViewController {
+class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelegate {
     
     @IBOutlet weak var tkAmountLabel: UITextField!
     
@@ -31,6 +32,33 @@ class DepositCoinViewController: BaseViewController {
     
     @IBAction func addCoinButtonAction(_ sender: Any) {
         
+        if tkAmountLabel.text?.count != 0{
+            
+            let tkAmount = (tkAmountLabel.text! as NSString).floatValue
+            
+            APIManager.manager.getInvoice(amount: tkAmount) { (status, id,url,msg) in
+                
+                print("getInvoice msg",msg!)
+                
+                if status{
+                    self.showStatus(status, msg: msg)
+                    
+                    print("getInvoice id",id ?? "??",url!)
+                    
+                    let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BkashPaymentViewController") as? BkashPaymentViewController
+                    
+                    vc?.urlString = url!
+                    
+                    self.navigationController?.pushViewController(vc!, animated: true)
+                    
+                }
+                else{
+                    self.showStatus(false, msg: msg)
+                }
+                
+            }
+
+        }
         
     }
     
