@@ -22,6 +22,8 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var confirmPassTextField: UITextField!
     
+    @IBOutlet weak var referralTextField: UITextField!
+    
     
     @IBOutlet weak var signUpButton: UIButton!
     
@@ -101,7 +103,7 @@ class SignUpViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func signUpButtonAction(_ sender: Any) {
         
-        APIManager.manager.signup(phone: self.phoneNoTextField.text!, userName: self.nameTextField.text!,email:self.emailTextField.text!,password: self.passWordTextField.text!) { (status, token, msg) in
+        APIManager.manager.signup(phone: self.phoneNoTextField.text!, userName: self.nameTextField.text!,email:self.emailTextField.text!,password: self.passWordTextField.text!,code: self.referralTextField.text!) { (status, token, msg) in
             
             print("...........",status,msg ?? "no msg")
             

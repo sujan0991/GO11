@@ -75,6 +75,8 @@ class ProfileViewController: BaseViewController,UIImagePickerControllerDelegate,
                             self.topRankCountLabel.text = String.init(format: "%d", um.metadata?.highestRank ?? "")
                             self.matchCountLabel.text = String.init(format: "%d", um.metadata?.totalMatchParticipation ?? "")
                             
+                            
+                            
                         }
                         else
                         {
@@ -163,11 +165,22 @@ class ProfileViewController: BaseViewController,UIImagePickerControllerDelegate,
     
     
     @IBAction func fullProfileButtonAction(_ sender: Any) {
+        
+        
     }
     @IBAction func verifyButtonAction(_ sender: Any) {
+        
+        
     }
     
-
+    @IBAction func referToFriendButtonAction(_ sender: Any) {
+        
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReferalViewController") as? ReferalViewController
+       
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+    }
+    
     @IBAction func logoutButtonAction(_ sender: Any) {
         
         APIManager.manager.logOut { (status, msg) in

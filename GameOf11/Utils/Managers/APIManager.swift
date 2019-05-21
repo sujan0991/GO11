@@ -191,7 +191,7 @@ class APIManager: NSObject {
         })
     }
     
-    func signup(phone:String,userName:String,email:String, password:String, withCompletionHandler completion:(( _ status: Double,_ authToken:String?, _ message: String?)->Void)?) {
+    func signup(phone:String,userName:String,email:String, password:String,code:String, withCompletionHandler completion:(( _ status: Double,_ authToken:String?, _ message: String?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
@@ -199,6 +199,7 @@ class APIManager: NSObject {
                                       "name":userName,
                                       "email":email,
                                       "password":password,
+                                      "referral":code,
                                       "gcm_registration_key":""
         ]
         

@@ -443,8 +443,14 @@ class UserModel: Glossy {
   
     var gcmRegistrationKey: String?
     var isVerified: Int?
+    var isBlocked: Int?
     var metadata: ProfileMetaData?
     var avatar: ProfileAvatar?
+    
+    var referralCode: String?
+    var referralLaw: String?
+    var referralMessage: String?
+    
     
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
@@ -462,6 +468,11 @@ class UserModel: Glossy {
         
         gcmRegistrationKey = "gcm_registration_key" <~~ json
         isVerified = "is_verified" <~~ json
+        isBlocked = "is_blocked" <~~ json
+        
+        referralCode = "referral_code" <~~ json
+        referralLaw = "referral_law" <~~ json
+        referralMessage = "referral_message" <~~ json
         
         metadata = ("metadata" <~~ json)
         avatar = ("avatar" <~~ json)
@@ -482,6 +493,10 @@ class UserModel: Glossy {
             "dob" ~~> dateOfBirth,
             "gcm_registration_key" ~~> gcmRegistrationKey,
             "is_verified" ~~> isVerified,
+            "referral_code" ~~> referralCode,
+            "referral_law" ~~> referralLaw,
+            "referral_message" ~~> referralMessage,
+            "is_blocked" ~~> isBlocked,
             "metadata" ~~> metadata,
             "avatar" ~~> avatar
             ])
