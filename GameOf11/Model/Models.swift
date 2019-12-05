@@ -20,12 +20,22 @@ class MatchList: Glossy {
     var matchName: String?
     var matchTime: String?
     var format: String?
+    var join_ends_before: Int?
     
     var totalJoinedContests: Int?
     var teams: [MatchTeams] = []
     
     var joiningLastTime: String? {
-        return matchTime?.serverTimetoDateString()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateFromString :Date = dateFormatter.date(from: matchTime!)!
+        
+        let date = dateFromString.addingTimeInterval(TimeInterval(-(join_ends_before! * 60)))
+        
+        let sttringFDate = date.toDateString(format: "yyyy-MM-dd HH:mm:ss")
+        
+        return sttringFDate.serverTimetoDateString()
     }
     
     required init?(json: Gloss.JSON) {
@@ -35,6 +45,7 @@ class MatchList: Glossy {
         matchName = "match_name" <~~ json
         matchTime = "match_time" <~~ json
         format = "format" <~~ json
+        join_ends_before = "join_ends_before" <~~ json
         totalJoinedContests = "total_joined_contests" <~~ json
         teams = ("teams" <~~ json) ?? []
     }
@@ -47,6 +58,7 @@ class MatchList: Glossy {
             "match_time" ~~> matchName,
             "format" ~~> matchTime,
             "email" ~~> format,
+            "join_ends_before" ~~> join_ends_before,
             "total_joined_contests" ~~> totalJoinedContests,
             "teams" ~~> teams,
             "joiningLastTime" ~~> joiningLastTime
@@ -237,7 +249,9 @@ class CreatedTeam: Glossy {
     var userTeamId: Int?
     var teamName: String?
     var captainName: String?
+    var captain_image: String?
     var viceCaptainName: String?
+    var vice_captain_image: String?
     var batsmanCount: Int?
     var bowlerCount: Int?
     var allrounderCount : Int?
@@ -247,6 +261,8 @@ class CreatedTeam: Glossy {
         userTeamId = "user_team_id" <~~ json
         teamName = "team_name" <~~ json
         captainName = "captain_name" <~~ json
+        captain_image = "captain_image" <~~ json
+        vice_captain_image = "vice_captain_image" <~~ json
         viceCaptainName = "vice_captain_name" <~~ json
         batsmanCount = "batsman" <~~ json
         bowlerCount = "bowler" <~~ json
@@ -264,7 +280,9 @@ class CreatedTeam: Glossy {
             "batsman" ~~> batsmanCount,
             "bowler" ~~> bowlerCount,
             "allrounder" ~~> allrounderCount,
-            "keeper" ~~> keeperCount
+            "keeper" ~~> keeperCount,
+            "captain_image" ~~> captain_image,
+            "vice_captain_image" ~~> vice_captain_image
             
             
             ])
@@ -450,7 +468,7 @@ class UserModel: Glossy {
     var referralCode: String?
     var referralLaw: String?
     var referralMessage: String?
-    
+    var minWithdrawLimit: Float?
     
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
@@ -476,6 +494,8 @@ class UserModel: Glossy {
         
         metadata = ("metadata" <~~ json)
         avatar = ("avatar" <~~ json)
+        
+        minWithdrawLimit = ("minimum_withdraw_amount" <~~ json)
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -498,7 +518,9 @@ class UserModel: Glossy {
             "referral_message" ~~> referralMessage,
             "is_blocked" ~~> isBlocked,
             "metadata" ~~> metadata,
-            "avatar" ~~> avatar
+            "avatar" ~~> avatar,
+            
+            "maximum_withdraw_amount" ~~> minWithdrawLimit
             ])
     }
 }
@@ -508,7 +530,7 @@ class ProfileMetaData: Glossy {
     var id: Int?
     var userId: Int?
     var rating: Float?
-    var totalCoins: Float?
+    var totalCoins: Int?
     var totalCash: Float?
     
     var totalContestParticipation: Int?
@@ -518,7 +540,7 @@ class ProfileMetaData: Glossy {
     
     var photoIdFront: String?
     var photoIdBack: String?
-    
+    var referral_contest_unlocked:Int?
     
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
@@ -532,6 +554,7 @@ class ProfileMetaData: Glossy {
         highestRank = "highest_rank" <~~ json
         photoIdFront = "nid_front" <~~ json
         photoIdBack = "nid_back" <~~ json
+        referral_contest_unlocked = "referral_contest_unlocked" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -546,7 +569,8 @@ class ProfileMetaData: Glossy {
             "total_pending_requests" ~~> totalPendingRequest,
             "highest_rank" ~~> highestRank,
             "nid_front" ~~> photoIdFront,
-            "nid_back" ~~> photoIdBack
+            "nid_back" ~~> photoIdBack,
+            "referral_contest_unlocked" ~~> referral_contest_unlocked
             ])
     }
 }
@@ -632,13 +656,16 @@ class ContestData: Glossy {
     var entryAmount: Int?
     var winningAmount: Int?
     var teamsCapacity: Int?
+    var total_user_joined: Int?
     var lastTimeEntry: String?
     var isCompleted: Int?
     var isJoined: Int?
+    var is_league: Int?
     var createdAt: String?
     var updatedAt: String?
+    var prizeConditionMsg: String?
     var prizes: [ContestPrizes] = []
-    
+    var is_free_allowed : Int?
     
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
@@ -649,12 +676,16 @@ class ContestData: Glossy {
         entryAmount = "entry_amount" <~~ json
         winningAmount = "winning_amount" <~~ json
         teamsCapacity = "teams_capacity" <~~ json
+        total_user_joined = "total_user_joined" <~~ json
         lastTimeEntry = "last_time_entry" <~~ json
         isCompleted = "is_completed" <~~ json
         isJoined = "is_joined" <~~ json
+        is_league = "is_league" <~~ json
         createdAt = "created_at" <~~ json
         updatedAt = "updated_at" <~~ json
+        prizeConditionMsg = "prize_condition_message" <~~ json
         prizes = "prize" <~~ json ?? []
+        is_free_allowed = "is_free_allowed" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -667,12 +698,16 @@ class ContestData: Glossy {
             "entry_amount" ~~> entryAmount,
             "winning_amount" ~~> winningAmount,
             "teams_capacity" ~~> teamsCapacity,
+            "total_user_joined" ~~> total_user_joined,
             "last_time_entry" ~~> lastTimeEntry,
             "is_completed" ~~> isCompleted,
             "is_joined" ~~> isJoined,
+            "is_league" ~~> is_league,
             "created_at" ~~> createdAt,
             "updated_at" ~~> updatedAt,
-            "prize" ~~> prizes
+            "prize_condition_message" ~~> prizeConditionMsg,
+            "prize" ~~> prizes,
+            "is_free_allowed" ~~> is_free_allowed
             ])
     }
 }
@@ -901,6 +936,7 @@ class TeamScoreData: Glossy {
     
     var team_name:String?
     var team_key:String?
+    var team_logo:String?
     var is_first_batting:Int?
     var team_earning_point:Float?
     var score:String?
@@ -908,6 +944,7 @@ class TeamScoreData: Glossy {
     required init?(json: Gloss.JSON) {
         team_name = "team_name" <~~ json
         team_key = "team_key" <~~ json
+        team_logo = "team_logo" <~~ json
         is_first_batting = "is_first_batting" <~~ json
         
         score = "score" <~~ json
@@ -917,6 +954,7 @@ class TeamScoreData: Glossy {
         return jsonify([
             "team_name" ~~> team_name,
             "team_key" ~~> team_key,
+            "team_logo" ~~> team_logo,
             "is_first_batting" ~~> is_first_batting,
             
             "score" ~~> score,
@@ -962,20 +1000,20 @@ class PointBreakDown: Glossy {
     
     
     var player_id:Int?
-    var runs:Int?
-    var sixes:Int?
+    var runs:Dictionary<String,Int>?
+    var sixes:Dictionary<String,Int>?
     
-    var fours:Int?
-    var strike_rate:Double?
-    var dismissed:Int?
+    var fours:Dictionary<String,Int>?
+    var strike_rate:Dictionary<String,Double>?
+    var dismissed:Dictionary<String,Int>?
 
-    var wickets:Int?
-    var maiden_overs:Int?
-    var economy:Double?
+    var wickets:Dictionary<String,Int>?
+    var maiden_overs:Dictionary<String,Int>?
+    var economy:Dictionary<String,Double>?
 
-    var catches:Int?
-    var runouts:Int?
-    var stumbeds:Int?
+    var catches:Dictionary<String,Int>?
+    var runouts:Dictionary<String,Int>?
+    var stumbeds:Dictionary<String,Int>?
 
     
     

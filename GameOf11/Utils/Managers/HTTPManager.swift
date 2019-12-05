@@ -31,6 +31,9 @@ public func Request(
         if let currentToken = AppSessionManager.shared.authToken{
             header["Authorization"] = "Bearer \(currentToken)"
         }
+        header.add(name: "Version-Number", value: UserDefaults.standard.object(forKey: "currentVersionNumber") as! String)
+        header.add(name: "Device-Type", value: API_K.DEVICE_TYPE)
+        
        // header = ["Content-Type": "application/json"]
        // header.add(name: "Content-Type", value: "application/json")
         
@@ -56,6 +59,11 @@ public func RequestForJson(
             header["Authorization"] = "Bearer \(currentToken)"
         }
         header.add(name: "Content-Type", value: "application/json")
+        header.add(name: "Version-Number", value: UserDefaults.standard.object(forKey: "currentVersionNumber") as! String)
+        header.add(name: "Device-Type", value: API_K.DEVICE_TYPE)
+
+        
+        
         
         if let theJSONData = try?  JSONSerialization.data(
             withJSONObject: parameters,
@@ -71,7 +79,7 @@ public func RequestForJson(
             return AF.request( fullUrl, method: method, parameters: parameters , encoding: JSONEncoding.default, headers: header).responseString { response in
                 print("Success: \(response.result.isSuccess)")
                 print("Response String: \(response.result.value)")
-            
+                print("header............",response.response?.allHeaderFields)
             }
         }
         else

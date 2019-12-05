@@ -29,9 +29,11 @@ enum RequestAction:String {
 }
 
 struct API_K {
-    static let DEVICE_TYPE = "iOS"
-    static let API_KEY = "base64:8WGdd0uX3GtRtTxeOyuHd3864Mqfc6C/cbhzpEZUdxA="
-    static let BaseUrlStr:String =  "http://18.224.1.221/" //"http://159.65.128.173/" //
+    static let DEVICE_TYPE = "ios"
+    
+  //  static let API_KEY = "base64:8WGdd0uX3GtRtTxeOyuHd3864Mqfc6C/cbhzpEZUdxA="
+     static let BaseUrlStr:String =  "https://www.gameof11.com/" //live
+ //   static let BaseUrlStr:String =  "http://18.224.1.221/" //"dev
     //http://159.65.128.173/
     //http://18.224.1.221/
 
@@ -49,7 +51,7 @@ struct API_K {
     static let OTHER_PROFILE = "othersProfile"
     static let UPLOAD_PROFILE_PICTURE = "uploadProfilePicture"
     static let UPLOAD_COVER_PHOTO = "uploadCoverPhoto"
-    static let UPDATE_PROFILE = "updateProfile"
+    static let UPDATE_PROFILE = "user"
     static let GET_AVATAR_LIST = "avatars"
     static let UPDATE_AVATAR = "update-avatar"
     static let CHANGE_PASSWORD = "change-password"
@@ -57,6 +59,11 @@ struct API_K {
     static let VERIFY_PROFILE = "user/profile-verify"
     static let UPDATE_GCM_TOKEN = "update-gcm-registration-key"
     
+    static let GET_BANNER = "banners"
+    static let GET_USER_OFFER = "get-user-offer"
+    
+
+
     static let GET_NEXT_MATCH_LIST = "upcoming-matches"//
     static let GET_LIVE_MATCH_LIST = "live-matches"//
     
@@ -64,8 +71,10 @@ struct API_K {
     static let GET_MATCH_SQUAD = "get-team-players"//
     static let GET_USERS_TEAM_FOR_MATCH = "get-user-teams"//
     static let GET_USERS_TEAM_PLAYERS = "get-user-team-players"
+    
     static let POST_TEAM = "user-team/create"
     static let JOIN_CONTEST = "user-contest/join"
+    static let POST_EDITED_TEAM = "user-team/edit"
     
     static let GET_UPCOMING_CONTEST_MATCH_LIST = "user/upcoming-match-contests"//
     static let GET_LIVE_CONTEST_MATCH_LIST = "user/live-match-contests"//
@@ -86,6 +95,11 @@ struct API_K {
     static let GET_COIN_PACKS = "coin-packs"
     
     static let PAYMENT_INVOICE = "user-invoice"
+    static let USER_FEEDBACK = "feedback"
+
+    static let GET_WALLET_INFO = "get-wallet-info"
+    
+    static let GET_APP_INFO = "ios-info"
     
    
     
@@ -367,6 +381,8 @@ class APIManager: NSObject {
     
     func getMyProfile(completion:(( _ status: Bool,_ user:UserModel?, _ message: String?)->Void)?) {
         
+//        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+//        
         getDataModel(method: API_K.MY_PROFILE) { (sts, dataModel,msg) in
             if sts{
                 
@@ -409,11 +425,166 @@ class APIManager: NSObject {
             }
         }
     }
+    func getBannerList(pageName:String,completion:(( _ banners: Array<Any>)->Void)?) {
+        
+      //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["banner_type":pageName,
+                                     ]
+        
+        Request(.get, API_K.GET_BANNER, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    if !isSuccess{
+                        completion?([])
+                    }
+                    else{
+ 
+                        let bannerArray:Array = jsonDic["data"] as! Array<Any>
+                        
+                        completion?(bannerArray)
+                    }
+                }
+                else {
+                    completion?([])
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?([])
+            }
+        })
+    }
     
+    func getWalletInfo(completion:((_ infoDic: Dictionary<String,Any>)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
+        Request(.get, API_K.GET_WALLET_INFO, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                
+               
+                
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    if !isSuccess{
+                        
+                    }
+                    else{
+                        
+                        completion?(jsonDic)
+                    }
+                }
+                else {
+                   
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+               
+            }
+        })
+    }
+
+    
+    func getAppInfo(completion:((_ infoDic: Dictionary<String,Any>)->Void)?) {
+        
+     //   SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
+        Request(.get, API_K.GET_APP_INFO, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                
+                
+                
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    if !isSuccess{
+                        
+                    }
+                    else{
+                        
+                        completion?(jsonDic)
+                    }
+                }
+                else {
+                    
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                
+            }
+        })
+    }
+
+    
+    func getUserOffer(completion:((_ status: Bool, _ osOfferAvailable: Bool,_ offerMessage:String?,_ msg:String?)->Void)?) {
+        
+     //   SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+//        let params:[String:String] = ["banner_type":pageName,
+//        ]
+        
+        Request(.get, API_K.GET_USER_OFFER, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    let isOfferAvailable:Bool = jsonDic["is_offer_available"] as! Bool
+                    let offerMsg:String = json["offer_message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,false,nil,msg)
+                    }
+                    else{
+                        
+                        if isOfferAvailable{
+                            
+                            completion?(true,true,offerMsg,msg)
+                        }
+                        
+                    }
+                }
+                else {
+                    completion?(false,false,nil,nil)
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false,false,nil,nil)
+            }
+        })
+    }
     
     func getAvatarList(completion:(( _ avatars: [Avatar])->Void)?) {
         
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+    //    SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
         Request(.get, API_K.GET_AVATAR_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
@@ -450,39 +621,62 @@ class APIManager: NSObject {
             }
         })
     }
-    func updateProfile(fullName:String,country:String,phone:String, aboutme:String, withCompletionHandler completion:(( _ status: Bool,_ token:String?, _ message: String?)->Void)?) {
+    func updateProfile(params:[String:String], withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
-        let params:[String:String] = ["fullName":fullName,
-                                      "country":country,
-                                      "phone":phone,
-                                      "aboutMe":aboutme]
+        let params:[String:String] = params
         
-        Request(.post, API_K.UPDATE_PROFILE, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+        Request(.patch, API_K.UPDATE_PROFILE, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            
+            print("responsedata in updateProfile",responseData)
+            
             switch responseData.result {
             case .success(let value):
                 print(value)
                 SVProgressHUD.dismiss()
                 let json = JSON(value)
                 if let jsonDic = json.dictionaryObject {
-                    let isSuccess:Bool = jsonDic["success"] as! Bool
-                    let msg:String = json["message"].stringValue
                     
-                    if !isSuccess{
-                        completion?(false,nil,msg)
-                    }
-                    else{
-                        let token:String = json["authToken"].stringValue
-                        completion?(true,token,msg)
-                    }
+                    let msg:String = json["message"].stringValue
+                    completion?(true,msg)
                 }
                 else {
-                    completion?(false,nil,nil)
+                    completion?(false,nil)
                 }
             case .failure(let error):
                 SVProgressHUD.dismiss()
-                completion?(false,nil,error.localizedDescription)
+                completion?(false,error.localizedDescription)
+            }
+        })
+    }
+    
+    func forgotPassword(email:String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["email":email]
+        
+        Request(.patch, API_K.FORGOT_PASSWORD, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            
+            print("responsedata in updateProfile",responseData)
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let msg:String = json["message"].stringValue
+                    completion?(true,msg)
+                }
+                else {
+                    completion?(false,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,error.localizedDescription)
             }
         })
     }
@@ -709,7 +903,7 @@ class APIManager: NSObject {
     
     func getUpcomingMatchList(completion:(( _ matches: [MatchList])->Void)?) {
         
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+      //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
         Request(.get, API_K.GET_NEXT_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
@@ -745,7 +939,7 @@ class APIManager: NSObject {
     }
     func getLiveMatchList(completion:(( _ matches: [MatchList])->Void)?) {
         
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+      //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
         Request(.get, API_K.GET_LIVE_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
@@ -785,7 +979,7 @@ class APIManager: NSObject {
     
     func getUserJoinedUpcomingMatchList(completion:(( _ matches: [MatchList])->Void)?) {
         
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+     //   SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
         Request(.get, API_K.GET_UPCOMING_CONTEST_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
@@ -821,7 +1015,7 @@ class APIManager: NSObject {
     }
     func getUserJoinedLiveMatchList(completion:(( _ matches: [MatchList])->Void)?) {
         
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+    //    SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
         Request(.get, API_K.GET_LIVE_CONTEST_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
@@ -857,7 +1051,7 @@ class APIManager: NSObject {
     }
     func getUserJoinedCompletedMatchList(completion:(( _ matches: [MatchList])->Void)?) {
         
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+   //     SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
         Request(.get, API_K.GET_COMPLETED_CONTEST_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
             print(responseData)
@@ -953,6 +1147,42 @@ class APIManager: NSObject {
         
         
         RequestForJson(.post, API_K.POST_TEAM, parameters: params.toJSON())?.responseJSON(completionHandler: { (responseData) in
+            
+            print("Created Team data", responseData)
+            
+            switch responseData.result {
+                
+            case .success(let value):
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,error.localizedDescription)
+            }
+        })
+    }
+    
+    func postEditedTeam(team: UsersFantasyTeam,teamId: String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let urlString = API_K.POST_EDITED_TEAM + "?user_team_id=\(teamId)"
+        
+        RequestForJson(.post, urlString, parameters: team.toJSON())?.responseJSON(completionHandler: { (responseData) in
             
             print("Created Team data", responseData)
             
@@ -1101,9 +1331,14 @@ class APIManager: NSObject {
     
     func getBreakDownOfCntest(match_id:String,user_team_id:String,completion:(( _ status: Bool,_ data:BreakDownData?, _ message: String?)->Void)?) {
         
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
         let params:[String:String] = ["match_id":match_id,"user_team_id":user_team_id]
         
         getDataModel(params, method: API_K.GET_LEADERBOARD_BREAKDOWN) { (sts, dataModel,msg) in
+            
+            SVProgressHUD.dismiss()
             
             if sts{
                 
@@ -1135,6 +1370,10 @@ class APIManager: NSObject {
             if sts{
                 
                 if let jsA = dataModel{
+                    
+                  //  print("getMatchSquad      json ",jsA)
+                    
+                   
                     if let histories = MatchSquadData.init(json: jsA) {
                         completion?(true,histories,msg)
                         
@@ -1152,13 +1391,42 @@ class APIManager: NSObject {
         }
     }
     
+    func getUsersSquad(teamId:String,completion:(( _ status: Bool,_ user:FantasySquadData?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["user_team_id":teamId]
+        getDataModel(params, method: API_K.GET_USERS_TEAM_PLAYERS) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    
+                    print("FantasySquadData      json ",jsA)
+                    
+                    if let histories = FantasySquadData.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
     
-    func getInvoice(amount:Float?, withCompletionHandler completion:(( _ status: Bool,_ invoiceId:String?,_ invoiceUrl:String?, _ message: String?)->Void)?){
+    
+    func getInvoice(amount:Float?,type:String?, withCompletionHandler completion:(( _ status: Bool,_ invoiceId:String?,_ invoiceUrl:String?, _ message: String?)->Void)?){
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
         
-        let params:[String:Float] = ["amount":amount!]
+        let params:[String:Any] = ["amount":amount!,
+                                     "payment_method":type!]
         
         print("param",params)
         
@@ -1202,16 +1470,214 @@ class APIManager: NSObject {
     }
     
     
+    func getCoinPack( withCompletionHandler completion:((_ status: Bool, _ dataArray: Array<Any>, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+
+        
+        Request(.get, API_K.GET_COIN_PACKS, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+
+                        let isSuccess:Bool = jsonDic["status"] as! Bool
+                        let msg:String = jsonDic["message"] as! String
+                      
+                        if !isSuccess{
+                            completion?(false,[],"")
+                        }
+                        else{
+                          let packArray:Array = jsonDic["data"] as! Array<Any>
+                        
+                           completion?(true,packArray,msg)
+                        }
+                    }
+                    
+
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,[],error.localizedDescription)
+            }
+        })
+        
+
+    }
+    
+    func getWithdrawList( withCompletionHandler completion:((_ status: Bool, _ dataArray: Array<Any>, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
+        Request(.get, API_K.GET_WITHDRAW_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = jsonDic["message"] as! String
+                    
+                    if !isSuccess{
+                        completion?(false,[],"")
+                    }
+                    else{
+                        let packArray:Array = jsonDic["data"] as! Array<Any>
+                        
+                        completion?(true,packArray,msg)
+                    }
+                }
+                
+                
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,[],error.localizedDescription)
+            }
+        })
+        
+        
+    }
+
+    
+    func postFeedback(params:[String:String] , withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = params
+        
+        Request(.post, API_K.USER_FEEDBACK, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+                
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false,nil)
+            }
+        })
+    }
+    
+    
+    public func postVerifyProfile(params:Dictionary<String, Any>, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show()
+        
+        
+        
+        let urlString = "\(API_K.BaseURL)\(API_K.VERIFY_PROFILE)"
+        
+        print("API_K.VERIFY_PROFILE",params)
+        
+        let params:[String:Any] = params
+    
+        
+        var header: HTTPHeaders = [:]
+        
+        
+//        header = ["Content-type": "multipart/form-data",
+//                   "Content-Disposition" : "form-data"]
+        if let currentToken = AppSessionManager.shared.authToken{
+            header["Authorization"] = "Bearer \(currentToken)"
+        }
+        header.add(name: "Version-Number", value: UserDefaults.standard.object(forKey: "currentVersionNumber") as! String)
+        header.add(name: "Device-Type", value: API_K.DEVICE_TYPE)
+
+//        header.add(name: "Content-Type", value: "application/x-www-form-urlencoded; charset=utf-8")
+        
+        AF.upload(multipartFormData: { (multipartFormData) in
+            
+//            for (key, value) in params {
+//                multipartFormData.append((value as! String).data(using: String.Encoding.utf8)!, withName: key)
+//            }
+            
+         
+                let image1 = params["nid_front"] as! UIImage
+                
+                guard let imgData1 = image1.jpegData(compressionQuality: 0.3) else { return }
+            
+                multipartFormData.append(imgData1, withName: "image1", fileName:"Image1.jpeg", mimeType: "image/jpeg")
+            
+            
+                if params["nid_back"] != nil{
+                
+                    let image2 = params["nid_back"] as! UIImage
+                    guard let imgData2 = image2.jpegData(compressionQuality: 0.3) else { return }
+                    
+                    multipartFormData.append(imgData2, withName: "image2", fileName:"Image2.jpeg", mimeType: "image/jpeg")
+                    
+                }
+            
+            
+        },usingThreshold: UInt64.init(),
+          to: urlString,
+          method: .post,
+          headers: header).response{ response in
+            
+            print("..............ebmobm",response.data)
+            switch response.result {
+            case .success(let value):
+                
+                print("suddecc......",value)
+                let json = JSON(value)
+                
+                print("getPostDataModel...... ",json)
+                
+                completion!(true,json["message"].stringValue)
+                
+            case .failure(let error):
+                
+                completion!(true,"Something went wrong")
+                
+                print("error",error.localizedDescription)
+            }
+            
+            SVProgressHUD.dismiss()
+            
+        }
+        
+        
+        
+    }
+    
+
+    
     func getDataModel(_ param:[String:Any]? = nil,method:String, withCompletionHandler completion:(( _ status: Bool, _ data: Gloss.JSON?,_ msg:String?)->Void)?) {
       
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+    //    SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         Request(.get, method, parameters: param)?.responseJSON(completionHandler: { (responseData) in
+            
             
             switch responseData.result {
             case .success(let value):
                 print("responseData",value)
                 SVProgressHUD.dismiss()
                 let json = JSON(value)
+                
+               // print("json........",json)
                 
                 if let jsonDic = json.dictionaryObject {
                     
@@ -1243,7 +1709,7 @@ class APIManager: NSObject {
 
     func getResponseDataModel(_ param:[String:Any]? = nil,method:String, withCompletionHandler completion:(( _ status: Bool, _ data: Gloss.JSON?,_ msg:String?)->Void)?) {
         
-        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+  //      SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         Request(.get, method, parameters: param)?.responseJSON(completionHandler: { (responseData) in
             
             switch responseData.result {

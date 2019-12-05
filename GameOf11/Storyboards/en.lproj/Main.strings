@@ -1,0 +1,879 @@
+
+/* Class = "UILabel"; text = "CREATED TEAMS"; ObjectID = "18J-Hz-PdV"; */
+"18J-Hz-PdV.text" = "CREATED TEAMS";
+
+/* Class = "UILabel"; text = "Credits left"; ObjectID = "1Rh-jq-SiX"; */
+"1Rh-jq-SiX.text" = "Credits left";
+
+/* Class = "UILabel"; text = "150 COINS"; ObjectID = "1k2-3E-Wl0"; */
+"1k2-3E-Wl0.text" = "150 COINS";
+
+/* Class = "UILabel"; text = "Write your feedback message"; ObjectID = "2Cs-wB-CZb"; */
+"2Cs-wB-CZb.text" = "Write your feedback message";
+
+/* Class = "UIButton"; normalTitle = "বাংলা"; ObjectID = "2HZ-gH-Wgd"; */
+"2HZ-gH-Wgd.normalTitle" = "বাংলা";
+
+/* Class = "UILabel"; text = "Personal Details"; ObjectID = "2Ki-CE-1At"; */
+"2Ki-CE-1At.text" = "Personal Details";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "2WH-1J-jbD"; */
+"2WH-1J-jbD.normalTitle" = "Sign Up";
+
+/* Class = "UITabBarItem"; title = "PROFILE"; ObjectID = "2a1-1c-xbi"; */
+"2a1-1c-xbi.title" = "PROFILE";
+
+/* Class = "UIButton"; normalTitle = "Terms & Conditions"; ObjectID = "2ui-Dx-sz5"; */
+"2ui-Dx-sz5.normalTitle" = "Terms & Conditions";
+
+/* Class = "UILabel"; text = "Amount in BDT"; ObjectID = "3PN-aI-vUg"; */
+"3PN-aI-vUg.text" = "Amount in BDT";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "3UO-xT-pyr"; */
+"3UO-xT-pyr.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "     Run outs"; ObjectID = "3d9-t2-9uV"; */
+"3d9-t2-9uV.text" = "     Run outs";
+
+/* Class = "UITextField"; placeholder = "Old Password"; ObjectID = "4EJ-hd-CNR"; */
+"4EJ-hd-CNR.placeholder" = "Old Password";
+
+/* Class = "UILabel"; text = "     Stumping"; ObjectID = "4PI-Jg-51o"; */
+"4PI-Jg-51o.text" = "     Stumping";
+
+/* Class = "UILabel"; text = "TOTAL BALANCE"; ObjectID = "4g0-vb-0qP"; */
+"4g0-vb-0qP.text" = "TOTAL BALANCE";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "4sC-cC-tjM"; */
+"4sC-cC-tjM.text" = "Label";
+
+/* Class = "UILabel"; text = "PLAYER INFO"; ObjectID = "5Qj-YO-vs4"; */
+"5Qj-YO-vs4.text" = "PLAYER INFO";
+
+/* Class = "UILabel"; text = "Pending Withdraw"; ObjectID = "5mC-NG-ufc"; */
+"5mC-NG-ufc.text" = "Pending Withdraw";
+
+/* Class = "UILabel"; text = "Winning Amount"; ObjectID = "6eg-cK-PBf"; */
+"6eg-cK-PBf.text" = "Winning Amount";
+
+/* Class = "UILabel"; text = "1000"; ObjectID = "6n6-mB-DIq"; */
+"6n6-mB-DIq.text" = "1000";
+
+/* Class = "UILabel"; text = "You are not logged in.You have to Login or Sign Up to see the profile section."; ObjectID = "6wV-6G-XE4"; */
+"6wV-6G-XE4.text" = "You are not logged in.You have to Login or Sign Up to see the profile section.";
+
+/* Class = "UILabel"; text = "(0)"; ObjectID = "74R-tE-gtd"; */
+"74R-tE-gtd.text" = "(0)";
+
+/* Class = "UIButton"; normalTitle = "REDEEM COINS"; ObjectID = "7aC-JI-TCx"; */
+"7aC-JI-TCx.normalTitle" = "REDEEM COINS";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "7gG-Be-fCO"; */
+"7gG-Be-fCO.normalTitle" = "Continue";
+
+/* Class = "UILabel"; text = "Last Update:"; ObjectID = "7tf-cm-VOC"; */
+"7tf-cm-VOC.text" = "Last Update:";
+
+/* Class = "UILabel"; text = "Total Winnings"; ObjectID = "80u-D5-v2R"; */
+"80u-D5-v2R.text" = "Total Winnings";
+
+/* Class = "UIButton"; normalTitle = "Team Preview"; ObjectID = "84C-XF-U69"; */
+"84C-XF-U69.normalTitle" = "Team Preview";
+
+/* Class = "UILabel"; text = "Payment Methods"; ObjectID = "8DB-fw-VAY"; */
+"8DB-fw-VAY.text" = "Payment Methods";
+
+/* Class = "UIButton"; normalTitle = "Verify Mobile Number"; ObjectID = "8Fe-qX-FCm"; */
+"8Fe-qX-FCm.normalTitle" = "Verify Mobile Number";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "8Ht-sJ-8mp"; */
+"8Ht-sJ-8mp.text" = "Label";
+
+/* Class = "UILabel"; text = "Second Innings"; ObjectID = "8ML-Sn-LwP"; */
+"8ML-Sn-LwP.text" = "Second Innings";
+
+/* Class = "UILabel"; text = "  Earned Points"; ObjectID = "8ba-ai-jUg"; */
+"8ba-ai-jUg.text" = "  Earned Points";
+
+/* Class = "UILabel"; text = "Use cash to redeem coins instantly!"; ObjectID = "8t2-gt-2YO"; */
+"8t2-gt-2YO.text" = "Use cash to redeem coins instantly!";
+
+/* Class = "UILabel"; text = "T20"; ObjectID = "90n-VW-609"; */
+"90n-VW-609.text" = "T20";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "9Gy-UG-a8O"; */
+"9Gy-UG-a8O.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9Hf-DU-D6g"; */
+"9Hf-DU-D6g.text" = "Label";
+
+/* Class = "UILabel"; text = " POINTS"; ObjectID = "9MU-YM-nIF"; */
+"9MU-YM-nIF.text" = " POINTS";
+
+/* Class = "UITextField"; placeholder = "Phone Number"; ObjectID = "9Ry-Rr-qxk"; */
+"9Ry-Rr-qxk.placeholder" = "Phone Number";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9T2-gx-tdg"; */
+"9T2-gx-tdg.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "SELECT IMAGE"; ObjectID = "AR1-DI-Yl0"; */
+"AR1-DI-Yl0.normalTitle" = "SELECT IMAGE";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ASU-ck-k1g"; */
+"ASU-ck-k1g.text" = "Label";
+
+/* Class = "UILabel"; text = "WITHDRAW HISTORY"; ObjectID = "AZ6-Ha-Ydu"; */
+"AZ6-Ha-Ydu.text" = "WITHDRAW HISTORY";
+
+/* Class = "UILabel"; text = " "; ObjectID = "AaP-WU-tWZ"; */
+"AaP-WU-tWZ.text" = " ";
+
+/* Class = "UILabel"; text = "E.g. 01XXXXXXXXX"; ObjectID = "Atp-vZ-1j1"; */
+"Atp-vZ-1j1.text" = "E.g. 01XXXXXXXXX";
+
+/* Class = "UILabel"; text = "     Events"; ObjectID = "BFL-UD-DhB"; */
+"BFL-UD-DhB.text" = "     Events";
+
+/* Class = "UIButton"; normalTitle = "Male"; ObjectID = "BGp-T6-sw9"; */
+"BGp-T6-sw9.normalTitle" = "Male";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "BUy-wl-iMN"; */
+"BUy-wl-iMN.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "Matches"; ObjectID = "BXD-Fx-j4O"; */
+"BXD-Fx-j4O.text" = "Matches";
+
+/* Class = "UILabel"; text = "This is a demo text for upcoming dynamic referral law."; ObjectID = "BYV-lV-yc1"; */
+"BYV-lV-yc1.text" = "This is a demo text for upcoming dynamic referral law.";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "BaH-CF-fQP"; */
+"BaH-CF-fQP.text" = "0";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "Bat-oN-oiP"; */
+"Bat-oN-oiP.text" = "Password";
+
+/* Class = "UIButton"; normalTitle = "English"; ObjectID = "Bbu-lt-tHq"; */
+"Bbu-lt-tHq.normalTitle" = "English";
+
+/* Class = "UILabel"; text = "BD"; ObjectID = "Bce-cs-Xw2"; */
+"Bce-cs-Xw2.text" = "BD";
+
+/* Class = "UILabel"; text = "JOINED CONTESTS"; ObjectID = "Bsf-pa-Vsh"; */
+"Bsf-pa-Vsh.text" = "JOINED CONTESTS";
+
+/* Class = "UILabel"; text = "Total Points"; ObjectID = "Cg1-hd-Cri"; */
+"Cg1-hd-Cri.text" = "Total Points";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Chy-bc-wux"; */
+"Chy-bc-wux.text" = "0";
+
+/* Class = "UITextField"; placeholder = "Date of Birth"; ObjectID = "Cth-Ra-Edt"; */
+"Cth-Ra-Edt.placeholder" = "Date of Birth";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "E3s-Th-pEO"; */
+"E3s-Th-pEO.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "E67-Bh-bBU"; */
+"E67-Bh-bBU.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "E7X-BU-UBv"; */
+"E7X-BU-UBv.text" = "Label";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "EaA-Q4-3aQ"; */
+"EaA-Q4-3aQ.text" = "Status";
+
+/* Class = "UILabel"; text = "Some criteria of player points breakdown is not listed here due to avoid calculation complexity. You can check the full player scoring point system in our 'How to play' section from the 'More' button mentioned in the main menu."; ObjectID = "Ech-Og-4Xq"; */
+"Ech-Og-4Xq.text" = "Some criteria of player points breakdown is not listed here due to avoid calculation complexity. You can check the full player scoring point system in our 'How to play' section from the 'More' button mentioned in the main menu.";
+
+/* Class = "UILabel"; text = "IND"; ObjectID = "Efv-tV-Yu2"; */
+"Efv-tV-Yu2.text" = "IND";
+
+/* Class = "UIButton"; normalTitle = "JOIN CONTEST"; ObjectID = "EgU-Y0-T4J"; */
+"EgU-Y0-T4J.normalTitle" = "JOIN CONTEST";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "Euh-8z-8yB"; */
+"Euh-8z-8yB.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "FLm-uV-wwr"; */
+"FLm-uV-wwr.text" = "Label";
+
+/* Class = "UILabel"; text = "Credits left"; ObjectID = "FRy-MA-vqs"; */
+"FRy-MA-vqs.text" = "Credits left";
+
+/* Class = "UITextField"; placeholder = "Personal bKash phone number"; ObjectID = "Fjq-gZ-PhK"; */
+"Fjq-gZ-PhK.placeholder" = "Personal bKash phone number";
+
+/* Class = "UIButton"; normalTitle = "Team Preview"; ObjectID = "G92-EC-L4d"; */
+"G92-EC-L4d.normalTitle" = "Team Preview";
+
+/* Class = "UILabel"; text = "     Econ. Rate"; ObjectID = "GMf-6R-2HX"; */
+"GMf-6R-2HX.text" = "     Econ. Rate";
+
+/* Class = "UILabel"; text = " "; ObjectID = "GXm-xi-R5V"; */
+"GXm-xi-R5V.text" = " ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "H66-mB-2WB"; */
+"H66-mB-2WB.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Zipcode"; ObjectID = "HCH-Oe-s9k"; */
+"HCH-Oe-s9k.placeholder" = "Zipcode";
+
+/* Class = "UILabel"; text = "CREDITS"; ObjectID = "HU8-VG-bkS"; */
+"HU8-VG-bkS.text" = "CREDITS";
+
+/* Class = "UILabel"; text = "Apply Free Contest"; ObjectID = "HlT-rr-64B"; */
+"HlT-rr-64B.text" = "Apply Free Contest";
+
+/* Class = "UILabel"; text = "Front Side Image"; ObjectID = "Hyc-Ws-uUS"; */
+"Hyc-Ws-uUS.text" = "Front Side Image";
+
+/* Class = "UILabel"; text = "     Events"; ObjectID = "I2a-oC-TLG"; */
+"I2a-oC-TLG.text" = "     Events";
+
+/* Class = "UILabel"; text = "20% tax"; ObjectID = "I8d-5t-Z4y"; */
+"I8d-5t-Z4y.text" = "20% tax";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "IKL-pY-XRb"; */
+"IKL-pY-XRb.text" = "0";
+
+/* Class = "UILabel"; text = "CONTEST LEADERBOARD"; ObjectID = "IfO-25-cAi"; */
+"IfO-25-cAi.text" = "CONTEST LEADERBOARD";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Ife-MC-16n"; */
+"Ife-MC-16n.text" = "Label";
+
+/* Class = "UILabel"; text = "+88003205235024"; ObjectID = "J6X-yq-KQS"; */
+"J6X-yq-KQS.text" = "+88003205235024";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "Jbg-XJ-EnA"; */
+"Jbg-XJ-EnA.placeholder" = "Email Address";
+
+/* Class = "UILabel"; text = "1 BDT = 50 Coins"; ObjectID = "JjM-fS-Mfp"; */
+"JjM-fS-Mfp.text" = "1 BDT = 50 Coins";
+
+/* Class = "UILabel"; text = "Available Coin Packs"; ObjectID = "Jmt-Bp-dFs"; */
+"Jmt-Bp-dFs.text" = "Available Coin Packs";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "K1d-QI-Bhq"; */
+"K1d-QI-Bhq.text" = "0";
+
+/* Class = "UILabel"; text = "Change Language"; ObjectID = "KB8-3V-Giy"; */
+"KB8-3V-Giy.text" = "Change Language";
+
+/* Class = "UILabel"; text = "STEP 01"; ObjectID = "KyT-4A-CFt"; */
+"KyT-4A-CFt.text" = "STEP 01";
+
+/* Class = "UILabel"; text = "SELECT YOUR AVATAR"; ObjectID = "L7e-Ig-wba"; */
+"L7e-Ig-wba.text" = "SELECT YOUR AVATAR";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "LHH-GB-M9e"; */
+"LHH-GB-M9e.text" = "Label";
+
+/* Class = "UILabel"; text = " Points"; ObjectID = "LRE-bk-p0q"; */
+"LRE-bk-p0q.text" = " Points";
+
+/* Class = "UILabel"; text = "     6's"; ObjectID = "Lk4-6L-CfG"; */
+"Lk4-6L-CfG.text" = "     6's";
+
+/* Class = "UITextField"; placeholder = "Phone Number"; ObjectID = "Lt3-O1-q6u"; */
+"Lt3-O1-q6u.placeholder" = "Phone Number";
+
+/* Class = "UIButton"; disabledTitle = "Sign Up"; ObjectID = "Lwt-Zw-n8J"; */
+"Lwt-Zw-n8J.disabledTitle" = "Sign Up";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "Lwt-Zw-n8J"; */
+"Lwt-Zw-n8J.normalTitle" = "Sign Up";
+
+/* Class = "UILabel"; text = "WK"; ObjectID = "MRq-Vq-4eP"; */
+"MRq-Vq-4eP.text" = "WK";
+
+/* Class = "UIButton"; normalTitle = "Change"; ObjectID = "MkI-hQ-dFF"; */
+"MkI-hQ-dFF.normalTitle" = "Change";
+
+/* Class = "UILabel"; text = "How iIt Works?"; ObjectID = "N5Y-d9-QUd"; */
+"N5Y-d9-QUd.text" = "How iIt Works?";
+
+/* Class = "UILabel"; text = "Contests"; ObjectID = "NE9-3O-jNd"; */
+"NE9-3O-jNd.text" = "Contests";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "NTm-bt-Kjz"; */
+"NTm-bt-Kjz.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "You have to Login or Sign Up to join any contest. Before joining contests you can create your own Fantasy Team. Please Login or Sign Up to prove your skill"; ObjectID = "NeE-8f-InB"; */
+"NeE-8f-InB.text" = "You have to Login or Sign Up to join any contest. Before joining contests you can create your own Fantasy Team. Please Login or Sign Up to prove your skill";
+
+/* Class = "UILabel"; text = "Max 7 Players From a Team"; ObjectID = "Nno-Yf-aga"; */
+"Nno-Yf-aga.text" = "Max 7 Players From a Team";
+
+/* Class = "UILabel"; text = "     Is in Playing XI"; ObjectID = "OJE-HE-c2e"; */
+"OJE-HE-c2e.text" = "     Is in Playing XI";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "OLf-7r-OM7"; */
+"OLf-7r-OM7.text" = "0";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "ONV-Zg-Lrp"; */
+"ONV-Zg-Lrp.text" = "Name";
+
+/* Class = "UIButton"; normalTitle = "Share Your Code"; ObjectID = "OP7-3T-yTN"; */
+"OP7-3T-yTN.normalTitle" = "Share Your Code";
+
+/* Class = "UITextField"; placeholder = "Confirm Password"; ObjectID = "OPD-5g-q0D"; */
+"OPD-5g-q0D.placeholder" = "Confirm Password";
+
+/* Class = "UILabel"; text = "(0)"; ObjectID = "P4i-rJ-bEK"; */
+"P4i-rJ-bEK.text" = "(0)";
+
+/* Class = "UIButton"; normalTitle = "Logout"; ObjectID = "PCs-Co-mFm"; */
+"PCs-Co-mFm.normalTitle" = "Logout";
+
+/* Class = "UILabel"; text = "     Catches"; ObjectID = "PWa-JN-x2A"; */
+"PWa-JN-x2A.text" = "     Catches";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "Paz-La-zH9"; */
+"Paz-La-zH9.text" = "Status";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "QAx-Eh-zYp"; */
+"QAx-Eh-zYp.text" = "Label";
+
+/* Class = "UILabel"; text = "The amount in BDT you would mention here will add the equivalent amount of coins in your profile."; ObjectID = "QR3-99-PZS"; */
+"QR3-99-PZS.text" = "The amount in BDT you would mention here will add the equivalent amount of coins in your profile.";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "QWR-hN-O0D"; */
+"QWR-hN-O0D.text" = "Label";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Qbf-EO-9bH"; */
+"Qbf-EO-9bH.text" = "0";
+
+/* Class = "UILabel"; text = "Entry"; ObjectID = "Qia-SO-xLk"; */
+"Qia-SO-xLk.text" = "Entry";
+
+/* Class = "UILabel"; text = "You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. After that, required money will be deducted from your payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 20 BDT."; ObjectID = "Qt5-7U-tZc"; */
+"Qt5-7U-tZc.text" = "You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. After that, required money will be deducted from your payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 20 BDT.";
+
+/* Class = "UILabel"; text = "Total coin"; ObjectID = "R39-Sg-cgM"; */
+"R39-Sg-cgM.text" = "Total coin";
+
+/* Class = "UILabel"; text = "The result will be published when the match ends!"; ObjectID = "REN-h3-szf"; */
+"REN-h3-szf.text" = "The result will be published when the match ends!";
+
+/* Class = "UILabel"; text = "fjhs@gmail.com"; ObjectID = "RSK-PY-eW6"; */
+"RSK-PY-eW6.text" = "fjhs@gmail.com";
+
+/* Class = "UILabel"; text = "E.g. 01XXXXXXXXX"; ObjectID = "RUM-4z-ass"; */
+"RUM-4z-ass.text" = "E.g. 01XXXXXXXXX";
+
+/* Class = "UILabel"; text = "Players"; ObjectID = "RUo-H6-7RD"; */
+"RUo-H6-7RD.text" = "Players";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "RXd-Hn-Hmo"; */
+"RXd-Hn-Hmo.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "Rbd-aB-xfy"; */
+"Rbd-aB-xfy.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "ALL PLAYERS RANK & POINTS"; ObjectID = "Ryt-E5-5jA"; */
+"Ryt-E5-5jA.text" = "ALL PLAYERS RANK & POINTS";
+
+/* Class = "UILabel"; text = "VS"; ObjectID = "SDi-Q6-CuC"; */
+"SDi-Q6-CuC.text" = "VS";
+
+/* Class = "UILabel"; text = "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT."; ObjectID = "ScD-d5-kvp"; */
+"ScD-d5-kvp.text" = "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT.";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "Shm-9B-C3D"; */
+"Shm-9B-C3D.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "(C) gets 2x points & (VC) gets 1.5x points"; ObjectID = "TLv-KZ-BI3"; */
+"TLv-KZ-BI3.text" = "(C) gets 2x points & (VC) gets 1.5x points";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "TWq-bs-L42"; */
+"TWq-bs-L42.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "PAY NOW"; ObjectID = "TbW-PU-qx3"; */
+"TbW-PU-qx3.normalTitle" = "PAY NOW";
+
+/* Class = "UIButton"; normalTitle = "SELECT A MATCH"; ObjectID = "TbW-aq-aQb"; */
+"TbW-aq-aQb.normalTitle" = "SELECT A MATCH";
+
+/* Class = "UITextField"; placeholder = "Write amount in BDT to buy Coins"; ObjectID = "Tfq-U5-zcX"; */
+"Tfq-U5-zcX.placeholder" = "Write amount in BDT to buy Coins";
+
+/* Class = "UITabBarItem"; title = "HOME"; ObjectID = "Tfs-yE-WMk"; */
+"Tfs-yE-WMk.title" = "HOME";
+
+/* Class = "UILabel"; text = "500"; ObjectID = "ToE-fV-odb"; */
+"ToE-fV-odb.text" = "500";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "TrI-Jq-CdT"; */
+"TrI-Jq-CdT.placeholder" = "Name";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "U9K-wR-Bna"; */
+"U9K-wR-Bna.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "UR8-WE-qgH"; */
+"UR8-WE-qgH.text" = "Label";
+
+/* Class = "UILabel"; text = "VC"; ObjectID = "VJ8-uA-y7s"; */
+"VJ8-uA-y7s.text" = "VC";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "VcW-bg-M6V"; */
+"VcW-bg-M6V.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Pick 1-4 Wicket-Keepers"; ObjectID = "VvU-8A-oPq"; */
+"VvU-8A-oPq.text" = "Pick 1-4 Wicket-Keepers";
+
+/* Class = "UILabel"; text = "BD"; ObjectID = "VwB-hN-mYN"; */
+"VwB-hN-mYN.text" = "BD";
+
+/* Class = "UIButton"; normalTitle = "Send Withdraw Request"; ObjectID = "VwQ-yc-FuI"; */
+"VwQ-yc-FuI.normalTitle" = "Send Withdraw Request";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "WDL-OB-dXF"; */
+"WDL-OB-dXF.normalTitle" = "Sign Up";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "WK9-G5-sPR"; */
+"WK9-G5-sPR.text" = "0";
+
+/* Class = "UILabel"; text = "Your available  free contests = 0"; ObjectID = "WPM-1L-bie"; */
+"WPM-1L-bie.text" = "Your available  free contests = 0";
+
+/* Class = "UITextField"; placeholder = "City"; ObjectID = "Wgj-1X-Ay5"; */
+"Wgj-1X-Ay5.placeholder" = "City";
+
+/* Class = "UILabel"; text = "Cash-Withdrawl!"; ObjectID = "Wi7-Em-zBS"; */
+"Wi7-Em-zBS.text" = "Cash-Withdrawl!";
+
+/* Class = "UILabel"; text = "Verified By"; ObjectID = "Wm1-Jx-qDG"; */
+"Wm1-Jx-qDG.text" = "Verified By";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Wmj-nC-x1m"; */
+"Wmj-nC-x1m.text" = "Label";
+
+/* Class = "UILabel"; text = "     Wickets"; ObjectID = "Wxl-5l-uc2"; */
+"Wxl-5l-uc2.text" = "     Wickets";
+
+/* Class = "UIButton"; normalTitle = "UPDATE PROFILE"; ObjectID = "Wxm-mr-o2Z"; */
+"Wxm-mr-o2Z.normalTitle" = "UPDATE PROFILE";
+
+/* Class = "UILabel"; text = "STEP 02"; ObjectID = "WzA-uu-tGP"; */
+"WzA-uu-tGP.text" = "STEP 02";
+
+/* Class = "UILabel"; text = "     Runs"; ObjectID = "XAa-LZ-9hs"; */
+"XAa-LZ-9hs.text" = "     Runs";
+
+/* Class = "UIButton"; normalTitle = "REFER TO A FRIEND"; ObjectID = "XCz-8M-fCP"; */
+"XCz-8M-fCP.normalTitle" = "REFER TO A FRIEND";
+
+/* Class = "UIButton"; normalTitle = "Terms & Conditions"; ObjectID = "XYb-vM-ecJ"; */
+"XYb-vM-ecJ.normalTitle" = "Terms & Conditions";
+
+/* Class = "UILabel"; text = "You haven't join any upcoming contests."; ObjectID = "Xxm-iZ-PKX"; */
+"Xxm-iZ-PKX.text" = "You haven't join any upcoming contests.";
+
+/* Class = "UILabel"; text = "110"; ObjectID = "YOd-4N-g9M"; */
+"YOd-4N-g9M.text" = "110";
+
+/* Class = "UILabel"; text = "Back Side Image"; ObjectID = "YbZ-1J-zKd"; */
+"YbZ-1J-zKd.text" = "Back Side Image";
+
+/* Class = "UILabel"; text = "500"; ObjectID = "Yba-YI-fLH"; */
+"Yba-YI-fLH.text" = "500";
+
+/* Class = "UILabel"; text = "POINTS"; ObjectID = "YnH-1d-aHH"; */
+"YnH-1d-aHH.text" = "POINTS";
+
+/* Class = "UILabel"; text = "Amount in BDT"; ObjectID = "Yof-QG-nFi"; */
+"Yof-QG-nFi.text" = "Amount in BDT";
+
+/* Class = "UITextField"; placeholder = "Phone number"; ObjectID = "Z03-U5-5EB"; */
+"Z03-U5-5EB.placeholder" = "Phone number";
+
+/* Class = "UILabel"; text = "     Maiden Overs"; ObjectID = "ZKd-2a-5dR"; */
+"ZKd-2a-5dR.text" = "     Maiden Overs";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "ZjL-iq-HIt"; */
+"ZjL-iq-HIt.text" = "Status";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Zzd-Hp-dXD"; */
+"Zzd-Hp-dXD.text" = "Label";
+
+/* Class = "UILabel"; text = "     Strike Rate"; ObjectID = "a2a-wR-7ph"; */
+"a2a-wR-7ph.text" = "     Strike Rate";
+
+/* Class = "UILabel"; text = "POINT BRAKDOWN"; ObjectID = "aTV-Qa-AKq"; */
+"aTV-Qa-AKq.text" = "POINT BRAKDOWN";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "aW7-Lj-vSD"; */
+"aW7-Lj-vSD.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "abC-Hg-oGZ"; */
+"abC-Hg-oGZ.text" = "Label";
+
+/* Class = "UILabel"; text = "IND"; ObjectID = "afF-Fp-WS8"; */
+"afF-Fp-WS8.text" = "IND";
+
+/* Class = "UILabel"; text = "VS"; ObjectID = "alX-SD-tdX"; */
+"alX-SD-tdX.text" = "VS";
+
+/* Class = "UILabel"; text = "Playing History"; ObjectID = "b64-YX-Cke"; */
+"b64-YX-Cke.text" = "Playing History";
+
+/* Class = "UILabel"; text = "No transaction history yet!"; ObjectID = "b7e-Gx-XwC"; */
+"b7e-Gx-XwC.text" = "No transaction history yet!";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "bAV-KH-4XK"; */
+"bAV-KH-4XK.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Full Profile"; ObjectID = "bbG-bE-aD5"; */
+"bbG-bE-aD5.normalTitle" = "Full Profile";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "bbh-5c-i2F"; */
+"bbh-5c-i2F.text" = "Label";
+
+/* Class = "UILabel"; text = "Max 7 Players From a Team"; ObjectID = "bdN-cW-jAf"; */
+"bdN-cW-jAf.text" = "Max 7 Players From a Team";
+
+/* Class = "UILabel"; text = "SCOREBOARD"; ObjectID = "bw0-UZ-XLI"; */
+"bw0-UZ-XLI.text" = "SCOREBOARD";
+
+/* Class = "UITextField"; placeholder = "Give your team name"; ObjectID = "cHB-35-J4o"; */
+"cHB-35-J4o.placeholder" = "Give your team name";
+
+/* Class = "UILabel"; text = " Points"; ObjectID = "cVf-aZ-lNy"; */
+"cVf-aZ-lNy.text" = " Points";
+
+/* Class = "UILabel"; text = "Account Info"; ObjectID = "ch8-HV-JkV"; */
+"ch8-HV-JkV.text" = "Account Info";
+
+/* Class = "UILabel"; text = "I Agree with GO11"; ObjectID = "cra-er-skw"; */
+"cra-er-skw.text" = "I Agree with GO11";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "d81-s1-UfB"; */
+"d81-s1-UfB.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "d9C-ol-YYy"; */
+"d9C-ol-YYy.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "Already have account?"; ObjectID = "dCZ-bf-1AW"; */
+"dCZ-bf-1AW.text" = "Already have account?";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dMm-c6-dLU"; */
+"dMm-c6-dLU.text" = "Label";
+
+/* Class = "UILabel"; text = "VS"; ObjectID = "dui-wa-jkO"; */
+"dui-wa-jkO.text" = "VS";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "e3d-3N-GCS"; */
+"e3d-3N-GCS.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "eET-H1-454"; */
+"eET-H1-454.normalTitle" = "Continue";
+
+/* Class = "UIButton"; normalTitle = "ADD COINS"; ObjectID = "ePd-qw-B4d"; */
+"ePd-qw-B4d.normalTitle" = "ADD COINS";
+
+/* Class = "UILabel"; text = "     6's"; ObjectID = "eRx-AH-bh0"; */
+"eRx-AH-bh0.text" = "     6's";
+
+/* Class = "UILabel"; text = "PLAYERS"; ObjectID = "ekz-PO-vne"; */
+"ekz-PO-vne.text" = "PLAYERS";
+
+/* Class = "UILabel"; text = "  Earned Points"; ObjectID = "en8-a2-xdc"; */
+"en8-a2-xdc.text" = "  Earned Points";
+
+/* Class = "UILabel"; text = "62.5"; ObjectID = "f7z-ZH-y6H"; */
+"f7z-ZH-y6H.text" = "62.5";
+
+/* Class = "UILabel"; text = "Total Coins"; ObjectID = "fGc-sd-Jhi"; */
+"fGc-sd-Jhi.text" = "Total Coins";
+
+/* Class = "UILabel"; text = "PENDING"; ObjectID = "fao-dK-LLk"; */
+"fao-dK-LLk.text" = "PENDING";
+
+/* Class = "UILabel"; text = "Phone Number"; ObjectID = "fum-HW-Pmd"; */
+"fum-HW-Pmd.text" = "Phone Number";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "fyj-d5-51h"; */
+"fyj-d5-51h.normalTitle" = "Sign Up";
+
+/* Class = "UILabel"; text = "CODE"; ObjectID = "g78-1G-eeS"; */
+"g78-1G-eeS.text" = "CODE";
+
+/* Class = "UIButton"; normalTitle = "Redeem Coins"; ObjectID = "gRR-dr-vPA"; */
+"gRR-dr-vPA.normalTitle" = "Redeem Coins";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "gcE-7R-Uoe"; */
+"gcE-7R-Uoe.text" = "0";
+
+/* Class = "UILabel"; text = "     Run outs"; ObjectID = "gdB-Sr-J0l"; */
+"gdB-Sr-J0l.text" = "     Run outs";
+
+/* Class = "UILabel"; text = "     Is in Playing XI"; ObjectID = "gfA-Ni-cuh"; */
+"gfA-Ni-cuh.text" = "     Is in Playing XI";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "goA-DS-H9r"; */
+"goA-DS-H9r.placeholder" = "Email Address";
+
+/* Class = "UILabel"; text = "     Econ. Rate"; ObjectID = "hF3-Wn-YkZ"; */
+"hF3-Wn-YkZ.text" = "     Econ. Rate";
+
+/* Class = "UILabel"; text = "PLAYERS"; ObjectID = "hcs-Rj-zo9"; */
+"hcs-Rj-zo9.text" = "PLAYERS";
+
+/* Class = "UILabel"; text = "6/11"; ObjectID = "hh1-Za-oWE"; */
+"hh1-Za-oWE.text" = "6/11";
+
+/* Class = "UILabel"; text = "WK"; ObjectID = "ib4-0C-HM0"; */
+"ib4-0C-HM0.text" = "WK";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "iqD-PH-4py"; */
+"iqD-PH-4py.text" = "Label";
+
+/* Class = "UILabel"; text = "1.5x"; ObjectID = "jDh-Ar-ezY"; */
+"jDh-Ar-ezY.text" = "1.5x";
+
+/* Class = "UIButton"; normalTitle = "Request to reset password"; ObjectID = "jK9-xP-XC9"; */
+"jK9-xP-XC9.normalTitle" = "Request to reset password";
+
+/* Class = "UIButton"; normalTitle = "CREATE YOUR TEAM"; ObjectID = "joI-Ae-MpE"; */
+"joI-Ae-MpE.normalTitle" = "CREATE YOUR TEAM";
+
+/* Class = "UITextField"; placeholder = "********"; ObjectID = "jr0-ol-Uee"; */
+"jr0-ol-Uee.placeholder" = "********";
+
+/* Class = "UILabel"; text = "By Joining this contest, you accept GO11's T&C"; ObjectID = "k9a-1U-cg2"; */
+"k9a-1U-cg2.text" = "By Joining this contest, you accept GO11's T&C";
+
+/* Class = "UILabel"; text = "     Stumping"; ObjectID = "kBr-8n-deh"; */
+"kBr-8n-deh.text" = "     Stumping";
+
+/* Class = "UILabel"; text = "Don't have any account?"; ObjectID = "kEP-wq-ZQp"; */
+"kEP-wq-ZQp.text" = "Don't have any account?";
+
+/* Class = "UILabel"; text = "150"; ObjectID = "kVp-1C-g3M"; */
+"kVp-1C-g3M.text" = "150";
+
+/* Class = "UILabel"; text = "500"; ObjectID = "kic-fq-mRc"; */
+"kic-fq-mRc.text" = "500";
+
+/* Class = "UILabel"; text = "PRIZE LIST"; ObjectID = "l0A-f4-5z0"; */
+"l0A-f4-5z0.text" = "PRIZE LIST";
+
+/* Class = "UILabel"; text = "     Wickets"; ObjectID = "lEf-nP-aYd"; */
+"lEf-nP-aYd.text" = "     Wickets";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "lFP-AS-rGb"; */
+"lFP-AS-rGb.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "Choose Captain (C) & Vice Captain (VC)"; ObjectID = "lUu-jc-Cg3"; */
+"lUu-jc-Cg3.text" = "Choose Captain (C) & Vice Captain (VC)";
+
+/* Class = "UIButton"; normalTitle = "UPDATE AVATAR"; ObjectID = "lnH-Na-uSn"; */
+"lnH-Na-uSn.normalTitle" = "UPDATE AVATAR";
+
+/* Class = "UIButton"; normalTitle = "Verify Your Profile!"; ObjectID = "lnf-Xg-Nuw"; */
+"lnf-Xg-Nuw.normalTitle" = "Verify Your Profile!";
+
+/* Class = "UILabel"; text = "Top Rank"; ObjectID = "loZ-lj-eFE"; */
+"loZ-lj-eFE.text" = "Top Rank";
+
+/* Class = "UILabel"; text = "Share your referral code with your friends and get your offer"; ObjectID = "lpj-rj-keN"; */
+"lpj-rj-keN.text" = "Share your referral code with your friends and get your offer";
+
+/* Class = "UITabBarItem"; title = "MY CONTEST"; ObjectID = "m6J-oH-gKM"; */
+"m6J-oH-gKM.title" = "MY CONTEST";
+
+/* Class = "UILabel"; text = "     Maiden Overs"; ObjectID = "mHG-yu-ygj"; */
+"mHG-yu-ygj.text" = "     Maiden Overs";
+
+/* Class = "UILabel"; text = "Email Address"; ObjectID = "maZ-OA-cYi"; */
+"maZ-OA-cYi.text" = "Email Address";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "moL-3C-4xZ"; */
+"moL-3C-4xZ.normalTitle" = "1";
+
+/* Class = "UILabel"; text = " "; ObjectID = "nBA-Vt-lYM"; */
+"nBA-Vt-lYM.text" = " ";
+
+/* Class = "UILabel"; text = "     4's"; ObjectID = "nao-GE-hr8"; */
+"nao-GE-hr8.text" = "     4's";
+
+/* Class = "UILabel"; text = "I Agree with GO11"; ObjectID = "ntd-RY-sJ4"; */
+"ntd-RY-sJ4.text" = "I Agree with GO11";
+
+/* Class = "UILabel"; text = "     Catches"; ObjectID = "o5i-Xf-6wp"; */
+"o5i-Xf-6wp.text" = "     Catches";
+
+/* Class = "UILabel"; text = "GAME OF 11"; ObjectID = "oU2-fW-oWh"; */
+"oU2-fW-oWh.text" = "GAME OF 11";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "obT-Fj-Sqr"; */
+"obT-Fj-Sqr.text" = "Name";
+
+/* Class = "UILabel"; text = "Personal Bkash number is needed while withdrawing the money. You may provide it later when GO11 team contact you regarding the withdrawal process."; ObjectID = "oc2-Ou-OrE"; */
+"oc2-Ou-OrE.text" = "Personal Bkash number is needed while withdrawing the money. You may provide it later when GO11 team contact you regarding the withdrawal process.";
+
+/* Class = "UILabel"; text = "bKash Digital Payment"; ObjectID = "ogK-0h-Dfc"; */
+"ogK-0h-Dfc.text" = "bKash Digital Payment";
+
+/* Class = "UILabel"; text = "Pick 1-4 Wicket-Keepers"; ObjectID = "ouX-n8-SGa"; */
+"ouX-n8-SGa.text" = "Pick 1-4 Wicket-Keepers";
+
+/* Class = "UILabel"; text = "Players"; ObjectID = "p3h-1N-HHd"; */
+"p3h-1N-HHd.text" = "Players";
+
+/* Class = "UIButton"; normalTitle = "JOIN CONTEST"; ObjectID = "pma-Py-cnH"; */
+"pma-Py-cnH.normalTitle" = "JOIN CONTEST";
+
+/* Class = "UIButton"; normalTitle = "Save Your Team"; ObjectID = "q2g-NK-mSa"; */
+"q2g-NK-mSa.normalTitle" = "Save Your Team";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "q6T-Sv-QSP"; */
+"q6T-Sv-QSP.text" = "Label";
+
+/* Class = "UILabel"; text = "     Strike Rate"; ObjectID = "qRf-RM-d6p"; */
+"qRf-RM-d6p.text" = "     Strike Rate";
+
+/* Class = "UILabel"; text = "To Pay"; ObjectID = "qlQ-BC-bZO"; */
+"qlQ-BC-bZO.text" = "To Pay";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qtr-hP-amN"; */
+"qtr-hP-amN.text" = "Label";
+
+/* Class = "UILabel"; text = "First Innings"; ObjectID = "r9E-yY-plU"; */
+"r9E-yY-plU.text" = "First Innings";
+
+/* Class = "UITextField"; placeholder = "Mailing Address"; ObjectID = "rMs-Qw-eVu"; */
+"rMs-Qw-eVu.placeholder" = "Mailing Address";
+
+/* Class = "UILabel"; text = "YOUR FEEDBACK"; ObjectID = "rNa-ZS-nJC"; */
+"rNa-ZS-nJC.text" = "YOUR FEEDBACK";
+
+/* Class = "UILabel"; text = "Please write your GO11 registered email address to get generated password. You will be using it while Logging into GO11."; ObjectID = "rZg-hm-LO7"; */
+"rZg-hm-LO7.text" = "Please write your GO11 registered email address to get generated password. You will be using it while Logging into GO11.";
+
+/* Class = "UIButton"; normalTitle = "Change Password"; ObjectID = "rmZ-96-knq"; */
+"rmZ-96-knq.normalTitle" = "Change Password";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "ro8-PI-zdS"; */
+"ro8-PI-zdS.text" = "0";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "rq4-Eb-GJe"; */
+"rq4-Eb-GJe.text" = "Label";
+
+/* Class = "UILabel"; text = "TEAM SELECT & SCORING"; ObjectID = "sfY-mh-e0n"; */
+"sfY-mh-e0n.text" = "TEAM SELECT & SCORING";
+
+/* Class = "UILabel"; text = "     Runs"; ObjectID = "sxz-QI-Rh4"; */
+"sxz-QI-Rh4.text" = "     Runs";
+
+/* Class = "UILabel"; text = "6/11"; ObjectID = "t0p-Vd-JgA"; */
+"t0p-Vd-JgA.text" = "6/11";
+
+/* Class = "UIButton"; normalTitle = "VERIFY YOUR PROFILE"; ObjectID = "uE9-MB-2pK"; */
+"uE9-MB-2pK.normalTitle" = "VERIFY YOUR PROFILE";
+
+/* Class = "UILabel"; text = "Credit/Debit Cards/Mobile Banking/Online Banking"; ObjectID = "uRY-Tv-txd"; */
+"uRY-Tv-txd.text" = "Credit/Debit Cards/Mobile Banking/Online Banking";
+
+/* Class = "UILabel"; text = "CONFIRMATION"; ObjectID = "uT6-gH-dS5"; */
+"uT6-gH-dS5.text" = "CONFIRMATION";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ucp-qC-yTX"; */
+"ucp-qC-yTX.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ups-ra-By1"; */
+"ups-ra-By1.text" = "Label";
+
+/* Class = "UILabel"; text = "VERIFY YOUR PROFILE"; ObjectID = "uqx-sv-3Mu"; */
+"uqx-sv-3Mu.text" = "VERIFY YOUR PROFILE";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "v1V-5e-WKb"; */
+"v1V-5e-WKb.text" = "0";
+
+/* Class = "UILabel"; text = "VS"; ObjectID = "vb1-O4-Voz"; */
+"vb1-O4-Voz.text" = "VS";
+
+/* Class = "UILabel"; text = " "; ObjectID = "wEO-di-y3T"; */
+"wEO-di-y3T.text" = " ";
+
+/* Class = "UIButton"; normalTitle = "ADD COINS"; ObjectID = "wWR-le-ccq"; */
+"wWR-le-ccq.normalTitle" = "ADD COINS";
+
+/* Class = "UITextField"; placeholder = "New Password"; ObjectID = "wZH-y5-wwV"; */
+"wZH-y5-wwV.placeholder" = "New Password";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "wdB-vz-7JV"; */
+"wdB-vz-7JV.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "300.00"; ObjectID = "wvg-RJ-cWz"; */
+"wvg-RJ-cWz.text" = "300.00";
+
+/* Class = "UILabel"; text = "Free contest"; ObjectID = "xBs-wo-pRw"; */
+"xBs-wo-pRw.text" = "Free contest";
+
+/* Class = "UILabel"; text = "CREDITS"; ObjectID = "xCD-hX-uQb"; */
+"xCD-hX-uQb.text" = "CREDITS";
+
+/* Class = "UIButton"; normalTitle = "SELECT IMAGE"; ObjectID = "xDx-jV-YZo"; */
+"xDx-jV-YZo.normalTitle" = "SELECT IMAGE";
+
+/* Class = "UIButton"; normalTitle = "Female"; ObjectID = "xGS-FU-7P9"; */
+"xGS-FU-7P9.normalTitle" = "Female";
+
+/* Class = "UITextField"; placeholder = "Referral Code (Optional)"; ObjectID = "xMN-g9-bUH"; */
+"xMN-g9-bUH.placeholder" = "Referral Code (Optional)";
+
+/* Class = "UILabel"; text = "SELECT A MATCH"; ObjectID = "xNo-vE-UJ7"; */
+"xNo-vE-UJ7.text" = "SELECT A MATCH";
+
+/* Class = "UILabel"; text = "62.5"; ObjectID = "xUl-PK-5IP"; */
+"xUl-PK-5IP.text" = "62.5";
+
+/* Class = "UIButton"; normalTitle = "ADD MORE COINS"; ObjectID = "xbv-m6-sV5"; */
+"xbv-m6-sV5.normalTitle" = "ADD MORE COINS";
+
+/* Class = "UITextField"; placeholder = "Amount in BDT"; ObjectID = "xsV-6E-qJM"; */
+"xsV-6E-qJM.placeholder" = "Amount in BDT";
+
+/* Class = "UITabBarItem"; title = "MORE"; ObjectID = "xuE-QR-0z1"; */
+"xuE-QR-0z1.title" = "MORE";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "y5G-qM-trE"; */
+"y5G-qM-trE.text" = "Label";
+
+/* Class = "UILabel"; text = "Deposited Coin"; ObjectID = "y5l-vh-X2N"; */
+"y5l-vh-X2N.text" = "Deposited Coin";
+
+/* Class = "UIButton"; normalTitle = "WITHDRAW PRIZE"; ObjectID = "y8m-mf-ah1"; */
+"y8m-mf-ah1.normalTitle" = "WITHDRAW PRIZE";
+
+/* Class = "UILabel"; text = " RANK"; ObjectID = "yN3-Sr-bUK"; */
+"yN3-Sr-bUK.text" = " RANK";
+
+/* Class = "UIButton"; normalTitle = "Send Your Feedback"; ObjectID = "yOc-kT-9aI"; */
+"yOc-kT-9aI.normalTitle" = "Send Your Feedback";
+
+/* Class = "UILabel"; text = "We provide upcoming match schedule based on your preferences. No upcoming match of that priority is available now."; ObjectID = "ynU-wl-3Bt"; */
+"ynU-wl-3Bt.text" = "We provide upcoming match schedule based on your preferences. No upcoming match of that priority is available now.";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password?"; ObjectID = "ynl-ai-h3r"; */
+"ynl-ai-h3r.normalTitle" = "Forgot Password?";
+
+/* Class = "UIButton"; normalTitle = "CREATE YOUR TEAM"; ObjectID = "yvM-qK-Cjf"; */
+"yvM-qK-Cjf.normalTitle" = "CREATE YOUR TEAM";
+
+/* Class = "UILabel"; text = "     4's"; ObjectID = "zB3-vU-pOY"; */
+"zB3-vU-pOY.text" = "     4's";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "zKn-zx-jyj"; */
+"zKn-zx-jyj.text" = "0";
+
+/* Class = "UILabel"; text = "FORGOT PASSWORD"; ObjectID = "zXJ-Fc-EQn"; */
+"zXJ-Fc-EQn.text" = "FORGOT PASSWORD";
+
+/* Class = "UILabel"; text = "Share your referral code with your friends. Encourage to use your code when signing up in GO11."; ObjectID = "zcO-8g-nHt"; */
+"zcO-8g-nHt.text" = "Share your referral code with your friends. Encourage to use your code when signing up in GO11.";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "zjQ-Hx-rfe"; */
+"zjQ-Hx-rfe.text" = "Label";

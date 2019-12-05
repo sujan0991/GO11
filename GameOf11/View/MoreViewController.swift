@@ -17,6 +17,14 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
     
     @IBOutlet weak var moretableView: UITableView!
     
+    @IBOutlet weak var changeLanguageLabel: UILabel!
+    @IBOutlet weak var englishButton: UIButton!
+    @IBOutlet weak var banglaButton: UIButton!
+    
+    @IBOutlet weak var shadowView: UIView!
+    
+    @IBOutlet weak var languageView: UIView!
+    
     var menuArray = [Dictionary<String,Any>]()
 
     override func viewDidLoad() {
@@ -27,25 +35,58 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
         moretableView.delegate = self
         moretableView.dataSource = self
         
-        placeNavBar(withTitle: "More", isBackBtnVisible: false)
+        placeNavBar(withTitle: "MORE".localized, isBackBtnVisible: false,isLanguageBtnVisible: false)
+        
+        changeLanguageLabel.text = "Change Language".localized
+        
+        if Language.language == Language.bangla{
+            
+            banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+            banglaButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            
+            englishButton.backgroundColor = UIColor.white
+            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+        }else{
+            banglaButton.backgroundColor = UIColor.white
+            banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+            
+            englishButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+            
+        }
+        englishButton.layer.borderWidth = 0.5
+        englishButton.layer.borderColor = UIColor.lightGray.cgColor
+        banglaButton.layer.borderWidth = 0.5
+        banglaButton.layer.borderColor = UIColor.lightGray.cgColor
         
         
-        menuArray.append(["title":"How to Play", "icon":"how_to_play_icon"])
-        menuArray.append(["title":"FAQs", "icon":"faq_icon"])
-        menuArray.append(["title":"Terms & Conditions", "icon":"terms_icon"])
-        menuArray.append(["title":"Privacy Policy", "icon":"privacy_icon"])
-        menuArray.append(["title":"About Us", "icon":"about_us_icon"])
-        menuArray.append(["title":"Watch How To Play", "icon":"play_icon"])
         
+        
+        menuArray.append(["title":"How to Play".localized, "icon":"how_to_play_icon"])
+        menuArray.append(["title":"FAQs".localized, "icon":"faq_icon"])
+        menuArray.append(["title":"Team Select & Scoring".localized, "icon":"scoring"])
+        menuArray.append(["title":"Terms & Conditions".localized, "icon":"terms_icon"])
+        menuArray.append(["title":"Privacy Policy".localized, "icon":"privacy_icon"])
+        menuArray.append(["title":"About Us".localized, "icon":"about_us_icon"])
+        menuArray.append(["title":"Watch How To Play".localized, "icon":"play_icon"])
+        menuArray.append(["title":"Write Your Feedback".localized, "icon":"feedback"])
+        menuArray.append(["title":"Change Language".localized, "icon":"language_change_icon"])
         
         moretableView.tableFooterView = UIView()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        shadowView.addGestureRecognizer(tap)
     }
     
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        
+        shadowView.isHidden = true
+        languageView.isHidden = true
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 6
+        return menuArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,18 +118,40 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
         }else if(indexPath.row == 1){
             
             urlString = "https://www.gameof11.com/faq"
+            
         }else if(indexPath.row == 2){
             
-            urlString = "https://www.gameof11.com/terms-and-conditions"
+            let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "WebViewController") as? WebViewController
+            
+            self.navigationController?.pushViewController(popupVC ?? self, animated: true)
+
+           
+           
         }else if(indexPath.row == 3){
+            urlString = "https://www.gameof11.com/terms-and-conditions"
             
-            urlString = "https://www.gameof11.com/privacy-policy"
         }else if(indexPath.row == 4){
+             urlString = "https://www.gameof11.com/privacy-policy"
             
-            urlString = "https://www.gameof11.com/about-us"
         }else if(indexPath.row == 5){
+            urlString = "https://www.gameof11.com/about-us"
+           
+        }else if(indexPath.row == 6){
             
-            urlString = "https://youtu.be/OJMbQ-BpEWM"
+             urlString = "https://youtu.be/OJMbQ-BpEWM"
+            
+        }else if(indexPath.row == 7){
+            
+            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedbackViewController") as? FeedbackViewController
+            
+            self.navigationController?.pushViewController(vc!, animated: true)
+            
+            
+        }else if(indexPath.row == 8){
+            
+            shadowView.isHidden = false
+            languageView.isHidden = false
+            
         }
         
         print("urlString",urlString)
@@ -107,7 +170,29 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
         
     }
     
+    @IBAction func englishButtonAction(_ sender: Any) {
+        
+        Language.language = Language.english
+    }
     
+    @IBAction func banglaButtonAction(_ sender: Any) {
+        
+        print("bangla.........")
+        Language.language = Language.bangla
+    }
+    
+    @objc func languageChangeAction(_ notification: NSNotification) {
+        
+        print("baseLanguageButtonAction")
+        if let currentVC = UIApplication.topViewController() as? MoreViewController {
+            
+            shadowView.isHidden = false
+            languageView.isHidden = false
+            
+        }
+        
+    }
+
     
 
 }

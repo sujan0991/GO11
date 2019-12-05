@@ -7,23 +7,77 @@
 //
 
 import UIKit
+import SafariServices
 
-class VerifyAccountViewController: BaseViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class VerifyAccountViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     var imagePicker = UIImagePickerController()
     var isFront = true;
 
+    @IBOutlet weak var navTitleLabel: UILabel!
+    @IBOutlet weak var suggestionLabel: TIFAttributedLabel!
     
+    
+    
+    @IBOutlet weak var frontSelectButton: UIButton!
     @IBOutlet weak var frontImageView: UIImageView!
+    @IBOutlet weak var frontImageLabel: UILabel!
     
+    @IBOutlet weak var backImageButton: UIButton!
     @IBOutlet weak var backImageView: UIImageView!
+    @IBOutlet weak var backImageLabel: UILabel!
+    
+    @IBOutlet weak var verifyButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        placeNavBar(withTitle: "Verify Account", isBackBtnVisible: true)
+   //     self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
+        
+      //  placeNavBar(withTitle: "VERIFY ACCOUNT", isBackBtnVisible: true)
+        self.tabBarController?.tabBar.isHidden = true
         
         imagePicker.delegate = self
+        
+        frontImageView.layer.cornerRadius = 5.0
+        frontImageView.layer.borderWidth = 1.0
+        frontImageView.layer.borderColor = UIColor.init(named: "GreenHighlight")?.cgColor
+        backImageView.layer.cornerRadius = 5.0
+        backImageView.layer.borderWidth = 1.0
+        backImageView.layer.borderColor = UIColor.init(named: "GreenHighlight")?.cgColor
+        
+        navTitleLabel.text = "VERIFY YOUR PROFILE".localized
+        suggestionLabel.text = "To verify your profile, you need to provide any one of these mentioned Govt. issued ID i.e. NID, Driving License, Passport, Birth Certificate.You need to upload the photo of both the front and back side of the ID. For Passport you can upload the main page and address page in a single image.".localized
+        
+        frontSelectButton.setTitle("SELECT IMAGE".localized, for: .normal)
+        backImageButton.setTitle("SELECT IMAGE".localized, for: .normal)
+        
+        frontImageLabel.text = "Front Side Image".localized
+        backImageLabel.text = "Back Side Image".localized
+        verifyButton.setTitle("VERIFY YOUR PROFILE".localized, for: .normal)
+        
+        
+        let userData = AppSessionManager.shared.currentUser
+        
+        if userData?.metadata?.photoIdFront != nil{
+            
+            let url = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(userData?.metadata?.photoIdFront ?? "")")
+            
+            self.frontImageView.kf.setImage(with: url)
+            
+            
+//            frontSelectButton.isHidden = true
+//            backImageButton.isHidden = true
+//            verifyButton.isHidden = true
+            
+        }
+        if userData?.metadata?.photoIdBack != nil{
+            
+            let url = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(userData?.metadata?.photoIdBack ?? "")")
+            
+            self.backImageView.kf.setImage(with: url)
+        }
     }
     
     
@@ -71,7 +125,7 @@ class VerifyAccountViewController: BaseViewController,UIImagePickerControllerDel
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
         {
             imagePicker.sourceType = UIImagePickerController.SourceType.camera
-            imagePicker.allowsEditing = true
+            imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
         else
@@ -85,7 +139,7 @@ class VerifyAccountViewController: BaseViewController,UIImagePickerControllerDel
     func openGallary()
     {
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         self.present(imagePicker, animated: true, completion: nil)
     }
     @IBAction func backButtonAction(_ sender: Any) {
@@ -96,6 +150,49 @@ class VerifyAccountViewController: BaseViewController,UIImagePickerControllerDel
     
     
     @IBAction func verifyProfileButtonAction(_ sender: Any) {
+        
+        if frontImageView.image != nil && backImageView.image != nil{
+            
+            
+            
+            let params = [
+                
+                "nid_front":frontImageView.image!,
+                "nid_back":backImageView.image!,
+                ] as [String : Any]
+            
+            APIManager.manager.postVerifyProfile(params: params, withCompletionHandler: { (status, msg) in
+                
+                print("msg in post messege",msg)
+                if status{
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+            })
+        }else if frontImageView.image != nil{
+            
+            let params = [
+                
+                "nid_front":frontImageView.image!,
+                
+                ] as [String : Any]
+            
+            APIManager.manager.postVerifyProfile(params: params, withCompletionHandler: { (status, msg) in
+                
+                print("msg in post messege",msg)
+                
+                if status{
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+            })
+        }else{
+            
+            self.view.makeToast("Please upload one image at least!".localized)
+        }
+        
         
     }
     
@@ -110,7 +207,9 @@ class VerifyAccountViewController: BaseViewController,UIImagePickerControllerDel
             
             if self.isFront {
                 
+                
                 self.frontImageView.image = image
+                self.verifyButton.isUserInteractionEnabled = true
                 
             }else{
                 
@@ -128,6 +227,45 @@ class VerifyAccountViewController: BaseViewController,UIImagePickerControllerDel
             
         }
     }
+    @IBAction func infoButtonAction(_ sender: Any) {
+        
+        let urlString = "https://www.gameof11.com/verify-profile"
+        if let url = URL(string: urlString) {
+            
+            // UIApplication.shared.open(url, options: [:])
+            let svc = SFSafariViewController(url: url)
+            
+            
+            self.present(svc, animated: true) {
+                
+                print("open safari")
+            }
+        }
+    }
+    
+    
+    @IBAction func backbuttonAction(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    
+    
+}
 
+
+@IBDesignable class TIFAttributedLabel: UILabel {
+    
+    @IBInspectable var fontSize: CGFloat = 13.0
+    
+    @IBInspectable var fontFamily: String = "Open Sans"
+    
+    override func awakeFromNib() {
+        var attrString = NSMutableAttributedString(attributedString: self.attributedText!)
+        attrString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: self.fontFamily, size: self.fontSize)!, range: NSMakeRange(0, attrString.length))
+        self.attributedText = attrString
+    }
+    
     
 }

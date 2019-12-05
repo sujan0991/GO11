@@ -14,6 +14,8 @@ class TeamPlayerTableViewCell: UITableViewCell {
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerDetails: UILabel!
     
+    @IBOutlet weak var teamNamelabel: UILabel!
+    
     @IBOutlet weak var offerImage: UIImageView!
     @IBOutlet weak var viceCaptainButton: UIButton!
     @IBOutlet weak var captainButton: UIButton!
@@ -23,6 +25,8 @@ class TeamPlayerTableViewCell: UITableViewCell {
         // Initialization code
         
          playerImage.makeCircular(borderWidth: 0, borderColor: .clear)
+         captainButton.makeCircular(borderWidth: 0.5, borderColor: UIColor.darkGray)
+         viceCaptainButton.makeCircular(borderWidth: 0.5, borderColor: UIColor.darkGray)
     }
     
     func setInfo( player:Player ,  squad : PlayingTeamsData)  {
@@ -33,6 +37,26 @@ class TeamPlayerTableViewCell: UITableViewCell {
         
         self.viceCaptainButton.isSelected = player.isViceCaptain
         self.captainButton.isSelected = player.isCaptain
+        
+        if self.captainButton.isSelected {
+            captainButton.backgroundColor = UIColor.init(named: "GreenHighlight")
+            captainButton.layer.borderColor = UIColor.init(named: "GreenHighlight")?.cgColor
+            captainButton.setTitleColor(UIColor.white, for: .selected)
+        }else{
+            captainButton.backgroundColor = UIColor.white
+            captainButton.layer.borderColor = UIColor.darkGray.cgColor
+            captainButton.setTitleColor(UIColor.init(named: "brand_txt_color_black"), for: .normal)
+        }
+        if self.viceCaptainButton.isSelected {
+            viceCaptainButton.backgroundColor = UIColor.init(named: "TabOrangeColor")
+            viceCaptainButton.layer.borderColor = UIColor.init(named: "TabOrangeColor")?.cgColor
+            viceCaptainButton.setTitleColor(UIColor.white, for: .selected)
+        }else{
+            viceCaptainButton.backgroundColor = UIColor.white
+            viceCaptainButton.layer.borderColor = UIColor.darkGray.cgColor
+            viceCaptainButton.setTitleColor(UIColor.init(named: "brand_txt_color_black"), for: .normal)
+        }
+
         
         if(player.isCaptain == true)
         {
@@ -52,17 +76,41 @@ class TeamPlayerTableViewCell: UITableViewCell {
         
         if player.teamBelong == 1
         {
-            playerDetails.text = " \(squad.firstTeam?.name ?? "") | \(player.creditPoints ?? 0)"
+            
+            teamNamelabel.text = squad.firstTeam?.teamKey?.uppercased() ?? ""
+            
+            playerDetails.text = " | \(player.role?.uppercased() ?? "") | \(player.creditPoints ?? 0)"
             
         }
         else
         {
-            playerDetails.text = " \(squad.secondTeam?.name ?? "") | \(player.creditPoints ?? 0)"
+            teamNamelabel.text = squad.secondTeam?.teamKey?.uppercased() ?? ""
+            
+            playerDetails.text = " | \(player.role?.uppercased() ?? "") | \(player.creditPoints ?? 0)"
+        }
+        let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
+        playerImage.kf.setImage(with: url1)
+        
+        if player.teamBelong == 1{
+            
+            if player.playerImage == nil{
+                
+                playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+            }else if url1 == nil{
+                playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+            }
+        }else{
+            
+            if player.playerImage == nil{
+                
+                playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+            }else if url1 == nil{
+                playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+            }
         }
         
-        let url1 = URL(string: "\(API_K.BaseUrlStr)\(player.playerImage ?? "")")
         
-        playerImage.kf.setImage(with: url1)
+        
         self.needsUpdateConstraints()
         self.setNeedsLayout()
         
@@ -72,7 +120,8 @@ class TeamPlayerTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        
+        
     }
 
 }

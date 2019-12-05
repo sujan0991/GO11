@@ -10,6 +10,8 @@ import UIKit
 
 class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
+    var delegate: BackFromTeamSelect?
+    
     var teams:[CreatedTeam] = []
     var contestId: Int = 0
     
@@ -22,14 +24,24 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        print("teams........",teams)
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "Select Team", isBackBtnVisible: true)
+        placeNavBar(withTitle: "SELECT YOUR TEAM".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
         confirmButton.makeRound(5, borderWidth: 0, borderColor: .clear)
+        
+        confirmButton.setTitle("JOIN CONTEST".localized, for: .normal)
+        confirmButton.layer.shadowColor = UIColor.gray.cgColor
+        confirmButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        confirmButton.layer.shadowRadius = 2
+        confirmButton.layer.shadowOpacity = 0.5
+        confirmButton.layer.masksToBounds = false
+
         
         if (teamTableView != nil)
         {
-            teamTableView.register(UINib(nibName: "CteatedTableViewCell", bundle: nil), forCellReuseIdentifier: "CreatedTeamCell")
+            teamTableView.register(UINib(nibName: "CreatedTeamTableViewCell", bundle: nil), forCellReuseIdentifier: "CreatedTeamTableViewCell")
             
             teamTableView.delegate = self
             teamTableView.dataSource = self
@@ -46,47 +58,48 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier:"CreatedTeamCell") as! CteatedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:"CreatedTeamTableViewCell") as! CreatedTeamTableViewCell
      
         let singleTeam = teams[indexPath.section] as CreatedTeam
         
         cell.setInfo(singleTeam)
-        cell.selectView.isHidden = false
+      //  cell.selectView.isHidden = false
         
         
         if selectedIndex == indexPath.section
         {
-            cell.selectButton.isSelected = true
+            cell.selectTeamButton.isSelected = true
             
         }
         else
         {
-             cell.selectButton.isSelected = false
+             cell.selectTeamButton.isSelected = false
         }
-        cell.selectButton.tag = indexPath.section
+        cell.selectTeamButton.tag = indexPath.section
      // cell.confirmButton.tag = singleTeam.userTeamId ?? 0
         
-        cell.selectButton.addTarget(self, action: #selector(teamSelectAction(_:)), for: .touchUpInside)
+        cell.selectTeamButton.addTarget(self, action: #selector(teamSelectAction(_:)), for: .touchUpInside)
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 180
     }
     
     @IBAction func confirmButtonAction(_ sender: Any) {
         
         let singleTeam = teams[selectedIndex] as CreatedTeam
         
+        if let delegate = self.delegate {
+            
+            delegate.selectedTeam(team: singleTeam,contestId: self.contestId)
+        }
         
-        APIManager.manager.joinInContestWith(contestId: String.init(format: "%d", contestId), teamId: String.init(format: "%d", singleTeam.userTeamId ?? 0), withCompletionHandler: { (status, msg) in
-            if status{
-                self.navigationController?.popToRootViewController(animated: true)
-                
-            }
-            else{
-                self.showStatus(status, msg: msg)
-            }
-        })
-       
+        print("team name...........?????????",singleTeam.teamName)
+        dismiss(animated: true, completion: nil)
         
     }
     @IBAction func teamSelectAction(_ sender: UIButton) {

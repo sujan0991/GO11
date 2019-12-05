@@ -9,21 +9,51 @@
 import UIKit
 import AccountKit
 
-class UnSignedProfileViewController: BaseViewController,AKFViewControllerDelegate {
+class UnSignedProfileViewController: UIViewController,AKFViewControllerDelegate {
 
     
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var suggestionLabel: UILabel!
     
     var _accountKit: AKFAccountKit!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        placeNavBar(withTitle: "Sign UP", isBackBtnVisible: true)
+       // placeNavBar(withTitle: "Sign UP", isBackBtnVisible: true)
         
         // initialize Account Kit
         if _accountKit == nil {
             _accountKit = AKFAccountKit(responseType: .accessToken)
+        }
+        
+        
+        signUpButton.decorateButtonRound(5, borderWidth: 0.5, borderColor: "#30B847")
+        
+        suggestionLabel.text = "You are not logged in. You have to Login or Sign Up to perform your desired action.".localized
+        
+        signUpButton.setTitle("Sign Up".localized, for: .normal)
+        loginButton.setTitle("Login".localized, for: .normal)
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("viewWillAppear in UnSignedProfileViewController")
+        self.tabBarController?.tabBar.isHidden = false
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+         print("viewDidAppear in UnSignedProfileViewController")
+        if AppSessionManager.shared.authToken != nil{
+            
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -44,17 +74,31 @@ class UnSignedProfileViewController: BaseViewController,AKFViewControllerDelegat
     
     @IBAction func signUpButtonAction(_ sender: Any) {
         
-//        let vc = (_accountKit?.viewControllerForPhoneLogin(with: nil, state: nil))!
-//        vc.enableSendToFacebook = true
-//        self.prepareFBLoginViewController(loginViewController: vc)
-//        self.present(vc as UIViewController, animated: true, completion: nil)
+        let vc = (_accountKit?.viewControllerForPhoneLogin(with: nil, state: nil))!
+        vc.enableSendToFacebook = true
+        self.prepareFBLoginViewController(loginViewController: vc)
+        self.present(vc as UIViewController, animated: true, completion: nil)
+
         
-        //For testing
-        let VC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
-        
-        
-        self.navigationController?.pushViewController(VC!, animated: true)
+//        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
+//
+//        popupVC?.phoneNo = "01768431957"
+//        self.navigationController?.pushViewController(popupVC!, animated: true)
     }
+    
+    @IBAction func logInButtonAction(_ sender: Any) {
+        
+        self.tabBarController?.tabBar.isHidden = true
+        
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        
+       
+        
+        self.navigationController?.pushViewController(popupVC!, animated: true)
+
+
+    }
+    
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
         
@@ -62,10 +106,22 @@ class UnSignedProfileViewController: BaseViewController,AKFViewControllerDelegat
         
                 print("Login successful")
         
-                let VC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
-        
-        
-                self.navigationController?.pushViewController(VC!, animated: true)
+        _accountKit.requestAccount{
+            (account, error) -> Void in
+            if let phoneNumber = account?.phoneNumber{
+                
+                print("phone number..........",phoneNumber.phoneNumber)
+                
+                self.tabBarController?.tabBar.isHidden = true
+                
+                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
+                
+                popupVC?.phoneNo = phoneNumber.phoneNumber
+                self.navigationController?.pushViewController(popupVC!, animated: true)
+                
+            }
+            
+        }
 
     }
     

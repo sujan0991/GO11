@@ -17,18 +17,28 @@ class PreviewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var fourthPlayer: UIView!
     @IBOutlet weak var fifthPlayer: UIView!
+    @IBOutlet weak var sixthPlayer: UIView!
     
     @IBOutlet weak var firstPlayerImage: UIImageView!
     @IBOutlet weak var secondPlayerImage: UIImageView!
     @IBOutlet weak var thirdPlayerImage: UIImageView!
     @IBOutlet weak var fourthPlayerImage: UIImageView!
     @IBOutlet weak var fifthPlayerImage: UIImageView!
+    @IBOutlet weak var sixthPlayerImage: UIImageView!
     
     @IBOutlet weak var firstPlayerName: UILabel!
     @IBOutlet weak var secondPlayerName: UILabel!
     @IBOutlet weak var thirdPlayerName: UILabel!
     @IBOutlet weak var fourthPlayerName: UILabel!
     @IBOutlet weak var fifthPlayerName: UILabel!
+    @IBOutlet weak var sixthPlayerName: UILabel!
+    
+    @IBOutlet weak var firstCap: UILabel!
+    @IBOutlet weak var secondCap: UILabel!
+    @IBOutlet weak var thirdCap: UILabel!
+    @IBOutlet weak var fourthCap: UILabel!
+    @IBOutlet weak var fifthCap: UILabel!
+    @IBOutlet weak var sixthCap: UILabel!
     
     @IBOutlet weak var stackView: UIStackView!
     
@@ -41,12 +51,20 @@ class PreviewTableViewCell: UITableViewCell {
         thirdPlayerImage.makeCircular(borderWidth: 0, borderColor: .clear)
         fourthPlayerImage.makeCircular(borderWidth: 0, borderColor: .clear)
         fifthPlayerImage.makeCircular(borderWidth: 0, borderColor: .clear)
+        sixthPlayerImage.makeCircular(borderWidth: 0, borderColor: .clear)
+        
+//        firstCap.makeCircular(borderWidth: 1.0, borderColor: UIColor.clear)
+//        secondCap.makeCircular(borderWidth: 1.0, borderColor: UIColor.clear)
+//        thirdCap.makeCircular(borderWidth: 1.0, borderColor: UIColor.clear)
+//        fourthCap.makeCircular(borderWidth: 1.0, borderColor: UIColor.clear)
+//        fifthCap.makeCircular(borderWidth: 1.0, borderColor: UIColor.clear)
+//        sixthCap.makeCircular(borderWidth: 1.0, borderColor: UIColor.clear)
 
     }
 
 
 
-func setInfo( players:[Player] ,  squad : PlayingTeamsData)  {
+func setInfo( players:[Player])  {
     
     print(players.count)
     //[self.stackView.arrangedSubviews[_expandedViewIndex] setHidden: YES];
@@ -57,6 +75,7 @@ func setInfo( players:[Player] ,  squad : PlayingTeamsData)  {
     thirdPlayer.isHidden = true
     fourthPlayer.isHidden = true
     fifthPlayer.isHidden = true
+    sixthPlayer.isHidden = true
     
     var player: Player!
     
@@ -70,22 +89,214 @@ func setInfo( players:[Player] ,  squad : PlayingTeamsData)  {
         if index == 0
         {
             firstPlayerName.text = player.lastName()
+            if player.playerImage != nil{
+                
+                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
+                firstPlayerImage.kf.setImage(with: url1)
+                
+                if url1 == nil{
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
+                    
+                }
+            }else {
+                
+                if player.teamBelong == 1{
+                    
+                    firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }else{
+                    firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }
+            }
+            
+       
+            
+           
+            
         }
         else if index == 1
         {
-            secondPlayerName.text = player.name
+            secondPlayerName.text = player.lastName()
+            if player.playerImage != nil{
+                
+                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
+                secondPlayerImage.kf.setImage(with: url1)
+                
+                if url1 == nil{
+                    
+                    if player.teamBelong == 1{
+                        
+                        secondPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        
+                        secondPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
+                    
+                }
+
+            }else{
+                if player.teamBelong == 1{
+                    
+                    secondPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }else{
+                    
+                    secondPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }
+            }
+            
+        
         }
         else if index == 2
         {
-            thirdPlayerName.text = player.name
+            thirdPlayerName.text = player.lastName()
+            if player.playerImage != nil{
+                
+                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
+                thirdPlayerImage.kf.setImage(with: url1)
+                
+                if url1 == nil{
+                    
+                    if player.teamBelong == 1{
+                        thirdPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        thirdPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
+                    
+                }
+
+            }else{
+                
+                if player.teamBelong == 1{
+                    thirdPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }else{
+                    thirdPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }
+            }
+
+           
+   
         }
         else if index == 3
         {
-            fourthPlayerName.text = player.name
+            fourthPlayerName.text = player.lastName()
+            if player.playerImage != nil{
+                
+                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
+                fourthPlayerImage.kf.setImage(with: url1)
+                
+                if url1 == nil{
+                    
+                    if player.teamBelong == 1{
+                        fourthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        fourthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
+                    
+                }
+
+            }else{
+                
+                if player.teamBelong == 1{
+                    fourthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }else{
+                    fourthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }
+            }
+
+            if player.isCaptain {
+                
+                fourthCap.isHidden = false
+                fourthCap.text = "C"
+                fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            }else if player.isViceCaptain{
+                fourthCap.isHidden = false
+                fourthCap.text = "VC"
+                fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+            }
         }
         else if index == 4
         {
-            fifthPlayerName.text = player.name
+            fifthPlayerName.text = player.lastName()
+            if player.playerImage != nil{
+                
+                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
+                fifthPlayerImage.kf.setImage(with: url1)
+                
+                if url1 == nil{
+                    
+                    if player.teamBelong == 1{
+                        fifthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        fifthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
+                    
+                }
+
+            }else{
+                
+                if player.teamBelong == 1{
+                    fifthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }else{
+                    fifthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }
+            }
+    
+            if player.isCaptain {
+                
+                fifthCap.isHidden = false
+                fifthCap.text = "C"
+                fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            }else if player.isViceCaptain{
+                fifthCap.isHidden = false
+                fifthCap.text = "VC"
+                fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+            }
+          
+        }
+        else if index == 5
+        {
+            sixthPlayerName.text = player.lastName()
+            if player.playerImage != nil{
+                
+                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
+                sixthPlayerImage.kf.setImage(with: url1)
+                
+                if url1 == nil{
+                    
+                    if player.teamBelong == 1{
+                        sixthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        sixthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
+                    
+                }
+
+            }else{
+                
+                if player.teamBelong == 1{
+                    sixthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }else{
+                    sixthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }
+            }
+            
+  
+            if player.isCaptain {
+                
+                sixthCap.isHidden = false
+                sixthCap.text = "C"
+                sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            }else if player.isViceCaptain{
+                sixthCap.isHidden = false
+                sixthCap.text = "VC"
+                sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+            }
+            
         }
         
     }

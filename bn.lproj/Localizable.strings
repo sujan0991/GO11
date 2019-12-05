@@ -1,0 +1,302 @@
+/* 
+  Localizable.strings
+  GameOf11
+
+  Created by Md.Ballal Hossen on 30/8/19.
+  Copyright © 2019 Tanvir Palash. All rights reserved.
+*/
+
+"1" = "১";
+"2" = "২";
+"3" = "৩";
+"4" = "৪";
+"5" = "৫";
+"6" = "৬";
+"7" = "৭";
+"8" = "৮";
+"9" = "৯";
+"0" = "০";
+
+"Home" = "হোম";
+"My Contest" = "মাই কন্টেস্ট";
+"Profile" = "প্রোফাইল";
+"More" = "অন্যান্য";
+
+
+
+"Login" = "লগইন";
+"LOGIN" = "লগইন";
+"Logout" = "লগ আউট";
+"Sign Up" = "সাইন আপ";
+"SIGN UP" = "সাইন আপ";
+"Name" = "আপনার নাম";
+"Email Address" = "ইমেইল";
+"Password" = "পাসওয়ার্ড";
+"Confirm Password" = "কনফার্ম পাসওয়ার্ড";
+"Referral Code (Optional)" = "রেফারেল কোড (ঐচ্ছিক)";
+"Phone Number" = "ফোন নাম্বার";
+"Please fill phone number" = "সঠিক ফোন নাম্বার দিন";
+"Please fill out your name" = "আপনার নাম টাইপ করুন";
+"Please fill password" = "পাসওয়ার্ড টাইপ করুন";
+"Please confirm your password" = "পাসওয়ার্ড কনফার্ম করুন";
+"Confirm password didn\'t match!" = "আপনার কনফার্ম পাসওয়ার্ড মিলছে না!";
+"Password should at least 6 characters" = "পাসওয়ার্ড কমপক্ষে ৬ ক্যারেক্টার এর হতে হবে";
+"Name cannot contain special character/number" = "নামে স্পেশাল ক্যারেক্টার/নাম্বার দেওয়া যাবে না";
+
+"Verify Mobile Number" = "ভেরিফাই মোবাইল নাম্বার";
+"Already have account?" ="অলরেডি আপনার অ্যাকাউন্ট আছে?";
+
+"Phone Number" = "ফোন নাম্বার";
+"Forgot Password?" = "পাসওয়ার্ড ভুলে গেছেন?";
+"Don't have any account?" = "আপনার একাউন্ট রেজিস্টার করা নেই?";
+
+"FORGOT PASSWORD" = "পাসওয়ার্ড ভুলে গেছেন";
+"Please write your GO11 registered email address to get generated password. You will be using it while Logging into GO11." = "আপনি GO11 এ যে ইমেইল দিয়ে রেজিস্ট্রেশন করেছিলেন সেটা লিখুন। আপনার ইমেইলে একটা নতুন পাসওয়ার্ড যাবে। সেই পাসওয়ার্ড ব্যবহার করে আপনি লগইন করতে পারবেন।";
+"Request to reset password" = "পাসওয়ার্ড রিসেট করুন";
+
+
+"You are not logged in. You have to Login or Sign Up to perform your desired action." = "আপনি লগইন করা নেই। আপনি যেটা দেখতে চাচ্ছেন বা করতে চাচ্ছেন সেটার জন্য আপনাকে লগইন বা সাইন আপ করতে হবে।";
+
+
+"SELECT A MATCH" = "ম্যাচ সিলেক্ট করুন";
+
+"Change Language" = "ভাষা পরিবর্তন";
+"%@ Left" = "%@ বাকি";
+
+"CONTESTS" = "সকল কন্টেস্ট";
+"Total Prize" = "সর্বমোট পুরস্কার";
+"Entry %d" = "এন্ট্রি %d";
+"Entry %@" = "এন্ট্রি %@";
+"Entry Free" = "এন্ট্রি ফ্রি";
+"Total %@ Winners" = "সর্বমোট %@ জন বিজয়ী";
+"%@ Team Joined" = "%@ টিম জয়েন করেছে";
+"%@ Spots Left" = "%@ স্পট বাকী আছে";
+"JOIN" ="জয়েন করুন";
+
+"CREATED TEAMS" = "বানানো টিম";
+"JOINED CONTESTS" = "জয়েন করা কন্টেস্ট";
+
+
+"You have to Login or Sign Up to join any contest. Before joining contests you can create your own Fantasy Team. Please Login or Sign Up to prove your skill." = "কন্টেস্টে জয়েন করতে হলে আপনাকে লগইন বা সাইন আপ করতে হবে। আর কন্টেস্টে জয়েন করার আগে আপনাকে আপনার ফ্যান্টাসি টিম বানাতে হবে। লগ ইন বা সাইন আপ করুন আর আপনার স্কিল দেখান সবাইকে।";
+"You have to Login to view your own wallet. Please Login or Sign Up to prove your skill." = "আপনার প্রোফাইলে কত কয়েন বা টাকা জমা আছে সেটা দেখতে লগইন বা সাইন আপ করুন।";
+
+"TOTAL BALANCE" = "টোটাল ব্যালেন্স";
+"Total Coins" = "টোটাল কয়েন";
+"Total Winnings" = "টোটাল জিতেছেন";
+"ADD MORE COINS" = "কয়েন কিনুন";
+
+"CREATE YOUR TEAM" = "আপনার টিম বানান";
+
+"We provide upcoming match schedule based on your preferences. No upcoming match of that priority is available now." = "সকল ইউজার দের পছন্দ অনুযায়ী এখানে ম্যাচ পাবলিশ করা হয় এবং সেই ম্যাচ গুলোর কন্টেস্ট দেয়া হয়। এই মূহুর্তে সেই টাইপের ম্যাচ নেই তাই এখান আপকামিং ম্যাচ লিস্টে পাবলিশ হয়নি";
+
+"You haven't join any upcoming contests. Join the upcoming match contests and prove your skills." = "আপনি এই ম্যাচের কোন কোন কন্টেস্টে জয়েন করেন নাই। আপকামিং ম্যাচ লিস্ট থেকে ম্যাচ সিলেক্ট করে কন্টেস্ট জয়েন করুন আর আপনার স্কিল দেখান";
+"You haven't join any live contests. Join the upcoming match contests and prove your skills." = "আপনি এই ম্যাচের কোন কোন কন্টেস্টে জয়েন করেন নাই। আপকামিং ম্যাচ লিস্ট থেকে ম্যাচ সিলেক্ট করে কন্টেস্ট জয়েন করুন আর আপনার স্কিল দেখান";
+"You haven't joined this contest. You can see details of this Contest and LeaderBoard after joining this Contest before Match begins." = "আপনি এই কন্টেস্টে জয়েন করেন নাই। কন্টেস্ট এর লিডারবোর্ড দেখতে হলে আপনাকে এই কন্টেস্টে জয়েন করতে হবে";
+
+"Max 7 Players From a Team" = "সর্বোচ্চ ৭ জন প্লেয়ার একটা দল থেকে";
+"Players" = "প্লেয়ারস";
+"PLAYERS" = "প্লেয়ারস";
+"CREDITS" = "ক্রেডিট";
+"Credits Left" = "বাকি ক্রেডিট";
+"Pick 1-4 Wicket-Keepers" = "১-৪ জন উইকেট-কিপার নিন";
+"Pick 3-6 Batsmen" = "৩-৬ জন ব্যাটসম্যান নিন";
+"Pick 1-4 All-Rounders" = "১-৪ জন অল-রাউন্ডার নিন";
+"Pick 3-6 Bowlers" = "৩-৬  জন বোলার নিন";
+"(%d)" = "(%d)";
+
+"Your squad can not cross 11 players" = "আপনি ১১ জনের বেশি প্লেয়ার নিতে পারবেন না";
+"Total credit value can not be greater than 100" = "টোটাল ১০০ ক্রেডিট এর মধ্যেই ১১ জন প্লেয়ার নিতে হবে";
+"Not more than 6 Batsmen" = "৬ জন ব্যাটসম্যান এর বেশি না";
+"Not more than 4 All Rounders" = "৪ জন অল রাউন্ডারের বেশি না";
+"Not more than 6 Bowlers" = "৬ জন বোলারের বেশি না";
+"Not more than 4 Wicket Keeper" = "৪ জন উইকেট কিপার এর বেশি না";
+"Not more than 7 players from any team" = "যেকোন এক টিম থেকে ৭ জন প্লেয়ারের বেশি না";
+
+"Minimum 1 All Rounder" = "সর্বনিম্ন ১ জন অল রাউন্ডার";
+"Minimum 3 Bowlers" = "সর্বনিম্ন ৩ জন বোলার";
+"Minimum 3 Batsmen" = "সর্বনিম্ন ৩ জন ব্যাটসম্যান";
+"Minimum 1 Wicket Keeper" = "সর্বনিম্ন ১ জন উইকেট কিপার";
+
+"Preview Team" = "প্রিভিউ টিম";
+"Continue" = "Continue";
+
+"CHOOSE CAPTAIN (C) & VICE CAPTAIN (VC)" = "ক্যাপ্টেন (C) এবং ভাইস-ক্যাপ্টেন (VC) সিলেকশন";
+"Your Captain gets 2x points & Vice Captain gets 1.5x points" = "আপনার ক্যাপ্টেন দ্বিগুণ এবং ভাইস-ক্যাপ্টেন দেড়গুণ পয়েন্ট পাবে";
+"You Must Select a Captain" = "আপনাকে একজন ক্যাপ্টেন সিলেক্ট করতে হবে";
+"You Must Select a Vice Captain" = "আপনাকে একজন ভাইস-ক্যাপ্টেন সিলেক্ট করতে হবে";
+"Please provide a name for your team" = "আপনার দলের নাম দিতে হবে";
+"Your Team Name" = "আপনার দলের নাম";
+
+"CONFIRMATION" = "কনফার্মেশন";
+"Your total coins = %@" = "আপনার টোটাল কয়েন = %@";
+
+"To Pay" = "পে করবেন";
+"Entry" = "এন্ট্রি";
+"Apply Free Contest" = "অ্যাপ্লাই ফ্রি কন্টেস্ট";
+"JOIN CONTEST" ="কন্টেস্টে জয়েন করুন";
+"You don't have enough coins" = "আপনার পর্যাপ্ত পরিমাণ কয়েন নেই";
+"BUY COINS" = "কয়েন কিনুন";
+"1 BDT" = "১ টাকা";
+"= 50" = "= ৫০";
+"SELECT YOUR TEAM" = "আপনার টিম সিলেক্ট করুন";
+"CAPTAIN" = "ক্যাপ্টেন";
+"VICE-CAPTAIN" = "ভাইস-ক্যাপ্টেন";
+"CHOOSE TEAM" = "টিম সিলেক্ট করুন";
+"Available free contests = %@" = "আপনার অব্যবহৃত ফ্রি কন্টেস্ট = %@";
+
+"Total Joined Contest" = "টোটাল জয়েন করা কন্টেস্ট";
+"COMPLETED" = "কমপ্লিটেড";
+"IN PROGRESS" = "চলমান";
+"MY CONTESTS" = "মাই কন্টেস্ট";
+"SELECT A MATCH" = "ম্যাচ সিলেক্ট করুন";
+
+"MY TEAMS" = "আমার সব টিম";
+"Create Another Team" = "আরেকটি টিম বানান";
+"TEAM PREVIEW" = "টিম প্রিভিউ";
+"Batsman" = "ব্যাটসম্যান";
+"All rounders" = "অল রাউন্ডার";
+"Bowlers" = "বোলার";
+"Wicket Keeper" = "উইকেট কিপার";
+
+"Maximum 24 Character" = "সর্বোচ্চ ২৪ ক্যারেক্টার";
+"Save Your Team" = "টিম সেভ করুন";
+
+
+"Your available  free contests = %@" = "আপনার অব্যবহৃত ফ্রি কন্টেস্ট = %@ টি";
+"Account Info" = "একাউন্ট তথ্য";
+"Deposited Coins" = "টোটাল জমাকৃত কয়েন";
+"Winning Amount" = "টোটাল জিতেছেন";
+"Pending Withdraw" = "পেন্ডিং প্রাইজ";
+
+"ADD COINS" = "কয়েন কিনুন";
+"WITHDRAW PRIZE" = "প্রাইজ তুলুন";
+"REDEEM COINS" = "কয়েন রিডিম";
+"REFER TO A FRIEND" = "আপনার বন্ধুকে রেফার করুন";
+
+"Playing History" = "আপনার খেলার হিস্টোরি";
+"Contests" = "কন্টেস্ট";
+"Top Rank" = "সর্বোচ্চ র‍্যাংক";
+"Matches" = "সকল ম্যাচ";
+
+"Personal Details" = "ব্যাক্তিগত তথ্য";
+"Full Profile" = "এডিট প্রোফাইল";
+"Verify Your Profile!" = "প্রোফাইল ভেরিফাই করুন";
+"Verified Profile" = "আপনার প্রোফাইল ভেরিফায়েড";
+"Profile Verification Pending!" = "প্রোফাইল ভেরিফিকেশন পেন্ডিং!";
+
+"Logout" = "লগ আউট";
+
+"Share your referral code with your friends and get your offer" = "আপনার রেফারেল কোড বন্ধুদের সাথে শেয়ার করে আপনি ও আপনার বন্ধু উপভোগ করুন বোনাস অফার";
+"Share Your Code" = "কোড শেয়ার করুন";
+"How it Works?" = "রেফারেল কিভাবে কাজ করে?";
+"STEP 01" = "স্টেপ ১";
+"Share your referral code with your friends. Encourage to use your code when signing up in GO11." = "আপনার রেফারেল কোড বন্ধুদের সাথে শেয়ার করুন। তাদের উৎসাহ দিন আর আপনার রেফারেল কোড দিয়ে GO11 এ সাইন আপ করে কন্টেস্টে জয়েন করতে বলুন।";
+"STEP 02" = "স্টেপ ২";
+"MY REFERRALS" = "আমার রেফারেল";
+
+"VERIFY YOUR PROFILE" = "প্রোফাইল ভেরিফাই করুন";
+"To verify your profile, you need to provide any one of these mentioned Govt. issued ID i.e. NID, Driving License, Passport, Birth Certificate.You need to upload the photo of both the front and back side of the ID. For Passport you can upload the main page and address page in a single image." = "আপনার প্রোফাইল ভেরিফাই করতে আপনার ভোটার আইডি কার্ড অথবা পাসপোর্ট অথবা জন্ম নিবন্ধন অথবা ড্রাইভিং লাইসেন্স এগুলোর যেকোন একটির সামনের ও পিছনের ছবি আপলোড করুন। তবে পাসপোর্ট বা জন্ম নিবন্ধনের ক্ষেত্রে দুই সাইডের ছবি লাগবে না শুধু মূল পাতার ছবি দিলেই হবে";
+"SELECT IMAGE" = "সিলেক্ট ইমেজ";
+"Front Side Image" = "সামনের সাইডের ছবি";
+"Back Side Image" = "পিছনের সাইডের ছবি";
+"Please upload one image at least!" = "প্লিজ অন্তত একটি ছবি আপলোড করুন!";
+"1 BDT = 50 Coins" = "১ টাকা = ৫০ কয়েন";
+"You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT." = "আপনি এই স্ক্রিন থেকে আপনার প্রোফাইলে কয়েন কিনে যোগ করতে পারবেন। উপরে হাইলাইট করে দেয়া লেখা অনুযায়ী ১ টাকা = ৫০ কয়েন, যার মানে হচ্ছে আপনি যদি আপনার প্রোফাইলে ১০০০ কয়েন যোগ করতে চান তাহলে নিচের ইনপুট বক্সে ২০ লিখবেন। এরপর কয়েন কিনুন বাটনে ক্লিক করে পেমেন্ট মেথড সিলেক্ট করুন। এরপর অ্যাপ এর পেমেন্ট গেটওয়ের মাধ্যমে আপনার বাছাই করা পেমেন্ট মেথড থেকে ২০ টাকা কেটে নেয়া হবে  সবগুলো পেমেন্ট মেথড পরীক্ষিত এবং সম্পূর্ন নিরাপদ। সফল ভাবে পেমেন্ট হয়ে গেলে আপনার প্রোফাইল সেই টাকার সমপরিমাণ কয়েন যোগ হয়ে যাবে। আপনি সর্বনিম্ন ১০ টাকার কয়েন কিনতে পারবেন।";
+"Write amount in BDT to buy Coins" = "যত টাকার কয়েন কিনতে চান সেটা লিখুন";
+"Available Coin Packs" = "সকল Available কয়েন প্যাকেজ";
+"Payment Methods" = "পেমেন্ট মেথড";
+"bKash Digital Payment" = "bKash ডিজিটাল পেমেন্ট";
+"Credit/Debit Cards/Mobile\nBanking/Online Banking" = "ক্রেডিট/ডেবিট কার্ড/মোবাইল\nব্যাংকিং/অনলাইন ব্যাংকিং";
+"PAY NOW" = "পে করুন";
+
+"PERSONAL DETAILS" = "ব্যাক্তিগত তথ্য";
+"Name" = "আপনার নাম";
+"Email Address" = "ইমেইল";
+"Phone Number" = "ফোন নাম্বার";
+"Password" = "পাসওয়ার্ড";
+"Old Password" = "পুরনো পাসওয়ার্ড দিন";
+"New Password" = "নতুন পাসওয়ার্ড দিন";
+"Cancel" = "বাতিল";
+"Change" = "পরিবর্তন";
+"Change Password" = "পাসওয়ার্ড পরিবর্তন";
+"Date of Birth" = "জন্মতারিখ(dd.mm.yy)";
+"Male" = "পুরুষ";
+"Female" = "মহিলা";
+"Mailing Address" = "চিঠি পাঠানোর ঠিকানা";
+"City" = "জেলা শহর";
+"Zipcode" = "পোষ্টকোড";
+"UPDATE PROFILE" = "আপডেট প্রোফাইল";
+
+"REDEEM COIN" = "কয়েন রিডিম";
+"Amount in BDT" = "টাকার পরিমাণ";
+"Redeem Coins" = "কয়েন রিডিম";
+"Use cash to redeem coins instantly!" = "আপনার প্রোফাইলে থাকা টাকাকে কয়েনে কনভার্ট করুন সহজেই!";
+"The amount in BDT you would mention here will add the equivalent amount of coins in your profile." = "আপনি এখানে যত টাকা এর পরিমাণ লিখবেন সেই টাকার সমপরিমাণ কয়েন আপনার প্রোফাইলে জমা হয়ে যাবে";
+
+"WITHDRAW REQUEST" = "প্রাইজ তুলুন";
+"Personal bKash phone number" = "বিকাশ পার্সোনাল ফোন নাম্বার";
+"Send Withdraw Request" = "প্রাইজ তোলার রিকুয়েস্ট করুন";
+"Cash-Withdrawl!" = "প্রাইজ তুলুন!";
+"The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT." = "সর্বনিম্ন ২৫০ টাকা প্রাইজ হিসেবে তুলতে পারবেন এবং সর্বোচ্চ ৪৯৯৯ টাকা প্রাইজ হিসেবে তুলতে পারবেন।";
+"Personal Bkash number is needed while withdrawing the money." = "যেই পার্সোনাল বিকাশ নাম্বারে প্রাইজ এর টাকা পেতে চাচ্ছেন সেটা দিন।";
+
+"COIN PURCHASE" = "কয়েন ক্রয়";
+"Payment successfull" = "আপনার পেমেন্ট সফল হয়েছে!";
+
+"SELECT YOUR AVATAR" = "আপনার এভাটার বেছে নিন";
+"UPDATE AVATAR" = "আপডেট এভাটার";
+
+"YOUR FEEDBACK" = "আপনার মতামত";
+"Write your feedback message" = "আপনার মতামত লিখুন";
+"Send Your Feedback" = "আপনার মতামত পাঠান";
+
+"MORE" = "অন্যান্য";
+"How to Play" = "কিভাবে খেলব";
+"FAQs" = "বহুল জিজ্ঞাসিত প্রশ্নগুলো";
+"Team Select & Scoring" = "টিম বানানো এবং প্লেয়ারদের পয়েন্টস";
+"Terms & Conditions" = "GO11 এর সকল শর্তাবলী";
+"Privacy Policy" = "প্রাইভেসি পলিসি";
+"About Us" = "আমাদের সম্পর্কে";
+"Watch How To Play" = "ভিডিও টিউটোরিয়াল দেখুন";
+"Write Your Feedback" = "আপনার মতামত পাঠান";
+"Change Language" = "ভাষা পরিবর্তন";
+
+"TEAM SELECT & SCORING" = "টিম বানানো এবং প্লেয়ারদের পয়েন্টস";
+
+"CONTEST LEADERBOARD" = "কন্টেস্ট লিডারবোর্ড";
+"The result will be published when the match ends!" = "ম্যাচ শেষ হলে ফলাফল প্রকাশ করা হবে";
+"RANK" = "র‍্যাংক";
+"POINTS" = "পয়েন্টস";
+"ALL PLAYERS RANK & POINTS" = "সব প্লেয়ারের র‍্যাংক এবং পয়েন্টস";
+
+
+"POINTS BREAKDOWN" = "পয়েন্টস ব্রেকডাউন";
+"PLAYER INFO" = "প্লেয়ারের তথ্য";
+
+"Total Points" = "টোটাল পয়েন্টস";
+"     Events" = "     ইভেন্টস";
+"  Earned Points" = "  পয়েন্টস";
+" Points" = " পয়েন্টস";
+"Some criteria of player points breakdown is not listed here to avoid calculation complexity. You can check the full scoring point system by clicking top right 'Question Mark' icon." = "প্লেয়ার পয়েন্ট পাবে এমন কিছু ইভেন্ট এখানে সরাসরি দেয়া নাই ক্যাককুলেশন জনিত জটিলতা এড়ানোর জন্য, যেমন কোন প্লেয়ার ৫০ রান করলে এক্সট্রা বোনাস পয়েন্ট পাবে। আপনি সম্পূর্ন পয়েন্ট স্কোরিং সিস্টেম জানতে এই স্ক্রিনের উপরে ডানের কোশ্চেন মার্ক আইকন এ ক্লিক করুন।";
+
+"Your Profile Is Blocked!" = "আপনার প্রোফাইল ব্লকড!";
+"Your profile has been blocked! To know about reason of blocking or to resolve the matter please message to our facebook page https://www.facebook.com/gameof11/ . GO11 support team will guide you for further procedure." = "আপনার প্রোফাইল ব্লক করা হয়েছে! প্লিজ আমাদের ফেসবুক পেইজে https://www.facebook.com/gameof11/ মেসেজ করুন বিস্তারিত জানতে। GO11 টিম আপনাকে অবশ্যই পরবর্তী হেল্প করবে যদি আপনার সমস্যা সমাধান করবার মত হয়।";
+
+"Something went wrong! Please try again" = "হয়ত কোথাও সমস্যা হচ্ছে! প্লিজ, আবার চেষ্টা করুন।";
+
+"Your payment to buy Coins was Successful. Now please choose from your created Teams and join contest" = "কয়েন কেনার জন্য আপনার পেমেন্ট টি সফল হয়েছে।এখন আপনি আপনার বানানো ফ্যান্টাসি দল থেকে সিলেক্ট করে কন্টেস্ট এ জয়েন করুন।";
+"Your payment to buy Coins was Successful." = "কয়েন কেনার জন্য আপনার পেমেন্ট টি সফল হয়েছে।";
+
+"Please verify your profile first to withdraw your winnings" = "আপনার প্রাইজ তোলার রিকুয়েস্ট করার আগে প্লিজ আপনার প্রোফাইল ভেরিফাই করুন";
+"Contest joining time not ended yet. After ending contest joining time you will be able to see other participant's player info with total points earned" = "এই ম্যাচের কন্টেস্ট জয়েনের সময় এখনো শেষ হয়নি। কন্টেস্ট জয়েনের সময় শেষ হবার পর আপনি অন্য ইউজারদের ফ্যান্টাসি টিম, তারা কোন কোন প্লেয়ারদের নিয়েছে এবং সেইসব প্লেয়ারদের পয়েন্টস দেখতে পারবেন।";
+
+"Each player's detailed points breakdown will be available when the match is completed and the completion of reviewing and updating individual players point calculation via our web server" = "প্রতিটা প্লেয়ার পাওয়া পয়েন্টেসের বিস্তারিত ব্রেকডাউন ম্যাচ শেষ হবার পর আমাদের সার্ভারে ঠিকমত রিভিউ এবং আপডেটে হয়ে গেলেই দেখতে পারবেন।";
+
+"Do you really want to exit? Your fantasy team changes will be discarded." = "এই স্ক্রিন থেকে বের হতে চাচ্ছেন? আপনার এই স্ক্রিনের ফ্যান্টাসি টিম রিলেটেড সব সিলেকশন বা পরিবর্তন মুছে যাবে।";
+
+"You do not have enough money to redeem" = "কয়েন এ কনভার্ট করতে আপনার পর্যাপ্ত টাকা নেই!";
+"You do not have enough money to withdraw." = "আপনার প্রাইজ তোলার মত পর্যাপ্ত টাকা নেই!";
+
+"New update is available." = "নতুন আপডেট ব্যবহারযোগ্য।";
+"SKIP" = "স্কিপ";
+"UPDATE" = "আপডেট";

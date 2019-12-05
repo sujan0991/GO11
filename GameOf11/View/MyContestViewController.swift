@@ -16,13 +16,27 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
+       print("viewDidLoad in my contest")
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       
+    print("AppSessionManager.shared.authToken",AppSessionManager.shared.authToken)
+        
+        self.tabBarController?.tabBar.isHidden = false
         
         if AppSessionManager.shared.authToken == nil{
-            self.performSegue(withIdentifier: "openSignUpFromContest", sender: self)
+            
+            let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UnSignedProfileViewController") as? UnSignedProfileViewController
+            
+            self.navigationController?.pushViewController(popupVC ?? self, animated: true)
+
         }
         else
         {
-            placeNavBar(withTitle: "My Contest", isBackBtnVisible: false)
+            placeNavBar(withTitle: "MY CONTESTS".localized, isBackBtnVisible: false,isLanguageBtnVisible: false)
             
             // Do any additional setup after loading the view.
             
@@ -59,6 +73,7 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
         }
     }
     
+  
 
     func customizeSegment(pagerController: DTPagerController)
     {
@@ -73,6 +88,20 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
         pagerController.scrollIndicator.layer.cornerRadius = pagerController.scrollIndicator.frame.height/2
         pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "TabOrangeColor")
         pagerController.pageSegmentedControl.backgroundColor = UIColor.init(named: "GreenHighlight")
+        
+        if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "upcoming"{
+            
+              pagerController.selectedPageIndex = 0
+            
+        }else if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "live"{
+            
+              pagerController.selectedPageIndex = 1
+            
+        }else if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "completed"{
+            
+              pagerController.selectedPageIndex = 2
+        }
+      
         
     }
     func setImage(_ image: UIImage?, forSegmentAt segment: Int) {
@@ -89,17 +118,23 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
     }
     
     func pagerController(_ pagerController: DTPagerController, didChangeSelectedPageIndex index: Int) {
-        print(index)
+        
+        print("didChangeSelectedPageIndex",index)
+        
+        if index == 0{
+            
+            UserDefaults.standard.set("upcoming", forKey: "selectedMyContest")
+            
+        }else if index == 1{
+            
+            UserDefaults.standard.set("live", forKey: "selectedMyContest")
+            
+        }else if index == 2{
+            
+            UserDefaults.standard.set("completed", forKey: "selectedMyContest")
+            
+        }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

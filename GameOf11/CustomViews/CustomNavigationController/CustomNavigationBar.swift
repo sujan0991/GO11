@@ -11,6 +11,7 @@ import Bond
 
 protocol NavigationBarDelegate: class {
     func backButtonAction()
+    func languageButtonAction()
 }
 
 class CustomNavigationBar: UIView {
@@ -25,7 +26,9 @@ class CustomNavigationBar: UIView {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var logoImageView: UIImageView!
     
- //   let viewModel = CustomNavigationBarViewModel.init()
+    @IBOutlet weak var languageButton: UIButton!
+    
+    //   let viewModel = CustomNavigationBarViewModel.init()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,6 +53,7 @@ class CustomNavigationBar: UIView {
     // public methods
     public func activateBtn(navBarTitle: String,
                             isBackBtnVisible visible: Bool,
+                            isLanguageBtnVisible lnVisible: Bool,
                             onBtnPressed callback: @escaping(UIButton) -> Void) {
         headerLabel.text = navBarTitle
         
@@ -70,7 +74,22 @@ class CustomNavigationBar: UIView {
             backBtn.isHidden = true
             
         }
+        
+        if lnVisible {
+            
+            languageButton.isHidden = false
+            
+        } else {
+            languageButton.isHidden = true
+            
+        }
     }
+    
+    @IBAction func languageButtonAction(_ sender: Any) {
+        
+        delegate?.languageButtonAction()
+    }
+    
     
     @IBAction func backButtonAction(_ sender: Any) {
        

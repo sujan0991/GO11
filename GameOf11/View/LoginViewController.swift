@@ -8,22 +8,67 @@
 
 import UIKit
 import SVProgressHUD
+import AccountKit
 
-class LoginViewController: BaseViewController {
+class LoginViewController: BaseViewController,AKFViewControllerDelegate {
+
+    var _accountKit: AKFAccountKit!
 
     @IBOutlet weak var signinButton: UIButton!
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    
+    @IBOutlet weak var dontHaveAccountLabel: UILabel!
+    @IBOutlet weak var signUpButton: UIButton!
+    
+    @IBOutlet weak var forgotPassButton: UIButton!
+    
+    @IBOutlet weak var shadoWView: UIView!
+    @IBOutlet weak var languagEView: UIView!
+    
+    @IBOutlet weak var changeLanguageLabel: UILabel!
+    @IBOutlet weak var englishButton: UIButton!
+    @IBOutlet weak var banglaButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-       // phoneField.text = "+8801715257212"
-        phoneField.text = "+8801676330929"
-        passwordField.text = "123456"
+        placeNavBar(withTitle: "LOGIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: true)
+        
+        // initialize Account Kit
+        if _accountKit == nil {
+            _accountKit = AKFAccountKit(responseType: .accessToken)
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.languageChangeAction(_:)), name: NSNotification.Name(rawValue: "languageChange"), object: nil)
+        
+        if Language.language == Language.bangla{
             
+            banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+            banglaButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            
+            englishButton.backgroundColor = UIColor.white
+            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+        }else{
+            banglaButton.backgroundColor = UIColor.white
+            banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+            
+            englishButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+            
+        }
+        
+        englishButton.layer.borderWidth = 0.5
+        englishButton.layer.borderColor = UIColor.lightGray.cgColor
+        banglaButton.layer.borderWidth = 0.5
+        banglaButton.layer.borderColor = UIColor.lightGray.cgColor
+        
+
+//        phoneField.text = "01676330929"
+//        passwordField.text = "123456"
+        
         
         signinButton.makeRound(5, borderWidth: 0, borderColor: .clear)
         
@@ -31,36 +76,178 @@ class LoginViewController: BaseViewController {
             print(currentToken)
         }
         
+        phoneField.placeholder = "Phone Number".localized
+        passwordField.placeholder = "Password".localized
+        
+        signUpButton.setTitle("Sign Up".localized, for: .normal)
+        signinButton.setTitle("Login".localized, for: .normal)
+        forgotPassButton.setTitle("Forgot Password?".localized, for: .normal)
+        dontHaveAccountLabel.text = "Don't have any account?".localized
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        shadoWView.addGestureRecognizer(tap)
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        
+        shadoWView.isHidden = true
+        languagEView.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        languagEView.isHidden = true
+        shadoWView.isHidden = true
+    }
+    @IBAction func signUpButtonAction(_ sender: Any) {
+        
+        
+        let vc = (_accountKit?.viewControllerForPhoneLogin(with: nil, state: nil))!
+        vc.enableSendToFacebook = true
+        self.prepareFBLoginViewController(loginViewController: vc)
+        self.present(vc as UIViewController, animated: true, completion: nil)
+
+
+    }
+    
+    @IBAction func passSeenUnseenButtonAction(_ sender: UIButton) {
+        
+        sender.isSelected = !sender.isSelected
+        
+        if sender.isSelected{
+            
+            passwordField.isSecureTextEntry = false
+        }else{
+            
+             passwordField.isSecureTextEntry = true
+        }
         
     }
     
-    @IBAction func signUpButtonAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+    
+    @IBAction func forgotPassButtonAction(_ sender: Any) {
+        
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController
+        
+        self.navigationController?.pushViewController(popupVC!, animated: false)
+        
     }
+    
     @IBAction func backButtonAction(_ sender: Any) {
+        
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func signinAction(_ sender: Any) {
         
-        APIManager.manager.login(userName: phoneField.text!, password: passwordField.text!) { (status, token, msg) in
+        let phn = String.init(format: "+88%@", phoneField.text!)
+        APIManager.manager.login(userName: phn, password: passwordField.text!) { (status, token, msg) in
            
             if status{
-                self.showStatus(status, msg: msg)
+                self.view.makeToast( msg!)
                 
                 AppSessionManager.shared.authToken = token
                 AppSessionManager.shared.save()
                 
-               self.navigationController?.popToRootViewController(animated: true)
+//                let sb: UIStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+//                let vc = sb.instantiateInitialViewController()
+//
+//                if let window = UIApplication.shared.delegate?.window {
+//                    window?.rootViewController = vc
+//                }
+                
+                self.navigationController?.popToRootViewController(animated: true)
+                
             }
             else{
-                self.showStatus(false, msg: msg)
+                self.view.makeToast(msg!)
             }
             
         }
         
         
     }
-   
-
+    
+    func prepareFBLoginViewController(loginViewController: AKFViewController) {
+        
+        loginViewController.delegate = self
+        
+        loginViewController.whitelistedCountryCodes = ["BD"]
+        
+        // Optionally, you may set up backup verification methods.
+        loginViewController.enableSendToFacebook = true
+        loginViewController.enableGetACall = false
+        
+        //UI Theming - Optional
+        loginViewController.uiManager = AKFSkinManager(skinType: .classic, primaryColor: UIColor.init(named: "GreenHighlight"))
+        
+        
+    }
+    
+    
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+        
+        print("did complete login with access token \(accessToken.tokenString) state \(String(describing: state))")
+        
+        print("Login successful")
+        
+        _accountKit.requestAccount{
+            (account, error) -> Void in
+            if let phoneNumber = account?.phoneNumber{
+                
+                print("phone number..........",phoneNumber.phoneNumber)
+                
+                self.tabBarController?.tabBar.isHidden = true
+                
+                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
+                
+                popupVC?.phoneNo = phoneNumber.phoneNumber
+                self.navigationController?.pushViewController(popupVC!, animated: true)
+                
+            }
+            
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    //handle a failed
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
+        // ... implement appropriate error handling ...
+        print("\(String(describing: viewController)) did fail with error: \(error.localizedDescription)")
+    }
+    
+    //or canceled login
+    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
+        // ... handle user cancellation of the login process ...
+    }
+    
+    
+    @IBAction func englishButtonAction(_ sender: Any) {
+        Language.language = Language.english
+    }
+    
+    @IBAction func banglaButtonAction(_ sender: Any) {
+        Language.language = Language.bangla
+    }
+    
+    @objc func languageChangeAction(_ notification: NSNotification) {
+        
+        phoneField.resignFirstResponder()
+        passwordField.resignFirstResponder()
+        
+        print("baseLanguageButtonAction")
+        if let currentVC = UIApplication.topViewController() as? LoginViewController {
+            
+            shadoWView.isHidden = false
+            languagEView.isHidden = false
+            
+        }
+        
+    }
 }

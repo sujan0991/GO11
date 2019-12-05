@@ -10,8 +10,14 @@ import UIKit
 
 class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITableViewDataSource {
 
-    var squadData : MatchSquadData!
+    var pvSquadData : MatchSquadData!
+    var userTeamId = 0
     
+    var isAlreadyCreatedTeam = false
+    var alreadyCreatedTeam:FantasySquadData!
+    var userTeam : UsersFantasyTeam!
+    
+
     var batsmanList:[Player] = []
     var bowlerList:[Player] = []
     var keeperList:[Player] = []
@@ -26,29 +32,245 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-         placeNavBar(withTitle: "Team Preview", isBackBtnVisible: true)
+         placeNavBar(withTitle: "TEAM PREVIEW".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+        
+//        print("userTeam.batsman.count",userTeam.batsman.count)
+        
+        if isAlreadyCreatedTeam{
+            
+            APIManager.manager.getUsersSquad(teamId: String(describing: userTeamId)) { (status, data, msg) in
+                
+                if status{
+                    
+                    self.alreadyCreatedTeam = data
+                    
+                    self.setSelectedPlayer()
+                    
+                    self.teamTableView.delegate = self
+                    self.teamTableView.dataSource = self
+                    self.teamTableView.removeEmptyCells()
+                    
+                }
+            }
+
+        }else{
+
+        print("pvSquadData.playersList.count.......",pvSquadData.playersList.count,userTeam.batsman.count)
+            
+            if pvSquadData != nil
+            {
+                for player in pvSquadData.playersList
+                {
+ 
+                    switch (player.role) {
+                        
+                    case "batsman":
+                        for userPlayer in userTeam.batsman{
+                            
+                            print("pvSquadData.batsman id.....",player.isCaptain)
+                            print("userTeam.batsman id.......",userPlayer.isCaptain)
+                            
+                           
+                            if player.playerId == userPlayer.id{
+                                
+                                print("userTeam.batsman id",userPlayer.id!)
+                                
+                                player.playerSelected = true
+                                
+                                
+                                
+                                if userPlayer.isCaptain == 1{
+                                    
+                                    player.isCaptain = true
+                                }
+                                if userPlayer.isViceCaptain == 1{
+                                    
+                                    player.isViceCaptain = true
+                                    
+                                }
+                                
+                                self.batsmanList.append(player)
+                            }
+                            
+                        }
+                        break;
+                    case "bowler":
+                        for userPlayer in userTeam.bowler{
+                            
+                            if player.playerId == userPlayer.id{
+                                
+                                player.playerSelected = true
+                                
+                                if userPlayer.isCaptain == 1{
+                                    player.isCaptain = true
+                                }
+                                if userPlayer.isViceCaptain == 1{
+                                    player.isViceCaptain = true
+                                }
+                                
+                                self.bowlerList.append(player)
+                            }
+                            
+                        }
+
+                        break;
+                    case "keeper":
+                        for userPlayer in userTeam.keeper{
+                            
+                            print("pvSquadData.batsman id.....??",player.isCaptain)
+                            print("userTeam.batsman id.......??",userPlayer.isCaptain)
+                            
+                            if player.playerId == userPlayer.id{
+                                
+                                player.playerSelected = true
+                                
+                                if userPlayer.isCaptain == 1{
+                                    
+                                    player.isCaptain = true
+                                }
+                                if userPlayer.isViceCaptain == 1{
+                                    
+                                    player.isViceCaptain = true
+                                }
+                                
+                                self.keeperList.append(player)
+                            }
+                            
+                            
+                        }
+
+                        break;
+                    case "allrounder":
+                        for userPlayer in userTeam.allrounder{
+                            
+                            if player.playerId == userPlayer.id{
+                                
+                                player.playerSelected = true
+                                
+                                if userPlayer.isCaptain == 1{
+                                    player.isCaptain = true
+                                }
+                                if userPlayer.isViceCaptain == 1{
+                                    player.isViceCaptain = true
+                                }
+                                self.allRounderList.append(player)
+                            }
+                        }
+
+                        break;
+                        
+                    default:
+                        break;
+                    }
+                    
+                }
+            
+                teamTableView.delegate = self
+                teamTableView.dataSource = self
+                teamTableView.removeEmptyCells()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
       
-        squadData.playersList = squadData.playersList.filter{($0 as Player).playerSelected == true }
+
+        print("isAlreadyCreatedTeam......",isAlreadyCreatedTeam)
         
-        if squadData != nil
+        
+    }
+    
+    func setSelectedPlayer(){
+        
+        print("alreadyCreatedTeam......",alreadyCreatedTeam.keeper.count,alreadyCreatedTeam.batsman.count,alreadyCreatedTeam.allrounder.count,alreadyCreatedTeam.bowler.count)
+        
+        if self.pvSquadData != nil
         {
-            for player in squadData.playersList
+            
+            for player in self.pvSquadData.playersList
             {
+                
+                
                 switch (player.role) {
                 case "batsman":
-                    batsmanList.append(player)
+                    
+                    for userPlayer in alreadyCreatedTeam.batsman{
+                        
+                        if player.playerId == userPlayer.playerId{
+                            
+                            player.playerSelected = true
+                            
+                            if userPlayer.isCaptain == 1{
+                                player.isCaptain = true
+                            }
+                            if userPlayer.isViceCaptain == 1{
+                                player.isViceCaptain = true
+                            }
+                            
+                            self.batsmanList.append(player)
+                        }
+                        
+                    }
+                    
                     break;
                 case "bowler":
-                    bowlerList.append(player)
+                    for userPlayer in alreadyCreatedTeam.bowler{
+                        
+                        if player.playerId == userPlayer.playerId{
+                            
+                            player.playerSelected = true
+                            
+                            if userPlayer.isCaptain == 1{
+                                player.isCaptain = true
+                            }
+                            if userPlayer.isViceCaptain == 1{
+                                player.isViceCaptain = true
+                            }
+                            
+                            self.bowlerList.append(player)
+                        }
+                        
+                    }
+                    
                     break;
                 case "keeper":
-                    keeperList.append(player)
+                    for userPlayer in alreadyCreatedTeam.keeper{
+                        
+                        if player.playerId == userPlayer.playerId{
+                            
+                            player.playerSelected = true
+                            
+                            if userPlayer.isCaptain == 1{
+                                player.isCaptain = true
+                            }
+                            if userPlayer.isViceCaptain == 1{
+                                player.isViceCaptain = true
+                            }
+                            
+                            self.keeperList.append(player)
+                        }
+                        
+                        
+                    }
+                    
                     break;
                 case "allrounder":
-                    allRounderList.append(player)
+                    for userPlayer in alreadyCreatedTeam.allrounder{
+                        
+                        if player.playerId == userPlayer.playerId{
+                            
+                            player.playerSelected = true
+                            
+                            if userPlayer.isCaptain == 1{
+                                player.isCaptain = true
+                            }
+                            if userPlayer.isViceCaptain == 1{
+                                player.isViceCaptain = true
+                            }
+                         self.allRounderList.append(player)
+                        }
+                    }
+                    
                     break;
                     
                 default:
@@ -56,12 +278,11 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                 }
                 
             }
-            
-            teamTableView.delegate = self
-            teamTableView.dataSource = self
-            teamTableView.removeEmptyCells()
         }
+        
+        
     }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -79,22 +300,358 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
         
         if indexPath.section == 0
         {
-            cell.setInfo(players: keeperList,squad: squadData.teams!)
+            cell.setInfo(players: keeperList)
         }
         else if indexPath.section == 1
         {
-            cell.setInfo(players: batsmanList,squad: squadData.teams!)
+            print("batsmanList.count........",batsmanList.count)
+            cell.setInfo(players: batsmanList)
         }
         else if indexPath.section == 2
         {
-            cell.setInfo(players: allRounderList,squad: squadData.teams!)
+            cell.setInfo(players: allRounderList)
         }
         else
         {
-            cell.setInfo(players: bowlerList,squad: squadData.teams!)
+            cell.setInfo(players: bowlerList)
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        
+        if let cell = cell as? PreviewTableViewCell{
+            
+            var player: Player!
+            
+            if indexPath.section == 0
+            {
+               
+                for index in 0..<keeperList.count
+                {
+                    let firstView = cell.stackView.arrangedSubviews[index]
+                    firstView.isHidden = false
+                    
+                    player = keeperList.item(at: index)
+                    
+                if index == 0{
+                    
+                    if player.isCaptain {
+                        
+                        cell.firstCap.isHidden = false
+                        cell.firstCap.text = "C"
+                      //  cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.firstCap.isHidden = false
+                        cell.firstCap.text = "VC"
+                       // cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 1{
+                    if player.isCaptain {
+                        
+                        cell.secondCap.isHidden = false
+                        cell.secondCap.text = "C"
+                     //   cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.secondCap.isHidden = false
+                        cell.secondCap.text = "VC"
+                      //  cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                    
+                   
+                }else if index == 2{
+                    if player.isCaptain {
+                        
+                        cell.thirdCap.isHidden = false
+                        cell.thirdCap.text = "C"
+                     //   cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.thirdCap.isHidden = false
+                        cell.thirdCap.text = "VC"
+                     //   cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 3{
+                    if player.isCaptain {
+                        
+                        cell.fourthCap.isHidden = false
+                        cell.fourthCap.text = "C"
+                      //  cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.fourthCap.isHidden = false
+                        cell.fourthCap.text = "VC"
+                      //  cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 4{
+                    if player.isCaptain {
+                        
+                        cell.fifthCap.isHidden = false
+                        cell.fifthCap.text = "C"
+                      //  cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.fifthCap.isHidden = false
+                        cell.fifthCap.text = "VC"
+                     //   cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 5{
+                    if player.isCaptain {
+                        
+                        cell.sixthCap.isHidden = false
+                        cell.sixthCap.text = "C"
+                     //   cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.sixthCap.isHidden = false
+                        cell.sixthCap.text = "VC"
+                    //    cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                  }
+                }
+            }
+            else if indexPath.section == 1
+            {
+                for index in 0..<batsmanList.count
+                {
+                    let firstView = cell.stackView.arrangedSubviews[index]
+                    firstView.isHidden = false
+                    
+                    player = batsmanList.item(at: index)
+
+                if index == 0{
+                    
+                    if player.isCaptain {
+                        
+                        cell.firstCap.isHidden = false
+                        cell.firstCap.text = "C"
+                     //   cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.firstCap.isHidden = false
+                        cell.firstCap.text = "VC"
+                      //  cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 1{
+                    if player.isCaptain {
+                        
+                        cell.secondCap.isHidden = false
+                        cell.secondCap.text = "C"
+                    //    cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.secondCap.isHidden = false
+                        cell.secondCap.text = "VC"
+                     //   cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 2{
+                    if player.isCaptain {
+                        
+                        cell.thirdCap.isHidden = false
+                        cell.thirdCap.text = "C"
+                   //     cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.thirdCap.isHidden = false
+                        cell.thirdCap.text = "VC"
+                     //   cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 3{
+                    if player.isCaptain {
+                        
+                        cell.fourthCap.isHidden = false
+                        cell.fourthCap.text = "C"
+                    //    cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.fourthCap.isHidden = false
+                        cell.fourthCap.text = "VC"
+                    //    cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 4{
+                    if player.isCaptain {
+                        
+                        cell.fifthCap.isHidden = false
+                        cell.fifthCap.text = "C"
+                   //     cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.fifthCap.isHidden = false
+                        cell.fifthCap.text = "VC"
+                     //   cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 5{
+                    if player.isCaptain {
+                        
+                        cell.sixthCap.isHidden = false
+                        cell.sixthCap.text = "C"
+                   //     cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.sixthCap.isHidden = false
+                        cell.sixthCap.text = "VC"
+                    //    cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                 }
+              }
+            }
+            else if indexPath.section == 2
+            {
+                for index in 0..<allRounderList.count
+                {
+                    let firstView = cell.stackView.arrangedSubviews[index]
+                    firstView.isHidden = false
+                    
+                    player = allRounderList.item(at: index)
+                    
+
+                
+                if index == 0{
+                    
+                    if player.isCaptain {
+                        
+                        cell.firstCap.isHidden = false
+                        cell.firstCap.text = "C"
+                 //       cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.firstCap.isHidden = false
+                        cell.firstCap.text = "VC"
+                   //     cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 1{
+                    if player.isCaptain {
+                        
+                        cell.secondCap.isHidden = false
+                        cell.secondCap.text = "C"
+                    //    cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.secondCap.isHidden = false
+                        cell.secondCap.text = "VC"
+                    //    cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 2{
+                    if player.isCaptain {
+                        
+                        cell.thirdCap.isHidden = false
+                        cell.thirdCap.text = "C"
+                   //     cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.thirdCap.isHidden = false
+                        cell.thirdCap.text = "VC"
+                   //     cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 3{
+                    if player.isCaptain {
+                        
+                        cell.fourthCap.isHidden = false
+                        cell.fourthCap.text = "C"
+                    //    cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.fourthCap.isHidden = false
+                        cell.fourthCap.text = "VC"
+                    //    cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 4{
+                    if player.isCaptain {
+                        
+                        cell.fifthCap.isHidden = false
+                        cell.fifthCap.text = "C"
+                   //     cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.fifthCap.isHidden = false
+                        cell.fifthCap.text = "VC"
+                  //      cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 5{
+                    if player.isCaptain {
+                        
+                        cell.sixthCap.isHidden = false
+                        cell.sixthCap.text = "C"
+                  //      cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.sixthCap.isHidden = false
+                        cell.sixthCap.text = "VC"
+                  //      cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                  }
+                }
+            }
+            else
+            {
+                for index in 0..<bowlerList.count
+                {
+                    let firstView = cell.stackView.arrangedSubviews[index]
+                    firstView.isHidden = false
+                    
+                    player = bowlerList.item(at: index)
+                    
+                if index == 0{
+                    
+                    if player.isCaptain {
+                        
+                        cell.firstCap.isHidden = false
+                        cell.firstCap.text = "C"
+                  //      cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.firstCap.isHidden = false
+                        cell.firstCap.text = "VC"
+                   //     cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 1{
+                    if player.isCaptain {
+                        
+                        cell.secondCap.isHidden = false
+                        cell.secondCap.text = "C"
+                  //      cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.secondCap.isHidden = false
+                        cell.secondCap.text = "VC"
+                 //       cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 2{
+                    if player.isCaptain {
+                        
+                        cell.thirdCap.isHidden = false
+                        cell.thirdCap.text = "C"
+                 //       cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.thirdCap.isHidden = false
+                        cell.thirdCap.text = "VC"
+                //        cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 3{
+                    if player.isCaptain {
+                        
+                        cell.fourthCap.isHidden = false
+                        cell.fourthCap.text = "C"
+                 //       cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.fourthCap.isHidden = false
+                        cell.fourthCap.text = "VC"
+                 //       cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 4{
+                    if player.isCaptain {
+                        
+                        cell.fifthCap.isHidden = false
+                        cell.fifthCap.text = "C"
+                 //       cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.fifthCap.isHidden = false
+                        cell.fifthCap.text = "VC"
+                 //       cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }else if index == 5{
+                    if player.isCaptain {
+                        
+                        cell.sixthCap.isHidden = false
+                        cell.sixthCap.text = "C"
+                 //       cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    }else if player.isViceCaptain{
+                        cell.sixthCap.isHidden = false
+                        cell.sixthCap.text = "VC"
+                 //       cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }
+                }
+              }
+            }
+
+      }
+
+        
+        
     }
    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -107,25 +664,25 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
         
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        label.textColor = UIColor.init(named: "BackgroundColor") // my custom colour
+        label.textColor = UIColor.init(named: "Bg") // my custom colour
         label.textAlignment = .center
         headerView.addSubview(label)
         
         if section == 1
         {
-            label.text = "Batsman"
+            label.text = "Batsman".localized.uppercased()
         }
         else if section == 2
         {
-            label.text = "All rounders"
+            label.text = "All rounders".localized.uppercased()
         }
         else if section == 3
         {
-            label.text = "Bowlers"
+            label.text = "Bowlers".localized.uppercased()
         }
         else
         {
-            label.text = "Wicket Keeper"
+            label.text = "Wicket Keeper".localized.uppercased()
         }
         
         return headerView

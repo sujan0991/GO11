@@ -18,6 +18,7 @@ public enum MatchType:Int {
     case completedContest = 5
 }
 
+
 class BaseViewController: UIViewController,NavigationBarDelegate {
    
 
@@ -30,6 +31,11 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,17 +103,22 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
     }
 
     // public methods
-    open func placeNavBar(withTitle title: String, isBackBtnVisible visible: Bool) {
-        navBar = CustomNavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 60.0 + extraTop()))
+    open func placeNavBar(withTitle title: String, isBackBtnVisible visible: Bool,isLanguageBtnVisible lnVisible: Bool) {
+        
+        print("extraTop..........",extraTop())
+        navBar = CustomNavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64.0 + extraTop()))
+        
         navBar.delegate = self
         
         navBar.activateBtn(navBarTitle: title,
-                           isBackBtnVisible: visible) { btn in
-            if visible {
-                self.onSlideMenuButtonPressed(btn)
-            } else {
-                _ = self.navigationController?.popViewController(animated: true)
-            }
+                           isBackBtnVisible: visible, isLanguageBtnVisible: lnVisible) { btn in
+                            
+                            
+//            if visible {
+//                self.onSlideMenuButtonPressed(btn)
+//            } else {
+//                _ = self.navigationController?.popViewController(animated: true)
+//            }
         }
         self.view.addSubview(navBar)
     }
@@ -137,6 +148,18 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
         default:
             print("default\n", terminator: "")
         }
+    }
+    
+    func languageButtonAction(){
+        
+       
+        
+        print("languageButtonAction in base")
+        
+        // Post a notification
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "languageChange"), object: nil, userInfo: nil)
+
+        
     }
     
     func backButtonAction() {
