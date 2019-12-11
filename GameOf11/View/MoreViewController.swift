@@ -35,7 +35,7 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
         moretableView.delegate = self
         moretableView.dataSource = self
         
-        placeNavBar(withTitle: "MORE".localized, isBackBtnVisible: false,isLanguageBtnVisible: false)
+        placeNavBar(withTitle: "MORE".localized, isBackBtnVisible: false,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         
         changeLanguageLabel.text = "Change Language".localized
         

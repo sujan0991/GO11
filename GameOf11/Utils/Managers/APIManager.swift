@@ -32,8 +32,8 @@ struct API_K {
     static let DEVICE_TYPE = "ios"
     
   //  static let API_KEY = "base64:8WGdd0uX3GtRtTxeOyuHd3864Mqfc6C/cbhzpEZUdxA="
-     static let BaseUrlStr:String =  "https://www.gameof11.com/" //live
- //   static let BaseUrlStr:String =  "http://18.224.1.221/" //"dev
+ //    static let BaseUrlStr:String =  "https://www.gameof11.com/" //live
+    static let BaseUrlStr:String =  "http://18.224.1.221/" //"dev
     //http://159.65.128.173/
     //http://18.224.1.221/
 
@@ -65,25 +65,51 @@ struct API_K {
 
 
     static let GET_NEXT_MATCH_LIST = "upcoming-matches"//
+    static let GET_NEXT_FOOTBALL_MATCH_LIST = "football/upcoming-matches"//
+    
     static let GET_LIVE_MATCH_LIST = "live-matches"//
     
     static let GET_ACTIVE_CONTEST_LIST = "active-contests"//
+    static let GET_ACTIVE_FOOTBALL_CONTEST_LIST = "football/active-contests"//
+    
     static let GET_MATCH_SQUAD = "get-team-players"//
+    static let GET_FOOTBALL_MATCH_SQUAD = "football/get-team-players"//
+    
     static let GET_USERS_TEAM_FOR_MATCH = "get-user-teams"//
+    static let GET_USERS_TEAM_FOR_FOOTBALL_MATCH = "football/get-user-teams"//
+    
     static let GET_USERS_TEAM_PLAYERS = "get-user-team-players"
+    static let GET_USERS_TEAM_PLAYERS_FOOTBALL = "football/get-user-team-players"
     
     static let POST_TEAM = "user-team/create"
+    static let POST_FOOTBALL_TEAM = "football/user-team/create"
+    
     static let JOIN_CONTEST = "user-contest/join"
+    static let JOIN_CONTEST_FOOTBALL = "football/user-contest/join"
+    
     static let POST_EDITED_TEAM = "user-team/edit"
+    static let POST_EDITED_FOOTBALL_TEAM = "football/user-team/edit"
     
     static let GET_UPCOMING_CONTEST_MATCH_LIST = "user/upcoming-match-contests"//
+    static let GET_UPCOMING_FOOTBALL_CONTEST_MATCH_LIST = "football/user/upcoming-match-contests"//
+    
     static let GET_LIVE_CONTEST_MATCH_LIST = "user/live-match-contests"//
+    static let GET_LIVE_FOOTBALL_CONTEST_MATCH_LIST = "foorball/user/live-match-contests"//
+    
     static let GET_COMPLETED_CONTEST_MATCH_LIST = "user/completed-match-contests"//
+    static let GET_COMPLETED_FOOTBALL_CONTEST_MATCH_LIST = "football/user/completed-match-contests"//
+    
     static let GET_USER_JOINRD_CONTEST_LIST = "user/match/contests"//
+    static let GET_USER_JOINRD_FOOTBALL_CONTEST_LIST = "football/user/match/contests"//
     
     static let GET_LEADERBOARD_CONTEST = "contest/leaderboard"//
+    static let GET_LEADERBOARD_CONTEST_FOOTBALL = "football/contest/leaderboard"//
+    
     static let GET_LEADERBOARD_BREAKDOWN = "contest/leaderboard/point-breakdown"//
+    static let GET_FOOTBALL_LEADERBOARD_BREAKDOWN = "football/contest/leaderboard/point-breakdown"//
+    
     static let GET_MATCH_SCORE = "live-match-score"//
+    static let GET_FOOTBALL_MATCH_SCORE = "football/live-match-score"//
     
     static let CREATE_OTP = "createOtp"
     static let GET_PASSWORD = "retrievePassword"
@@ -937,6 +963,44 @@ class APIManager: NSObject {
             }
         })
     }
+    func getUpcomingFootBallMatchList(completion:(( _ matches: [FootBallMatchList])->Void)?) {
+        
+    //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+    
+    Request(.get, API_K.GET_NEXT_FOOTBALL_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+    switch responseData.result {
+    case .success(let value):
+    print(value)
+    SVProgressHUD.dismiss()
+    let json = JSON(value)
+    if let jsonDic = json.dictionaryObject {
+    let isSuccess:Bool = jsonDic["status"] as! Bool
+    
+    if !isSuccess{
+    completion?([])
+    }
+    else{
+    if let matchArray = json["data"].arrayObject as? [Gloss.JSON] {
+    
+    if let matches = [FootBallMatchList].from(jsonArray: matchArray) {
+    completion?(matches)
+    } else {
+    completion?([])
+    }
+    }
+    }
+    }
+    else {
+    completion?([])
+    }
+    case .failure( _):
+    SVProgressHUD.dismiss()
+    completion?([])
+    }
+    })
+    }
+    
+    
     func getLiveMatchList(completion:(( _ matches: [MatchList])->Void)?) {
         
       //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
@@ -1013,6 +1077,44 @@ class APIManager: NSObject {
             }
         })
     }
+    
+    func getUserJoinedUpcomingFootballMatchList(completion:(( _ matches: [FootBallMatchList])->Void)?) {
+        
+        //   SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        Request(.get, API_K.GET_UPCOMING_FOOTBALL_CONTEST_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    if !isSuccess{
+                        completion?([])
+                    }
+                    else{
+                        if let matchArray = json["data"].arrayObject as? [Gloss.JSON] {
+                            
+                            if let matches = [FootBallMatchList].from(jsonArray: matchArray) {
+                                completion?(matches)
+                            } else {
+                                completion?([])
+                            }
+                        }
+                    }
+                }
+                else {
+                    completion?([])
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?([])
+            }
+        })
+    }
+    
     func getUserJoinedLiveMatchList(completion:(( _ matches: [MatchList])->Void)?) {
         
     //    SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
@@ -1049,6 +1151,46 @@ class APIManager: NSObject {
             }
         })
     }
+    
+    func getUserJoinedLiveFootballMatchList(completion:(( _ matches: [FootBallMatchList])->Void)?) {
+        
+        //    SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        Request(.get, API_K.GET_LIVE_FOOTBALL_CONTEST_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    if !isSuccess{
+                        completion?([])
+                    }
+                    else{
+                        if let matchArray = json["data"].arrayObject as? [Gloss.JSON] {
+                            
+                            if let matches = [FootBallMatchList].from(jsonArray: matchArray) {
+                                completion?(matches)
+                            } else {
+                                completion?([])
+                            }
+                        }
+                    }
+                }
+                else {
+                    completion?([])
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?([])
+            }
+        })
+    }
+
+    
+    
     func getUserJoinedCompletedMatchList(completion:(( _ matches: [MatchList])->Void)?) {
         
    //     SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
@@ -1090,6 +1232,49 @@ class APIManager: NSObject {
             }
         })
     }
+    func getUserJoinedCompletedFootballMatchList(completion:(( _ matches: [FootBallMatchList])->Void)?) {
+        
+        //     SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        Request(.get, API_K.GET_COMPLETED_FOOTBALL_CONTEST_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            print(responseData)
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    if !isSuccess{
+                        completion?([])
+                    }
+                    else{
+                        if let matchArray = json["data"].arrayObject as? [Gloss.JSON] {
+                            
+                            if let matches = [FootBallMatchList].from(jsonArray: matchArray) {
+                                
+                                completion?(matches)
+                                
+                            } else {
+                                
+                                completion?([])
+                            }
+                        }
+                    }
+                }
+                else {
+                    completion?([])
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?([])
+            }
+        })
+    }
+    
+    
     func getTeamForMatch(matchId:String,completion:(( _ status: Bool,_ user:CreatedTeamList?, _ message: String?)->Void)?) {
         
         let params:[String:String] = ["match_id":matchId]
@@ -1114,11 +1299,61 @@ class APIManager: NSObject {
         }
     }
     
+    func getTeamForFootballMatch(matchId:String,completion:(( _ status: Bool,_ user:CreatedTeamListFootball?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["match_id":matchId]
+        getResponseDataModel(params, method: API_K.GET_USERS_TEAM_FOR_FOOTBALL_MATCH) { (sts, dataModel,msg) in
+            
+            if sts{
+                if let jsA = dataModel{
+                    if let histories = CreatedTeamListFootball.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+
+    
     
     func getActiveContestList(matchId:String,completion:(( _ status: Bool,_ user:ContestList?, _ message: String?)->Void)?) {
       
         let params:[String:String] = ["match_id":matchId]
         getDataModel(params, method: API_K.GET_ACTIVE_CONTEST_LIST) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    if let histories = ContestList.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+    
+    func getActiveFootBallContestList(matchId:String,completion:(( _ status: Bool,_ user:ContestList?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["match_id":matchId]
+        getDataModel(params, method: API_K.GET_ACTIVE_FOOTBALL_CONTEST_LIST) { (sts, dataModel,msg) in
             
             if sts{
                 
@@ -1176,11 +1411,82 @@ class APIManager: NSObject {
         })
     }
     
+    func postFootballTeam(params: UsersFantasyTeamFootball, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
+        RequestForJson(.post, API_K.POST_FOOTBALL_TEAM, parameters: params.toJSON())?.responseJSON(completionHandler: { (responseData) in
+            
+            print("Created Team data", responseData)
+            
+            switch responseData.result {
+                
+            case .success(let value):
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,error.localizedDescription)
+            }
+        })
+    }
+    
     func postEditedTeam(team: UsersFantasyTeam,teamId: String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
         let urlString = API_K.POST_EDITED_TEAM + "?user_team_id=\(teamId)"
+        
+        RequestForJson(.post, urlString, parameters: team.toJSON())?.responseJSON(completionHandler: { (responseData) in
+            
+            print("Created Team data", responseData)
+            
+            switch responseData.result {
+                
+            case .success(let value):
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,error.localizedDescription)
+            }
+        })
+    }
+    
+    func postEditedFootballTeam(team: UsersFantasyTeamFootball,teamId: String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let urlString = API_K.POST_EDITED_FOOTBALL_TEAM + "?user_team_id=\(teamId)"
         
         RequestForJson(.post, urlString, parameters: team.toJSON())?.responseJSON(completionHandler: { (responseData) in
             
@@ -1252,6 +1558,46 @@ class APIManager: NSObject {
         })
     }
     
+    func joinInFootballContestWith(contestId:String, teamId:String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["contest_id":contestId,
+                                      "user_team_id":teamId,
+        ]
+        
+        Request(.post, API_K.JOIN_CONTEST_FOOTBALL, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    var isSuccess:Bool?
+                    
+                    isSuccess = jsonDic["status"] as? Bool ?? true
+                    
+                    if !isSuccess!{
+                        let msg:String? = json["message"].stringValue
+                        
+                        completion?(false,msg)
+                    }
+                    else{
+                        
+                        completion?(true,"Success")
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,error.localizedDescription)
+            }
+        })
+    }
+    
     func getJoinedActiveContestList(matchId:String,completion:(( _ status: Bool,_ user:ContestList?, _ message: String?)->Void)?) {
         
         let params:[String:String] = ["match_id":matchId]
@@ -1276,6 +1622,32 @@ class APIManager: NSObject {
             }
         }
     }
+    
+    func getJoinedActiveFootballContestList(matchId:String,completion:(( _ status: Bool,_ user:ContestList?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["match_id":matchId]
+        getDataModel(params, method: API_K.GET_USER_JOINRD_FOOTBALL_CONTEST_LIST) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    if let histories = ContestList.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+
     
     func getLeaderBoardOfCntest(contestId:String,pageNo:String,completion:(( _ status: Bool,_ data:LeaderBoardData?, _ message: String?)->Void)?) {
 
@@ -1302,6 +1674,32 @@ class APIManager: NSObject {
             }
         }
     }
+    func getLeaderBoardOfCntestFootball(contestId:String,pageNo:String,completion:(( _ status: Bool,_ data:LeaderBoardData?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["contest_id":contestId,"page_number":pageNo]
+        
+        getDataModel(params, method: API_K.GET_LEADERBOARD_CONTEST_FOOTBALL) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    if let histories = LeaderBoardData.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+
     
     func getMatchScore(matchId:String,completion:(( _ status: Bool,_ data:MatchScoreData?, _ message: String?)->Void)?) {
         
@@ -1329,6 +1727,33 @@ class APIManager: NSObject {
         }
     }
     
+    func getFootballMatchScore(matchId:String,completion:(( _ status: Bool,_ data:MatchScoreData?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["match_id":matchId]
+        
+        getDataModel(params, method: API_K.GET_FOOTBALL_MATCH_SCORE) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    if let histories = MatchScoreData.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+
+    
     func getBreakDownOfCntest(match_id:String,user_team_id:String,completion:(( _ status: Bool,_ data:BreakDownData?, _ message: String?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
@@ -1337,6 +1762,37 @@ class APIManager: NSObject {
         let params:[String:String] = ["match_id":match_id,"user_team_id":user_team_id]
         
         getDataModel(params, method: API_K.GET_LEADERBOARD_BREAKDOWN) { (sts, dataModel,msg) in
+            
+            SVProgressHUD.dismiss()
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    if let histories = BreakDownData.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+    
+    func getBreakDownOfFootballCntest(match_id:String,user_team_id:String,completion:(( _ status: Bool,_ data:BreakDownData?, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
+        let params:[String:String] = ["match_id":match_id,"user_team_id":user_team_id]
+        
+        getDataModel(params, method: API_K.GET_FOOTBALL_LEADERBOARD_BREAKDOWN) { (sts, dataModel,msg) in
             
             SVProgressHUD.dismiss()
             
@@ -1391,6 +1847,37 @@ class APIManager: NSObject {
         }
     }
     
+    
+    func getFootballMatchSquad(matchId:String,completion:(( _ status: Bool,_ user:MatchSquadData?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["match_id":matchId]
+        getDataModel(params, method: API_K.GET_FOOTBALL_MATCH_SQUAD) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    
+                    //  print("getMatchSquad      json ",jsA)
+                    
+                    
+                    if let histories = MatchSquadData.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+
+    
     func getUsersSquad(teamId:String,completion:(( _ status: Bool,_ user:FantasySquadData?, _ message: String?)->Void)?) {
         
         let params:[String:String] = ["user_team_id":teamId]
@@ -1418,6 +1905,35 @@ class APIManager: NSObject {
             }
         }
     }
+    
+    func getUsersSquadFootball(teamId:String,completion:(( _ status: Bool,_ user:FantasySquadDataFootball?, _ message: String?)->Void)?) {
+        
+        let params:[String:String] = ["user_team_id":teamId]
+        getDataModel(params, method: API_K.GET_USERS_TEAM_PLAYERS_FOOTBALL) { (sts, dataModel,msg) in
+            
+            if sts{
+                
+                if let jsA = dataModel{
+                    
+                    print("FantasySquadData      json ",jsA)
+                    
+                    if let histories = FantasySquadDataFootball.init(json: jsA) {
+                        completion?(true,histories,msg)
+                        
+                    } else {
+                        completion?(false,nil,msg)
+                    }
+                }
+                else{
+                    completion?(false,nil,msg)
+                }
+            }
+            else{
+                completion?(false,nil,msg)
+            }
+        }
+    }
+
     
     
     func getInvoice(amount:Float?,type:String?, withCompletionHandler completion:(( _ status: Bool,_ invoiceId:String?,_ invoiceUrl:String?, _ message: String?)->Void)?){

@@ -98,7 +98,8 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     @objc func tapOnImageView(_ sender: UITapGestureRecognizer? = nil) {
         
         print("tap on image view")
-        
+      if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakDownViewController") as? PointBreakDownViewController
       
         vc?.matchId = match_id ?? 0
@@ -111,11 +112,28 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
             
             print("open PointBreakDownViewController")
         }
-
+      }else{
+        
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakdownFootballViewController") as? PointBreakdownFootballViewController
+        
+        vc?.matchId = match_id ?? 0
+        vc?.teamId = leaderBoardData?.user_team_id ?? 0
+        vc?.username = leaderBoardData?.username ?? ""
+        vc?.teamName = leaderBoardData?.user_team_name ?? ""
+      //  vc?.matchType = matchData?.match_format
+        vc?.match_status_id = matchData?.match_status_id ?? 0
+        self.present(vc!, animated: true) {
+            
+            print("open PointBreakDownViewController")
+        }
+        
+        }
     }
     
     func getData(){
-        
+      
+     if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
         APIManager.manager.getMatchScore(matchId: "\(match_id ?? 0)") { (Bool, data, msg) in
             
             print("getMatchScore",data!)
@@ -127,6 +145,21 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
             }
             
         }
+     }else{
+        
+        APIManager.manager.getFootballMatchScore(matchId: "\(match_id ?? 0)") { (Bool, data, msg) in
+            
+            print("getMatchScore",data!)
+            
+            if data != nil{
+                
+                self.matchData = data
+                self.populateTeamView()
+            }
+            
+        }
+        
+        }
         
         getLeaderBoard(contestId: contest_id ?? 0, pageNo: page_no)
         
@@ -136,7 +169,9 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
         
         var c_id:String = String(describing: contestId)
         var p_no:String = String(describing: pageNo)
-        
+       
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
         APIManager.manager.getLeaderBoardOfCntest(contestId: c_id as String, pageNo: p_no) { (Bool, data, msg) in
             
             print("getLeaderBoardOfCntest",data!)
@@ -172,6 +207,45 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
             self.leaderBoardTabelView.reloadData()
             self.leaderBoardTabelView.isHidden = false
             
+        }
+        }else{
+            
+            APIManager.manager.getLeaderBoardOfCntestFootball(contestId: c_id as String, pageNo: p_no) { (Bool, data, msg) in
+                
+                print("getLeaderBoardOfCntest",data!)
+                
+                
+                if self.page_no == 1{
+                    
+                    self.total_page_no = data?.total_page_number
+                    
+                    self.leaderBoardData = data
+                    
+                }else{
+                    
+                    self.leaderBoardData?.leaderboard.append(contentsOf: data?.leaderboard ?? [])
+                }
+                
+                self.sortedleaderBoard = self.leaderBoardData?.leaderboard.sorted(by: {
+                    (player1: LeaderBoardUserListData, player2: LeaderBoardUserListData) -> Bool in
+                    
+                    if let rank1 = player1.rank,
+                        let rank2 = player2.rank{
+                        
+                        return rank1 < rank2
+                    }
+                    
+                    
+                    return true
+                }) ?? []
+                
+                
+                self.populateUserView()
+                
+                self.leaderBoardTabelView.reloadData()
+                self.leaderBoardTabelView.isHidden = false
+                
+            }
         }
     }
     
@@ -462,7 +536,9 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if matchData!.match_status_id == 2 || matchData!.match_status_id == 3{
-            
+          
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                
             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakDownViewController") as? PointBreakDownViewController
             
             let singleUser = leaderBoardData?.leaderboard[indexPath.row]
@@ -478,6 +554,22 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
             self.present(vc!, animated: true) {
                 
                 print("open PointBreakDownViewController")
+            }
+            }else{
+                
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakdownFootballViewController") as? PointBreakdownFootballViewController
+                
+                vc?.matchId = match_id ?? 0
+                vc?.teamId = leaderBoardData?.user_team_id ?? 0
+                vc?.username = leaderBoardData?.username ?? ""
+                vc?.teamName = leaderBoardData?.user_team_name ?? ""
+                //  vc?.matchType = matchData?.match_format
+                vc?.match_status_id = matchData?.match_status_id ?? 0
+                self.present(vc!, animated: true) {
+                    
+                    print("open PointBreakDownViewController")
+                }
+
             }
         }else{
             

@@ -76,15 +76,24 @@ class TeamPlayerTableViewCell: UITableViewCell {
         
         if player.teamBelong == 1
         {
-            
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             teamNamelabel.text = squad.firstTeam?.teamKey?.uppercased() ?? ""
+        }else{
+            
+            teamNamelabel.text = squad.firstTeam?.code?.uppercased() ?? ""
+            }
             
             playerDetails.text = " | \(player.role?.uppercased() ?? "") | \(player.creditPoints ?? 0)"
             
         }
         else
         {
-            teamNamelabel.text = squad.secondTeam?.teamKey?.uppercased() ?? ""
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                teamNamelabel.text = squad.secondTeam?.teamKey?.uppercased() ?? ""
+                
+            }else{
+                teamNamelabel.text = squad.secondTeam?.code?.uppercased() ?? ""                
+            }
             
             playerDetails.text = " | \(player.role?.uppercased() ?? "") | \(player.creditPoints ?? 0)"
         }

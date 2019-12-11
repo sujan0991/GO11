@@ -20,6 +20,7 @@
             <connections>
                 <outlet property="backBtn" destination="9C2-bB-sZA" id="sZI-vY-04a"/>
                 <outlet property="containerView" destination="iN0-l3-epB" id="sFE-7H-FZa"/>
+                <outlet property="gameSelectButton" destination="QHo-0a-jIx" id="i0E-Ut-egl"/>
                 <outlet property="headerLabel" destination="Ybl-zi-0Th" id="biu-GL-XUI"/>
                 <outlet property="languageButton" destination="SMY-9U-Srn" id="rBC-ws-Lr0"/>
                 <outlet property="logoImageView" destination="xhE-fA-g2B" id="OhP-9G-fKd"/>
@@ -71,16 +72,32 @@
                                 <action selector="languageButtonAction:" destination="-1" eventType="touchUpInside" id="KM4-9d-lOb"/>
                             </connections>
                         </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHo-0a-jIx">
+                            <rect key="frame" x="350" y="7" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="bRX-vM-yA4"/>
+                                <constraint firstAttribute="height" constant="30" id="eDo-ht-wpJ"/>
+                            </constraints>
+                            <state key="normal" image="match_icon"/>
+                            <state key="selected" image="football-icon"/>
+                            <connections>
+                                <action selector="gameSelectButtonAction:" destination="-1" eventType="touchUpInside" id="Ued-8l-gvj"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" name="GreenHighlight"/>
                     <constraints>
+                        <constraint firstItem="QHo-0a-jIx" firstAttribute="trailing" secondItem="SMY-9U-Srn" secondAttribute="trailing" id="2xF-p9-l2d"/>
+                        <constraint firstItem="QHo-0a-jIx" firstAttribute="top" secondItem="SMY-9U-Srn" secondAttribute="top" id="AGt-CS-a1S"/>
                         <constraint firstItem="Ybl-zi-0Th" firstAttribute="centerY" secondItem="9C2-bB-sZA" secondAttribute="centerY" id="CZ5-zL-BP8"/>
                         <constraint firstAttribute="trailing" secondItem="SMY-9U-Srn" secondAttribute="trailing" constant="15" id="Gof-q6-bok"/>
                         <constraint firstItem="Ybl-zi-0Th" firstAttribute="centerX" secondItem="8gh-m2-lId" secondAttribute="centerX" id="Ifp-Q9-p1U"/>
                         <constraint firstItem="Ybl-zi-0Th" firstAttribute="centerX" secondItem="8gh-m2-lId" secondAttribute="centerX" id="NxU-hT-pQG"/>
                         <constraint firstItem="9C2-bB-sZA" firstAttribute="leading" secondItem="8gh-m2-lId" secondAttribute="leading" id="PYG-xt-RZk"/>
+                        <constraint firstItem="QHo-0a-jIx" firstAttribute="bottom" secondItem="SMY-9U-Srn" secondAttribute="bottom" id="QwT-YB-84u"/>
                         <constraint firstItem="SMY-9U-Srn" firstAttribute="centerY" secondItem="Ybl-zi-0Th" secondAttribute="centerY" id="X8c-cq-XGM"/>
                         <constraint firstItem="Ybl-zi-0Th" firstAttribute="centerY" secondItem="8gh-m2-lId" secondAttribute="centerY" id="cAu-ZT-HIm"/>
+                        <constraint firstItem="QHo-0a-jIx" firstAttribute="leading" secondItem="SMY-9U-Srn" secondAttribute="leading" id="u38-NG-wc1"/>
                         <constraint firstAttribute="height" constant="44" id="x78-tZ-bq3"/>
                     </constraints>
                 </view>
@@ -102,8 +119,10 @@
     </objects>
     <resources>
         <image name="backArrow" width="22.5" height="22.5"/>
+        <image name="football-icon" width="32" height="32"/>
         <image name="language_change_icon" width="256" height="256"/>
         <image name="logoWhiteText" width="180" height="46"/>
+        <image name="match_icon" width="256" height="256"/>
         <namedColor name="GreenHighlight">
             <color red="0.18823529411764706" green="0.72156862745098038" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

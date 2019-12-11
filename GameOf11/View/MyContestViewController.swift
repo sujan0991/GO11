@@ -36,7 +36,7 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
         }
         else
         {
-            placeNavBar(withTitle: "MY CONTESTS".localized, isBackBtnVisible: false,isLanguageBtnVisible: false)
+            placeNavBar(withTitle: "MY CONTESTS".localized, isBackBtnVisible: false,isLanguageBtnVisible: false, isGameSelectBtnVisible: true)
             
             // Do any additional setup after loading the view.
             

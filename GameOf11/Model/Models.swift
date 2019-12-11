@@ -66,6 +66,60 @@ class MatchList: Glossy {
     }
 }
 
+class FootBallMatchList: Glossy {
+    
+    var matchId: Int?
+    var matchKey: String?
+    var tournamentName: String?
+    var matchName: String?
+    var matchTime: String?
+   
+    var join_ends_before: Int?
+    
+    var totalJoinedContests: Int?
+    var teams: [FootBallMatchTeams] = []
+    
+    var joiningLastTime: String? {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateFromString :Date = dateFormatter.date(from: matchTime!)!
+        
+        let date = dateFromString.addingTimeInterval(TimeInterval(-(join_ends_before! * 60)))
+        
+        let sttringFDate = date.toDateString(format: "yyyy-MM-dd HH:mm:ss")
+        
+        return sttringFDate.serverTimetoDateString()
+    }
+    
+    required init?(json: Gloss.JSON) {
+        matchId = "match_id" <~~ json
+        matchKey = "match_key" <~~ json
+        tournamentName = "tournament_name" <~~ json
+        matchName = "match_name" <~~ json
+        matchTime = "match_time" <~~ json
+       
+        join_ends_before = "join_ends_before" <~~ json
+        totalJoinedContests = "total_joined_contests" <~~ json
+        teams = ("teams" <~~ json) ?? []
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "match_id" ~~> matchId,
+            "match_key" ~~> matchKey,
+            "tournament_name" ~~> tournamentName,
+            "match_time" ~~> matchName,
+            
+            "join_ends_before" ~~> join_ends_before,
+            "total_joined_contests" ~~> totalJoinedContests,
+            "teams" ~~> teams,
+            "joiningLastTime" ~~> joiningLastTime
+            ])
+    }
+}
+
+
 class MatchTeams: Glossy {
     
     var teamId: Int?
@@ -94,10 +148,42 @@ class MatchTeams: Glossy {
     }
 }
 
+class FootBallMatchTeams: Glossy {
+    
+    var teamId: Int?
+    var name: String?
+    var teamKey: String?
+    var logo: String?
+    var code: String?
+    
+    
+    
+    required init?(json: Gloss.JSON) {
+        teamId = "team_id" <~~ json
+        name = "name" <~~ json
+        teamKey = "team_key" <~~ json
+        logo = "logo" <~~ json
+        code = "code" <~~ json
+        
+        logo = logo?.trimForURL()
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "team_id" ~~> teamId,
+            "name" ~~> name,
+            "team_key" ~~> teamKey,
+            "logo" ~~> logo,
+            "code" ~~> code
+            ])
+    }
+}
+
 class PlayingTeam: Glossy {
     
     var teamId: Int?
     var name: String?
+    var code: String?
     var teamKey: String?
     var logo: String?
     var playersList: [Player] = []
@@ -106,6 +192,7 @@ class PlayingTeam: Glossy {
     required init?(json: Gloss.JSON) {
         teamId = "team_id" <~~ json
         name = "name" <~~ json
+        code = "code" <~~ json
         teamKey = "team_key" <~~ json
         logo = "logo" <~~ json
         logo = logo?.trimForURL()
@@ -117,6 +204,7 @@ class PlayingTeam: Glossy {
         return jsonify([
             "team_id" ~~> teamId,
             "name" ~~> name,
+            "code" ~~> code,
             "team_key" ~~> teamKey,
             "logo" ~~> logo,
             "players" ~~> playersList
@@ -222,6 +310,35 @@ class FantasySquadData: Glossy {
     }
 }
 
+class FantasySquadDataFootball: Glossy {
+    
+    var teamName: String?
+    var striker: [FantasyPlayer] = []
+    var defender: [FantasyPlayer] = []
+    var midfielder: [FantasyPlayer] = []
+    var goalkeeper: [FantasyPlayer] = []
+    
+    required init?(json: Gloss.JSON) {
+        
+        teamName = "team_name" <~~ json
+        striker = ("striker" <~~ json) ?? []
+        defender = ("defender" <~~ json) ?? []
+        midfielder = ("midfielder" <~~ json) ?? []
+        goalkeeper = ("goalkeeper" <~~ json) ?? []
+        
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "team_name" ~~> teamName,
+            "striker" ~~> striker,
+            "defender" ~~> defender,
+            "midfielder" ~~> midfielder,
+            "goalkeeper" ~~> goalkeeper
+            ])
+    }
+}
+
 class CreatedTeamList: Glossy {
     
     var status: Int?
@@ -281,6 +398,71 @@ class CreatedTeam: Glossy {
             "bowler" ~~> bowlerCount,
             "allrounder" ~~> allrounderCount,
             "keeper" ~~> keeperCount,
+            "captain_image" ~~> captain_image,
+            "vice_captain_image" ~~> vice_captain_image
+            
+            
+            ])
+    }
+}
+
+class CreatedTeamListFootball: Glossy {
+    
+    var status: Int?
+    var message: String?
+    var teams: [CreatedTeamFootball] = []
+    
+    required init?(json: Gloss.JSON) {
+        status = "status" <~~ json
+        message = "message" <~~ json
+        teams = "data" <~~ json ?? []
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "status" ~~> status,
+            "message" ~~> message,
+            "data" ~~> teams
+            ])
+    }
+}
+class CreatedTeamFootball: Glossy {
+    
+    var userTeamId: Int?
+    var teamName: String?
+    var captainName: String?
+    var captain_image: String?
+    var viceCaptainName: String?
+    var vice_captain_image: String?
+    var strikerCount: Int?
+    var defenderCount: Int?
+    var midfielderCount : Int?
+    var keeperCount : Int?
+    
+    required init?(json: Gloss.JSON) {
+        userTeamId = "user_team_id" <~~ json
+        teamName = "team_name" <~~ json
+        captainName = "captain_name" <~~ json
+        captain_image = "captain_image" <~~ json
+        vice_captain_image = "vice_captain_image" <~~ json
+        viceCaptainName = "vice_captain_name" <~~ json
+        strikerCount = "striker" <~~ json
+        defenderCount = "defender" <~~ json
+        midfielderCount = "midfielder" <~~ json
+        keeperCount = "goalkeeper" <~~ json
+        
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "user_team_id" ~~> userTeamId,
+            "team_name" ~~> teamName,
+            "captain_name" ~~> captainName,
+            "vice_captain_name" ~~> viceCaptainName,
+            "striker" ~~> strikerCount,
+            "defender" ~~> defenderCount,
+            "midfielder" ~~> midfielderCount,
+            "goalkeeper" ~~> keeperCount,
             "captain_image" ~~> captain_image,
             "vice_captain_image" ~~> vice_captain_image
             
@@ -383,6 +565,46 @@ class UsersFantasyTeam: Glossy {
             "bowler" ~~> bowler.toJSONArray(),
             "allrounder" ~~> allrounder.toJSONArray(),
             "keeper" ~~> keeper.toJSONArray()
+            ])
+    }
+}
+
+class UsersFantasyTeamFootball: Glossy {
+    
+    var matchId: Int?
+    var teamName: String?
+    var captain: Int?
+    var viceCaptain: Int?
+    
+    var striker: [UserFantasyPlayer] = []
+    var defender: [UserFantasyPlayer] = []
+    var midfielder: [UserFantasyPlayer] = []
+    var goalkeeper : [UserFantasyPlayer] = []
+    
+    required init?(json: Gloss.JSON) {
+        
+        matchId = "match_id" <~~ json
+        teamName = "team_name" <~~ json
+        captain = "captain" <~~ json
+        viceCaptain = "vice_captain" <~~ json
+        striker = ("striker" <~~ json) ?? []
+        defender = ("defender" <~~ json) ?? []
+        midfielder = ("midfielder" <~~ json) ?? []
+        goalkeeper = "goalkeeper" <~~ json ?? []
+        
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            
+            "match_id" ~~> matchId,
+            "team_name" ~~> teamName,
+            "captain" ~~> captain,
+            "vice_captain" ~~> viceCaptain,
+            "striker" ~~> striker.toJSONArray(),
+            "defender" ~~> defender.toJSONArray(),
+            "midfielder" ~~> midfielder.toJSONArray(),
+            "goalkeeper" ~~> goalkeeper.toJSONArray()
             ])
     }
 }
@@ -536,7 +758,12 @@ class ProfileMetaData: Glossy {
     var totalContestParticipation: Int?
     var totalMatchParticipation: Int?
     var totalPendingRequest: Int?
+    var totalFootballContestParticipation: Int?
+    var totalFootballMatchParticipation: Int?
+   
+
     var highestRank: Int?
+    var highestFootballRank: Int?
     
     var photoIdFront: String?
     var photoIdBack: String?
@@ -552,6 +779,9 @@ class ProfileMetaData: Glossy {
         totalMatchParticipation = "total_match_participation" <~~ json
         totalPendingRequest = "total_pending_requests" <~~ json
         highestRank = "highest_rank" <~~ json
+        totalFootballContestParticipation = "total_contest_participation_football" <~~ json
+        totalFootballMatchParticipation = "total_football_match_participation" <~~ json
+        highestFootballRank = "football_highest_rank" <~~ json
         photoIdFront = "nid_front" <~~ json
         photoIdBack = "nid_back" <~~ json
         referral_contest_unlocked = "referral_contest_unlocked" <~~ json
@@ -568,6 +798,9 @@ class ProfileMetaData: Glossy {
             "total_match_participation" ~~> totalMatchParticipation,
             "total_pending_requests" ~~> totalPendingRequest,
             "highest_rank" ~~> highestRank,
+            "total_contest_participation_football" ~~> totalFootballContestParticipation,
+            "total_football_match_participation" ~~> totalFootballMatchParticipation,
+            "football_highest_rank" ~~> highestFootballRank,
             "nid_front" ~~> photoIdFront,
             "nid_back" ~~> photoIdBack,
             "referral_contest_unlocked" ~~> referral_contest_unlocked

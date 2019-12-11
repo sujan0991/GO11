@@ -55,7 +55,14 @@ class PlayerTableViewCell: UITableViewCell {
         
         if player.teamBelong == 1
         {
-            teamCode.text = squad.firstTeam?.teamKey?.uppercased()
+             if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                teamCode.text = squad.firstTeam?.teamKey?.uppercased()
+                
+             }else{
+                
+                teamCode.text = squad.firstTeam?.code?.uppercased()
+                
+             }
             
             if player.playerImage == nil{
                 
@@ -67,7 +74,13 @@ class PlayerTableViewCell: UITableViewCell {
         }
         else
         {
-            teamCode.text = squad.secondTeam?.teamKey?.uppercased()
+             if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                teamCode.text = squad.secondTeam?.teamKey?.uppercased()
+                
+             }else{
+                teamCode.text = squad.secondTeam?.code?.uppercased()
+  
+            }
             if player.playerImage == nil{
                 playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
             }else if url1 == nil{

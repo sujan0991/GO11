@@ -26,7 +26,7 @@ class RedeemCoinViewController: BaseViewController {
 
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "REDEEM COIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+        placeNavBar(withTitle: "REDEEM COIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         redeemButton.makeRound(5, borderWidth: 0, borderColor: .clear)
         
         tkToCoinLabel.text = "1 BDT = 50 Coins".localized

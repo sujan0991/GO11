@@ -13,6 +13,7 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     
     var joinedContestList:[ContestData] = []
     var parentMatch: MatchList? = nil
+    var parentMatchFootball: FootBallMatchList? = nil
     
     var prizeFilteredArray: [PrizeRankCal] = []
     
@@ -40,7 +41,7 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        placeNavBar(withTitle: "JOINED CONTESTS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+        placeNavBar(withTitle: "JOINED CONTESTS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         
         vsLabel.makeCircular(borderWidth: 1, borderColor: UIColor.init(named: "HighlightGrey")!)
         
@@ -53,17 +54,29 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         
         prizeRankTableView.delegate = self
         prizeRankTableView.dataSource = self
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            self.firstTeamName.text = self.parentMatch?.teams.item(at: 0).teamKey ?? ""
+            self.secondTeamName.text = self.parentMatch?.teams.item(at: 1).teamKey ?? ""
+            self.statusLabel.text = String.init(format: "%@ Left".localized,self.parentMatch?.joiningLastTime ?? "" )
+            
+            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatch?.teams.item(at: 0).logo ?? "")")
+            let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatch?.teams.item(at: 1).logo ?? "")")
+            self.firstTeamFlag.kf.setImage(with: url1)
+            self.secondTeamFlag.kf.setImage(with: url2)
+
+        }else{
+            self.firstTeamName.text = self.parentMatchFootball?.teams.item(at: 0).code ?? ""
+            self.secondTeamName.text = self.parentMatchFootball?.teams.item(at: 1).code ?? ""
+            self.statusLabel.text = String.init(format: "%@ Left".localized,self.parentMatchFootball?.joiningLastTime ?? "" )
+            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatchFootball?.teams.item(at: 0).logo ?? "")")
+            let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatchFootball?.teams.item(at: 1).logo ?? "")")
+            self.firstTeamFlag.kf.setImage(with: url1)
+            self.secondTeamFlag.kf.setImage(with: url2)
+
+        }
         
-        self.firstTeamName.text = self.parentMatch?.teams.item(at: 0).teamKey ?? ""
-        self.secondTeamName.text = self.parentMatch?.teams.item(at: 1).teamKey ?? ""
-        self.statusLabel.text = String.init(format: "%@ Left".localized,self.parentMatch?.joiningLastTime ?? "" )
         
         
-        
-        let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatch?.teams.item(at: 0).logo ?? "")")
-        let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatch?.teams.item(at: 1).logo ?? "")")
-        self.firstTeamFlag.kf.setImage(with: url1)
-        self.secondTeamFlag.kf.setImage(with: url2)
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         backShadowView.addGestureRecognizer(tap)
@@ -152,7 +165,12 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
             let contest = joinedContestList[indexPath.section]
         
             VC.contest_id = contest.id
-            VC.match_id = parentMatch?.matchId
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                
+                 VC.match_id = parentMatch?.matchId
+            }else{
+                 VC.match_id = parentMatchFootball?.matchId
+            }
             VC.contestName = contest.name
         
             // self.navigationController?.pushViewController(VC, animated: true)

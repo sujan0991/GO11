@@ -34,7 +34,7 @@ class ReferalViewController: BaseViewController {
       //  self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
         
         
-         placeNavBar(withTitle: "MY REFERRALS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+         placeNavBar(withTitle: "MY REFERRALS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         
         self.tabBarController?.tabBar.isHidden = true;
         

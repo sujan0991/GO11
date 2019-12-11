@@ -9,12 +9,14 @@
 import UIKit
 import SVProgressHUD
 import Kingfisher
+import BetterSegmentedControl
 
 class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
    
     
     
     var matches:[MatchList] = []
+    var footBallmatches:[FootBallMatchList] = []
     
     var type : MatchType = .next
     
@@ -43,6 +45,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var matchListTableView: UITableView!
     
    
+    @IBOutlet weak var gameSegmentControl: BetterSegmentedControl!
     
     
     
@@ -53,11 +56,11 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         super.viewDidLoad()
         
         
-        
+       
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
-         print("??????????..............",Language.language)
+        // print("??????????..............",Language.language)
         
         selectAmatchLabel.text = "SELECT A MATCH".localized
         
@@ -87,6 +90,8 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         // Register to receive notification in your class
         NotificationCenter.default.addObserver(self, selector: #selector(self.languageChangeAction(_:)), name: NSNotification.Name(rawValue: "languageChange"), object: nil)
+        
+        
         
         
         englishButton.layer.borderWidth = 0.5
@@ -123,6 +128,34 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         shadowView.addGestureRecognizer(tap)
+        
+        
+        gameSegmentControl.segments = LabelSegment.segments(withTitles: ["Cricket", "FootBall"],
+                                                            normalFont: UIFont(name: "OpenSans-Bold", size: 13.0)!,
+                                                            selectedFont: UIFont(name: "OpenSans-Bold", size: 13.0)!,
+                                                            selectedTextColor: UIColor.init(named: "GreenHighlight")!)
+       // gameSegmentControl.setIndex(1)
+        
+    }
+    
+    
+    @IBAction func gameChangeAction(_ sender:
+        BetterSegmentedControl) {
+            
+            print("The selected index is...... \(sender.index)")
+        
+        if sender.index == 0{
+            
+            UserDefaults.standard.set("cricket", forKey: "selectedGameType")
+            
+            getData()
+            
+        }else{
+            
+            UserDefaults.standard.set("football", forKey: "selectedGameType")
+            
+            getFootBallData()
+        }
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -138,14 +171,19 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("viewWillAppear..............match")
-        
+        print("viewWillAppear..............match",UserDefaults.standard.string(forKey: "selectedGameType"))
+ 
+       
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("viewDidAppear..............match")
+       // print("viewDidAppear..............match")
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.gameSelectAction(_:)), name: NSNotification.Name(rawValue: "gameChange"), object: nil)
         
         languageView.isHidden = true
         shadowView.isHidden = true
@@ -153,13 +191,32 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         self.tabBarController?.tabBar.isHidden = false
   
-        
-        getData()
+         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
+            getData()
+            
+            gameSegmentControl.setIndex(0)
+            
+         }else{
+            
+             getFootBallData()
+            
+            gameSegmentControl.setIndex(1)
+            
+        }
        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+//print("viewDidDisappear............///////////")
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
     }
     
     
     func getData(){
+        
+        
         
         self.noContestView.isHidden = true
         
@@ -185,6 +242,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 if self.matches.count == 0{
                     
                     self.selectAmatchLabel.isHidden = true
+                    
                     self.noMatchView.isHidden = false
                 }else{
                     self.noMatchView.isHidden = true
@@ -256,6 +314,101 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
     }
     
+     func getFootBallData(){
+        
+      //  print("get football data...............")
+        
+        self.noContestView.isHidden = true
+        
+        if (matchListTableView != nil)
+        {
+            if type == .next{
+                
+                matchListTableView.register(UINib(nibName: "UpComingMatchCell", bundle: nil), forCellReuseIdentifier: "UpcomingMatchCell")
+            }else{
+                matchListTableView.register(UINib(nibName: "MatchTableViewCell", bundle: nil), forCellReuseIdentifier: "MatchCell")
+            }
+            matchListTableView.delegate = self
+            matchListTableView.dataSource = self
+            matchListTableView.removeEmptyCells()
+        }
+        
+        if type == .next
+        {
+            APIManager.manager.getUpcomingFootBallMatchList { (nextMatches) in
+                self.footBallmatches = nextMatches
+                self.matchListTableView.reloadData()
+                
+                if self.footBallmatches.count == 0{
+                    
+                    self.selectAmatchLabel.isHidden = true
+                    
+                    self.noMatchView.isHidden = false
+                }else{
+                    
+                    self.noMatchView.isHidden = true
+                    self.selectAmatchLabel.isHidden = false
+                    
+                }
+                
+            }
+            
+            
+        }
+        else  if type == .upcomingContest
+        {
+            APIManager.manager.getUserJoinedUpcomingFootballMatchList { (nextMatches) in
+                
+                print("upcomingContest........")
+                self.footBallmatches = nextMatches
+                self.matchListTableView.reloadData()
+                if self.footBallmatches.count == 0{
+                    
+                    self.noContestView.isHidden = false
+                }else{
+                    self.noContestView.isHidden = true
+                }
+                
+            }
+        }
+        else  if type == .liveContest
+        {
+            APIManager.manager.getUserJoinedLiveFootballMatchList { (nextMatches) in
+                
+                
+                self.footBallmatches = nextMatches
+                self.matchListTableView.reloadData()
+                if self.footBallmatches.count == 0{
+                    
+                    self.noContestLabel.text = "You haven't join any live contests. Join the upcoming match contests and prove your skills.".localized
+                    
+                    self.noContestView.isHidden = false
+                    
+                }else{
+                    
+                    self.noContestView.isHidden = true
+                }
+            }
+        }
+        else  if type == .completedContest
+        {
+            APIManager.manager.getUserJoinedCompletedFootballMatchList { (nextMatches) in
+                
+                
+                self.footBallmatches = nextMatches
+                self.matchListTableView.reloadData()
+                //                if self.matches.count == 0{
+                //
+                //                    self.noContestView.isHidden = false
+                //                }else{
+                //                     self.noContestView.isHidden = true
+                //                }
+            }
+        }
+        
+        
+    }
+    
     
     @IBAction func selectAMatchbuttonAction(_ sender: Any) {
         
@@ -269,150 +422,294 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         return 1
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return matches.count
+        
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+           
+          print(".......matches.coun......",matches.count)
+            
+          return matches.count
+            
+        }else{
+            
+           return footBallmatches.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let match = matches[indexPath.section]
-        
-        if type == .next{
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
-            let cell = tableView.dequeueReusableCell(withIdentifier:"UpcomingMatchCell") as! UpComingMatchCell
-            
-            if match.joiningLastTime == "CONTEST JOIN ENDED"{
+          let match = matches[indexPath.section]
+          
+            if type == .next{
                 
-                cell.statusLabel.text = String.init(format: "%@",match.joiningLastTime ?? "" )
+                let cell = tableView.dequeueReusableCell(withIdentifier:"UpcomingMatchCell") as! UpComingMatchCell
+                
+                if match.joiningLastTime == "CONTEST JOIN ENDED"{
+                    
+                    cell.statusLabel.text = String.init(format: "%@",match.joiningLastTime ?? "" )
+                    
+                }else{
+                    
+                    cell.statusLabel.text = String.init(format: "%@ Left".localized,match.joiningLastTime?.localized ?? "" )
+                    
+                }
+                
+                cell.setInfo(match)
+               
+                
+                
+                return cell
                 
             }else{
-            
-             cell.statusLabel.text = String.init(format: "%@ Left".localized,match.joiningLastTime?.localized ?? "" )
-            
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier:"MatchCell") as! MatchTableViewCell
+                
+                if type == .upcomingContest{
+                    
+                    
+                    cell.statusLabel.text = String.init(format:"%@ Left".localized.uppercased(),match.joiningLastTime?.localized.uppercased() ?? "" )
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    
+                }else if type == .liveContest{
+                    
+                    cell.statusLabel.text = String.init(format: "IN PROGRESS".localized)
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "Blue")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "Blue")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "Blue")!
+                    cell.contestLabel.textColor = UIColor.init(named: "Blue")!
+                    
+                }else if type == .completedContest{
+                    
+                    
+                    cell.statusLabel.text = String.init(format: "COMPLETED".localized )
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    
+                }
+                
+                cell.setInfo(match)
+                
+                if match.totalJoinedContests ?? 0 > 0 {
+                    
+                    cell.contestMessageHeightConstraint.constant = 20
+                }
+                else
+                {
+                    cell.contestMessageHeightConstraint.constant = 0
+                }
+                
+                return cell
             }
-            
-            cell.setInfo(match)
-  
-            
-            return cell
             
         }else{
             
-            let cell = tableView.dequeueReusableCell(withIdentifier:"MatchCell") as! MatchTableViewCell
+            let match = footBallmatches[indexPath.section]
             
-            if type == .upcomingContest{
+            if type == .next{
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier:"UpcomingMatchCell") as! UpComingMatchCell
+                
+                if match.joiningLastTime == "CONTEST JOIN ENDED"{
+                    
+                    cell.statusLabel.text = String.init(format: "%@",match.joiningLastTime ?? "" )
+                    
+                }else{
+                    
+                    cell.statusLabel.text = String.init(format: "%@ Left".localized,match.joiningLastTime?.localized ?? "" )
+                    
+                }
+                
+                cell.setFootballInfo(match)
                 
                 
-                cell.statusLabel.text = String.init(format:"%@ Left".localized.uppercased(),match.joiningLastTime?.localized.uppercased() ?? "" )
-                cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
                 
-            }else if type == .liveContest{
-                         
-                cell.statusLabel.text = String.init(format: "IN PROGRESS".localized)
-                cell.statusBackground.backgroundColor = UIColor.init(named: "Blue")!
-                cell.firstTeamName.backgroundColor = UIColor.init(named: "Blue")!
-                cell.secondTeamName.backgroundColor = UIColor.init(named: "Blue")!
-                cell.contestLabel.textColor = UIColor.init(named: "Blue")!
-                
-            }else if type == .completedContest{
-                
-                
-                cell.statusLabel.text = String.init(format: "COMPLETED".localized )
-                cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                return cell
                 
             }
-            
-            cell.setInfo(match)
-            
-            if match.totalJoinedContests ?? 0 > 0 {
-                
-                cell.contestMessageHeightConstraint.constant = 20
+            else{
+
+                let cell = tableView.dequeueReusableCell(withIdentifier:"MatchCell") as! MatchTableViewCell
+
+                if type == .upcomingContest{
+
+
+                    cell.statusLabel.text = String.init(format:"%@ Left".localized.uppercased(),match.joiningLastTime?.localized.uppercased() ?? "" )
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+
+                }else if type == .liveContest{
+
+                    cell.statusLabel.text = String.init(format: "IN PROGRESS".localized)
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "Blue")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "Blue")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "Blue")!
+                    cell.contestLabel.textColor = UIColor.init(named: "Blue")!
+
+                }else if type == .completedContest{
+
+
+                    cell.statusLabel.text = String.init(format: "COMPLETED".localized )
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+
+                }
+
+            //    cell.setFootballInfo(match)
+
+                if match.totalJoinedContests ?? 0 > 0 {
+
+                    cell.contestMessageHeightConstraint.constant = 20
+                }
+                else
+                {
+                    cell.contestMessageHeightConstraint.constant = 0
+                }
+
+                return cell
             }
-            else
-            {
-                cell.contestMessageHeightConstraint.constant = 0
-            }
             
-            return cell
+          
         }
-            
-        
-        
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
         SVProgressHUD.show()
         print("didSelectRowAt............")
-        let match = matches[indexPath.section]
         
-      
-        
-        if type == .next{
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
-            if match.joiningLastTime == "CONTEST JOIN ENDED"{
-
-                self.view.makeToast("Oops! Contest joining deadline has passed".localized)
-
-                SVProgressHUD.dismiss()
-            }else{
-
-                APIManager.manager.getActiveContestList(matchId: "\(match.matchId ?? 0)") { (status, cm, msg) in
-                    if status{
-                        if cm != nil{
-
-                            let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ContestListViewController") as? ContestListViewController
-                            popupVC?.type = self.type
-                            popupVC?.parentMatch = match
-                            popupVC?.activeContestList = (cm?.contests)!
-                            popupVC?.modalPresentationStyle = .overCurrentContext
-                            popupVC?.modalTransitionStyle = .crossDissolve
-
-                            let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
-                            navigationController.isNavigationBarHidden = true
-
-                            self.present(navigationController, animated: true) {
-
-                                SVProgressHUD.dismiss()
-                                print("")
+            let match = matches[indexPath.section]
+            
+            
+            if type == .next{
+                
+                if match.joiningLastTime == "CONTEST JOIN ENDED"{
+                    
+                    self.view.makeToast("Oops! Contest joining deadline has passed".localized)
+                    
+                    SVProgressHUD.dismiss()
+                }else{
+                    
+                    APIManager.manager.getActiveContestList(matchId: "\(match.matchId ?? 0)") { (status, cm, msg) in
+                        if status{
+                            if cm != nil{
+                                
+                                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ContestListViewController") as? ContestListViewController
+                                popupVC?.type = self.type
+                                popupVC?.parentMatch = match
+                                popupVC?.activeContestList = (cm?.contests)!
+                                popupVC?.modalPresentationStyle = .overCurrentContext
+                                popupVC?.modalTransitionStyle = .crossDissolve
+                                
+                                let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
+                                navigationController.isNavigationBarHidden = true
+                                
+                                self.present(navigationController, animated: true) {
+                                    
+                                    SVProgressHUD.dismiss()
+                                    print("")
+                                }
+                                
                             }
-
+                        }
+                        else{
+                            
+                            self.view.makeToast(msg!)
                         }
                     }
-                    else{
-                        
-                          self.view.makeToast(msg!)
-                    }
-                 }
-
+                    
+                }
+                
+                
+            }else{
+                
+                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ContestListViewController") as? ContestListViewController
+                popupVC?.type = type
+                popupVC?.parentMatch = match
+                popupVC?.modalPresentationStyle = .overCurrentContext
+                popupVC?.modalTransitionStyle = .crossDissolve
+                
+                let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
+                navigationController.isNavigationBarHidden = true
+                
+                self.present(navigationController, animated: true) {
+                    
+                    SVProgressHUD.dismiss()
+                    print("")
+                }
             }
-            
-  
         }else{
             
-            let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ContestListViewController") as? ContestListViewController
-            popupVC?.type = type
-            popupVC?.parentMatch = match
-            popupVC?.modalPresentationStyle = .overCurrentContext
-            popupVC?.modalTransitionStyle = .crossDissolve
+            let match = footBallmatches[indexPath.section]
             
-            let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
-            navigationController.isNavigationBarHidden = true
             
-            self.present(navigationController, animated: true) {
+            if type == .next{
                 
-                SVProgressHUD.dismiss()
-                print("")
+                if match.joiningLastTime == "CONTEST JOIN ENDED"{
+                    
+                    self.view.makeToast("Oops! Contest joining deadline has passed".localized)
+                    
+                    SVProgressHUD.dismiss()
+                }else{
+                    
+                    APIManager.manager.getActiveFootBallContestList(matchId: "\(match.matchId ?? 0)") { (status, cm, msg) in
+                        if status{
+                            if cm != nil{
+                                
+                                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ContestListViewController") as? ContestListViewController
+                                popupVC?.type = self.type
+                                popupVC?.parentMatchFootball = match
+                                popupVC?.activeContestList = (cm?.contests)!
+                                popupVC?.modalPresentationStyle = .overCurrentContext
+                                popupVC?.modalTransitionStyle = .crossDissolve
+                                
+                                let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
+                                navigationController.isNavigationBarHidden = true
+                                
+                                self.present(navigationController, animated: true) {
+                                    
+                                    SVProgressHUD.dismiss()
+                                    print("")
+                                }
+                                
+                            }
+                        }
+                        else{
+                            
+                            self.view.makeToast(msg!)
+                        }
+                    }
+                    
+                }
+                
+                
+            }else{
+                
+                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ContestListViewController") as? ContestListViewController
+                popupVC?.type = type
+                popupVC?.parentMatchFootball = match
+                popupVC?.modalPresentationStyle = .overCurrentContext
+                popupVC?.modalTransitionStyle = .crossDissolve
+                
+                let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
+                navigationController.isNavigationBarHidden = true
+                
+                self.present(navigationController, animated: true) {
+                    
+                    SVProgressHUD.dismiss()
+                    print("")
+                }
             }
         }
-                
-        
-     
-        
+       
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -514,4 +811,35 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     }
     
     }
+    
+    @objc func gameSelectAction(_ notification: NSNotification) {
+
+        print("noti info...........",notification.userInfo!["isSelected"]!)
+        if let currentVC = UIApplication.topViewController() as? MyContestViewController {
+
+             print("match gameChangeAction")
+            //selected for football
+            
+            if notification.userInfo!["isSelected"]! as! Bool == true{
+                
+                UserDefaults.standard.set("cricket", forKey: "selectedGameType")
+                
+                getData()
+                
+            }else{
+                
+                
+                UserDefaults.standard.set("football", forKey: "selectedGameType")
+                
+                getFootBallData()
+            }
+            
+        }
+    }
+    
+//    override func gameChange() {
+//
+//         print("match gameChangeAction.........")
+//    }
+ 
 }

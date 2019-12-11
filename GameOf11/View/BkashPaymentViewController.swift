@@ -23,7 +23,7 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        placeNavBar(withTitle: "COIN PURCHASE".localized, isBackBtnVisible: true, isLanguageBtnVisible: false)
+        placeNavBar(withTitle: "COIN PURCHASE".localized, isBackBtnVisible: true, isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         
         self.webView.navigationDelegate = self
 

@@ -27,7 +27,7 @@ class WithdrawRequestViewController: BaseViewController {
       //  self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "WITHDRAW REQUEST".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+        placeNavBar(withTitle: "WITHDRAW REQUEST".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         
         amountLabel.text = "Amount in BDT".localized
         tkAmountTextField.placeholder = "Amount in BDT".localized

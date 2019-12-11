@@ -32,7 +32,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-         placeNavBar(withTitle: "TEAM PREVIEW".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+         placeNavBar(withTitle: "TEAM PREVIEW".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         
 //        print("userTeam.batsman.count",userTeam.batsman.count)
         

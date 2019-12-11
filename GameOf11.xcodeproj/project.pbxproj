@@ -77,6 +77,9 @@
 		644A078922ED729B00DAFE9E /* CreatedTeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 644A078822ED729B00DAFE9E /* CreatedTeamTableViewCell.xib */; };
 		644A078B22ED72E200DAFE9E /* CreatedTeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A078A22ED72E200DAFE9E /* CreatedTeamTableViewCell.swift */; };
 		645037E322F2CEA50013334D /* CoinPackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645037E222F2CEA50013334D /* CoinPackCollectionViewCell.swift */; };
+		64522215239C0FCC0091AE28 /* TeamCreateFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64522214239C0FCB0091AE28 /* TeamCreateFootballViewController.swift */; };
+		64522217239C182B0091AE28 /* CaptainSelectorFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64522216239C182B0091AE28 /* CaptainSelectorFootballViewController.swift */; };
+		64522219239C50F80091AE28 /* TeamPreviewFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64522218239C50F80091AE28 /* TeamPreviewFootballViewController.swift */; };
 		6453959C22DA0AEB007273D2 /* GradientProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6453959B22DA0AEA007273D2 /* GradientProgress.swift */; };
 		6453F2AE230960F2006A86CF /* UpComingMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6453F2AD230960F2006A86CF /* UpComingMatchCell.xib */; };
 		6453F2B22309638A006A86CF /* UpComingMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6453F2B12309638A006A86CF /* UpComingMatchCell.swift */; };
@@ -86,6 +89,8 @@
 		645F7DF8231598D100515F11 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF7231598D100515F11 /* WebViewController.swift */; };
 		646EC5FC230DB5C500E9D1A9 /* AvaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */; };
 		646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */; };
+		647825AA239D2BC0007AAC7A /* EditTeamFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */; };
+		647825AC23A02B45007AAC7A /* PointBreakdownFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */; };
 		647C5D13233D35AE00E4C3CF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647C5D12233D35AE00E4C3CF /* NotificationService.swift */; };
 		647C5D17233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 647C5D10233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */; };
@@ -204,6 +209,9 @@
 		644A078822ED729B00DAFE9E /* CreatedTeamTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreatedTeamTableViewCell.xib; sourceTree = "<group>"; };
 		644A078A22ED72E200DAFE9E /* CreatedTeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatedTeamTableViewCell.swift; sourceTree = "<group>"; };
 		645037E222F2CEA50013334D /* CoinPackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPackCollectionViewCell.swift; sourceTree = "<group>"; };
+		64522214239C0FCB0091AE28 /* TeamCreateFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCreateFootballViewController.swift; sourceTree = "<group>"; };
+		64522216239C182B0091AE28 /* CaptainSelectorFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptainSelectorFootballViewController.swift; sourceTree = "<group>"; };
+		64522218239C50F80091AE28 /* TeamPreviewFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamPreviewFootballViewController.swift; sourceTree = "<group>"; };
 		6453959B22DA0AEA007273D2 /* GradientProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientProgress.swift; sourceTree = "<group>"; };
 		6453F2AD230960F2006A86CF /* UpComingMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpComingMatchCell.xib; sourceTree = "<group>"; };
 		6453F2B12309638A006A86CF /* UpComingMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingMatchCell.swift; sourceTree = "<group>"; };
@@ -213,6 +221,8 @@
 		645F7DF7231598D100515F11 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaterViewController.swift; sourceTree = "<group>"; };
 		646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
+		647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamFootballViewController.swift; sourceTree = "<group>"; };
+		647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBreakdownFootballViewController.swift; sourceTree = "<group>"; };
 		647C5D0A233D280700E4C3CF /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		647C5D10233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		647C5D12233D35AE00E4C3CF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -282,11 +292,13 @@
 				0C0BE62521DA293F00BE30CF /* BaseViewController.swift */,
 				6448F5BE2293EDC400B31BFC /* BkashPaymentViewController.swift */,
 				0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */,
+				64522216239C182B0091AE28 /* CaptainSelectorFootballViewController.swift */,
 				6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */,
 				0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */,
 				0C78C1F422244F390068B5D6 /* DepositCoinViewController.swift */,
 				0C78C1F522244F3A0068B5D6 /* EditProfileViewController.swift */,
 				6445BE2E22D7577B00366B01 /* EditTeamViewController.swift */,
+				647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */,
 				6441ECBC23100AE0008FFE0F /* FeedbackViewController.swift */,
 				643488EA230B280800846649 /* ForgotPasswordViewController.swift */,
 				0C3336CE21DF488D00E6EB11 /* HomeViewController.swift */,
@@ -296,7 +308,10 @@
 				0C78C1FE222450AB0068B5D6 /* MoreViewController.swift */,
 				0C3336D021DF489A00E6EB11 /* MyContestViewController.swift */,
 				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
+				64441E50231C1BD400A21EDA /* ParentTabViewController.swift */,
+				645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */,
 				6445269F2237D8300099FB37 /* PointBreakDownViewController.swift */,
+				647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */,
 				0C78C1FF222450AB0068B5D6 /* ProfileViewController.swift */,
 				0C78C1F622244F3B0068B5D6 /* RedeemCoinViewController.swift */,
 				6448F5C02294094600B31BFC /* ReferalViewController.swift */,
@@ -304,14 +319,14 @@
 				0C33367A21DF3AB100E6EB11 /* SplashViewController.swift */,
 				0CE8835E21DFB6730025A31E /* TeamCreateViewController.swift */,
 				0C85C3482225C5D800B6515C /* TeamPreviewViewController.swift */,
+				64522218239C50F80091AE28 /* TeamPreviewFootballViewController.swift */,
 				0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */,
+				6412BAF32343C4930081958E /* TutorialViewController.swift */,
 				641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */,
 				0C78C1F722244F3C0068B5D6 /* VerifyAccountViewController.swift */,
-				0C78C1F822244F3D0068B5D6 /* WithdrawRequestViewController.swift */,
-				645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */,
 				645F7DF7231598D100515F11 /* WebViewController.swift */,
-				64441E50231C1BD400A21EDA /* ParentTabViewController.swift */,
-				6412BAF32343C4930081958E /* TutorialViewController.swift */,
+				0C78C1F822244F3D0068B5D6 /* WithdrawRequestViewController.swift */,
+				64522214239C0FCB0091AE28 /* TeamCreateFootballViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -649,6 +664,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/Bond/Bond.framework",
 				"${BUILT_PRODUCTS_DIR}/DTPagerController/DTPagerController.framework",
 				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
@@ -673,6 +689,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BetterSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bond.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTPagerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differ.framework",
@@ -793,6 +810,7 @@
 				0CE8836921DFE0AF0025A31E /* ContestListViewController.swift in Sources */,
 				0C3336C721DF419400E6EB11 /* Extension.swift in Sources */,
 				0C33368221DF3B0400E6EB11 /* CustomNavigationBar.swift in Sources */,
+				64522217239C182B0091AE28 /* CaptainSelectorFootballViewController.swift in Sources */,
 				641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */,
 				6445BE2F22D7577B00366B01 /* EditTeamViewController.swift in Sources */,
 				0C8B95ED21E1144400ADE46B /* ValidationManager.swift in Sources */,
@@ -818,6 +836,7 @@
 				0C78C203222451980068B5D6 /* UIColorExtension.swift in Sources */,
 				0C390AD921DFAAA900FA6A15 /* PositionCollectionViewCell.swift in Sources */,
 				0CEB167A2264F73A002D0208 /* CaptainSelectorViewController.swift in Sources */,
+				64522219239C50F80091AE28 /* TeamPreviewFootballViewController.swift in Sources */,
 				0C8B95E921E1022200ADE46B /* AppSessionManager.swift in Sources */,
 				6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */,
 				0CE8835F21DFB6730025A31E /* TeamCreateViewController.swift in Sources */,
@@ -840,8 +859,11 @@
 				646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */,
 				0C3336D121DF489A00E6EB11 /* MyContestViewController.swift in Sources */,
 				6448F5BF2293EDC400B31BFC /* BkashPaymentViewController.swift in Sources */,
+				647825AC23A02B45007AAC7A /* PointBreakdownFootballViewController.swift in Sources */,
 				0CE8836221DFD5730025A31E /* PlayerTableViewCell.swift in Sources */,
 				0C3336CF21DF488D00E6EB11 /* HomeViewController.swift in Sources */,
+				647825AA239D2BC0007AAC7A /* EditTeamFootballViewController.swift in Sources */,
+				64522215239C0FCC0091AE28 /* TeamCreateFootballViewController.swift in Sources */,
 				643488EB230B280800846649 /* ForgotPasswordViewController.swift in Sources */,
 				0C33367B21DF3AB100E6EB11 /* SplashViewController.swift in Sources */,
 				641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */,
@@ -1022,7 +1044,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MS UMBRELLA SOFT (2VBWUYWHX2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
@@ -1066,7 +1088,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = go11Dis;
+				PROVISIONING_PROFILE_SPECIFIER = "GO11 Dev";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1079,7 +1101,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MS UMBRELLA SOFT (2VBWUYWHX2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
@@ -1123,7 +1145,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = go11Dis;
+				PROVISIONING_PROFILE_SPECIFIER = "GO11 Dev";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1133,7 +1155,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1D9994E50EBEB3202776FEF /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MS UMBRELLA SOFT (2VBWUYWHX2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
@@ -1147,7 +1169,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dis";
+				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dev";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1158,7 +1180,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E158AAB73C4A0C032EC4EFD1 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MS UMBRELLA SOFT (2VBWUYWHX2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
@@ -1172,7 +1194,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dis";
+				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dev";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

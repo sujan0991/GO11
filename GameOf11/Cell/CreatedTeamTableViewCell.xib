@@ -332,13 +332,17 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="allrounderLabel" destination="dHM-BI-bea" id="ciz-0G-f69"/>
                 <outlet property="arCountLabel" destination="x3V-jt-bEN" id="fVR-ZQ-Tuv"/>
                 <outlet property="batCountLabel" destination="KXX-g5-ljL" id="BSn-my-MXu"/>
+                <outlet property="batsmanLabel" destination="lNY-Lo-zEw" id="HYp-0R-9pp"/>
                 <outlet property="bowlCountLabel" destination="bXX-ZU-vhw" id="2Vk-eB-hQg"/>
+                <outlet property="bowlerLabel" destination="x5W-9o-a04" id="ph7-QW-5CC"/>
                 <outlet property="captainLabel" destination="V9B-aN-Hat" id="P2k-F7-gR0"/>
                 <outlet property="captainNameLabel" destination="mhS-ul-SYW" id="d0D-9J-MZK"/>
                 <outlet property="chooseTeamLabel" destination="mgv-Q7-oZu" id="lmP-sq-7qM"/>
                 <outlet property="keeperCountLabel" destination="SmE-io-x40" id="sGJ-CD-fN4"/>
+                <outlet property="keeperLabel" destination="KCP-Lm-Tfb" id="dII-uD-cqy"/>
                 <outlet property="selectTeamButton" destination="6KH-Ii-lvm" id="pyW-zD-VLw"/>
                 <outlet property="teamNameLabel" destination="fqA-pe-ddL" id="deK-Nv-dSE"/>
                 <outlet property="viceCaptainLabel" destination="grD-rJ-tel" id="JDL-5j-Mkp"/>

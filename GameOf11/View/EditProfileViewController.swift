@@ -47,7 +47,7 @@ class EditProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        placeNavBar(withTitle: "PERSONAL DETAILS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+        placeNavBar(withTitle: "PERSONAL DETAILS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         
         self.tabBarController?.tabBar.isHidden = true
         

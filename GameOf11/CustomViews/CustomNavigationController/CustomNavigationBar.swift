@@ -12,6 +12,7 @@ import Bond
 protocol NavigationBarDelegate: class {
     func backButtonAction()
     func languageButtonAction()
+    func gameSelectAction(isSelected:Bool)
 }
 
 class CustomNavigationBar: UIView {
@@ -27,6 +28,8 @@ class CustomNavigationBar: UIView {
     @IBOutlet weak var logoImageView: UIImageView!
     
     @IBOutlet weak var languageButton: UIButton!
+    
+    @IBOutlet weak var gameSelectButton: UIButton!
     
     //   let viewModel = CustomNavigationBarViewModel.init()
 
@@ -48,12 +51,22 @@ class CustomNavigationBar: UIView {
 //        headerLabel.textColor = viewModel.colors.navBarText
         self.addSubview(containerView)
         containerView.frame = self.bounds
+        
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
+            gameSelectButton.isSelected = true
+            
+        }else{
+            
+            gameSelectButton.isSelected = false
+        }
     }
 
     // public methods
     public func activateBtn(navBarTitle: String,
                             isBackBtnVisible visible: Bool,
                             isLanguageBtnVisible lnVisible: Bool,
+                            isGameSelectBtnVisible isGameBtnVisible: Bool,
                             onBtnPressed callback: @escaping(UIButton) -> Void) {
         headerLabel.text = navBarTitle
         
@@ -71,6 +84,7 @@ class CustomNavigationBar: UIView {
                 callback(self.backBtn)
             }
         } else {
+            
             backBtn.isHidden = true
             
         }
@@ -83,12 +97,26 @@ class CustomNavigationBar: UIView {
             languageButton.isHidden = true
             
         }
+        
+        if isGameBtnVisible {
+            gameSelectButton.isHidden = false
+        }else{
+            gameSelectButton.isHidden = true
+        }
     }
     
     @IBAction func languageButtonAction(_ sender: Any) {
         
         delegate?.languageButtonAction()
     }
+    
+    @IBAction func gameSelectButtonAction(_ sender: UIButton) {
+        
+        sender.isSelected = !sender.isSelected
+        
+        delegate?.gameSelectAction(isSelected:sender.isSelected)
+    }
+    
     
     
     @IBAction func backButtonAction(_ sender: Any) {

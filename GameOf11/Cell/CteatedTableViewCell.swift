@@ -23,6 +23,12 @@ class CteatedTableViewCell: UITableViewCell {
     @IBOutlet weak var batsmanCountLabel: UILabel!
     @IBOutlet weak var allrounderCountLabel: UILabel!
     @IBOutlet weak var bowlerCountLabel: UILabel!
+    
+    @IBOutlet weak var keeperLabel: UILabel!
+    @IBOutlet weak var batsmanLabel: UILabel!
+    @IBOutlet weak var allrounderLabel: UILabel!
+    @IBOutlet weak var bowlerLabel: UILabel!
+    
 
     @IBOutlet weak var selectView: UIView!
     
@@ -114,6 +120,65 @@ class CteatedTableViewCell: UITableViewCell {
         self.setNeedsLayout()
         
     }
+    
+    
+    func setInfoFootball(_ team:CreatedTeamFootball)  {
+        
+        print("team......CteatedTableViewCell",team.userTeamId!)
+        
+        self.teamName.text = team.teamName?.uppercased()
+        self.captainName.text = team.captainName
+        self.viceCaptainName.text = team.viceCaptainName
+        
+        if Language.language == Language.english{
+            
+            self.keeperCountLabel.text = String.init(format: "%d", team.keeperCount ?? 0)
+            self.allrounderCountLabel.text = String.init(format: "%d", team.midfielderCount ?? 0)
+            self.batsmanCountLabel.text = String.init(format: "%d", team.defenderCount ?? 0)
+            self.bowlerCountLabel.text = String.init(format: "%d", team.strikerCount ?? 0)
+            
+        }else{
+            
+            self.keeperCountLabel.text = String.init(format: "%@", formatter.string(from: NSNumber(value: team.keeperCount!))!)
+            self.allrounderCountLabel.text = String.init(format: "%@", formatter.string(from: NSNumber(value: team.midfielderCount!))!)
+            self.batsmanCountLabel.text = String.init(format: "%@", formatter.string(from: NSNumber(value: team.defenderCount!))!)
+            self.bowlerCountLabel.text = String.init(format: "%@", formatter.string(from: NSNumber(value: team.strikerCount!))!)
+            
+        }
+        
+        
+        
+        if team.captain_image != nil{
+            
+            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(team.captain_image ?? "")")
+            
+            self.captainimageView.kf.setImage(with: url1)
+            if url1 == nil{
+                captainimageView.image = UIImage.init(named: "player_avatar_global.png")
+            }
+        }else{
+            
+            captainimageView.image = UIImage.init(named: "player_avatar_global.png")
+        }
+        
+        if team.vice_captain_image != nil{
+            let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(team.vice_captain_image ?? "")")
+            
+            self.vCaptainImageView.kf.setImage(with: url2)
+            if url2 == nil{
+                vCaptainImageView.image = UIImage.init(named: "player_avatar_global.png")
+            }
+        }else{
+            
+            vCaptainImageView.image = UIImage.init(named: "player_avatar_global.png")
+        }
+        
+        
+        self.needsUpdateConstraints()
+        self.setNeedsLayout()
+        
+    }
+
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

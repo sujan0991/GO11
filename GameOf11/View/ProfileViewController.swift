@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 import SafariServices
 
-class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate {
     
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -59,6 +59,16 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var matchlabel: UILabel!
     @IBOutlet var matchCountLabel: UILabel!
     
+    @IBOutlet weak var contestFootballLabel: UILabel!
+    @IBOutlet var contestCountFootballLabel: UILabel!
+    
+    @IBOutlet weak var topRankFootballlabel: UILabel!
+    @IBOutlet var topRankCountFootballLabel: UILabel!
+    
+    
+    @IBOutlet weak var matchFootballlabel: UILabel!
+    @IBOutlet var matchCountFootbaLabel: UILabel!
+
   
     @IBOutlet weak var personalDetailLabel: UILabel!
     @IBOutlet weak var fullProfileButton: UIButton!
@@ -66,7 +76,16 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var verifyButton: UIButton!
     @IBOutlet weak var verifyInfoButton: UIButton!
     
-   
+    @IBOutlet weak var gameTypeImageView: UIImageView!
+    
+    @IBOutlet weak var historyScrollView: UIScrollView!{
+        didSet{
+            historyScrollView.delegate = self
+        }
+    }
+    
+    @IBOutlet weak var pageControl: UIPageControl!
+    
     
     @IBOutlet var phoneNoLabel: UILabel!
     @IBOutlet var emailLabel: UILabel!
@@ -166,6 +185,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         let tap = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.tapContestLabel))
         contestLabel.addGestureRecognizer(tap)
         
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.tapFootballContestLabel))
+        contestFootballLabel.addGestureRecognizer(tap1)
+
         scrollView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
@@ -174,6 +196,14 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
 
         self.blockView.isHidden = true
         self.blockViewHeight.constant = 0
+        
+        
+        
+        historyScrollView.contentSize = CGSize(width: view.frame.width * 2.0, height: historyScrollView.frame.height)
+        
+        pageControl.currentPage = 0
+        
+        
     }
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         
@@ -185,9 +215,18 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
    @objc func tapContestLabel(sender:UITapGestureRecognizer) {
     
         UserDefaults.standard.set("completed", forKey: "selectedMyContest")
+        UserDefaults.standard.set("cricket", forKey: "selectedGameType")
     
         self.tabBarController?.selectedIndex = 1
     
+    }
+    @objc func tapFootballContestLabel(sender:UITapGestureRecognizer) {
+        
+        UserDefaults.standard.set("completed", forKey: "selectedMyContest")
+        UserDefaults.standard.set("football", forKey: "selectedGameType")
+        
+        self.tabBarController?.selectedIndex = 1
+        
     }
     @objc private func refreshData(_ sender: Any) {
         
@@ -243,9 +282,14 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 self.depositedCoinCountLabel.text = String.init(format: "%d", um.metadata?.totalCoins ?? "")
                                 self.winningAmountLabel.text = String.init(format: "%.2f", um.metadata?.totalCash ?? "")
                                 self.pendingReqCountLabel.text = String.init(format: "%d", um.metadata?.totalPendingRequest ?? "")
+                                
                                 self.contestCountLabel.text = String.init(format: "%d", um.metadata?.totalContestParticipation ?? "")
                                 self.topRankCountLabel.text = String.init(format: "%d", um.metadata?.highestRank ?? "")
                                 self.matchCountLabel.text = String.init(format: "%d", um.metadata?.totalMatchParticipation ?? "")
+                                
+                                self.contestCountFootballLabel.text = String.init(format: "%d", um.metadata?.totalFootballContestParticipation ?? "")
+                                self.topRankCountFootballLabel.text = String.init(format: "%d", um.metadata?.highestFootballRank ?? "")
+                                self.matchCountFootbaLabel.text = String.init(format: "%d", um.metadata?.totalFootballMatchParticipation ?? "")
                                 
                                 self.freeContestLabel.text = String.init(format: "Your available free contests = %d", um.metadata?.referral_contest_unlocked ?? 0)
                             }else{
@@ -253,19 +297,20 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 self.depositedCoinCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalCoins as NSNumber? ?? 0)!)
                                 self.winningAmountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalCash as NSNumber? ?? 0)!)
                                 self.pendingReqCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalPendingRequest as NSNumber? ?? 0)!)
+                                
                                 self.contestCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalContestParticipation as NSNumber? ?? 0)!)
                                 self.topRankCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.highestRank as NSNumber? ?? 0)!)
                                 self.matchCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalMatchParticipation as NSNumber? ?? 0)!)
+                                
+                                self.contestCountFootballLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalFootballContestParticipation as NSNumber? ?? 0)!)
+                                self.topRankCountFootballLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.highestFootballRank as NSNumber? ?? 0)!)
+                                self.matchCountFootbaLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalFootballMatchParticipation as NSNumber? ?? 0)!)
                                 
                                 self.freeContestLabel.text = String.init(format: "আপনার অব্যবহৃত ফ্রি কন্টেস্ট = %@", self.formatter.string(from: um.metadata?.referral_contest_unlocked as NSNumber? ?? 0)!)
                                 
                             }
                             
-                            
-                            
-                            
-                            
-                            
+
                             
                             if um.avatar != nil{
                                 
@@ -567,6 +612,18 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         alertVC.addAction(okAction)
         self.present(alertVC, animated: true, completion: nil)
         
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+        pageControl.currentPage = Int(pageIndex)
+        
+        if pageIndex == 0{
+            gameTypeImageView.image = UIImage.init(named: "match_icon")
+        }else{
+            gameTypeImageView.image = UIImage.init(named: "football-icon")
+        }
     }
     
     

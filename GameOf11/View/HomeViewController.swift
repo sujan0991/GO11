@@ -31,7 +31,7 @@ class HomeViewController: BaseViewController,DTSegmentedControlProtocol,DTPagerC
     
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "GAME OF 11", isBackBtnVisible: false,isLanguageBtnVisible: true)
+        placeNavBar(withTitle: "GAME OF 11", isBackBtnVisible: false,isLanguageBtnVisible: true, isGameSelectBtnVisible: false)
         placeContainer()
         
         

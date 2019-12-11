@@ -13,6 +13,7 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
     var delegate: BackFromTeamSelect?
     
     var teams:[CreatedTeam] = []
+    var teamsFootball:[CreatedTeamFootball] = []
     var contestId: Int = 0
     
     var selectedIndex : Int!
@@ -28,7 +29,7 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         print("teams........",teams)
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "SELECT YOUR TEAM".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+        placeNavBar(withTitle: "SELECT YOUR TEAM".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         confirmButton.makeRound(5, borderWidth: 0, borderColor: .clear)
         
         confirmButton.setTitle("JOIN CONTEST".localized, for: .normal)
@@ -53,17 +54,39 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         return 1
     }
     func numberOfSections(in tableView: UITableView) -> Int {
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
         return teams.count
+        }else{
+            
+            return teamsFootball.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"CreatedTeamTableViewCell") as! CreatedTeamTableViewCell
-     
+     if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
         let singleTeam = teams[indexPath.section] as CreatedTeam
+        
+        cell.keeperLabel.text = "WK"
+        cell.batsmanLabel.text = "BAT"
+        cell.allrounderLabel.text = "AL"
+        cell.bowlerLabel.text = "BOWL"
         
         cell.setInfo(singleTeam)
       //  cell.selectView.isHidden = false
+     }else{
+        let singleTeam = teamsFootball[indexPath.section] as CreatedTeamFootball
+        
+        cell.keeperLabel.text = "GK"
+        cell.batsmanLabel.text = "DEF"
+        cell.allrounderLabel.text = "MID"
+        cell.bowlerLabel.text = "STR"
+
+        cell.setInfoFootball(singleTeam)
+        
+        }
         
         
         if selectedIndex == indexPath.section
@@ -91,6 +114,8 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     @IBAction func confirmButtonAction(_ sender: Any) {
         
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
         let singleTeam = teams[selectedIndex] as CreatedTeam
         
         if let delegate = self.delegate {
@@ -100,6 +125,17 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         
         print("team name...........?????????",singleTeam.teamName)
         dismiss(animated: true, completion: nil)
+        }else{
+            let singleTeam = teamsFootball[selectedIndex] as CreatedTeamFootball
+            
+            if let delegate = self.delegate {
+                
+                delegate.selectedTeamFootball(team: singleTeam,contestId: self.contestId)
+            }
+            
+            print("team name...........?????????",singleTeam.teamName)
+            dismiss(animated: true, completion: nil)
+        }
         
     }
     @IBAction func teamSelectAction(_ sender: UIButton) {

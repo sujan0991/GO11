@@ -47,7 +47,8 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         
       //  IQKeyboardManager.shared.enable = false
 
-        placeNavBar(withTitle: "ADD COINS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+        placeNavBar(withTitle: "ADD COINS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        
         self.tabBarController?.tabBar.isHidden = true;
         
         formatter.numberStyle = .decimal

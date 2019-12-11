@@ -52,7 +52,7 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate,AKFViewContro
         
         animationContainerView.isHidden = true
         
-        placeNavBar(withTitle: "SIGN UP".localized, isBackBtnVisible: true,isLanguageBtnVisible: false)
+        placeNavBar(withTitle: "SIGN UP".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
         
         // initialize Account Kit
         if _accountKit == nil {

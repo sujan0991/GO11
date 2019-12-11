@@ -27,6 +27,8 @@ target 'GameOf11' do
     pod 'Crashlytics', '~> 3.12.0'
     pod 'lottie-ios'
     pod 'OneSignal', '>= 2.6.2', '< 3.0'
+    pod 'BetterSegmentedControl', '1.0'
+
     
 
 end

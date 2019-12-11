@@ -1,6 +1,7 @@
 PODS:
   - AccountKit (4.35.0)
   - Alamofire (5.0.0.beta.1)
+  - BetterSegmentedControl (1.0)
   - Bond (6.10.2):
     - Differ (~> 1.3)
     - ReactiveKit (~> 3.9)
@@ -89,6 +90,7 @@ PODS:
 DEPENDENCIES:
   - AccountKit
   - Alamofire (~> 5.0.0.beta.1)
+  - BetterSegmentedControl (= 1.0)
   - Bond (~> 6.10.0)
   - Crashlytics (~> 3.12.0)
   - DTPagerController
@@ -111,6 +113,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AccountKit
     - Alamofire
+    - BetterSegmentedControl
     - Bond
     - Crashlytics
     - Differ
@@ -143,6 +146,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AccountKit: 870ccaf5d33facda9408783e28fbe68c5211e069
   Alamofire: 2ef6d6c984c5d21c366e9b41a9ae7dfee2b67a44
+  BetterSegmentedControl: 92555f980e4273ec414d6187acc5b811659a9abf
   Bond: 5c9d854fb14d3268496ccaf9b7ccd8428ec1609c
   Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   Differ: 9fcee7602542d7c6484ce05a0faec1c11258ed63
@@ -172,6 +176,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   ViewUtils: 68e42c708a4b3912e39691cef5080282dc5013fb
 
-PODFILE CHECKSUM: 4a9e49db6cc8d4ec42f4807a83b07665e0f1c185
+PODFILE CHECKSUM: d401f6991b42db1f2fe6f9f2a2ea1422221e3938
 
 COCOAPODS: 1.6.1

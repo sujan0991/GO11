@@ -35,7 +35,7 @@ class LoginViewController: BaseViewController,AKFViewControllerDelegate {
 
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "LOGIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: true)
+        placeNavBar(withTitle: "LOGIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: true, isGameSelectBtnVisible: false)
         
         // initialize Account Kit
         if _accountKit == nil {

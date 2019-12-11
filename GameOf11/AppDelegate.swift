@@ -90,7 +90,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 
         IQKeyboardManager.shared.enable = true
 
+        
         UserDefaults.standard.set("upcoming", forKey: "selectedMyContest")
+        UserDefaults.standard.set("cricket", forKey: "selectedGameType")
+        
+        print("appdelegate..............match",UserDefaults.standard.string(forKey: "selectedgametype"))
         
         
         // One Signal

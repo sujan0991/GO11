@@ -69,6 +69,38 @@ class UpComingMatchCell: UITableViewCell {
        
     }
     
+    func setFootballInfo(_ match:FootBallMatchList)  {
+        
+        
+        firstTeamName.text = match.teams.item(at: 0).code ?? ""
+        secondTeamName.text = match.teams.item(at: 1).code ?? ""
+        tournamentName.text = String.init(format: "%@",match.tournamentName ?? "")
+        tournamentTypeLabel.isHidden = true
+      //  tournamentTypeLabel.text = String.init(format: "%@",match.format!.uppercased() )
+        
+        print("match.teams.item(at: 0).logo",match.teams.item(at: 0).logo)
+        
+        if match.teams.item(at: 0).logo != nil{
+            
+            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(match.teams.item(at: 0).logo ?? "")")
+            firstTeamFlag.kf.setImage(with: url1)
+        }
+        
+        if match.teams.item(at: 1).logo != nil{
+            
+            let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(match.teams.item(at: 1).logo ?? "")")
+            
+            secondTeamFlag.kf.setImage(with: url2)
+        }
+        
+        
+        
+        self.needsUpdateConstraints()
+        self.setNeedsLayout()
+        
+    }
+
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -38,6 +38,7 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
         
     }
 
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,7 +104,7 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
     }
 
     // public methods
-    open func placeNavBar(withTitle title: String, isBackBtnVisible visible: Bool,isLanguageBtnVisible lnVisible: Bool) {
+    open func placeNavBar(withTitle title: String, isBackBtnVisible visible: Bool,isLanguageBtnVisible lnVisible: Bool,isGameSelectBtnVisible isGameBtnVisible: Bool) {
         
         print("extraTop..........",extraTop())
         navBar = CustomNavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 64.0 + extraTop()))
@@ -111,7 +112,7 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
         navBar.delegate = self
         
         navBar.activateBtn(navBarTitle: title,
-                           isBackBtnVisible: visible, isLanguageBtnVisible: lnVisible) { btn in
+                           isBackBtnVisible: visible, isLanguageBtnVisible: lnVisible, isGameSelectBtnVisible: isGameBtnVisible) { btn in
                             
                             
 //            if visible {
@@ -161,6 +162,26 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
 
         
     }
+    
+    func gameSelectAction(isSelected:Bool){
+        
+        
+        print("gameSelectAction in base........",isSelected)
+        
+//        gameChange()
+        
+        // Post a notification
+        let dataDict:[String: Bool] = ["isSelected": isSelected]
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "gameChange"), object: nil, userInfo: dataDict)
+        
+        
+    }
+    
+//    func gameChange(){
+//
+//        print("gameChangeAction in base.........")
+//    }
+    
     
     func backButtonAction() {
         if (self.navigationController != nil)
