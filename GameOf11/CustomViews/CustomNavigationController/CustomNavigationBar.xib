@@ -78,8 +78,8 @@
                                 <constraint firstAttribute="width" constant="30" id="bRX-vM-yA4"/>
                                 <constraint firstAttribute="height" constant="30" id="eDo-ht-wpJ"/>
                             </constraints>
-                            <state key="normal" image="match_icon"/>
-                            <state key="selected" image="football-icon"/>
+                            <state key="normal" image="icon_cricket_placing"/>
+                            <state key="selected" image="icon_football_placing"/>
                             <connections>
                                 <action selector="gameSelectButtonAction:" destination="-1" eventType="touchUpInside" id="Ued-8l-gvj"/>
                             </connections>
@@ -119,10 +119,10 @@
     </objects>
     <resources>
         <image name="backArrow" width="22.5" height="22.5"/>
-        <image name="football-icon" width="32" height="32"/>
+        <image name="icon_cricket_placing" width="303" height="270.5"/>
+        <image name="icon_football_placing" width="328" height="332.5"/>
         <image name="language_change_icon" width="256" height="256"/>
         <image name="logoWhiteText" width="180" height="46"/>
-        <image name="match_icon" width="256" height="256"/>
         <namedColor name="GreenHighlight">
             <color red="0.18823529411764706" green="0.72156862745098038" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

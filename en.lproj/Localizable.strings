@@ -301,3 +301,18 @@
 "You do not have enough money to withdraw." = "You do not have enough money to withdraw.";
 
 "New update is available." = "New update is available.";
+
+
+"Pick 1 Goal-Keeper" = "Pick 1 Goal-Keeper";
+"Pick 3-5 Defenders" = "Pick 3-5 Defenders";
+"Pick 3-5 Midfielders" = "Pick 3-5 Midfielders";
+"Pick 1-3 Strikers"  = "Pick 1-3 Strikers";
+
+"Not more than 5 Defenders" = "Not more than 5 Defenders";
+"Minimum 3 Midfielders" = "Minimum 3 Midfielders";
+"Minimum 1 Striker" = "Minimum 1 Striker";
+"Minimum 1 Goal Keeper" = "Minimum 1 Goal Keeper";
+"Not more than 1 Goal Keeper" = "Not more than 1 Goal Keeper";
+"Minimum 3 Defenders" = "Minimum 3 Defenders";
+"Not more than 5 Midfielders" = "Not more than 5 Midfielders";
+"Not more than 3 Strikers" = "Not more than 3 Strikers";

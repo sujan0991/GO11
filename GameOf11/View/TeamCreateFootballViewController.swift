@@ -945,7 +945,7 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
                 if userTeam.striker.count >= 3
                 {
                     
-                    self.view.makeToast(String.init(format: "Not more than 3 Striker".localized))
+                    self.view.makeToast(String.init(format: "Not more than 3 Strikers".localized))
                     return false
                 }
                 else if  Team_Rules.MaxPlayer - (1 + userTeam.striker.count + userTeam.defender.count + userTeam.goalkeeper.count) < 3 //squadData.team_rules?.allrounder?.minPerMatch ?? 0
@@ -999,11 +999,11 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
                     return false
                 }else if  Team_Rules.MaxPlayer - (1 + userTeam.striker.count + userTeam.midfielder.count + userTeam.goalkeeper.count) < 3 //squadData.team_rules?.bowler?.minPerMatch ?? 0
                 {
-                    self.view.makeToast( String.init(format: "Minimum 3 Defender".localized ))
+                    self.view.makeToast( String.init(format: "Minimum 3 Defenders".localized ))
                     return false
                 }else if  Team_Rules.MaxPlayer - (1 + userTeam.striker.count + userTeam.defender.count + userTeam.goalkeeper.count) < 3 //squadData.team_rules?.allrounder?.minPerMatch ?? 0
                 {
-                    self.view.makeToast( String.init(format: "Minimum 1 Midfielder".localized))
+                    self.view.makeToast( String.init(format: "Minimum 3 Midfielders".localized))
                     return false
                 }
                 else if  Team_Rules.MaxPlayer - (1 + userTeam.goalkeeper.count + userTeam.defender.count + userTeam.midfielder.count) < 1 //squadData.team_rules?.batsman?.minPerMatch ?? 0

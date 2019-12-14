@@ -55,21 +55,7 @@ class PointBreakdownFootballViewController: UIViewController,UITableViewDelegate
     @IBOutlet weak var earningTitleLabel: UILabel!
     
     
-    //            assist = 0;
-    //            cleansheet = 0;
-    //            "goal_conceded" = 0;
-    //            "goal_saved" = 0;
-    //            goals = 0;
-    //            minutes = 0;
-    //            "own_goal" = 0;
-    //            passes = 0;
-    //            "penalty_missed" = 0;
-    //            "penalty_saved" = 0;
-    //            "penalty_scored" = 0;
-    
-    //            "red_card" = 0;
-    //            tackles = 0;
-    //            "yellow_card" = 0;
+
     
     @IBOutlet weak var assistLabel: UILabel!
     @IBOutlet weak var assistValueLabel: UILabel!
@@ -111,6 +97,10 @@ class PointBreakdownFootballViewController: UIViewController,UITableViewDelegate
     @IBOutlet weak var penalty_savedValueLabel: UILabel!
     @IBOutlet weak var penalty_savedPointLabel: UILabel!
     
+    @IBOutlet weak var penalty_scoredLabel: UILabel!
+    @IBOutlet weak var penalty_scoredValueLabel: UILabel!
+    @IBOutlet weak var penalty_scoredPointLabel: UILabel!
+
     @IBOutlet weak var red_cardLabel: UILabel!
     @IBOutlet weak var red_cardValueLabel: UILabel!
     @IBOutlet weak var red_cardPointLabel: UILabel!
@@ -166,6 +156,12 @@ class PointBreakdownFootballViewController: UIViewController,UITableViewDelegate
         }
         
         
+        //test
+        
+//        var x:Float = 25/10
+//        var y:Float = 5/10
+//        print("................................................",x,x.rounded(.down),y.rounded(.down))
+//        
         
     }
     
@@ -241,7 +237,7 @@ class PointBreakdownFootballViewController: UIViewController,UITableViewDelegate
             
             let singlePlayerInfo = self.leaderBoardData?.team_info?.player_info[indexPath.row]
             
-            let singlePlayerPoint = singlePlayerInfo?.point_breakdown
+            let singlePlayerPoint = singlePlayerInfo?.point_breakdown_football
             
             self.playernameLabel.text = singlePlayerInfo?.player_name
             self.playerRollLabel.text = singlePlayerInfo?.player_role?.uppercased()
@@ -265,115 +261,113 @@ class PointBreakdownFootballViewController: UIViewController,UITableViewDelegate
 
             self.playerPointLabel.text = "\(singlePlayerInfo?.player_earning_point ?? 0)"
             
-            self.isInXIValueLabel.text = singlePlayerInfo?.is_in_playing_xi
-            self.runsValueLabel.text = "\(singlePlayerPoint?.runs?["1"] ?? 0)"
-            self.fourValueLabel.text = "\(singlePlayerPoint?.fours?["1"] ?? 0)"
-            self.sixValueLabel.text = "\(singlePlayerPoint?.sixes?["1"] ?? 0)"
-            self.strikeValueLabel.text = "\(singlePlayerPoint?.strike_rate?["1"] ?? 0)"
-            self.catchValueLabel.text = "\(singlePlayerPoint?.catches?["1"] ?? 0)"
-            self.wicketValueLabel.text = "\(singlePlayerPoint?.wickets?["1"] ?? 0)"
-            self.maidenValueLabel.text = "\(singlePlayerPoint?.maiden_overs?["1"] ?? 0)"
-            self.econValueLabel.text = "\(singlePlayerPoint?.economy?["1"] ?? 0)"
-            self.runOutValueLabel.text = "\(singlePlayerPoint?.runouts?["1"] ?? 0)"
-            self.stumpingValueLabel.text = "\(singlePlayerPoint?.stumbeds?["1"] ?? 0)"
+            self.assistValueLabel.text = "\(singlePlayerPoint?.assist ?? 0)"
+            self.cleansheetValueLabel.text = "\(singlePlayerPoint?.cleansheet ?? 0)"
+            self.goal_concededValueLabel.text = "\(singlePlayerPoint?.goal_conceded ?? 0)"
+            self.goal_savedValueLabel.text = "\(singlePlayerPoint?.goal_saved ?? 0)"
+            self.goalsValueLabel.text = "\(singlePlayerPoint?.goals ?? 0)"
+            self.minutesValueLabel.text = "\(singlePlayerPoint?.minutes ?? 0)"
+            self.own_goalValueLabel.text = "\(singlePlayerPoint?.own_goal ?? 0)"
+            self.passesValueLabel.text = "\(singlePlayerPoint?.passes ?? 0)"
+            self.penalty_savedValueLabel.text = "\(singlePlayerPoint?.penalty_saved ?? 0)"
+            self.penalty_missedValueLabel.text = "\(singlePlayerPoint?.penalty_missed ?? 0)"
+            self.penalty_scoredValueLabel.text = "\(singlePlayerPoint?.penalty_scored ?? 0)"
+            self.red_cardValueLabel.text = "\(singlePlayerPoint?.red_card ?? 0)"
+            self.tacklesValueLabel.text = "\(singlePlayerPoint?.tackles ?? 0)"
+            self.yellow_cardValueLabel.text = "\(singlePlayerPoint?.yellow_card ?? 0)"
             
             
-                if isInXIValueLabel.text == "Yes"{
-                    self.isInXIPointLabel.text = "2"
-                }else{
-                    
-                    self.isInXIPointLabel.text = "0.0"
+            
+                if singlePlayerPoint?.assist != nil{
+                
+                    self.assistPointLabel.text = "\(Float((singlePlayerPoint?.assist)!) * 5.0)"
                 }
                 
-                if singlePlayerPoint?.runs != nil{
-                    self.runsPointLabel.text = "\(Float((singlePlayerPoint?.runs?["1"])!) * 0.5)"
-                }
-                if singlePlayerPoint?.fours != nil{
-                    self.fourPointLabel.text = "\(Float((singlePlayerPoint?.fours?["1"])!) * 0.5)"
-                }
-                if singlePlayerPoint?.sixes != nil{
-                    self.sixPointLabel.text = "\(Float((singlePlayerPoint?.sixes?["1"])!) * 1.0)"
+                if singlePlayerPoint?.cleansheet != nil{
+                    if singlePlayerInfo?.player_role == "midfielder"{
+                        self.cleansheetPointLabel.text = "\(Float((singlePlayerPoint?.cleansheet)!) * 1.0)"
+                    }else if singlePlayerInfo?.player_role == "defender"{
+                        self.cleansheetPointLabel.text = "\(Float((singlePlayerPoint?.cleansheet)!) * 5.0)"
+                    }
                     
                 }
+                if singlePlayerPoint?.goal_conceded != nil{
+                    
+                    let concededPoint:Float = Float((singlePlayerPoint?.goal_conceded)!/2)
+                    self.goal_concededPointLabel.text = "\(concededPoint.rounded(.down) * -1.0)"
+                }
+                if singlePlayerPoint?.goal_saved != nil{
+                    self.goal_savedPointLabel.text = "\(Float((singlePlayerPoint?.goal_saved)!) * 2.0)"
+                    
+                }
                 
                 
-                if singlePlayerPoint?.strike_rate != nil{
-                    if singlePlayerInfo?.player_role != "bowler"{
-                        
-                        if ( Float((singlePlayerPoint?.strike_rate?["1"])!) != 0.0 && Float((singlePlayerPoint?.strike_rate?["1"])!) < 50 ){
-                            
-                            self.strikePointLabel.text = "-3.0"
-                            
-                        }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 59.99 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 50  ){
-                            
-                            self.strikePointLabel.text = "-2.0"
-                            
-                            
-                        }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 70 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 60  ){
-                            
-                            self.strikePointLabel.text = "-1.0"
-                            
-                            
-                        }else{
-                            self.strikePointLabel.text = "0.0"
-                        }
+                if singlePlayerPoint?.goals != nil{
+                    
+                    if singlePlayerInfo?.player_role == "midfielder"{
+                        self.goalsPointLabel.text = "\(Float((singlePlayerPoint?.goals)!) * 9.0)"
+                    }else if singlePlayerInfo?.player_role == "defender" || singlePlayerInfo?.player_role == "goalkeeper"{
+                        self.goalsPointLabel.text = "\(Float((singlePlayerPoint?.goals)!) * 10.0)"
+                    }else if singlePlayerInfo?.player_role == "striker"{
+                        self.goalsPointLabel.text = "\(Float((singlePlayerPoint?.goals)!) * 8.0)"
                     }
                 }
                 
-                if singlePlayerPoint?.catches != nil{
-                    self.catchPointLabel.text = "\(Float((singlePlayerPoint?.catches?["1"])!) * 4.0)"
-                }
-                if singlePlayerPoint?.wickets != nil{
-                    self.wicketPointLabel.text = "\(Float((singlePlayerPoint?.wickets?["1"])!) * 10.0)"
+                if singlePlayerPoint?.minutes != nil{
+                    
+                    if singlePlayerPoint!.minutes! >= 55{
+                        
+                        self.minutesPointLabel.text = "2.0"
+                        
+                    }else{
+                        
+                        self.minutesPointLabel.text = "1.0"
+                        
+                    }
                     
                 }
-                if singlePlayerPoint?.maiden_overs != nil{
-                    self.maidenPointLabel.text = "\(Float((singlePlayerPoint?.maiden_overs?["1"])!) * 4.0)"
+                if singlePlayerPoint?.own_goal != nil{
+                    self.own_goalPointLabel.text = "\(Float((singlePlayerPoint?.own_goal)!) * -2.0)"
+                    
                 }
-                
-                
-                
+            
+                if singlePlayerPoint?.passes != nil{
+
+                    var passPoint:Float = Float((singlePlayerPoint?.passes)!/10)
+                    self.passesPointLabel.text = "\( passPoint.rounded(.down) * 0.5)"
+                }
+
+
+
                 //Have to calculate like strike rate
                 // self.econPointLabel.text = "\(Float((singlePlayerPoint?.sixes)!) * 1.0)"
-                if singlePlayerPoint?.economy != nil{
-                    if ( Float((singlePlayerPoint?.economy?["1"])!) != 0.0 && Float((singlePlayerPoint?.economy?["1"])!) < 4 ){
-                        
-                        self.econPointLabel.text = "3.0"
-                        
-                    }else if (Float((singlePlayerPoint?.economy?["1"])!) <= 4.99 && Float((singlePlayerPoint?.economy?["1"])!) >= 4  ){
-                        
-                        self.econPointLabel.text = "2.0"
-                        
-                        
-                    }else if (Float((singlePlayerPoint?.economy?["1"])!) <= 5.99 && Float((singlePlayerPoint?.economy?["1"])!) >= 5  ){
-                        
-                        self.econPointLabel.text = "1.0"
-                        
-                        
-                    }
-                    else if (Float((singlePlayerPoint?.economy?["1"])!) <= 9.99 && Float((singlePlayerPoint?.economy?["1"])!) >= 9  ){
-                        
-                        self.econPointLabel.text = "-1.0"
-                        
-                        
-                    }else if (Float((singlePlayerPoint?.economy?["1"])!) <= 11 && Float((singlePlayerPoint?.economy?["1"])!) >= 10  ){
-                        
-                        self.econPointLabel.text = "-2.0"
-                    } else if Float((singlePlayerPoint?.economy?["1"])!) > 11{
-                        
-                        self.econPointLabel.text = "-3.0"
-                    }else{
-                        self.econPointLabel.text = "0.0"
-                    }
-                }
+            if singlePlayerPoint?.penalty_missed != nil{
                 
-                if singlePlayerPoint?.runouts != nil{
-                    self.runOutPointLabel.text = "\(Float((singlePlayerPoint?.runouts?["1"])!) * 6.0)"
-                }
-                if singlePlayerPoint?.stumbeds != nil{
-                    self.stumpingPointLabel.text = "\(Float((singlePlayerPoint?.stumbeds?["1"])!) * 6.0)"
+                self.penalty_missedPointLabel.text = "\(Float((singlePlayerPoint?.penalty_missed)!) * -2.0)"
+            }
+            
+            if singlePlayerPoint?.penalty_saved != nil{
+                
+                self.penalty_savedPointLabel.text = "\(Float((singlePlayerPoint?.penalty_saved)!) * 9.0)"
+            }
+//            if singlePlayerPoint?.penalty_scored != nil{
+//
+//                self.penalty_scoredPointLabel.text = "\(Float((singlePlayerPoint?.penalty_scored)!) * -2.0)"
+//            }
+
+            if singlePlayerPoint?.red_card != nil{
+                    self.red_cardPointLabel.text = "\(Float((singlePlayerPoint?.red_card)!) * -3.0)"
+            }
+            if singlePlayerPoint?.tackles != nil{
                     
-                }
+                    let tacklesPoint:Float = Float((singlePlayerPoint?.tackles)!/3)
+                    self.tacklesPointLabel.text = "\( tacklesPoint.rounded(.down) * 1)"
+            }
+            if singlePlayerPoint?.yellow_card != nil{
+                
+                 self.yellow_cardPointLabel.text = "\(Float((singlePlayerPoint?.yellow_card)!) * -1.0)"
+            }
+            
         }else{
             
             self.view.makeToast("Each player's detailed points breakdown will be available when the match is completed and the completion of reviewing and updating individual players point calculation via our web server".localized)

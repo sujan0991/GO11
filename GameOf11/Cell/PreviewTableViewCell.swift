@@ -95,6 +95,30 @@ func setInfo( players:[Player])  {
                 firstPlayerImage.kf.setImage(with: url1)
                 
                 if url1 == nil{
+                  
+                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                        
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
+                    }else{
+                        
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                        }
+                        
+                    }
+                    
+                }
+            }else {
+                
+                if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                     
                     if player.teamBelong == 1{
                         
@@ -102,16 +126,17 @@ func setInfo( players:[Player])  {
                     }else{
                         firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
                     }
-                    
-                }
-            }else {
-                
-                if player.teamBelong == 1{
-                    
-                    firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
                 }else{
-                    firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                    }
+                    
                 }
+                
             }
             
        
@@ -129,23 +154,45 @@ func setInfo( players:[Player])  {
                 
                 if url1 == nil{
                     
-                    if player.teamBelong == 1{
+                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                         
-                        secondPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        }
                     }else{
                         
-                        secondPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                        }
+                        
                     }
                     
                 }
 
             }else{
-                if player.teamBelong == 1{
+                if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                     
-                    secondPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
                 }else{
                     
-                    secondPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                    }
+                    
                 }
             }
             
@@ -161,20 +208,46 @@ func setInfo( players:[Player])  {
                 
                 if url1 == nil{
                     
-                    if player.teamBelong == 1{
-                        thirdPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                        
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        }
                     }else{
-                        thirdPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                        }
+                        
                     }
                     
                 }
 
             }else{
                 
-                if player.teamBelong == 1{
-                    thirdPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
                 }else{
-                    thirdPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                    }
+                    
                 }
             }
 
@@ -191,20 +264,46 @@ func setInfo( players:[Player])  {
                 
                 if url1 == nil{
                     
-                    if player.teamBelong == 1{
-                        fourthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                        
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        }
                     }else{
-                        fourthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                        }
+                        
                     }
                     
                 }
 
             }else{
                 
-                if player.teamBelong == 1{
-                    fourthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
                 }else{
-                    fourthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                    }
+                    
                 }
             }
 
@@ -229,20 +328,46 @@ func setInfo( players:[Player])  {
                 
                 if url1 == nil{
                     
-                    if player.teamBelong == 1{
-                        fifthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                        
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        }
                     }else{
-                        fifthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                        }
+                        
                     }
                     
                 }
 
             }else{
                 
-                if player.teamBelong == 1{
-                    fifthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
                 }else{
-                    fifthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                    }
+                    
                 }
             }
     
@@ -268,20 +393,46 @@ func setInfo( players:[Player])  {
                 
                 if url1 == nil{
                     
-                    if player.teamBelong == 1{
-                        sixthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                        
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        }
                     }else{
-                        sixthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                        
+                        if player.teamBelong == 1{
+                            
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                        }else{
+                            firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                        }
+                        
                     }
                     
                 }
 
             }else{
                 
-                if player.teamBelong == 1{
-                    sixthPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    }
                 }else{
-                    sixthPlayerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                    
+                    if player.teamBelong == 1{
+                        
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                    }else{
+                        firstPlayerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                    }
+                    
                 }
             }
             

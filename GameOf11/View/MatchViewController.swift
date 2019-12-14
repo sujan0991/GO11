@@ -41,6 +41,10 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var banglabutton: UIButton!
     @IBOutlet weak var changeLanguageLabel: UILabel!
     
+    @IBOutlet weak var noContestImageView: UIImageView!
+    @IBOutlet weak var noMatchImageView: UIImageView!
+    
+    
     
     @IBOutlet weak var matchListTableView: UITableView!
     
@@ -269,6 +273,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 self.matchListTableView.reloadData()
                 if self.matches.count == 0{
                     
+                    self.noContestImageView.image = UIImage.init(named: "trophy_no_contest_icon")
                     self.noContestView.isHidden = false
                 }else{
                     self.noContestView.isHidden = true
@@ -286,7 +291,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 if self.matches.count == 0{
                     
                     self.noContestLabel.text = "You haven't join any live contests. Join the upcoming match contests and prove your skills.".localized
-
+                    self.noContestImageView.image = UIImage.init(named: "trophy_no_contest_icon")
                     self.noContestView.isHidden = false
                     
                 }else{
@@ -318,6 +323,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
       //  print("get football data...............")
         
+        self.noMatchView.isHidden = true
         self.noContestView.isHidden = true
         
         if (matchListTableView != nil)
@@ -344,6 +350,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                     self.selectAmatchLabel.isHidden = true
                     
                     self.noMatchView.isHidden = false
+                    
                 }else{
                     
                     self.noMatchView.isHidden = true
@@ -364,9 +371,13 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 self.matchListTableView.reloadData()
                 if self.footBallmatches.count == 0{
                     
+                     self.noContestImageView.image = UIImage.init(named: "trophy_no_contest_football")
                     self.noContestView.isHidden = false
+                    
                 }else{
+                    
                     self.noContestView.isHidden = true
+                    
                 }
                 
             }
@@ -381,7 +392,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 if self.footBallmatches.count == 0{
                     
                     self.noContestLabel.text = "You haven't join any live contests. Join the upcoming match contests and prove your skills.".localized
-                    
+                    self.noContestImageView.image = UIImage.init(named: "trophy_no_contest_football")
                     self.noContestView.isHidden = false
                     
                 }else{
@@ -561,7 +572,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
 
                 }
 
-            //    cell.setFootballInfo(match)
+                cell.setFootballInfo(match)
 
                 if match.totalJoinedContests ?? 0 > 0 {
 

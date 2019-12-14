@@ -151,6 +151,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         topRanklabel.text = "Top Rank".localized
         matchlabel.text = "Matches".localized
         
+        contestFootballLabel.text = "Contests".localized
+        topRankFootballlabel.text = "Top Rank".localized
+        matchFootballlabel.text = "Matches".localized
     
         personalDetailLabel.text = "Personal Details".localized
         
@@ -620,9 +623,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         pageControl.currentPage = Int(pageIndex)
         
         if pageIndex == 0{
-            gameTypeImageView.image = UIImage.init(named: "match_icon")
+            gameTypeImageView.image = UIImage.init(named: "icon_cricket_placing")
         }else{
-            gameTypeImageView.image = UIImage.init(named: "football-icon")
+            gameTypeImageView.image = UIImage.init(named: "icon_football_placing")
         }
     }
     

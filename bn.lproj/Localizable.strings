@@ -300,3 +300,17 @@
 "New update is available." = "নতুন আপডেট ব্যবহারযোগ্য।";
 "SKIP" = "স্কিপ";
 "UPDATE" = "আপডেট";
+
+"Pick 1 Goal-Keeper" = "১ জন গোল-কিপার নিন";
+"Pick 3-5 Defenders" = "৩-৫ জন ডিফেন্ডার নিন";
+"Pick 3-5 Midfielders" = "৩-৫ জন মিডফিল্ডার নিন";
+"Pick 1-3 Strikers"  = "১-৩ জন স্ট্রাইকার নিন";
+
+"Not more than 5 Defenders" = "৫ জন ডিফেন্ডার এর বেশি না";
+"Minimum 3 Midfielders" = "সর্বনিম্ন ৩ জন মিডফিল্ডার";
+"Minimum 1 Striker" = "সর্বনিম্ন ১ জন স্ট্রাইকার";
+"Minimum 1 Goal Keeper" = "সর্বনিম্ন ১ জন গোল-কিপার";
+"Not more than 1 Goal Keeper" = "১ জন গোল-কিপার এর বেশি না";
+"Minimum 3 Defenders" = "সর্বনিম্ন ৩ জন ডিফেন্ডার";
+"Not more than 5 Midfielders" = "৫ জন মিডফিল্ডার এর বেশি না";
+"Not more than 3 Strikers" = "৩ জন স্ট্রাইকার এর বেশি না";

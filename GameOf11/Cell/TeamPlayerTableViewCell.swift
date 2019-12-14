@@ -9,7 +9,7 @@
 import UIKit
 
 class TeamPlayerTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var playerImage: UIImageView!
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerDetails: UILabel!
@@ -24,14 +24,14 @@ class TeamPlayerTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-         playerImage.makeCircular(borderWidth: 0, borderColor: .clear)
-         captainButton.makeCircular(borderWidth: 0.5, borderColor: UIColor.darkGray)
-         viceCaptainButton.makeCircular(borderWidth: 0.5, borderColor: UIColor.darkGray)
+        playerImage.makeCircular(borderWidth: 0, borderColor: .clear)
+        captainButton.makeCircular(borderWidth: 0.5, borderColor: UIColor.darkGray)
+        viceCaptainButton.makeCircular(borderWidth: 0.5, borderColor: UIColor.darkGray)
     }
     
     func setInfo( player:Player ,  squad : PlayingTeamsData)  {
         
-       // print(player.toJSON())
+        // print(player.toJSON())
         
         playerName.text = player.name
         
@@ -56,7 +56,7 @@ class TeamPlayerTableViewCell: UITableViewCell {
             viceCaptainButton.layer.borderColor = UIColor.darkGray.cgColor
             viceCaptainButton.setTitleColor(UIColor.init(named: "brand_txt_color_black"), for: .normal)
         }
-
+        
         
         if(player.isCaptain == true)
         {
@@ -70,17 +70,17 @@ class TeamPlayerTableViewCell: UITableViewCell {
         }
         else
         {
-             offerImage.isHidden = true
+            offerImage.isHidden = true
         }
         
         
         if player.teamBelong == 1
         {
-        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
-            teamNamelabel.text = squad.firstTeam?.teamKey?.uppercased() ?? ""
-        }else{
-            
-            teamNamelabel.text = squad.firstTeam?.code?.uppercased() ?? ""
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                teamNamelabel.text = squad.firstTeam?.teamKey?.uppercased() ?? ""
+            }else{
+                
+                teamNamelabel.text = squad.firstTeam?.code?.uppercased() ?? ""
             }
             
             playerDetails.text = " | \(player.role?.uppercased() ?? "") | \(player.creditPoints ?? 0)"
@@ -99,23 +99,45 @@ class TeamPlayerTableViewCell: UITableViewCell {
         }
         let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
         playerImage.kf.setImage(with: url1)
-        
-        if player.teamBelong == 1{
-            
-            if player.playerImage == nil{
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            if player.teamBelong == 1{
                 
-                playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
-            }else if url1 == nil{
-                playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                if player.playerImage == nil{
+                    
+                    playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }else if url1 == nil{
+                    playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }
+            }else{
+                
+                if player.playerImage == nil{
+                    
+                    playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }else if url1 == nil{
+                    playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }
             }
+            
         }else{
             
-            if player.playerImage == nil{
+            if player.teamBelong == 1{
                 
-                playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
-            }else if url1 == nil{
-                playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                if player.playerImage == nil{
+                    
+                    playerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                }else if url1 == nil{
+                    playerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                }
+            }else{
+                
+                if player.playerImage == nil{
+                    
+                    playerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                }else if url1 == nil{
+                    playerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                }
             }
+            
         }
         
         
@@ -124,13 +146,13 @@ class TeamPlayerTableViewCell: UITableViewCell {
         self.setNeedsLayout()
         
     }
-   
-
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         
         
     }
-
+    
 }

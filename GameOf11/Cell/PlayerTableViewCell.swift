@@ -57,35 +57,46 @@ class PlayerTableViewCell: UITableViewCell {
         {
              if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 teamCode.text = squad.firstTeam?.teamKey?.uppercased()
+                if player.playerImage == nil{
+                    
+                    playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }else if url1 == nil{
+                    playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
+                }
                 
              }else{
                 
                 teamCode.text = squad.firstTeam?.code?.uppercased()
+                if player.playerImage == nil{
+                    
+                    playerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                }else if url1 == nil{
+                    playerImage.image = UIImage.init(named: "player_football_avatar_team_1.png")
+                }
                 
              }
             
-            if player.playerImage == nil{
-                
-                playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
-            }else if url1 == nil{
-                playerImage.image = UIImage.init(named: "player_avatar_team_1.png")
-            }
+            
             
         }
         else
         {
              if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 teamCode.text = squad.secondTeam?.teamKey?.uppercased()
-                
+                if player.playerImage == nil{
+                    playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }else if url1 == nil{
+                    playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
+                }
              }else{
                 teamCode.text = squad.secondTeam?.code?.uppercased()
-  
+                if player.playerImage == nil{
+                    playerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                }else if url1 == nil{
+                    playerImage.image = UIImage.init(named: "player_football_avatar_team_2.png")
+                }
             }
-            if player.playerImage == nil{
-                playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
-            }else if url1 == nil{
-                playerImage.image = UIImage.init(named: "player_avatar_team_2.png")
-            }
+            
 
         }
         

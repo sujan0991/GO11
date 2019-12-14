@@ -51,6 +51,10 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         self.statusLabel.text = String.init(format: "%@ Left".localized,self.parentMatch?.joiningLastTime ?? "" )
         
         
+        self.firstTeamFlag.image = UIImage.init(named: "teamPlaceHolder_icon")
+        self.secondTeamFlag.image = UIImage.init(named: "teamPlaceHolder_icon")
+        
+        
         let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatch?.teams.item(at: 0).logo ?? "")")
         let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatch?.teams.item(at: 1).logo ?? "")")
         self.firstTeamFlag.kf.setImage(with: url1)
@@ -61,6 +65,9 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         self.firstTeamName.text = self.parentMatchFootball?.teams.item(at: 0).code ?? ""
         self.secondTeamName.text = self.parentMatchFootball?.teams.item(at: 1).code ?? ""
         self.statusLabel.text = String.init(format: "%@ Left".localized,self.parentMatchFootball?.joiningLastTime ?? "" )
+        
+        self.firstTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
+        self.secondTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
         
         
         let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatchFootball?.teams.item(at: 0).logo ?? "")")

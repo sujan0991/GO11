@@ -1166,7 +1166,7 @@ class LeaderBoardData: Glossy {
 
 class TeamScoreData: Glossy {
     
-    
+    var team_code:String?
     var team_name:String?
     var team_key:String?
     var team_logo:String?
@@ -1175,6 +1175,7 @@ class TeamScoreData: Glossy {
     var score:String?
     
     required init?(json: Gloss.JSON) {
+        team_code = "team_code" <~~ json
         team_name = "team_name" <~~ json
         team_key = "team_key" <~~ json
         team_logo = "team_logo" <~~ json
@@ -1185,6 +1186,7 @@ class TeamScoreData: Glossy {
     
     func toJSON() -> Gloss.JSON? {
         return jsonify([
+            "team_code" ~~> team_code,
             "team_name" ~~> team_name,
             "team_key" ~~> team_key,
             "team_logo" ~~> team_logo,
@@ -1206,6 +1208,7 @@ class MatchScoreData: Glossy {
     var result:String?
     var teams: [TeamScoreData] = []
     
+    var playing_time: String?
     
     required init?(json: Gloss.JSON) {
         match_id = "match_id" <~~ json
@@ -1214,6 +1217,7 @@ class MatchScoreData: Glossy {
         match_name = "match_name" <~~ json
         result = "result" <~~ json
         teams = "teams" <~~ json ?? []
+        playing_time = "playing_time" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -1224,6 +1228,7 @@ class MatchScoreData: Glossy {
             "match_name" ~~> match_name,
             "result" ~~> result,
             "teams" ~~> teams,
+             "playing_time" ~~> playing_time,
             ])
     }
 }
@@ -1288,6 +1293,76 @@ class PointBreakDown: Glossy {
     }
 }
 
+class PointBreakDownFootball: Glossy {
+    
+    
+    var player_id:Int?
+    var assist:Int?
+    var cleansheet:Int?
+    
+    var goal_conceded:Int?
+    var goal_saved:Int?
+    var goals:Int?
+    
+    var minutes:Int?
+    var own_goal:Int?
+    var passes:Int?
+    
+    var penalty_missed:Int?
+    var penalty_saved:Int?
+    var penalty_scored:Int?
+    
+    var red_card:Int?
+    var tackles:Int?
+    var yellow_card:Int?
+    
+    
+    
+    required init?(json: Gloss.JSON) {
+        player_id = "player_id" <~~ json
+        assist = "assist" <~~ json
+        cleansheet = "cleansheet" <~~ json
+        
+        goal_conceded = "goal_conceded" <~~ json
+        goal_saved = "goal_saved" <~~ json
+        goals = "goals" <~~ json
+        
+        minutes = "minutes" <~~ json
+        own_goal = "own_goal" <~~ json
+        passes = "passes" <~~ json
+        
+        penalty_missed = "penalty_missed" <~~ json
+        penalty_saved = "penalty_saved" <~~ json
+        penalty_scored = "penalty_scored" <~~ json
+        
+        red_card = "red_card" <~~ json
+        tackles = "tackles" <~~ json
+        yellow_card = "yellow_card" <~~ json
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "player_id" ~~> player_id ,
+            "assist" ~~> assist,
+            "cleansheet" ~~> cleansheet,
+            "goal_conceded" ~~> goal_conceded,
+            "goal_saved" ~~> goal_saved,
+            "goals" ~~> goals,
+            "minutes" ~~> minutes ,
+            "own_goal" ~~> own_goal,
+            "passes" ~~> passes,
+            
+            "penalty_missed" ~~> penalty_missed,
+            "penalty_saved" ~~> penalty_saved,
+            "penalty_scored" ~~> penalty_scored,
+            
+            "red_card" ~~> red_card,
+            "tackles" ~~> tackles,
+            "yellow_card" ~~> yellow_card,
+            ])
+    }
+}
+
 
 class PlayerInfoData: Glossy {
     
@@ -1305,6 +1380,7 @@ class PlayerInfoData: Glossy {
     var is_in_playing_xi:String?
     var point_breakdown: PointBreakDown?
     
+    var point_breakdown_football: PointBreakDownFootball?
     
     required init?(json: Gloss.JSON) {
         player_id = "player_id" <~~ json
@@ -1317,6 +1393,7 @@ class PlayerInfoData: Glossy {
         last_updated_time = "last_updated_time" <~~ json
         is_in_playing_xi = "is_in_playing_xi" <~~ json
         point_breakdown = "point_breakdown" <~~ json
+        point_breakdown_football = "point_breakdown" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -1333,6 +1410,7 @@ class PlayerInfoData: Glossy {
             "is_in_playing_xi" ~~> is_in_playing_xi,
             "point_breakdown" ~~> point_breakdown,
             
+            "point_breakdown_football" ~~> point_breakdown_football,
             ])
     }
 }

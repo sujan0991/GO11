@@ -53,6 +53,12 @@ class UpComingMatchCell: UITableViewCell {
             
            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(match.teams.item(at: 0).logo ?? "")")
            firstTeamFlag.kf.setImage(with: url1)
+            
+        }else{
+   
+           self.firstTeamFlag.image = UIImage.init(named: "teamPlaceHolder_icon")
+                
+            
         }
         
         if match.teams.item(at: 1).logo != nil{
@@ -60,6 +66,12 @@ class UpComingMatchCell: UITableViewCell {
             let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(match.teams.item(at: 1).logo ?? "")")
             
             secondTeamFlag.kf.setImage(with: url2)
+        }else{
+            
+  
+            self.secondTeamFlag.image = UIImage.init(named: "teamPlaceHolder_icon")
+                
+          
         }
         
         
@@ -84,6 +96,9 @@ class UpComingMatchCell: UITableViewCell {
             
             let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(match.teams.item(at: 0).logo ?? "")")
             firstTeamFlag.kf.setImage(with: url1)
+        }else{
+            self.firstTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
+            
         }
         
         if match.teams.item(at: 1).logo != nil{
@@ -91,6 +106,9 @@ class UpComingMatchCell: UITableViewCell {
             let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(match.teams.item(at: 1).logo ?? "")")
             
             secondTeamFlag.kf.setImage(with: url2)
+        }else{
+            self.secondTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
+            
         }
         
         

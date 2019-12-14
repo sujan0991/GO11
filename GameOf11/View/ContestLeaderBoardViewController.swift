@@ -9,12 +9,12 @@
 import UIKit
 
 class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-   
+    
     
     
     var contest_id: Int?
     var match_id: Int?
-
+    
     var page_no = 1
     var total_page_no : Int!
     
@@ -23,7 +23,7 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     var leaderBoardData:LeaderBoardData?
     var contestName:String!
     var sortedleaderBoard:[LeaderBoardUserListData] = []
-   
+    
     let formatter = NumberFormatter()
     
     @IBOutlet weak var navTitleLabel: UILabel!
@@ -46,6 +46,15 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     @IBOutlet weak var secondTeamScoreLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
     
+    @IBOutlet weak var scoreViewFootball: UIView!
+    @IBOutlet weak var firstTeamnameInScore: UILabel!
+    
+    @IBOutlet weak var firstTeamScoreFootballLabel: UILabel!
+    @IBOutlet weak var secondTeamNameInScore: UILabel!
+    @IBOutlet weak var secondTeamScoreFootballLabel
+    : UILabel!
+    @IBOutlet weak var playingTimeLabel: UILabel!
+    
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
@@ -64,9 +73,9 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        placeNavBar(withTitle: "LEADERBOARD", isBackBtnVisible: true)
-//
+        
+        //        placeNavBar(withTitle: "LEADERBOARD", isBackBtnVisible: true)
+        //
         navTitleLabel.text = "CONTEST LEADERBOARD".localized
         vsLabel.makeCircular(borderWidth: 1, borderColor: UIColor.init(named: "HighlightGrey")!)
         
@@ -90,7 +99,9 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapOnImageView(_:)))
         userImageView.isUserInteractionEnabled = true
         userImageView.addGestureRecognizer(tap)
-
+        
+        scoreViewFootball.isHidden = true
+        
         getData()
         
     }
@@ -98,67 +109,67 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     @objc func tapOnImageView(_ sender: UITapGestureRecognizer? = nil) {
         
         print("tap on image view")
-      if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakDownViewController") as? PointBreakDownViewController
-      
-        vc?.matchId = match_id ?? 0
-        vc?.teamId = leaderBoardData?.user_team_id ?? 0
-        vc?.username = leaderBoardData?.username ?? ""
-        vc?.teamName = leaderBoardData?.user_team_name ?? ""
-        vc?.matchType = matchData?.match_format
-        vc?.match_status_id = matchData?.match_status_id ?? 0
-        self.present(vc!, animated: true) {
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakDownViewController") as? PointBreakDownViewController
             
-            print("open PointBreakDownViewController")
-        }
-      }else{
-        
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakdownFootballViewController") as? PointBreakdownFootballViewController
-        
-        vc?.matchId = match_id ?? 0
-        vc?.teamId = leaderBoardData?.user_team_id ?? 0
-        vc?.username = leaderBoardData?.username ?? ""
-        vc?.teamName = leaderBoardData?.user_team_name ?? ""
-      //  vc?.matchType = matchData?.match_format
-        vc?.match_status_id = matchData?.match_status_id ?? 0
-        self.present(vc!, animated: true) {
+            vc?.matchId = match_id ?? 0
+            vc?.teamId = leaderBoardData?.user_team_id ?? 0
+            vc?.username = leaderBoardData?.username ?? ""
+            vc?.teamName = leaderBoardData?.user_team_name ?? ""
+            vc?.matchType = matchData?.match_format
+            vc?.match_status_id = matchData?.match_status_id ?? 0
+            self.present(vc!, animated: true) {
+                
+                print("open PointBreakDownViewController")
+            }
+        }else{
             
-            print("open PointBreakDownViewController")
-        }
-        
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakdownFootballViewController") as? PointBreakdownFootballViewController
+            
+            vc?.matchId = match_id ?? 0
+            vc?.teamId = leaderBoardData?.user_team_id ?? 0
+            vc?.username = leaderBoardData?.username ?? ""
+            vc?.teamName = leaderBoardData?.user_team_name ?? ""
+            //  vc?.matchType = matchData?.match_format
+            vc?.match_status_id = matchData?.match_status_id ?? 0
+            self.present(vc!, animated: true) {
+                
+                print("open PointBreakDownViewController")
+            }
+            
         }
     }
     
     func getData(){
-      
-     if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+        
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
-        APIManager.manager.getMatchScore(matchId: "\(match_id ?? 0)") { (Bool, data, msg) in
-            
-            print("getMatchScore",data!)
-            
-            if data != nil{
+            APIManager.manager.getMatchScore(matchId: "\(match_id ?? 0)") { (Bool, data, msg) in
                 
-                self.matchData = data
-                self.populateTeamView()
+                print("getMatchScore",data!)
+                
+                if data != nil{
+                    
+                    self.matchData = data
+                    self.populateTeamView()
+                }
+                
+            }
+        }else{
+            
+            APIManager.manager.getFootballMatchScore(matchId: "\(match_id ?? 0)") { (Bool, data, msg) in
+                
+                print("getMatchScore",data!)
+                
+                if data != nil{
+                    
+                    self.matchData = data
+                    self.populateTeamView()
+                }
+                
             }
             
-        }
-     }else{
-        
-        APIManager.manager.getFootballMatchScore(matchId: "\(match_id ?? 0)") { (Bool, data, msg) in
-            
-            print("getMatchScore",data!)
-            
-            if data != nil{
-                
-                self.matchData = data
-                self.populateTeamView()
-            }
-            
-        }
-        
         }
         
         getLeaderBoard(contestId: contest_id ?? 0, pageNo: page_no)
@@ -169,46 +180,48 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
         
         var c_id:String = String(describing: contestId)
         var p_no:String = String(describing: pageNo)
-       
+        
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
-        APIManager.manager.getLeaderBoardOfCntest(contestId: c_id as String, pageNo: p_no) { (Bool, data, msg) in
-            
-            print("getLeaderBoardOfCntest",data!)
-            
-            
-            if self.page_no == 1{
+            APIManager.manager.getLeaderBoardOfCntest(contestId: c_id as String, pageNo: p_no) { (Bool, data, msg) in
                 
-                self.total_page_no = data?.total_page_number
+                print("getLeaderBoardOfCntest",data!)
                 
-                self.leaderBoardData = data
                 
-            }else{
-                
-                self.leaderBoardData?.leaderboard.append(contentsOf: data?.leaderboard ?? [])
-            }
-            
-            self.sortedleaderBoard = self.leaderBoardData?.leaderboard.sorted(by: {
-                (player1: LeaderBoardUserListData, player2: LeaderBoardUserListData) -> Bool in
-                
-                if let rank1 = player1.rank,
-                    let rank2 = player2.rank{
+                if self.page_no == 1{
                     
-                    return rank1 < rank2
+                    self.total_page_no = data?.total_page_number
+                    
+                    self.leaderBoardData = data
+                    
+                }else{
+                    
+                    self.leaderBoardData?.leaderboard.append(contentsOf: data?.leaderboard ?? [])
                 }
                 
+                self.sortedleaderBoard = self.leaderBoardData?.leaderboard.sorted(by: {
+                    (player1: LeaderBoardUserListData, player2: LeaderBoardUserListData) -> Bool in
+                    
+                    if let rank1 = player1.rank,
+                        let rank2 = player2.rank{
+                        
+                        return rank1 < rank2
+                    }
+                    
+                    
+                    return true
+                }) ?? []
                 
-                return true
-            }) ?? []
-
-            
-            self.populateUserView()
-            
-            self.leaderBoardTabelView.reloadData()
-            self.leaderBoardTabelView.isHidden = false
-            
-        }
+                
+                self.populateUserView()
+                
+                self.leaderBoardTabelView.reloadData()
+                self.leaderBoardTabelView.isHidden = false
+                
+            }
         }else{
+            
+            scoreViewFootball.isHidden = false
             
             APIManager.manager.getLeaderBoardOfCntestFootball(contestId: c_id as String, pageNo: p_no) { (Bool, data, msg) in
                 
@@ -252,220 +265,332 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     
     @IBAction func refreshButtonAction(_ sender: Any) {
         
-         page_no = 1
+        page_no = 1
         
-         getData()
+        getData()
         
         let indexPath = NSIndexPath(row: 0, section: 0)
         self.leaderBoardTabelView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
-    
+        
     }
     
     func populateTeamView() {
         
         if matchData!.match_status_id == 2 {//live
             
-           
-         for singleTeam in matchData!.teams {
-            
-          if singleTeam.is_first_batting == 1{
-            
-            let singleTeam = matchData!.teams[0]
-            self.firstTeamNameLabel.text = singleTeam.team_key?.uppercased()
-            
-            
-            if singleTeam.team_logo != nil{
-
-                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam.team_logo!)")
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 
-                
-                self.firstTeamFlagImageView.kf.setImage(with: url1)
-            }
-            
-            if singleTeam.score != nil{
-                
-             //   if Language.language == Language.english{
+                for singleTeam in matchData!.teams {
                     
-                    self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing: singleTeam.score!))"
-//                }else{
-//
-//                    let bnNumberString = self.formatter.string(for: singleTeam.score!)
-//                    self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing:bnNumberString!))"
-//                }
-            
+                    if singleTeam.is_first_batting == 1{
+                        
+                        let singleTeam = matchData!.teams[0]
+                        self.firstTeamNameLabel.text = singleTeam.team_key?.uppercased()
+                        
+                        
+                        if singleTeam.team_logo != nil{
+                            
+                            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam.team_logo!)")
+                            
+                            
+                            self.firstTeamFlagImageView.kf.setImage(with: url1)
+                        }
+                        
+                        if singleTeam.score != nil{
+                            
+                            //   if Language.language == Language.english{
+                            
+                            self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing: singleTeam.score!))"
+                            //                }else{
+                            //
+                            //                    let bnNumberString = self.formatter.string(for: singleTeam.score!)
+                            //                    self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing:bnNumberString!))"
+                            //                }
+                            
+                        }else{
+                            //  if Language.language == Language.english{
+                            
+                            self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - 0/0 (0.0)"
+                            //                }else{
+                            //                    self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - ০/০ (০.০)"
+                            //                }
+                        }
+                        
+                    }else{
+                        
+                        let singleTeam1 = matchData!.teams[1]
+                        secondTeamNameLabel.text = singleTeam1.team_key?.uppercased()
+                        
+                        if singleTeam1.team_logo != nil{
+                            
+                            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam1.team_logo!)")
+                            self.secondTeamFlagImageView.kf.setImage(with: url1)
+                        }
+                        
+                        if singleTeam1.score != nil{
+                            
+                            // if Language.language == Language.english{
+                            
+                            self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing: singleTeam1.score!))"
+                            //                }else{
+                            //
+                            //                    let bnNumberString = self.formatter.string(for: singleTeam1.score!)
+                            //                    self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing:bnNumberString!))"
+                            //                }
+                            
+                        }else{
+                            // if Language.language == Language.english{
+                            
+                            self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - 0/0 (0.0)"
+                            //                }else{
+                            //                    self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - ০/০ (০.০)"
+                            //                }
+                        }
+                        
+                    }
+                }
             }else{
-              //  if Language.language == Language.english{
+                
+                let singleTeam = matchData!.teams[0]
+                self.firstTeamNameLabel.text = singleTeam.team_code?.uppercased()
+                self.firstTeamnameInScore.text = singleTeam.team_name?.uppercased()
+                self.firstTeamFlagImageView.image = UIImage.init(named: "placeholder_football_team_logo")
+                
+                if singleTeam.team_logo != nil{
                     
-                   self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - 0/0 (0.0)"
-//                }else{
-//                    self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - ০/০ (০.০)"
-//                }
+                    let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam.team_logo!)")
+                    
+                    
+                    self.firstTeamFlagImageView.kf.setImage(with: url1)
+                }
+                
+                let singleTeam1 = matchData!.teams[1]
+                secondTeamNameLabel.text = singleTeam1.team_code?.uppercased()
+                secondTeamNameInScore.text = singleTeam1.team_name?.uppercased()
+                self.secondTeamFlagImageView.image = UIImage.init(named: "placeholder_football_team_logo")
+                
+                if singleTeam1.team_logo != nil{
+                    
+                    let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam1.team_logo!)")
+                    
+                    
+                    self.secondTeamFlagImageView.kf.setImage(with: url1)
+                }
+                
+                if matchData?.playing_time != nil{
+                    playingTimeLabel.text =  matchData?.playing_time!
+                }
+                
+                if singleTeam.score != nil{
+                    self.firstTeamScoreFootballLabel.text = "\(String(describing: singleTeam.score!))"
+                }
+                if singleTeam1.score != nil{
+                    self.secondTeamScoreFootballLabel.text = "\(String(describing: singleTeam1.score!))"
+                }
+                
             }
             
-           }else{
-            
-            let singleTeam1 = matchData!.teams[1]
-            secondTeamNameLabel.text = singleTeam1.team_key?.uppercased()
-            
-            if singleTeam1.team_logo != nil{
-                
-                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam1.team_logo!)")
-                self.secondTeamFlagImageView.kf.setImage(with: url1)
-            }
-
-            if singleTeam1.score != nil{
-                
-               // if Language.language == Language.english{
-                    
-                    self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing: singleTeam1.score!))"
-//                }else{
-//
-//                    let bnNumberString = self.formatter.string(for: singleTeam1.score!)
-//                    self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing:bnNumberString!))"
-//                }
-                
-            }else{
-               // if Language.language == Language.english{
-                    
-                    self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - 0/0 (0.0)"
-//                }else{
-//                    self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - ০/০ (০.০)"
-//                }
-            }
-            
-              }
-           }
         }
         else if matchData!.match_status_id == 3 {//completed
             
-            
-            for singleTeam in matchData!.teams {
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 
-                if singleTeam.is_first_batting == 1{
+                
+                for singleTeam in matchData!.teams {
                     
-                    let singleTeam = matchData!.teams[0]
-                    self.firstTeamNameLabel.text = singleTeam.team_key?.uppercased()
-                    
-                    if singleTeam.team_logo != nil{
+                    if singleTeam.is_first_batting == 1{
                         
-                        let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam.team_logo!)")
+                        let singleTeam = matchData!.teams[0]
+                        self.firstTeamNameLabel.text = singleTeam.team_key?.uppercased()
                         
-                        
-                        self.firstTeamFlagImageView.kf.setImage(with: url1)
-                    }
-                    if singleTeam.score != nil{
-                      //  if Language.language == Language.english{
+                        if singleTeam.team_logo != nil{
+                            
+                            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam.team_logo!)")
+                            
+                            
+                            self.firstTeamFlagImageView.kf.setImage(with: url1)
+                        }
+                        if singleTeam.score != nil{
+                            //  if Language.language == Language.english{
                             
                             self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing: singleTeam.score!))"
-//                        }else{
-//
-//                            let bnNumberString = self.formatter.string(for: singleTeam.score!)
-//                            self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing:bnNumberString!))"
-//                        }
-                        
-                    }else{
-                      //  if Language.language == Language.english{
+                            //                        }else{
+                            //
+                            //                            let bnNumberString = self.formatter.string(for: singleTeam.score!)
+                            //                            self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing:bnNumberString!))"
+                            //                        }
+                            
+                        }else{
+                            //  if Language.language == Language.english{
                             
                             self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - 0/0 (0.0)"
-//                        }else{
-//                            self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - ০/০ (০.০)"
-//                        }
-                    }
-                    
-                }else{
-                    
-                    let singleTeam1 = matchData!.teams[1]
-                    secondTeamNameLabel.text = singleTeam1.team_key?.uppercased()
-                    if singleTeam1.team_logo != nil{
-                        
-                        let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam1.team_logo!)")
-                        
-                        
-                        self.secondTeamFlagImageView.kf.setImage(with: url1)
-                    }
-                    if singleTeam1.score != nil{
-                       // if Language.language == Language.english{
-                            
-                            self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing: singleTeam1.score!))"
-//                        }else{
-//
-//                            let bnNumberString = self.formatter.string(for: singleTeam1.score!)
-//                            self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing:bnNumberString!))"
-//                        }
+                            //                        }else{
+                            //                            self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - ০/০ (০.০)"
+                            //                        }
+                        }
                         
                     }else{
-                      //  if Language.language == Language.english{
+                        
+                        let singleTeam1 = matchData!.teams[1]
+                        secondTeamNameLabel.text = singleTeam1.team_key?.uppercased()
+                        if singleTeam1.team_logo != nil{
+                            
+                            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam1.team_logo!)")
+                            
+                            
+                            self.secondTeamFlagImageView.kf.setImage(with: url1)
+                        }
+                        if singleTeam1.score != nil{
+                            // if Language.language == Language.english{
+                            
+                            self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing: singleTeam1.score!))"
+                            //                        }else{
+                            //
+                            //                            let bnNumberString = self.formatter.string(for: singleTeam1.score!)
+                            //                            self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing:bnNumberString!))"
+                            //                        }
+                            
+                        }else{
+                            //  if Language.language == Language.english{
                             
                             self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - 0/0 (0.0)"
-//                        }else{
-//                            self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - ০/০ (০.০)"
-//                        }
+                            //                        }else{
+                            //                            self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - ০/০ (০.০)"
+                            //                        }
+                        }
+                        
+                        
                     }
-                    
-                    
                 }
+            }else{
+                
+                let singleTeam = matchData!.teams[0]
+                self.firstTeamNameLabel.text = singleTeam.team_code?.uppercased()
+                firstTeamnameInScore.text = singleTeam.team_name?.uppercased()
+                self.firstTeamFlagImageView.image = UIImage.init(named: "placeholder_football_team_logo")
+                
+                if singleTeam.team_logo != nil{
+                    
+                    let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam.team_logo!)")
+                    
+                    
+                    self.firstTeamFlagImageView.kf.setImage(with: url1)
+                }
+                
+                let singleTeam1 = matchData!.teams[1]
+                secondTeamNameLabel.text = singleTeam1.team_code?.uppercased()
+                secondTeamNameInScore.text = singleTeam1.team_name?.uppercased()
+                self.secondTeamFlagImageView.image = UIImage.init(named: "placeholder_football_team_logo")
+                
+                if singleTeam1.team_logo != nil{
+                    
+                    let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam1.team_logo!)")
+                    
+                    
+                    self.secondTeamFlagImageView.kf.setImage(with: url1)
+                }
+                //    if Language.language == Language.english{
+                if matchData?.playing_time != nil{
+                    playingTimeLabel.text =  matchData?.playing_time!
+                }
+                
+                if singleTeam.score != nil{
+                    self.firstTeamScoreFootballLabel.text = "\(String(describing: singleTeam.score!))"
+                }
+                if singleTeam1.score != nil{
+                    self.secondTeamScoreFootballLabel.text = "\(String(describing: singleTeam1.score!))"
+                }
+                
             }
         }else if matchData!.match_status_id == 1{//not started
             
-            let singleTeam = matchData!.teams[0]
-            self.firstTeamNameLabel.text = singleTeam.team_key?.uppercased()
-            if singleTeam.team_logo != nil{
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 
-                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam.team_logo!)")
+                let singleTeam = matchData!.teams[0]
+                self.firstTeamNameLabel.text = singleTeam.team_key?.uppercased()
+                self.firstTeamFlagImageView.image = UIImage.init(named: "teamPlaceHolder_icon")
                 
+                if singleTeam.team_logo != nil{
+                    
+                    let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam.team_logo!)")
+                    
+                    
+                    self.firstTeamFlagImageView.kf.setImage(with: url1)
+                }
                 
-                self.firstTeamFlagImageView.kf.setImage(with: url1)
-            }
-            
-            let singleTeam1 = matchData!.teams[1]
-            secondTeamNameLabel.text = singleTeam1.team_key?.uppercased()
-            if singleTeam1.team_logo != nil{
+                let singleTeam1 = matchData!.teams[1]
+                secondTeamNameLabel.text = singleTeam1.team_key?.uppercased()
                 
-                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam1.team_logo!)")
+                self.secondTeamFlagImageView.image = UIImage.init(named: "teamPlaceHolder_icon")
                 
-                
-                self.secondTeamFlagImageView.kf.setImage(with: url1)
-            }
-        //    if Language.language == Language.english{
+                if singleTeam1.team_logo != nil{
+                    
+                    let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam1.team_logo!)")
+                    
+                    
+                    self.secondTeamFlagImageView.kf.setImage(with: url1)
+                }
+                //    if Language.language == Language.english{
                 
                 if singleTeam.score != nil{
-                  self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing: singleTeam.score!))"
+                    self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing: singleTeam.score!))"
                 }
                 if singleTeam1.score != nil{
-                  self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing: singleTeam1.score!))"
+                    self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing: singleTeam1.score!))"
                 }
-//            }else{
-//                if singleTeam.score != nil{
-//
-//
-//                    let bnNumberString = self.formatter.string(for: singleTeam.score!)
-//                    print("singleTeam.score............",bnNumberString)
-//
-////                    self.firstteamScoreLabel.text = "\(String(describing: singleTeam.team_key!.uppercased())) - \(String(describing:bnNumberString!))"
-//                }
-//                if singleTeam1.score != nil{
-//
-////                    let bnNumberString1 = self.formatter.string(for: singleTeam1.score!)
-////
-////
-////                    self.secondTeamScoreLabel.text = "\(String(describing: singleTeam1.team_key!.uppercased())) - \(String(describing:bnNumberString1!))"
-//                }
-//
-//
-//            }
+            }else{
+                
+                let singleTeam = matchData!.teams[0]
+                self.firstTeamNameLabel.text = singleTeam.team_code?.uppercased()
+                firstTeamnameInScore.text = singleTeam.team_name?.uppercased()
+                self.firstTeamFlagImageView.image = UIImage.init(named: "placeholder_football_team_logo")
+                
+                if singleTeam.team_logo != nil{
+                    
+                    let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam.team_logo!)")
+                    
+                    
+                    self.firstTeamFlagImageView.kf.setImage(with: url1)
+                }
+                
+                let singleTeam1 = matchData!.teams[1]
+                secondTeamNameLabel.text = singleTeam1.team_code?.uppercased()
+                secondTeamNameInScore.text = singleTeam1.team_name?.uppercased()
+                self.secondTeamFlagImageView.image = UIImage.init(named: "placeholder_football_team_logo")
+                if singleTeam1.team_logo != nil{
+                    
+                    let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(singleTeam1.team_logo!)")
+                    
+                    
+                    self.secondTeamFlagImageView.kf.setImage(with: url1)
+                }
+                //    if Language.language == Language.english{
+                if matchData?.playing_time != nil{
+                    playingTimeLabel.text =  matchData?.playing_time!
+                }
+                
+                if singleTeam.score != nil{
+                    self.firstTeamScoreFootballLabel.text = "\(String(describing: singleTeam.score!))"
+                }
+                if singleTeam1.score != nil{
+                    self.secondTeamScoreFootballLabel.text = "\(String(describing: singleTeam1.score!))"
+                }
+                
+            }
             
-
+            
+            
             
         }
         
-
+        
         
         self.contestnamentNameLabel.text = self.contestName.uppercased()
         self.playingFormatLabel.text = matchData?.match_format?.uppercased()
         if matchData?.result != nil{
-         self.resultLabel.text = matchData?.result
+            self.resultLabel.text = matchData?.result
         }
-                
+        
     }
     
     func populateUserView() {
@@ -486,22 +611,22 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
             self.rankLabel.text = "\(leaderBoardData?.user_rank ?? 0)"
             self.pointLabel.text = "\(leaderBoardData?.team_earning_point ?? 0)"
             self.userteamnameLabel.text = leaderBoardData?.user_team_name
-
+            
         }else{
             
             self.lastupdateTimeLabel.text = "শেষ আপডেটের সময়: \( sttringFDate )"
             self.userNameLabel.text = leaderBoardData?.username
             let bnNumberString = self.formatter.string(for: leaderBoardData?.user_rank!)
             let bnNumberString2 = self.formatter.string(for: leaderBoardData?.team_earning_point!)
-
+            
             self.rankLabel.text = bnNumberString ?? "০"
             self.pointLabel.text = bnNumberString2 ?? "০"
             self.userteamnameLabel.text = leaderBoardData?.user_team_name
-
+            
         }
         
-  }
-
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return sortedleaderBoard.count
@@ -509,11 +634,11 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-    
-         let cell = tableView.dequeueReusableCell(withIdentifier:"leaderCell") as! LeaderBoardTableViewCell
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier:"leaderCell") as! LeaderBoardTableViewCell
         
         
-
+        
         let singleUser = sortedleaderBoard[indexPath.row]
         
         
@@ -522,11 +647,11 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
         if indexPath.row == (sortedleaderBoard.count) - 3 {
             
             if total_page_no > page_no { // more items to fetch
-               
+                
                 page_no = page_no + 1
                 
                 getLeaderBoard(contestId: contest_id ?? 0, pageNo: page_no)
-
+                
             }
         }
         
@@ -536,25 +661,25 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if matchData!.match_status_id == 2 || matchData!.match_status_id == 3{
-          
+            
             if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakDownViewController") as? PointBreakDownViewController
-            
-            let singleUser = leaderBoardData?.leaderboard[indexPath.row]
-            
-            print(".........................matchData?.match_format",matchData?.match_format)
-            vc?.matchId = match_id ?? 0
-            vc?.teamId = singleUser?.user_team_id ?? 0
-            vc?.username = singleUser?.username ?? ""
-            vc?.teamName = singleUser?.team_name ?? ""
-            vc?.matchType = matchData?.match_format
-            vc?.match_status_id = matchData?.match_status_id ?? 0
-            
-            self.present(vc!, animated: true) {
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakDownViewController") as? PointBreakDownViewController
                 
-                print("open PointBreakDownViewController")
-            }
+                let singleUser = leaderBoardData?.leaderboard[indexPath.row]
+                
+                print(".........................matchData?.match_format",matchData?.match_format)
+                vc?.matchId = match_id ?? 0
+                vc?.teamId = singleUser?.user_team_id ?? 0
+                vc?.username = singleUser?.username ?? ""
+                vc?.teamName = singleUser?.team_name ?? ""
+                vc?.matchType = matchData?.match_format
+                vc?.match_status_id = matchData?.match_status_id ?? 0
+                
+                self.present(vc!, animated: true) {
+                    
+                    print("open PointBreakDownViewController")
+                }
             }else{
                 
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakdownFootballViewController") as? PointBreakdownFootballViewController
@@ -569,7 +694,7 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
                     
                     print("open PointBreakDownViewController")
                 }
-
+                
             }
         }else{
             
@@ -586,5 +711,5 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
         })
     }
     
-
+    
 }
