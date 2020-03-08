@@ -276,8 +276,8 @@
 "Total Points" = "টোটাল পয়েন্টস";
 "     Events" = "     ইভেন্টস";
 "  Earned Points" = "  পয়েন্টস";
-" Points" = " পয়েন্টস";
-"Some criteria of player points breakdown is not listed here to avoid calculation complexity. You can check the full scoring point system by clicking top right 'Question Mark' icon." = "প্লেয়ার পয়েন্ট পাবে এমন কিছু ইভেন্ট এখানে সরাসরি দেয়া নাই ক্যাককুলেশন জনিত জটিলতা এড়ানোর জন্য, যেমন কোন প্লেয়ার ৫০ রান করলে এক্সট্রা বোনাস পয়েন্ট পাবে। আপনি সম্পূর্ন পয়েন্ট স্কোরিং সিস্টেম জানতে এই স্ক্রিনের উপরে ডানের কোশ্চেন মার্ক আইকন এ ক্লিক করুন।";
+" Score" = " স্কোর";
+"Some criteria of player points breakdown is not listed here to avoid calculation complexity. You can check the full scoring point system by clicking top right 'Question Mark' icon." = "প্লেয়ার পয়েন্ট পাবে এমন কিছু ইভেন্ট এখানে সরাসরি দেয়া নাই ক্যাককুলেশন জনিত জটিলতা এড়ানোর জন্য। আপনি সম্পূর্ন পয়েন্ট স্কোরিং সিস্টেম জানতে এই স্ক্রিনের উপরে ডানের কোশ্চেন মার্ক আইকন এ ক্লিক করুন।";
 
 "Your Profile Is Blocked!" = "আপনার প্রোফাইল ব্লকড!";
 "Your profile has been blocked! To know about reason of blocking or to resolve the matter please message to our facebook page https://www.facebook.com/gameof11/ . GO11 support team will guide you for further procedure." = "আপনার প্রোফাইল ব্লক করা হয়েছে! প্লিজ আমাদের ফেসবুক পেইজে https://www.facebook.com/gameof11/ মেসেজ করুন বিস্তারিত জানতে। GO11 টিম আপনাকে অবশ্যই পরবর্তী হেল্প করবে যদি আপনার সমস্যা সমাধান করবার মত হয়।";
@@ -314,3 +314,12 @@
 "Minimum 3 Defenders" = "সর্বনিম্ন ৩ জন ডিফেন্ডার";
 "Not more than 5 Midfielders" = "৫ জন মিডফিল্ডার এর বেশি না";
 "Not more than 3 Strikers" = "৩ জন স্ট্রাইকার এর বেশি না";
+
+"APPLY PROMO" = "";
+
+"COINS LOG" = "কয়েন লগ";
+"PROMO CODE" = "প্রোমো কোড";
+"ANNOUNCEMENTS" = "অ্যানাউন্সমেন্ট";
+"Write your promo code" = "আপনার প্রোমো লিখুন";
+"Apply Promo Code" = "প্রোমো যোগ করুন";
+"Promo Code" = "প্রোমো কোড";

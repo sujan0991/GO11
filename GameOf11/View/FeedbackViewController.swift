@@ -9,7 +9,7 @@
 import UIKit
 
 class FeedbackViewController: UIViewController,UITextViewDelegate {
-
+    
     @IBOutlet weak var navTitlelabel: UILabel!
     @IBOutlet weak var feedbackView: UIView!
     
@@ -24,7 +24,7 @@ class FeedbackViewController: UIViewController,UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      //  self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
+        //  self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
         
         navTitlelabel.text = "YOUR FEEDBACK".localized
         feedbackPlaceHolderLabel.text = "Write your feedback message".localized
@@ -42,7 +42,7 @@ class FeedbackViewController: UIViewController,UITextViewDelegate {
             y: 2,
             blur: 6,
             spread: 0)
-
+        
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -63,26 +63,26 @@ class FeedbackViewController: UIViewController,UITextViewDelegate {
     @IBAction func fedbackButtonAction(_ sender: Any) {
         
         
-       if feedbackTextView.text.count != 0{
-        
-         let params:[String:String] = ["phone":phoneTextField.text!,
-                                       "email": emailTextField.text!,
-                                       "message":feedbackTextView.text!]
-        
-        
-        APIManager.manager.postFeedback(params: params) { (status, msg) in
+        if feedbackTextView.text.count != 0{
+            
+            let params:[String:String] = ["phone":phoneTextField.text!,
+                                          "email": emailTextField.text!,
+                                          "message":feedbackTextView.text!]
             
             
-            if status{
+            APIManager.manager.postFeedback(params: params) { (status, msg) in
                 
-                self.view.makeToast(msg!)
-                self.navigationController?.popViewController(animated: true)
+                
+                if status{
+                    
+                    self.view.makeToast(msg!)
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
+            
         }
         
-        }
-        
-       }
+    }
     
     @IBAction func backButtonAction(_ sender: Any) {
         

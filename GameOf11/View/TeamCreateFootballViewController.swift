@@ -198,7 +198,7 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
             })
             
             
-           // print("................................",keeperList.count,sortedkeeperList.count)
+            // print("................................",keeperList.count,sortedkeeperList.count)
         }
         
         positionSelectorCollectionView?.delegate = self
@@ -285,11 +285,11 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
     @IBAction func previewAction(_ sender: Any) {
         
         let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamPreviewFootballViewController") as? TeamPreviewFootballViewController
-
+        
         popupVC?.pvSquadData = squadData
         popupVC?.userTeam = userTeam
         self.navigationController?.pushViewController(popupVC ?? self, animated: true)
-
+        
     }
     
     
@@ -321,7 +321,7 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
         }
         else if indexPath.item == 1
         {
-           
+            
             cell.positionTitle.text = "DEF"
             // cell.positionIcon.image = UIImage.init(named: "bowlingIcon")
             
@@ -348,7 +348,7 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
         }
         else
         {
-           
+            
             cell.positionTitle.text = "STR"
             //  cell.positionIcon.image = UIImage.init(named: "battingIcon")
             

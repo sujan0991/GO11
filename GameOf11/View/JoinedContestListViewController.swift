@@ -9,7 +9,7 @@
 import UIKit
 
 class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
-
+    
     
     var joinedContestList:[ContestData] = []
     var parentMatch: MatchList? = nil
@@ -37,11 +37,11 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     @IBOutlet weak var backShadowView: UIView!
     
     var isFreeContest = 1
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        placeNavBar(withTitle: "JOINED CONTESTS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        
+        placeNavBar(withTitle: "JOINED CONTESTS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
         vsLabel.makeCircular(borderWidth: 1, borderColor: UIColor.init(named: "HighlightGrey")!)
         
@@ -67,7 +67,7 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
             let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatch?.teams.item(at: 1).logo ?? "")")
             self.firstTeamFlag.kf.setImage(with: url1)
             self.secondTeamFlag.kf.setImage(with: url2)
-
+            
         }else{
             
             
@@ -82,15 +82,15 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
             let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatchFootball?.teams.item(at: 1).logo ?? "")")
             self.firstTeamFlag.kf.setImage(with: url1)
             self.secondTeamFlag.kf.setImage(with: url2)
-
+            
         }
         
         
         
-
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         backShadowView.addGestureRecognizer(tap)
-
+        
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -99,7 +99,7 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         prizeRankView.isHidden = true
         
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.contestTableView{
             return 1
@@ -119,20 +119,20 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         if tableView == contestTableView{
-        let cell = tableView.dequeueReusableCell(withIdentifier:"contestCell") as! ContestTableViewCell
-        
-        let contest = joinedContestList[indexPath.section]
-        cell.setInfo(contest)
-        
-        cell.joinedButton.isHidden = true
-        
-        cell.totalWinnerButton.tag = indexPath.section
-
-        cell.totalWinnerButton.addTarget(self, action: #selector(prizeCalculation(_:)), for: .touchUpInside)
-        
-        return cell
-         }else{
+        if tableView == contestTableView{
+            let cell = tableView.dequeueReusableCell(withIdentifier:"contestCell") as! ContestTableViewCell
+            
+            let contest = joinedContestList[indexPath.section]
+            cell.setInfo(contest)
+            
+            cell.joinedButton.isHidden = true
+            
+            cell.totalWinnerButton.tag = indexPath.section
+            
+            cell.totalWinnerButton.addTarget(self, action: #selector(prizeCalculation(_:)), for: .touchUpInside)
+            
+            return cell
+        }else{
             let cell = tableView.dequeueReusableCell(withIdentifier:"rankCell") as! PrizeListTableViewCell
             
             let singlePrize = prizeFilteredArray[indexPath.row]
@@ -165,43 +165,43 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == contestTableView{
-
-        print("didSelectRowAt ",self.tabBarController?.selectedIndex)
- 
+            
+            print("didSelectRowAt ",self.tabBarController?.selectedIndex)
+            
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
             
             let VC = storyboard.instantiateViewController(withIdentifier: "ContestLeaderBoardViewController") as! ContestLeaderBoardViewController
             
             let contest = joinedContestList[indexPath.section]
-        
+            
             VC.contest_id = contest.id
             if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 
-                 VC.match_id = parentMatch?.matchId
+                VC.match_id = parentMatch?.matchId
             }else{
-                 VC.match_id = parentMatchFootball?.matchId
+                VC.match_id = parentMatchFootball?.matchId
             }
             VC.contestName = contest.name
-        
+            
             // self.navigationController?.pushViewController(VC, animated: true)
             
             self.present(VC, animated: true) {
                 
                 print("open")
+                
+            }
             
-        }
-        
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == contestTableView{
-        let contest = joinedContestList[indexPath.section]
-        
-        if contest.is_league! == 1{
+            let contest = joinedContestList[indexPath.section]
             
-            return 225
-        }else{
-            return 185
+            if contest.is_league! == 1{
+                
+                return 225
+            }else{
+                return 185
             }
             
         }else{
@@ -214,9 +214,9 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         
     }
     
-   @IBAction func prizeCalculation(_ sender: UIButton) {
+    @IBAction func prizeCalculation(_ sender: UIButton) {
         
-    
+        
         self.prizeFilteredArray = []
         
         let selectedContest = joinedContestList[sender.tag]
@@ -233,7 +233,7 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
             
         }
         print("selectedContest.prizes.count",selectedContest.prizes.count)
-    
+        
         for i in 0..<selectedContest.prizes.count {
             
             let singlePrize = selectedContest.prizes.item(at: i)
@@ -297,5 +297,20 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         prizeRankViewHeight.constant = CGFloat((prizeFilteredArray.count * 44) + 90)
         
     }
-
+    
+    
+    //    func joiningLastTime(matchTime: String, join_ends_before: Int) -> String{
+    //        
+    //        let dateFormatter = DateFormatter()
+    //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    //        let dateFromString :Date = dateFormatter.date(from: matchTime)!
+    //        
+    //        let date = dateFromString.addingTimeInterval(TimeInterval(-(join_ends_before * 60)))
+    //        
+    //        let sttringFDate = date.toDateString(format: "yyyy-MM-dd HH:mm:ss")
+    //        
+    //        return sttringFDate.serverTimetoDateString()
+    //        
+    //    }
+    
 }

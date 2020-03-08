@@ -154,11 +154,19 @@ class CteatedTableViewCell: UITableViewCell {
             
             self.captainimageView.kf.setImage(with: url1)
             if url1 == nil{
+                if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 captainimageView.image = UIImage.init(named: "player_avatar_global.png")
+                }else{
+                    captainimageView.image = UIImage.init(named: "player_football_avatar_global.png")
+                }
             }
         }else{
             
-            captainimageView.image = UIImage.init(named: "player_avatar_global.png")
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                captainimageView.image = UIImage.init(named: "player_avatar_global.png")
+            }else{
+                captainimageView.image = UIImage.init(named: "player_football_avatar_global.png")
+            }
         }
         
         if team.vice_captain_image != nil{
@@ -166,11 +174,21 @@ class CteatedTableViewCell: UITableViewCell {
             
             self.vCaptainImageView.kf.setImage(with: url2)
             if url2 == nil{
-                vCaptainImageView.image = UIImage.init(named: "player_avatar_global.png")
+                if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                    vCaptainImageView.image = UIImage.init(named: "player_avatar_global.png")
+                }else{
+                    vCaptainImageView.image = UIImage.init(named: "player_football_avatar_global.png")
+                }
+                
             }
         }else{
             
-            vCaptainImageView.image = UIImage.init(named: "player_avatar_global.png")
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                vCaptainImageView.image = UIImage.init(named: "player_avatar_global.png")
+            }else{
+                vCaptainImageView.image = UIImage.init(named: "player_football_avatar_global.png")
+            }
+
         }
         
         

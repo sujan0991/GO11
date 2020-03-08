@@ -126,39 +126,55 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
                 
                 self.userOldTeam = data!
                 
-                //add keeper to userTeam
-                for singlePlayer in data!.goalkeeper{
+                for player in self.squadData.playersList
+                {
                     
-                    let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
                     
-                    self.userTeam.goalkeeper.append(userFantasyPlayer!)
+                    switch (player.role) {
+                    case "defender":
+                        //add defender to userteam
+                        
+                        for singlePlayer in data!.defender{
+                            if player.playerId == singlePlayer.playerId{
+                                let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
+                                self.userTeam.defender.append(userFantasyPlayer!)
+                            }
+                        }
+                        break;
+                    case "striker":
+                        //add striker to userteam
+                        
+                        for singlePlayer in data!.striker{
+                            if player.playerId == singlePlayer.playerId{
+                                let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
+                                self.userTeam.striker.append(userFantasyPlayer!)
+                            }
+                        }
+                        break;
+                    case "goalkeeper":
+                        //add keeper to userTeam
+                        for singlePlayer in data!.goalkeeper{
+                            if player.playerId == singlePlayer.playerId{
+                                let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
+                                
+                                self.userTeam.goalkeeper.append(userFantasyPlayer!)
+                            }
+                        }
+                        break;
+                    case "midfielder":
+                        //add midfielder to userteam
+                        for singlePlayer in data!.midfielder{
+                            if player.playerId == singlePlayer.playerId{
+                                let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
+                                self.userTeam.midfielder.append(userFantasyPlayer!)
+                            }
+                        }
+                        break;
+                        
+                    default:
+                        break;
+                    }
                 }
-                //add batsman to userteam
-                
-                for singlePlayer in data!.defender{
-                    
-                    let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
-                    self.userTeam.defender.append(userFantasyPlayer!)
-                }
-                
-                //add allrounder to userteam
-                
-                for singlePlayer in data!.midfielder{
-                    
-                    let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
-                    self.userTeam.midfielder.append(userFantasyPlayer!)
-                }
-                
-                //add bowler to userteam
-                
-                for singlePlayer in data!.striker{
-                    
-                    let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
-                    self.userTeam.striker.append(userFantasyPlayer!)
-                }
-                
-                
-                
                 
                 self.setSelectedPlayer()
                 
@@ -551,7 +567,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
             cell.positionIcon.backgroundColor = UIColor.clear
         }
         
-
+        
         
         return cell
         
@@ -632,7 +648,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
         if selectedIndex == 0
         {
             player = sortedkeeperList[indexPath.section]
-          
+            
         }
         else if selectedIndex == 1
         {
@@ -648,7 +664,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
         {
             player = sortedstrikerList[indexPath.section]
             
-       
+            
         }
         
         cell.setInfo(player: player,squad: squadData.teams!)
@@ -1136,7 +1152,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
                 {
                     self.view.makeToast( String.init(format: "Not more than 1 Goal Keeper".localized))
                     return false
-                }else if  Team_Rules.MaxPlayer - (1 + userTeam.defender.count + userTeam.midfielder.count + userTeam.goalkeeper.count) < 3 //squadData.team_rules?.bowler?.minPerMatch ?? 0
+                }else if  Team_Rules.MaxPlayer - (1 + userTeam.striker.count + userTeam.midfielder.count + userTeam.goalkeeper.count) < 3 //squadData.team_rules?.bowler?.minPerMatch ?? 0
                 {
                     self.view.makeToast( String.init(format: "Minimum 3 Defender".localized ))
                     return false

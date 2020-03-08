@@ -47,6 +47,8 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet var redeemButton: UIButton!
     @IBOutlet weak var referButton: UIButton!
     
+    @IBOutlet weak var coinLogButton: UIButton!
+    
     @IBOutlet weak var playingHistoryLabel: UILabel!
     
     @IBOutlet weak var contestLabel: UILabel!
@@ -68,8 +70,8 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     @IBOutlet weak var matchFootballlabel: UILabel!
     @IBOutlet var matchCountFootbaLabel: UILabel!
-
-  
+    
+    
     @IBOutlet weak var personalDetailLabel: UILabel!
     @IBOutlet weak var fullProfileButton: UIButton!
     
@@ -77,6 +79,13 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var verifyInfoButton: UIButton!
     
     @IBOutlet weak var gameTypeImageView: UIImageView!
+    
+    @IBOutlet weak var verificationCancelReasonButton: UIButton!
+    
+    @IBOutlet weak var cancelReasonPopupView: UIView!
+    
+    @IBOutlet weak var cancelReasonLabel: UILabel!
+    
     
     @IBOutlet weak var historyScrollView: UIScrollView!{
         didSet{
@@ -114,7 +123,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         // Register to receive notification in your class
         NotificationCenter.default.addObserver(self, selector: #selector(self.paymentSuccessful(_:)), name: NSNotification.Name(rawValue: "paymentFromProfile"), object: nil)
         
-
+        
         
         if AppSessionManager.shared.authToken == nil{
             
@@ -125,17 +134,18 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             self.navigationController?.pushViewController(popupVC ?? self, animated: true)
         }
         
-//        placeNavBar(withTitle: "My Profile", isBackBtnVisible: false)
-
+        //        placeNavBar(withTitle: "My Profile", isBackBtnVisible: false)
+        
         addCoinButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
         withdrawButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
         redeemButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
+        coinLogButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
         
         imagePicker.delegate = self
         
         blockMessageLabel.text = "Your Profile Is Blocked!".localized
         suggestionTextView.text = "Your profile has been blocked! To know about reason of blocking or to resolve the matter please message to our facebook page https://www.facebook.com/gameof11/ . GO11 support team will guide you for further procedure.".localized
-       // freeContestLabel.text = "Your available free contests = 0"
+        // freeContestLabel.text = "Your available free contests = 0"
         accountInfoLabel.text = "Account Info".localized
         depositedCoinLabel.text = "Deposited Coins".localized
         winningLabel.text = "Winning Amount".localized
@@ -154,12 +164,13 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         contestFootballLabel.text = "Contests".localized
         topRankFootballlabel.text = "Top Rank".localized
         matchFootballlabel.text = "Matches".localized
-    
+        
         personalDetailLabel.text = "Personal Details".localized
         
         fullProfileButton.setTitle("Full Profile".localized, for: .normal)
         verifyButton.setTitle("Verify Your Profile!".localized, for: .normal)
         logoutButton.setTitle("Logout".localized, for: .normal)
+        coinLogButton.setTitle("COIN LOG".localized, for: .normal)
         
         self.topView.layer.applySketchShadow(
             color: UIColor.lightGray,
@@ -175,7 +186,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             y: 2,
             blur: 4,
             spread: 0)
-
+        
         self.historyView.layer.applySketchShadow(
             color: UIColor.lightGray,
             alpha: 1.0,
@@ -183,20 +194,20 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             y: 2,
             blur: 4,
             spread: 0)
-
-    
+        
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.tapContestLabel))
         contestLabel.addGestureRecognizer(tap)
         
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.tapFootballContestLabel))
         contestFootballLabel.addGestureRecognizer(tap1)
-
+        
         scrollView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
         let blocktap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         blockView.addGestureRecognizer(blocktap)
-
+        
         self.blockView.isHidden = true
         self.blockViewHeight.constant = 0
         
@@ -212,16 +223,16 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         shadowView.isHidden = false
         blockSuggestionView.isHidden = false
-       
+        
     }
-
-   @objc func tapContestLabel(sender:UITapGestureRecognizer) {
     
+    @objc func tapContestLabel(sender:UITapGestureRecognizer) {
+        
         UserDefaults.standard.set("completed", forKey: "selectedMyContest")
         UserDefaults.standard.set("cricket", forKey: "selectedGameType")
-    
+        
         self.tabBarController?.selectedIndex = 1
-    
+        
     }
     @objc func tapFootballContestLabel(sender:UITapGestureRecognizer) {
         
@@ -243,14 +254,14 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     }
     
     override func viewDidAppear(_ animated: Bool) {
-               
-       
+        
+        
         getData()
         
     }
     
     func getData(){
-    
+        
         if AppSessionManager.shared.authToken != nil{
             
             self.scrollView.isHidden = false
@@ -273,7 +284,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 
                                 self.blockView.isHidden = true
                                 self.blockViewHeight.constant = 0
-
+                                
                             }
                             
                             self.phoneNoLabel.text = String.init(format: "%@", um.phone ?? "")
@@ -313,7 +324,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 
                             }
                             
-
+                            
                             
                             if um.avatar != nil{
                                 
@@ -333,6 +344,11 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                             }else if um.isVerified == 2{
                                 
                                 self.verifyButton.setTitle("Profile Verification Pending!".localized, for: .normal)
+                            }else{
+                                
+                                if um.metadata?.verification_cancel_reason != nil{
+                                    self.verificationCancelReasonButton.isHidden = false
+                                }
                             }
                             
                         }
@@ -363,7 +379,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBAction func cameraButtonAction(_ sender: UIButton) {
         //getAvatarList
         APIManager.manager.getAvatarList { (avatars) in
-           print(avatars)
+            print(avatars)
             
             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AvaterViewController") as? AvaterViewController
             vc?.avatars = avatars
@@ -374,29 +390,29 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 print("open")
             }
         }
-//
-//        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-//        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-//            self.openCamera()
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-//            self.openGallary()
-//        }))
-//
-//        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-//
-//        switch UIDevice.current.userInterfaceIdiom {
-//        case .pad:
-//            alert.popoverPresentationController?.sourceView = sender
-//            alert.popoverPresentationController?.sourceRect = sender.bounds
-//            alert.popoverPresentationController?.permittedArrowDirections = .up
-//        default:
-//            break
-//        }
-//
-//        self.present(alert, animated: true, completion: nil)
-    
+        //
+        //        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        //        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+        //            self.openCamera()
+        //        }))
+        //
+        //        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+        //            self.openGallary()
+        //        }))
+        //
+        //        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        //
+        //        switch UIDevice.current.userInterfaceIdiom {
+        //        case .pad:
+        //            alert.popoverPresentationController?.sourceView = sender
+        //            alert.popoverPresentationController?.sourceRect = sender.bounds
+        //            alert.popoverPresentationController?.permittedArrowDirections = .up
+        //        default:
+        //            break
+        //        }
+        //
+        //        self.present(alert, animated: true, completion: nil)
+        
     }
     func openCamera()
     {
@@ -425,51 +441,51 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     //DepositCoinViewController
     @IBAction func addCoinButtonAction(_ sender: Any) {
         
-     if AppSessionManager.shared.currentUser?.isBlocked != 1{
-        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DepositCoinViewController") as? DepositCoinViewController
-        
-        self.navigationController?.pushViewController(vc!, animated: true)
-    }
+        if AppSessionManager.shared.currentUser?.isBlocked != 1{
+            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DepositCoinViewController") as? DepositCoinViewController
+            
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
         
         
     }
     
     @IBAction func withdrawButtonAction(_ sender: Any) {
         
-    print("........................",AppSessionManager.shared.currentUser!.minWithdrawLimit)
-      if AppSessionManager.shared.currentUser?.isBlocked != 1{
-        if AppSessionManager.shared.currentUser?.isVerified == 1{
-            
-            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WithdrawRequestViewController") as? WithdrawRequestViewController
-            
-            self.navigationController?.pushViewController(vc!, animated: true)
-            
-        }else if AppSessionManager.shared.currentUser!.metadata!.totalCash! < AppSessionManager.shared.currentUser!.minWithdrawLimit ?? 250 {
-            
-            self.view.makeToast("You do not have enough money to withdraw.".localized)
-            
-        }
-        else{
-            
-            self.view.makeToast("Please verify your profile first to withdraw your winnings".localized)
-            
-        }
+        print("........................",AppSessionManager.shared.currentUser!.minWithdrawLimit)
+        if AppSessionManager.shared.currentUser?.isBlocked != 1{
+            if AppSessionManager.shared.currentUser?.isVerified == 1{
+                
+                let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WithdrawRequestViewController") as? WithdrawRequestViewController
+                
+                self.navigationController?.pushViewController(vc!, animated: true)
+                
+            }else if AppSessionManager.shared.currentUser!.metadata!.totalCash! < AppSessionManager.shared.currentUser!.minWithdrawLimit ?? 250 {
+                
+                self.view.makeToast("You do not have enough money to withdraw.".localized)
+                
+            }
+            else{
+                
+                self.view.makeToast("Please verify your profile first to withdraw your winnings".localized)
+                
+            }
         }
     }
     
     @IBAction func redeemButtonAction(_ sender: Any) {
-     if AppSessionManager.shared.currentUser?.isBlocked != 1{
-       if AppSessionManager.shared.currentUser!.metadata!.totalCash! <= 0  {
-        
-            self.view.makeToast("You do not have enough money to redeem".localized)
-        
-       }else{
-        
-         let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RedeemCoinViewController") as? RedeemCoinViewController
-        
-         self.navigationController?.pushViewController(vc!, animated: true)
+        if AppSessionManager.shared.currentUser?.isBlocked != 1{
+            if AppSessionManager.shared.currentUser!.metadata!.totalCash! <= 0  {
+                
+                self.view.makeToast("You do not have enough money to redeem".localized)
+                
+            }else{
+                
+                let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RedeemCoinViewController") as? RedeemCoinViewController
+                
+                self.navigationController?.pushViewController(vc!, animated: true)
+            }
         }
-     }
     }
     
     
@@ -492,7 +508,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBAction func referToFriendButtonAction(_ sender: Any) {
         
         let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ReferalViewController") as? ReferalViewController
-       
+        
         self.navigationController?.pushViewController(vc!, animated: true)
         
     }
@@ -501,7 +517,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PendingWithdrawViewController") as? PendingWithdrawViewController
         
-
+        
         self.navigationController?.pushViewController(vc!, animated: true)
         
     }
@@ -521,7 +537,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 print("open safari")
             }
         }
-
+        
     }
     
     @IBAction func redeemInfoButtonAction(_ sender: Any) {
@@ -538,9 +554,19 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 print("open safari")
             }
         }
-
+        
         
     }
+    
+    
+    @IBAction func coinLogButtonAction(_ sender: Any) {
+        
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as? TransactionViewController
+        
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+    }
+    
     
     @IBAction func verifyAccountInfoButtonAction(_ sender: Any) {
         
@@ -556,7 +582,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 print("open safari")
             }
         }
-
+        
     }
     
     @IBAction func okButtonAction(_ sender: Any) {
@@ -572,9 +598,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             
             AppSessionManager.shared.logOut()
             if status{
-               // SVProgressHUD.showSuccess(withStatus: msg)
+                // SVProgressHUD.showSuccess(withStatus: msg)
                 self.view.makeToast( msg!)
- 
+                
             }
             else{
                 self.view.makeToast("Something went wrong! Please try again".localized)
@@ -584,6 +610,25 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             
         }
     }
+    
+    @IBAction func verificationCancelReasonButtonAction(_ sender: Any) {
+        
+        if AppSessionManager.shared.currentUser?.metadata!.verification_cancel_reason != nil{
+            
+            cancelReasonLabel.text = AppSessionManager.shared.currentUser?.metadata!.verification_cancel_reason
+        }
+        shadowView.isHidden = false
+        cancelReasonPopupView.isHidden = false
+    }
+    
+    @IBAction func cancelReasonOkButtonAction(_ sender: Any) {
+        
+        shadowView.isHidden = true
+        cancelReasonPopupView.isHidden = true
+    }
+    
+    
+    
     
     //image picker delegate
     

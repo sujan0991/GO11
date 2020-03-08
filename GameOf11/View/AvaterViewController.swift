@@ -9,7 +9,7 @@
 import UIKit
 
 class AvaterViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-
+    
     @IBOutlet weak var navTitleLabel: UILabel!
     @IBOutlet weak var avatarCollectionView: UICollectionView!
     
@@ -23,10 +23,10 @@ class AvaterViewController: UIViewController,UICollectionViewDelegate, UICollect
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navTitleLabel.text = "SELECT YOUR AVATAR".localized
         updateButton.setTitle("UPDATE AVATAR".localized, for: .normal)
-       avatarCollectionView.delegate = self
+        avatarCollectionView.delegate = self
         avatarCollectionView.dataSource = self
     }
     
@@ -82,7 +82,7 @@ class AvaterViewController: UIViewController,UICollectionViewDelegate, UICollect
         
         print("selectedAvatarId............",selectedAvatarId)
     }
-
+    
     
     @IBAction func updateAvatarAction(_ sender: Any) {
         
@@ -108,5 +108,5 @@ class AvaterViewController: UIViewController,UICollectionViewDelegate, UICollect
         }
     }
     
-
+    
 }

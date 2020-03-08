@@ -46,8 +46,8 @@ class EditProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        placeNavBar(withTitle: "PERSONAL DETAILS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        
+        placeNavBar(withTitle: "PERSONAL DETAILS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
         self.tabBarController?.tabBar.isHidden = true
         
@@ -116,11 +116,11 @@ class EditProfileViewController: BaseViewController {
         }
     }
     
-
+    
     @IBAction func changeButtonAction(_ sender: Any) {
         
-       let bottomView = stackView.arrangedSubviews[1]
-       
+        let bottomView = stackView.arrangedSubviews[1]
+        
         UIView.animate(withDuration: 0.10) {
             bottomView.isHidden = false
         }
@@ -134,7 +134,7 @@ class EditProfileViewController: BaseViewController {
             bottomView.isHidden = true
             
         }
-
+        
         
     }
     
@@ -183,7 +183,7 @@ class EditProfileViewController: BaseViewController {
         
         
         APIManager.manager.changePasswordWith(oldPassword: oldPasswordTextFoeld.text!, newPassword: newPasswordTextField.text!) { (status, msg) in
-          
+            
             if status{
                 
                 self.view.makeToast("Password change successful.".localized)
@@ -199,27 +199,27 @@ class EditProfileViewController: BaseViewController {
     
     @IBAction func updateProfileButtonAction(_ sender: Any) {
         
-   
+        
         var params:[String:String] = [:]
         
         if nameTextField.text!.count > 0{
             
             if maleButton.isSelected{
-              
-                 params = ["name":nameTextField.text!,
-                                              "sex":"Male",
-                                              "address":mailingAddressTextField.text ?? "",
-                                              "city":cityTextField.text ?? "",
-                                              "zipcode":zipCodeTextField.text ?? "",
-                                              "dob":dateOfbirthTextField.text ?? ""]
+                
+                params = ["name":nameTextField.text!,
+                          "sex":"Male",
+                          "address":mailingAddressTextField.text ?? "",
+                          "city":cityTextField.text ?? "",
+                          "zipcode":zipCodeTextField.text ?? "",
+                          "dob":dateOfbirthTextField.text ?? ""]
             }else if femaleButton.isSelected{
                 
-                 params = ["name":nameTextField.text!,
-                                              "sex":"Female",
-                                              "address":mailingAddressTextField.text ?? "",
-                                              "city":cityTextField.text ?? "",
-                                              "zipcode":zipCodeTextField.text ?? "",
-                                              "dob":dateOfbirthTextField.text ?? ""]
+                params = ["name":nameTextField.text!,
+                          "sex":"Female",
+                          "address":mailingAddressTextField.text ?? "",
+                          "city":cityTextField.text ?? "",
+                          "zipcode":zipCodeTextField.text ?? "",
+                          "dob":dateOfbirthTextField.text ?? ""]
             }else{
                 
                 params = ["name":nameTextField.text!,
@@ -249,6 +249,6 @@ class EditProfileViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-
+    
 }
 

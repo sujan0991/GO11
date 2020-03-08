@@ -46,10 +46,10 @@ class ParentTabViewController: UITabBarController {
             }
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         print("view did load")
         
         self.tabBar.tintColor = UIColor("#30B847")
@@ -112,15 +112,15 @@ class ParentTabViewController: UITabBarController {
         
     }
     
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        
-//        print("view will appear.....")
-//    }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
-//        
-//        print("view did appear.....")
-//    }
-
+    
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        
+    //        print("view will appear.....")
+    //    }
+    //    
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        
+    //        print("view did appear.....")
+    //    }
+    
 }

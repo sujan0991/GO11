@@ -25,19 +25,6 @@ class MatchList: Glossy {
     var totalJoinedContests: Int?
     var teams: [MatchTeams] = []
     
-    var joiningLastTime: String? {
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let dateFromString :Date = dateFormatter.date(from: matchTime!)!
-        
-        let date = dateFromString.addingTimeInterval(TimeInterval(-(join_ends_before! * 60)))
-        
-        let sttringFDate = date.toDateString(format: "yyyy-MM-dd HH:mm:ss")
-        
-        return sttringFDate.serverTimetoDateString()
-    }
-    
     required init?(json: Gloss.JSON) {
         matchId = "match_id" <~~ json
         matchKey = "match_key" <~~ json
@@ -55,14 +42,30 @@ class MatchList: Glossy {
             "match_id" ~~> matchId,
             "match_key" ~~> matchKey,
             "tournament_name" ~~> tournamentName,
-            "match_time" ~~> matchName,
-            "format" ~~> matchTime,
-            "email" ~~> format,
+            "match_name" ~~> matchName,
+            "match_time" ~~> matchTime,
+            "format" ~~> format,
             "join_ends_before" ~~> join_ends_before,
             "total_joined_contests" ~~> totalJoinedContests,
-            "teams" ~~> teams,
-            "joiningLastTime" ~~> joiningLastTime
+            "teams" ~~> teams
             ])
+    }
+    
+    
+    var joiningLastTime: String? {
+        
+        print("matchTime.................",matchTime!,join_ends_before!)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "en_US")//without it app crashes in device
+        let dateFromString :Date = dateFormatter.date(from: matchTime!)!
+        
+        let date = dateFromString.addingTimeInterval(TimeInterval(-(join_ends_before! * 60)))
+        
+        let sttringFDate = date.toDateString(format: "yyyy-MM-dd HH:mm:ss")
+        
+        return sttringFDate.serverTimetoDateString()
     }
 }
 
@@ -83,6 +86,7 @@ class FootBallMatchList: Glossy {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "en_US")//
         let dateFromString :Date = dateFormatter.date(from: matchTime!)!
         
         let date = dateFromString.addingTimeInterval(TimeInterval(-(join_ends_before! * 60)))
@@ -109,14 +113,16 @@ class FootBallMatchList: Glossy {
             "match_id" ~~> matchId,
             "match_key" ~~> matchKey,
             "tournament_name" ~~> tournamentName,
-            "match_time" ~~> matchName,
-            
+            "match_name" ~~> matchName,
+            "match_time" ~~> matchTime,
             "join_ends_before" ~~> join_ends_before,
             "total_joined_contests" ~~> totalJoinedContests,
-            "teams" ~~> teams,
-            "joiningLastTime" ~~> joiningLastTime
+            "teams" ~~> teams
             ])
     }
+    
+    
+    
 }
 
 
@@ -684,6 +690,7 @@ class UserModel: Glossy {
     var gcmRegistrationKey: String?
     var isVerified: Int?
     var isBlocked: Int?
+    
     var metadata: ProfileMetaData?
     var avatar: ProfileAvatar?
     
@@ -709,7 +716,7 @@ class UserModel: Glossy {
         gcmRegistrationKey = "gcm_registration_key" <~~ json
         isVerified = "is_verified" <~~ json
         isBlocked = "is_blocked" <~~ json
-        
+       
         referralCode = "referral_code" <~~ json
         referralLaw = "referral_law" <~~ json
         referralMessage = "referral_message" <~~ json
@@ -739,6 +746,9 @@ class UserModel: Glossy {
             "referral_law" ~~> referralLaw,
             "referral_message" ~~> referralMessage,
             "is_blocked" ~~> isBlocked,
+            
+            
+            
             "metadata" ~~> metadata,
             "avatar" ~~> avatar,
             
@@ -769,6 +779,8 @@ class ProfileMetaData: Glossy {
     var photoIdBack: String?
     var referral_contest_unlocked:Int?
     
+    var verification_cancel_reason: String?
+    
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
         userId = "user_id" <~~ json
@@ -785,6 +797,8 @@ class ProfileMetaData: Glossy {
         photoIdFront = "nid_front" <~~ json
         photoIdBack = "nid_back" <~~ json
         referral_contest_unlocked = "referral_contest_unlocked" <~~ json
+        
+        verification_cancel_reason = "verification_cancel_reason" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -803,7 +817,9 @@ class ProfileMetaData: Glossy {
             "football_highest_rank" ~~> highestFootballRank,
             "nid_front" ~~> photoIdFront,
             "nid_back" ~~> photoIdBack,
-            "referral_contest_unlocked" ~~> referral_contest_unlocked
+            "referral_contest_unlocked" ~~> referral_contest_unlocked,
+            
+            "verification_cancel_reason" ~~> verification_cancel_reason
             ])
     }
 }
@@ -1316,6 +1332,7 @@ class PointBreakDownFootball: Glossy {
     var tackles:Int?
     var yellow_card:Int?
     
+    var shotOnTarget:Int?
     
     
     required init?(json: Gloss.JSON) {
@@ -1338,6 +1355,8 @@ class PointBreakDownFootball: Glossy {
         red_card = "red_card" <~~ json
         tackles = "tackles" <~~ json
         yellow_card = "yellow_card" <~~ json
+        
+        shotOnTarget = "shot_on_target" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -1359,6 +1378,7 @@ class PointBreakDownFootball: Glossy {
             "red_card" ~~> red_card,
             "tackles" ~~> tackles,
             "yellow_card" ~~> yellow_card,
+            "shot_on_target" ~~> shotOnTarget,
             ])
     }
 }

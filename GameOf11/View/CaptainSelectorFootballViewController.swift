@@ -275,24 +275,24 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
     
     
     @objc func setCaptain(_ sender: UIButton){
-
+        
         
         let section = sender.tag/100
         let row = sender.tag % 10
-
+        
         var player: Player!
         var userFantasyPlayer : UserFantasyPlayer! // for user team
-
-
         
-
-
+        
+        
+        
+        
         // change the player state in user team
         if section == 0
         {
             player = keeperList[row]
             userFantasyPlayer =  userTeam.goalkeeper.item(at: row)
-
+            
         }
         else if section == 1
         {
@@ -309,31 +309,31 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
             player = strikerList[row]
             userFantasyPlayer =  userTeam.striker.item(at: row)
         }
-
+        
         //*****************
-
-
+        
+        
         player.isViceCaptain = false
         player.isCaptain = true
-
+        
         userFantasyPlayer.isViceCaptain = 0
         userFantasyPlayer.isCaptain = 1
-
+        
         userTeam.captain = player.playerId
-
+        
         if userTeam.captain == userTeam.viceCaptain{
             userTeam.viceCaptain = 0
         }
-
+        
         print("player.playerId......in  captain",player.playerId,player.isCaptain,player.isViceCaptain)
-
+        
         // change status for main squad
         if currentCaptain != nil && currentCaptain.playerId != player.playerId
         {
             //  print("currentCaptain.isCaptain.......id.",currentCaptain.playerId,  player.playerId)
             currentCaptain.isCaptain = false
             currentCaptain = player
-
+            
             //  print("currentCaptain.isCaptain........",currentCaptain.isCaptain)
         }
         else
@@ -341,85 +341,85 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
             currentCaptain = player
             // print("currentCaptain.isCaptain",currentCaptain.isCaptain)
         }
-
-
-
-
+        
+        
+        
+        
         //remove other captain from squad
         removeOtherCaptain(id: userTeam.captain)
-
-
-
-
-
+        
+        
+        
+        
+        
         teamPlayerListView.reloadData()
-
-
+        
+        
     }
-
+    
     func removeOtherCaptain(id:Int?) {
-
+        
         for singlaPlayer in userTeam.goalkeeper{
-
+            
             if singlaPlayer.id == id{
-
+                
                 print("same id for captain keeper")
                 singlaPlayer.isCaptain = 1
-
+                
             }
             else{
-
+                
                 singlaPlayer.isCaptain = 0
             }
         }
-
+        
         for singlaPlayer in userTeam.defender{
-
+            
             if singlaPlayer.id == id{
                 print("same id for captain batsman")
                 singlaPlayer.isCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isCaptain = 0
             }
         }
         for singlaPlayer in userTeam.midfielder{
-
+            
             if singlaPlayer.id == id{
                 print("same id for captain allroun")
                 singlaPlayer.isCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isCaptain = 0
             }
         }
         for singlaPlayer in userTeam.striker{
-
+            
             if singlaPlayer.id == id{
                 print("same id for captain bowler")
                 singlaPlayer.isCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isCaptain = 0
             }
         }
-
+        
     }
     
     @objc func setViceCaptain(_ sender: UIButton){
-
+        
         let section = sender.tag/100
         let row = sender.tag % 10
-
+        
         var player: Player!
         
         var userFantasyPlayer : UserFantasyPlayer!
-
-
-
+        
+        
+        
         if section == 0
         {
             player = keeperList[row]
@@ -443,18 +443,18 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
         
         player.isViceCaptain = true
         player.isCaptain = false
-
+        
         userFantasyPlayer.isViceCaptain = 1
         userFantasyPlayer.isCaptain = 0
-
+        
         userTeam.viceCaptain = player.playerId
-
+        
         if userTeam.captain == userTeam.viceCaptain{
             userTeam.captain = 0
         }
-
+        
         print("player.playerId......in vice captain",player.playerId,player.isViceCaptain,player.isCaptain)
-
+        
         if currentViceCaptain != nil && currentViceCaptain.playerId != player.playerId
         {
             currentViceCaptain.isViceCaptain = false
@@ -464,201 +464,201 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
         {
             currentViceCaptain = player
         }
-
-       
-
+        
+        
+        
         removeOtherViceCaptain(id: userTeam.viceCaptain)
-
-
-
+        
+        
+        
         teamPlayerListView.reloadData()
         
     }
-
+    
     func removeOtherViceCaptain(id:Int?) {
-
+        
         for singlaPlayer in userTeam.goalkeeper{
-
+            
             if singlaPlayer.id == id{
                 print("same id for ViceCaptain keeper")
                 singlaPlayer.isViceCaptain = 1
-
+                
             }
             else{
-
+                
                 singlaPlayer.isViceCaptain = 0
             }
         }
-
+        
         for singlaPlayer in userTeam.defender{
-
+            
             if singlaPlayer.id == id{
                 print("same id for ViceCaptain batsman")
                 singlaPlayer.isViceCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isViceCaptain = 0
             }
         }
         for singlaPlayer in userTeam.midfielder{
-
+            
             if singlaPlayer.id == id{
                 print("same id for ViceCaptain allroun")
                 singlaPlayer.isViceCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isViceCaptain = 0
             }
         }
         for singlaPlayer in userTeam.striker{
-
+            
             if singlaPlayer.id == id{
-
+                
                 print("same id for ViceCaptain bowler")
                 singlaPlayer.isViceCaptain = 1
-
+                
             }
             else{
-
+                
                 singlaPlayer.isViceCaptain = 0
             }
         }
     }
-
+    
     @IBAction func saveTeamAction(_ sender: Any) {
-
+        
         print("captain and vice cap id in save team",userTeam.captain,userTeam.viceCaptain)
-
-
+        
+        
         if (userTeam.captain ?? 0 <= 0)
         {
             self.view.makeToast("You Must Select a Captain".localized)
         }
         else  if (userTeam.viceCaptain ?? 0 <= 0)
         {
-
+            
             self.view.makeToast("You Must Select a Vice Captain".localized)
-
+            
         }else if userTeam.captain == userTeam.viceCaptain{
-
+            
             self.view.makeToast("Please select Captain and Vice Captain properly".localized)
         }
         else if teamNameTextField.text!.count > 25{
-
+            
             self.view.makeToast("Maximum 24 Character".localized)
         }
         else if self.teamNameTextField.text?.count ?? 0 > 0
         {
             userTeam.teamName = self.teamNameTextField.text
-
+            
             print("captain and vice cap id........",userTeam.captain,userTeam.viceCaptain)
             
             
             //For double check/ set captain again
-
+            
             for singlaPlayer in userTeam.goalkeeper{
-
+                
                 if singlaPlayer.id == userTeam.captain{
                     
                     print("same id for captain keeper........")
                     singlaPlayer.isCaptain = 1
                     singlaPlayer.isViceCaptain = 0
                 }
-
+                
             }
-
+            
             for singlaPlayer in userTeam.defender{
-
+                
                 if singlaPlayer.id == userTeam.captain{
                     print("same id for captain batsman.........")
                     singlaPlayer.isCaptain = 1
                     singlaPlayer.isViceCaptain = 0
                 }
-
+                
             }
             for singlaPlayer in userTeam.midfielder{
-
+                
                 if singlaPlayer.id == userTeam.captain{
                     print("same id for captain allroun........")
                     singlaPlayer.isCaptain = 1
                     singlaPlayer.isViceCaptain = 0
                 }
-
+                
             }
             for singlaPlayer in userTeam.striker{
-
+                
                 if singlaPlayer.id == userTeam.captain{
                     print("same id for captain bowler........")
                     singlaPlayer.isCaptain = 1
                     singlaPlayer.isViceCaptain = 0
                 }
-
+                
             }
-
+            
             //For double check/ set Vicecaptain again
             
             for singlaPlayer in userTeam.goalkeeper{
-
+                
                 if singlaPlayer.id == userTeam.viceCaptain{
-
+                    
                     print("same id for vicecaptain keeper.........")
                     singlaPlayer.isCaptain = 0
                     singlaPlayer.isViceCaptain = 1
                 }
-
+                
             }
-
+            
             for singlaPlayer in userTeam.defender{
-
+                
                 if singlaPlayer.id == userTeam.viceCaptain{
                     print("same id for vicecaptain batsman........")
                     singlaPlayer.isCaptain = 0
                     singlaPlayer.isViceCaptain = 1
                 }
-
+                
             }
             for singlaPlayer in userTeam.midfielder{
-
+                
                 if singlaPlayer.id == userTeam.viceCaptain{
                     print("same id for vicecaptain allroun..........")
                     singlaPlayer.isCaptain = 0
                     singlaPlayer.isViceCaptain = 1
                 }
-
+                
             }
             for singlaPlayer in userTeam.striker{
-
+                
                 if singlaPlayer.id == userTeam.viceCaptain{
                     print("same id for vicecaptain bowler........")
                     singlaPlayer.isCaptain = 0
                     singlaPlayer.isViceCaptain = 1
                 }
-
+                
             }
             
             
-
-
-
-
+            
+            
+            
+            
             if isFromEdit{
-
+                
                 //print("userTeam.toJSON()..........saveTeamAction.",userTeam.toJSON())
-
-
+                
+                
                 APIManager.manager.postEditedFootballTeam(team: userTeam, teamId: String(describing: userTeamId)) { (status, msg) in
-
+                    
                     //    print("msg...........",msg)
                     self.view.makeToast(msg!)
                     
                     if status{
-
+                        
                         if (self.navigationController != nil)
                         {
                             if self.isFromEdit{
-
+                                
                                 if let destinationViewController = self.navigationController?.viewControllers
                                     .filter(
                                         {$0.classForCoder == MyTeamViewController.self})
@@ -670,7 +670,7 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
                             {
                                 self.navigationController?.popToRootViewController(animated: true)
                             }
-
+                            
                         }
                         else
                         {
@@ -681,18 +681,18 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
                     }
                 }
             }else{
-
+                
                 //     print("userTeam.captain ",userTeam.captain,userTeam.viceCaptain)
-
+                
                 APIManager.manager.postFootballTeam(params: userTeam) { (status, msg) in
                     self.view.makeToast(msg!)
-
+                    
                     if status{
-
+                        
                         if (self.navigationController != nil)
                         {
                             self.navigationController?.popToRootViewController(animated: true)
-
+                            
                         }
                         else
                         {
@@ -701,27 +701,27 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
                             }
                         }
                     }
-
+                    
                 }
-
+                
             }
         }
         else
         {
-
+            
             self.view.makeToast("Please provide a name for your team".localized)
             //print(userTeam.batsman.toJSONArray())
             //print(userTeam.bowler.toJSONArray())
             //print(userTeam.allrounder.toJSONArray())
             
         }
-
+        
     }
-
-
+    
+    
     @IBAction func backButtonAction(_ sender: Any) {
-
-
+        
+        
         self.navigationController?.popViewController(animated: true)
     }
     

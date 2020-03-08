@@ -12,7 +12,7 @@ import Kingfisher
 import BetterSegmentedControl
 
 class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-   
+    
     
     
     var matches:[MatchList] = []
@@ -35,11 +35,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var selectAmatchButton: UIButton!
     
     
-    @IBOutlet weak var shadowView: UIView!
-    @IBOutlet weak var languageView: UIView!
-    @IBOutlet weak var englishButton: UIButton!
-    @IBOutlet weak var banglabutton: UIButton!
-    @IBOutlet weak var changeLanguageLabel: UILabel!
+    
     
     @IBOutlet weak var noContestImageView: UIImageView!
     @IBOutlet weak var noMatchImageView: UIImageView!
@@ -48,7 +44,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     
     @IBOutlet weak var matchListTableView: UITableView!
     
-   
+    
     @IBOutlet weak var gameSegmentControl: BetterSegmentedControl!
     
     
@@ -59,8 +55,11 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-       
+        //        if #available(iOS 13.0, *) {
+        //            overrideUserInterfaceStyle = .dark
+        //        } else {
+        //            // Fallback on earlier versions
+        //        }
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
@@ -68,43 +67,14 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         selectAmatchLabel.text = "SELECT A MATCH".localized
         
-        if Language.language == Language.bangla{
-            
-            banglabutton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-            banglabutton.backgroundColor = UIColor.init(named: "GreenHighlight")!
-            
-            englishButton.backgroundColor = UIColor.white
-            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-        }else{
-            banglabutton.backgroundColor = UIColor.white
-            banglabutton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-            
-            englishButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
-            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-
-        }
         
-        //Localize
-        changeLanguageLabel.text = "Change Language".localized
-       
+        
         noMatchLabel.text = "We provide upcoming match schedule based on your preferences. No upcoming match of that priority is available now.".localized
         noContestLabel.text = "You haven't join any upcoming contests. Join the upcoming match contests and prove your skills.".localized
         
         selectAmatchButton.setTitle("SELECT A MATCH".localized, for: .normal)
         
-        // Register to receive notification in your class
-        NotificationCenter.default.addObserver(self, selector: #selector(self.languageChangeAction(_:)), name: NSNotification.Name(rawValue: "languageChange"), object: nil)
         
-        
-        
-        
-        englishButton.layer.borderWidth = 0.5
-        englishButton.layer.borderColor = UIColor.lightGray.cgColor
-        banglabutton.layer.borderWidth = 0.5
-        banglabutton.layer.borderColor = UIColor.lightGray.cgColor
-        
-        
-        //
         
         self.noContestView.isHidden = true
         
@@ -115,7 +85,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             
             APIManager.manager.getBannerList(pageName: "homepage") { (bannerArray) in
                 
-               
+                
                 self.bannerArray = bannerArray
                 
                 self.adCollectionView.reloadData()
@@ -126,27 +96,29 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             topViewHeight.constant = 0
         }
         
-      
+        
+        
+        
+        
         matchListTableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        shadowView.addGestureRecognizer(tap)
         
         
-        gameSegmentControl.segments = LabelSegment.segments(withTitles: ["Cricket", "FootBall"],
+        
+        gameSegmentControl.segments = LabelSegment.segments(withTitles: ["Cricket", "Football"],
                                                             normalFont: UIFont(name: "OpenSans-Bold", size: 13.0)!,
                                                             selectedFont: UIFont(name: "OpenSans-Bold", size: 13.0)!,
                                                             selectedTextColor: UIColor.init(named: "GreenHighlight")!)
-       // gameSegmentControl.setIndex(1)
+        // gameSegmentControl.setIndex(1)
         
     }
     
     
     @IBAction func gameChangeAction(_ sender:
         BetterSegmentedControl) {
-            
-            print("The selected index is...... \(sender.index)")
+        
+        print("The selected index is...... \(sender.index)")
         
         if sender.index == 0{
             
@@ -162,58 +134,59 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        
-        shadowView.isHidden = true
-        languageView.isHidden = true
-    }
+    
     @objc private func refreshData(_ sender: Any) {
         
-       getData()
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            getData()
+        }else{
+            
+            getFootBallData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         print("viewWillAppear..............match",UserDefaults.standard.string(forKey: "selectedGameType"))
- 
-       
-       
+        self.noMatchView.isHidden = true
+        self.noContestView.isHidden = true
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-       // print("viewDidAppear..............match")
+        // print("viewDidAppear..............match")
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.gameSelectAction(_:)), name: NSNotification.Name(rawValue: "gameChange"), object: nil)
         
-        languageView.isHidden = true
-        shadowView.isHidden = true
+        
         
         
         self.tabBarController?.tabBar.isHidden = false
-  
-         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+        
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
             getData()
             
             gameSegmentControl.setIndex(0)
             
-         }else{
+        }else{
             
-             getFootBallData()
+            getFootBallData()
             
             gameSegmentControl.setIndex(1)
             
         }
-       
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         
-//print("viewDidDisappear............///////////")
+        //print("viewDidDisappear............///////////")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
     }
     
@@ -221,16 +194,16 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     func getData(){
         
         
-        
+        self.noMatchView.isHidden = true
         self.noContestView.isHidden = true
         
         if (matchListTableView != nil)
         {
             if type == .next{
                 
-            matchListTableView.register(UINib(nibName: "UpComingMatchCell", bundle: nil), forCellReuseIdentifier: "UpcomingMatchCell")
+                matchListTableView.register(UINib(nibName: "UpComingMatchCell", bundle: nil), forCellReuseIdentifier: "UpcomingMatchCell")
             }else{
-            matchListTableView.register(UINib(nibName: "MatchTableViewCell", bundle: nil), forCellReuseIdentifier: "MatchCell")
+                matchListTableView.register(UINib(nibName: "MatchTableViewCell", bundle: nil), forCellReuseIdentifier: "MatchCell")
             }
             matchListTableView.delegate = self
             matchListTableView.dataSource = self
@@ -247,13 +220,16 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                     
                     self.selectAmatchLabel.isHidden = true
                     
+                    self.noMatchImageView.image =  UIImage.init(named: "match_icon")
                     self.noMatchView.isHidden = false
+                    
                 }else{
+                    
                     self.noMatchView.isHidden = true
                     self.selectAmatchLabel.isHidden = false
-
+                    
                 }
-
+                
             }
             
             
@@ -319,9 +295,9 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
     }
     
-     func getFootBallData(){
+    func getFootBallData(){
         
-      //  print("get football data...............")
+        //  print("get football data...............")
         
         self.noMatchView.isHidden = true
         self.noContestView.isHidden = true
@@ -348,7 +324,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 if self.footBallmatches.count == 0{
                     
                     self.selectAmatchLabel.isHidden = true
-                    
+                    self.noMatchImageView.image =  UIImage.init(named: "icon_football_match_upcoming")
                     self.noMatchView.isHidden = false
                     
                 }else{
@@ -371,7 +347,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 self.matchListTableView.reloadData()
                 if self.footBallmatches.count == 0{
                     
-                     self.noContestImageView.image = UIImage.init(named: "trophy_no_contest_football")
+                    self.noContestImageView.image = UIImage.init(named: "trophy_no_contest_football")
                     self.noContestView.isHidden = false
                     
                 }else{
@@ -417,7 +393,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             }
         }
         
-        
+        self.refreshControl.endRefreshing()
     }
     
     
@@ -435,14 +411,14 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     func numberOfSections(in tableView: UITableView) -> Int {
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
-           
-          print(".......matches.coun......",matches.count)
             
-          return matches.count
+            print(".......matches.coun......",matches.count)
+            
+            return matches.count
             
         }else{
             
-           return footBallmatches.count
+            return footBallmatches.count
         }
     }
     
@@ -451,8 +427,8 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
-          let match = matches[indexPath.section]
-          
+            let match = matches[indexPath.section]
+            
             if type == .next{
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier:"UpcomingMatchCell") as! UpComingMatchCell
@@ -468,7 +444,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 }
                 
                 cell.setInfo(match)
-               
+                
                 
                 
                 return cell
@@ -543,55 +519,55 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 
             }
             else{
-
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier:"MatchCell") as! MatchTableViewCell
-
+                
                 if type == .upcomingContest{
-
-
+                    
+                    
                     cell.statusLabel.text = String.init(format:"%@ Left".localized.uppercased(),match.joiningLastTime?.localized.uppercased() ?? "" )
                     cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
                     cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
                     cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-
+                    
                 }else if type == .liveContest{
-
+                    
                     cell.statusLabel.text = String.init(format: "IN PROGRESS".localized)
                     cell.statusBackground.backgroundColor = UIColor.init(named: "Blue")!
                     cell.firstTeamName.backgroundColor = UIColor.init(named: "Blue")!
                     cell.secondTeamName.backgroundColor = UIColor.init(named: "Blue")!
                     cell.contestLabel.textColor = UIColor.init(named: "Blue")!
-
+                    
                 }else if type == .completedContest{
-
-
+                    
+                    
                     cell.statusLabel.text = String.init(format: "COMPLETED".localized )
                     cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
                     cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
                     cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-
+                    
                 }
-
+                
                 cell.setFootballInfo(match)
-
+                
                 if match.totalJoinedContests ?? 0 > 0 {
-
+                    
                     cell.contestMessageHeightConstraint.constant = 20
                 }
                 else
                 {
                     cell.contestMessageHeightConstraint.constant = 0
                 }
-
+                
                 return cell
             }
             
-          
+            
         }
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+        
         SVProgressHUD.show()
         print("didSelectRowAt............")
         
@@ -617,11 +593,12 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                                 popupVC?.type = self.type
                                 popupVC?.parentMatch = match
                                 popupVC?.activeContestList = (cm?.contests)!
-                                popupVC?.modalPresentationStyle = .overCurrentContext
+                                popupVC?.modalPresentationStyle = .fullScreen
                                 popupVC?.modalTransitionStyle = .crossDissolve
                                 
                                 let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
                                 navigationController.isNavigationBarHidden = true
+                                navigationController.modalPresentationStyle = .fullScreen
                                 
                                 self.present(navigationController, animated: true) {
                                     
@@ -645,11 +622,12 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ContestListViewController") as? ContestListViewController
                 popupVC?.type = type
                 popupVC?.parentMatch = match
-                popupVC?.modalPresentationStyle = .overCurrentContext
+                popupVC?.modalPresentationStyle = .fullScreen
                 popupVC?.modalTransitionStyle = .crossDissolve
                 
                 let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
                 navigationController.isNavigationBarHidden = true
+                navigationController.modalPresentationStyle = .fullScreen
                 
                 self.present(navigationController, animated: true) {
                     
@@ -679,11 +657,12 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                                 popupVC?.type = self.type
                                 popupVC?.parentMatchFootball = match
                                 popupVC?.activeContestList = (cm?.contests)!
-                                popupVC?.modalPresentationStyle = .overCurrentContext
+                                popupVC?.modalPresentationStyle = .fullScreen
                                 popupVC?.modalTransitionStyle = .crossDissolve
                                 
                                 let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
                                 navigationController.isNavigationBarHidden = true
+                                navigationController.modalPresentationStyle = .fullScreen
                                 
                                 self.present(navigationController, animated: true) {
                                     
@@ -707,11 +686,12 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ContestListViewController") as? ContestListViewController
                 popupVC?.type = type
                 popupVC?.parentMatchFootball = match
-                popupVC?.modalPresentationStyle = .overCurrentContext
+                popupVC?.modalPresentationStyle = .fullScreen
                 popupVC?.modalTransitionStyle = .crossDissolve
                 
                 let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
                 navigationController.isNavigationBarHidden = true
+                navigationController.modalPresentationStyle = .fullScreen
                 
                 self.present(navigationController, animated: true) {
                     
@@ -720,7 +700,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 }
             }
         }
-       
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -743,7 +723,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         view.backgroundColor = .clear
         return view
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return bannerArray.count
@@ -754,18 +734,18 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "adCell", for: indexPath) as! BannerCollectionViewCell
         
         let singleBanner = bannerArray[indexPath.item] as! Dictionary<String,Any>
-   
+        
         
         let urlString = singleBanner["image_path"] as! String
         let fullUrl = "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(urlString)"
         print("singleBanner.....",fullUrl)
         
-       // let url = URL(string: fullUrl)
+        // let url = URL(string: fullUrl)
         if let url = URL(string: fullUrl) {
             print("url string ",url)
             
             cell.bannerImageView.kf.setImage(with:url)
-
+            
         } else {
             if let urlEscapedString = fullUrl.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ,
                 let escapedURL = URL(string: urlEscapedString){
@@ -773,7 +753,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 print("escapedURL string ",escapedURL)
                 
                 cell.bannerImageView.kf.setImage(with:escapedURL)
-
+                
             }
         }
         
@@ -782,7 +762,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-       
+        
         return CGSize(width: collectionView.frame.size.width - 30, height: collectionView.frame.size.height)
     }
     
@@ -791,7 +771,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         let singleBanner = bannerArray[indexPath.item] as! Dictionary<String,Any>
         let urlString = singleBanner["reference_url"] as! String
-
+        
         guard let url = URL(string: urlString) else {
             return //be safe
         }
@@ -800,35 +780,16 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
     }
     
-    @IBAction func englishButtonAction(_ sender: Any) {
-        
-        Language.language = Language.english
-    }
-   
-    @IBAction func banglaButtonAction(_ sender: Any) {
-        
-        print("bangla.........")
-        Language.language = Language.bangla
-    }
     
-   @objc func languageChangeAction(_ notification: NSNotification) {
-
-        print("baseLanguageButtonAction")
-    if let currentVC = UIApplication.topViewController() as? HomeViewController {
-        
-        shadowView.isHidden = false
-        languageView.isHidden = false
-        
-    }
     
-    }
+    
     
     @objc func gameSelectAction(_ notification: NSNotification) {
-
+        
         print("noti info...........",notification.userInfo!["isSelected"]!)
         if let currentVC = UIApplication.topViewController() as? MyContestViewController {
-
-             print("match gameChangeAction")
+            
+            print("match gameChangeAction")
             //selected for football
             
             if notification.userInfo!["isSelected"]! as! Bool == true{
@@ -848,9 +809,9 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
-//    override func gameChange() {
-//
-//         print("match gameChangeAction.........")
-//    }
- 
+    //    override func gameChange() {
+    //
+    //         print("match gameChangeAction.........")
+    //    }
+    
 }

@@ -95,6 +95,7 @@ class UpComingMatchCell: UITableViewCell {
         if match.teams.item(at: 0).logo != nil{
             
             let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(match.teams.item(at: 0).logo ?? "")")
+            print("logo..................................",url1)
             firstTeamFlag.kf.setImage(with: url1)
         }else{
             self.firstTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")

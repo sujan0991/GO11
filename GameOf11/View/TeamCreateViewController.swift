@@ -29,8 +29,8 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
     var sortedbowlerList:[Player] = []
     var sortedkeeperList:[Player] = []
     var sortedallRounderList:[Player] = []
-//
-   
+    //
+    
     var firstTeamPlayerCount = 0
     var secondTeamPlayerCount = 0
     var totalCreditPoint = 0.0
@@ -41,7 +41,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
     var userTeam : UsersFantasyTeam!
     
     var timeLeft : String!
-   
+    
     let formatter = NumberFormatter()
     
     @IBOutlet weak var maxPlayerLabel: UILabel!
@@ -88,16 +88,16 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        placeNavBar(withTitle: "Create Your Team", isBackBtnVisible: true)
-//
+        
+        //        placeNavBar(withTitle: "Create Your Team", isBackBtnVisible: true)
+        //
         formatter.numberStyle = .decimal
         formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
         
         navTitle.text = String.init(format: "%@ Left".localized,timeLeft ?? "" )
         
         progressView.gradientColors = [UIColor.init(named: "GreenHighlight")!.cgColor, UIColor.init(named: "GreenHighlight")!.cgColor]
-
+        
         
         nextButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
         nextButton.isUserInteractionEnabled = false
@@ -114,7 +114,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
         alertmsgLabel.text = "Do you really want to exit? Your fantasy team changes will be discarded.".localized
         cancelButton.setTitle("Cancel".localized, for: .normal)
-
+        
         let teamJson = [
             "match_id" : "0",
             "team_name": ""
@@ -151,19 +151,19 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
                 }
                 
             }
-
-                sortedkeeperList = keeperList.sorted(by: {
-                    (player1: Player, player2: Player) -> Bool in
-                    
-                    if let point1 = player1.creditPoints,
-                        let point2 = player2.creditPoints{
-                        
-                        return point1 > point2
-                    }
-                    
             
-                    return true
-                })
+            sortedkeeperList = keeperList.sorted(by: {
+                (player1: Player, player2: Player) -> Bool in
+                
+                if let point1 = player1.creditPoints,
+                    let point2 = player2.creditPoints{
+                    
+                    return point1 > point2
+                }
+                
+                
+                return true
+            })
             
             sortedbatsmanList = batsmanList.sorted(by: {
                 (player1: Player, player2: Player) -> Bool in
@@ -203,8 +203,8 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
                 
                 return true
             })
-
-
+            
+            
             print("................................",keeperList.count,sortedkeeperList.count)
         }
         
@@ -229,11 +229,11 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         nextButton.layer.shadowRadius = 2
         nextButton.layer.shadowOpacity = 0.5
         nextButton.layer.masksToBounds = false
-
-       
+        
+        
     }
     
-
+    
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -245,7 +245,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         if userTeam.batsman.count != 0{
             
             print("userTeam in viewwill appear??????????",userTeam.batsman.count)
-
+            
         }
         
         if squadData != nil{
@@ -259,7 +259,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         }
         
         
-       
+        
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
@@ -279,13 +279,13 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         }
         else
         {
-             self.view.makeToast("Please complete the team first".localized)
+            self.view.makeToast("Please complete the team first".localized)
         }
         
         
-//        self.present(popupVC!, animated: true) {
-//            print("")
-//        }
+        //        self.present(popupVC!, animated: true) {
+        //            print("")
+        //        }
         
     }
     
@@ -313,55 +313,55 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         if indexPath.item == 0
         {
             cell.positionTitle.text = "WK"
-          //  cell.positionIcon.image = UIImage.init(named: "wicketKeeperIcon")
-           
-                
-                if userTeam != nil
-                {
-                    cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.keeper.count)
-                }
+            //  cell.positionIcon.image = UIImage.init(named: "wicketKeeperIcon")
+            
+            
+            if userTeam != nil
+            {
+                cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.keeper.count)
+            }
             
             cell.isSelected = true
-           
+            
         }
         else if indexPath.item == 1
         {
             cell.positionTitle.text = "BAT"
-          //  cell.positionIcon.image = UIImage.init(named: "battingIcon")
+            //  cell.positionIcon.image = UIImage.init(named: "battingIcon")
             
-                if userTeam != nil
-                {
-                    cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.batsman.count)
-                }
+            if userTeam != nil
+            {
+                cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.batsman.count)
+            }
             
-
+            
             
         }
         else if indexPath.item == 2
         {
             cell.positionTitle.text = "ALL"
-           // cell.positionIcon.image = UIImage.init(named: "allrounderIcon")
-          
-                
-                if userTeam != nil
-                {
-                    cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.allrounder.count)
-                }
+            // cell.positionIcon.image = UIImage.init(named: "allrounderIcon")
             
-
+            
+            if userTeam != nil
+            {
+                cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.allrounder.count)
+            }
+            
+            
         }
         else
         {
             cell.positionTitle.text = "BOWL"
-           // cell.positionIcon.image = UIImage.init(named: "bowlingIcon")
+            // cell.positionIcon.image = UIImage.init(named: "bowlingIcon")
             
-                
-                if userTeam != nil
-                {
-                    cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.bowler.count)
-                }
             
-
+            if userTeam != nil
+            {
+                cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.bowler.count)
+            }
+            
+            
         }
         cell.isSelected = selectedIndex == indexPath.item
         
@@ -374,28 +374,28 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             cell.positionIcon.backgroundColor = UIColor.clear
         }
         
-
+        
         
         return cell
         
     }
     
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//
-//       // print("insetForSectionAt")
-//        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-//        let width = collectionView.frame.size.height //some width
-//
-//        let numberOfItems = CGFloat(collectionView.numberOfItems(inSection: section))
-//
-//        let combinedItemWidth = (numberOfItems * width) + ((numberOfItems - 1)  * flowLayout.minimumInteritemSpacing)
-//        let padding = (collectionView.frame.width - combinedItemWidth) / 2
-//
-//        return UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
-//
-//
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    //
+    //       // print("insetForSectionAt")
+    //        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+    //        let width = collectionView.frame.size.height //some width
+    //
+    //        let numberOfItems = CGFloat(collectionView.numberOfItems(inSection: section))
+    //
+    //        let combinedItemWidth = (numberOfItems * width) + ((numberOfItems - 1)  * flowLayout.minimumInteritemSpacing)
+    //        let padding = (collectionView.frame.width - combinedItemWidth) / 2
+    //
+    //        return UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
+    //
+    //
+    //    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -405,7 +405,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-               
+        
         selectedIndex = indexPath.item
         
         let indexPth = IndexPath(row: 0, section: 0)
@@ -461,47 +461,47 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
     }
     
-
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"playerCell") as! PlayerTableViewCell
         
-      
+        
         
         var player: Player!
-       
+        
         if selectedIndex == 0
         {
-             player = sortedkeeperList[indexPath.section]
+            player = sortedkeeperList[indexPath.section]
             
             
         }
         else if selectedIndex == 1
         {
-             player = sortedbatsmanList[indexPath.section]
+            player = sortedbatsmanList[indexPath.section]
             
             
         }
         else if selectedIndex == 2
         {
-             player = sortedallRounderList[indexPath.section]
+            player = sortedallRounderList[indexPath.section]
             
-
+            
         }
         else
         {
             
-
-             player = sortedbowlerList[indexPath.section]
             
-
+            player = sortedbowlerList[indexPath.section]
+            
+            
         }
         
-       
+        
         cell.setInfo(player: player,squad: squadData.teams!)
         
- 
+        
         return cell
     }
     
@@ -537,7 +537,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
                 
                 
             }
-
+            
             if player.teamBelong == 1
             {
                 
@@ -552,27 +552,27 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier:"headerCell")
-//
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//
-//        return 50
-//    }
+    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //
+    //        let cell = tableView.dequeueReusableCell(withIdentifier:"headerCell")
+    //
+    //        return cell
+    //    }
+    //
+    //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    //
+    //        return 50
+    //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-
-    //    let currentCell = tableView.cellForRow(at: indexPath) as! PlayerTableViewCell
-  
+        
+        //    let currentCell = tableView.cellForRow(at: indexPath) as! PlayerTableViewCell
+        
         var player: Player!
         
         var userFantasyPlayer: UserFantasyPlayer!
-       
+        
         if selectedIndex == 0
         {
             
@@ -587,7 +587,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             {
                 multiplyer = -1.0
                 
-               
+                
             }
             //remove as captain and vice captain
             if player.isCaptain{
@@ -602,12 +602,12 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             if player.playerSelected
             {
                 print("......... playerSelected")
-             
+                
                 totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
                 
                 print("totalCreditPoint in did select",totalCreditPoint)
                 
-
+                
                 
                 if self.verify(player)
                 {
@@ -633,7 +633,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
                 
                 userTeam.keeper = userTeam.keeper.filter{$0.id != userFantasyPlayer.id}
                 isGreen = false
-            
+                
             }
             
         }
@@ -814,10 +814,10 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
                 userTeam.bowler = userTeam.bowler.filter{$0.id != userFantasyPlayer.id}
                 isGreen = false
                 
-               
+                
             }
         }
-       
+        
         
         
         var multiplyer = 1.0
@@ -841,11 +841,11 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         {
             isGreen = true
         }
-      
+        
         self.updateSummary()
         tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
         
-       // positionSelectorCollectionView.reloadItems(at: [IndexPath.init(item: selectedIndex, section: 0) as IndexPath])
+        // positionSelectorCollectionView.reloadItems(at: [IndexPath.init(item: selectedIndex, section: 0) as IndexPath])
         positionSelectorCollectionView.reloadData()
     }
     
@@ -859,7 +859,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         let total = 11
         let progress:Float = Float(selectedCount) / Float(total)
         progressView.progress = progress
-
+        
         
         firstTeamCode.text = squadData.teams?.firstTeam?.teamKey?.uppercased()
         secondTeamCode.text = squadData.teams?.secondTeam?.teamKey?.uppercased()
@@ -877,7 +877,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             
         }else{
             
-         
+            
             let bnSelectedCount = formatter.string(for: (firstTeamPlayerCount + secondTeamPlayerCount))
             totalPlayersCountLabel.text = "\(String(describing: bnSelectedCount!))/১১"
             
@@ -889,21 +889,21 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             print("???????????????????????",pointLeft,bnPointLeft)
             totalPointsLabel.text = bnPointLeft
             
-
+            
         }
         
         
         
         if squadData.teams?.firstTeam?.logo != nil{
-
+            
             let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(squadData.teams?.firstTeam?.logo ?? "")")
             firstTeamFlag.kf.setImage(with: url1)
         }
-
+        
         if squadData.teams?.secondTeam?.logo != nil{
-
+            
             let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(squadData.teams?.secondTeam?.logo ?? "")")
-
+            
             secondTeamFlag.kf.setImage(with: url2)
         }
         
@@ -917,7 +917,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             nextButton.layer.shadowRadius = 2
             nextButton.layer.shadowOpacity = 0.5
             nextButton.layer.masksToBounds = false
-
+            
         }else{
             
             nextButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
@@ -928,11 +928,11 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             nextButton.layer.shadowRadius = 2
             nextButton.layer.shadowOpacity = 0.5
             nextButton.layer.masksToBounds = false
-
-
+            
+            
         }
-       
-       // print("count.........",(firstTeamPlayerCount + secondTeamPlayerCount))
+        
+        // print("count.........",(firstTeamPlayerCount + secondTeamPlayerCount))
     }
     
     func verify(_ singlePlayer: Player) -> Bool
@@ -943,10 +943,10 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             
             switch (singlePlayer.role) {
             case "batsman":
-//                if userTeam.batsman.count >= squadData.team_rules?.batsman?.maxPerMatch ?? 0
-//                {
+                //                if userTeam.batsman.count >= squadData.team_rules?.batsman?.maxPerMatch ?? 0
+                //                {
                 if userTeam.batsman.count >= 6
-                    {
+                {
                     
                     self.view.makeToast(String.init(format: "Not more than 6 Batsmen".localized))
                     return false
@@ -958,27 +958,27 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
                 }
                 else if  Team_Rules.MaxPlayer - (1 + userTeam.batsman.count + userTeam.allrounder.count + userTeam.keeper.count) < 3 //squadData.team_rules?.bowler?.minPerMatch ?? 0
                 {
-                   self.view.makeToast( String.init(format: "Minimum 3 Bowlers".localized ))
+                    self.view.makeToast( String.init(format: "Minimum 3 Bowlers".localized ))
                     return false
                 }
                 else if  Team_Rules.MaxPlayer - (1+userTeam.bowler.count + userTeam.allrounder.count + userTeam.batsman.count) < 1 //squadData.team_rules?.keeper?.minPerMatch ?? 0
                 {
-                   self.view.makeToast( String.init(format: "Minimum 1 Wicket Keeper".localized ))
+                    self.view.makeToast( String.init(format: "Minimum 1 Wicket Keeper".localized ))
                     return false
                 }
                 break;
             case "bowler":
-//                if userTeam.bowler.count >= squadData.team_rules?.bowler?.maxPerMatch ?? 0
-//                {
+                //                if userTeam.bowler.count >= squadData.team_rules?.bowler?.maxPerMatch ?? 0
+                //                {
                 if userTeam.bowler.count >= 6
                 {
-
-                   self.view.makeToast( String.init(format: "Not more than 6 Bowlers".localized))
+                    
+                    self.view.makeToast( String.init(format: "Not more than 6 Bowlers".localized))
                     return false
                 }
                 else if  Team_Rules.MaxPlayer - (1 + userTeam.batsman.count + userTeam.bowler.count + userTeam.keeper.count) < 1 //squadData.team_rules?.allrounder?.minPerMatch ?? 0
                 {
-                   self.view.makeToast( String.init(format: "Minimum 1 All Rounder".localized))
+                    self.view.makeToast( String.init(format: "Minimum 1 All Rounder".localized))
                     return false
                 }
                 else if  Team_Rules.MaxPlayer - (1 + userTeam.keeper.count + userTeam.bowler.count + userTeam.allrounder.count) < 3 //squadData.team_rules?.batsman?.minPerMatch ?? 0
@@ -988,25 +988,25 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
                 }
                 else if  Team_Rules.MaxPlayer - (1+userTeam.bowler.count + userTeam.allrounder.count + userTeam.batsman.count) < 1 //squadData.team_rules?.keeper?.minPerMatch ?? 0
                 {
-                   self.view.makeToast( String.init(format: "Minimum 1 Wicket Keeper".localized))
+                    self.view.makeToast( String.init(format: "Minimum 1 Wicket Keeper".localized))
                     return false
                 }
                 break;
             case "keeper":
                 
-//                if userTeam.keeper.count >= squadData.team_rules?.keeper?.maxPerMatch ?? 0
-//                {
+                //                if userTeam.keeper.count >= squadData.team_rules?.keeper?.maxPerMatch ?? 0
+                //                {
                 if userTeam.keeper.count >= 4
                 {
-                   self.view.makeToast( String.init(format: "Not more than 4 Wicket Keeper".localized))
+                    self.view.makeToast( String.init(format: "Not more than 4 Wicket Keeper".localized))
                     return false
                 }else if  Team_Rules.MaxPlayer - (1 + userTeam.batsman.count + userTeam.allrounder.count + userTeam.keeper.count) < 3 //squadData.team_rules?.bowler?.minPerMatch ?? 0
                 {
-                   self.view.makeToast( String.init(format: "Minimum 3 Bowlers".localized ))
+                    self.view.makeToast( String.init(format: "Minimum 3 Bowlers".localized ))
                     return false
                 }else if  Team_Rules.MaxPlayer - (1 + userTeam.batsman.count + userTeam.bowler.count + userTeam.keeper.count) < 1 //squadData.team_rules?.allrounder?.minPerMatch ?? 0
                 {
-                   self.view.makeToast( String.init(format: "Minimum 1 All Rounder".localized))
+                    self.view.makeToast( String.init(format: "Minimum 1 All Rounder".localized))
                     return false
                 }
                 else if  Team_Rules.MaxPlayer - (1 + userTeam.keeper.count + userTeam.bowler.count + userTeam.allrounder.count) < 3 //squadData.team_rules?.batsman?.minPerMatch ?? 0
@@ -1014,12 +1014,12 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
                     self.view.makeToast( String.init(format: "Minimum 3 Batsmen".localized))
                     return false
                 }
-
+                
                 break;
             case "allrounder":
                 if userTeam.allrounder.count >= 4 //squadData.team_rules?.allrounder?.maxPerMatch ?? 0
                 {
-                   self.view.makeToast( String.init(format: "Not more than 4 All Rounders".localized))
+                    self.view.makeToast( String.init(format: "Not more than 4 All Rounders".localized))
                     return false
                 }
                 else if  Team_Rules.MaxPlayer - (1 + userTeam.batsman.count + userTeam.allrounder.count + userTeam.keeper.count) < 3 //squadData.team_rules?.bowler?.minPerMatch ?? 0
@@ -1032,10 +1032,10 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
                     self.view.makeToast( String.init(format: "Minimum 3 Batsmen".localized))
                     return false
                 }
-
+                    
                 else if  Team_Rules.MaxPlayer - (1+userTeam.bowler.count + userTeam.allrounder.count + userTeam.batsman.count) < 1 //squadData.team_rules?.keeper?.minPerMatch ?? 0
                 {
-                   self.view.makeToast( String.init(format: "Minimum 1 Wicket Keeper".localized ))
+                    self.view.makeToast( String.init(format: "Minimum 1 Wicket Keeper".localized ))
                     return false
                 }
                 break;
@@ -1051,7 +1051,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             if totalCreditPoint > Team_Rules.MaxCredit
             {
                 
-               self.view.makeToast( String.init(format: "Total credit value can not be greater than 100".localized))
+                self.view.makeToast( String.init(format: "Total credit value can not be greater than 100".localized))
                 
                 return false
             }
@@ -1060,10 +1060,10 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             //Team
             if singlePlayer.teamBelong == 1
             {
-               // if firstTeamPlayerCount >= Team_Rules.Team1MaxPlayer
+                // if firstTeamPlayerCount >= Team_Rules.Team1MaxPlayer
                 if firstTeamPlayerCount >= 7
                 {
-                   self.view.makeToast( String.init(format: "Not more than 7 players from any team".localized ))
+                    self.view.makeToast( String.init(format: "Not more than 7 players from any team".localized ))
                     return false
                 }
             }
@@ -1071,7 +1071,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             {
                 if secondTeamPlayerCount >= 7
                 {
-                   self.view.makeToast( String.init(format: "Not more than 7 players from any team".localized ))
+                    self.view.makeToast( String.init(format: "Not more than 7 players from any team".localized ))
                     
                     return false
                 }
@@ -1079,7 +1079,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         }
         else
         {
-           self.view.makeToast( String.init(format: "Your squad can not cross 11 players".localized))
+            self.view.makeToast( String.init(format: "Your squad can not cross 11 players".localized))
             return false
         }
         
@@ -1088,17 +1088,17 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         return true
     }
     
-   
+    
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
     @IBAction func backButtonAction(_ sender: Any) {
         

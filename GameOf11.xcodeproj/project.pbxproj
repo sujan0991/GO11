@@ -43,7 +43,6 @@
 		0CB1B8FD2266FF32003D6C56 /* CteatedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CB1B8FB2266FF32003D6C56 /* CteatedTableViewCell.xib */; };
 		0CB1B8FF2266FF4C003D6C56 /* MyTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */; };
 		0CB1B90122686419003D6C56 /* TeamSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */; };
-		0CB1B9042268AC58003D6C56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0CB1B9032268AC57003D6C56 /* GoogleService-Info.plist */; };
 		0CE8835F21DFB6730025A31E /* TeamCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8835E21DFB6730025A31E /* TeamCreateViewController.swift */; };
 		0CE8836221DFD5730025A31E /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8836021DFD5730025A31E /* PlayerTableViewCell.swift */; };
 		0CE8836321DFD5730025A31E /* PlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CE8836121DFD5730025A31E /* PlayerTableViewCell.xib */; };
@@ -53,17 +52,16 @@
 		0CE8836B21E0000E0025A31E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8836A21E0000E0025A31E /* LoginViewController.swift */; };
 		0CEB167A2264F73A002D0208 /* CaptainSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */; };
 		0CEB167C2265C102002D0208 /* TeamPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */; };
-		640B9D41233D397F00387A2A /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 640B9D40233D397F00387A2A /* Pods_GameOf11.framework */; };
 		6412BAF42343C4930081958E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412BAF32343C4930081958E /* TutorialViewController.swift */; };
 		6412BAF72343C4F40081958E /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412BAF52343C4F40081958E /* Slide.swift */; };
 		6412BAF82343C4F40081958E /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6412BAF62343C4F40081958E /* Slide.xib */; };
 		641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E1768222A9A7D00302A19 /* SignUpViewController.swift */; };
 		641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */; };
+		64251026240D652900077D25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64251025240D652900077D25 /* GoogleService-Info.plist */; };
 		643488EB230B280800846649 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643488EA230B280800846649 /* ForgotPasswordViewController.swift */; };
 		6438DF9F2318FA1500E29F5D /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6438DF9E2318FA1500E29F5D /* Localizable.swift */; };
 		6438DFB02319111500E29F5D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6438DFB22319111500E29F5D /* Localizable.strings */; };
 		6441ECBD23100AE1008FFE0F /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6441ECBC23100AE0008FFE0F /* FeedbackViewController.swift */; };
-		64441E4F231BF3A600A21EDA /* FBUImManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64441E4E231BF3A600A21EDA /* FBUImManager.swift */; };
 		64441E51231C1BD400A21EDA /* ParentTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64441E50231C1BD400A21EDA /* ParentTabViewController.swift */; };
 		644526A02237D8320099FB37 /* ContestLeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */; };
 		644526A12237D8320099FB37 /* PointBreakDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6445269F2237D8300099FB37 /* PointBreakDownViewController.swift */; };
@@ -87,6 +85,7 @@
 		645F7DF423153F4800515F11 /* PendingWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */; };
 		645F7DF6231545FF00515F11 /* WithdrawTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */; };
 		645F7DF8231598D100515F11 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF7231598D100515F11 /* WebViewController.swift */; };
+		64669C5523E75C8F00288346 /* PromoCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64669C5423E75C8F00288346 /* PromoCodeViewController.swift */; };
 		646EC5FC230DB5C500E9D1A9 /* AvaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */; };
 		646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */; };
 		647825AA239D2BC0007AAC7A /* EditTeamFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */; };
@@ -104,6 +103,14 @@
 		64C77A5222FEEBC5005161BF /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64C77A4822FEEBC5005161BF /* OpenSans-ExtraBoldItalic.ttf */; };
 		64C77A5322FEEBC5005161BF /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64C77A4922FEEBC5005161BF /* OpenSans-Regular.ttf */; };
 		64C77A5422FEEBC5005161BF /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64C77A4A22FEEBC5005161BF /* OpenSans-BoldItalic.ttf */; };
+		64CBB4DB23E9C81100F0DBA2 /* PromoCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4DA23E9C81100F0DBA2 /* PromoCodeTableViewCell.swift */; };
+		64CBB4DD23E9DC5400F0DBA2 /* AnnouncementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4DC23E9DC5400F0DBA2 /* AnnouncementViewController.swift */; };
+		64CBB4DF23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */; };
+		64CBB4E123EA4A9900F0DBA2 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */; };
+		64CBB4E323EA4AB200F0DBA2 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */; };
+		64E0D8CE240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 640B9D40233D397F00387A2A /* Pods_GameOf11.framework */; };
+		64E0D8CF240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 640B9D40233D397F00387A2A /* Pods_GameOf11.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		64E5B42E23F0009A00D377F0 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E5B42D23F0009A00D377F0 /* OTPViewController.swift */; };
 		64E999D3231B0E84003C7FFE /* sign_up_dialog_anim_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */; };
 		64E999D5231B131E003C7FFE /* Boat_Loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D4231B131E003C7FFE /* Boat_Loader.json */; };
 		B1C8ECC19B9C9D4A35DC6C55 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B5353A4D138F254818D385 /* Pods_OneSignalNotificationServiceExtension.framework */; };
@@ -131,6 +138,17 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		64E0D8D0240C5A8F00E8EDE3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				64E0D8CF240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -149,7 +167,7 @@
 		0C390AD521DF83E500FA6A15 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
 		0C390AD821DFAAA900FA6A15 /* PositionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionCollectionViewCell.swift; sourceTree = "<group>"; };
 		0C562CD722700A0A00D3995A /* PreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewTableViewCell.swift; sourceTree = "<group>"; };
-		0C676CED21B7E97F00F21072 /* GameOf11.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameOf11.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C676CED21B7E97F00F21072 /* GO11 Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GO11 Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C676CF721B7E98600F21072 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C676CFC21B7E98600F21072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C78C1F422244F390068B5D6 /* DepositCoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositCoinViewController.swift; sourceTree = "<group>"; };
@@ -173,7 +191,6 @@
 		0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeamViewController.swift; sourceTree = "<group>"; };
 		0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSelectViewController.swift; sourceTree = "<group>"; };
 		0CB1B90222689D21003D6C56 /* GameOf11.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameOf11.entitlements; sourceTree = "<group>"; };
-		0CB1B9032268AC57003D6C56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CE8835E21DFB6730025A31E /* TeamCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCreateViewController.swift; sourceTree = "<group>"; };
 		0CE8836021DFD5730025A31E /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		0CE8836121DFD5730025A31E /* PlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerTableViewCell.xib; sourceTree = "<group>"; };
@@ -189,13 +206,13 @@
 		6412BAF62343C4F40081958E /* Slide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
 		641E1768222A9A7D00302A19 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSignedProfileViewController.swift; sourceTree = "<group>"; };
+		64251025240D652900077D25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		643488EA230B280800846649 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		6438DF9E2318FA1500E29F5D /* Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		6438DFAE2319110C00E29F5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		6438DFB12319111500E29F5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6438DFB32319114A00E29F5D /* bn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bn; path = bn.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6441ECBC23100AE0008FFE0F /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
-		64441E4E231BF3A600A21EDA /* FBUImManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBUImManager.swift; sourceTree = "<group>"; };
 		64441E50231C1BD400A21EDA /* ParentTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentTabViewController.swift; sourceTree = "<group>"; };
 		6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContestLeaderBoardViewController.swift; sourceTree = "<group>"; };
 		6445269F2237D8300099FB37 /* PointBreakDownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointBreakDownViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +236,7 @@
 		645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingWithdrawViewController.swift; sourceTree = "<group>"; };
 		645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawTableViewCell.swift; sourceTree = "<group>"; };
 		645F7DF7231598D100515F11 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		64669C5423E75C8F00288346 /* PromoCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeViewController.swift; sourceTree = "<group>"; };
 		646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaterViewController.swift; sourceTree = "<group>"; };
 		646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
 		647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamFootballViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +256,12 @@
 		64C77A4822FEEBC5005161BF /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		64C77A4922FEEBC5005161BF /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		64C77A4A22FEEBC5005161BF /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		64CBB4DA23E9C81100F0DBA2 /* PromoCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeTableViewCell.swift; sourceTree = "<group>"; };
+		64CBB4DC23E9DC5400F0DBA2 /* AnnouncementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementViewController.swift; sourceTree = "<group>"; };
+		64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementTableViewCell.swift; sourceTree = "<group>"; };
+		64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		64E5B42D23F0009A00D377F0 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sign_up_dialog_anim_2.json; sourceTree = "<group>"; };
 		64E999D4231B131E003C7FFE /* Boat_Loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Boat_Loader.json; sourceTree = "<group>"; };
 		75B5353A4D138F254818D385 /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,7 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				640B9D41233D397F00387A2A /* Pods_GameOf11.framework in Frameworks */,
+				64E0D8CE240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,14 +315,14 @@
 				646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */,
 				0C0BE62521DA293F00BE30CF /* BaseViewController.swift */,
 				6448F5BE2293EDC400B31BFC /* BkashPaymentViewController.swift */,
-				0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */,
 				64522216239C182B0091AE28 /* CaptainSelectorFootballViewController.swift */,
+				0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */,
 				6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */,
 				0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */,
 				0C78C1F422244F390068B5D6 /* DepositCoinViewController.swift */,
 				0C78C1F522244F3A0068B5D6 /* EditProfileViewController.swift */,
-				6445BE2E22D7577B00366B01 /* EditTeamViewController.swift */,
 				647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */,
+				6445BE2E22D7577B00366B01 /* EditTeamViewController.swift */,
 				6441ECBC23100AE0008FFE0F /* FeedbackViewController.swift */,
 				643488EA230B280800846649 /* ForgotPasswordViewController.swift */,
 				0C3336CE21DF488D00E6EB11 /* HomeViewController.swift */,
@@ -310,23 +334,27 @@
 				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
 				64441E50231C1BD400A21EDA /* ParentTabViewController.swift */,
 				645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */,
-				6445269F2237D8300099FB37 /* PointBreakDownViewController.swift */,
 				647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */,
+				6445269F2237D8300099FB37 /* PointBreakDownViewController.swift */,
 				0C78C1FF222450AB0068B5D6 /* ProfileViewController.swift */,
+				64669C5423E75C8F00288346 /* PromoCodeViewController.swift */,
 				0C78C1F622244F3B0068B5D6 /* RedeemCoinViewController.swift */,
 				6448F5C02294094600B31BFC /* ReferalViewController.swift */,
 				641E1768222A9A7D00302A19 /* SignUpViewController.swift */,
 				0C33367A21DF3AB100E6EB11 /* SplashViewController.swift */,
+				64522214239C0FCB0091AE28 /* TeamCreateFootballViewController.swift */,
 				0CE8835E21DFB6730025A31E /* TeamCreateViewController.swift */,
-				0C85C3482225C5D800B6515C /* TeamPreviewViewController.swift */,
 				64522218239C50F80091AE28 /* TeamPreviewFootballViewController.swift */,
+				0C85C3482225C5D800B6515C /* TeamPreviewViewController.swift */,
 				0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */,
 				6412BAF32343C4930081958E /* TutorialViewController.swift */,
 				641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */,
 				0C78C1F722244F3C0068B5D6 /* VerifyAccountViewController.swift */,
 				645F7DF7231598D100515F11 /* WebViewController.swift */,
 				0C78C1F822244F3D0068B5D6 /* WithdrawRequestViewController.swift */,
-				64522214239C0FCB0091AE28 /* TeamCreateFootballViewController.swift */,
+				64CBB4DC23E9DC5400F0DBA2 /* AnnouncementViewController.swift */,
+				64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */,
+				64E5B42D23F0009A00D377F0 /* OTPViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -360,7 +388,6 @@
 				0C8B95EC21E1144300ADE46B /* ValidationManager.swift */,
 				0C8B95EA21E103DC00ADE46B /* UIViewController_Extra.swift */,
 				0C8B95EE21E1150900ADE46B /* AlertManager.swift */,
-				64441E4E231BF3A600A21EDA /* FBUImManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -390,6 +417,9 @@
 				6453F2B12309638A006A86CF /* UpComingMatchCell.swift */,
 				646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */,
 				645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */,
+				64CBB4DA23E9C81100F0DBA2 /* PromoCodeTableViewCell.swift */,
+				64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */,
+				64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -410,7 +440,7 @@
 		0C676CEE21B7E97F00F21072 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0C676CED21B7E97F00F21072 /* GameOf11.app */,
+				0C676CED21B7E97F00F21072 /* GO11 Pro.app */,
 				647C5D10233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
@@ -431,8 +461,8 @@
 				0C0BE60921DA293F00BE30CF /* Storyboards */,
 				0C7F54F421DA70C900049571 /* CustomViews */,
 				0C676CF721B7E98600F21072 /* Assets.xcassets */,
+				64251025240D652900077D25 /* GoogleService-Info.plist */,
 				0C676CFC21B7E98600F21072 /* Info.plist */,
-				0CB1B9032268AC57003D6C56 /* GoogleService-Info.plist */,
 			);
 			path = GameOf11;
 			sourceTree = "<group>";
@@ -531,10 +561,10 @@
 				0C676CE921B7E97E00F21072 /* Sources */,
 				0C676CEA21B7E97E00F21072 /* Frameworks */,
 				0C676CEB21B7E97E00F21072 /* Resources */,
-				F003475949B4A88DD7D43832 /* [CP] Copy Pods Resources */,
 				0CB1B9062268F490003D6C56 /* ShellScript */,
 				647C5D05233D1C7F00E4C3CF /* Embed App Extensions */,
 				0175AB32022525EEB31666A2 /* [CP] Embed Pods Frameworks */,
+				64E0D8D0240C5A8F00E8EDE3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -543,7 +573,7 @@
 			);
 			name = GameOf11;
 			productName = GameOf11;
-			productReference = 0C676CED21B7E97F00F21072 /* GameOf11.app */;
+			productReference = 0C676CED21B7E97F00F21072 /* GO11 Pro.app */;
 			productType = "com.apple.product-type.application";
 		};
 		647C5D0F233D35AE00E4C3CF /* OneSignalNotificationServiceExtension */ = {
@@ -618,6 +648,7 @@
 			files = (
 				0C33368021DF3B0400E6EB11 /* CustomNavigationBar.xib in Resources */,
 				64C77A5222FEEBC5005161BF /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				64251026240D652900077D25 /* GoogleService-Info.plist in Resources */,
 				64C77A4B22FEEBC5005161BF /* OpenSans-Semibold.ttf in Resources */,
 				64C77A5022FEEBC5005161BF /* OpenSans-Bold.ttf in Resources */,
 				64E999D3231B0E84003C7FFE /* sign_up_dialog_anim_2.json in Resources */,
@@ -637,7 +668,6 @@
 				64C77A4E22FEEBC5005161BF /* OpenSans-ExtraBold.ttf in Resources */,
 				64C77A5422FEEBC5005161BF /* OpenSans-BoldItalic.ttf in Resources */,
 				644A078922ED729B00DAFE9E /* CreatedTeamTableViewCell.xib in Resources */,
-				0CB1B9042268AC58003D6C56 /* GoogleService-Info.plist in Resources */,
 				0CB1B8FD2266FF32003D6C56 /* CteatedTableViewCell.xib in Resources */,
 				0C0BE64D21DA294000BE30CF /* LaunchScreen.storyboard in Resources */,
 				64C77A4F22FEEBC5005161BF /* OpenSans-LightItalic.ttf in Resources */,
@@ -675,7 +705,8 @@
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveKit/ReactiveKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -700,7 +731,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -772,24 +804,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F003475949B4A88DD7D43832 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-resources.sh",
-				"${PODS_ROOT}/AccountKit/AccountKitStrings.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccountKitStrings.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -801,12 +815,15 @@
 				0C8B95F921E1211800ADE46B /* APIManager.swift in Sources */,
 				0CB1B8FC2266FF32003D6C56 /* CteatedTableViewCell.swift in Sources */,
 				0CE8836B21E0000E0025A31E /* LoginViewController.swift in Sources */,
+				64E5B42E23F0009A00D377F0 /* OTPViewController.swift in Sources */,
 				6453F2B22309638A006A86CF /* UpComingMatchCell.swift in Sources */,
 				0C390AD021DF5E0200FA6A15 /* MatchViewController.swift in Sources */,
 				0CB1B8FF2266FF4C003D6C56 /* MyTeamViewController.swift in Sources */,
 				0C78C1F922244F450068B5D6 /* DepositCoinViewController.swift in Sources */,
+				64CBB4E323EA4AB200F0DBA2 /* TransactionViewController.swift in Sources */,
 				0C78C1FD22244F450068B5D6 /* WithdrawRequestViewController.swift in Sources */,
 				0C7F54F321DA6FBC00049571 /* AppDelegate.swift in Sources */,
+				64CBB4E123EA4A9900F0DBA2 /* TransactionTableViewCell.swift in Sources */,
 				0CE8836921DFE0AF0025A31E /* ContestListViewController.swift in Sources */,
 				0C3336C721DF419400E6EB11 /* Extension.swift in Sources */,
 				0C33368221DF3B0400E6EB11 /* CustomNavigationBar.swift in Sources */,
@@ -817,9 +834,12 @@
 				64441E51231C1BD400A21EDA /* ParentTabViewController.swift in Sources */,
 				0C78C1FB22244F450068B5D6 /* RedeemCoinViewController.swift in Sources */,
 				0C78C1FC22244F450068B5D6 /* VerifyAccountViewController.swift in Sources */,
+				64CBB4DB23E9C81100F0DBA2 /* PromoCodeTableViewCell.swift in Sources */,
 				0CEB167C2265C102002D0208 /* TeamPlayerTableViewCell.swift in Sources */,
 				6445274822DB38B800D23734 /* BannerCollectionViewCell.swift in Sources */,
+				64CBB4DF23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift in Sources */,
 				645F7DF423153F4800515F11 /* PendingWithdrawViewController.swift in Sources */,
+				64669C5523E75C8F00288346 /* PromoCodeViewController.swift in Sources */,
 				6445274622DB2BCD00D23734 /* PrizeListTableViewCell.swift in Sources */,
 				645037E322F2CEA50013334D /* CoinPackCollectionViewCell.swift in Sources */,
 				6441ECBD23100AE1008FFE0F /* FeedbackViewController.swift in Sources */,
@@ -846,7 +866,7 @@
 				0CB1B90122686419003D6C56 /* TeamSelectViewController.swift in Sources */,
 				645F7DF8231598D100515F11 /* WebViewController.swift in Sources */,
 				6438DF9F2318FA1500E29F5D /* Localizable.swift in Sources */,
-				64441E4F231BF3A600A21EDA /* FBUImManager.swift in Sources */,
+				64CBB4DD23E9DC5400F0DBA2 /* AnnouncementViewController.swift in Sources */,
 				0C8B95EB21E103DC00ADE46B /* UIViewController_Extra.swift in Sources */,
 				0C78C200222450AB0068B5D6 /* MoreViewController.swift in Sources */,
 				6455AE712320260A00F9679D /* Toast.swift in Sources */,
@@ -1054,6 +1074,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1087,7 +1108,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "GO11 Pro";
 				PROVISIONING_PROFILE_SPECIFIER = "GO11 Dev";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1111,6 +1132,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1144,7 +1166,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "GO11 Pro";
 				PROVISIONING_PROFILE_SPECIFIER = "GO11 Dev";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1166,7 +1188,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dev";
@@ -1191,7 +1213,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dev";

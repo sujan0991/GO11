@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 
 class ReferalViewController: BaseViewController {
-
+    
     
     @IBOutlet weak var suggestionLabel: UILabel!
     
@@ -30,11 +30,11 @@ class ReferalViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      //  self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
+        
+        //  self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
         
         
-         placeNavBar(withTitle: "MY REFERRALS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        placeNavBar(withTitle: "MY REFERRALS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
         self.tabBarController?.tabBar.isHidden = true;
         
@@ -62,7 +62,7 @@ class ReferalViewController: BaseViewController {
         if let um = AppSessionManager.shared.currentUser {
             
             let vc = UIActivityViewController(activityItems: [um.referralMessage!], applicationActivities: [])
-          present(vc, animated: true, completion: nil)
+            present(vc, animated: true, completion: nil)
         }
     }
     
@@ -84,5 +84,5 @@ class ReferalViewController: BaseViewController {
         
     }
     
-
+    
 }

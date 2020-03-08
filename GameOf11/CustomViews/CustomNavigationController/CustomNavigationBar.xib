@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,8 +16,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomNavigationBar" customModule="GameOf11" customModuleProvider="target">
             <connections>
+                <outlet property="announcementButton" destination="lad-ae-Ork" id="PQV-bz-Gak"/>
                 <outlet property="backBtn" destination="9C2-bB-sZA" id="sZI-vY-04a"/>
                 <outlet property="containerView" destination="iN0-l3-epB" id="sFE-7H-FZa"/>
+                <outlet property="countLabel" destination="Srp-Yn-ewf" id="nwT-a4-Uzp"/>
                 <outlet property="gameSelectButton" destination="QHo-0a-jIx" id="i0E-Ut-egl"/>
                 <outlet property="headerLabel" destination="Ybl-zi-0Th" id="biu-GL-XUI"/>
                 <outlet property="languageButton" destination="SMY-9U-Srn" id="rBC-ws-Lr0"/>
@@ -56,23 +56,12 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybl-zi-0Th">
-                            <rect key="frame" x="135.5" y="9.5" width="124" height="25"/>
+                            <rect key="frame" x="142" y="11.5" width="111.5" height="21"/>
                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMY-9U-Srn">
-                            <rect key="frame" x="350" y="7" width="30" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="30" id="6b1-cu-yVg"/>
-                                <constraint firstAttribute="height" constant="30" id="96U-m9-jrJ"/>
-                            </constraints>
-                            <state key="normal" image="language_change_icon"/>
-                            <connections>
-                                <action selector="languageButtonAction:" destination="-1" eventType="touchUpInside" id="KM4-9d-lOb"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHo-0a-jIx">
+                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHo-0a-jIx">
                             <rect key="frame" x="350" y="7" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="bRX-vM-yA4"/>
@@ -84,20 +73,57 @@
                                 <action selector="gameSelectButtonAction:" destination="-1" eventType="touchUpInside" id="Ued-8l-gvj"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lad-ae-Ork">
+                            <rect key="frame" x="312" y="7" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="A47-fR-z9R"/>
+                                <constraint firstAttribute="width" constant="30" id="gIS-U7-xDi"/>
+                            </constraints>
+                            <state key="normal" image="notification_bell"/>
+                            <connections>
+                                <action selector="announcementButtonAction:" destination="-1" eventType="touchUpInside" id="aQC-hd-s1A"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMY-9U-Srn">
+                            <rect key="frame" x="350" y="7" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="6b1-cu-yVg"/>
+                                <constraint firstAttribute="height" constant="30" id="96U-m9-jrJ"/>
+                            </constraints>
+                            <state key="normal" image="language_change_icon"/>
+                            <connections>
+                                <action selector="languageButtonAction:" destination="-1" eventType="touchUpInside" id="KM4-9d-lOb"/>
+                            </connections>
+                        </button>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Srp-Yn-ewf">
+                            <rect key="frame" x="308" y="7" width="18" height="18"/>
+                            <color key="backgroundColor" name="TabOrangeColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="0zQ-sv-kV4"/>
+                                <constraint firstAttribute="width" constant="18" id="HXY-dE-8f3"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" name="GreenHighlight"/>
                     <constraints>
-                        <constraint firstItem="QHo-0a-jIx" firstAttribute="trailing" secondItem="SMY-9U-Srn" secondAttribute="trailing" id="2xF-p9-l2d"/>
+                        <constraint firstItem="lad-ae-Ork" firstAttribute="leading" secondItem="Srp-Yn-ewf" secondAttribute="trailing" constant="-14" id="7rv-v7-Qdx"/>
                         <constraint firstItem="QHo-0a-jIx" firstAttribute="top" secondItem="SMY-9U-Srn" secondAttribute="top" id="AGt-CS-a1S"/>
                         <constraint firstItem="Ybl-zi-0Th" firstAttribute="centerY" secondItem="9C2-bB-sZA" secondAttribute="centerY" id="CZ5-zL-BP8"/>
-                        <constraint firstAttribute="trailing" secondItem="SMY-9U-Srn" secondAttribute="trailing" constant="15" id="Gof-q6-bok"/>
                         <constraint firstItem="Ybl-zi-0Th" firstAttribute="centerX" secondItem="8gh-m2-lId" secondAttribute="centerX" id="Ifp-Q9-p1U"/>
                         <constraint firstItem="Ybl-zi-0Th" firstAttribute="centerX" secondItem="8gh-m2-lId" secondAttribute="centerX" id="NxU-hT-pQG"/>
                         <constraint firstItem="9C2-bB-sZA" firstAttribute="leading" secondItem="8gh-m2-lId" secondAttribute="leading" id="PYG-xt-RZk"/>
                         <constraint firstItem="QHo-0a-jIx" firstAttribute="bottom" secondItem="SMY-9U-Srn" secondAttribute="bottom" id="QwT-YB-84u"/>
                         <constraint firstItem="SMY-9U-Srn" firstAttribute="centerY" secondItem="Ybl-zi-0Th" secondAttribute="centerY" id="X8c-cq-XGM"/>
                         <constraint firstItem="Ybl-zi-0Th" firstAttribute="centerY" secondItem="8gh-m2-lId" secondAttribute="centerY" id="cAu-ZT-HIm"/>
-                        <constraint firstItem="QHo-0a-jIx" firstAttribute="leading" secondItem="SMY-9U-Srn" secondAttribute="leading" id="u38-NG-wc1"/>
+                        <constraint firstAttribute="trailing" secondItem="QHo-0a-jIx" secondAttribute="trailing" constant="15" id="eYJ-zX-xJm"/>
+                        <constraint firstItem="QHo-0a-jIx" firstAttribute="top" secondItem="lad-ae-Ork" secondAttribute="top" id="eqq-N9-2x0"/>
+                        <constraint firstItem="QHo-0a-jIx" firstAttribute="leading" secondItem="lad-ae-Ork" secondAttribute="trailing" constant="8" id="gC9-cv-tda"/>
+                        <constraint firstItem="QHo-0a-jIx" firstAttribute="bottom" secondItem="lad-ae-Ork" secondAttribute="bottom" id="k8F-7k-iqM"/>
+                        <constraint firstItem="lad-ae-Ork" firstAttribute="top" secondItem="Srp-Yn-ewf" secondAttribute="bottom" constant="-18" id="qpd-ne-nMH"/>
+                        <constraint firstAttribute="trailing" secondItem="SMY-9U-Srn" secondAttribute="trailing" constant="15" id="ua4-wp-3PS"/>
                         <constraint firstAttribute="height" constant="44" id="x78-tZ-bq3"/>
                     </constraints>
                 </view>
@@ -123,8 +149,12 @@
         <image name="icon_football_placing" width="328" height="332.5"/>
         <image name="language_change_icon" width="256" height="256"/>
         <image name="logoWhiteText" width="180" height="46"/>
+        <image name="notification_bell" width="32" height="32"/>
         <namedColor name="GreenHighlight">
             <color red="0.18823529411764706" green="0.72156862745098038" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TabOrangeColor">
+            <color red="0.94117647058823528" green="0.45490196078431372" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

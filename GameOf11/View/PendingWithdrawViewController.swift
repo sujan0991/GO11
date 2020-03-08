@@ -17,22 +17,22 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
     @IBOutlet weak var navTitle: UILabel!
     
     
-     var withdrawListArray : [Any] = []
-     var username = AppSessionManager.shared.currentUser?.name
+    var withdrawListArray : [Any] = []
+    var username = AppSessionManager.shared.currentUser?.name
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.tabBarController?.tabBar.isHidden = true
         
-//        self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor("#66dcff").withAlphaComponent(0.30))
+        //        self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor("#66dcff").withAlphaComponent(0.30))
         
         requestTableView.delegate = self
         requestTableView.dataSource = self
         requestTableView.tableFooterView = UIView()
         
-         self.requestTableView.isHidden = true
-         self.noRequestView.isHidden = true
+        self.requestTableView.isHidden = true
+        self.noRequestView.isHidden = true
         
         APIManager.manager.getWithdrawList { (status, dataList, msg) in
             
@@ -57,7 +57,7 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
             }else{
                 self.requestTableView.isHidden = true
                 self.noRequestView.isHidden = false
-
+                
             }
             
         }
@@ -97,6 +97,7 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "en_US")//without it app crashes in device
         let dateFromString :Date = dateFormatter.date(from: ((singleRequest["created_at"]! as! String)))!
         let sttringFDate = dateFromString.toDateString(format: "dd/MM/yyyy")
         
@@ -108,10 +109,10 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if let cell = cell as? WithdrawTableViewCell{
-        
+            
             let singleRequest = withdrawListArray[indexPath.row] as! Dictionary<String,Any>
             
-
+            
             if singleRequest["status"] as! String == "pending" {
                 
                 cell.statusLabel.textColor = UIColor.init(named: "TabOrangeColor")!
@@ -123,7 +124,7 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
                 cell.amountLabel.textColor = UIColor.init(named: "GreenHighlight")!
                 cell.statusImageView.image = UIImage(named: "team_select_icon")
             }
-
+            
         }
         
     }
@@ -132,12 +133,12 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
-
+    
     @IBAction func backButtonAction(_ sender: Any) {
         
         self.navigationController?.popViewController(animated: true)
         
     }
     
-
+    
 }

@@ -9,10 +9,10 @@
 import UIKit
 
 class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
-
+    
     var userTeam : UsersFantasyTeam!
     var nextsquadData : MatchSquadData!
-  
+    
     
     var selectedPlayerList:[Player] = []
     var batsmanList:[Player] = []
@@ -26,7 +26,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
     
     var currentFantasyCaptain : UserFantasyPlayer!
     var currentFantasyViceCaptain : UserFantasyPlayer!
-
+    
     //if comes from edit view
     var isFromEdit = false
     var userTeamId = 0
@@ -45,10 +45,10 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         
-//        placeNavBar(withTitle: "Create Your Team", isBackBtnVisible: true)
+        
+        
+        //        placeNavBar(withTitle: "Create Your Team", isBackBtnVisible: true)
         navTitle.text = String.init(format: "%@ Left".localized,timeLeft ?? "" )
         
         chooseCaptainLabel.text = "CHOOSE CAPTAIN (C) & VICE CAPTAIN (VC)".localized
@@ -67,8 +67,8 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         saveTeamButton.layer.masksToBounds = false
         
         selectedPlayerList = nextsquadData.playersList.filter{($0 as Player).playerSelected == true }
-
-
+        
+        
         
         if selectedPlayerList.count != 0
         {
@@ -108,11 +108,11 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                     currentViceCaptain = player
                     userTeam.viceCaptain = player.playerId
                 }
-              
+                
                 //if comes from edit view
                 if isFromEdit{
-                  
-                   self.teamNameTextField.text = userTeamName
+                    
+                    self.teamNameTextField.text = userTeamName
                     
                 }
             }
@@ -210,7 +210,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             }
             
             if player.teamBelong == 1{
-              cell.teamNamelabel.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.teamNamelabel.textColor = UIColor.init(named: "GreenHighlight")!
             }else{
                 cell.teamNamelabel.textColor = UIColor.init(named: "TabOrangeColor")!
             }
@@ -220,22 +220,22 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
-//        if section == 1
-//        {
-//            return "Batsman"
-//        }
-//        else if section == 2
-//        {
-//            return "All rounders"
-//        }
-//        else if section == 3
-//        {
-//            return "Bowlers"
-//        }
-//        else
-//        {
-//            return "Wicket Keeper"
-//        }
+        //        if section == 1
+        //        {
+        //            return "Batsman"
+        //        }
+        //        else if section == 2
+        //        {
+        //            return "All rounders"
+        //        }
+        //        else if section == 3
+        //        {
+        //            return "Bowlers"
+        //        }
+        //        else
+        //        {
+        //            return "Wicket Keeper"
+        //        }
         return ""
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -244,14 +244,14 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-//        guard let textFieldText = textField.text,
-//            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
-//                return false
-//        }
-//        let substringToReplace = textFieldText[rangeOfTextToReplace]
-//        let count = textFieldText.count - substringToReplace.count + string.count
-//
-//        return count <= 24
+        //        guard let textFieldText = textField.text,
+        //            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+        //                return false
+        //        }
+        //        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        //        let count = textFieldText.count - substringToReplace.count + string.count
+        //
+        //        return count <= 24
         
         if range.location > 24 - 1 {
             textField.text?.removeLast()
@@ -266,27 +266,27 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             alertVC.addAction(okAction)
             self.present(alertVC, animated: true, completion: nil)
             
-
+            
         }
         
         return true
     }
     
-
-      
-//            let alertVC = UIAlertController(title: nil, message: "Maximum 24 Character".localized, preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (aciton) in
-//
-//               // self.dismiss(animated: true, completion: nil)
-//
-//               // self.teamNameTextField.resignFirstResponder()
-//            })
-//
-//            alertVC.addAction(okAction)
-//            self.present(alertVC, animated: true, completion: nil)
-
-        //    self.view.makeToast("Maximum 24 Character".localized)
-            
+    
+    
+    //            let alertVC = UIAlertController(title: nil, message: "Maximum 24 Character".localized, preferredStyle: .alert)
+    //            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (aciton) in
+    //
+    //               // self.dismiss(animated: true, completion: nil)
+    //
+    //               // self.teamNameTextField.resignFirstResponder()
+    //            })
+    //
+    //            alertVC.addAction(okAction)
+    //            self.present(alertVC, animated: true, completion: nil)
+    
+    //    self.view.makeToast("Maximum 24 Character".localized)
+    
     
     
     @objc func setCaptain(_ sender: UIButton){
@@ -299,54 +299,54 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         var userFantasyPlayer : UserFantasyPlayer! // for user team
         
         
-//        if isFromEdit{
-//
-//            for singlePlayer in userTeam.keeper{
-//
-//                if singlePlayer.isCaptain == 1{
-//
-//                    singlePlayer.isCaptain = 0
-//
-//                    print("singlePlayer.isCaptain",singlePlayer.isCaptain)
-//                }
-//
-//            }
-//
-//            for singlePlayer in userTeam.batsman{
-//
-//                if singlePlayer.isCaptain == 1{
-//
-//                    singlePlayer.isCaptain = 0
-//
-//                    print("singlePlayer.isCaptain",singlePlayer.isCaptain)
-//                }
-//
-//            }
-//
-//            for singlePlayer in userTeam.allrounder{
-//
-//                if singlePlayer.isCaptain == 1{
-//
-//                    singlePlayer.isCaptain = 0
-//
-//                    print("singlePlayer.isCaptain",singlePlayer.isCaptain)
-//                }
-//            }
-//
-//            for singlePlayer in userTeam.bowler{
-//
-//                if singlePlayer.isCaptain == 1{
-//
-//                    singlePlayer.isCaptain = 0
-//
-//                    print("singlePlayer.isCaptain",singlePlayer.isCaptain)
-//                }
-//
-//            }
-//        }
+        //        if isFromEdit{
+        //
+        //            for singlePlayer in userTeam.keeper{
+        //
+        //                if singlePlayer.isCaptain == 1{
+        //
+        //                    singlePlayer.isCaptain = 0
+        //
+        //                    print("singlePlayer.isCaptain",singlePlayer.isCaptain)
+        //                }
+        //
+        //            }
+        //
+        //            for singlePlayer in userTeam.batsman{
+        //
+        //                if singlePlayer.isCaptain == 1{
+        //
+        //                    singlePlayer.isCaptain = 0
+        //
+        //                    print("singlePlayer.isCaptain",singlePlayer.isCaptain)
+        //                }
+        //
+        //            }
+        //
+        //            for singlePlayer in userTeam.allrounder{
+        //
+        //                if singlePlayer.isCaptain == 1{
+        //
+        //                    singlePlayer.isCaptain = 0
+        //
+        //                    print("singlePlayer.isCaptain",singlePlayer.isCaptain)
+        //                }
+        //            }
+        //
+        //            for singlePlayer in userTeam.bowler{
+        //
+        //                if singlePlayer.isCaptain == 1{
+        //
+        //                    singlePlayer.isCaptain = 0
+        //
+        //                    print("singlePlayer.isCaptain",singlePlayer.isCaptain)
+        //                }
+        //
+        //            }
+        //        }
         
         
-       // change the player state in user team
+        // change the player state in user team
         if section == 0
         {
             player = keeperList[row]
@@ -389,29 +389,29 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         // change status for main squad
         if currentCaptain != nil && currentCaptain.playerId != player.playerId
         {
-          //  print("currentCaptain.isCaptain.......id.",currentCaptain.playerId,  player.playerId)
+            //  print("currentCaptain.isCaptain.......id.",currentCaptain.playerId,  player.playerId)
             currentCaptain.isCaptain = false
             currentCaptain = player
             
-          //  print("currentCaptain.isCaptain........",currentCaptain.isCaptain)
+            //  print("currentCaptain.isCaptain........",currentCaptain.isCaptain)
         }
         else
         {
             currentCaptain = player
-           // print("currentCaptain.isCaptain",currentCaptain.isCaptain)
+            // print("currentCaptain.isCaptain",currentCaptain.isCaptain)
         }
         
         //check if there is any captain in user team
-//        if currentFantasyCaptain != nil && currentFantasyCaptain.id != userFantasyPlayer.id
-//        {
-//
-//            currentFantasyCaptain.isCaptain = 0
-//            currentFantasyCaptain = userFantasyPlayer
-//        }
-//        else
-//        {
-//            currentFantasyCaptain = userFantasyPlayer
-//        }
+        //        if currentFantasyCaptain != nil && currentFantasyCaptain.id != userFantasyPlayer.id
+        //        {
+        //
+        //            currentFantasyCaptain.isCaptain = 0
+        //            currentFantasyCaptain = userFantasyPlayer
+        //        }
+        //        else
+        //        {
+        //            currentFantasyCaptain = userFantasyPlayer
+        //        }
         
         
         
@@ -422,49 +422,49 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         
         
         
-       
-//        //For double check
-//        for userFanPlayer in userTeam.keeper{
-//
-//            if userFanPlayer.id == currentCaptain.playerId{
-//
-//                userFanPlayer.isCaptain = 1
-//                userFanPlayer.isViceCaptain = 0
-//            }
-//            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
-//        }
-//        for userFanPlayer in userTeam.batsman{
-//
-//            if userFanPlayer.id == currentCaptain.playerId{
-//
-//                userFanPlayer.isCaptain = 1
-//                userFanPlayer.isViceCaptain = 0
-//            }
-//            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
-//        }
-//        for userFanPlayer in userTeam.bowler{
-//
-//            if userFanPlayer.id == currentCaptain.playerId{
-//
-//                userFanPlayer.isCaptain = 1
-//                userFanPlayer.isViceCaptain = 0
-//            }
-//            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
-//        }
-//
-//        for userFanPlayer in userTeam.allrounder{
-//
-//            if userFanPlayer.id == currentCaptain.playerId{
-//
-//                userFanPlayer.isCaptain = 1
-//                userFanPlayer.isViceCaptain = 0
-//            }
-//            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
-//        }
+        
+        //        //For double check
+        //        for userFanPlayer in userTeam.keeper{
+        //
+        //            if userFanPlayer.id == currentCaptain.playerId{
+        //
+        //                userFanPlayer.isCaptain = 1
+        //                userFanPlayer.isViceCaptain = 0
+        //            }
+        //            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
+        //        }
+        //        for userFanPlayer in userTeam.batsman{
+        //
+        //            if userFanPlayer.id == currentCaptain.playerId{
+        //
+        //                userFanPlayer.isCaptain = 1
+        //                userFanPlayer.isViceCaptain = 0
+        //            }
+        //            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
+        //        }
+        //        for userFanPlayer in userTeam.bowler{
+        //
+        //            if userFanPlayer.id == currentCaptain.playerId{
+        //
+        //                userFanPlayer.isCaptain = 1
+        //                userFanPlayer.isViceCaptain = 0
+        //            }
+        //            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
+        //        }
+        //
+        //        for userFanPlayer in userTeam.allrounder{
+        //
+        //            if userFanPlayer.id == currentCaptain.playerId{
+        //
+        //                userFanPlayer.isCaptain = 1
+        //                userFanPlayer.isViceCaptain = 0
+        //            }
+        //            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
+        //        }
         
         teamPlayerListView.reloadData()
         
-      
+        
     }
     
     func removeOtherCaptain(id:Int?) {
@@ -478,7 +478,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                 
             }
             else{
-
+                
                 singlaPlayer.isCaptain = 0
             }
         }
@@ -490,7 +490,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                 singlaPlayer.isCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isCaptain = 0
             }
         }
@@ -501,7 +501,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                 singlaPlayer.isCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isCaptain = 0
             }
         }
@@ -512,7 +512,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                 singlaPlayer.isCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isCaptain = 0
             }
         }
@@ -520,7 +520,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
     }
     
     @objc func setViceCaptain(_ sender: UIButton){
-       
+        
         let section = sender.tag/100
         let row = sender.tag % 10
         
@@ -529,51 +529,51 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         var userFantasyPlayer : UserFantasyPlayer!
         
         
-//        if isFromEdit{
-//
-//            for singlePlayer in userTeam.keeper{
-//
-//                if singlePlayer.isViceCaptain == 1{
-//
-//                    singlePlayer.isViceCaptain = 0
-//
-//                    print("singlePlayer.isCaptain",singlePlayer.isViceCaptain)
-//                }
-//
-//            }
-//
-//            for singlePlayer in userTeam.batsman{
-//
-//                if singlePlayer.isViceCaptain == 1{
-//
-//                    singlePlayer.isViceCaptain = 0
-//
-//                    print("singlePlayer.isCaptain",singlePlayer.isViceCaptain)
-//                }
-//
-//            }
-//
-//            for singlePlayer in userTeam.allrounder{
-//
-//                if singlePlayer.isViceCaptain == 1{
-//
-//                    singlePlayer.isViceCaptain = 0
-//
-//                    print("singlePlayer.isCaptain",singlePlayer.isViceCaptain)
-//                }
-//            }
-//
-//            for singlePlayer in userTeam.bowler{
-//
-//                if singlePlayer.isViceCaptain == 1{
-//
-//                    singlePlayer.isViceCaptain = 0
-//
-//                    print("singlePlayer.isCaptain",singlePlayer.isViceCaptain)
-//                }
-//
-//            }
-//        }
+        //        if isFromEdit{
+        //
+        //            for singlePlayer in userTeam.keeper{
+        //
+        //                if singlePlayer.isViceCaptain == 1{
+        //
+        //                    singlePlayer.isViceCaptain = 0
+        //
+        //                    print("singlePlayer.isCaptain",singlePlayer.isViceCaptain)
+        //                }
+        //
+        //            }
+        //
+        //            for singlePlayer in userTeam.batsman{
+        //
+        //                if singlePlayer.isViceCaptain == 1{
+        //
+        //                    singlePlayer.isViceCaptain = 0
+        //
+        //                    print("singlePlayer.isCaptain",singlePlayer.isViceCaptain)
+        //                }
+        //
+        //            }
+        //
+        //            for singlePlayer in userTeam.allrounder{
+        //
+        //                if singlePlayer.isViceCaptain == 1{
+        //
+        //                    singlePlayer.isViceCaptain = 0
+        //
+        //                    print("singlePlayer.isCaptain",singlePlayer.isViceCaptain)
+        //                }
+        //            }
+        //
+        //            for singlePlayer in userTeam.bowler{
+        //
+        //                if singlePlayer.isViceCaptain == 1{
+        //
+        //                    singlePlayer.isViceCaptain = 0
+        //
+        //                    print("singlePlayer.isCaptain",singlePlayer.isViceCaptain)
+        //                }
+        //
+        //            }
+        //        }
         
         
         
@@ -603,7 +603,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         
         userFantasyPlayer.isViceCaptain = 1
         userFantasyPlayer.isCaptain = 0
-
+        
         userTeam.viceCaptain = player.playerId
         
         if userTeam.captain == userTeam.viceCaptain{
@@ -622,56 +622,56 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             currentViceCaptain = player
         }
         
-//        if currentFantasyViceCaptain != nil && currentFantasyViceCaptain.id != userFantasyPlayer.id
-//        {
-//            currentFantasyViceCaptain.isViceCaptain = 0
-//            currentFantasyViceCaptain = userFantasyPlayer
-//        }
-//        else
-//        {
-//            currentFantasyViceCaptain = userFantasyPlayer
-//        }
+        //        if currentFantasyViceCaptain != nil && currentFantasyViceCaptain.id != userFantasyPlayer.id
+        //        {
+        //            currentFantasyViceCaptain.isViceCaptain = 0
+        //            currentFantasyViceCaptain = userFantasyPlayer
+        //        }
+        //        else
+        //        {
+        //            currentFantasyViceCaptain = userFantasyPlayer
+        //        }
         
         removeOtherViceCaptain(id: userTeam.viceCaptain)
         
         
         //For double check
-//        for userFanPlayer in userTeam.keeper{
-//
-//            if userFanPlayer.id == currentViceCaptain.playerId{
-//
-//                userFanPlayer.isCaptain = 0
-//                userFanPlayer.isViceCaptain = 1
-//            }
-//            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
-//        }
-//        for userFanPlayer in userTeam.batsman{
-//
-//            if userFanPlayer.id == currentViceCaptain.playerId{
-//
-//                userFanPlayer.isCaptain = 0
-//                userFanPlayer.isViceCaptain = 1
-//            }
-//            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
-//        }
-//        for userFanPlayer in userTeam.bowler{
-//
-//            if userFanPlayer.id == currentViceCaptain.playerId{
-//
-//                userFanPlayer.isCaptain = 0
-//                userFanPlayer.isViceCaptain = 1
-//            }
-//            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
-//        }
-//        for userFanPlayer in userTeam.allrounder{
-//
-//            if userFanPlayer.id == currentViceCaptain.playerId{
-//
-//                userFanPlayer.isCaptain = 0
-//                userFanPlayer.isViceCaptain = 1
-//            }
-//            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
-//        }
+        //        for userFanPlayer in userTeam.keeper{
+        //
+        //            if userFanPlayer.id == currentViceCaptain.playerId{
+        //
+        //                userFanPlayer.isCaptain = 0
+        //                userFanPlayer.isViceCaptain = 1
+        //            }
+        //            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
+        //        }
+        //        for userFanPlayer in userTeam.batsman{
+        //
+        //            if userFanPlayer.id == currentViceCaptain.playerId{
+        //
+        //                userFanPlayer.isCaptain = 0
+        //                userFanPlayer.isViceCaptain = 1
+        //            }
+        //            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
+        //        }
+        //        for userFanPlayer in userTeam.bowler{
+        //
+        //            if userFanPlayer.id == currentViceCaptain.playerId{
+        //
+        //                userFanPlayer.isCaptain = 0
+        //                userFanPlayer.isViceCaptain = 1
+        //            }
+        //            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
+        //        }
+        //        for userFanPlayer in userTeam.allrounder{
+        //
+        //            if userFanPlayer.id == currentViceCaptain.playerId{
+        //
+        //                userFanPlayer.isCaptain = 0
+        //                userFanPlayer.isViceCaptain = 1
+        //            }
+        //            print("userFanPlayer .in  captain",userFanPlayer.id,userFanPlayer.isViceCaptain,userFanPlayer.isCaptain)
+        //        }
         
         teamPlayerListView.reloadData()
         
@@ -682,12 +682,12 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         for singlaPlayer in userTeam.keeper{
             
             if singlaPlayer.id == id{
-                 print("same id for ViceCaptain keeper")
+                print("same id for ViceCaptain keeper")
                 singlaPlayer.isViceCaptain = 1
                 
             }
             else{
-
+                
                 singlaPlayer.isViceCaptain = 0
             }
         }
@@ -695,22 +695,22 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         for singlaPlayer in userTeam.batsman{
             
             if singlaPlayer.id == id{
-                 print("same id for ViceCaptain batsman")
+                print("same id for ViceCaptain batsman")
                 singlaPlayer.isViceCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isViceCaptain = 0
             }
         }
         for singlaPlayer in userTeam.allrounder{
             
             if singlaPlayer.id == id{
-                 print("same id for ViceCaptain allroun")
+                print("same id for ViceCaptain allroun")
                 singlaPlayer.isViceCaptain = 1
             }
             else{
-
+                
                 singlaPlayer.isViceCaptain = 0
             }
         }
@@ -723,12 +723,12 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                 
             }
             else{
-
+                
                 singlaPlayer.isViceCaptain = 0
             }
         }
     }
-
+    
     @IBAction func saveTeamAction(_ sender: Any) {
         
         print("captain and vice cap id in save team",userTeam.captain,userTeam.viceCaptain)
@@ -740,7 +740,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         }
         else  if (userTeam.viceCaptain ?? 0 <= 0)
         {
-           
+            
             self.view.makeToast("You Must Select a Vice Captain".localized)
             
         }else if userTeam.captain == userTeam.viceCaptain{
@@ -768,7 +768,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                     singlaPlayer.isCaptain = 1
                     singlaPlayer.isViceCaptain = 0
                 }
-               
+                
             }
             
             for singlaPlayer in userTeam.batsman{
@@ -846,33 +846,33 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             
             
             if isFromEdit{
-
+                
                 //print("userTeam.toJSON()..........saveTeamAction.",userTeam.toJSON())
-
-
+                
+                
                 APIManager.manager.postEditedTeam(team: userTeam, teamId: String(describing: userTeamId)) { (status, msg) in
-
-                //    print("msg...........",msg)
+                    
+                    //    print("msg...........",msg)
                     self.view.makeToast(msg!)
-
+                    
                     if status{
-
+                        
                         if (self.navigationController != nil)
                         {
                             if self.isFromEdit{
-
+                                
                                 if let destinationViewController = self.navigationController?.viewControllers
                                     .filter(
                                         {$0.classForCoder == MyTeamViewController.self})
                                     .first {
                                     self.navigationController?.popToViewController(destinationViewController, animated: true)
-                                    }
+                                }
                             }
                             else
                             {
-                                    self.navigationController?.popToRootViewController(animated: true)
+                                self.navigationController?.popToRootViewController(animated: true)
                             }
-
+                            
                         }
                         else
                         {
@@ -883,18 +883,18 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                     }
                 }
             }else{
-
-           //     print("userTeam.captain ",userTeam.captain,userTeam.viceCaptain)
-
+                
+                //     print("userTeam.captain ",userTeam.captain,userTeam.viceCaptain)
+                
                 APIManager.manager.postTeam(params: userTeam) { (status, msg) in
                     self.view.makeToast(msg!)
-
+                    
                     if status{
-
+                        
                         if (self.navigationController != nil)
                         {
                             self.navigationController?.popToRootViewController(animated: true)
-
+                            
                         }
                         else
                         {
@@ -903,9 +903,9 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                             }
                         }
                     }
-
+                    
                 }
-
+                
             }
         }
         else
@@ -915,17 +915,17 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             //print(userTeam.batsman.toJSONArray())
             //print(userTeam.bowler.toJSONArray())
             //print(userTeam.allrounder.toJSONArray())
-           
+            
         }
         
     }
-
-
+    
+    
     @IBAction func backButtonAction(_ sender: Any) {
         
-       
+        
         self.navigationController?.popViewController(animated: true)
     }
     
-
+    
 }

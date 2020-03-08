@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AccountKit
+
 import SafariServices
 import SVProgressHUD
 
@@ -16,11 +16,11 @@ protocol BackFromTeamSelect {
     func selectedTeamFootball(team: CreatedTeamFootball,contestId: Int)
 }
 
-class ContestListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,BackFromTeamSelect,AKFViewControllerDelegate {
+class ContestListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,BackFromTeamSelect {
     
     
     
-    var _accountKit: AKFAccountKit!
+    
     
     private let refreshControl = UIRefreshControl()
     
@@ -162,10 +162,6 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         navTitleLabel.text = "CONTESTS".localized
         
-        // initialize Account Kit
-        if _accountKit == nil {
-            _accountKit = AKFAccountKit(responseType: .accessToken)
-        }
         
         
         formatter.numberStyle = .decimal
@@ -306,8 +302,9 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                 self.firstTeamFlag.kf.setImage(with: url1)
             }else{
                 
-                 self.firstTeamFlag.image = UIImage.init(named: "teamPlaceHolder_icon")
+                self.firstTeamFlag.image = UIImage.init(named: "teamPlaceHolder_icon")
             }
+            
             if self.parentMatch?.teams.item(at: 1).logo != nil{
                 
                 let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatch?.teams.item(at: 1).logo ?? "")")
@@ -315,7 +312,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                 self.secondTeamFlag.kf.setImage(with: url2)
                 
             }else{
-                 self.secondTeamFlag.image = UIImage.init(named: "teamPlaceHolder_icon")
+                self.secondTeamFlag.image = UIImage.init(named: "teamPlaceHolder_icon")
             }
             
         }else{
@@ -358,10 +355,11 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                 let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatchFootball?.teams.item(at: 0).logo ?? "")")
                 self.firstTeamFlag.kf.setImage(with: url1)
             }
-            if self.parentMatch?.teams.item(at: 1).logo != nil{
+            if self.parentMatchFootball?.teams.item(at: 1).logo != nil{
                 
                 let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatchFootball?.teams.item(at: 1).logo ?? "")")
                 
+                print("logo.............",url2)
                 self.secondTeamFlag.kf.setImage(with: url2)
                 
             }
@@ -377,24 +375,44 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     @objc private func refreshData(_ sender: Any) {
         
-        
-        if type == .next{
-            
-            APIManager.manager.getActiveContestList(matchId: "\(parentMatch?.matchId ?? 0)") { (status, cm, msg) in
-                if status{
-                    if cm != nil{
-                        
-                        // self.fill(u)
-                        self.activeContestList = (cm?.contests)!
-                        self.contestTableView.reloadData()
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            if type == .next{
+                
+                APIManager.manager.getActiveContestList(matchId: "\(parentMatch?.matchId ?? 0)") { (status, cm, msg) in
+                    if status{
+                        if cm != nil{
+                            
+                            // self.fill(u)
+                            self.activeContestList = (cm?.contests)!
+                            self.contestTableView.reloadData()
+                        }
+                    }
+                    else{
+                        //  self.showStatus(status, msg: msg)
                     }
                 }
-                else{
-                    //  self.showStatus(status, msg: msg)
+            }
+            getData()
+            
+        }else{
+            if type == .next{
+                
+                APIManager.manager.getActiveFootBallContestList(matchId: "\(self.parentMatchFootball?.matchId ?? 0)") { (status, cm, msg) in
+                    if status{
+                        if cm != nil{
+                            
+                            // self.fill(u)
+                            self.activeContestList = (cm?.contests)!
+                            self.contestTableView.reloadData()
+                            
+                            
+                        }
+                    }
                 }
             }
+            
+            getFootballData()
         }
-        getData()
     }
     
     
@@ -826,10 +844,10 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     VC.contest_id = contest.id
                     if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                         
-                      VC.match_id = parentMatch?.matchId
+                        VC.match_id = parentMatch?.matchId
                     }else{
                         
-                      VC.match_id = parentMatchFootball?.matchId
+                        VC.match_id = parentMatchFootball?.matchId
                     }
                     VC.contestName = contest.name
                     
@@ -1621,62 +1639,62 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         joinContestButton.isUserInteractionEnabled = false
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
-        APIManager.manager.joinInContestWith(contestId: String.init(format: "%d", selectedContestId), teamId: String.init(format: "%d", selectedTeamId), withCompletionHandler: { (status, msg) in
-            if status{
-                self.joinContestButton.isUserInteractionEnabled = true
-                
-                print("Team submitted")
-                
-                //update contest list
-                APIManager.manager.getActiveContestList(matchId: "\(self.parentMatch?.matchId ?? 0)") { (status, cm, msg) in
-                    if status{
-                        if cm != nil{
-                            
-                            // self.fill(u)
-                            self.activeContestList = (cm?.contests)!
-                            self.contestTableView.reloadData()
-                            
-                            self.confirmationView.isHidden = true
-                            self.backShadeView.isHidden = true
-                            
+            APIManager.manager.joinInContestWith(contestId: String.init(format: "%d", selectedContestId), teamId: String.init(format: "%d", selectedTeamId), withCompletionHandler: { (status, msg) in
+                if status{
+                    self.joinContestButton.isUserInteractionEnabled = true
+                    
+                    print("Team submitted")
+                    
+                    //update contest list
+                    APIManager.manager.getActiveContestList(matchId: "\(self.parentMatch?.matchId ?? 0)") { (status, cm, msg) in
+                        if status{
+                            if cm != nil{
+                                
+                                // self.fill(u)
+                                self.activeContestList = (cm?.contests)!
+                                self.contestTableView.reloadData()
+                                
+                                self.confirmationView.isHidden = true
+                                self.backShadeView.isHidden = true
+                                
+                            }
                         }
                     }
-                }
-                //update joined contest
-                APIManager.manager.getJoinedActiveContestList(matchId: "\(self.parentMatch?.matchId ?? 0)") { (status, cm, msg) in
-                    if status{
-                        if cm != nil{
-                            
-                            if self.type == .upcomingContest || self.type == .liveContest || self.type == .completedContest{
+                    //update joined contest
+                    APIManager.manager.getJoinedActiveContestList(matchId: "\(self.parentMatch?.matchId ?? 0)") { (status, cm, msg) in
+                        if status{
+                            if cm != nil{
                                 
-                                self.activeContestList = (cm?.contests)!
-                                
-                            }else{
-                                
-                                self.joinedContestList = (cm?.contests)!
-                                self.joinedContestCount = (cm?.contests.count)!
-                                if Language.language == Language.english{
+                                if self.type == .upcomingContest || self.type == .liveContest || self.type == .completedContest{
                                     
-                                    self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
+                                    self.activeContestList = (cm?.contests)!
+                                    
                                 }else{
                                     
-                                    let bnNumberString = self.formatter.string(for: self.joinedContestCount )
-                                    self.contestCount.text = String.init(format: "%@",bnNumberString!)
+                                    self.joinedContestList = (cm?.contests)!
+                                    self.joinedContestCount = (cm?.contests.count)!
+                                    if Language.language == Language.english{
+                                        
+                                        self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
+                                    }else{
+                                        
+                                        let bnNumberString = self.formatter.string(for: self.joinedContestCount )
+                                        self.contestCount.text = String.init(format: "%@",bnNumberString!)
+                                    }
+                                    //                                        self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
                                 }
-                                //                                        self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
+                                
                             }
-                            
                         }
                     }
                 }
-            }
-            else{
-                
-                self.joinContestButton.isUserInteractionEnabled = true
-                
-                self.view.makeToast(msg!)
-            }
-        })
+                else{
+                    
+                    self.joinContestButton.isUserInteractionEnabled = true
+                    
+                    self.view.makeToast(msg!)
+                }
+            })
             
         }else{
             
@@ -1738,7 +1756,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             })
             
         }
- 
+        
     }
     
     @IBAction func closeConfirmationView(_ sender: Any) {
@@ -1888,10 +1906,9 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     @IBAction func signUpButtonAction(_ sender: Any) {
         
-        let vc = (_accountKit?.viewControllerForPhoneLogin(with: nil, state: nil))!
-        vc.enableSendToFacebook = true
-        self.prepareFBLoginViewController(loginViewController: vc)
-        self.present(vc as UIViewController, animated: true, completion: nil)
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        
+        self.navigationController?.pushViewController(popupVC!, animated: true)
         
     }
     
@@ -1907,7 +1924,13 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     @IBAction func infoButtonAction(_ sender: Any) {
         
-        let urlString = "https://www.gameof11.com/what-is-contest"
+        var urlString = ""
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            urlString = "https://www.gameof11.com/what-is-contest"
+        }else{
+            urlString = "https://www.gameof11.com/football/what-is-contest"
+        }
+        
         if let url = URL(string: urlString) {
             
             // UIApplication.shared.open(url, options: [:])
@@ -2127,66 +2150,6 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     
-    
-    
-    func prepareFBLoginViewController(loginViewController: AKFViewController) {
-        
-        loginViewController.delegate = self
-        
-        loginViewController.whitelistedCountryCodes = ["BD"]
-        
-        // Optionally, you may set up backup verification methods.
-        loginViewController.enableSendToFacebook = true
-        loginViewController.enableGetACall = false
-        
-        //UI Theming - Optional
-        loginViewController.uiManager = AKFSkinManager(skinType: .classic, primaryColor: UIColor.init(named: "GreenHighlight"))
-        
-        
-    }
-    
-    
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        
-        print("did complete login with access token \(accessToken.tokenString) state \(String(describing: state))")
-        
-        print("Login successful")
-        
-        _accountKit.requestAccount{
-            (account, error) -> Void in
-            if let phoneNumber = account?.phoneNumber{
-                
-                print("phone number..........",phoneNumber.phoneNumber)
-                
-                self.tabBarController?.tabBar.isHidden = true
-                
-                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
-                
-                popupVC?.phoneNo = phoneNumber.phoneNumber
-                self.navigationController?.pushViewController(popupVC!, animated: true)
-                
-            }
-            
-        }
-        
-        
-        
-    }
-    
-    
-    
-    
-    
-    //handle a failed
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
-        // ... implement appropriate error handling ...
-        print("\(String(describing: viewController)) did fail with error: \(error.localizedDescription)")
-    }
-    
-    //or canceled login
-    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
-        // ... handle user cancellation of the login process ...
-    }
     
     
     

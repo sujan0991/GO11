@@ -597,6 +597,7 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "en_US")//without it app crashes in device
         let dateFromString :Date = dateFormatter.date(from: ((leaderBoardData?.last_updated_time!) ?? ""))!
         let sttringFDate = dateFromString.toDateString(format: "d MMM, yyyy hh:mm a")
         
@@ -684,10 +685,12 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
                 
                 let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PointBreakdownFootballViewController") as? PointBreakdownFootballViewController
                 
+                let singleUser = leaderBoardData?.leaderboard[indexPath.row]
+                
                 vc?.matchId = match_id ?? 0
-                vc?.teamId = leaderBoardData?.user_team_id ?? 0
-                vc?.username = leaderBoardData?.username ?? ""
-                vc?.teamName = leaderBoardData?.user_team_name ?? ""
+                vc?.teamId = singleUser?.user_team_id ?? 0
+                vc?.username = singleUser?.username ?? ""
+                vc?.teamName = singleUser?.team_name ?? ""
                 //  vc?.matchType = matchData?.match_format
                 vc?.match_status_id = matchData?.match_status_id ?? 0
                 self.present(vc!, animated: true) {

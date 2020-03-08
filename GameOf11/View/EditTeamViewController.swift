@@ -136,40 +136,79 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
                     
                     self.userOldTeam = data!
                     
-                    //add keeper to userTeam
-                    for singlePlayer in data!.keeper{
+//                    else{
+//                        print("remove from batsman list")
+//                        let index = userTeam.batsman.index(where: { $0.id == userPlayer.id })
+//
+//                        if let index = index {
+//                          userTeam.batsman.remove(at: index)
+//                        }
+//                    }
+                    for player in self.squadData.playersList{
                         
-                      let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
-                        
-                      self.userTeam.keeper.append(userFantasyPlayer!)
-                    }
-                    //add batsman to userteam
-                    
-                    for singlePlayer in data!.batsman{
-                        
-                        let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
-                        self.userTeam.batsman.append(userFantasyPlayer!)
-                    }
-                    
-                    //add allrounder to userteam
-                    
-                    for singlePlayer in data!.allrounder{
-                        
-                        let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
-                        self.userTeam.allrounder.append(userFantasyPlayer!)
-                    }
-                    
-                    //add bowler to userteam
-                    
-                    for singlePlayer in data!.bowler{
-                        
-                        let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
-                        self.userTeam.bowler.append(userFantasyPlayer!)
-                    }
-                    
-                    
-                    
+                       switch (player.role) {
+                       case "batsman":
+                                    //add batsman to userteam
+                                    
+                                    for singlePlayer in data!.batsman{
+                                        
+                                       if player.playerId == singlePlayer.playerId{ // checking if squad is updated
+                                       
+                                         let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
+                                        
+                                         self.userTeam.batsman.append(userFantasyPlayer!)
+                                        }
+                                    }
 
+                        break;
+                        case "bowler":
+                                       //add bowler to userteam
+                                         
+                                       for singlePlayer in data!.bowler{
+                                        
+                                          if player.playerId == singlePlayer.playerId{ // checking if squad is updated
+                                            
+                                             let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
+                                            
+                                             self.userTeam.bowler.append(userFantasyPlayer!)
+                                           }
+                                         }
+                        break;
+                        case "keeper":
+                                    //add keeper to userTeam
+                                    for singlePlayer in data!.keeper{
+                                     
+                                        if player.playerId == singlePlayer.playerId{ // checking if squad is updated
+                                                                    
+                                           let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
+                                                                    
+                                            self.userTeam.keeper.append(userFantasyPlayer!)
+                                                                
+                                         }
+                                    }
+
+                        break;
+                        case "allrounder":
+                            //add allrounder to userteam
+                            
+                          for singlePlayer in data!.allrounder{
+                             if player.playerId == singlePlayer.playerId{ // checking if squad is updated
+
+                                let userFantasyPlayer = UserFantasyPlayer.init(json: ["id":singlePlayer.playerId ?? 0,"is_captain": singlePlayer.isCaptain!, "is_vice_captain" : singlePlayer.isViceCaptain! ])
+                                self.userTeam.allrounder.append(userFantasyPlayer!)
+                             }
+                           }
+                            
+                        break;
+                                        
+                        default:
+                        break;
+                    }
+
+                    }
+                    }
+                   
+                 
                     self.setSelectedPlayer()
                     
                     
@@ -180,7 +219,7 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
 
                 }
             
-        }
+
         
 
         
@@ -207,6 +246,7 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
         nextButton.layer.shadowOpacity = 0.5
         nextButton.layer.masksToBounds = false
 
+    
     }
     
     func setSelectedPlayer(){

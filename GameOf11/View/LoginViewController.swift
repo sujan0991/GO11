@@ -8,12 +8,11 @@
 
 import UIKit
 import SVProgressHUD
-import AccountKit
 
-class LoginViewController: BaseViewController,AKFViewControllerDelegate {
-
-    var _accountKit: AKFAccountKit!
-
+class LoginViewController: BaseViewController {
+    
+    
+    
     @IBOutlet weak var signinButton: UIButton!
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -32,15 +31,12 @@ class LoginViewController: BaseViewController,AKFViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "LOGIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: true, isGameSelectBtnVisible: false)
+        placeNavBar(withTitle: "LOGIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: true, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
-        // initialize Account Kit
-        if _accountKit == nil {
-            _accountKit = AKFAccountKit(responseType: .accessToken)
-        }
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.languageChangeAction(_:)), name: NSNotification.Name(rawValue: "languageChange"), object: nil)
         
@@ -65,9 +61,9 @@ class LoginViewController: BaseViewController,AKFViewControllerDelegate {
         banglaButton.layer.borderWidth = 0.5
         banglaButton.layer.borderColor = UIColor.lightGray.cgColor
         
-
-//        phoneField.text = "01676330929"
-//        passwordField.text = "123456"
+        
+        //        phoneField.text = "01676330929"
+        //        passwordField.text = "123456"
         
         
         signinButton.makeRound(5, borderWidth: 0, borderColor: .clear)
@@ -102,12 +98,9 @@ class LoginViewController: BaseViewController,AKFViewControllerDelegate {
     @IBAction func signUpButtonAction(_ sender: Any) {
         
         
-        let vc = (_accountKit?.viewControllerForPhoneLogin(with: nil, state: nil))!
-        vc.enableSendToFacebook = true
-        self.prepareFBLoginViewController(loginViewController: vc)
-        self.present(vc as UIViewController, animated: true, completion: nil)
-
-
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        
+        self.navigationController?.pushViewController(popupVC!, animated: true)
     }
     
     @IBAction func passSeenUnseenButtonAction(_ sender: UIButton) {
@@ -119,7 +112,7 @@ class LoginViewController: BaseViewController,AKFViewControllerDelegate {
             passwordField.isSecureTextEntry = false
         }else{
             
-             passwordField.isSecureTextEntry = true
+            passwordField.isSecureTextEntry = true
         }
         
     }
@@ -142,19 +135,19 @@ class LoginViewController: BaseViewController,AKFViewControllerDelegate {
         
         let phn = String.init(format: "+88%@", phoneField.text!)
         APIManager.manager.login(userName: phn, password: passwordField.text!) { (status, token, msg) in
-           
+            
             if status{
                 self.view.makeToast( msg!)
                 
                 AppSessionManager.shared.authToken = token
                 AppSessionManager.shared.save()
                 
-//                let sb: UIStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-//                let vc = sb.instantiateInitialViewController()
-//
-//                if let window = UIApplication.shared.delegate?.window {
-//                    window?.rootViewController = vc
-//                }
+                //                let sb: UIStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+                //                let vc = sb.instantiateInitialViewController()
+                //
+                //                if let window = UIApplication.shared.delegate?.window {
+                //                    window?.rootViewController = vc
+                //                }
                 
                 self.navigationController?.popToRootViewController(animated: true)
                 
@@ -168,64 +161,6 @@ class LoginViewController: BaseViewController,AKFViewControllerDelegate {
         
     }
     
-    func prepareFBLoginViewController(loginViewController: AKFViewController) {
-        
-        loginViewController.delegate = self
-        
-        loginViewController.whitelistedCountryCodes = ["BD"]
-        
-        // Optionally, you may set up backup verification methods.
-        loginViewController.enableSendToFacebook = true
-        loginViewController.enableGetACall = false
-        
-        //UI Theming - Optional
-        loginViewController.uiManager = AKFSkinManager(skinType: .classic, primaryColor: UIColor.init(named: "GreenHighlight"))
-        
-        
-    }
-    
-    
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        
-        print("did complete login with access token \(accessToken.tokenString) state \(String(describing: state))")
-        
-        print("Login successful")
-        
-        _accountKit.requestAccount{
-            (account, error) -> Void in
-            if let phoneNumber = account?.phoneNumber{
-                
-                print("phone number..........",phoneNumber.phoneNumber)
-                
-                self.tabBarController?.tabBar.isHidden = true
-                
-                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
-                
-                popupVC?.phoneNo = phoneNumber.phoneNumber
-                self.navigationController?.pushViewController(popupVC!, animated: true)
-                
-            }
-            
-        }
-        
-        
-        
-    }
-    
-    
-    
-    
-    
-    //handle a failed
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
-        // ... implement appropriate error handling ...
-        print("\(String(describing: viewController)) did fail with error: \(error.localizedDescription)")
-    }
-    
-    //or canceled login
-    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
-        // ... handle user cancellation of the login process ...
-    }
     
     
     @IBAction func englishButtonAction(_ sender: Any) {

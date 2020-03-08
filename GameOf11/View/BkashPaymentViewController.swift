@@ -23,10 +23,10 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        placeNavBar(withTitle: "COIN PURCHASE".localized, isBackBtnVisible: true, isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        placeNavBar(withTitle: "COIN PURCHASE".localized, isBackBtnVisible: true, isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
         self.webView.navigationDelegate = self
-
+        
         self.tabBarController?.tabBar.isHidden = true;
         
         print("url string",urlString)
@@ -45,18 +45,18 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
         print("Strat to load")
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
-
+        
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         print("finish to load")
         
-//        let contestDataDict:[String: Any] = ["contestId": selectedContestId,"teams" : createdTeamList]
-//        
-//        self.navigationController?.popViewController(animated: true)
-//        
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromContestList"), object: nil, userInfo: contestDataDict)
-//
+        //        let contestDataDict:[String: Any] = ["contestId": selectedContestId,"teams" : createdTeamList]
+        //        
+        //        self.navigationController?.popViewController(animated: true)
+        //        
+        //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromContestList"), object: nil, userInfo: contestDataDict)
+        //
         
         SVProgressHUD.dismiss()
     }
@@ -69,7 +69,7 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
             
             print("got success url ")
             //self.view.makeToast("Payment successfull".localized)
-           // self.showStatus(true, msg: "Payment successfull")
+            // self.showStatus(true, msg: "Payment successfull")
             
             if let vcStack = self.navigationController?.viewControllers
             {
@@ -96,7 +96,7 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
             
         }else if webView.url?.absoluteString == "https://www.gameof11.com/payment/failed"{
             
-             self.view.makeToast("Something went wrong! Please try again".localized)
+            self.view.makeToast("Something went wrong! Please try again".localized)
         }
     }
 }

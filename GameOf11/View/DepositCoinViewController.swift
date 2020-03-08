@@ -45,9 +45,9 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      //  IQKeyboardManager.shared.enable = false
-
-        placeNavBar(withTitle: "ADD COINS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        //  IQKeyboardManager.shared.enable = false
+        
+        placeNavBar(withTitle: "ADD COINS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
         self.tabBarController?.tabBar.isHidden = true;
         
@@ -70,7 +70,7 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         payButton.setTitle("PAY NOW".localized, for: .normal)
         
         
-       // tkAmountLabel.becomeFirstResponder()
+        // tkAmountLabel.becomeFirstResponder()
         
         packCollectionView.delegate = self
         packCollectionView.dataSource = self
@@ -96,13 +96,13 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         shadowView.addGestureRecognizer(tap)
         
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         
         shadowView.isHidden = true
         paymentView.isHidden = true
     }
-
+    
     @IBAction func backButtonAction(_ sender: Any) {
         
         self.navigationController?.popViewController(animated: true)
@@ -130,9 +130,9 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
                 
                 
             }
-
             
-
+            
+            
         }
         
     }
@@ -150,9 +150,9 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         
         //String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
         if Language.language == Language.english{
-           cell.oldpackLabel.text = "\(String(describing: singlePack["actual_amount"]!)) BDT"
-           cell.newPackLabel.text = "\(String(describing: singlePack["amount"]!)) BDT"
-           cell.counAmountLabel.text = "\(String(describing: singlePack["coin"]!)) COINS"
+            cell.oldpackLabel.text = "\(String(describing: singlePack["actual_amount"]!)) BDT"
+            cell.newPackLabel.text = "\(String(describing: singlePack["amount"]!)) BDT"
+            cell.counAmountLabel.text = "\(String(describing: singlePack["coin"]!)) COINS"
         }else{
             
             cell.oldpackLabel.text = "\(String(describing: formatter.string(for: singlePack["actual_amount"]!)!)) টাকা"
@@ -160,7 +160,7 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
             cell.counAmountLabel.text = "\(String(describing: formatter.string(for: singlePack["coin"]!)!)) কয়েন"
             
         }
-
+        
         return cell
     }
     
@@ -179,7 +179,7 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-
+        
         print("textFieldDidBeginEditing")
         
         if range.location < 2 {
@@ -237,47 +237,47 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
     }
     
     @IBAction func payNowButtonAction(_ sender: Any) {
-      
-     if tkAmountTextField.text?.count != 0 {
-        if selectTermButton.isSelected{
-            
-            let tkAmount = (tkAmountTextField.text! as NSString).floatValue
-            var type = "ghoori"
-            if selectBkashButton.isSelected{
+        
+        if tkAmountTextField.text?.count != 0 {
+            if selectTermButton.isSelected{
                 
-                type = "ghoori"
-                
-            }else if selectCardButton.isSelected{
-                
-                type = "foster"
-            }
-            
-             print("tkAmount and type ",tkAmount,type)
-            
-            APIManager.manager.getInvoice(amount: tkAmount,type:type) { (status, id,url,msg) in
-                
-                print("getInvoice msg",msg!)
-                
-                if status{
-                    self.view.makeToast(msg!)
+                let tkAmount = (tkAmountTextField.text! as NSString).floatValue
+                var type = "ghoori"
+                if selectBkashButton.isSelected{
                     
-                    print("getInvoice id",id ?? "??",url!)
+                    type = "ghoori"
                     
-                    let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BkashPaymentViewController") as? BkashPaymentViewController
+                }else if selectCardButton.isSelected{
                     
-                    vc?.urlString = url!
-                    
-                    self.navigationController?.pushViewController(vc!, animated: true)
-                    
-                }
-                else{
-                    self.view.makeToast(msg!)
+                    type = "foster"
                 }
                 
+                print("tkAmount and type ",tkAmount,type)
+                
+                APIManager.manager.getInvoice(amount: tkAmount,type:type) { (status, id,url,msg) in
+                    
+                    print("getInvoice msg",msg!)
+                    
+                    if status{
+                        self.view.makeToast(msg!)
+                        
+                        print("getInvoice id",id ?? "??",url!)
+                        
+                        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BkashPaymentViewController") as? BkashPaymentViewController
+                        
+                        vc?.urlString = url!
+                        
+                        self.navigationController?.pushViewController(vc!, animated: true)
+                        
+                    }
+                    else{
+                        self.view.makeToast(msg!)
+                    }
+                    
+                }
+                
             }
-
         }
-      }
     }
     
 }

@@ -77,9 +77,9 @@ public func RequestForJson(
           //  AF.request("ghttps://httpbin.org/post", method: .post, parameters: parameters, encoding: JSONEncoding.default)
 
             return AF.request( fullUrl, method: method, parameters: parameters , encoding: JSONEncoding.default, headers: header).responseString { response in
-                print("Success: \(response.result.isSuccess)")
-                print("Response String: \(response.result.value)")
-                print("header............",response.response?.allHeaderFields)
+//                print("Success: \(response.result.isSuccess)")
+//                print("Response String: \(response.result.value)")
+//                print("header............",response.response?.allHeaderFields)
             }
         }
         else

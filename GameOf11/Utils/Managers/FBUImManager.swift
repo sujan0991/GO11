@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AccountKit
+//import AccountKit
 
 class FBUImManager: NSObject,AKFUIManager {
     

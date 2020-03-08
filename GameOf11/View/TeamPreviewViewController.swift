@@ -9,7 +9,7 @@
 import UIKit
 
 class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITableViewDataSource {
-
+    
     var pvSquadData : MatchSquadData!
     var userTeamId = 0
     
@@ -17,7 +17,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
     var alreadyCreatedTeam:FantasySquadData!
     var userTeam : UsersFantasyTeam!
     
-
+    
     var batsmanList:[Player] = []
     var bowlerList:[Player] = []
     var keeperList:[Player] = []
@@ -32,9 +32,9 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-         placeNavBar(withTitle: "TEAM PREVIEW".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        placeNavBar(withTitle: "TEAM PREVIEW".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
-//        print("userTeam.batsman.count",userTeam.batsman.count)
+        //        print("userTeam.batsman.count",userTeam.batsman.count)
         
         if isAlreadyCreatedTeam{
             
@@ -52,16 +52,16 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                     
                 }
             }
-
+            
         }else{
-
-        print("pvSquadData.playersList.count.......",pvSquadData.playersList.count,userTeam.batsman.count)
+            
+            print("pvSquadData.playersList.count.......",pvSquadData.playersList.count,userTeam.batsman.count)
             
             if pvSquadData != nil
             {
                 for player in pvSquadData.playersList
                 {
- 
+                    
                     switch (player.role) {
                         
                     case "batsman":
@@ -70,7 +70,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                             print("pvSquadData.batsman id.....",player.isCaptain)
                             print("userTeam.batsman id.......",userPlayer.isCaptain)
                             
-                           
+                            
                             if player.playerId == userPlayer.id{
                                 
                                 print("userTeam.batsman id",userPlayer.id!)
@@ -112,7 +112,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                             }
                             
                         }
-
+                        
                         break;
                     case "keeper":
                         for userPlayer in userTeam.keeper{
@@ -138,7 +138,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                             
                             
                         }
-
+                        
                         break;
                     case "allrounder":
                         for userPlayer in userTeam.allrounder{
@@ -156,7 +156,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                                 self.allRounderList.append(player)
                             }
                         }
-
+                        
                         break;
                         
                     default:
@@ -164,7 +164,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                     }
                     
                 }
-            
+                
                 teamTableView.delegate = self
                 teamTableView.dataSource = self
                 teamTableView.removeEmptyCells()
@@ -173,8 +173,8 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
     }
     
     override func viewDidAppear(_ animated: Bool) {
-      
-
+        
+        
         print("isAlreadyCreatedTeam......",isAlreadyCreatedTeam)
         
         
@@ -267,7 +267,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                             if userPlayer.isViceCaptain == 1{
                                 player.isViceCaptain = true
                             }
-                         self.allRounderList.append(player)
+                            self.allRounderList.append(player)
                         }
                     }
                     
@@ -282,7 +282,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
         
         
     }
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -328,7 +328,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
             
             if indexPath.section == 0
             {
-               
+                
                 for index in 0..<keeperList.count
                 {
                     let firstView = cell.stackView.arrangedSubviews[index]
@@ -336,76 +336,76 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                     
                     player = keeperList.item(at: index)
                     
-                if index == 0{
-                    
-                    if player.isCaptain {
+                    if index == 0{
                         
-                        cell.firstCap.isHidden = false
-                        cell.firstCap.text = "C"
-                      //  cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.firstCap.isHidden = false
-                        cell.firstCap.text = "VC"
-                       // cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 1{
-                    if player.isCaptain {
+                        if player.isCaptain {
+                            
+                            cell.firstCap.isHidden = false
+                            cell.firstCap.text = "C"
+                            //  cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.firstCap.isHidden = false
+                            cell.firstCap.text = "VC"
+                            // cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 1{
+                        if player.isCaptain {
+                            
+                            cell.secondCap.isHidden = false
+                            cell.secondCap.text = "C"
+                            //   cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.secondCap.isHidden = false
+                            cell.secondCap.text = "VC"
+                            //  cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
                         
-                        cell.secondCap.isHidden = false
-                        cell.secondCap.text = "C"
-                     //   cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.secondCap.isHidden = false
-                        cell.secondCap.text = "VC"
-                      //  cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                    
-                   
-                }else if index == 2{
-                    if player.isCaptain {
                         
-                        cell.thirdCap.isHidden = false
-                        cell.thirdCap.text = "C"
-                     //   cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.thirdCap.isHidden = false
-                        cell.thirdCap.text = "VC"
-                     //   cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                    }else if index == 2{
+                        if player.isCaptain {
+                            
+                            cell.thirdCap.isHidden = false
+                            cell.thirdCap.text = "C"
+                            //   cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.thirdCap.isHidden = false
+                            cell.thirdCap.text = "VC"
+                            //   cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 3{
+                        if player.isCaptain {
+                            
+                            cell.fourthCap.isHidden = false
+                            cell.fourthCap.text = "C"
+                            //  cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.fourthCap.isHidden = false
+                            cell.fourthCap.text = "VC"
+                            //  cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 4{
+                        if player.isCaptain {
+                            
+                            cell.fifthCap.isHidden = false
+                            cell.fifthCap.text = "C"
+                            //  cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.fifthCap.isHidden = false
+                            cell.fifthCap.text = "VC"
+                            //   cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 5{
+                        if player.isCaptain {
+                            
+                            cell.sixthCap.isHidden = false
+                            cell.sixthCap.text = "C"
+                            //   cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.sixthCap.isHidden = false
+                            cell.sixthCap.text = "VC"
+                            //    cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
                     }
-                }else if index == 3{
-                    if player.isCaptain {
-                        
-                        cell.fourthCap.isHidden = false
-                        cell.fourthCap.text = "C"
-                      //  cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.fourthCap.isHidden = false
-                        cell.fourthCap.text = "VC"
-                      //  cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 4{
-                    if player.isCaptain {
-                        
-                        cell.fifthCap.isHidden = false
-                        cell.fifthCap.text = "C"
-                      //  cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.fifthCap.isHidden = false
-                        cell.fifthCap.text = "VC"
-                     //   cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 5{
-                    if player.isCaptain {
-                        
-                        cell.sixthCap.isHidden = false
-                        cell.sixthCap.text = "C"
-                     //   cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.sixthCap.isHidden = false
-                        cell.sixthCap.text = "VC"
-                    //    cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                  }
                 }
             }
             else if indexPath.section == 1
@@ -416,76 +416,76 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                     firstView.isHidden = false
                     
                     player = batsmanList.item(at: index)
-
-                if index == 0{
                     
-                    if player.isCaptain {
+                    if index == 0{
                         
-                        cell.firstCap.isHidden = false
-                        cell.firstCap.text = "C"
-                     //   cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.firstCap.isHidden = false
-                        cell.firstCap.text = "VC"
-                      //  cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        if player.isCaptain {
+                            
+                            cell.firstCap.isHidden = false
+                            cell.firstCap.text = "C"
+                            //   cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.firstCap.isHidden = false
+                            cell.firstCap.text = "VC"
+                            //  cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 1{
+                        if player.isCaptain {
+                            
+                            cell.secondCap.isHidden = false
+                            cell.secondCap.text = "C"
+                            //    cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.secondCap.isHidden = false
+                            cell.secondCap.text = "VC"
+                            //   cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 2{
+                        if player.isCaptain {
+                            
+                            cell.thirdCap.isHidden = false
+                            cell.thirdCap.text = "C"
+                            //     cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.thirdCap.isHidden = false
+                            cell.thirdCap.text = "VC"
+                            //   cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 3{
+                        if player.isCaptain {
+                            
+                            cell.fourthCap.isHidden = false
+                            cell.fourthCap.text = "C"
+                            //    cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.fourthCap.isHidden = false
+                            cell.fourthCap.text = "VC"
+                            //    cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 4{
+                        if player.isCaptain {
+                            
+                            cell.fifthCap.isHidden = false
+                            cell.fifthCap.text = "C"
+                            //     cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.fifthCap.isHidden = false
+                            cell.fifthCap.text = "VC"
+                            //   cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 5{
+                        if player.isCaptain {
+                            
+                            cell.sixthCap.isHidden = false
+                            cell.sixthCap.text = "C"
+                            //     cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.sixthCap.isHidden = false
+                            cell.sixthCap.text = "VC"
+                            //    cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
                     }
-                }else if index == 1{
-                    if player.isCaptain {
-                        
-                        cell.secondCap.isHidden = false
-                        cell.secondCap.text = "C"
-                    //    cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.secondCap.isHidden = false
-                        cell.secondCap.text = "VC"
-                     //   cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 2{
-                    if player.isCaptain {
-                        
-                        cell.thirdCap.isHidden = false
-                        cell.thirdCap.text = "C"
-                   //     cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.thirdCap.isHidden = false
-                        cell.thirdCap.text = "VC"
-                     //   cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 3{
-                    if player.isCaptain {
-                        
-                        cell.fourthCap.isHidden = false
-                        cell.fourthCap.text = "C"
-                    //    cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.fourthCap.isHidden = false
-                        cell.fourthCap.text = "VC"
-                    //    cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 4{
-                    if player.isCaptain {
-                        
-                        cell.fifthCap.isHidden = false
-                        cell.fifthCap.text = "C"
-                   //     cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.fifthCap.isHidden = false
-                        cell.fifthCap.text = "VC"
-                     //   cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 5{
-                    if player.isCaptain {
-                        
-                        cell.sixthCap.isHidden = false
-                        cell.sixthCap.text = "C"
-                   //     cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.sixthCap.isHidden = false
-                        cell.sixthCap.text = "VC"
-                    //    cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                 }
-              }
+                }
             }
             else if indexPath.section == 2
             {
@@ -496,76 +496,76 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                     
                     player = allRounderList.item(at: index)
                     
-
-                
-                if index == 0{
                     
-                    if player.isCaptain {
+                    
+                    if index == 0{
                         
-                        cell.firstCap.isHidden = false
-                        cell.firstCap.text = "C"
-                 //       cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.firstCap.isHidden = false
-                        cell.firstCap.text = "VC"
-                   //     cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        if player.isCaptain {
+                            
+                            cell.firstCap.isHidden = false
+                            cell.firstCap.text = "C"
+                            //       cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.firstCap.isHidden = false
+                            cell.firstCap.text = "VC"
+                            //     cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 1{
+                        if player.isCaptain {
+                            
+                            cell.secondCap.isHidden = false
+                            cell.secondCap.text = "C"
+                            //    cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.secondCap.isHidden = false
+                            cell.secondCap.text = "VC"
+                            //    cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 2{
+                        if player.isCaptain {
+                            
+                            cell.thirdCap.isHidden = false
+                            cell.thirdCap.text = "C"
+                            //     cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.thirdCap.isHidden = false
+                            cell.thirdCap.text = "VC"
+                            //     cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 3{
+                        if player.isCaptain {
+                            
+                            cell.fourthCap.isHidden = false
+                            cell.fourthCap.text = "C"
+                            //    cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.fourthCap.isHidden = false
+                            cell.fourthCap.text = "VC"
+                            //    cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 4{
+                        if player.isCaptain {
+                            
+                            cell.fifthCap.isHidden = false
+                            cell.fifthCap.text = "C"
+                            //     cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.fifthCap.isHidden = false
+                            cell.fifthCap.text = "VC"
+                            //      cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 5{
+                        if player.isCaptain {
+                            
+                            cell.sixthCap.isHidden = false
+                            cell.sixthCap.text = "C"
+                            //      cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.sixthCap.isHidden = false
+                            cell.sixthCap.text = "VC"
+                            //      cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
                     }
-                }else if index == 1{
-                    if player.isCaptain {
-                        
-                        cell.secondCap.isHidden = false
-                        cell.secondCap.text = "C"
-                    //    cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.secondCap.isHidden = false
-                        cell.secondCap.text = "VC"
-                    //    cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 2{
-                    if player.isCaptain {
-                        
-                        cell.thirdCap.isHidden = false
-                        cell.thirdCap.text = "C"
-                   //     cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.thirdCap.isHidden = false
-                        cell.thirdCap.text = "VC"
-                   //     cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 3{
-                    if player.isCaptain {
-                        
-                        cell.fourthCap.isHidden = false
-                        cell.fourthCap.text = "C"
-                    //    cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.fourthCap.isHidden = false
-                        cell.fourthCap.text = "VC"
-                    //    cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 4{
-                    if player.isCaptain {
-                        
-                        cell.fifthCap.isHidden = false
-                        cell.fifthCap.text = "C"
-                   //     cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.fifthCap.isHidden = false
-                        cell.fifthCap.text = "VC"
-                  //      cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 5{
-                    if player.isCaptain {
-                        
-                        cell.sixthCap.isHidden = false
-                        cell.sixthCap.text = "C"
-                  //      cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.sixthCap.isHidden = false
-                        cell.sixthCap.text = "VC"
-                  //      cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                  }
                 }
             }
             else
@@ -577,83 +577,83 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                     
                     player = bowlerList.item(at: index)
                     
-                if index == 0{
-                    
-                    if player.isCaptain {
+                    if index == 0{
                         
-                        cell.firstCap.isHidden = false
-                        cell.firstCap.text = "C"
-                  //      cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.firstCap.isHidden = false
-                        cell.firstCap.text = "VC"
-                   //     cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 1{
-                    if player.isCaptain {
-                        
-                        cell.secondCap.isHidden = false
-                        cell.secondCap.text = "C"
-                  //      cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.secondCap.isHidden = false
-                        cell.secondCap.text = "VC"
-                 //       cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 2{
-                    if player.isCaptain {
-                        
-                        cell.thirdCap.isHidden = false
-                        cell.thirdCap.text = "C"
-                 //       cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.thirdCap.isHidden = false
-                        cell.thirdCap.text = "VC"
-                //        cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 3{
-                    if player.isCaptain {
-                        
-                        cell.fourthCap.isHidden = false
-                        cell.fourthCap.text = "C"
-                 //       cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.fourthCap.isHidden = false
-                        cell.fourthCap.text = "VC"
-                 //       cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 4{
-                    if player.isCaptain {
-                        
-                        cell.fifthCap.isHidden = false
-                        cell.fifthCap.text = "C"
-                 //       cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.fifthCap.isHidden = false
-                        cell.fifthCap.text = "VC"
-                 //       cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
-                    }
-                }else if index == 5{
-                    if player.isCaptain {
-                        
-                        cell.sixthCap.isHidden = false
-                        cell.sixthCap.text = "C"
-                 //       cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    }else if player.isViceCaptain{
-                        cell.sixthCap.isHidden = false
-                        cell.sixthCap.text = "VC"
-                 //       cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        if player.isCaptain {
+                            
+                            cell.firstCap.isHidden = false
+                            cell.firstCap.text = "C"
+                            //      cell.firstCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.firstCap.isHidden = false
+                            cell.firstCap.text = "VC"
+                            //     cell.firstCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 1{
+                        if player.isCaptain {
+                            
+                            cell.secondCap.isHidden = false
+                            cell.secondCap.text = "C"
+                            //      cell.secondCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.secondCap.isHidden = false
+                            cell.secondCap.text = "VC"
+                            //       cell.secondCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 2{
+                        if player.isCaptain {
+                            
+                            cell.thirdCap.isHidden = false
+                            cell.thirdCap.text = "C"
+                            //       cell.thirdCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.thirdCap.isHidden = false
+                            cell.thirdCap.text = "VC"
+                            //        cell.thirdCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 3{
+                        if player.isCaptain {
+                            
+                            cell.fourthCap.isHidden = false
+                            cell.fourthCap.text = "C"
+                            //       cell.fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.fourthCap.isHidden = false
+                            cell.fourthCap.text = "VC"
+                            //       cell.fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 4{
+                        if player.isCaptain {
+                            
+                            cell.fifthCap.isHidden = false
+                            cell.fifthCap.text = "C"
+                            //       cell.fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.fifthCap.isHidden = false
+                            cell.fifthCap.text = "VC"
+                            //       cell.fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
+                    }else if index == 5{
+                        if player.isCaptain {
+                            
+                            cell.sixthCap.isHidden = false
+                            cell.sixthCap.text = "C"
+                            //       cell.sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                        }else if player.isViceCaptain{
+                            cell.sixthCap.isHidden = false
+                            cell.sixthCap.text = "VC"
+                            //       cell.sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                        }
                     }
                 }
-              }
             }
-
-      }
-
+            
+        }
+        
         
         
     }
-   
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40;
     }
@@ -692,15 +692,15 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (tableView.frame.size.height - 200)/4
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

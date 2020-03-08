@@ -21,8 +21,17 @@ class WebViewController: UIViewController {
         navTitleLabel.text = "TEAM SELECT & SCORING".localized
         
       //  let urlString = "\(API_K.BaseUrlStr)team-select-and-scoring-system"
-        let urlString = "https://www.gameof11.com/team-select-and-scoring-system"
-  
+        var urlString = ""
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
+            urlString = "https://www.gameof11.com/team-select-and-scoring-system"
+            
+        }else{
+            urlString = "https://www.gameof11.com/football/point-system"
+            
+            
+        }
+        
         print("urlString.........",urlString)
         let url = URL(string: urlString)!
         webView.load(URLRequest(url: url))

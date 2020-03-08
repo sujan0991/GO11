@@ -10,20 +10,20 @@ import UIKit
 import DTPagerController
 
 class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTPagerControllerDelegate {
-
+    
     var selectedSegmentIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-       print("viewDidLoad in my contest")
+        
+        print("viewDidLoad in my contest")
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       
-    print("AppSessionManager.shared.authToken",AppSessionManager.shared.authToken)
+        
+        print("AppSessionManager.shared.authToken",AppSessionManager.shared.authToken)
         
         self.tabBarController?.tabBar.isHidden = false
         
@@ -32,11 +32,11 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
             let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UnSignedProfileViewController") as? UnSignedProfileViewController
             
             self.navigationController?.pushViewController(popupVC ?? self, animated: true)
-
+            
         }
         else
         {
-            placeNavBar(withTitle: "MY CONTESTS".localized, isBackBtnVisible: false,isLanguageBtnVisible: false, isGameSelectBtnVisible: true)
+            placeNavBar(withTitle: "MY CONTESTS".localized, isBackBtnVisible: false,isLanguageBtnVisible: false, isGameSelectBtnVisible: true,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
             
             // Do any additional setup after loading the view.
             
@@ -73,8 +73,8 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
         }
     }
     
-  
-
+    
+    
     func customizeSegment(pagerController: DTPagerController)
     {
         
@@ -91,17 +91,17 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
         
         if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "upcoming"{
             
-              pagerController.selectedPageIndex = 0
+            pagerController.selectedPageIndex = 0
             
         }else if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "live"{
             
-              pagerController.selectedPageIndex = 1
+            pagerController.selectedPageIndex = 1
             
         }else if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "completed"{
             
-              pagerController.selectedPageIndex = 2
+            pagerController.selectedPageIndex = 2
         }
-      
+        
         
     }
     func setImage(_ image: UIImage?, forSegmentAt segment: Int) {
@@ -136,5 +136,5 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
         }
     }
     
-
+    
 }

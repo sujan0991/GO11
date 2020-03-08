@@ -21,12 +21,12 @@ class RedeemCoinViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       // self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
-
+        
+        // self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
+        
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "REDEEM COIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        placeNavBar(withTitle: "REDEEM COIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         redeemButton.makeRound(5, borderWidth: 0, borderColor: .clear)
         
         tkToCoinLabel.text = "1 BDT = 50 Coins".localized
@@ -41,7 +41,7 @@ class RedeemCoinViewController: BaseViewController {
     
     @IBAction func redeemButtonAction(_ sender: Any) {
         
-       if tkAmountTextField.text?.count != 0 { APIManager.manager.redeemCoinForCash(amount: self.tkAmountTextField.text ?? "0") { (success, msg) in
+        if tkAmountTextField.text?.count != 0 { APIManager.manager.redeemCoinForCash(amount: self.tkAmountTextField.text ?? "0") { (success, msg) in
             if(success)
             {
                 self.view.makeToast( msg!)
@@ -51,10 +51,10 @@ class RedeemCoinViewController: BaseViewController {
             else{
                 self.view.makeToast(msg!)
             }
-        
-          }
+            
+            }
         }
-
+        
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -62,6 +62,6 @@ class RedeemCoinViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-  
-
+    
+    
 }

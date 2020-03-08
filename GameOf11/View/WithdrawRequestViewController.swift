@@ -15,6 +15,9 @@ class WithdrawRequestViewController: BaseViewController {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var tkAmountTextField: UITextField!
     @IBOutlet weak var bKashNoTextField: UITextField!
+    @IBOutlet weak var confirmBkashNoTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     @IBOutlet weak var sendButton: UIButton!
     
     @IBOutlet weak var cashWithdrawLabel: UILabel!
@@ -27,11 +30,12 @@ class WithdrawRequestViewController: BaseViewController {
       //  self.view.setGradientBackground(colorTop:UIColor.white , colorBottom: UIColor.init(named: "light_blue_transparent")!)
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "WITHDRAW REQUEST".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        placeNavBar(withTitle: "WITHDRAW REQUEST".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
         amountLabel.text = "Amount in BDT".localized
         tkAmountTextField.placeholder = "Amount in BDT".localized
         bKashNoTextField.placeholder = "Personal bKash phone number".localized
+        
         sendButton.setTitle("Send Withdraw Request".localized, for: .normal)
         
         cashWithdrawLabel.text = "Cash-Withdrawl!".localized
@@ -46,19 +50,28 @@ class WithdrawRequestViewController: BaseViewController {
    
     @IBAction func sendRequestButtonAction(_ sender: Any) {
         
-        if tkAmountTextField.text?.count != 0 && bKashNoTextField.text?.count != 0 {
-        
-        APIManager.manager.postWithdrawRequest(amount: self.tkAmountTextField.text ?? "0", number: self.bKashNoTextField.text ?? "0") { (success, msg) in
-            if(success)
-            {
-                self.view.makeToast(msg!)
-                self.navigationController?.popViewController(animated: true)
+        if tkAmountTextField.text?.count != 0 && bKashNoTextField.text?.count != 0 && confirmBkashNoTextField.text?.count != 0{
+            
+            if  bKashNoTextField.text != confirmBkashNoTextField.text{
                 
+                self.view.makeToast( "Given bKash numbers are not same!")
+                
+            }else{
+                
+                APIManager.manager.postWithdrawRequest(amount: self.tkAmountTextField.text ?? "0", number: self.bKashNoTextField.text ?? "0") { (success, msg) in
+                    if(success)
+                    {
+                        self.view.makeToast(msg!)
+                        self.navigationController?.popViewController(animated: true)
+                        
+                    }
+                    else{
+                        self.view.makeToast( msg!)
+                    }
+                }
             }
-            else{
-                self.view.makeToast( msg!)
-            }
-          }
+        
+     
         }
     }
     

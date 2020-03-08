@@ -32,7 +32,7 @@ class TeamPreviewFootballViewController: BaseViewController, UITableViewDelegate
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        placeNavBar(withTitle: "TEAM PREVIEW".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        placeNavBar(withTitle: "TEAM PREVIEW".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
         //        print("userTeam.batsman.count",userTeam.batsman.count)
         
@@ -488,7 +488,7 @@ class TeamPreviewFootballViewController: BaseViewController, UITableViewDelegate
                     }
                 }
             }
-            
+                
             else if indexPath.section == 2
             {
                 for index in 0..<midfielderList.count
@@ -682,7 +682,7 @@ class TeamPreviewFootballViewController: BaseViewController, UITableViewDelegate
         else if section == 3
         {
             label.text =  "Striker".localized.uppercased()
-
+            
         }
         else
         {

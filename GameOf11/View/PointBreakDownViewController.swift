@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 
 class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-
+    
     
     var matchId = 0
     var teamId = 0
@@ -163,8 +163,8 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-     //   placeNavBar(withTitle: "POINT BRAKDOWN", isBackBtnVisible: true)
+        
+        //   placeNavBar(withTitle: "POINT BRAKDOWN", isBackBtnVisible: true)
         
         self.usernameLabel.text = username
         self.teamnamelabel.text = teamName.uppercased()
@@ -213,7 +213,7 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
         }
         
         
-       
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -223,11 +223,11 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-         let cell = tableView.dequeueReusableCell(withIdentifier:"playerCell") as! PointBreakDownTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:"playerCell") as! PointBreakDownTableViewCell
         
-         let singlePlayerInfo = self.leaderBoardData?.team_info?.player_info[indexPath.row]
+        let singlePlayerInfo = self.leaderBoardData?.team_info?.player_info[indexPath.row]
         
-         cell.setInfo(singlePlayerInfo!)
+        cell.setInfo(singlePlayerInfo!)
         
         return cell
     }
@@ -239,25 +239,25 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
             let singlePlayerInfo = self.leaderBoardData?.team_info?.player_info[indexPath.row]
             
             if singlePlayerInfo!.is_captain == 1{
-
+                
                 print("indexPath.row........",indexPath.row)
-
+                
                 cell.captainLabel.isHidden = false
                 cell.xLabel.isHidden = false
                 cell.captainLabel.text = "C"
                 cell.captainLabel.backgroundColor = UIColor.init(named: "GreenHighlight")!
                 cell.xLabel.text = "2x"
                 cell.xLabel.textColor = UIColor.init(named: "GreenHighlight")!
-
+                
             }else if singlePlayerInfo!.is_vice_captain == 1{
-
+                
                 cell.captainLabel.isHidden = false
                 cell.captainLabel.text = "VC"
                 cell.captainLabel.backgroundColor = UIColor.init(named: "TabOrangeColor")!
                 cell.xLabel.isHidden = false
                 cell.xLabel.text = "1.5x"
                 cell.xLabel.textColor = UIColor.init(named: "TabOrangeColor")!
-
+                
             }
         }
         
@@ -274,13 +274,13 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
         
         playerInfoLabel.text = "PLAYER INFO".localized
         pointsLabel.text = "POINTS".localized
-
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       print("match_status_id.........",match_status_id)
+        print("match_status_id.........",match_status_id)
         
         if match_status_id == 3{
             
@@ -415,30 +415,30 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
                 
                 if singlePlayerPoint?.strike_rate != nil{
                     
-                  if singlePlayerInfo?.player_role != "bowler"{
-                    
-                    if (Float((singlePlayerPoint?.strike_rate?["1"])!) != 0.0 && Float((singlePlayerPoint?.strike_rate?["1"])!) < 40) {
+                    if singlePlayerInfo?.player_role != "bowler"{
                         
-                        
-                        self.strikePointLabel.text = "-3.0"
-                        
-                        
-                        
-                    }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) < 49.99 && Float((singlePlayerPoint?.strike_rate?["1"])!) > 40  ){
-                        
-                        
-                        self.strikePointLabel.text = "-2.0"
-                        
-                        
-                    }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) < 60 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 50  ){
-                        
-                        self.strikePointLabel.text = "-1.0"
-                        
-                        
-                    }else{
-                        self.strikePointLabel.text = "0.0"
+                        if (Float((singlePlayerPoint?.strike_rate?["1"])!) != 0.0 && Float((singlePlayerPoint?.strike_rate?["1"])!) < 40) {
+                            
+                            
+                            self.strikePointLabel.text = "-3.0"
+                            
+                            
+                            
+                        }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) < 49.99 && Float((singlePlayerPoint?.strike_rate?["1"])!) > 40  ){
+                            
+                            
+                            self.strikePointLabel.text = "-2.0"
+                            
+                            
+                        }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) < 60 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 50  ){
+                            
+                            self.strikePointLabel.text = "-1.0"
+                            
+                            
+                        }else{
+                            self.strikePointLabel.text = "0.0"
+                        }
                     }
-                }
                 }
                 if singlePlayerPoint?.catches != nil{
                     self.catchPointLabel.text = "\(Float((singlePlayerPoint?.catches?["1"])!) * 4.0)"
@@ -485,7 +485,7 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
                         
                     } else if Float((singlePlayerPoint?.economy?["1"])!) > 9{
                         
-                       self.econPointLabel.text = "-3.0"
+                        self.econPointLabel.text = "-3.0"
                     }
                     else{
                         self.econPointLabel.text = "0.0"
@@ -527,24 +527,24 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
                 if singlePlayerPoint?.strike_rate != nil{
                     if singlePlayerInfo?.player_role != "bowler"{
                         
-                    if ( Float((singlePlayerPoint?.strike_rate?["1"])!) != 0.0 && Float((singlePlayerPoint?.strike_rate?["1"])!) < 50 ){
-                        
-                        self.strikePointLabel.text = "-3.0"
-                        
-                    }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 59.99 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 50  ){
-                        
-                        self.strikePointLabel.text = "-2.0"
-                        
-                        
-                    }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 70 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 60  ){
-                        
-                        self.strikePointLabel.text = "-1.0"
-                        
-                        
-                    }else{
-                        self.strikePointLabel.text = "0.0"
+                        if ( Float((singlePlayerPoint?.strike_rate?["1"])!) != 0.0 && Float((singlePlayerPoint?.strike_rate?["1"])!) < 50 ){
+                            
+                            self.strikePointLabel.text = "-3.0"
+                            
+                        }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 59.99 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 50  ){
+                            
+                            self.strikePointLabel.text = "-2.0"
+                            
+                            
+                        }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 70 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 60  ){
+                            
+                            self.strikePointLabel.text = "-1.0"
+                            
+                            
+                        }else{
+                            self.strikePointLabel.text = "0.0"
+                        }
                     }
-                }
                 }
                 
                 if singlePlayerPoint?.catches != nil{
@@ -628,24 +628,24 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
                     
                     if singlePlayerInfo?.player_role != "bowler"{
                         
-                    if (Float((singlePlayerPoint?.strike_rate?["1"])!) != 0.0 && Float((singlePlayerPoint?.strike_rate?["1"])!) < 80 ) {
-                        
-                        self.strikePointLabel.text = "-3.0"
-                        
-                    }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 89.99 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 80  ){
-                        
-                        self.strikePointLabel.text = "-2.0"
-                        
-                        
-                    }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 90.99 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 90  ){
-                        
-                        self.strikePointLabel.text = "-1.0"
-                        
-                        
-                    }else{
-                        self.strikePointLabel.text = "0.0"
+                        if (Float((singlePlayerPoint?.strike_rate?["1"])!) != 0.0 && Float((singlePlayerPoint?.strike_rate?["1"])!) < 80 ) {
+                            
+                            self.strikePointLabel.text = "-3.0"
+                            
+                        }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 89.99 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 80  ){
+                            
+                            self.strikePointLabel.text = "-2.0"
+                            
+                            
+                        }else if (Float((singlePlayerPoint?.strike_rate?["1"])!) <= 90.99 && Float((singlePlayerPoint?.strike_rate?["1"])!) >= 90  ){
+                            
+                            self.strikePointLabel.text = "-1.0"
+                            
+                            
+                        }else{
+                            self.strikePointLabel.text = "0.0"
+                        }
                     }
-                }
                 }
                 
                 if singlePlayerPoint?.catches != nil{
@@ -705,7 +705,7 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
                 }
                 
             }
-
+            
             
         }else{
             
@@ -727,19 +727,19 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
         let topSpace = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 1.0
         
         UIView.animate(withDuration:0.2, animations: {
-
-
+            
+            
             self.breakdownView.frame = CGRect(x: 0, y:topSpace + 44, width: self.breakdownView.frame.width, height: self.breakdownView.frame.height)
-
-            }) { _ in
-
-
+            
+        }) { _ in
+            
+            
         }
-         self.view.bringSubviewToFront(breakdownView)
+        self.view.bringSubviewToFront(breakdownView)
         
-         breakdownView.isHidden = false
-         backButton.isHidden = true
-         closeButton.isHidden = false
+        breakdownView.isHidden = false
+        backButton.isHidden = true
+        closeButton.isHidden = false
     }
     
     @IBAction func closeButtonAction(_ sender: Any) {
@@ -763,7 +763,7 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
                 print("open safari")
             }
         }
-
+        
     }
     
     
@@ -774,5 +774,5 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
         }
     }
     
-
+    
 }

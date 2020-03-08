@@ -18,14 +18,14 @@ class ForgotPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navTitleLabel.text = "FORGOT PASSWORD".localized
         suggestionLabel.text = "Please write your GO11 registered email address to get generated password. You will be using it while Logging into GO11.".localized
         
         emailTextField.placeholder = "Email Address".localized
         
         resetButton.setTitle("Request to reset password".localized, for: .normal)
-       
+        
     }
     
     @IBAction func requestPasswordButtonAction(_ sender: Any) {
@@ -36,7 +36,7 @@ class ForgotPasswordViewController: UIViewController {
             showConfimationAlert(vmsg)
             return
         }
-
+        
         APIManager.manager.forgotPassword(email: emailTextField.text!) { (status, msg) in
             
             print("email sent.......")
@@ -44,7 +44,7 @@ class ForgotPasswordViewController: UIViewController {
             self.view.makeToast(msg!)
             
         }
-
+        
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -52,6 +52,6 @@ class ForgotPasswordViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-
-
+    
+    
 }

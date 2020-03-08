@@ -60,7 +60,7 @@ extension Date {
         //Specify Format of String to Parse
         dateFormatter.dateFormat = format
         
-       // dateFormatter.dateStyle = .medium
+        // dateFormatter.dateStyle = .medium
         
         //Parse into NSDate
         let dateFromString : String = dateFormatter.string(from: self)
@@ -74,9 +74,9 @@ extension Date {
         let dateFormatter = DateFormatter()
         
         //Specify Format of String to Parse
-       // dateFormatter.dateFormat = "dd/MM/YYYY"
+        // dateFormatter.dateFormat = "dd/MM/YYYY"
         dateFormatter.dateFormat = "MM/dd/YYYY"
-
+        
         
         // dateFormatter.dateStyle = .MediumStyle
         
@@ -224,7 +224,7 @@ extension String {
         //Return Parsed Date
         let df = DateFormatter()
         df.dateFormat = "EEEE: MMM dd, yyyy"
-       // df.dateStyle = dateStyle
+        // df.dateStyle = dateStyle
         df.locale = Locale(identifier: "pt")
         
         let strDate = df.string(from: dateFromString)
@@ -246,6 +246,39 @@ extension String {
         return dateFromString
     }
     
+    func getElapsedInterval() -> String {
+        
+        //Create Date Formatter
+        let dateFormatter = DateFormatter()
+        
+        //Specify Format of String to Parse
+        //   dateFormatter.dateFormat = format
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        //Parse into NSDate
+        
+        let dateFromString :Date = dateFormatter.date(from: self)!
+        
+        let calendar = Calendar.current
+        
+        
+        let interval = calendar.dateComponents([.day, .hour, .minute,], from: dateFromString, to: Date())
+        
+        if let year = interval.year, year > 0 {
+            return year == 1 ? "\(year)" + " " + "year ago" :
+                "\(year)" + " " + "years ago"
+        } else if let month = interval.month, month > 0 {
+            return month == 1 ? "\(month)" + " " + "month ago" :
+                "\(month)" + " " + "months ago"
+        } else if let day = interval.day, day > 0 {
+            return day == 1 ? "\(day)" + " " + "day ago" :
+                "\(day)" + " " + "days ago"
+        } else {
+            return "Today"
+            
+        }
+        
+    }
     
     func serverTimetoDateString() -> String
     {
@@ -253,7 +286,7 @@ extension String {
         let dateFormatter = DateFormatter()
         
         //Specify Format of String to Parse
-     //   dateFormatter.dateFormat = format
+        //   dateFormatter.dateFormat = format
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         //Parse into NSDate
@@ -262,7 +295,7 @@ extension String {
         //Return Parsed Date
         let df = DateFormatter()
         df.dateFormat = "HH:mm:ss"
-
+        
         // df.dateStyle = dateStyle
         let currentDate = Date()
         let calendar = Calendar.current
@@ -287,23 +320,23 @@ extension String {
             
             
             if diffDateComponents.day! != 0{
-              
+                
                 if diffDateComponents.day! >= 1{
                     
                     if Language.language == Language.english{
                         
-                      countdown = "\(String(describing: diffDateComponents.day!)) day"
+                        countdown = "\(String(describing: diffDateComponents.day!)) day"
                         
                     }else{
                         
                         
                         let bnNumberString = formatter.string(for: diffDateComponents.day!)
-
+                        
                         countdown = "\(String(describing: bnNumberString!)) দিন"
                     }
                 }
                 
-//                countdown = "\(String(describing: diffDateComponents.day!))d \(String(describing: diffDateComponents.hour!))h \(String(describing: diffDateComponents.minute!))m"
+                //                countdown = "\(String(describing: diffDateComponents.day!))d \(String(describing: diffDateComponents.hour!))h \(String(describing: diffDateComponents.minute!))m"
                 
             }else{
                 
@@ -336,7 +369,7 @@ extension String {
                 }else{
                     
                     if Language.language == Language.english{
-                      countdown = "\(String(describing: diffDateComponents.minute!)) mins"
+                        countdown = "\(String(describing: diffDateComponents.minute!)) mins"
                     }else{
                         
                         let bnNumberStringMin = formatter.string(for: diffDateComponents.minute!)
@@ -349,9 +382,9 @@ extension String {
             // let strDate = df.string(from: dateFromString)
             
             return countdown
-
-        }
             
+        }
+        
     }
     func asURL()->URL? {
         if let url = URL(string: self) {
@@ -403,6 +436,8 @@ extension String {
         return self.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: " ").inverted)
     }
     
+    
+    
 }
 
 extension UIColor {
@@ -435,12 +470,12 @@ extension UIButton{
             }
         }
     }
-//    func decorateButtonRound() {
-//        self.layer.cornerRadius = 15
-//        self.clipsToBounds = true
-//        self.layer.borderWidth = 0.5
-//        self.layer.borderColor = UIColor.gray.cgColor
-//    }
+    //    func decorateButtonRound() {
+    //        self.layer.cornerRadius = 15
+    //        self.clipsToBounds = true
+    //        self.layer.borderWidth = 0.5
+    //        self.layer.borderColor = UIColor.gray.cgColor
+    //    }
     
     func decorateButtonCardAndRound() {
         self.layer.cornerRadius = 15
@@ -449,19 +484,19 @@ extension UIButton{
         self.layer.borderColor = UIColor.gray.cgColor
     }
     
-//    func decorateButtonRound(_ cornerRadius: Int) {
-//        self.layer.cornerRadius = CGFloat(cornerRadius)
-//        self.clipsToBounds = true
-//        self.layer.borderWidth = 1
-//        self.layer.borderColor = UIColor.gray.cgColor
-//    }
+    //    func decorateButtonRound(_ cornerRadius: Int) {
+    //        self.layer.cornerRadius = CGFloat(cornerRadius)
+    //        self.clipsToBounds = true
+    //        self.layer.borderWidth = 1
+    //        self.layer.borderColor = UIColor.gray.cgColor
+    //    }
     
-//    func decorateButtonRound(_ cornerRadius: Int, borderWidth: CGFloat) {
-//        self.layer.cornerRadius = CGFloat(cornerRadius)
-//        self.clipsToBounds = true
-//        self.layer.borderWidth = borderWidth
-//        self.layer.borderColor = UIColor.gray.cgColor
-//    }
+    //    func decorateButtonRound(_ cornerRadius: Int, borderWidth: CGFloat) {
+    //        self.layer.cornerRadius = CGFloat(cornerRadius)
+    //        self.clipsToBounds = true
+    //        self.layer.borderWidth = borderWidth
+    //        self.layer.borderColor = UIColor.gray.cgColor
+    //    }
     
     func decorateButton() {
         self.layer.borderWidth = 0.5
@@ -500,20 +535,20 @@ extension UIButton{
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         self.setBackgroundImage(image(withColor: color), for: state)
     }
-
+    
 }
 /*
-extension UITextField{
-    @IBInspectable var placeHolderColor: UIColor? {
-        get {
-            return self.placeHolderColor
-        }
-        set {
-            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSForegroundColorAttributeName: newValue!])
-        }
-    }
-}
-*/
+ extension UITextField{
+ @IBInspectable var placeHolderColor: UIColor? {
+ get {
+ return self.placeHolderColor
+ }
+ set {
+ self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSForegroundColorAttributeName: newValue!])
+ }
+ }
+ }
+ */
 extension UIImage{
     func getImageStr() -> String {
         let imageData:Data = self.jpegData(compressionQuality:0.9)!
@@ -614,7 +649,7 @@ extension UIView {
                                 cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.path = path.cgPath
-
+        
         self.layer.mask = mask
     }
     
@@ -639,7 +674,7 @@ extension UIView {
         
         layer.insertSublayer(gradientLayer, at: 0)
     }
-
+    
 }
 
 extension UITableView {
@@ -652,7 +687,7 @@ extension UITableView {
     }
     
     func removeEmptyCells() {
-         self.tableFooterView = UIView(frame: .zero)
+        self.tableFooterView = UIView(frame: .zero)
     }
 }
 
@@ -803,3 +838,6 @@ extension CALayer {
                       height: size.height + topInset + bottomInset)
     }
 }
+
+
+

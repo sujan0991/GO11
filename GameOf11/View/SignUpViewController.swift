@@ -8,14 +8,14 @@
 
 import UIKit
 import SafariServices
-import AccountKit
+
 import Lottie
 
-class SignUpViewController: BaseViewController,UITextFieldDelegate,AKFViewControllerDelegate {
-
-    var _accountKit: AKFAccountKit!
+class SignUpViewController: BaseViewController,UITextFieldDelegate {
+    
+    
     let animationView = AnimationView()
-
+    
     var phoneNo:String!
     
     @IBOutlet weak var animView: UIView!
@@ -52,18 +52,15 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate,AKFViewContro
         
         animationContainerView.isHidden = true
         
-        placeNavBar(withTitle: "SIGN UP".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false)
+        placeNavBar(withTitle: "SIGN UP".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
-        // initialize Account Kit
-        if _accountKit == nil {
-            _accountKit = AKFAccountKit(responseType: .accessToken)
-        }
-
-//        signUpButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
-//        signUpButton.isUserInteractionEnabled = false
-//
         
-
+        
+        //        signUpButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
+        //        signUpButton.isUserInteractionEnabled = false
+        //
+        
+        
         
         let animation = Animation.named("sign_up_dialog_anim_2", subdirectory: nil)
         
@@ -76,19 +73,19 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate,AKFViewContro
         
         animationView.topAnchor.constraint(equalTo: animView.layoutMarginsGuide.topAnchor).isActive = true
         animationView.leadingAnchor.constraint(equalTo: animView.leadingAnchor).isActive = true
-
+        
         animationView.bottomAnchor.constraint(equalTo: animView.layoutMarginsGuide.bottomAnchor, constant:0).isActive = true
         animationView.trailingAnchor.constraint(equalTo: animView.trailingAnchor).isActive = true
         animationView.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
         
-
+        
         /// *** Keypath Setting
         
         let redValueProvider = ColorValueProvider(Color(r: 1, g: 0.2, b: 0.3, a: 1))
         animationView.setValueProvider(redValueProvider, keypath: AnimationKeypath(keypath: "Switch Outline Outlines.**.Fill 1.Color"))
         animationView.setValueProvider(redValueProvider, keypath: AnimationKeypath(keypath: "Checkmark Outlines 2.**.Stroke 1.Color"))
         
-
+        
         self.phoneNoTextField.text = phoneNo
         
         
@@ -113,49 +110,34 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate,AKFViewContro
     
     override func viewWillAppear(_ animated: Bool) {
         
-       
+        
     }
     
-    func prepareFBLoginViewController(loginViewController: AKFViewController) {
-        
-        loginViewController.delegate = self
-        
-        loginViewController.whitelistedCountryCodes = ["BD"]
-        
-        // Optionally, you may set up backup verification methods.
-        loginViewController.enableSendToFacebook = true
-        loginViewController.enableGetACall = true
-        
-        //UI Theming - Optional
-        loginViewController.uiManager = AKFSkinManager(skinType: .classic, primaryColor: UIColor.init(named: "GreenHighlight"))
-        
-        
-    }
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//
-//        if textField == confirmPassTextField {
-//
-//            if confirmPassTextField.text != passWordTextField.text{
-//
-//                showConfimationAlert("Password are not same")
-//            }
-//        }
-//    }
+    //    func textFieldDidEndEditing(_ textField: UITextField) {
+    //
+    //        if textField == confirmPassTextField {
+    //
+    //            if confirmPassTextField.text != passWordTextField.text{
+    //
+    //                showConfimationAlert("Password are not same")
+    //            }
+    //        }
+    //    }
     
     @IBAction func termsSelectionButtonAction(_ sender: UIButton) {
         
-       
+        
         sender.isSelected = !sender.isSelected
         
-//        if sender.isSelected{
-//
-//            signUpButton.setBackgroundColor(UIColor.init(named: "GreenHighlight")!, for: UIControl.State.normal)
-//            signUpButton.isUserInteractionEnabled = true
-//
-//        }else{
-//            signUpButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
-//            signUpButton.isUserInteractionEnabled = false
-//        }
+        //        if sender.isSelected{
+        //
+        //            signUpButton.setBackgroundColor(UIColor.init(named: "GreenHighlight")!, for: UIControl.State.normal)
+        //            signUpButton.isUserInteractionEnabled = true
+        //
+        //        }else{
+        //            signUpButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
+        //            signUpButton.isUserInteractionEnabled = false
+        //        }
     }
     
     
@@ -173,125 +155,88 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate,AKFViewContro
                 print("open safari")
             }
         }
-
+        
     }
     
     
     
     @IBAction func verifyButtonAction(_ sender: Any) {
         
-        let vc = (_accountKit?.viewControllerForPhoneLogin(with: nil, state: nil))!
-        vc.enableSendToFacebook = true
-        self.prepareFBLoginViewController(loginViewController: vc)
-        self.present(vc as UIViewController, animated: true, completion: nil)
-
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        
+        self.navigationController?.pushViewController(popupVC!, animated: true)
     }
     
     
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        
-        print("did complete login with access token \(accessToken.tokenString) state \(String(describing: state))")
-        
-        print("Login successful")
-        
-        _accountKit.requestAccount{
-            (account, error) -> Void in
-            if let phoneNumber = account?.phoneNumber{
-                
-                print("phone number..........",phoneNumber.phoneNumber)
-                
-              self.phoneNoTextField.text = phoneNumber.phoneNumber
-                
-            }
-            
-        }
-
-        
-    }
-    
-    
-    
-    
-    
-    //handle a failed
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
-        // ... implement appropriate error handling ...
-        print("\(String(describing: viewController)) did fail with error: \(error.localizedDescription)")
-    }
-    
-    //or canceled login
-    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
-        // ... handle user cancellation of the login process ...
-    }
     
     
     @IBAction func signUpButtonAction(_ sender: Any) {
         
         if thikButton.isSelected{
             
-        let vmsg = ValidationManager.manager.validateRegisterForm(userName: nameTextField.text!, email: emailTextField.text!, password:passWordTextField.text!,phone:phoneNoTextField.text!)
-        
-        if !vmsg.isEmpty{
-            showConfimationAlert(vmsg)
-            return
-        }
-        
-        if confirmPassTextField.text != passWordTextField.text{
+            let vmsg = ValidationManager.manager.validateRegisterForm(userName: nameTextField.text!, email: emailTextField.text!, password:passWordTextField.text!,phone:phoneNoTextField.text!)
             
-            showConfimationAlert("Password are not same")
-            
-            return
-        }
-        
-        let phn = String.init(format: "+880%@", self.phoneNoTextField.text!)
-            
-        print("..................",phn)
-            
-        APIManager.manager.signup(phone: phn, userName: self.nameTextField.text!,email:self.emailTextField.text!,password: self.passWordTextField.text!,code: self.referralTextField.text!) { (status, token, msg) in
-
-            print("...........",status,msg ?? "no msg")
-
-            if token != nil {
-//                self.showStatus(status, msg: msg)
-
-                AppSessionManager.shared.authToken = token
-                AppSessionManager.shared.save()
-
-                APIManager.manager.getUserOffer(completion: { (status,isOffer,offerMsg,msg) in
-
-                    if status{
-
-                        self.welcomeDetailLabel.attributedText = offerMsg?.htmlToAttributedString
-                        self.animationContainerView.isHidden = false
-                        //  self.welcomeDetailLabel.text = String.init(format:"%@",offerMsg!)
-
-                        self.animationView.play(fromProgress: 0,
-                                                toProgress: 1,
-                                                loopMode: LottieLoopMode.repeat(5.0),
-                                                completion: { (finished) in
-
-                                                    print("animationView.play............")
-                                                    if finished {
-                                                        print("Animation Complete")
-                                                    } else {
-                                                        print("Animation cancelled")
-                                                    }
-                        })
-
-
-                    }else{
-
-                        print("................",msg)
-                    }
-
-                })
-
+            if !vmsg.isEmpty{
+                showConfimationAlert(vmsg)
+                return
             }
-            else{
-                self.view.makeToast("Phone number or email has already been taken".localized)
+            
+            if confirmPassTextField.text != passWordTextField.text{
+                
+                showConfimationAlert("Password are not same")
+                
+                return
             }
-
-         }
+            
+            let phn = String.init(format: "+88%@", self.phoneNoTextField.text!)
+            
+            print("..................",phn)
+            
+            APIManager.manager.signup(phone: phn, userName: self.nameTextField.text!,email:self.emailTextField.text!,password: self.passWordTextField.text!,code: self.referralTextField.text!) { (status, token, msg) in
+                
+                print("...........",status,msg ?? "no msg")
+                
+                if token != nil {
+                    //                self.showStatus(status, msg: msg)
+                    
+                    AppSessionManager.shared.authToken = token
+                    AppSessionManager.shared.save()
+                    
+                    APIManager.manager.getUserOffer(completion: { (status,isOffer,offerMsg,msg) in
+                        
+                        if status{
+                            
+                            self.welcomeDetailLabel.attributedText = offerMsg?.htmlToAttributedString
+                            self.animationContainerView.isHidden = false
+                            //  self.welcomeDetailLabel.text = String.init(format:"%@",offerMsg!)
+                            
+                            self.animationView.play(fromProgress: 0,
+                                                    toProgress: 1,
+                                                    loopMode: LottieLoopMode.repeat(5.0),
+                                                    completion: { (finished) in
+                                                        
+                                                        print("animationView.play............")
+                                                        if finished {
+                                                            print("Animation Complete")
+                                                        } else {
+                                                            print("Animation cancelled")
+                                                        }
+                            })
+                            
+                            
+                        }else{
+                            
+                            print("................",msg)
+                        }
+                        
+                    })
+                    
+                }
+                else{
+                    self.view.makeToast("Phone number or email has already been taken".localized)
+                }
+                
+            }
             
         }else{
             
@@ -304,18 +249,18 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate,AKFViewContro
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-
+    
     @IBAction func loginButtonAction(_ sender: Any) {
         
         let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
         
-//        popupVC?.modalPresentationStyle = .overCurrentContext
-//        popupVC?.modalTransitionStyle = .crossDissolve
-//
-//        self.present(popupVC!, animated: true) {
-//
-//
-//        }
+        //        popupVC?.modalPresentationStyle = .overCurrentContext
+        //        popupVC?.modalTransitionStyle = .crossDissolve
+        //
+        //        self.present(popupVC!, animated: true) {
+        //
+        //
+        //        }
         self.navigationController?.pushViewController(popupVC!, animated: false)
         
     }
@@ -325,6 +270,8 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate,AKFViewContro
 
 extension String {
     var htmlToAttributedString: NSAttributedString? {
+        
+        
         guard let data = data(using: .utf8) else { return NSAttributedString() }
         do {
             return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
