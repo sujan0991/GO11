@@ -11,6 +11,9 @@ import Bond
 
 protocol NavigationBarDelegate: class {
     func backButtonAction()
+    func languageButtonAction()
+//    func gameSelectAction(isSelected:Bool)
+//    func announcementButtonAction()
 }
 
 class CustomNavigationBar: UIView {
@@ -25,7 +28,15 @@ class CustomNavigationBar: UIView {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var logoImageView: UIImageView!
     
- //   let viewModel = CustomNavigationBarViewModel.init()
+    @IBOutlet weak var languageButton: UIButton!
+    
+    @IBOutlet weak var gameSelectButton: UIButton!
+    
+    @IBOutlet weak var announcementButton: UIButton!
+    @IBOutlet weak var countLabel: UILabel!
+    
+    
+    //   let viewModel = CustomNavigationBarViewModel.init()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,12 +56,29 @@ class CustomNavigationBar: UIView {
 //        headerLabel.textColor = viewModel.colors.navBarText
         self.addSubview(containerView)
         containerView.frame = self.bounds
+        
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
+            gameSelectButton.isSelected = false
+            
+        }else{
+            
+            gameSelectButton.isSelected = true
+        }
+        
+        
+        countLabel.makeCircular(borderWidth: 1, borderColor: UIColor.white )
     }
 
     // public methods
     public func activateBtn(navBarTitle: String,
                             isBackBtnVisible visible: Bool,
+                            isLanguageBtnVisible lnVisible: Bool,
+                            isGameSelectBtnVisible isGameBtnVisible: Bool,
+                            isAnnouncementBtnVisible isAnnounceBtnVisible: Bool,
+                            isCountLabelVisible isCountLbVisible: Bool,
                             onBtnPressed callback: @escaping(UIButton) -> Void) {
+        
         headerLabel.text = navBarTitle
         
         if navBarTitle.count == 0
@@ -67,10 +95,74 @@ class CustomNavigationBar: UIView {
                 callback(self.backBtn)
             }
         } else {
+            
             backBtn.isHidden = true
             
         }
+        
+        if lnVisible {
+            
+            languageButton.isHidden = false
+            
+        } else {
+            languageButton.isHidden = true
+            
+        }
+        
+        if isGameBtnVisible {
+            gameSelectButton.isHidden = false
+            
+        }else{
+            gameSelectButton.isHidden = true
+         
+
+        }
+        if isAnnounceBtnVisible {
+            
+            announcementButton.isHidden = false
+        }else{
+            
+            announcementButton.isHidden = true
+            
+        }
+        
+        if isCountLbVisible {
+            
+            countLabel.isHidden = false
+            
+        }else{
+            
+            countLabel.isHidden = true
+            
+        }
+
     }
+    
+    public func announcement(count: Int){
+        
+        countLabel.text = "\(count)"
+        countLabel.isHidden = false
+    }
+    
+    @IBAction func languageButtonAction(_ sender: Any) {
+        
+        delegate?.languageButtonAction()
+    }
+    
+//    @IBAction func gameSelectButtonAction(_ sender: UIButton) {
+//
+//        sender.isSelected = !sender.isSelected
+//
+//        delegate?.gameSelectAction(isSelected:sender.isSelected)
+//    }
+//
+//
+//    @IBAction func announcementButtonAction(_ sender: Any) {
+//
+//        delegate?.announcementButtonAction()
+//    }
+    
+    
     
     @IBAction func backButtonAction(_ sender: Any) {
        

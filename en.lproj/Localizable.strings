@@ -1,0 +1,328 @@
+/* 
+  Localizable.strings
+  GameOf11
+
+  Created by Md.Ballal Hossen on 30/8/19.
+  Copyright © 2019 Tanvir Palash. All rights reserved.
+*/
+
+"1" = "1";
+"2" = "2";
+"3" = "3";
+"4" = "4";
+"5" = "5";
+"6" = "6";
+"7" = "7";
+"8" = "8";
+"9" = "9";
+"0" = "0";
+
+"Home" = "Home";
+"My Contest" = "My Contest";
+"Profile" = "Profile";
+"More" = "More";
+
+
+"Login" = "Login";
+"LOGIN" = "LOGIN";
+"Logout" = "Logout";
+"Sign Up" = "Sign Up";
+"SIGN UP" = "SIGN UP";
+"Name" = "Name";
+"Email Address" = "Email Address";
+"Password" = "Password";
+"Confirm Password" = "Confirm Password";
+"Referral Code (Optional)" = "Referral Code (Optional)";
+"Phone Number" = "Phone Number";
+"Please fill phone number" = "Please fill phone number";
+"Please fill out your name" = "Please fill out your name";
+"Please fill password" = "Please fill password";
+"Please confirm your password" = "Please confirm your password";
+"Confirm password didn\'t match!" = "Confirm password didn\'t match!";
+"Password should at least 6 characters" = "Password should at least 6 characters";
+"Name cannot contain special character/number" = "Name cannot contain special character/number";
+
+"Verify Mobile Number" = "Verify Mobile Number";
+"Already have account?" ="Already have account?";
+
+"Phone Number" = "Phone Number";
+"Forgot Password?" = "Forgot Password?";
+"Don't have any account?" = "Don't have any account?";
+"Request to reset password" = "Request to reset password";
+
+"FORGOT PASSWORD" ="FORGOT PASSWORD";
+
+"Please write your GO11 registered email address to get generated password. You will be using it while Logging into GO11." = "Please write your GO11 registered email address to get generated password. You will be using it while Logging into GO11.";
+
+"You are not logged in. You have to Login or Sign Up to perform your desired action." = "You are not logged in. You have to Login or Sign Up to perform your desired action.";
+
+
+"SELECT A MATCH" = "SELECT A MATCH";
+
+"Change Language" = "Change Language";
+"%@ Left" = "%@ Left";
+
+"CONTESTS" = "CONTESTS";
+"Total Prize" = "Total Prize";
+"Entry %d" = "Entry %d";
+"Entry %@" = "Entry %@";
+"Entry Free" = "Entry Free";
+"Total %@ Winners" = "Total %@ Winners";
+"%@ Team Joined" = "%@ Team Joined";
+"%@ Spots Left" = "%@ Spots Left";
+"JOIN" = "JOIN";
+
+
+"CREATED TEAMS" = "CREATED TEAMS";
+"JOINED CONTESTS" = "JOINED CONTESTS";
+
+"You have to Login or Sign Up to join any contest. Before joining contests you can create your own Fantasy Team. Please Login or Sign Up to prove your skill." = "You have to Login or Sign Up to join any contest. Before joining contests you can create your own Fantasy Team. Please Login or Sign Up to prove your skill";
+"You have to Login to view your own wallet. Please Login or Sign Up to prove your skill." = "You have to Login to view your own wallet. Please Login or Sign Up to prove your skill.";
+
+"TOTAL BALANCE" = "TOTAL BALANCE";
+"Total Coins" = "Total Coins";
+"Total Winnings" = "Total Winnings";
+"ADD MORE COINS" = "ADD MORE COINS";
+
+"CREATE YOUR TEAM" = "CREATE YOUR TEAM";
+
+"We provide upcoming match schedule based on your preferences. No upcoming match of that priority is available now." = "We provide upcoming match schedule based on your preferences. No upcoming match of that priority is available now.";
+"You haven't join any upcoming contests. Join the upcoming match contests and prove your skills." = "You haven't join any upcoming contests. Join the upcoming match contests and prove your skills.";
+"You haven't join any live contests. Join the upcoming match contests and prove your skills." = "You haven't join any live contests. Join the upcoming match contests and prove your skills.";
+"You haven't joined this contest. You can see details of this Contest and LeaderBoard after joining this Contest before Match begins." = "You haven't joined this contest. You can see details of this Contest and LeaderBoard after joining this Contest before Match begins.";
+
+"Max 7 Players From a Team" ="Max 7 Players From a Team";
+"Players" = "Players";
+"PLAYERS" = "PLAYERS";
+"CREDITS" = "CREDITS";
+"Credits Left" = "Credits Left";
+"Pick 1-4 Wicket-Keepers" = "Pick 1-4 Wicket-Keepers";
+"Pick 3-6 Batsmen" = "Pick 3-6 Batsmen";
+"Pick 1-4 All-Rounders" = "Pick 1-4 All-Rounders";
+"Pick 3-6 Bowlers" = "Pick 3-6 Bowlers";
+"(%d)" = "(%d)";
+
+"Your squad can not cross 11 players" = "Your squad can not cross 11 players";
+"Total credit value can not be greater than 100" = "Total credit value can not be greater than 100";
+"Not more than 6 Batsmen" = "Not more than 6 Batsmen";
+"Not more than 4 All Rounders" = "Not more than 4 All Rounders";
+"Not more than 6 Bowlers" = "Not more than 6 Bowlers";
+"Not more than 4 Wicket Keeper" = "Not more than 4 Wicket Keeper";
+"Not more than 7 players from any team" = "Not more than 7 players from any team";
+"Minimum 1 All Rounder" = "Minimum 1 All Rounder";
+"Minimum 3 Bowlers" = "Minimum 3 Bowlers";
+"Minimum 3 Batsmen" = "Minimum 3 Batsmen";
+"Minimum 1 Wicket Keeper" = "Minimum 1 Wicket Keeper";
+
+"Preview Team" = "Preview Team";
+"Continue" = "Continue";
+
+"CHOOSE CAPTAIN (C) & VICE CAPTAIN (VC)" = "CHOOSE CAPTAIN (C) & VICE CAPTAIN (VC)";
+"Your Captain gets 2x points & Vice Captain gets 1.5x points" = "Your Captain gets 2x points & Vice Captain gets 1.5x points";
+"You Must Select a Captain" = "You Must Select a Captain";
+"You Must Select a Vice Captain" = "You Must Select a Vice Captain";
+"Please provide a name for your team" = "Please provide a name for your team";
+"Your Team Name" = "Your Team Name";
+
+"CONFIRMATION" = "CONFIRMATION";
+"Your total coins = %@" = "Your total coins = %@";
+
+"To Pay" = "To Pay";
+"Entry" = "Entry";
+"Apply Free Contest" = "Apply Free Contest";
+"JOIN CONTEST" ="JOIN CONTEST";
+"You don't have enough coins" = "You don't have enough coins";
+"BUY COINS" = "BUY COINS";
+"1 BDT" = "1 BDT";
+"= 50" = "= 50";
+"Available free contests = %@" = "Available free contests = %@";
+
+"SELECT YOUR TEAM" = "SELECT YOUR TEAM";
+"CAPTAIN" = "CAPTAIN";
+"VICE-CAPTAIN" = "VICE-CAPTAIN";
+"CHOOSE TEAM" = "CHOOSE TEAM";
+
+
+"Total Joined Contest" = "Total Joined Contest";
+"COMPLETED" = "COMPLETED";
+"IN PROGRESS" = "IN PROGRESS";
+"MY CONTESTS" = "MY CONTESTS";
+"SELECT A MATCH" = "SELECT A MATCH";
+
+"MY TEAMS" = "MY TEAMS";
+"Create Another Team" = "Create Another Team";
+"TEAM PREVIEW" = "TEAM PREVIEW";
+"Batsman"  = "Batsman";
+"All rounders" = "All rounders";
+"Bowlers" = "Bowlers";
+"Wicket Keeper" = "Wicket Keeper";
+
+"Maximum 24 Character" = "Maximum 24 Character";
+"Save Your Team" = "Save Your Team";
+
+"Your available  free contests = %@" = "Your available  free contests = %@";
+"Account Info" = "Account Info";
+"Deposited Coins" = "Deposited Coins";
+"Winning Amount" = "Winning Amount";
+"Pending Withdraw" = "Pending Withdraw";
+
+"ADD COINS" = "ADD COINS";
+"WITHDRAW PRIZE" = "WITHDRAW PRIZE";
+"REDEEM COINS" = "REDEEM COINS";
+"REFER TO A FRIEND" = "REFER TO A FRIEND";
+
+"Playing History" = "Playing History";
+"Contests" = "Contests";
+"Top Rank" = "Top Rank";
+"Matches" = "Matches";
+
+"Personal Details" = "Personal Details";
+"Full Profile" = "Full Profile";
+"Verify Your Profile!" = "Verify Your Profile!";
+"Verified Profile" = "Verified Profile";
+"Profile Verification Pending!" = "Profile Verification Pending!";
+
+"Logout" = "Logout";
+
+
+"Share your referral code with your friends and get your offer" = "Share your referral code with your friends and get your offer";
+"Share Your Code" = "Share Your Code";
+"How it Works?" = "How it Works?";
+"STEP 01" = "STEP 01";
+"Share your referral code with your friends. Encourage to use your code when signing up in GO11." = "Share your referral code with your friends. Encourage to use your code when signing up in GO11.";
+"STEP 02" = "STEP 02";
+"MY REFERRALS" = "MY REFERRALS";
+
+"VERIFY YOUR PROFILE" = "VERIFY YOUR PROFILE";
+"To verify your profile, you need to provide any one of these mentioned Govt. issued ID i.e. NID, Driving License, Passport, Birth Certificate.You need to upload the photo of both the front and back side of the ID. For Passport you can upload the main page and address page in a single image." = "To verify your profile, you need to provide any one of these mentioned Govt. issued ID i.e. NID, Driving License, Passport, Birth Certificate.You need to upload the photo of both the front and back side of the ID. For Passport you can upload the main page and address page in a single image.";
+"SELECT IMAGE" = "SELECT IMAGE";
+"Front Side Image" = "Front Side Image";
+"Back Side Image" = "Back Side Image";
+"Please upload one image at least!" = "Please upload one image at least!";
+
+"1 BDT = 50 Coins" = "1 BDT = 50 Coins";
+"You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT." = "You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT.";
+"Write amount in BDT to buy Coins" = "Write amount in BDT to buy Coins";
+"Available Coin Packs" = "Available Coin Packs";
+"Payment Methods" = "Payment Methods";
+"bKash Digital Payment" = "bKash Digital Payment";
+"Credit/Debit Cards/Mobile\nBanking/Online Banking" = "Credit/Debit Cards/Mobile\nBanking/Online Banking";
+"PAY NOW" = "PAY NOW";
+
+"PERSONAL DETAILS" = "PERSONAL DETAILS";
+"Name" = "Name";
+"Email Address" = "Email Address";
+"Phone Number" = "Phone Number";
+"Password" = "Password";
+"Old Password" = "Old Password";
+"New Password" = "New Password";
+"Cancel" = "Cancel";
+"Change" = "Change";
+"Change Password" = "Change Password";
+"Date of Birth" = "Date of Birth";
+"Male" = "Male";
+"Female" = "Female";
+"Mailing Address" = "Mailing Address";
+"City" = "City";
+"Zipcode" = "Zipcode";
+"UPDATE PROFILE" = "UPDATE PROFILE";
+
+"REDEEM COIN" = "REDEEM COIN";
+"Amount in BDT" = "Amount in BDT";
+"Redeem Coins" = "Redeem Coins";
+"Use cash to redeem coins instantly!" = "Use cash to redeem coins instantly!";
+"The amount in BDT you would mention here will add the equivalent amount of coins in your profile." = "The amount in BDT you would mention here will add the equivalent amount of coins in your profile.";
+
+
+"WITHDRAW REQUEST" = "WITHDRAW REQUEST";
+"Personal bKash phone number" = "Personal bKash phone number";
+"Send Withdraw Request" = "Send Withdraw Request";
+"Cash-Withdrawl!" = "Cash-Withdrawl!";
+"The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT." = "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT.";
+"Personal Bkash number is needed while withdrawing the money." = "Personal Bkash number is needed while withdrawing the money.";
+
+"COIN PURCHASE" = "COIN PURCHASE";
+"Payment successfull" = "Payment successfull";
+
+"SELECT YOUR AVATAR" = "SELECT YOUR AVATAR";
+"UPDATE AVATAR" = "UPDATE AVATAR";
+
+"YOUR FEEDBACK" = "YOUR FEEDBACK";
+"Write your feedback message" ="Write your feedback message";
+"Send Your Feedback" = "Send Your Feedback";
+
+"MORE" = "MORE";
+"How to Play" = "How to Play";
+"FAQs" = "FAQs";
+"Team Select & Scoring" = "Team Select & Scoring";
+"Terms & Conditions" = "Terms & Conditions";
+"Privacy Policy" ="Privacy Policy";
+"About Us" = "About Us";
+"Watch How To Play" = "Watch How To Play";
+"Write Your Feedback" = "Write Your Feedback";
+"Change Language" = "Change Language";
+
+"TEAM SELECT & SCORING" = "TEAM SELECT & SCORING";
+
+"CONTEST LEADERBOARD" = "CONTEST LEADERBOARD";
+"The result will be published when the match ends!" = "The result will be published when the match ends!";
+"RANK" = "RANK";
+"POINTS" = "POINTS";
+"ALL PLAYERS RANK & POINTS" = "ALL PLAYERS RANK & POINTS";
+
+
+"POINTS BREAKDOWN" = "POINTS BREAKDOWN";
+"PLAYER INFO" = "PLAYER INFO";
+
+"Total Points" = "Total Points";
+"     Events" = "     Events";
+"  Earned Points" = "  Earned Points";
+" Points" = " Points";
+"Some criteria of player points breakdown is not listed here to avoid calculation complexity. You can check the full scoring point system by clicking top right 'Question Mark' icon." = "Some criteria of player points breakdown is not listed here to avoid calculation complexity. You can check the full scoring point system by clicking top right 'Question Mark' icon.";
+
+
+"Your Profile Is Blocked!" = "Your Profile Is Blocked!";
+"Your profile has been blocked! To know about reason of blocking or to resolve the matter please message to our facebook page https://www.facebook.com/gameof11/ . GO11 support team will guide you for further procedure." = "Your profile has been blocked! To know about reason of blocking or to resolve the matter please message to our facebook page https://www.facebook.com/gameof11/ . GO11 support team will guide you for further procedure.";
+
+"Something went wrong! Please try again" = "Something went wrong! Please try again";
+
+"Your payment to buy Coins was Successful. Now please choose from your created Teams and join contest" = "Your payment to buy Coins was Successful. Now please choose from your created Teams and join contest";
+"Your payment to buy Coins was Successful." = "Your payment to buy Coins was Successful.";
+
+"Please verify your profile first to withdraw your winnings" = "Please verify your profile first to withdraw your winnings";
+
+"Contest joining time not ended yet. After ending contest joining time you will be able to see other participant's player info with total points earned" = "Contest joining time not ended yet. After ending contest joining time you will be able to see other participant's player info with total points earned";
+
+"Each player's detailed points breakdown will be available when the match is completed and the completion of reviewing and updating individual players point calculation via our web server" = "Each player's detailed points breakdown will be available when the match is completed and the completion of reviewing and updating individual players point calculation via our web server";
+
+"Do you really want to exit? Your fantasy team changes will be discarded." = "Do you really want to exit? Your fantasy team changes will be discarded.";
+
+"You do not have enough money to redeem" = "You do not have enough money to redeem";
+"You do not have enough money to withdraw." = "You do not have enough money to withdraw.";
+
+"New update is available." = "New update is available.";
+
+
+"Pick 1 Goal-Keeper" = "Pick 1 Goal-Keeper";
+"Pick 3-5 Defenders" = "Pick 3-5 Defenders";
+"Pick 3-5 Midfielders" = "Pick 3-5 Midfielders";
+"Pick 1-3 Strikers"  = "Pick 1-3 Strikers";
+
+"Not more than 5 Defenders" = "Not more than 5 Defenders";
+"Minimum 3 Midfielders" = "Minimum 3 Midfielders";
+"Minimum 1 Striker" = "Minimum 1 Striker";
+"Minimum 1 Goal Keeper" = "Minimum 1 Goal Keeper";
+"Not more than 1 Goal Keeper" = "Not more than 1 Goal Keeper";
+"Minimum 3 Defenders" = "Minimum 3 Defenders";
+"Not more than 5 Midfielders" = "Not more than 5 Midfielders";
+"Not more than 3 Strikers" = "Not more than 3 Strikers";
+
+
+
+"COINS LOG" = "COINS LOG";
+
+"PROMO CODE" = "PROMO CODE";
+"ANNOUNCEMENTS" = "ANNOUNCEMENTS";
+"Enter your promo code" = "Enter your promo code";
+"Apply Promo Code" = "Apply Promo Code";
+"Promo Code"= "Promo Code";

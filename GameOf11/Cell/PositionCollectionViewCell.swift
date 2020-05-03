@@ -16,8 +16,12 @@ class PositionCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            self.positionIcon.tintColor = isSelected ? UIColor.init(named: "GreenHighlight") : UIColor.init(named: "HighlightGrey")
+            print("selected...............")
+//            self.positionIcon.tintColor = isSelected ? UIColor.init(named: "on_green") : UIColor.init(named: "HighlightGrey")
            
+//            positionTitle.textColor = UIColor.init(named: "dark_to_white")
+//            playerCount.textColor = UIColor.init(named: "dark_to_white")
+
         }
     }
     

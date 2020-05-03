@@ -46,9 +46,9 @@ extension Date {
         if years(from: date)   > 0 { return "\(years(from: date)) años"   }
         if months(from: date)  > 0 { return "\(months(from: date)) meses"  }
         if weeks(from: date)   > 0 { return "\(weeks(from: date)) semanas"   }
-        if days(from: date)    > 0 { return "\(days(from: date)) días"    }
-        if hours(from: date)   > 0 { return "\(hours(from: date)) horas"   }
-        if minutes(from: date) > 0 { return "\(minutes(from: date)) minutos" }
+        if days(from: date)    > 0 { return "\(days(from: date)) D"    }
+        if hours(from: date)   > 0 { return "\(hours(from: date)) H"   }
+        if minutes(from: date) > 0 { return "\(minutes(from: date)) M" }
         if seconds(from: date) > 0 { return "\(seconds(from: date)) segundos" }
         return ""
     }
@@ -60,7 +60,7 @@ extension Date {
         //Specify Format of String to Parse
         dateFormatter.dateFormat = format
         
-       // dateFormatter.dateStyle = .medium
+        // dateFormatter.dateStyle = .medium
         
         //Parse into NSDate
         let dateFromString : String = dateFormatter.string(from: self)
@@ -74,9 +74,9 @@ extension Date {
         let dateFormatter = DateFormatter()
         
         //Specify Format of String to Parse
-       // dateFormatter.dateFormat = "dd/MM/YYYY"
+        // dateFormatter.dateFormat = "dd/MM/YYYY"
         dateFormatter.dateFormat = "MM/dd/YYYY"
-
+        
         
         // dateFormatter.dateStyle = .MediumStyle
         
@@ -224,7 +224,7 @@ extension String {
         //Return Parsed Date
         let df = DateFormatter()
         df.dateFormat = "EEEE: MMM dd, yyyy"
-       // df.dateStyle = dateStyle
+        // df.dateStyle = dateStyle
         df.locale = Locale(identifier: "pt")
         
         let strDate = df.string(from: dateFromString)
@@ -245,13 +245,48 @@ extension String {
         //Return Parsed Date
         return dateFromString
     }
+    
+    func getElapsedInterval() -> String {
+        
+        //Create Date Formatter
+        let dateFormatter = DateFormatter()
+        
+        //Specify Format of String to Parse
+        //   dateFormatter.dateFormat = format
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        //Parse into NSDate
+        
+        let dateFromString :Date = dateFormatter.date(from: self)!
+        
+        let calendar = Calendar.current
+        
+        
+        let interval = calendar.dateComponents([.day, .hour, .minute,], from: dateFromString, to: Date())
+        
+        if let year = interval.year, year > 0 {
+            return year == 1 ? "\(year)" + " " + "year ago" :
+                "\(year)" + " " + "years ago"
+        } else if let month = interval.month, month > 0 {
+            return month == 1 ? "\(month)" + " " + "month ago" :
+                "\(month)" + " " + "months ago"
+        } else if let day = interval.day, day > 0 {
+            return day == 1 ? "\(day)" + " " + "day ago" :
+                "\(day)" + " " + "days ago"
+        } else {
+            return "Today"
+            
+        }
+        
+    }
+    
     func serverTimetoDateString() -> String
     {
         //Create Date Formatter
         let dateFormatter = DateFormatter()
         
         //Specify Format of String to Parse
-     //   dateFormatter.dateFormat = format
+        //   dateFormatter.dateFormat = format
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         //Parse into NSDate
@@ -259,11 +294,97 @@ extension String {
         let dateFromString :Date = dateFormatter.date(from: self)!
         //Return Parsed Date
         let df = DateFormatter()
-        df.dateFormat = "dd MMM yyyy"
-        // df.dateStyle = dateStyle
+        df.dateFormat = "HH:mm:ss"
         
-        let strDate = df.string(from: dateFromString)
-        return strDate
+        // df.dateStyle = dateStyle
+        let currentDate = Date()
+        let calendar = Calendar.current
+        var countdown = ""
+        
+        let diffDateComponents = calendar.dateComponents([.day, .hour, .minute,], from: currentDate, to: dateFromString)
+        
+        
+        
+        if dateFromString < currentDate  {
+            
+            return "CONTEST JOIN ENDED"
+            
+        }else{
+            
+            
+            print("Language.language in serverTimetoDateString......",Language.language)
+            
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .none
+            formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
+            
+            
+            if diffDateComponents.day! != 0{
+                
+                if diffDateComponents.day! >= 1{
+                    
+                    if Language.language == Language.english{
+                        
+                        countdown = "\(String(describing: diffDateComponents.day!)) day"
+                        
+                    }else{
+                        
+                        
+                        let bnNumberString = formatter.string(for: diffDateComponents.day!)
+                        
+                        countdown = "\(String(describing: bnNumberString!)) দিন"
+                    }
+                }
+                
+                //                countdown = "\(String(describing: diffDateComponents.day!))d \(String(describing: diffDateComponents.hour!))h \(String(describing: diffDateComponents.minute!))m"
+                
+            }else{
+                
+                if diffDateComponents.hour! != 0{
+                    
+                    if diffDateComponents.hour! >= 10{
+                        
+                        if Language.language == Language.english{
+                            
+                            countdown = "\(String(describing: diffDateComponents.hour!)) hours"
+                        }else{
+                            
+                            let bnNumberString = formatter.string(for: diffDateComponents.hour!)
+                            countdown = "\(String(describing: bnNumberString!)) ঘণ্টা"
+                        }
+                    }else{
+                        
+                        if Language.language == Language.english{
+                            
+                            countdown = "\(String(describing: diffDateComponents.hour!))h \((String(describing: diffDateComponents.minute!))) mins"
+                        }else{
+                            
+                            let bnNumberString = formatter.string(for: diffDateComponents.hour!)
+                            let bnNumberStringMin = formatter.string(for: diffDateComponents.minute!)
+                            
+                            countdown = "\(String(describing: bnNumberString!)) ঘ: \((String(describing: bnNumberStringMin!))) মিনিট"
+                        }
+                    }
+                    
+                }else{
+                    
+                    if Language.language == Language.english{
+                        countdown = "\(String(describing: diffDateComponents.minute!)) mins"
+                    }else{
+                        
+                        let bnNumberStringMin = formatter.string(for: diffDateComponents.minute!)
+                        
+                        countdown = "\((String(describing: bnNumberStringMin!))) মিনিট"
+                    }
+                }
+                
+            }
+            // let strDate = df.string(from: dateFromString)
+            
+            return countdown
+            
+        }
+        
     }
     func asURL()->URL? {
         if let url = URL(string: self) {
@@ -315,6 +436,8 @@ extension String {
         return self.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: " ").inverted)
     }
     
+    
+    
 }
 
 extension UIColor {
@@ -347,12 +470,12 @@ extension UIButton{
             }
         }
     }
-    func decorateButtonRound() {
-        self.layer.cornerRadius = 15
-        self.clipsToBounds = true
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.gray.cgColor
-    }
+    //    func decorateButtonRound() {
+    //        self.layer.cornerRadius = 15
+    //        self.clipsToBounds = true
+    //        self.layer.borderWidth = 0.5
+    //        self.layer.borderColor = UIColor.gray.cgColor
+    //    }
     
     func decorateButtonCardAndRound() {
         self.layer.cornerRadius = 15
@@ -361,19 +484,19 @@ extension UIButton{
         self.layer.borderColor = UIColor.gray.cgColor
     }
     
-    func decorateButtonRound(_ cornerRadius: Int) {
-        self.layer.cornerRadius = CGFloat(cornerRadius)
-        self.clipsToBounds = true
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.gray.cgColor
-    }
+    //    func decorateButtonRound(_ cornerRadius: Int) {
+    //        self.layer.cornerRadius = CGFloat(cornerRadius)
+    //        self.clipsToBounds = true
+    //        self.layer.borderWidth = 1
+    //        self.layer.borderColor = UIColor.gray.cgColor
+    //    }
     
-    func decorateButtonRound(_ cornerRadius: Int, borderWidth: CGFloat) {
-        self.layer.cornerRadius = CGFloat(cornerRadius)
-        self.clipsToBounds = true
-        self.layer.borderWidth = borderWidth
-        self.layer.borderColor = UIColor.gray.cgColor
-    }
+    //    func decorateButtonRound(_ cornerRadius: Int, borderWidth: CGFloat) {
+    //        self.layer.cornerRadius = CGFloat(cornerRadius)
+    //        self.clipsToBounds = true
+    //        self.layer.borderWidth = borderWidth
+    //        self.layer.borderColor = UIColor.gray.cgColor
+    //    }
     
     func decorateButton() {
         self.layer.borderWidth = 0.5
@@ -394,20 +517,47 @@ extension UIButton{
         self.layer.borderColor = UIColor(borderColor).cgColor
         
     }
+    
+    func buttonRound(_ cornerRadius: Int, borderWidth: CGFloat ,borderColor: UIColor) {
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+        self.clipsToBounds = true
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor.cgColor
+        
+    }
 
+    
+    private func image(withColor color: UIColor) -> UIImage? {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
+    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
+        self.setBackgroundImage(image(withColor: color), for: state)
+    }
+    
 }
 /*
-extension UITextField{
-    @IBInspectable var placeHolderColor: UIColor? {
-        get {
-            return self.placeHolderColor
-        }
-        set {
-            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSForegroundColorAttributeName: newValue!])
-        }
-    }
-}
-*/
+ extension UITextField{
+ @IBInspectable var placeHolderColor: UIColor? {
+ get {
+ return self.placeHolderColor
+ }
+ set {
+ self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSForegroundColorAttributeName: newValue!])
+ }
+ }
+ }
+ */
 extension UIImage{
     func getImageStr() -> String {
         let imageData:Data = self.jpegData(compressionQuality:0.9)!
@@ -456,6 +606,18 @@ extension UIView {
         self.layer.shadowOpacity = 0.2
     }
     
+    func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = offSet
+        layer.shadowRadius = radius
+        
+        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
     func makeCardRadius_2() {
         self.layer.cornerRadius = 8
         self.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -496,7 +658,7 @@ extension UIView {
                                 cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.path = path.cgPath
-
+        
         self.layer.mask = mask
     }
     
@@ -510,6 +672,18 @@ extension UIView {
     func setAccessibilityIdentifier(usingName name: String) {
         self.accessibilityIdentifier = name
     }
+    
+    func setGradientBackground(colorTop: UIColor, colorBottom: UIColor) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorBottom.cgColor, colorTop.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.locations = [0, 1.2]
+        gradientLayer.frame = bounds
+        
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
 }
 
 extension UITableView {
@@ -522,7 +696,7 @@ extension UITableView {
     }
     
     func removeEmptyCells() {
-         self.tableFooterView = UIView(frame: .zero)
+        self.tableFooterView = UIView(frame: .zero)
     }
 }
 
@@ -654,4 +828,25 @@ extension CALayer {
         }
     }
 }
+
+@IBDesignable class PaddingLabel: UILabel {
+    
+    @IBInspectable var topInset: CGFloat = 5.0
+    @IBInspectable var bottomInset: CGFloat = 5.0
+    @IBInspectable var leftInset: CGFloat = 7.0
+    @IBInspectable var rightInset: CGFloat = 7.0
+    
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: rect.inset(by: insets))
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: size.width + leftInset + rightInset,
+                      height: size.height + topInset + bottomInset)
+    }
+}
+
+
 

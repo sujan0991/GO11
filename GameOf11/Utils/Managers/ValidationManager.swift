@@ -12,16 +12,16 @@ import SVProgressHUD
 
 struct ValidationStr {
     
-    static let  USERNAME_EMPTY_ERROR = "Please enter user name."
+    static let  USERNAME_EMPTY_ERROR = "Please fill out your name".localized
     static let  FULLNAME_EMPTY_ERROR = "Please enter full name."
-    static let  PHONE_EMPTY_ERROR = "Please enter phone number."
+    static let  PHONE_EMPTY_ERROR = "Please fill phone number".localized
     static let  COUNTRY_EMPTY_ERROR = "Please enter country."
     static let  EMAIL_EMPTY_ERROR = "Please enter email address."
     static let  INVALID_EMAIL = "Please enter valid email address."
     static let OTP_EMPTY_ERROR = "Please enter otp."
-    static let  PASSWORD_EMPTY_ERROR = "Please enter password."
-    static let  CONF_PASSWORD_EMPTY_ERROR = "Please enter confirm password."
-    static let PASSWORD_MISMATCH_ERROR = "Password and confirm password does not match."
+    static let  PASSWORD_EMPTY_ERROR = "Please fill password".localized
+    static let  CONF_PASSWORD_EMPTY_ERROR = "Please confirm your password".localized
+    static let PASSWORD_MISMATCH_ERROR = "Confirm password didn\'t match!".localized
     
    // static let  PASSWORD_LENGTH_ERROR = "Please enter password."
     //static let  CONF_PASSWORD_LENGTH_ERROR = "Please enter password."
@@ -73,17 +73,18 @@ class ValidationManager: NSObject {
     }
     
     
-    func validateRegisterForm(userName:String, fullName:String,email:String,password:String,phone:String) -> String {
+    func validateRegisterForm(userName:String, email:String,password:String,phone:String) -> String {
         
         
         var msg: String = ""
+        let characterset = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ")
         
         if userName.isEmpty {
             msg = ValidationStr.USERNAME_EMPTY_ERROR
             return msg
-        }
-        if fullName.isEmpty {
-            msg = ValidationStr.FULLNAME_EMPTY_ERROR
+        }else if userName.rangeOfCharacter(from: characterset.inverted) != nil {
+            
+            msg = "Name cannot contain special character/number".localized
             return msg
         }
         else if email.isEmpty{
@@ -92,6 +93,10 @@ class ValidationManager: NSObject {
         }
         else if password.isEmpty{
             msg = ValidationStr.PASSWORD_EMPTY_ERROR
+            return msg
+        }
+        else if password.count < 6 {
+            msg = "Password should at least 6 characters".localized
             return msg
         }
        
@@ -107,6 +112,26 @@ class ValidationManager: NSObject {
         }
         return msg
     }
+    
+    func validateForgotPass(email:String) -> String {
+        
+        
+        var msg: String = ""
+   
+        if email.isEmpty{
+            msg = ValidationStr.EMAIL_EMPTY_ERROR
+            return msg
+        }
+ 
+        if !email.isEmpty{
+            if !isValidEmail(email){
+                msg = ValidationStr.INVALID_EMAIL
+                return msg
+            }
+        }
+        return msg
+    }
+
     
     func validateEditProfileForm(fullName:String,aboutme:String) -> String {
         
@@ -148,34 +173,34 @@ class ValidationManager: NSObject {
         return msg
     }
     
-    func validateResetPasswordForm(otp:String,password:String,confirmPassword:String) -> String {
+    func validateResetPasswordForm(oldPassword:String,confirmPassword:String) -> String {
         var msg = ""
-        if otp.isEmpty{
-            msg = ValidationStr.OTP_EMPTY_ERROR
-            return msg
-        }
-        if password.isEmpty{
+//        if otp.isEmpty{
+//            msg = ValidationStr.OTP_EMPTY_ERROR
+//            return msg
+//        }
+        if oldPassword.isEmpty{
             msg = ValidationStr.PASSWORD_EMPTY_ERROR
             return msg
         }
-        if password.characters.count < 3 || password.characters.count > 50{
-            msg = "Password must be \(3) to \(50) characters."
-            return msg
-        }
+//        if oldPassword.characters.count < 3 || oldPassword.characters.count > 50{
+//            msg = "Password must be \(3) to \(50) characters."
+//            return msg
+//        }
         if confirmPassword.isEmpty{
             msg = ValidationStr.CONF_PASSWORD_EMPTY_ERROR
 
             return msg
         }
-        if confirmPassword.characters.count < 3 || confirmPassword.characters.count > 50{
-            msg = "Confirm password must be \(3) to \(50) characters."
-
-            return msg
-        }
-        if password != confirmPassword{
-            msg = ValidationStr.PASSWORD_MISMATCH_ERROR
-         return msg
-        }
+//        if confirmPassword.characters.count < 3 || confirmPassword.characters.count > 50{
+//            msg = "Confirm password must be \(3) to \(50) characters."
+//
+//            return msg
+//        }
+//        if oldPassword != confirmPassword{
+//            msg = ValidationStr.PASSWORD_MISMATCH_ERROR
+//         return msg
+//        }
         return msg
     }
 }

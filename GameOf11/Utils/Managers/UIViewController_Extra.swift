@@ -84,8 +84,10 @@ extension UIViewController {
 
 extension UIViewController{
     func showStatus(_ sts:Bool,msg:String?)  {
+        
         if sts{
             SVProgressHUD.showSuccess(withStatus: msg ?? "")
+            
         }
         else{
             SVProgressHUD.showError(withStatus:msg ?? "")

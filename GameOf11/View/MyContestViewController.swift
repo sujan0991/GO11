@@ -10,47 +10,90 @@ import UIKit
 import DTPagerController
 
 class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTPagerControllerDelegate {
-
+    
     var selectedSegmentIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        placeNavBar(withTitle: "My Contest", isBackBtnVisible: false)
-        
-        // Do any additional setup after loading the view.
-        
-        placeContainer()
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let fixtureVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController") as! MatchViewController
-        fixtureVC.title = "Upcoming"
-        fixtureVC.type = .upcomingContest
-        
-        let liveVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController") as! MatchViewController
-        liveVC.title = "Live"
-        liveVC.type = .liveContest
         
         
-        let resultVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController")as! MatchViewController
-        resultVC.title = "Completed"
-        resultVC.type = .completedContest
+        print("viewDidLoad in my contest")
         
-        
-        let pagerController = DTPagerController(viewControllers: [fixtureVC, liveVC,resultVC])
-        customizeSegment(pagerController: pagerController)
-        
-        pagerController.delegate = self
-        
-        print(containerView)
-        addChild(pagerController)
-        pagerController.view.frame = containerView.bounds
-        print(pagerController.view)
-        containerView.addSubview(pagerController.view)
-        pagerController.didMove(toParent: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        print("AppSessionManager.shared.authToken",AppSessionManager.shared.authToken)
 
+            
+            if #available(iOS 13, *) {
+                      if UserDefaults.standard.bool(forKey: "DarkMode"){
+                          
+                          overrideUserInterfaceStyle = .dark
+                          self.tabBarController?.tabBar.backgroundColor = UIColor.init(named: "tab_dark_bg")
+                          self.tabBarController?.tabBar.unselectedItemTintColor = .white
+
+                      }else{
+                          overrideUserInterfaceStyle = .light
+                          self.tabBarController?.tabBar.backgroundColor = .white
+                          self.tabBarController?.tabBar.unselectedItemTintColor = .gray
+
+                      }
+                  
+                  }else{
+                      
+                  }
+        
+        self.tabBarController?.tabBar.isHidden = false
+        
+        if AppSessionManager.shared.authToken == nil{
+            
+            let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "UnSignedProfileViewController") as? UnSignedProfileViewController
+            
+            self.navigationController?.pushViewController(popupVC ?? self, animated: true)
+            
+        }
+        else
+        {
+            placeNavBar(withTitle: "MY CONTESTS".localized, isBackBtnVisible: false,isLanguageBtnVisible: false, isGameSelectBtnVisible: true,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
+            
+            // Do any additional setup after loading the view.
+            
+            placeContainer()
+            
+            
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let fixtureVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController") as! MatchViewController
+            fixtureVC.title = "Upcoming"
+            fixtureVC.type = .upcomingContest
+            
+            let liveVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController") as! MatchViewController
+            liveVC.title = "Live"
+            liveVC.type = .liveContest
+            
+            
+            let resultVC = storyboard.instantiateViewController(withIdentifier: "MatchViewController")as! MatchViewController
+            resultVC.title = "Completed"
+            resultVC.type = .completedContest
+            
+            
+            let pagerController = DTPagerController(viewControllers: [fixtureVC, liveVC,resultVC])
+            customizeSegment(pagerController: pagerController)
+            
+            pagerController.delegate = self
+            
+            addChild(pagerController)
+            pagerController.view.frame = containerView.bounds
+            print(pagerController.view)
+            containerView.addSubview(pagerController.view)
+            pagerController.didMove(toParent: self)
+        }
+    }
+    
+    
+    
     func customizeSegment(pagerController: DTPagerController)
     {
         
@@ -62,8 +105,23 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
         
         pagerController.perferredScrollIndicatorHeight = 2
         pagerController.scrollIndicator.layer.cornerRadius = pagerController.scrollIndicator.frame.height/2
-        pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "TabOrangeColor")
+        pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "brand_orange")
         pagerController.pageSegmentedControl.backgroundColor = UIColor.init(named: "GreenHighlight")
+        pagerController.view.backgroundColor = UIColor.init(named: "GreenHighlight")
+        
+        if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "upcoming"{
+            
+            pagerController.selectedPageIndex = 0
+            
+        }else if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "live"{
+            
+            pagerController.selectedPageIndex = 1
+            
+        }else if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "completed"{
+            
+            pagerController.selectedPageIndex = 2
+        }
+        
         
     }
     func setImage(_ image: UIImage?, forSegmentAt segment: Int) {
@@ -80,17 +138,23 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
     }
     
     func pagerController(_ pagerController: DTPagerController, didChangeSelectedPageIndex index: Int) {
-        print(index)
+        
+        print("didChangeSelectedPageIndex",index)
+        
+        if index == 0{
+            
+            UserDefaults.standard.set("upcoming", forKey: "selectedMyContest")
+            
+        }else if index == 1{
+            
+            UserDefaults.standard.set("live", forKey: "selectedMyContest")
+            
+        }else if index == 2{
+            
+            UserDefaults.standard.set("completed", forKey: "selectedMyContest")
+            
+        }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
