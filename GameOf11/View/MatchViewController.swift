@@ -148,23 +148,24 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+
+            
+            if #available(iOS 13, *) {
+                      if UserDefaults.standard.bool(forKey: "DarkMode"){
+                          
+                          overrideUserInterfaceStyle = .dark
+                          
+                      }else{
+                          overrideUserInterfaceStyle = .light
+                      }
+                  
+                  }else{
+                      
+                  }
+        
         print("viewWillAppear..............match",UserDefaults.standard.string(forKey: "selectedGameType"))
         self.noMatchView.isHidden = true
         self.noContestView.isHidden = true
-        
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // print("viewDidAppear..............match")
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.gameSelectAction(_:)), name: NSNotification.Name(rawValue: "gameChange"), object: nil)
-        
-        
-        
         
         self.tabBarController?.tabBar.isHidden = false
         
@@ -181,6 +182,20 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             gameSegmentControl.setIndex(1)
             
         }
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // print("viewDidAppear..............match")
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.gameSelectAction(_:)), name: NSNotification.Name(rawValue: "gameChange"), object: nil)
+        
+        
+        
+        
         
     }
     
@@ -297,7 +312,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     
     func getFootBallData(){
         
-        //  print("get football data...............")
+        print("get football data...............")
         
         self.noMatchView.isHidden = true
         self.noContestView.isHidden = true
@@ -457,9 +472,9 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                     
                     
                     cell.statusLabel.text = String.init(format:"%@ Left".localized.uppercased(),match.joiningLastTime?.localized.uppercased() ?? "" )
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "on_green")!
                     
                 }else if type == .liveContest{
                     
@@ -473,9 +488,9 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                     
                     
                     cell.statusLabel.text = String.init(format: "COMPLETED".localized )
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "on_green")!
                     
                 }
                 

@@ -39,6 +39,25 @@ class RedeemCoinViewController: BaseViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+    }
+    
     @IBAction func redeemButtonAction(_ sender: Any) {
         
         if tkAmountTextField.text?.count != 0 { APIManager.manager.redeemCoinForCash(amount: self.tkAmountTextField.text ?? "0") { (success, msg) in

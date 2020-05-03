@@ -216,6 +216,25 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.leaderBoardData?.team_info?.player_info.count ?? 0
@@ -253,10 +272,10 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
                 
                 cell.captainLabel.isHidden = false
                 cell.captainLabel.text = "VC"
-                cell.captainLabel.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                cell.captainLabel.backgroundColor = UIColor.init(named: "brand_orange")!
                 cell.xLabel.isHidden = false
                 cell.xLabel.text = "1.5x"
-                cell.xLabel.textColor = UIColor.init(named: "TabOrangeColor")!
+                cell.xLabel.textColor = UIColor.init(named: "brand_orange")!
                 
             }
         }

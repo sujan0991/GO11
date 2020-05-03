@@ -55,8 +55,8 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         prizeRankTableView.delegate = self
         prizeRankTableView.dataSource = self
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
-            self.firstTeamName.text = self.parentMatch?.teams.item(at: 0).teamKey ?? ""
-            self.secondTeamName.text = self.parentMatch?.teams.item(at: 1).teamKey ?? ""
+            self.firstTeamName.text = self.parentMatch?.teams.item(at: 0).teamKey?.uppercased() ?? ""
+            self.secondTeamName.text = self.parentMatch?.teams.item(at: 1).teamKey?.uppercased() ?? ""
             self.statusLabel.text = String.init(format: "%@ Left".localized,self.parentMatch?.joiningLastTime ?? "" )
             
             self.firstTeamFlag.image = UIImage.init(named: "teamPlaceHolder_icon")
@@ -71,8 +71,8 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         }else{
             
             
-            self.firstTeamName.text = self.parentMatchFootball?.teams.item(at: 0).code ?? ""
-            self.secondTeamName.text = self.parentMatchFootball?.teams.item(at: 1).code ?? ""
+            self.firstTeamName.text = self.parentMatchFootball?.teams.item(at: 0).code?.uppercased() ?? ""
+            self.secondTeamName.text = self.parentMatchFootball?.teams.item(at: 1).code?.uppercased() ?? ""
             self.statusLabel.text = String.init(format: "%@ Left".localized,self.parentMatchFootball?.joiningLastTime ?? "" )
             
             self.firstTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
@@ -91,6 +91,25 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         backShadowView.addGestureRecognizer(tap)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {

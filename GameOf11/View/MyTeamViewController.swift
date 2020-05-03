@@ -46,8 +46,8 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
-            self.firstTeamName.text = self.parentMatch?.teams.item(at: 0).teamKey ?? ""
-            self.secondTeamName.text = self.parentMatch?.teams.item(at: 1).teamKey ?? ""
+            self.firstTeamName.text = self.parentMatch?.teams.item(at: 0).teamKey?.uppercased() ?? ""
+            self.secondTeamName.text = self.parentMatch?.teams.item(at: 1).teamKey?.uppercased() ?? ""
             self.statusLabel.text = String.init(format: "%@ Left".localized,self.parentMatch?.joiningLastTime ?? "" )
             
             
@@ -62,8 +62,8 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             
         }else{
             
-            self.firstTeamName.text = self.parentMatchFootball?.teams.item(at: 0).code ?? ""
-            self.secondTeamName.text = self.parentMatchFootball?.teams.item(at: 1).code ?? ""
+            self.firstTeamName.text = self.parentMatchFootball?.teams.item(at: 0).code?.uppercased() ?? ""
+            self.secondTeamName.text = self.parentMatchFootball?.teams.item(at: 1).code?.uppercased() ?? ""
             self.statusLabel.text = String.init(format: "%@ Left".localized,self.parentMatchFootball?.joiningLastTime ?? "" )
             
             self.firstTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
@@ -90,6 +90,19 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+            if #available(iOS 13, *) {
+                      if UserDefaults.standard.bool(forKey: "DarkMode"){
+                          
+                          overrideUserInterfaceStyle = .dark
+                          
+                      }else{
+                          overrideUserInterfaceStyle = .light
+                      }
+                  
+                  }else{
+                      
+                  }
         
         print("teams in MyTeamViewController",teams)
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{

@@ -41,11 +41,11 @@ class PlayerTableViewCell: UITableViewCell {
         
         if self.selectButton.isSelected{
             
-             self.backgroundColor = UIColor("#FAE5D3")
+            self.backgroundColor = UIColor.init(named: "orange_to_blue")
             
         }else{
             
-             self.backgroundColor = UIColor.white
+             self.backgroundColor = UIColor.init(named: "brand_bg_color")
         }
         
         let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")

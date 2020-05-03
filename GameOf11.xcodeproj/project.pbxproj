@@ -93,6 +93,8 @@
 		647C5D13233D35AE00E4C3CF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647C5D12233D35AE00E4C3CF /* NotificationService.swift */; };
 		647C5D17233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 647C5D10233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */; };
+		64A0EDD7243357BC00B52AE6 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */; };
+		64A0EDD92433590E00B52AE6 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EDD82433590D00B52AE6 /* SettingTableViewCell.swift */; };
 		64C77A4B22FEEBC5005161BF /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64C77A4122FEEBC5005161BF /* OpenSans-Semibold.ttf */; };
 		64C77A4C22FEEBC5005161BF /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64C77A4222FEEBC5005161BF /* OpenSans-Light.ttf */; };
 		64C77A4D22FEEBC5005161BF /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64C77A4322FEEBC5005161BF /* OpenSans-Italic.ttf */; };
@@ -246,6 +248,8 @@
 		647C5D12233D35AE00E4C3CF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		647C5D14233D35AE00E4C3CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCell.swift; sourceTree = "<group>"; };
+		64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		64A0EDD82433590D00B52AE6 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		64C77A4122FEEBC5005161BF /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		64C77A4222FEEBC5005161BF /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		64C77A4322FEEBC5005161BF /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
@@ -355,6 +359,7 @@
 				64CBB4DC23E9DC5400F0DBA2 /* AnnouncementViewController.swift */,
 				64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */,
 				64E5B42D23F0009A00D377F0 /* OTPViewController.swift */,
+				64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				64CBB4DA23E9C81100F0DBA2 /* PromoCodeTableViewCell.swift */,
 				64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */,
 				64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */,
+				64A0EDD82433590D00B52AE6 /* SettingTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -828,6 +834,7 @@
 				0C3336C721DF419400E6EB11 /* Extension.swift in Sources */,
 				0C33368221DF3B0400E6EB11 /* CustomNavigationBar.swift in Sources */,
 				64522217239C182B0091AE28 /* CaptainSelectorFootballViewController.swift in Sources */,
+				64A0EDD92433590E00B52AE6 /* SettingTableViewCell.swift in Sources */,
 				641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */,
 				6445BE2F22D7577B00366B01 /* EditTeamViewController.swift in Sources */,
 				0C8B95ED21E1144400ADE46B /* ValidationManager.swift in Sources */,
@@ -840,6 +847,7 @@
 				64CBB4DF23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift in Sources */,
 				645F7DF423153F4800515F11 /* PendingWithdrawViewController.swift in Sources */,
 				64669C5523E75C8F00288346 /* PromoCodeViewController.swift in Sources */,
+				64A0EDD7243357BC00B52AE6 /* SettingViewController.swift in Sources */,
 				6445274622DB2BCD00D23734 /* PrizeListTableViewCell.swift in Sources */,
 				645037E322F2CEA50013334D /* CoinPackCollectionViewCell.swift in Sources */,
 				6441ECBD23100AE1008FFE0F /* FeedbackViewController.swift in Sources */,

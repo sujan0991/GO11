@@ -124,6 +124,26 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      self.tabBarController?.tabBar.backgroundColor = UIColor.init(named: "tab_dark_bg")
+                      self.tabBarController?.tabBar.unselectedItemTintColor = .white
+
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+    }
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 1
@@ -212,7 +232,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             if player.teamBelong == 1{
                 cell.teamNamelabel.textColor = UIColor.init(named: "GreenHighlight")!
             }else{
-                cell.teamNamelabel.textColor = UIColor.init(named: "TabOrangeColor")!
+                cell.teamNamelabel.textColor = UIColor.init(named: "brand_orange")!
             }
         }
         

@@ -72,8 +72,8 @@ class EditProfileViewController: BaseViewController {
         updateButton.setTitle("UPDATE PROFILE".localized, for: .normal)
         
         
-        maleButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
-        femaleButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
+        maleButton.buttonRound(15, borderWidth: 1.0, borderColor: UIColor.init(named: "on_green")!)
+        femaleButton.buttonRound(15, borderWidth: 1.0, borderColor: UIColor.init(named: "on_green")!)
         changePasswordButton.decorateButtonRound(5, borderWidth: 1.0, borderColor: "#AEB2BB")
         //AEB2BB
         
@@ -94,12 +94,12 @@ class EditProfileViewController: BaseViewController {
                 if um.sex == "Male"{
                     
                     maleButton.isSelected = true;
-                    maleButton.backgroundColor = UIColor.init(named: "GreenHighlight")
+                    maleButton.backgroundColor = UIColor.init(named: "on_green")
                     
                 }else if um.sex == "Female"{
                     
                     femaleButton.isSelected = true;
-                    femaleButton.backgroundColor = UIColor.init(named: "GreenHighlight")
+                    femaleButton.backgroundColor = UIColor.init(named: "on_green")
                     
                 }
             }
@@ -116,6 +116,25 @@ class EditProfileViewController: BaseViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+       
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+    }
+
     
     @IBAction func changeButtonAction(_ sender: Any) {
         
@@ -146,7 +165,7 @@ class EditProfileViewController: BaseViewController {
             
             femaleButton.isSelected = false
             femaleButton.backgroundColor = UIColor.white
-            sender.backgroundColor = UIColor.init(named: "GreenHighlight")
+            sender.backgroundColor = UIColor.init(named: "on_green")
             
         }else{
             
@@ -163,7 +182,7 @@ class EditProfileViewController: BaseViewController {
             
             maleButton.isSelected = false
             maleButton.backgroundColor = UIColor.white
-            sender.backgroundColor = UIColor.init(named: "GreenHighlight")
+            sender.backgroundColor = UIColor.init(named: "on_green")
             
         }else{
             

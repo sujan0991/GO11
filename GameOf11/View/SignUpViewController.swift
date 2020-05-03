@@ -110,7 +110,19 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+
     }
     
     //    func textFieldDidEndEditing(_ textField: UITextField) {

@@ -92,7 +92,7 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
         progressView.gradientColors = [UIColor.init(named: "GreenHighlight")!.cgColor, UIColor.init(named: "GreenHighlight")!.cgColor]
         
         
-        nextButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
+        nextButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
         nextButton.isUserInteractionEnabled = false
         
         previewButton.setTitle("Preview Team".localized, for: .normal)
@@ -226,7 +226,24 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
         
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -541,7 +558,7 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
             else
             {
                 
-                cell.teamCode.textColor = UIColor.init(named: "TabOrangeColor")!
+                cell.teamCode.textColor = UIColor.init(named: "brand_orange")!
             }
         }
         
@@ -906,7 +923,7 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
         
         if (firstTeamPlayerCount + secondTeamPlayerCount) == 11 {
             
-            nextButton.setBackgroundColor(UIColor.init(named: "GreenHighlight")!, for: UIControl.State.normal)
+            nextButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
             nextButton.isUserInteractionEnabled = true
             
             nextButton.layer.shadowColor = UIColor.gray.cgColor

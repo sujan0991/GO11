@@ -14,7 +14,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomNavigationBar" customModule="GameOf11" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomNavigationBar" customModule="GO11_Pro" customModuleProvider="target">
             <connections>
                 <outlet property="announcementButton" destination="lad-ae-Ork" id="PQV-bz-Gak"/>
                 <outlet property="backBtn" destination="9C2-bB-sZA" id="sZI-vY-04a"/>

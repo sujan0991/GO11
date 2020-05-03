@@ -17,13 +17,6 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
     
     @IBOutlet weak var moretableView: UITableView!
     
-    @IBOutlet weak var changeLanguageLabel: UILabel!
-    @IBOutlet weak var englishButton: UIButton!
-    @IBOutlet weak var banglaButton: UIButton!
-    
-    @IBOutlet weak var shadowView: UIView!
-    
-    @IBOutlet weak var languageView: UIView!
     
     var menuArray = [Dictionary<String,Any>]()
     
@@ -37,30 +30,7 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
         
         placeNavBar(withTitle: "MORE".localized, isBackBtnVisible: false,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
-        changeLanguageLabel.text = "Change Language".localized
-        
-        if Language.language == Language.bangla{
-            
-            banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-            banglaButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
-            
-            englishButton.backgroundColor = UIColor.white
-            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-        }else{
-            banglaButton.backgroundColor = UIColor.white
-            banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-            
-            englishButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
-            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-            
-        }
-        englishButton.layer.borderWidth = 0.5
-        englishButton.layer.borderColor = UIColor.lightGray.cgColor
-        banglaButton.layer.borderWidth = 0.5
-        banglaButton.layer.borderColor = UIColor.lightGray.cgColor
-        
-        
-        
+
         
         menuArray.append(["title":"How to Play".localized, "icon":"how_to_play_icon"])
         menuArray.append(["title":"FAQs".localized, "icon":"faq_icon"])
@@ -71,18 +41,36 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
         menuArray.append(["title":"Watch How To Play".localized, "icon":"play_icon"])
         menuArray.append(["title":"Write Your Feedback".localized, "icon":"feedback"])
         menuArray.append(["title":"Promo Code".localized, "icon":"promotion"])
-        menuArray.append(["title":"Change Language".localized, "icon":"language_change_icon"])
-        
+        menuArray.append(["title":"Setting".localized, "icon":"language_change_icon"])
+        //"Change Language"
         moretableView.tableFooterView = UIView()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        shadowView.addGestureRecognizer(tap)
+        
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        shadowView.isHidden = true
-        languageView.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+  
+            
+            if #available(iOS 13, *) {
+                      if UserDefaults.standard.bool(forKey: "DarkMode"){
+                          
+                          overrideUserInterfaceStyle = .dark
+                          self.tabBarController?.tabBar.backgroundColor = UIColor.init(named: "tab_dark_bg")
+                          self.tabBarController?.tabBar.unselectedItemTintColor = .white
+
+                      }else{
+                          overrideUserInterfaceStyle = .light
+                          self.tabBarController?.tabBar.backgroundColor = .white
+                          self.tabBarController?.tabBar.unselectedItemTintColor = .gray
+
+                      }
+                  
+                  }else{
+                      
+                  }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -201,8 +189,10 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
             
         }else if(indexPath.row == 9){
             
-            shadowView.isHidden = false
-            languageView.isHidden = false
+             let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingViewController") as? SettingViewController
+            
+             self.navigationController?.pushViewController(vc!, animated: true)
+
             
         }
         
@@ -221,29 +211,7 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
         }
         
     }
-    
-    @IBAction func englishButtonAction(_ sender: Any) {
-        
-        Language.language = Language.english
-    }
-    
-    @IBAction func banglaButtonAction(_ sender: Any) {
-        
-        print("bangla.........")
-        Language.language = Language.bangla
-    }
-    
-    @objc func languageChangeAction(_ notification: NSNotification) {
-        
-        print("baseLanguageButtonAction")
-        if let currentVC = UIApplication.topViewController() as? MoreViewController {
-            
-            shadowView.isHidden = false
-            languageView.isHidden = false
-            
-        }
-        
-    }
+  
     
     
     

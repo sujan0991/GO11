@@ -58,7 +58,7 @@ class ContestTableViewCell: UITableViewCell {
         
         self.containerView.layer.cornerRadius = 5
         self.containerView.layer.applySketchShadow(
-            color: UIColor.gray,
+            color: UIColor.init(named: "ShadowColor")!,
             alpha: 1.0,
             x: 0,
             y: 2,
@@ -128,7 +128,7 @@ class ContestTableViewCell: UITableViewCell {
         
         
         
-        progressView.gradientColors = [UIColor.init(named: "TabOrangeColor")!.cgColor, UIColor.init(named: "TabOrangeColor")!.cgColor]
+        progressView.gradientColors = [UIColor.init(named: "brand_orange")!.cgColor, UIColor.init(named: "brand_orange")!.cgColor]
         
         if contest.is_league == 1{
             

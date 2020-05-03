@@ -136,10 +136,10 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         //        placeNavBar(withTitle: "My Profile", isBackBtnVisible: false)
         
-        addCoinButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
-        withdrawButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
-        redeemButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
-        coinLogButton.decorateButtonRound(15, borderWidth: 1.0, borderColor: "#30B847")
+        addCoinButton.buttonRound(5, borderWidth: 0.0, borderColor: UIColor.init(named: "on_green")!)
+        withdrawButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "on_green")!)
+        redeemButton.buttonRound(5, borderWidth: 0.0, borderColor: UIColor.init(named: "on_green")!)
+        coinLogButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "on_green")!)
         
         imagePicker.delegate = self
         
@@ -172,28 +172,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         logoutButton.setTitle("Logout".localized, for: .normal)
         coinLogButton.setTitle("COIN LOG".localized, for: .normal)
         
-        self.topView.layer.applySketchShadow(
-            color: UIColor.lightGray,
-            alpha: 1.0,
-            x: 0,
-            y: 2,
-            blur: 4,
-            spread: 0)
-        self.accountInfoView.layer.applySketchShadow(
-            color: UIColor.lightGray,
-            alpha: 1.0,
-            x: 0,
-            y: 2,
-            blur: 4,
-            spread: 0)
         
-        self.historyView.layer.applySketchShadow(
-            color: UIColor.lightGray,
-            alpha: 1.0,
-            x: 0,
-            y: 2,
-            blur: 4,
-            spread: 0)
         
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.tapContestLabel))
@@ -249,7 +228,53 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     override func viewWillAppear(_ animated: Bool) {
         
+//        if UserDefaults.standard.bool(forKey: "DarkMode"){
+//            
+//        }else{
+//                    self.topView.layer.applySketchShadow(
+//                        color: .lightGray,
+//                        alpha: 1.0,
+//                        x: 0,
+//                        y: 2,
+//                        blur: 4,
+//                        spread: 0)
+//                    self.accountInfoView.layer.applySketchShadow(
+//                        color: .lightGray,
+//                        alpha: 1.0,
+//                        x: 0,
+//                        y: 2,
+//                        blur: 4,
+//                        spread: 0)
+//            
+//                    self.historyView.layer.applySketchShadow(
+//                        color: .lightGray,
+//                        alpha: 1.0,
+//                        x: 0,
+//                        y: 2,
+//                        blur: 4,
+//                        spread: 0)
+//
+//        }
+
         self.tabBarController?.tabBar.isHidden = false
+            
+            if #available(iOS 13, *) {
+                      if UserDefaults.standard.bool(forKey: "DarkMode"){
+                          
+                          overrideUserInterfaceStyle = .dark
+                          self.tabBarController?.tabBar.backgroundColor = UIColor.init(named: "tab_dark_bg")
+                          self.tabBarController?.tabBar.unselectedItemTintColor = .white
+
+                      }else{
+                          overrideUserInterfaceStyle = .light
+                          self.tabBarController?.tabBar.backgroundColor = .white
+                          self.tabBarController?.tabBar.unselectedItemTintColor = .gray
+
+                      }
+                  
+                  }else{
+                      
+                  }
         
     }
     

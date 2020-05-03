@@ -38,6 +38,7 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
     @IBOutlet weak var banglabutton: UIButton!
     @IBOutlet weak var changeLanguageLabel: UILabel!
     
+    
     var announcementArray:[Any] = []
     
     
@@ -55,7 +56,6 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
         //       placePagerContainer()
         
         
-        print("containerView........",containerView.frame)
         
         updatemsgLabel.text = "New update is available.".localized
         skipButton.setTitle("SKIP".localized, for: .normal)
@@ -64,22 +64,20 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
         
         if Language.language == Language.bangla{
             
-            banglabutton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-            banglabutton.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            banglabutton.setTitleColor(UIColor.white, for: .normal)
+            banglabutton.backgroundColor = UIColor.init(named: "on_green")!
             
             englishButton.backgroundColor = UIColor.white
             englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-            
         }else{
-            
             banglabutton.backgroundColor = UIColor.white
             banglabutton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
             
-            englishButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
-            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+            englishButton.backgroundColor = UIColor.init(named: "on_green")!
+            englishButton.setTitleColor(UIColor.white, for: .normal)
             
         }
-        
+
         //Localize
         changeLanguageLabel.text = "Change Language".localized
         
@@ -111,7 +109,9 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
         
         pagerController.delegate = self
         
-        print("//////////////////////",containerView)
+        print("//////////////////////",containerView.frame)
+        print("navView........",navView.frame)
+        
         addChild(pagerController)
         pagerController.view.frame = containerView.bounds
         print(pagerController.view)
@@ -157,11 +157,13 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
             }
         }
         
+   
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         languageShadowView.addGestureRecognizer(tap)
     }
     
+
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         
@@ -207,12 +209,34 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
     override func viewWillAppear(_ animated: Bool) {
         
         print("view will appear.....home")
+        if #available(iOS 13, *) {
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                self.tabBarController?.tabBar.backgroundColor = UIColor.init(named: "tab_dark_bg")
+                self.tabBarController?.tabBar.unselectedItemTintColor = .white
+
+            }else{
+                overrideUserInterfaceStyle = .light
+                self.tabBarController?.tabBar.backgroundColor = .white
+                self.tabBarController?.tabBar.unselectedItemTintColor = .gray
+
+            }
+          
+           
         
+        }else{
+            
+        }
+        
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
         print("view did appear.....home")
+        
+         
     }
     
     
@@ -227,7 +251,7 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
         
         pagerController.perferredScrollIndicatorHeight = 2
         pagerController.scrollIndicator.layer.cornerRadius = pagerController.scrollIndicator.frame.height/2
-        pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "TabOrangeColor")
+        pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "brand_orange")
         pagerController.pageSegmentedControl.backgroundColor = UIColor.init(named: "GreenHighlight")
         
     }

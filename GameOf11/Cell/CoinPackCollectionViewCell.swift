@@ -32,17 +32,17 @@ class CoinPackCollectionViewCell: UICollectionViewCell {
         didSet{
             if self.isSelected
             {
-                self.contentView.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                self.contentView.backgroundColor = UIColor.init(named: "on_green")!
                 
             }
             else
             {
-                self.contentView.backgroundColor = UIColor.white
+                self.contentView.backgroundColor = UIColor.init(named: "cell_bg")!
             }
             
-           oldpackLabel.textColor = isSelected ? UIColor.white: UIColor.init(named: "GreyTextColor")!
-           newPackLabel.textColor = isSelected ? UIColor.white: UIColor.init(named: "GreyTextColor")!
-           counAmountLabel.textColor = isSelected ? UIColor.white: UIColor.init(named: "DefaultTextColor")!
+           oldpackLabel.textColor = isSelected ? UIColor.white: UIColor.init(named: "brand_txt_color_black")!
+           newPackLabel.textColor = isSelected ? UIColor.white: UIColor.init(named: "brand_txt_color_black")!
+           counAmountLabel.textColor = isSelected ? UIColor.white: UIColor.init(named: "brand_txt_color_black")!
         }
     }
 

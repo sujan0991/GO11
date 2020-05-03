@@ -42,12 +42,13 @@ class UpComingMatchCell: UITableViewCell {
     func setInfo(_ match:MatchList)  {
         
         
-        firstTeamName.text = match.teams.item(at: 0).teamKey ?? ""
-        secondTeamName.text = match.teams.item(at: 1).teamKey ?? ""
+        firstTeamName.text = match.teams.item(at: 0).teamKey?.uppercased() ?? ""
+        secondTeamName.text = match.teams.item(at: 1).teamKey?.uppercased() ?? ""
         tournamentName.text = String.init(format: "%@",match.tournamentName ?? "")
+        tournamentTypeLabel.isHidden = false
         tournamentTypeLabel.text = String.init(format: "%@",match.format!.uppercased() )
         
-        print("match.teams.item(at: 0).logo",match.teams.item(at: 0).logo)
+        print("tournamentTypeLabel",match.format!)
         
         if match.teams.item(at: 0).logo != nil{
             
@@ -84,8 +85,8 @@ class UpComingMatchCell: UITableViewCell {
     func setFootballInfo(_ match:FootBallMatchList)  {
         
         
-        firstTeamName.text = match.teams.item(at: 0).code ?? ""
-        secondTeamName.text = match.teams.item(at: 1).code ?? ""
+        firstTeamName.text = match.teams.item(at: 0).code?.uppercased() ?? ""
+        secondTeamName.text = match.teams.item(at: 1).code?.uppercased() ?? ""
         tournamentName.text = String.init(format: "%@",match.tournamentName ?? "")
         tournamentTypeLabel.isHidden = true
       //  tournamentTypeLabel.text = String.init(format: "%@",match.format!.uppercased() )

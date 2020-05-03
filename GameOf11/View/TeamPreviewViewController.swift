@@ -176,6 +176,19 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
         
         
         print("isAlreadyCreatedTeam......",isAlreadyCreatedTeam)
+   
+            if #available(iOS 13, *) {
+                      if UserDefaults.standard.bool(forKey: "DarkMode"){
+                          
+                          overrideUserInterfaceStyle = .dark
+                          
+                      }else{
+                          overrideUserInterfaceStyle = .light
+                      }
+                  
+                  }else{
+                      
+                  }
         
         
     }

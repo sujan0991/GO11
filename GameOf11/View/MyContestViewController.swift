@@ -24,6 +24,25 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
     override func viewWillAppear(_ animated: Bool) {
         
         print("AppSessionManager.shared.authToken",AppSessionManager.shared.authToken)
+
+            
+            if #available(iOS 13, *) {
+                      if UserDefaults.standard.bool(forKey: "DarkMode"){
+                          
+                          overrideUserInterfaceStyle = .dark
+                          self.tabBarController?.tabBar.backgroundColor = UIColor.init(named: "tab_dark_bg")
+                          self.tabBarController?.tabBar.unselectedItemTintColor = .white
+
+                      }else{
+                          overrideUserInterfaceStyle = .light
+                          self.tabBarController?.tabBar.backgroundColor = .white
+                          self.tabBarController?.tabBar.unselectedItemTintColor = .gray
+
+                      }
+                  
+                  }else{
+                      
+                  }
         
         self.tabBarController?.tabBar.isHidden = false
         
@@ -86,8 +105,9 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
         
         pagerController.perferredScrollIndicatorHeight = 2
         pagerController.scrollIndicator.layer.cornerRadius = pagerController.scrollIndicator.frame.height/2
-        pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "TabOrangeColor")
+        pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "brand_orange")
         pagerController.pageSegmentedControl.backgroundColor = UIColor.init(named: "GreenHighlight")
+        pagerController.view.backgroundColor = UIColor.init(named: "GreenHighlight")
         
         if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "upcoming"{
             

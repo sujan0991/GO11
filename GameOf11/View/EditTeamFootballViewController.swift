@@ -215,6 +215,26 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+    }
+
+    
     func setSelectedPlayer(){
         
         if self.squadData != nil
@@ -715,7 +735,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
             else
             {
                 
-                cell.teamCode.textColor = UIColor.init(named: "TabOrangeColor")!
+                cell.teamCode.textColor = UIColor.init(named: "brand_orange")!
             }
         }
         
@@ -1075,7 +1095,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
         
         if (firstTeamPlayerCount + secondTeamPlayerCount) == 11 {
             
-            nextButton.setBackgroundColor(UIColor.init(named: "GreenHighlight")!, for: UIControl.State.normal)
+            nextButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
             nextButton.isUserInteractionEnabled = true
             
         }else{

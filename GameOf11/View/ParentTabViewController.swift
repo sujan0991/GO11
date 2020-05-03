@@ -2,7 +2,7 @@
 //  ParentTabViewController.swift
 //  GameOf11
 //
-//  Created by Md.Ballal Hossen on 1/9/19.
+//  Created by Tanvir Palash on 1/9/19.
 //  Copyright © 2019 Tanvir Palash. All rights reserved.
 //
 
@@ -52,7 +52,7 @@ class ParentTabViewController: UITabBarController {
         
         print("view did load")
         
-        self.tabBar.tintColor = UIColor("#30B847")
+        self.tabBar.tintColor = UIColor.init(named: "on_green")
         tabBar.shadowImage = UIImage()
         tabBar.backgroundImage = UIImage()
         tabBar.layer.shadowColor = UIColor.black.cgColor
@@ -61,7 +61,26 @@ class ParentTabViewController: UITabBarController {
         tabBar.layer.shadowOpacity = 0.5
         tabBar.layer.masksToBounds = false
         
+        if #available(iOS 13, *) {
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                self.tabBarController?.tabBar.backgroundColor = UIColor.init(named: "tab_dark_bg")
+                self.tabBarController?.tabBar.unselectedItemTintColor = .white
+
+            }else{
+                overrideUserInterfaceStyle = .light
+                self.tabBarController?.tabBar.backgroundColor = .white
+                self.tabBarController?.tabBar.unselectedItemTintColor = .gray
+
+            }
+          
+           
         
+        }else{
+            
+        }
+
         //Home
         
         let vc1 = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
@@ -113,13 +132,13 @@ class ParentTabViewController: UITabBarController {
     }
     
     
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        
-    //        print("view will appear.....")
-    //    }
-    //    
+//        override func viewWillAppear(_ animated: Bool) {
+//    
+//            print("view will appear.....")
+//        }
+    //
     //    override func viewDidAppear(_ animated: Bool) {
-    //        
+    //
     //        print("view did appear.....")
     //    }
     

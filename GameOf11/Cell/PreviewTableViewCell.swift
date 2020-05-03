@@ -315,7 +315,7 @@ func setInfo( players:[Player])  {
             }else if player.isViceCaptain{
                 fourthCap.isHidden = false
                 fourthCap.text = "VC"
-                fourthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                fourthCap.backgroundColor = UIColor.init(named: "brand_orange")!
             }
         }
         else if index == 4
@@ -379,7 +379,7 @@ func setInfo( players:[Player])  {
             }else if player.isViceCaptain{
                 fifthCap.isHidden = false
                 fifthCap.text = "VC"
-                fifthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                fifthCap.backgroundColor = UIColor.init(named: "brand_orange")!
             }
           
         }
@@ -445,7 +445,7 @@ func setInfo( players:[Player])  {
             }else if player.isViceCaptain{
                 sixthCap.isHidden = false
                 sixthCap.text = "VC"
-                sixthCap.backgroundColor = UIColor.init(named: "TabOrangeColor")!
+                sixthCap.backgroundColor = UIColor.init(named: "brand_orange")!
             }
             
         }

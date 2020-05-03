@@ -134,7 +134,8 @@ class BaseViewController: UIViewController,NavigationBarDelegate {
         let someFloat = CGFloat(self.view.frame.height)
         
         containerView = UIView(frame: CGRect(x: 0, y: navBar.frame.height ,width: UIScreen.main.bounds.size.width,height: someFloat - navBar.frame.height ))
-        containerView.backgroundColor = UIColor.init(named: "BackgroundColor")
+        containerView.backgroundColor = UIColor.init(named: "brand_bg_color")
+        
         
         self.view.addSubview(containerView)
         

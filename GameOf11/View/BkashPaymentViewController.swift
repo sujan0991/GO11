@@ -36,6 +36,23 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
         webView.allowsBackForwardNavigationGestures = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+    }
+    
     //MARK:- WKNavigationDelegate
     
     func webView(didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {

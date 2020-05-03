@@ -99,7 +99,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         progressView.gradientColors = [UIColor.init(named: "GreenHighlight")!.cgColor, UIColor.init(named: "GreenHighlight")!.cgColor]
         
         
-        nextButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
+        nextButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
         nextButton.isUserInteractionEnabled = false
         
         previewButton.setTitle("Preview Team".localized, for: .normal)
@@ -233,7 +233,24 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -367,11 +384,12 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
         if cell.isSelected {
             
-            cell.positionIcon.backgroundColor = UIColor.red
-            
+            cell.positionIcon.backgroundColor = UIColor.init(named: "orange_to_blue")
+           
         }else{
             
             cell.positionIcon.backgroundColor = UIColor.clear
+            
         }
         
         
@@ -408,6 +426,10 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
         selectedIndex = indexPath.item
         
+//        let selectedCell: PositionCollectionViewCell = collectionView.cellForItem(at: indexPath) as! PositionCollectionViewCell
+//        selectedCell.positionTitle.textColor = UIColor.init(named: "dark_to_white")
+//        selectedCell.playerCount.textColor = UIColor.init(named: "dark_to_white")
+                   
         let indexPth = IndexPath(row: 0, section: 0)
         self.playerListView.scrollToRow(at: indexPth, at: .top, animated: true)
         
@@ -541,12 +563,12 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             if player.teamBelong == 1
             {
                 
-                cell.teamCode.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.teamCode.textColor = UIColor.init(named: "on_green")!
             }
             else
             {
                 
-                cell.teamCode.textColor = UIColor.init(named: "TabOrangeColor")!
+                cell.teamCode.textColor = UIColor.init(named: "brand_orange")!
             }
         }
         
@@ -909,7 +931,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
         if (firstTeamPlayerCount + secondTeamPlayerCount) == 11 {
             
-            nextButton.setBackgroundColor(UIColor.init(named: "GreenHighlight")!, for: UIControl.State.normal)
+            nextButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
             nextButton.isUserInteractionEnabled = true
             
             nextButton.layer.shadowColor = UIColor.gray.cgColor

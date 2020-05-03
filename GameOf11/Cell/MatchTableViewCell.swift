@@ -61,8 +61,8 @@ class MatchTableViewCell: UITableViewCell {
     func setInfo(_ match:MatchList)  {
         
         
-        firstTeamName.text = match.teams.item(at: 0).teamKey ?? ""
-        secondTeamName.text = match.teams.item(at: 1).teamKey ?? ""
+        firstTeamName.text = match.teams.item(at: 0).teamKey?.uppercased() ?? ""
+        secondTeamName.text = match.teams.item(at: 1).teamKey?.uppercased() ?? ""
         tournamentName.text = String.init(format: "%@ %@",match.tournamentName ?? "",match.format! )
         //        statusLabel.text = String.init(format: "JOIN ENDS:\n %@",match.joiningLastTime ?? "" )
         
@@ -116,8 +116,8 @@ class MatchTableViewCell: UITableViewCell {
     func setFootballInfo(_ match:FootBallMatchList)  {
         
         
-        firstTeamName.text = match.teams.item(at: 0).code ?? ""
-        secondTeamName.text = match.teams.item(at: 1).code ?? ""
+        firstTeamName.text = match.teams.item(at: 0).code?.uppercased() ?? ""
+        secondTeamName.text = match.teams.item(at: 1).code?.uppercased() ?? ""
         tournamentName.text = String.init(format: "%@",match.tournamentName ?? "" )
         //        statusLabel.text = String.init(format: "JOIN ENDS:\n %@",match.joiningLastTime ?? "" )
         

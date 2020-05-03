@@ -63,6 +63,24 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return withdrawListArray.count
@@ -115,8 +133,8 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
             
             if singleRequest["status"] as! String == "pending" {
                 
-                cell.statusLabel.textColor = UIColor.init(named: "TabOrangeColor")!
-                cell.amountLabel.textColor = UIColor.init(named: "TabOrangeColor")!
+                cell.statusLabel.textColor = UIColor.init(named: "brand_orange")!
+                cell.amountLabel.textColor = UIColor.init(named: "brand_orange")!
                 cell.statusImageView.image = UIImage(named: "pending_icon")
             }else{
                 

@@ -48,8 +48,8 @@ class TeamPlayerTableViewCell: UITableViewCell {
             captainButton.setTitleColor(UIColor.init(named: "brand_txt_color_black"), for: .normal)
         }
         if self.viceCaptainButton.isSelected {
-            viceCaptainButton.backgroundColor = UIColor.init(named: "TabOrangeColor")
-            viceCaptainButton.layer.borderColor = UIColor.init(named: "TabOrangeColor")?.cgColor
+            viceCaptainButton.backgroundColor = UIColor.init(named: "brand_orange")
+            viceCaptainButton.layer.borderColor = UIColor.init(named: "brand_orange")?.cgColor
             viceCaptainButton.setTitleColor(UIColor.white, for: .selected)
         }else{
             viceCaptainButton.backgroundColor = UIColor.white

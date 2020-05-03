@@ -94,6 +94,19 @@ class LoginViewController: BaseViewController {
         
         languagEView.isHidden = true
         shadoWView.isHidden = true
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+
     }
     @IBAction func signUpButtonAction(_ sender: Any) {
         

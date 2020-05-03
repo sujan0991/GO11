@@ -29,8 +29,9 @@ class UnSignedProfileViewController: UIViewController {
 //        }
 //        
         
-        signUpButton.decorateButtonRound(5, borderWidth: 0.5, borderColor: "#30B847")
-        
+        signUpButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
+        loginButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
+
         suggestionLabel.text = "You are not logged in. You have to Login or Sign Up to perform your desired action.".localized
         
         signUpButton.setTitle("Sign Up".localized, for: .normal)
@@ -44,6 +45,19 @@ class UnSignedProfileViewController: UIViewController {
         
         print("viewWillAppear in UnSignedProfileViewController")
         self.tabBarController?.tabBar.isHidden = false
+
+            if #available(iOS 13, *) {
+                      if UserDefaults.standard.bool(forKey: "DarkMode"){
+                          
+                          overrideUserInterfaceStyle = .dark
+                          
+                      }else{
+                          overrideUserInterfaceStyle = .light
+                      }
+                  
+                  }else{
+                      
+                  }
         
     }
     

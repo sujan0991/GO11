@@ -172,7 +172,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         vsLabel.makeCircular(borderWidth: 1, borderColor: UIColor.init(named: "HighlightGrey")!)
         createTeamButton.makeRound(5, borderWidth: 0, borderColor: .clear)
         
-        signUpButton.decorateButtonRound(5, borderWidth: 0.5, borderColor: "#30B847")
+        signUpButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
+        loginButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
         
         contestTableView.register(UINib(nibName: "ContestTableViewCell", bundle: nil), forCellReuseIdentifier: "contestCell")
         
@@ -202,6 +203,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         createTeamButton.setTitle("CREATE YOUR TEAM".localized, for: .normal)
         
+        createTeamButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "on_green")!)
         createTeamButton.layer.shadowColor = UIColor.gray.cgColor
         createTeamButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         createTeamButton.layer.shadowRadius = 2
@@ -266,8 +268,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
-            self.firstTeamName.text = self.parentMatch?.teams.item(at: 0).teamKey ?? ""
-            self.secondTeamName.text = self.parentMatch?.teams.item(at: 1).teamKey ?? ""
+            self.firstTeamName.text = self.parentMatch?.teams.item(at: 0).teamKey?.uppercased() ?? ""
+            self.secondTeamName.text = self.parentMatch?.teams.item(at: 1).teamKey?.uppercased() ?? ""
             
             if type == .next  {
                 
@@ -317,8 +319,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             
         }else{
             
-            self.firstTeamName.text = self.parentMatchFootball?.teams.item(at: 0).code ?? ""
-            self.secondTeamName.text = self.parentMatchFootball?.teams.item(at: 1).code ?? ""
+            self.firstTeamName.text = self.parentMatchFootball?.teams.item(at: 0).code?.uppercased() ?? ""
+            self.secondTeamName.text = self.parentMatchFootball?.teams.item(at: 1).code?.uppercased() ?? ""
             self.firstTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
             
             self.secondTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
@@ -373,6 +375,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         backShadeView.addGestureRecognizer(tap)
     }
     
+
+    
     @objc private func refreshData(_ sender: Any) {
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
@@ -416,9 +420,21 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
+       override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -796,7 +812,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             if (contest.isJoined != 0)
             {
                 
-                cell.joinedButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
+                cell.joinedButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
                 
                 cell.joinedButton.setTitle("JOINED".localized, for: UIControl.State.normal)
                 cell.joinedButton.setTitleColor(UIColor.gray, for: .normal)
@@ -806,7 +822,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             }
             else
             {
-                cell.joinedButton.setBackgroundColor(UIColor.init(named: "GreenHighlight")!, for: UIControl.State.normal)
+                cell.joinedButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
                 
                 cell.joinedButton.setTitle("JOIN".localized, for: UIControl.State.normal)
                 cell.joinedButton.setTitleColor(UIColor.white, for: .normal)
