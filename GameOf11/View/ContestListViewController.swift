@@ -170,8 +170,14 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         
         vsLabel.makeCircular(borderWidth: 1, borderColor: UIColor.init(named: "HighlightGrey")!)
-        createTeamButton.makeRound(5, borderWidth: 0, borderColor: .clear)
-        
+      //  createTeamButton.makeRound(5, borderWidth: 0, borderColor: .clear)
+        createTeamButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "on_green")!)
+        createTeamButton.layer.shadowColor = UIColor.gray.cgColor
+        createTeamButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        createTeamButton.layer.shadowRadius = 2
+        createTeamButton.layer.shadowOpacity = 0.5
+        createTeamButton.layer.masksToBounds = false
+              
         signUpButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
         loginButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
         
@@ -203,13 +209,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         createTeamButton.setTitle("CREATE YOUR TEAM".localized, for: .normal)
         
-        createTeamButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "on_green")!)
-        createTeamButton.layer.shadowColor = UIColor.gray.cgColor
-        createTeamButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        createTeamButton.layer.shadowRadius = 2
-        createTeamButton.layer.shadowOpacity = 0.5
-        createTeamButton.layer.masksToBounds = false
-        
+      
         
         confirmationLabel.text = "CONFIRMATION".localized
         entryLabel.text = "Entry".localized

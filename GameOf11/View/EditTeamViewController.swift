@@ -846,7 +846,7 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
             if player.teamBelong == 1
             {
                 
-                cell.teamCode.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.teamCode.textColor = UIColor.init(named: "on_green")!
             }
             else
             {

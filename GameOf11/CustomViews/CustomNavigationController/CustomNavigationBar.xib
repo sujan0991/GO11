@@ -58,7 +58,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybl-zi-0Th">
                             <rect key="frame" x="142" y="11.5" width="111.5" height="21"/>
                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="main_title_color"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHo-0a-jIx">
@@ -155,6 +155,9 @@
         </namedColor>
         <namedColor name="TabOrangeColor">
             <color red="0.94117647058823528" green="0.45490196078431372" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="main_title_color">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -230,7 +230,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             }
             
             if player.teamBelong == 1{
-                cell.teamNamelabel.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.teamNamelabel.textColor = UIColor.init(named: "on_green")!
             }else{
                 cell.teamNamelabel.textColor = UIColor.init(named: "brand_orange")!
             }
