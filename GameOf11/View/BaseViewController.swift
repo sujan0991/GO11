@@ -21,9 +21,7 @@ public enum MatchType:Int {
 
 class BaseViewController: UIViewController,NavigationBarDelegate {
     
-    
-    
-    
+
     // Private variables
     
     private var navBar: CustomNavigationBar!

@@ -76,9 +76,6 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                                 print("userTeam.batsman id",userPlayer.id!)
                                 
                                 player.playerSelected = true
-                                
-                                
-                                
                                 if userPlayer.isCaptain == 1{
                                     
                                     player.isCaptain = true

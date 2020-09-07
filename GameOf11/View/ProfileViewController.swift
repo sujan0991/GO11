@@ -112,6 +112,8 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
+        self.profilePicImageView.layer.cornerRadius = self.profilePicImageView.frame.height/2
+        
         formatter.numberStyle = .decimal
         formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
         
@@ -170,7 +172,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         fullProfileButton.setTitle("Full Profile".localized, for: .normal)
         verifyButton.setTitle("Verify Your Profile!".localized, for: .normal)
         logoutButton.setTitle("Logout".localized, for: .normal)
-        coinLogButton.setTitle("COIN LOG".localized, for: .normal)
+        coinLogButton.setTitle("COINS LOG".localized, for: .normal)
         
         
         

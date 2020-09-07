@@ -162,6 +162,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         navTitleLabel.text = "CONTESTS".localized
         
+        prizeListLabel.text = "Prize List".localized
+        taxlabel.text = "Tax Msg".localized
         
         
         formatter.numberStyle = .decimal
@@ -448,6 +450,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             signUpView.isHidden = true
             addCoinView.isHidden = true
             paymentView.isHidden = true
+            
+           
             
             //       self.tabBarController?.tabBar.isHidden = false
             
@@ -778,17 +782,36 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             
             //  print("singlePrize........",singlePrize.amount)
             
+            var bnLowRankString : String!
+            var bnHighRankString : String!
+            var bnPrizeAmountString : String!
+            
+            if Language.language == Language.english{
+                bnLowRankString = String(singlePrize.lowRank!)
+                bnHighRankString = String(singlePrize.hignRank!)
+                bnPrizeAmountString = String(singlePrize.amount!)
+         
+               
+            }else{
+               
+                bnLowRankString = self.formatter.string(for: singlePrize.lowRank! )
+                bnHighRankString = self.formatter.string(for: singlePrize.hignRank! )
+                bnPrizeAmountString = self.formatter.string(for: singlePrize.amount! )
+            }
             
             if singlePrize.hignRank == nil{
-                
-                cell.rankLabel.text = "Rank \(singlePrize.lowRank!)"
-                
+                //cell.rankLabel.text = "Rank \(singlePrize.lowRank!)"
+                cell.rankLabel.text =  String.init(format: "Rank %@".localized, bnLowRankString!)
+               
             }else{
-                
-                cell.rankLabel.text = "Rank \(singlePrize.lowRank!) - Rank \(singlePrize.hignRank!)"
-                
+                _ = self.formatter.string(for: singlePrize.lowRank! )
+                _ = self.formatter.string(for: singlePrize.hignRank! )
+           
+              //  cell.rankLabel.text = "Rank \(singlePrize.lowRank!) - Rank \(singlePrize.hignRank!)"
+                cell.rankLabel.text =  String.init(format: "Rank %@ - Rank %@".localized, bnLowRankString!,bnHighRankString!)
+         
             }
-            cell.amountLabel.text = "\(singlePrize.amount!)"
+            cell.amountLabel.text = bnPrizeAmountString //"\(singlePrize.amount!)"
             
             if isFreeContest == 1{
                 

@@ -39,29 +39,21 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
            let current = UNUserNotificationCenter.current()
            current.getNotificationSettings(completionHandler: { settings in
 
-               switch settings.authorizationStatus {
-
-               case .notDetermined:
-                
-                print("Authorization request has not been made yet")
-                
-               case .denied:
-                   // You could tell them to change this in Settings
-                print("User has denied authorization.")
-                self.isNotiON = false
-                
-               case .authorized:
-                   
-                print("User has given authorization.")
-                self.isNotiON = true
-                
-               case .provisional:
-                
-                print("provisional.")
-            }
+                switch settings.authorizationStatus {
+                    case .notDetermined:
+                        print("Authorization request has not been made yet")
+                    case .denied:
+                        // You could tell them to change this in Settings
+                        print("User has denied authorization.")
+                        self.isNotiON = false
+                    case .authorized:
+                        print("User has given authorization.")
+                        self.isNotiON = true
+                    case .provisional:
+                        print("provisional.")
+                default : break
+                }
            })
-            
-            
         }
 
 

@@ -19,10 +19,13 @@ class UpComingMatchCell: UITableViewCell {
     @IBOutlet weak var secondTeamName: UILabel!
     
     @IBOutlet weak var statusLabel: UILabel!
+    
+    @IBOutlet weak var contestCount: UILabel!
     @IBOutlet weak var tournamentName: UILabel!
 
     @IBOutlet weak var tournamentTypeLabel: UILabel!
-    
+    let formatter = NumberFormatter()
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,6 +39,11 @@ class UpComingMatchCell: UITableViewCell {
             y: 2,
             blur: 6,
             spread: 0)
+        
+        
+        formatter.numberStyle = .decimal
+        formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
+        
 
     }
 
@@ -47,8 +55,19 @@ class UpComingMatchCell: UITableViewCell {
         tournamentName.text = String.init(format: "%@",match.tournamentName ?? "")
         tournamentTypeLabel.isHidden = false
         tournamentTypeLabel.text = String.init(format: "%@",match.format!.uppercased() )
-        
+//        contestCount.text = String.init(format: "Contest Available : %d", match.availableContest!)
         print("tournamentTypeLabel",match.format!)
+        var availableContest : String!
+        if Language.language == Language.english{
+            
+            availableContest = String.init(format: "%d", match.availableContest! ?? 0)
+            
+        }else{
+            
+            availableContest = String.init(format: "%@",formatter.string(from: NSNumber(value: match.availableContest!))!)
+        }
+        contestCount.text =  String.init(format: "Contest Available : %@".localized, availableContest!)
+ 
         
         if match.teams.item(at: 0).logo != nil{
             

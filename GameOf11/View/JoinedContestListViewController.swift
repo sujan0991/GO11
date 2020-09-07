@@ -28,6 +28,7 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     @IBOutlet weak var contestTableView: UITableView!
     @IBOutlet weak var statusLabel: UILabel!
     
+    @IBOutlet weak var prizeListTitleLabel: UILabel!
     @IBOutlet weak var matchSummaryView: UIView!
     
     @IBOutlet weak var prizeRankView: UIView!
@@ -37,6 +38,8 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     @IBOutlet weak var backShadowView: UIView!
     
     var isFreeContest = 1
+    let formatter = NumberFormatter()
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +48,11 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         
         vsLabel.makeCircular(borderWidth: 1, borderColor: UIColor.init(named: "HighlightGrey")!)
         
+        formatter.numberStyle = .decimal
+        formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
+     
+        prizeListTitleLabel.text = "Prize List".localized
+        taxLabel.text = "Tax Msg".localized
         
         contestTableView.register(UINib(nibName: "ContestTableViewCell", bundle: nil), forCellReuseIdentifier: "contestCell")
         
@@ -96,7 +104,7 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        prizeRankView.isHidden = true
         
         if #available(iOS 13, *) {
                   if UserDefaults.standard.bool(forKey: "DarkMode"){
@@ -158,17 +166,40 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
             
             //  print("singlePrize........",singlePrize.amount)
             
+            var bnLowRankString : String!
+            var bnHighRankString : String!
+            var bnPrizeAmountString : String!
+            
+            if Language.language == Language.english{
+                bnLowRankString = String(singlePrize.lowRank!)
+                if singlePrize.hignRank != nil {
+                    bnHighRankString = String(singlePrize.hignRank!)
+                }
+                bnPrizeAmountString = String(singlePrize.amount!)
+         
+               
+            }else{
+                bnLowRankString = self.formatter.string(for: singlePrize.lowRank! )
+                if singlePrize.hignRank != nil {
+                    bnHighRankString = self.formatter.string(for: singlePrize.hignRank! )
+           
+                }
+                bnPrizeAmountString = self.formatter.string(for: singlePrize.amount! )
+            }
             
             if singlePrize.hignRank == nil{
-                
-                cell.rankLabel.text = "Rank \(singlePrize.lowRank!)"
-                
+                //cell.rankLabel.text = "Rank \(singlePrize.lowRank!)"
+                cell.rankLabel.text =  String.init(format: "Rank %@".localized, bnLowRankString!)
+               
             }else{
-                
-                cell.rankLabel.text = "Rank \(singlePrize.lowRank!) - Rank \(singlePrize.hignRank!)"
-                
+                _ = self.formatter.string(for: singlePrize.lowRank! )
+                _ = self.formatter.string(for: singlePrize.hignRank! )
+           
+              //  cell.rankLabel.text = "Rank \(singlePrize.lowRank!) - Rank \(singlePrize.hignRank!)"
+                cell.rankLabel.text =  String.init(format: "Rank %@ - Rank %@".localized, bnLowRankString!,bnHighRankString!)
+         
             }
-            cell.amountLabel.text = "\(singlePrize.amount!)"
+            cell.amountLabel.text = bnPrizeAmountString //"\(singlePrize.amount!)"
             
             if isFreeContest == 1{
                 

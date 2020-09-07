@@ -78,6 +78,7 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
     @IBOutlet weak var suggestionLabel: UILabel!
     @IBOutlet weak var playersLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
+    @IBOutlet weak var selectedPerLabel: UILabel!
     
     @IBOutlet weak var navTitle: UILabel!
     
@@ -110,6 +111,8 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
         playersTopLabel.text = "Players".localized
         playersLabel.text = "PLAYERS".localized
         creditsLabel.text = "CREDITS".localized
+        selectedPerLabel.text = "SEL by %".localized
+        
         creditLeftLabel.text = "Credits Left".localized
         suggestionLabel.text = "Pick 1-4 Wicket-Keepers".localized
         

@@ -64,6 +64,8 @@
 
 "CONTESTS" = "CONTESTS";
 "Total Prize" = "Total Prize";
+"Prize List" = "Prize List";
+"Tax Msg" = "** 20% Govt Tax(AIT) will be applicable on Prize money";
 "Entry %d" = "Entry %d";
 "Entry %@" = "Entry %@";
 "Entry Free" = "Entry Free";
@@ -126,6 +128,10 @@
 
 "CONFIRMATION" = "CONFIRMATION";
 "Your total coins = %@" = "Your total coins = %@";
+"Contest Available : %@" = "Contest Available : %@";
+"Rank %@" = "Rank %@";
+"Rank %@ - Rank %@" = "Rank %@ - Rank %@";
+
 
 "To Pay" = "To Pay";
 "Entry" = "Entry";
@@ -167,9 +173,9 @@
 "Pending Withdraw" = "Pending Withdraw";
 
 "ADD COINS" = "ADD COINS";
-"WITHDRAW PRIZE" = "WITHDRAW PRIZE";
+"WITHDRAW PRIZE" = "WITHDRAW";
 "REDEEM COINS" = "REDEEM COINS";
-"REFER TO A FRIEND" = "REFER TO A FRIEND";
+"REFER TO A FRIEND" = "Refer a Friend";
 
 "Playing History" = "Playing History";
 "Contests" = "Contests";
@@ -177,7 +183,7 @@
 "Matches" = "Matches";
 
 "Personal Details" = "Personal Details";
-"Full Profile" = "Full Profile";
+"Full Profile" = "EDIT PROFILE";
 "Verify Your Profile!" = "Verify Your Profile!";
 "Verified Profile" = "Verified Profile";
 "Profile Verification Pending!" = "Profile Verification Pending!";
@@ -326,3 +332,5 @@
 "Enter your promo code" = "Enter your promo code";
 "Apply Promo Code" = "Apply Promo Code";
 "Promo Code"= "Promo Code";
+
+"SEL by %" = "SEL by %";

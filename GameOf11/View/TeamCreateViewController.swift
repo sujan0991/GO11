@@ -71,6 +71,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
     
     @IBOutlet weak var playersLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
+    @IBOutlet weak var selectedPerLabel: UILabel!
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var previewButton: UIButton!
@@ -109,6 +110,8 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         playersTopLabel.text = "Players".localized
         playersLabel.text = "PLAYERS".localized
         creditsLabel.text = "CREDITS".localized
+        selectedPerLabel.text = "SEL by %".localized
+        
         creditLeftLabel.text = "Credits Left".localized
         suggestionLabel.text = "Pick 1-4 Wicket-Keepers".localized
         

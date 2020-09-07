@@ -13,6 +13,7 @@ class PlayerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var playerImage: UIImageView!
     @IBOutlet weak var playerName: UILabel!
+    @IBOutlet weak var selectedPerLbl: UILabel!
     
     @IBOutlet weak var teamCode: UILabel!
     @IBOutlet weak var creditScore: UILabel!
@@ -36,6 +37,8 @@ class PlayerTableViewCell: UITableViewCell {
         
         playerName.text = player.name
         creditScore.text = "\(player.creditPoints ?? 0)"
+    
+        selectedPerLbl.text = "\(player.selectedPer ?? 0)%"
         
         self.selectButton.isSelected = player.playerSelected
         

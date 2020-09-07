@@ -22,6 +22,7 @@ class MatchList: Glossy {
     var format: String?
     var join_ends_before: Int?
     
+    var availableContest : Int?
     var totalJoinedContests: Int?
     var teams: [MatchTeams] = []
     
@@ -32,6 +33,7 @@ class MatchList: Glossy {
         matchName = "match_name" <~~ json
         matchTime = "match_time" <~~ json
         format = "format" <~~ json
+        availableContest = "contest_count" <~~ json
         join_ends_before = "join_ends_before" <~~ json
         totalJoinedContests = "total_joined_contests" <~~ json
         teams = ("teams" <~~ json) ?? []
@@ -47,7 +49,8 @@ class MatchList: Glossy {
             "format" ~~> format,
             "join_ends_before" ~~> join_ends_before,
             "total_joined_contests" ~~> totalJoinedContests,
-            "teams" ~~> teams
+            "teams" ~~> teams,
+            "contest_count" ~~> availableContest
             ])
     }
     
@@ -625,6 +628,7 @@ class Player: Glossy {
     var playerImage: String?
     var creditPoints: Double?
     var teamBelong: Int?
+    var selectedPer : Double?
     var playerSelected: Bool = false
     var isCaptain: Bool = false
     var isViceCaptain: Bool = false
@@ -639,7 +643,7 @@ class Player: Glossy {
         playerImage = playerImage?.trimForURL()
         creditPoints = "credit_points" <~~ json
         teamBelong = "team_belong" <~~ json
-        
+        selectedPer = "selected_percentage" <~~ json
         //  playerSelected = "playerSelected" <~~ json ?? false
         //  isCaptain = "playerSeisCaptainlected" <~~ json ?? false
         //  isViceCaptain = "isViceCaptain" <~~ json ?? false
@@ -658,8 +662,8 @@ class Player: Glossy {
             
             "playerSelected" ~~> playerSelected,
             "isCaptain" ~~> isCaptain,
-            "isViceCaptain" ~~> isViceCaptain
-            
+            "isViceCaptain" ~~> isViceCaptain,
+            "selected_percentage" ~~> selectedPer
             ])
     }
     func lastName() -> String {

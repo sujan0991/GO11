@@ -24,6 +24,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var bannerRatioConstraint: NSLayoutConstraint!
     @IBOutlet weak var adCollectionView: UICollectionView!
     @IBOutlet weak var selectAmatchLabel: UILabel!
     
@@ -47,9 +48,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     
     @IBOutlet weak var gameSegmentControl: BetterSegmentedControl!
     
-    
-    
-    
+
     private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -80,6 +79,9 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         if type == .next {
             
+            topViewHeight.isActive = false
+            bannerRatioConstraint.isActive = true
+            
             adCollectionView.delegate = self
             adCollectionView.dataSource = self
             
@@ -93,11 +95,9 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             
         }else{
             
-            topViewHeight.constant = 0
+            bannerRatioConstraint.isActive = false
+            topViewHeight.isActive = true
         }
-        
-        
-        
         
         
         matchListTableView.refreshControl = refreshControl
@@ -722,7 +722,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         if type == .next{
             
-            return 120
+            return 140
         }
         return 150
     }
@@ -776,9 +776,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
-        return CGSize(width: collectionView.frame.size.width - 30, height: collectionView.frame.size.height)
+        return CGSize(width: collectionView.frame.size.width , height: collectionView.frame.size.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -794,10 +792,6 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
         
     }
-    
-    
-    
-    
     
     @objc func gameSelectAction(_ notification: NSNotification) {
         

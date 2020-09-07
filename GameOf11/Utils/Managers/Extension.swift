@@ -167,7 +167,7 @@ extension String {
         
         //Specify Format of String to Parse
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        dateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
         //Parse into NSDate
         
         let dateFromString :Date = dateFormatter.date(from: self)!

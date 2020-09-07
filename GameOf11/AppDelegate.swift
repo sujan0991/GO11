@@ -136,10 +136,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
         
-        
-        
-        
-        
         return true
     }
     
@@ -157,6 +153,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             print("InstanceID token: \(refreshedToken)")
         }
         Messaging.messaging().apnsToken = deviceToken
+        
+        // Need to call api to send token to server whenever api is ready
+        //subscribe to channel provided by Anik
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
