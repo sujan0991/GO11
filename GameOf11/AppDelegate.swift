@@ -153,9 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             print("InstanceID token: \(refreshedToken)")
         }
         Messaging.messaging().apnsToken = deviceToken
-        
-        // Need to call api to send token to server whenever api is ready
-        //subscribe to channel provided by Anik
+       
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -170,6 +168,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 //        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
+        
+        var oldToken = ""
+        if let oldFcmToken = AppSessionManager.shared.fcmToken{
+            oldToken = oldFcmToken
+        }
+        APIManager.manager.sendFCMToken(old_token: oldToken, new_token: fcmToken, action_type: "startup") { (status, msg) in
+            if status{
+                AppSessionManager.shared.fcmToken = fcmToken
+                AppSessionManager.shared.save()
+            }
+            else{
+                print(msg)
+            }
+        }
+    }
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+
+        print(userInfo)
+        switch application.applicationState {
+
+        case .inactive:
+            print("Inactive")
+            //Show the view with the content of the push
+            completionHandler(.newData)
+
+        case .background:
+            print("Background")
+            //Refresh the local model
+            completionHandler(.newData)
+
+        case .active:
+            print("Active")
+            //Show an in-app banner
+            completionHandler(.newData)
+        }
     }
     
     //Called when a notification is delivered to a foreground app.

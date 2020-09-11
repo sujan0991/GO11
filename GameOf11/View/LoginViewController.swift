@@ -161,6 +161,18 @@ class LoginViewController: BaseViewController {
                 //                if let window = UIApplication.shared.delegate?.window {
                 //                    window?.rootViewController = vc
                 //                }
+                var oldToken = ""
+                if let oldFcmToken = AppSessionManager.shared.fcmToken{
+                    oldToken = oldFcmToken
+                }
+                APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "login") { (status, msg) in
+                    if status{
+                        print(msg ?? "")
+                    }
+                    else{
+                        print(msg ?? "")
+                    }
+                }
                 
                 self.navigationController?.popToRootViewController(animated: true)
                 

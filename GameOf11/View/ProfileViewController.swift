@@ -628,6 +628,19 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 // SVProgressHUD.showSuccess(withStatus: msg)
                 self.view.makeToast( msg!)
                 
+                var oldToken = ""
+                if let oldFcmToken = AppSessionManager.shared.fcmToken{
+                    oldToken = oldFcmToken
+                }
+                APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "logout") { (status, msg) in
+                    if status{
+                        print(msg ?? "")
+                    }
+                    else{
+                        print(msg ?? "")
+                    }
+                }
+                
             }
             else{
                 self.view.makeToast("Something went wrong! Please try again".localized)

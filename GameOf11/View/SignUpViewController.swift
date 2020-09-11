@@ -214,6 +214,19 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
                     AppSessionManager.shared.authToken = token
                     AppSessionManager.shared.save()
                     
+                    var oldToken = ""
+                    if let oldFcmToken = AppSessionManager.shared.fcmToken{
+                        oldToken = oldFcmToken
+                    }
+                    APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "signup") { (status, msg) in
+                        if status{
+                            print(msg ?? "")
+                        }
+                        else{
+                            print(msg ?? "")
+                        }
+                    }
+                    
                     APIManager.manager.getUserOffer(completion: { (status,isOffer,offerMsg,msg) in
                         
                         if status{

@@ -62,7 +62,8 @@ struct API_K {
     static let FORGOT_PASSWORD = "forgot-password"
     static let VERIFY_PROFILE = "user/profile-verify"
     static let UPDATE_GCM_TOKEN = "update-gcm-registration-key"
-    
+    static let UPDATE_FCM_TOKEN = "update-fcm-key"
+   
     static let GET_BANNER = "banners"
     static let GET_USER_OFFER = "get-user-offer"
     
@@ -848,6 +849,45 @@ class APIManager: NSObject {
             switch responseData.result {
             case .success(let value):
                 print(value)
+                SVProgressHUD.dismiss()
+                
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = json["message"].stringValue
+                    
+                    if !isSuccess{
+                        completion?(false,msg)
+                    }
+                    else{
+                        completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+                
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false,nil)
+            }
+        })
+    }
+    func sendFCMToken(old_token:String, new_token: String,action_type:String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["old_token":old_token,
+                                      "fcm_token":new_token,
+                                      "action_type":action_type,
+                                      "device": "ios"]
+      
+        Request(.post, API_K.UPDATE_FCM_TOKEN, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+//            print( responseData.result)
+          
+            switch responseData.result {
+            case .success(let value):
                 SVProgressHUD.dismiss()
                 
                 let json = JSON(value)
