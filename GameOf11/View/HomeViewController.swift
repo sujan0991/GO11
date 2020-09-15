@@ -13,6 +13,8 @@ import DTPagerController
 class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerControllerDelegate {
     
     var selectedSegmentIndex: Int = 0
+    var popId: Int = 0
+    
     //var containerView: UIView!
     
     @IBOutlet weak var topImageView: UIImageView!
@@ -28,6 +30,14 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var alertView: UIView!
     
+    @IBOutlet weak var popupCloseButton: UIButton!
+    @IBOutlet weak var ruleView: UIView!
+    @IBOutlet weak var newsLetterImage: UIImageView!
+    
+    @IBOutlet weak var newsLetterText: UILabel!
+    @IBOutlet weak var newsLetterTitleText: UILabel!
+    
+    @IBOutlet weak var newsLetterButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var updatebutton: UIButton!
     @IBOutlet weak var updatemsgLabel: UILabel!
@@ -54,9 +64,8 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
         //        placeNavBar(withTitle: "GAME OF 11", isBackBtnVisible: false,isLanguageBtnVisible: true, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: true, isCountLabelVisible: false)
         //
         //       placePagerContainer()
-        
-        
-        
+       
+        newsLetterButton.setTitle("GOT IT".localized, for: .normal)
         updatemsgLabel.text = "New update is available.".localized
         skipButton.setTitle("SKIP".localized, for: .normal)
         updatebutton.setTitle("UPDATE".localized, for: .normal)
@@ -154,6 +163,31 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
                 //                NotificationCenter.default.post(name: Notification.Name("newAnnouncement"), object: nil, userInfo: dataDict)
                 //
                 
+                for announcement in self.announcementArray{
+                    let temp = announcement as! Dictionary<String,Any>
+                    if temp["type"] as! String == "popup" {
+                        
+                        print(UserDefaults.standard.value(forKey: "popupID") as? Int ?? 0 )
+                        self.popId = temp["id"] as! Int
+                        
+                        if self.popId != UserDefaults.standard.value(forKey: "popupID") as? Int ?? 0
+                        {
+                            self.ruleView.isHidden = false
+                            self.shadowView.isHidden = false
+                            self.popupCloseButton.isHidden = false
+                     
+                            self.newsLetterTitleText.text = temp["title"] as? String ?? ""
+                            self.newsLetterText.text = temp["description"] as? String ?? ""
+                            
+                            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(temp["image_path"] ?? "")")
+                            
+                            self.newsLetterImage.kf.setImage(with: url1)
+                            if url1 == nil{
+                                self.newsLetterImage.image = UIImage.init(named: "")
+                            }
+                        }
+                    }
+                }
             }
         }
         
@@ -321,5 +355,16 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
         Language.language = Language.bangla
     }
     
+    @IBAction func popupUpdate(_ sender: Any) {
+        self.ruleView.isHidden = true
+        self.shadowView.isHidden = true
+        self.popupCloseButton.isHidden = true
+        UserDefaults.standard.setValue(self.popId, forKey: "popupID")
+    }
+    @IBAction func dismissRuleView(_ sender: Any) {
+        self.ruleView.isHidden = true
+        self.shadowView.isHidden = true
+        self.popupCloseButton.isHidden = true
+    }
     
 }

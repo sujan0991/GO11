@@ -23,8 +23,6 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     @IBOutlet weak var secondTeamName: UILabel!
     @IBOutlet weak var secondTeamFlag: UIImageView!
     
-    
-    
     @IBOutlet weak var contestTableView: UITableView!
     @IBOutlet weak var statusLabel: UILabel!
     
@@ -153,10 +151,12 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
             cell.setInfo(contest)
             
             cell.joinedButton.isHidden = true
-            
             cell.totalWinnerButton.tag = indexPath.section
             
             cell.totalWinnerButton.addTarget(self, action: #selector(prizeCalculation(_:)), for: .touchUpInside)
+            cell.editButton.isHidden = false
+            cell.editButton.tag = contest.id ?? 0
+            cell.editButton.addTarget(self, action: #selector(teamEditInJoinedContestAction(_:)), for: .touchUpInside)
             
             return cell
         }else{
@@ -263,6 +263,50 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         return 0;
         
     }
+    
+    @IBAction func teamEditInJoinedContestAction(_ sender: UIButton) {
+        
+            if let um = AppSessionManager.shared.currentUser {
+                
+                if um.isBlocked == 1{
+                    print("Blocked...............")
+                    
+                }else{
+                    for contest in joinedContestList{
+                        if sender.tag == contest.id{
+//                            selectedContest = contest
+                        }
+                    }
+                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
+                        
+                        popupVC?.modalPresentationStyle = .overCurrentContext
+                        popupVC?.modalTransitionStyle = .crossDissolve
+//                        popupVC?.teams = self.createdTeamList
+                        popupVC?.contestId = sender.tag
+//                        popupVC?.delegate = self
+                        
+                        self.present(popupVC!, animated: true) {
+                        }
+                        
+                    }else{
+                        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
+                        
+                        popupVC?.modalPresentationStyle = .overCurrentContext
+                        popupVC?.modalTransitionStyle = .crossDissolve
+//                        popupVC?.teamsFootball = self.createdTeamListFootball
+                        popupVC?.contestId = sender.tag
+//                        popupVC?.delegate = self
+                        
+                        self.present(popupVC!, animated: true) {
+                        }
+                        
+                    }
+                }
+            }
+    }
+    
+   
     
     @IBAction func prizeCalculation(_ sender: UIButton) {
         

@@ -60,6 +60,8 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         //            // Fallback on earlier versions
         //        }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.moveToContestView(_:)), name: NSNotification.Name(rawValue: "notificationRecieved"), object: nil)
+        
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
         // print("??????????..............",Language.language)
@@ -193,10 +195,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.gameSelectAction(_:)), name: NSNotification.Name(rawValue: "gameChange"), object: nil)
         
-        
-        
-        
-        
+       
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -205,6 +204,42 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
     }
     
+    @objc func moveToContestView(_ notification: NSNotification) {
+        
+        print("noti info...........",notification.userInfo)
+       
+        
+        if let totalfup = Int(notification.userInfo?["match_id"] as! String)
+        {
+           
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                
+                getData()
+                gameSegmentControl.setIndex(0)
+                if let index = self.matches.firstIndex(where: {$0.matchId == totalfup}){
+                    let indexPath = IndexPath(row: 0 , section: index)
+                    matchListTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                    matchListTableView.delegate?.tableView!(matchListTableView, didSelectRowAt: indexPath)
+             
+                }
+            }else{
+                
+                getFootBallData()
+                gameSegmentControl.setIndex(1)
+                if let index = self.footBallmatches.firstIndex(where: {$0.matchId == totalfup}){
+                    let indexPath = IndexPath(row: 0 , section: index)
+                    matchListTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                    matchListTableView.delegate?.tableView!(matchListTableView, didSelectRowAt: indexPath)
+             
+                }
+               
+            }
+            
+            
+        }
+       
+   
+    }
     
     func getData(){
         
@@ -584,7 +619,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         SVProgressHUD.show()
-        print("didSelectRowAt............")
+        print("didSelectRowAt............ \(indexPath.section)")
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             

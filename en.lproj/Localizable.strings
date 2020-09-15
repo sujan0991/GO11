@@ -104,6 +104,7 @@
 "Pick 3-6 Bowlers" = "Pick 3-6 Bowlers";
 "(%d)" = "(%d)";
 
+
 "Your squad can not cross 11 players" = "Your squad can not cross 11 players";
 "Total credit value can not be greater than 100" = "Total credit value can not be greater than 100";
 "Not more than 6 Batsmen" = "Not more than 6 Batsmen";
@@ -334,3 +335,7 @@
 "Promo Code"= "Promo Code";
 
 "SEL by %" = "SEL by %";
+"GOT IT" = "GOT IT";
+"CHANGE TEAM" = "CHANGE TEAM";
+"CHANGE YOUR TEAM" = "CHANGE YOUR TEAM";
+"You are changing your team, Want to join using the new team" = "You are changing your team, Want to join using the new team";

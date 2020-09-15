@@ -33,6 +33,7 @@ class ContestTableViewCell: UITableViewCell {
     
     @IBOutlet weak var spotLeftLabel: UILabel!
     
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var progressView: GradientProgressBar!
     
     @IBOutlet weak var totalWinnerButton: UIButton!

@@ -14,13 +14,10 @@ import SVProgressHUD
 protocol BackFromTeamSelect {
     func selectedTeam(team: CreatedTeam,contestId: Int)
     func selectedTeamFootball(team: CreatedTeamFootball,contestId: Int)
+  
 }
 
 class ContestListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,BackFromTeamSelect {
-    
-    
-    
-    
     
     private let refreshControl = UIRefreshControl()
     
@@ -245,7 +242,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         contestTableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData(_:)), name: NSNotification.Name(rawValue: "updateContestDetails"), object: nil)
+       
         
         //    getData()
         
@@ -767,6 +765,10 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             cell.joinedButton.addTarget(self, action: #selector(teamSelectAction(_:)), for: .touchUpInside)
             //    }
             
+            cell.editButton.tag = contest.id ?? 0
+            cell.editButton.addTarget(self, action: #selector(teamEditInJoinedContestAction(_:)), for: .touchUpInside)
+         
+            
             print("contest type",contest.contestType)
             
             cell.totalWinnerButton.tag = indexPath.section
@@ -788,14 +790,19 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             
             if Language.language == Language.english{
                 bnLowRankString = String(singlePrize.lowRank!)
-                bnHighRankString = String(singlePrize.hignRank!)
+                if singlePrize.hignRank != nil {
+                    bnHighRankString = String(singlePrize.hignRank!)
+                }
                 bnPrizeAmountString = String(singlePrize.amount!)
          
                
             }else{
                
                 bnLowRankString = self.formatter.string(for: singlePrize.lowRank! )
-                bnHighRankString = self.formatter.string(for: singlePrize.hignRank! )
+                if singlePrize.hignRank != nil {
+                    bnHighRankString = self.formatter.string(for: singlePrize.hignRank! )
+           
+                }
                 bnPrizeAmountString = self.formatter.string(for: singlePrize.amount! )
             }
             
@@ -840,6 +847,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                 cell.joinedButton.setTitle("JOINED".localized, for: UIControl.State.normal)
                 cell.joinedButton.setTitleColor(UIColor.gray, for: .normal)
                 cell.joinedButton.isUserInteractionEnabled = false
+                cell.editButton.isHidden = false
                 
                 
             }
@@ -850,6 +858,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                 cell.joinedButton.setTitle("JOIN".localized, for: UIControl.State.normal)
                 cell.joinedButton.setTitleColor(UIColor.white, for: .normal)
                 cell.joinedButton.isUserInteractionEnabled = true
+                cell.editButton.isHidden = true
+
             }
             
             //            if contest.contestType == "free"{
@@ -1336,6 +1346,69 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
     }
     
+    @IBAction func teamEditInJoinedContestAction(_ sender: UIButton) {
+        
+        if AppSessionManager.shared.authToken == nil {
+            
+            loginSuggestionLabel.text = "You have to Login or Sign Up to join any contest. Before joining contests you can create your own Fantasy Team. Please Login or Sign Up to prove your skill.".localized
+            self.backShadeView.isHidden = false
+            self.signUpView.isHidden = false
+            
+        }
+        else
+        {
+            if let um = AppSessionManager.shared.currentUser {
+                
+                if um.isBlocked == 1{
+                    print("Blocked...............")
+                    backShadeView.isHidden = false
+                    blockSuggestionView.isHidden = false
+                    
+                }else{
+                    for contest in activeContestList{
+                        if sender.tag == contest.id{
+                            selectedContest = contest
+                        }
+                    }
+                    let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
+                    popupVC?.modalPresentationStyle = .overCurrentContext
+                    popupVC?.modalTransitionStyle = .crossDissolve
+                    popupVC?.contestId = sender.tag
+                    popupVC?.delegate = self
+                    popupVC?.forTeamChange = true
+                
+                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                        if let index = self.createdTeamList.firstIndex(where: {$0.userTeamId == selectedContest?.userTeamId}){
+                            popupVC?.selectedIndex = index;
+                       
+                        }
+                    
+                        popupVC?.teams = self.createdTeamList
+                        if (self.createdTeamList.count != 0)
+                        {
+                            self.present(popupVC!, animated: true) {
+                            }
+                        }
+                       }else{
+                        if let index = self.createdTeamListFootball.firstIndex(where: {$0.userTeamId == selectedContest?.userTeamId}){
+                            popupVC?.selectedIndex = index;
+                       
+                        }
+                        popupVC?.teamsFootball = self.createdTeamListFootball
+                        if (self.createdTeamListFootball.count != 0)
+                        {
+                            self.present(popupVC!, animated: true) {
+                            }
+                        }
+                        self.present(popupVC!, animated: true) {
+                        }
+                    }
+                }
+            }
+        }
+    }
+   
+    
     @IBAction func teamEditAction(_ sender: Any) {
         if let um = AppSessionManager.shared.currentUser {
             
@@ -1364,7 +1437,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             }
         }
     }
-    
+   
     func selectedTeam(team: CreatedTeam,contestId: Int) {
         
         

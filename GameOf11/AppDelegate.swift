@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             
             let storeVersion = infoDic["store_version"] as! String
            // let storeVersion = "1.1.2"
-            
+            // 5000 limit on Recharge
             
             UserDefaults.standard.set(storeVersion, forKey: "storeVersionNumber")
             
@@ -185,7 +185,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
-        print(userInfo)
+//        print(userInfo)
         switch application.applicationState {
 
         case .inactive:
@@ -203,19 +203,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             //Show an in-app banner
             completionHandler(.newData)
         }
+//        UserDefaults.standard.set("cricket", forKey: "selectedGameType")
+        //UserDefaults.standard.set("football", forKey: "selectedGameType")
+        
+        
     }
     
     //Called when a notification is delivered to a foreground app.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-            
-        print("///////////",notification.request.content.userInfo)
+        //Handle the notification
+        completionHandler(
+            [UNNotificationPresentationOptions.alert,
+             UNNotificationPresentationOptions.sound])
     }
     //Called to let your app know which action was selected by the user for a given notification.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
         print("///////////.................",response.notification.request.content.userInfo)
+        let notificationData = response.notification.request.content.userInfo;
+        if (notificationData["match_id"] != nil)
+        {
+            UserDefaults.standard.set(notificationData["game_type"], forKey: "selectedGameType")
+            NotificationCenter.default.post(name: Notification.Name("notificationRecieved"), object: nil, userInfo: notificationData)
+        }
+        
+        
     }
     
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

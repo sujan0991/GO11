@@ -919,7 +919,8 @@ class ContestData: Glossy {
     var prizeConditionMsg: String?
     var prizes: [ContestPrizes] = []
     var is_free_allowed : Int?
-    
+    var userTeamId : Int?
+  
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
         matchId = "match_id" <~~ json
@@ -939,6 +940,7 @@ class ContestData: Glossy {
         prizeConditionMsg = "prize_condition_message" <~~ json
         prizes = "prize" <~~ json ?? []
         is_free_allowed = "is_free_allowed" <~~ json
+        userTeamId = "user_team_id" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -960,7 +962,8 @@ class ContestData: Glossy {
             "updated_at" ~~> updatedAt,
             "prize_condition_message" ~~> prizeConditionMsg,
             "prize" ~~> prizes,
-            "is_free_allowed" ~~> is_free_allowed
+            "is_free_allowed" ~~> is_free_allowed,
+            "is_free_allowed" ~~> userTeamId
             ])
     }
 }

@@ -140,16 +140,12 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
             
             UIView.animate(withDuration:0.2, animations: {
                 
-                
                 self.paymentView.frame = CGRect(x: 0, y:self.view.frame.height - self.paymentView.frame.height - bottonSpace, width: self.paymentView.frame.width, height: self.paymentView.frame.height)
                 
             }) { _ in
                 
                 
             }
-            
-            
-            
         }
         
     }
