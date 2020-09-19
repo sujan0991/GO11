@@ -293,6 +293,7 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
 }
 
 
+
 extension String {
     var htmlToAttributedString: NSAttributedString? {
         

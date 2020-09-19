@@ -935,7 +935,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development: Tanvir Ahmad (WG962TBUN2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -997,7 +997,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development: Tanvir Ahmad (WG962TBUN2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1027,7 +1027,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Tanvir Ahmad (WG962TBUN2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
@@ -1085,7 +1085,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Tanvir Ahmad (WG962TBUN2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
@@ -1140,7 +1140,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1D9994E50EBEB3202776FEF /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development: Tanvir Ahmad (WG962TBUN2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
@@ -1165,7 +1165,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E158AAB73C4A0C032EC4EFD1 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development: Tanvir Ahmad (WG962TBUN2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;

@@ -94,9 +94,24 @@ class AnnouncementViewController: UIViewController,UITableViewDelegate,UITableVi
         titleLabel.text = "\(String(describing: singleAnnouncement["title"]!))"
         
         let htmlString = singleAnnouncement["description"]! as! String
-        print("..................",htmlString.htmlToAttributedString!)
+        let customizedText = NSMutableAttributedString(string: htmlString)
+        customizedText.addAttribute(NSAttributedString.Key.strokeWidth, value: 5.0, range: NSRange(location: 0, length: customizedText.string.count))
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      customizedText.addAttribute(NSAttributedString.Key.strokeColor, value: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), range: NSRange(location: 0, length: customizedText.string.count))
+                      
+                  }else{
+                      customizedText.addAttribute(NSAttributedString.Key.strokeColor, value: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), range: NSRange(location: 0, length: customizedText.string.count))
+                  }
+              
+              }else{
+                  
+              }
+
         
-        detailLabel.attributedText = htmlString.htmlToAttributedString
+        detailLabel.attributedText = customizedText
+        
         
        // detailLabel.text = htmlString
        
@@ -133,8 +148,7 @@ class AnnouncementViewController: UIViewController,UITableViewDelegate,UITableVi
         
         self.navigationController?.popViewController(animated: true)
     }
-    
-    
 
 }
+
 
