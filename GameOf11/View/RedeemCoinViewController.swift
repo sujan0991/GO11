@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RedeemCoinViewController: BaseViewController {
+class RedeemCoinViewController: BaseViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var tkToCoinLabel: UILabel!
@@ -36,6 +36,7 @@ class RedeemCoinViewController: BaseViewController {
         secondSuggestionLabel.text = "The amount in BDT you would mention here will add the equivalent amount of coins in your profile.".localized
         
         self.tabBarController?.tabBar.isHidden = true;
+        self.tkAmountTextField.delegate = self
         
     }
     
@@ -58,8 +59,23 @@ class RedeemCoinViewController: BaseViewController {
               }
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let maxAmount = UserDefaults.standard.value(forKey: "maxRechargeAmount") as! Int
+        let newText = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
+        if newText.isEmpty {
+            return true
+        }
+        else if let intValue = Int(newText), intValue <= maxAmount {
+            return true
+        }
+        else {
+            self.view.makeToast("Maximum limit is \(maxAmount)")
+        }
+        return false
+    }
+    
     @IBAction func redeemButtonAction(_ sender: Any) {
-        
+       
         if tkAmountTextField.text?.count != 0 { APIManager.manager.redeemCoinForCash(amount: self.tkAmountTextField.text ?? "0") { (success, msg) in
             if(success)
             {

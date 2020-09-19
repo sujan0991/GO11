@@ -12,7 +12,7 @@ import IQKeyboardManagerSwift
 import Firebase
 import FirebaseMessaging
 import UserNotifications
-import OneSignal
+//import OneSignal
 
 
 @UIApplicationMain
@@ -47,14 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         
         UserDefaults.standard.set(version, forKey: "currentVersionNumber")
         
-        print("versionNumber...........",version)
-        
-        
+         
         APIManager.manager.getAppInfo{ (infoDic) in
             
             let mediaUrl = infoDic["media_base_url"] as! String
-            
-            print("mediaUrl...........?????????",mediaUrl)
             
             UserDefaults.standard.set( mediaUrl, forKey: "media_base_url")
             
@@ -69,7 +65,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             
             UserDefaults.standard.set(storeVersion, forKey: "storeVersionNumber")
             
+            
+            
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "versionCheck"), object: nil, userInfo: nil)
+            
+            let maxRechargeAmount = infoDic["maximum_buy_coin_amount"] as! Int
+           // let storeVersion = "1.1.2"
+            // 5000 limit on Recharge
+            
+            UserDefaults.standard.set(maxRechargeAmount, forKey: "maxRechargeAmount")
+          
             
         }
      
@@ -99,21 +104,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         
         
         // One Signal
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
-        
-        // Replace 'YOUR_APP_ID' with your OneSignal App ID.
-        OneSignal.initWithLaunchOptions(launchOptions,
-                                        appId: "64741dfa-452e-4a46-a1d0-c79a2f64e298",
-                                        handleNotificationAction: nil,
-                                        settings: onesignalInitSettings)
-        
-        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
-        
-        // Recommend moving the below line to prompt for push after informing the user about
-        //   how your app will use them.
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
-        })
+//        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+//
+//        // Replace 'YOUR_APP_ID' with your OneSignal App ID.
+//        OneSignal.initWithLaunchOptions(launchOptions,
+//                                        appId: "64741dfa-452e-4a46-a1d0-c79a2f64e298",
+//                                        handleNotificationAction: nil,
+//                                        settings: onesignalInitSettings)
+//
+//        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+//
+//        // Recommend moving the below line to prompt for push after informing the user about
+//        //   how your app will use them.
+//        OneSignal.promptForPushNotifications(userResponse: { accepted in
+//            print("User accepted notifications: \(accepted)")
+//        })
         
         
         

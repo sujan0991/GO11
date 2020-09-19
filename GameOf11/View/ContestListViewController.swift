@@ -838,14 +838,13 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         if let cell = cell as? ContestTableViewCell{
             
             let contest = activeContestList[indexPath.section]
+            cell.joinedButton.setTitleColor(UIColor.white, for: .normal)
             
             if (contest.isJoined != 0)
             {
                 
-                cell.joinedButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
-                
+                cell.joinedButton.setBackgroundColor(UIColor.init(named: "dark_to_green")!, for: UIControl.State.normal)
                 cell.joinedButton.setTitle("JOINED".localized, for: UIControl.State.normal)
-                cell.joinedButton.setTitleColor(UIColor.gray, for: .normal)
                 cell.joinedButton.isUserInteractionEnabled = false
                 cell.editButton.isHidden = false
                 
@@ -854,9 +853,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             else
             {
                 cell.joinedButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
-                
                 cell.joinedButton.setTitle("JOIN".localized, for: UIControl.State.normal)
-                cell.joinedButton.setTitleColor(UIColor.white, for: .normal)
                 cell.joinedButton.isUserInteractionEnabled = true
                 cell.editButton.isHidden = true
 

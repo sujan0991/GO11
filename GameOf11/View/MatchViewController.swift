@@ -839,14 +839,12 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             if notification.userInfo!["isSelected"]! as! Bool == true{
                 
                 UserDefaults.standard.set("cricket", forKey: "selectedGameType")
-                
                 getData()
                 
             }else{
                 
                 
                 UserDefaults.standard.set("football", forKey: "selectedGameType")
-                
                 getFootBallData()
             }
             
