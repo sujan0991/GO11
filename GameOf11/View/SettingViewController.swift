@@ -83,7 +83,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             
             menuArray.append(["title":"Change Language".localized, "icon":"language_change_icon"])
        //     menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
-            menuArray.append(["title":"Dark Mode".localized, "icon":"language_change_icon"])
+            menuArray.append(["title":"Dark Mode".localized, "icon":"night_mode"])
              
         }else{
             
@@ -143,16 +143,18 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         if indexPath.row == 0{
             
             cell.settingSwitch.isHidden = true
-        }else if indexPath.row == 1{
-            
-            if isNotiON{
-                                          
-                cell.settingSwitch.isOn = true
-            }else{
-                cell.settingSwitch.isOn = false
-            }
-            
-        }else if indexPath.row == 2{
+        }
+//        else if indexPath.row == 1{
+//
+//            if isNotiON{
+//
+//                cell.settingSwitch.isOn = true
+//            }else{
+//                cell.settingSwitch.isOn = false
+//            }
+//
+//        }
+        else if indexPath.row == 1{
             
              if UserDefaults.standard.bool(forKey: "DarkMode"){
                                
@@ -188,19 +190,19 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         let switchTag = sender.tag
         
         print("switch tag", switchTag)
+//        if sender.tag == 1{
+//            if sender.isOn{
+//
+//                print("noti on")
+//
+//            }else{
+//                print("noti on")
+//            }
+//
+//
+//        }
+
         if sender.tag == 1{
-            if sender.isOn{
-
-                print("noti on")
-
-            }else{
-                print("noti on")
-            }
-
-            
-        }
-
-        else if sender.tag == 2{
         if #available(iOS 13, *) {
             if sender.isOn{
 
