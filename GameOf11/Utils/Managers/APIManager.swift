@@ -91,6 +91,9 @@ struct API_K {
     
     static let JOIN_CONTEST = "user-contest/join"
     static let JOIN_CONTEST_FOOTBALL = "football/user-contest/join"
+    static let UPDATE_CONTEST = "user-contest/team/update"
+    static let UPDATE_FOOTBALL_CONTEST = "football/user-contest/team/update"
+  
     
     static let POST_EDITED_TEAM = "user-team/edit"
     static let POST_EDITED_FOOTBALL_TEAM = "football/user-team/edit"
@@ -1640,6 +1643,52 @@ class APIManager: NSObject {
                     }
                     else{
                         completion?(true,msg)
+                    }
+                }
+                else {
+                    completion?(false,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,error.localizedDescription)
+            }
+        })
+    }
+    
+    func updateTeamInContestWith(contestId:String, teamId:String, forTeamType:String,  withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["contest_id":contestId,
+                                      "user_team_id":teamId,
+        ]
+        
+        var url = API_K.UPDATE_CONTEST
+        if forTeamType == "football"
+        {
+            url = API_K.UPDATE_FOOTBALL_CONTEST
+        }
+        
+        Request(.post, url, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    var isSuccess:Bool?
+                    
+                    isSuccess = jsonDic["status"] as? Bool ?? true
+                    
+                    if !isSuccess!{
+                        let msg:String? = json["message"].stringValue
+                        
+                        completion?(false,msg)
+                    }
+                    else{
+                        
+                        completion?(true,"Success")
                     }
                 }
                 else {

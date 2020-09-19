@@ -27,7 +27,7 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         super.viewDidLoad()
         
         
-        print("teams........",teams)
+        print("teams........ \(selectedIndex)")
         // Do any additional setup after loading the view.
        
       
@@ -207,12 +207,12 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             let singleTeam = teams[selectedIndex] as CreatedTeam
             
-            APIManager.manager.joinInContestWith(contestId: String.init(format: "%d",  self.contestId), teamId: String.init(format: "%d", singleTeam.userTeamId!), withCompletionHandler: { (status, msg) in
+            APIManager.manager.updateTeamInContestWith(contestId: String.init(format: "%d",  self.contestId), teamId: String.init(format: "%d", singleTeam.userTeamId!), forTeamType: "cricket", withCompletionHandler: { (status, msg) in
                 if status{
                     
                     //update joined contest
                     self.view.makeToast(msg!)
-           
+                    NotificationCenter.default.post(name: Notification.Name("updateContestDetails"), object: nil, userInfo: nil)
                 }
                 else{
                     self.view.makeToast(msg!)
@@ -222,11 +222,12 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         }else{
             let singleFootballTeam = teamsFootball[selectedIndex] as CreatedTeamFootball
      
-            APIManager.manager.joinInFootballContestWith(contestId: String.init(format: "%d", self.contestId), teamId: String.init(format: "%d", singleFootballTeam.userTeamId!), withCompletionHandler: { (status, msg) in
+            APIManager.manager.updateTeamInContestWith(contestId: String.init(format: "%d", self.contestId), teamId: String.init(format: "%d", singleFootballTeam.userTeamId!),forTeamType: "football", withCompletionHandler: { (status, msg) in
                 if status{
                     
                     //update contest list
                     self.view.makeToast(msg!)
+                    NotificationCenter.default.post(name: Notification.Name("updateContestDetails"), object: nil, userInfo: nil)
            
                 }
                 else{

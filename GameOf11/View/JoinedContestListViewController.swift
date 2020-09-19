@@ -15,6 +15,10 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     var parentMatch: MatchList? = nil
     var parentMatchFootball: FootBallMatchList? = nil
     
+    var createdTeamList: [CreatedTeam] = []
+    var createdTeamListFootball: [CreatedTeamFootball] = []
+    
+    
     var prizeFilteredArray: [PrizeRankCal] = []
     
     @IBOutlet weak var firstTeamFlag: UIImageView!
@@ -57,6 +61,8 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         contestTableView.delegate = self
         contestTableView.dataSource = self
         contestTableView.removeEmptyCells()
+        
+        
         
         prizeRankTableView.delegate = self
         prizeRankTableView.dataSource = self
@@ -101,6 +107,34 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if AppSessionManager.shared.authToken != nil{
+            //user's team
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                APIManager.manager.getTeamForMatch(matchId: "\(parentMatch?.matchId ?? 0)") { (status, createdTeam, msg) in
+                    if status{
+                        
+                        if createdTeam != nil{
+                            self.createdTeamList = (createdTeam?.teams)!
+                            
+                        }
+                    }
+                }
+            }
+            else
+            {
+                APIManager.manager.getTeamForFootballMatch(matchId: "\(parentMatchFootball?.matchId ?? 0)") { (status, createdTeam, msg) in
+                    if status{
+                        
+                        if createdTeam != nil{
+                            self.createdTeamListFootball = (createdTeam?.teams)!
+                        
+                        }
+                    }
+                }
+            }
+            
+        }
         
         prizeRankView.isHidden = true
         
@@ -266,48 +300,51 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
     
     @IBAction func teamEditInJoinedContestAction(_ sender: UIButton) {
         
-            if let um = AppSessionManager.shared.currentUser {
-                
-                if um.isBlocked == 1{
-                    print("Blocked...............")
-                    
-                }else{
-                    for contest in joinedContestList{
-                        if sender.tag == contest.id{
-//                            selectedContest = contest
+        var selectedContest: ContestData?
+        if let um = AppSessionManager.shared.currentUser {
+            
+            if um.isBlocked == 1{
+                print("Blocked...............")
+            }else{
+                for contest in joinedContestList{
+                    if sender.tag == contest.id{
+                        selectedContest = contest
+                    }
+                }
+                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
+                popupVC?.modalPresentationStyle = .overCurrentContext
+                popupVC?.modalTransitionStyle = .crossDissolve
+                popupVC?.contestId = sender.tag
+                popupVC?.forTeamChange = true
+            
+                if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                    if let index = self.createdTeamList.firstIndex(where: {$0.userTeamId == selectedContest?.userTeamId}){
+                        popupVC?.selectedIndex = index;
+                   
+                    }
+                    popupVC?.teams = self.createdTeamList
+                    if (self.createdTeamList.count != 0)
+                    {
+                        self.present(popupVC!, animated: true) {
                         }
                     }
-                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
-                        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
-                        
-                        popupVC?.modalPresentationStyle = .overCurrentContext
-                        popupVC?.modalTransitionStyle = .crossDissolve
-//                        popupVC?.teams = self.createdTeamList
-                        popupVC?.contestId = sender.tag
-//                        popupVC?.delegate = self
-                        
+                   }else{
+                    if let index = self.createdTeamListFootball.firstIndex(where: {$0.userTeamId == selectedContest?.userTeamId}){
+                        popupVC?.selectedIndex = index;
+                   
+                    }
+                    popupVC?.teamsFootball = self.createdTeamListFootball
+                    if (self.createdTeamListFootball.count != 0)
+                    {
                         self.present(popupVC!, animated: true) {
                         }
-                        
-                    }else{
-                        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
-                        
-                        popupVC?.modalPresentationStyle = .overCurrentContext
-                        popupVC?.modalTransitionStyle = .crossDissolve
-//                        popupVC?.teamsFootball = self.createdTeamListFootball
-                        popupVC?.contestId = sender.tag
-//                        popupVC?.delegate = self
-                        
-                        self.present(popupVC!, animated: true) {
-                        }
-                        
+                    }
+                    self.present(popupVC!, animated: true) {
                     }
                 }
             }
+        }
     }
-    
-   
-    
     @IBAction func prizeCalculation(_ sender: UIButton) {
         
         

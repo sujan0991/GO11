@@ -82,13 +82,13 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         if #available(iOS 13, *) {
             
             menuArray.append(["title":"Change Language".localized, "icon":"language_change_icon"])
-            menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
+       //     menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
             menuArray.append(["title":"Dark Mode".localized, "icon":"language_change_icon"])
              
         }else{
             
             menuArray.append(["title":"Change Language".localized, "icon":"language_change_icon"])
-            menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
+        //    menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
              
         }
         
