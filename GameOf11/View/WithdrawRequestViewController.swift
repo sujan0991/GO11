@@ -24,6 +24,13 @@ class WithdrawRequestViewController: BaseViewController {
     @IBOutlet weak var firstSuggestionlabel: UILabel!
     @IBOutlet weak var secondSuggestionlabel: UILabel!
     
+    @IBOutlet weak var pendingLabel: UILabel!
+    @IBOutlet var pendingReqCountLabel: UILabel!
+
+  
+    
+    let formatter = NumberFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,17 +39,39 @@ class WithdrawRequestViewController: BaseViewController {
         
         placeNavBar(withTitle: "WITHDRAW REQUEST".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
+        formatter.numberStyle = .decimal
+        formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
+        
+        
         amountLabel.text = "Amount in BDT".localized
         tkAmountTextField.placeholder = "Amount in BDT".localized
         bKashNoTextField.placeholder = "Personal bKash phone number".localized
+        pendingLabel.text = "Pending Withdraw".localized
         
         sendButton.setTitle("Send Withdraw Request".localized, for: .normal)
         
         cashWithdrawLabel.text = "Cash-Withdrawl!".localized
         firstSuggestionlabel.text = "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT.".localized
-        secondSuggestionlabel.text = "Personal Bkash number is needed while withdrawing the money. You may provide it later when GO11 team contact you regarding the withdrawal process.".localized
+        secondSuggestionlabel.text = "Personal Bkash number is needed while withdrawing the money.".localized
         
         self.tabBarController?.tabBar.isHidden = true
+        
+        if let usermodel = AppSessionManager.shared.currentUser {
+           
+            if Language.language == Language.english{
+                
+                self.pendingReqCountLabel.text = String.init(format: "%d",usermodel.metadata?.totalPendingRequest ?? "")
+            }else{
+                
+                self.pendingReqCountLabel.text = String.init(format: "%@", self.formatter.string(from: usermodel.metadata?.totalPendingRequest as NSNumber? ?? 0)!)
+                
+            }
+        }else{
+            
+        }
+        
+        
+        
         
     }
     
@@ -92,6 +121,15 @@ class WithdrawRequestViewController: BaseViewController {
         }
     }
     
+    @IBAction func pendingWithdrawButtonAction(_ sender: Any) {
+        
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PendingWithdrawViewController") as? PendingWithdrawViewController
+        
+        
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+    }
+
   
     @IBAction func backButtonAction(_ sender: Any) {
         

@@ -39,8 +39,6 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var winningLabel: UILabel!
     @IBOutlet var winningAmountLabel: UILabel!
     
-    @IBOutlet weak var pendingLabel: UILabel!
-    @IBOutlet var pendingReqCountLabel: UILabel!
     
     @IBOutlet var addCoinButton: UIButton!
     @IBOutlet var withdrawButton: UIButton!
@@ -151,7 +149,6 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         accountInfoLabel.text = "Account Info".localized
         depositedCoinLabel.text = "Deposited Coins".localized
         winningLabel.text = "Winning Amount".localized
-        pendingLabel.text = "Pending Withdraw".localized
         
         addCoinButton.setTitle("ADD COINS".localized, for: .normal)
         withdrawButton.setTitle("WITHDRAW PRIZE".localized, for: .normal)
@@ -322,7 +319,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 
                                 self.depositedCoinCountLabel.text = String.init(format: "%d", um.metadata?.totalCoins ?? "")
                                 self.winningAmountLabel.text = String.init(format: "%.2f", um.metadata?.totalCash ?? "")
-                                self.pendingReqCountLabel.text = String.init(format: "%d", um.metadata?.totalPendingRequest ?? "")
+                            //    self.pendingReqCountLabel.text = String.init(format: "%d", um.metadata?.totalPendingRequest ?? "")
                                 
                                 self.contestCountLabel.text = String.init(format: "%d", um.metadata?.totalContestParticipation ?? "")
                                 self.topRankCountLabel.text = String.init(format: "%d", um.metadata?.highestRank ?? "")
@@ -337,7 +334,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 
                                 self.depositedCoinCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalCoins as NSNumber? ?? 0)!)
                                 self.winningAmountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalCash as NSNumber? ?? 0)!)
-                                self.pendingReqCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalPendingRequest as NSNumber? ?? 0)!)
+                                
                                 
                                 self.contestCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalContestParticipation as NSNumber? ?? 0)!)
                                 self.topRankCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.highestRank as NSNumber? ?? 0)!)
@@ -363,7 +360,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                             if um.isVerified == 1{
                                 
                                 self.verifyButton.setTitle("Verified Profile".localized, for: .normal)
-                                self.verifyButton.setTitleColor(UIColor.init(named: "GreenHighlight")!, for: .normal)
+                                self.verifyButton.setTitleColor(UIColor.init(named: "on_green")!, for: .normal)
                                 self.verifyButton.isUserInteractionEnabled = false
                                 self.verifyInfoButton.isUserInteractionEnabled = false
                                 self.verifyInfoButton.setImage(UIImage(named: "selected_thick"), for: .normal)
@@ -540,14 +537,6 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
     }
     
-    @IBAction func pendingWithdrawButtonAction(_ sender: Any) {
-        
-        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PendingWithdrawViewController") as? PendingWithdrawViewController
-        
-        
-        self.navigationController?.pushViewController(vc!, animated: true)
-        
-    }
     
     
     @IBAction func freeContestInfoButtonAction(_ sender: Any) {

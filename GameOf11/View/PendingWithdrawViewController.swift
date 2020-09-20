@@ -138,8 +138,8 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
                 cell.statusImageView.image = UIImage(named: "pending_icon")
             }else{
                 
-                cell.statusLabel.textColor = UIColor.init(named: "GreenHighlight")!
-                cell.amountLabel.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.statusLabel.textColor = UIColor.init(named: "on_green")!
+                cell.amountLabel.textColor = UIColor.init(named: "on_green")!
                 cell.statusImageView.image = UIImage(named: "team_select_icon")
             }
             
