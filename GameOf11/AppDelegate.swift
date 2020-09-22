@@ -159,6 +159,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         }
         Messaging.messaging().apnsToken = deviceToken
        
+        Messaging.messaging().subscribe(toTopic: "ALL_USER_TOPIC") { error in
+          print("Subscribed to weather topic")
+        }
+       
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -174,6 +178,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
         
+        Messaging.messaging().subscribe(toTopic: "ALL_USER_TOPIC") { error in
+          print("Subscribed to weather topic")
+        }
         var oldToken = ""
         if let oldFcmToken = AppSessionManager.shared.fcmToken{
             oldToken = oldFcmToken
