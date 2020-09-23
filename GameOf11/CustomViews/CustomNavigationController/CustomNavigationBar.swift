@@ -58,11 +58,11 @@ class CustomNavigationBar: UIView {
         containerView.frame = self.bounds
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
-            
+
             gameSelectButton.isSelected = false
-            
+
         }else{
-            
+
             gameSelectButton.isSelected = true
         }
         
@@ -115,14 +115,14 @@ class CustomNavigationBar: UIView {
             
         }
         
-        if isGameBtnVisible {
-            gameSelectButton.isHidden = false
-            
-        }else{
-            gameSelectButton.isHidden = true
-            
-            
-        }
+//        if isGameBtnVisible {
+//            gameSelectButton.isHidden = false
+//
+//        }else{
+//            gameSelectButton.isHidden = true
+//
+//
+ //       }
         if isAnnounceBtnVisible {
             
             announcementButton.isHidden = false
