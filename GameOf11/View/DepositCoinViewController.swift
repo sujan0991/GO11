@@ -57,7 +57,7 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         tkAmountTextField.delegate = self
         
         bDTtoCoinLabel.text = "1 BDT = 50 Coins".localized
-        suggestionLabel.text = "You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT.".localized
+        suggestionLabel.text = "Write your amount to get equivalent numbers of coins.Click on the 'ADD COINS' and choose your payment method. Minimum amount is 10 BDT.".localized
         tkAmountTextField.placeholder = "Write amount in BDT to buy Coins".localized
         
         addCoinButton.setTitle("ADD COINS".localized, for: .normal)

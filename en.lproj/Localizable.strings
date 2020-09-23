@@ -208,7 +208,7 @@
 "Please upload one image at least!" = "Please upload one image at least!";
 
 "1 BDT = 50 Coins" = "1 BDT = 50 Coins";
-"You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT." = "You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT.";
+"Write your amount to get equivalent numbers of coins.Click on the 'ADD COINS' and choose your payment method. Minimum amount is 10 BDT." = "Write your amount to get equivalent numbers of coins.Click on the 'ADD COINS' and choose your payment method. Minimum amount is 10 BDT.";
 "Write amount in BDT to buy Coins" = "Write amount in BDT to buy Coins";
 "Available Coin Packs" = "Available Coin Packs";
 "Payment Methods" = "Payment Methods";

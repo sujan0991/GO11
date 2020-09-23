@@ -42,8 +42,8 @@ class LoginViewController: BaseViewController {
         
         if Language.language == Language.bangla{
             
-            banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-            banglaButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            banglaButton.setTitleColor(UIColor.white, for: .normal)
+            banglaButton.backgroundColor = UIColor.init(named: "on_green")!
             
             englishButton.backgroundColor = UIColor.white
             englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
@@ -51,10 +51,11 @@ class LoginViewController: BaseViewController {
             banglaButton.backgroundColor = UIColor.white
             banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
             
-            englishButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
-            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+            englishButton.backgroundColor = UIColor.init(named: "on_green")!
+            englishButton.setTitleColor(UIColor.white, for: .normal)
             
         }
+
         
         englishButton.layer.borderWidth = 0.5
         englishButton.layer.borderColor = UIColor.lightGray.cgColor
@@ -62,8 +63,8 @@ class LoginViewController: BaseViewController {
         banglaButton.layer.borderColor = UIColor.lightGray.cgColor
         
         
-        //        phoneField.text = "01676330929"
-        //        passwordField.text = "123456"
+        //        phoneField.text = "01676330929"  8801770247711
+        //        passwordField.text = "123456"    shaf1234
         
         
         signinButton.makeRound(5, borderWidth: 0, borderColor: .clear)

@@ -207,7 +207,7 @@
 "Back Side Image" = "পিছনের সাইডের ছবি";
 "Please upload one image at least!" = "প্লিজ অন্তত একটি ছবি আপলোড করুন!";
 "1 BDT = 50 Coins" = "১ টাকা = ৫০ কয়েন";
-"You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT." = "আপনি এই স্ক্রিন থেকে আপনার প্রোফাইলে কয়েন কিনে যোগ করতে পারবেন। উপরে হাইলাইট করে দেয়া লেখা অনুযায়ী ১ টাকা = ৫০ কয়েন, যার মানে হচ্ছে আপনি যদি আপনার প্রোফাইলে ১০০০ কয়েন যোগ করতে চান তাহলে নিচের ইনপুট বক্সে ২০ লিখবেন। এরপর কয়েন কিনুন বাটনে ক্লিক করে পেমেন্ট মেথড সিলেক্ট করুন। এরপর অ্যাপ এর পেমেন্ট গেটওয়ের মাধ্যমে আপনার বাছাই করা পেমেন্ট মেথড থেকে ২০ টাকা কেটে নেয়া হবে  সবগুলো পেমেন্ট মেথড পরীক্ষিত এবং সম্পূর্ন নিরাপদ। সফল ভাবে পেমেন্ট হয়ে গেলে আপনার প্রোফাইল সেই টাকার সমপরিমাণ কয়েন যোগ হয়ে যাবে। আপনি সর্বনিম্ন ১০ টাকার কয়েন কিনতে পারবেন।";
+"Write your amount to get equivalent numbers of coins.Click on the 'ADD COINS' and choose your payment method. Minimum amount is 10 BDT." = "কয়েন পেতে আপনার টাকার পরিমাণটি লিখুন। 'ADD COINS' এ ক্লিক করুন এবং আপনার পেমেন্ট মেথড বাছাই করুন। সর্বনিম্ন ১০ টাকার কয়েন কিনতে পারবে।";
 "Write amount in BDT to buy Coins" = "যত টাকার কয়েন কিনতে চান সেটা লিখুন";
 "Available Coin Packs" = "সকল Available কয়েন প্যাকেজ";
 "Payment Methods" = "পেমেন্ট মেথড";
