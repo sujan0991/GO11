@@ -71,7 +71,6 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
     
     @IBOutlet weak var playersLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
-    @IBOutlet weak var selectedPerLabel: UILabel!
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var previewButton: UIButton!
@@ -110,7 +109,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         playersTopLabel.text = "Players".localized
         playersLabel.text = "PLAYERS".localized
         creditsLabel.text = "CREDITS".localized
-        selectedPerLabel.text = "SEL by %".localized
+//        selectedPerLabel.text = "SEL by %".localized
         
         creditLeftLabel.text = "Credits Left".localized
         suggestionLabel.text = "Pick 1-4 Wicket-Keepers".localized
@@ -387,7 +386,8 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
         if cell.isSelected {
             
-            cell.positionIcon.backgroundColor = UIColor.init(named: "orange_to_blue")
+            cell.positionIcon.backgroundColor = UIColor.init(named: "green_to_orange")
+         
            
         }else{
             
@@ -491,8 +491,6 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"playerCell") as! PlayerTableViewCell
-        
-        
         
         var player: Player!
         
@@ -945,7 +943,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             
         }else{
             
-            nextButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
+            nextButton.setBackgroundColor(UIColor.init(named: "brand_txt_color_gray")!, for: UIControl.State.normal)
             nextButton.isUserInteractionEnabled = false
             
             nextButton.layer.shadowColor = UIColor.gray.cgColor

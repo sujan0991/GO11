@@ -215,7 +215,7 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             
             cell.keeperLabel.text = "WK"
             cell.batsmanLabel.text = "BAT"
-            cell.allrounderLabel.text = "AL"
+            cell.allrounderLabel.text = "ALL"
             cell.bowlerLabel.text = "BOWL"
             
             cell.setInfo(singleTeam)

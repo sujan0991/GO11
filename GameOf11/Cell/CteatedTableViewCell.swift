@@ -87,9 +87,6 @@ class CteatedTableViewCell: UITableViewCell {
             self.bowlerCountLabel.text = String.init(format: "%@", formatter.string(from: NSNumber(value: team.bowlerCount!))!)
             
         }
-       
-        
-        
         if team.captain_image != nil{
             
             let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(team.captain_image ?? "")")

@@ -679,7 +679,7 @@ class TeamPreviewFootballViewController: BaseViewController, UITableViewDelegate
         
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        label.textColor = UIColor.init(named: "Bg") // my custom colour
+        label.textColor = UIColor.init(named: "LightGray") // my custom colour
         label.textAlignment = .center
         headerView.addSubview(label)
         

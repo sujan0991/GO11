@@ -64,13 +64,12 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
     
     @IBOutlet weak var playersLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
-    @IBOutlet weak var selectedPerLabel: UILabel!
+  
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var previewButton: UIButton!
     
     @IBOutlet weak var navTitle: UILabel!
-    
     
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var alartView: UIView!
@@ -103,7 +102,6 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
         playersTopLabel.text = "Players".localized
         playersLabel.text = "PLAYERS".localized
         creditsLabel.text = "CREDITS".localized
-        selectedPerLabel.text = "SEL by %".localized
         creditLeftLabel.text = "Credits Left".localized
         suggestionLabel.text = "Pick 1 Goal-Keeper".localized
         
@@ -381,8 +379,8 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
         
         if cell.isSelected {
             
-            cell.positionIcon.backgroundColor = UIColor.red
-            
+            cell.positionIcon.backgroundColor = UIColor.init(named: "green_to_orange")
+         
         }else{
             
             cell.positionIcon.backgroundColor = UIColor.clear
@@ -936,7 +934,7 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
             
         }else{
             
-            nextButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
+            nextButton.setBackgroundColor(UIColor.init(named: "brand_txt_color_gray")!, for: UIControl.State.normal)
             nextButton.isUserInteractionEnabled = false
             
             nextButton.layer.shadowColor = UIColor.gray.cgColor

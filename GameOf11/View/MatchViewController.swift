@@ -79,6 +79,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         self.noContestView.isHidden = true
         
+        print(type)
         if type == .next {
             
             topViewHeight.isActive = false
@@ -95,10 +96,11 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 self.adCollectionView.reloadData()
             }
             
-        }else{
+        }else {
             
-            bannerRatioConstraint.isActive = false
             topViewHeight.isActive = true
+            bannerRatioConstraint.isActive = false
+            
         }
         
         
@@ -149,9 +151,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-
-            
+    
             if #available(iOS 13, *) {
                       if UserDefaults.standard.bool(forKey: "DarkMode"){
                           
@@ -164,6 +164,13 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                   }else{
                       
                   }
+        
+        if type != .next {
+            
+            topViewHeight.isActive = true
+            bannerRatioConstraint.isActive = false
+            
+        }
         
         print("viewWillAppear..............match",UserDefaults.standard.string(forKey: "selectedGameType"))
         self.noMatchView.isHidden = true
@@ -191,6 +198,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         super.viewDidAppear(animated)
         
         // print("viewDidAppear..............match")
+        
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.gameSelectAction(_:)), name: NSNotification.Name(rawValue: "gameChange"), object: nil)

@@ -35,7 +35,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqA-pe-ddL">
                                 <rect key="frame" x="10" y="9" width="95" height="22"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
-                                <color key="textColor" name="dark_to_green"/>
+                                <color key="textColor" name="dark_to_white"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L19-yE-Kw7" userLabel="Captain">
@@ -218,7 +218,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="vxZ-8Z-RtV">
                                                         <rect key="frame" x="154" y="0.0" width="72" height="50"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHM-BI-bea">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHM-BI-bea">
                                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="19.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                                 <color key="textColor" name="GreyTextColor"/>
@@ -315,6 +315,7 @@
                                             <constraint firstAttribute="width" constant="30" id="wLY-eF-alS"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="13"/>
+                                        <color key="tintColor" name="black_to_blue"/>
                                         <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                         <state key="normal" image="edit_icon"/>
                                     </button>
@@ -414,11 +415,14 @@
         <namedColor name="TabOrangeColor">
             <color red="0.94117647058823528" green="0.45490196078431372" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="black_to_blue">
+            <color red="0.0040000001899898052" green="0.050999999046325684" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="brand_txt_color_black">
             <color red="0.28200000524520874" green="0.29800000786781311" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="dark_to_green">
-            <color red="0.28200000524520874" green="0.29800000786781311" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="dark_to_white">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="white_to_darkBlue">
             <color red="0.9100000262260437" green="0.9179999828338623" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

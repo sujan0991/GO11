@@ -78,7 +78,7 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
     @IBOutlet weak var suggestionLabel: UILabel!
     @IBOutlet weak var playersLabel: UILabel!
     @IBOutlet weak var creditsLabel: UILabel!
-    @IBOutlet weak var selectedPerLabel: UILabel!
+   
     
     @IBOutlet weak var navTitle: UILabel!
     
@@ -111,8 +111,8 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
         playersTopLabel.text = "Players".localized
         playersLabel.text = "PLAYERS".localized
         creditsLabel.text = "CREDITS".localized
-        selectedPerLabel.text = "SEL by %".localized
-        
+//        selectedPerLabel.text = "SEL by %".localized
+//
         creditLeftLabel.text = "Credits Left".localized
         suggestionLabel.text = "Pick 1-4 Wicket-Keepers".localized
         
@@ -614,7 +614,7 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
         
         if cell.isSelected {
             
-            cell.positionIcon.backgroundColor = UIColor.red
+            cell.positionIcon.backgroundColor = UIColor.init(named: "green_to_orange")
             
         }else{
             
@@ -1219,7 +1219,7 @@ class EditTeamViewController: UIViewController,UICollectionViewDelegate, UIColle
             
         }else{
             
-            nextButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
+            nextButton.setBackgroundColor(UIColor.init(named: "brand_txt_color_gray")!, for: UIControl.State.normal)
             nextButton.isUserInteractionEnabled = false
             
         }

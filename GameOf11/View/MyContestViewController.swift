@@ -86,7 +86,6 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
             
             addChild(pagerController)
             pagerController.view.frame = containerView.bounds
-            print(pagerController.view)
             containerView.addSubview(pagerController.view)
             pagerController.didMove(toParent: self)
         }
