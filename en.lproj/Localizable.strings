@@ -61,7 +61,7 @@
 
 "Change Language" = "Change Language";
 "%@ Left" = "%@ Left";
-"Favourite: %@" = "Favourite: %@";
+"Favourite: %@%%" = "Favourite: %@%%";
 
 "CONTESTS" = "CONTESTS";
 "Total Prize" = "Total Prize";

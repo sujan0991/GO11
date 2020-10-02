@@ -19,14 +19,12 @@ class PlayerTableViewCell: UITableViewCell {
     @IBOutlet weak var creditScore: UILabel!
   
     @IBOutlet weak var selectButton: UIButton!
-    let formatter = NumberFormatter()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        formatter.numberStyle = .decimal
-        formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
-       
+        
+      
         playerImage.makeCircular(borderWidth: 0, borderColor: .clear)
         
     }
@@ -35,20 +33,25 @@ class PlayerTableViewCell: UITableViewCell {
     func setInfo( player:Player ,  squad : PlayingTeamsData)  {
         
         //print(player.toJSON())
-        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .none
+        formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
+             
        
         
         playerName.text = player.name
         creditScore.text = "\(player.creditPoints ?? 0)"
     
         var bnLowRankString = "\(player.selectedPer ?? 0)"
+        
         if Language.language != Language.english{
             
-            bnLowRankString = self.formatter.string(for: player.selectedPer)!
-           
+            bnLowRankString = formatter.string(for:player.selectedPer)!
         }
         
-        selectedPerLbl.text =  String.init(format: "Favourite: %@".localized, bnLowRankString)
+        print("bnLowRankString...............",bnLowRankString,player.selectedPer,player.name)
+        
+        selectedPerLbl.text =  String.init(format: "Favourite: %@%%".localized, bnLowRankString)
         
         self.selectButton.isSelected = player.playerSelected
         

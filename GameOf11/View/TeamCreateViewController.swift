@@ -96,7 +96,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
         navTitle.text = String.init(format: "%@ Left".localized,timeLeft ?? "" )
         
-        progressView.gradientColors = [UIColor.init(named: "GreenHighlight")!.cgColor, UIColor.init(named: "GreenHighlight")!.cgColor]
+        progressView.gradientColors = [UIColor.init(named: "on_green")!.cgColor, UIColor.init(named: "on_green")!.cgColor]
         
         
         nextButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
@@ -128,7 +128,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         {
             userTeam.matchId = squadData.matchId
             
-            print("squadData.team_rules?.keeper ",squadData.team_rules?.keeper?.maxPerMatch)
+        //    print("squadData.team_rules?.keeper ",squadData.team_rules?.keeper?.maxPerMatch)
             
             for player in squadData.playersList
             {
@@ -207,7 +207,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             })
             
             
-            print("................................",keeperList.count,sortedkeeperList.count)
+          //  print("................................",keeperList.count,sortedkeeperList.count)
         }
         
         positionSelectorCollectionView?.delegate = self
@@ -263,7 +263,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
         if userTeam.batsman.count != 0{
             
-            print("userTeam in viewwill appear??????????",userTeam.batsman.count)
+         //   print("userTeam in viewwill appear??????????",userTeam.batsman.count)
             
         }
         
@@ -272,7 +272,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             for player in squadData.playersList
             {
                 
-                print("player.isCaptain in viewDidAppear",player.isCaptain)
+              //  print("player.isCaptain in viewDidAppear",player.isCaptain)
             }
             
         }
@@ -281,13 +281,656 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         
     }
     
+    
+     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            
+            return 4
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            
+            let cell:PositionCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "positionCell", for: indexPath) as! PositionCollectionViewCell
+            
+            
+            cell.playerCount.text = String.init(format: "0")
+            
+            if indexPath.item == 0
+            {
+                cell.positionTitle.text = "WK"
+                //  cell.positionIcon.image = UIImage.init(named: "wicketKeeperIcon")
+                
+                
+                if userTeam != nil
+                {
+                    cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.keeper.count)
+                }
+                
+                cell.isSelected = true
+                
+            }
+            else if indexPath.item == 1
+            {
+                cell.positionTitle.text = "BAT"
+                //  cell.positionIcon.image = UIImage.init(named: "battingIcon")
+                
+                if userTeam != nil
+                {
+                    cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.batsman.count)
+                }
+                
+                
+                
+            }
+            else if indexPath.item == 2
+            {
+                cell.positionTitle.text = "ALL"
+                // cell.positionIcon.image = UIImage.init(named: "allrounderIcon")
+                
+                
+                if userTeam != nil
+                {
+                    cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.allrounder.count)
+                }
+                
+                
+            }
+            else
+            {
+                cell.positionTitle.text = "BOWL"
+                // cell.positionIcon.image = UIImage.init(named: "bowlingIcon")
+                
+                
+                if userTeam != nil
+                {
+                    cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.bowler.count)
+                }
+                
+                
+            }
+            cell.isSelected = selectedIndex == indexPath.item
+            
+            if cell.isSelected {
+                
+                cell.positionIcon.backgroundColor = UIColor.init(named: "green_to_orange")
+             
+               
+            }else{
+                
+                cell.positionIcon.backgroundColor = UIColor.clear
+                
+            }
+            
+            
+            
+            return cell
+            
+        }
+        
+        
+        //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        //
+        //       // print("insetForSectionAt")
+        //        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        //        let width = collectionView.frame.size.height //some width
+        //
+        //        let numberOfItems = CGFloat(collectionView.numberOfItems(inSection: section))
+        //
+        //        let combinedItemWidth = (numberOfItems * width) + ((numberOfItems - 1)  * flowLayout.minimumInteritemSpacing)
+        //        let padding = (collectionView.frame.width - combinedItemWidth) / 2
+        //
+        //        return UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
+        //
+        //
+        //    }
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            
+            _ = (collectionView.frame.size.width - 3 * 10) / 4
+            
+            return CGSize(width: collectionView.frame.size.width/4, height: collectionView.frame.size.height)
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            
+            selectedIndex = indexPath.item
+            
+    //        let selectedCell: PositionCollectionViewCell = collectionView.cellForItem(at: indexPath) as! PositionCollectionViewCell
+    //        selectedCell.positionTitle.textColor = UIColor.init(named: "dark_to_white")
+    //        selectedCell.playerCount.textColor = UIColor.init(named: "dark_to_white")
+                       
+            let indexPth = IndexPath(row: 0, section: 0)
+            self.playerListView.scrollToRow(at: indexPth, at: .top, animated: true)
+            
+            if indexPath.item == 0
+            {
+                suggestionLabel.text = "Pick 1-4 Wicket-Keepers".localized
+            }
+            else if indexPath.item == 1
+            {
+                suggestionLabel.text = "Pick 3-6 Batsmen".localized
+                
+            }
+            else if indexPath.item == 2
+            {
+                
+                suggestionLabel.text = "Pick 1-4 All-Rounders".localized
+            }
+            else
+            {
+                
+                suggestionLabel.text = "Pick 3-6 Bowlers".localized
+            }
+            
+            positionSelectorCollectionView.reloadData()
+            playerListView.reloadData()
+            
+        }
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 1
+        }
+        
+        func numberOfSections(in tableView: UITableView) -> Int {
+            
+            if selectedIndex == 0
+            {
+                return keeperList.count
+            }
+            else if selectedIndex == 1
+            {
+                return batsmanList.count
+            }
+            else if selectedIndex == 2
+            {
+                return allRounderList.count
+            }
+            else
+            {
+                return bowlerList.count
+            }
+            
+        }
+        
+        
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier:"playerCell") as! PlayerTableViewCell
+            
+            var player: Player!
+            
+            if selectedIndex == 0
+            {
+                player = sortedkeeperList[indexPath.section]
+                
+                
+            }
+            else if selectedIndex == 1
+            {
+                player = sortedbatsmanList[indexPath.section]
+                
+                
+            }
+            else if selectedIndex == 2
+            {
+                player = sortedallRounderList[indexPath.section]
+                
+                
+            }
+            else
+            {
+                
+                
+                player = sortedbowlerList[indexPath.section]
+                
+                
+            }
+            
+            
+            cell.setInfo(player: player,squad: squadData.teams!)
+            
+            
+            return cell
+        }
+        
+        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            
+            
+            if let cell = cell as? PlayerTableViewCell{
+                
+                
+                var player: Player!
+                
+                if selectedIndex == 0
+                {
+                    player = sortedkeeperList[indexPath.section]
+                    
+                    
+                }
+                else if selectedIndex == 1
+                {
+                    player = sortedbatsmanList[indexPath.section]
+                    
+                    
+                }
+                else if selectedIndex == 2
+                {
+                    player = sortedallRounderList[indexPath.section]
+                    
+                    
+                }
+                else
+                {
+                    player = sortedbowlerList[indexPath.section]
+                    
+                    
+                }
+                
+                if player.teamBelong == 1
+                {
+                    
+                    cell.teamCode.textColor = UIColor.init(named: "on_green")!
+                }
+                else
+                {
+                    
+                    cell.teamCode.textColor = UIColor.init(named: "brand_orange")!
+                }
+            }
+            
+        }
+        
+        //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        //
+        //        let cell = tableView.dequeueReusableCell(withIdentifier:"headerCell")
+        //
+        //        return cell
+        //    }
+        //
+        //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        //
+        //        return 50
+        //    }
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
+            
+            //    let currentCell = tableView.cellForRow(at: indexPath) as! PlayerTableViewCell
+            
+            var player: Player!
+            
+            var userFantasyPlayer: UserFantasyPlayer!
+            
+            if selectedIndex == 0
+            {
+                
+                player = sortedkeeperList[indexPath.section]
+                player.playerSelected = !player.playerSelected
+                
+                userFantasyPlayer = UserFantasyPlayer.init(json: ["id":player.playerId ?? 0,"is_captain": 0, "is_vice_captain" : 0 ])
+                
+                var multiplyer = 1.0
+                
+                if !player.playerSelected
+                {
+                    multiplyer = -1.0
+                    
+                    
+                }
+                //remove as captain and vice captain
+                if player.isCaptain{
+                    
+                    player.isCaptain = false
+                }
+                if player.isViceCaptain{
+                    
+                    player.isViceCaptain = false
+                }
+                
+                if player.playerSelected
+                {
+    //                print("......... playerSelected")
+                    
+                    totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
+                    
+                //    print("totalCreditPoint in did select",totalCreditPoint)
+                    
+                    
+                    
+                    if self.verify(player)
+                    {
+                        userTeam.keeper.append(userFantasyPlayer)
+                    }
+                    else
+                    {
+                        player.playerSelected = !player.playerSelected
+                        tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
+                        
+                        totalCreditPoint = totalCreditPoint -  player.creditPoints!
+                        
+                        return
+                    }
+                    
+                }
+                else
+                {
+                  //  print("..........not playerSelected")
+                    totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
+                    
+                 //   print("totalCreditPoint in did select",totalCreditPoint)
+                    
+                    userTeam.keeper = userTeam.keeper.filter{$0.id != userFantasyPlayer.id}
+                    isGreen = false
+                    
+                }
+                
+            }
+            else if selectedIndex == 1
+            {
+                player = sortedbatsmanList[indexPath.section]
+                player.playerSelected = !player.playerSelected
+                
+                
+                userFantasyPlayer = UserFantasyPlayer.init(json: ["id":player.playerId ?? 0,"is_captain": 0, "is_vice_captain" : 0 ])
+                
+                var multiplyer = 1.0
+                
+                if !player.playerSelected
+                {
+                    multiplyer = -1.0
+                }
+                
+                //remove as captain and vice captain
+                if player.isCaptain{
+                    
+                    player.isCaptain = false
+                }
+                if player.isViceCaptain{
+                    
+                    player.isViceCaptain = false
+                }
+                
+                
+                if player.playerSelected
+                {
+                    
+                    totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
+                    
+                 //   print("totalCreditPoint in did select",totalCreditPoint)
+                    
+                    
+                    if self.verify(player)
+                    {
+                        userTeam.batsman.append(userFantasyPlayer)
+                    }
+                    else
+                    {
+                        player.playerSelected = !player.playerSelected
+                        tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
+                        
+                        totalCreditPoint = totalCreditPoint -  player.creditPoints!
+                        
+                        return
+                    }
+                    
+                }
+                else
+                {
+                    totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
+                    
+                 //   print("totalCreditPoint in did select",totalCreditPoint)
+                    
+                    
+                    userTeam.batsman = userTeam.batsman.filter{$0.id != userFantasyPlayer.id}
+                    isGreen = false
+                    
+                }
+                
+                print(userTeam.batsman.count)
+            }
+            else if selectedIndex == 2
+            {
+                player = sortedallRounderList[indexPath.section]
+                player.playerSelected = !player.playerSelected
+                
+                userFantasyPlayer = UserFantasyPlayer.init(json: ["id":player.playerId ?? 0,"is_captain": 0, "is_vice_captain" : 0 ])
+                
+                var multiplyer = 1.0
+                
+                if !player.playerSelected
+                {
+                    multiplyer = -1.0
+                }
+                
+                //remove as captain and vice captain
+                if player.isCaptain{
+                    
+                    player.isCaptain = false
+                }
+                if player.isViceCaptain{
+                    
+                    player.isViceCaptain = false
+                }
+                
+                
+                if player.playerSelected
+                {
+                    totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
+                    
+                  //  print("totalCreditPoint in did select",totalCreditPoint)
+                    
+                    
+                    if self.verify(player)
+                    {
+                        userTeam.allrounder.append(userFantasyPlayer)
+                    }else
+                    {
+                        player.playerSelected = !player.playerSelected
+                        tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
+                        
+                        totalCreditPoint = totalCreditPoint -  player.creditPoints!
+                        
+                        return
+                        
+                    }
+                }
+                else
+                {
+                    totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
+                    
+                  //  print("totalCreditPoint in did select",totalCreditPoint)
+                    
+                    userTeam.allrounder = userTeam.allrounder.filter{$0.id != userFantasyPlayer.id}
+                    isGreen = false
+                    
+                    
+                }
+            }
+            else
+            {
+                player = sortedbowlerList[indexPath.section]
+                player.playerSelected = !player.playerSelected
+                
+                userFantasyPlayer = UserFantasyPlayer.init(json: ["id":player.playerId ?? 0,"is_captain": 0, "is_vice_captain" : 0 ])
+                
+                var multiplyer = 1.0
+                
+                if !player.playerSelected
+                {
+                    multiplyer = -1.0
+                }
+                
+                //remove as captain and vice captain
+                if player.isCaptain{
+                    
+                    player.isCaptain = false
+                }
+                if player.isViceCaptain{
+                    
+                    player.isViceCaptain = false
+                }
+                
+                
+                if player.playerSelected
+                {
+                    totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
+                    
+                 //   print("totalCreditPoint in did select",totalCreditPoint)
+                    
+                    
+                    if self.verify(player)
+                    {
+                        userTeam.bowler.append(userFantasyPlayer)
+                    }
+                    else
+                    {
+                        player.playerSelected = !player.playerSelected
+                        tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
+                        
+                        totalCreditPoint = totalCreditPoint -  player.creditPoints!
+                        
+                        return
+                        
+                    }
+                }
+                else
+                {
+                    totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
+                    
+                //    print("totalCreditPoint in did select",totalCreditPoint)
+                    
+                    userTeam.bowler = userTeam.bowler.filter{$0.id != userFantasyPlayer.id}
+                    isGreen = false
+                    
+                    
+                }
+            }
+            
+            
+            
+            var multiplyer = 1.0
+            
+            if !player.playerSelected
+            {
+                multiplyer = -1.0
+            }
+            
+            
+            if player.teamBelong == 1
+            {
+                firstTeamPlayerCount = firstTeamPlayerCount + Int(1 * multiplyer)
+            }
+            else
+            {
+                secondTeamPlayerCount = secondTeamPlayerCount + Int(1 * multiplyer)
+            }
+            
+            if firstTeamPlayerCount + secondTeamPlayerCount == Team_Rules.MaxPlayer
+            {
+                isGreen = true
+            }
+            
+            self.updateSummary()
+            tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
+            
+            // positionSelectorCollectionView.reloadItems(at: [IndexPath.init(item: selectedIndex, section: 0) as IndexPath])
+            positionSelectorCollectionView.reloadData()
+        }
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 70
+        }
+        
+        func updateSummary()
+        {
+            let selectedCount = (firstTeamPlayerCount + secondTeamPlayerCount)
+            let total = 11
+            let progress:Float = Float(selectedCount) / Float(total)
+            progressView.progress = progress
+            
+            
+            firstTeamCode.text = squadData.teams?.firstTeam?.teamKey?.uppercased()
+            secondTeamCode.text = squadData.teams?.secondTeam?.teamKey?.uppercased()
+            firstTeamCount.setTitle("\(firstTeamPlayerCount)".localized, for: .normal)
+            secondTeamCount.setTitle("\(secondTeamPlayerCount)".localized, for: .normal)
+            
+            if Language.language == Language.english{
+                
+                totalPlayersCountLabel.text = "\(firstTeamPlayerCount + secondTeamPlayerCount)/11".localized
+                
+                selectedPlayerCountLabel.setTitle("\(firstTeamPlayerCount + secondTeamPlayerCount)".localized, for: .normal)
+                
+                let pointLeft = Double(Team_Rules.MaxCredit) - totalCreditPoint
+                totalPointsLabel.text = "\(pointLeft)".localized
+                
+            }else{
+                
+                
+                let bnSelectedCount = formatter.string(for: (firstTeamPlayerCount + secondTeamPlayerCount))
+                totalPlayersCountLabel.text = "\(String(describing: bnSelectedCount!))/১১"
+                
+                
+                selectedPlayerCountLabel.setTitle(bnSelectedCount, for: .normal)
+                
+                let pointLeft = Double(Team_Rules.MaxCredit) - totalCreditPoint
+                let bnPointLeft = formatter.string(from: NSNumber(value: pointLeft))
+             //   print("???????????????????????",pointLeft,bnPointLeft)
+                totalPointsLabel.text = bnPointLeft
+                
+                
+            }
+            
+            
+            
+            if squadData.teams?.firstTeam?.logo != nil{
+                
+                let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(squadData.teams?.firstTeam?.logo ?? "")")
+                firstTeamFlag.kf.setImage(with: url1)
+            }
+            
+            if squadData.teams?.secondTeam?.logo != nil{
+                
+                let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(squadData.teams?.secondTeam?.logo ?? "")")
+                
+                secondTeamFlag.kf.setImage(with: url2)
+            }
+            
+            if (firstTeamPlayerCount + secondTeamPlayerCount) == 11 {
+                
+                nextButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
+                nextButton.isUserInteractionEnabled = true
+                
+                nextButton.layer.shadowColor = UIColor.gray.cgColor
+                nextButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+                nextButton.layer.shadowRadius = 2
+                nextButton.layer.shadowOpacity = 0.5
+                nextButton.layer.masksToBounds = false
+                
+            }else{
+                
+                nextButton.setBackgroundColor(UIColor.init(named: "brand_txt_color_gray")!, for: UIControl.State.normal)
+                nextButton.isUserInteractionEnabled = false
+                
+                nextButton.layer.shadowColor = UIColor.gray.cgColor
+                nextButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+                nextButton.layer.shadowRadius = 2
+                nextButton.layer.shadowOpacity = 0.5
+                nextButton.layer.masksToBounds = false
+                
+                
+            }
+            
+            // print("count.........",(firstTeamPlayerCount + secondTeamPlayerCount))
+        }
+        
+    
     @IBAction func nextButtonAction(_ sender: Any) {
         
         if (isGreen)
         {
             let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CaptainSelectorViewController") as? CaptainSelectorViewController
             
-            print("nextButtonAction...........squad count",squadData.playersList.count)
+         //   print("nextButtonAction...........squad count",squadData.playersList.count)
             
             popupVC?.userTeam = userTeam
             popupVC?.nextsquadData = squadData
@@ -317,647 +960,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         self.navigationController?.pushViewController(popupVC ?? self, animated: true)
         
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell:PositionCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "positionCell", for: indexPath) as! PositionCollectionViewCell
-        
-        
-        cell.playerCount.text = String.init(format: "0")
-        
-        if indexPath.item == 0
-        {
-            cell.positionTitle.text = "WK"
-            //  cell.positionIcon.image = UIImage.init(named: "wicketKeeperIcon")
-            
-            
-            if userTeam != nil
-            {
-                cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.keeper.count)
-            }
-            
-            cell.isSelected = true
-            
-        }
-        else if indexPath.item == 1
-        {
-            cell.positionTitle.text = "BAT"
-            //  cell.positionIcon.image = UIImage.init(named: "battingIcon")
-            
-            if userTeam != nil
-            {
-                cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.batsman.count)
-            }
-            
-            
-            
-        }
-        else if indexPath.item == 2
-        {
-            cell.positionTitle.text = "ALL"
-            // cell.positionIcon.image = UIImage.init(named: "allrounderIcon")
-            
-            
-            if userTeam != nil
-            {
-                cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.allrounder.count)
-            }
-            
-            
-        }
-        else
-        {
-            cell.positionTitle.text = "BOWL"
-            // cell.positionIcon.image = UIImage.init(named: "bowlingIcon")
-            
-            
-            if userTeam != nil
-            {
-                cell.playerCount.text = String.init(format: "(%d)".localized, userTeam.bowler.count)
-            }
-            
-            
-        }
-        cell.isSelected = selectedIndex == indexPath.item
-        
-        if cell.isSelected {
-            
-            cell.positionIcon.backgroundColor = UIColor.init(named: "green_to_orange")
-         
-           
-        }else{
-            
-            cell.positionIcon.backgroundColor = UIColor.clear
-            
-        }
-        
-        
-        
-        return cell
-        
-    }
-    
-    
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    //
-    //       // print("insetForSectionAt")
-    //        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-    //        let width = collectionView.frame.size.height //some width
-    //
-    //        let numberOfItems = CGFloat(collectionView.numberOfItems(inSection: section))
-    //
-    //        let combinedItemWidth = (numberOfItems * width) + ((numberOfItems - 1)  * flowLayout.minimumInteritemSpacing)
-    //        let padding = (collectionView.frame.width - combinedItemWidth) / 2
-    //
-    //        return UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
-    //
-    //
-    //    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        _ = (collectionView.frame.size.width - 3 * 10) / 4
-        
-        return CGSize(width: collectionView.frame.size.width/4, height: collectionView.frame.size.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        selectedIndex = indexPath.item
-        
-//        let selectedCell: PositionCollectionViewCell = collectionView.cellForItem(at: indexPath) as! PositionCollectionViewCell
-//        selectedCell.positionTitle.textColor = UIColor.init(named: "dark_to_white")
-//        selectedCell.playerCount.textColor = UIColor.init(named: "dark_to_white")
-                   
-        let indexPth = IndexPath(row: 0, section: 0)
-        self.playerListView.scrollToRow(at: indexPth, at: .top, animated: true)
-        
-        if indexPath.item == 0
-        {
-            suggestionLabel.text = "Pick 1-4 Wicket-Keepers".localized
-        }
-        else if indexPath.item == 1
-        {
-            suggestionLabel.text = "Pick 3-6 Batsmen".localized
-            
-        }
-        else if indexPath.item == 2
-        {
-            
-            suggestionLabel.text = "Pick 1-4 All-Rounders".localized
-        }
-        else
-        {
-            
-            suggestionLabel.text = "Pick 3-6 Bowlers".localized
-        }
-        
-        positionSelectorCollectionView.reloadData()
-        playerListView.reloadData()
-        
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        if selectedIndex == 0
-        {
-            return keeperList.count
-        }
-        else if selectedIndex == 1
-        {
-            return batsmanList.count
-        }
-        else if selectedIndex == 2
-        {
-            return allRounderList.count
-        }
-        else
-        {
-            return bowlerList.count
-        }
-        
-    }
-    
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier:"playerCell") as! PlayerTableViewCell
-        
-        var player: Player!
-        
-        if selectedIndex == 0
-        {
-            player = sortedkeeperList[indexPath.section]
-            
-            
-        }
-        else if selectedIndex == 1
-        {
-            player = sortedbatsmanList[indexPath.section]
-            
-            
-        }
-        else if selectedIndex == 2
-        {
-            player = sortedallRounderList[indexPath.section]
-            
-            
-        }
-        else
-        {
-            
-            
-            player = sortedbowlerList[indexPath.section]
-            
-            
-        }
-        
-        
-        cell.setInfo(player: player,squad: squadData.teams!)
-        
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        
-        if let cell = cell as? PlayerTableViewCell{
-            
-            
-            var player: Player!
-            
-            if selectedIndex == 0
-            {
-                player = sortedkeeperList[indexPath.section]
-                
-                
-            }
-            else if selectedIndex == 1
-            {
-                player = sortedbatsmanList[indexPath.section]
-                
-                
-            }
-            else if selectedIndex == 2
-            {
-                player = sortedallRounderList[indexPath.section]
-                
-                
-            }
-            else
-            {
-                player = sortedbowlerList[indexPath.section]
-                
-                
-            }
-            
-            if player.teamBelong == 1
-            {
-                
-                cell.teamCode.textColor = UIColor.init(named: "on_green")!
-            }
-            else
-            {
-                
-                cell.teamCode.textColor = UIColor.init(named: "brand_orange")!
-            }
-        }
-        
-    }
-    
-    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    //
-    //        let cell = tableView.dequeueReusableCell(withIdentifier:"headerCell")
-    //
-    //        return cell
-    //    }
-    //
-    //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    //
-    //        return 50
-    //    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        //    let currentCell = tableView.cellForRow(at: indexPath) as! PlayerTableViewCell
-        
-        var player: Player!
-        
-        var userFantasyPlayer: UserFantasyPlayer!
-        
-        if selectedIndex == 0
-        {
-            
-            player = sortedkeeperList[indexPath.section]
-            player.playerSelected = !player.playerSelected
-            
-            userFantasyPlayer = UserFantasyPlayer.init(json: ["id":player.playerId ?? 0,"is_captain": 0, "is_vice_captain" : 0 ])
-            
-            var multiplyer = 1.0
-            
-            if !player.playerSelected
-            {
-                multiplyer = -1.0
-                
-                
-            }
-            //remove as captain and vice captain
-            if player.isCaptain{
-                
-                player.isCaptain = false
-            }
-            if player.isViceCaptain{
-                
-                player.isViceCaptain = false
-            }
-            
-            if player.playerSelected
-            {
-                print("......... playerSelected")
-                
-                totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
-                
-                print("totalCreditPoint in did select",totalCreditPoint)
-                
-                
-                
-                if self.verify(player)
-                {
-                    userTeam.keeper.append(userFantasyPlayer)
-                }
-                else
-                {
-                    player.playerSelected = !player.playerSelected
-                    tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
-                    
-                    totalCreditPoint = totalCreditPoint -  player.creditPoints!
-                    
-                    return
-                }
-                
-            }
-            else
-            {
-                print("..........not playerSelected")
-                totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
-                
-                print("totalCreditPoint in did select",totalCreditPoint)
-                
-                userTeam.keeper = userTeam.keeper.filter{$0.id != userFantasyPlayer.id}
-                isGreen = false
-                
-            }
-            
-        }
-        else if selectedIndex == 1
-        {
-            player = sortedbatsmanList[indexPath.section]
-            player.playerSelected = !player.playerSelected
-            
-            
-            userFantasyPlayer = UserFantasyPlayer.init(json: ["id":player.playerId ?? 0,"is_captain": 0, "is_vice_captain" : 0 ])
-            
-            var multiplyer = 1.0
-            
-            if !player.playerSelected
-            {
-                multiplyer = -1.0
-            }
-            
-            //remove as captain and vice captain
-            if player.isCaptain{
-                
-                player.isCaptain = false
-            }
-            if player.isViceCaptain{
-                
-                player.isViceCaptain = false
-            }
-            
-            
-            if player.playerSelected
-            {
-                
-                totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
-                
-                print("totalCreditPoint in did select",totalCreditPoint)
-                
-                
-                if self.verify(player)
-                {
-                    userTeam.batsman.append(userFantasyPlayer)
-                }
-                else
-                {
-                    player.playerSelected = !player.playerSelected
-                    tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
-                    
-                    totalCreditPoint = totalCreditPoint -  player.creditPoints!
-                    
-                    return
-                }
-                
-            }
-            else
-            {
-                totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
-                
-                print("totalCreditPoint in did select",totalCreditPoint)
-                
-                
-                userTeam.batsman = userTeam.batsman.filter{$0.id != userFantasyPlayer.id}
-                isGreen = false
-                
-            }
-            
-            print(userTeam.batsman.count)
-        }
-        else if selectedIndex == 2
-        {
-            player = sortedallRounderList[indexPath.section]
-            player.playerSelected = !player.playerSelected
-            
-            userFantasyPlayer = UserFantasyPlayer.init(json: ["id":player.playerId ?? 0,"is_captain": 0, "is_vice_captain" : 0 ])
-            
-            var multiplyer = 1.0
-            
-            if !player.playerSelected
-            {
-                multiplyer = -1.0
-            }
-            
-            //remove as captain and vice captain
-            if player.isCaptain{
-                
-                player.isCaptain = false
-            }
-            if player.isViceCaptain{
-                
-                player.isViceCaptain = false
-            }
-            
-            
-            if player.playerSelected
-            {
-                totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
-                
-                print("totalCreditPoint in did select",totalCreditPoint)
-                
-                
-                if self.verify(player)
-                {
-                    userTeam.allrounder.append(userFantasyPlayer)
-                }else
-                {
-                    player.playerSelected = !player.playerSelected
-                    tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
-                    
-                    totalCreditPoint = totalCreditPoint -  player.creditPoints!
-                    
-                    return
-                    
-                }
-            }
-            else
-            {
-                totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
-                
-                print("totalCreditPoint in did select",totalCreditPoint)
-                
-                userTeam.allrounder = userTeam.allrounder.filter{$0.id != userFantasyPlayer.id}
-                isGreen = false
-                
-                
-            }
-        }
-        else
-        {
-            player = sortedbowlerList[indexPath.section]
-            player.playerSelected = !player.playerSelected
-            
-            userFantasyPlayer = UserFantasyPlayer.init(json: ["id":player.playerId ?? 0,"is_captain": 0, "is_vice_captain" : 0 ])
-            
-            var multiplyer = 1.0
-            
-            if !player.playerSelected
-            {
-                multiplyer = -1.0
-            }
-            
-            //remove as captain and vice captain
-            if player.isCaptain{
-                
-                player.isCaptain = false
-            }
-            if player.isViceCaptain{
-                
-                player.isViceCaptain = false
-            }
-            
-            
-            if player.playerSelected
-            {
-                totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
-                
-                print("totalCreditPoint in did select",totalCreditPoint)
-                
-                
-                if self.verify(player)
-                {
-                    userTeam.bowler.append(userFantasyPlayer)
-                }
-                else
-                {
-                    player.playerSelected = !player.playerSelected
-                    tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
-                    
-                    totalCreditPoint = totalCreditPoint -  player.creditPoints! 
-                    
-                    return
-                    
-                }
-            }
-            else
-            {
-                totalCreditPoint = totalCreditPoint +  player.creditPoints! * multiplyer
-                
-                print("totalCreditPoint in did select",totalCreditPoint)
-                
-                userTeam.bowler = userTeam.bowler.filter{$0.id != userFantasyPlayer.id}
-                isGreen = false
-                
-                
-            }
-        }
-        
-        
-        
-        var multiplyer = 1.0
-        
-        if !player.playerSelected
-        {
-            multiplyer = -1.0
-        }
-        
-        
-        if player.teamBelong == 1
-        {
-            firstTeamPlayerCount = firstTeamPlayerCount + Int(1 * multiplyer)
-        }
-        else
-        {
-            secondTeamPlayerCount = secondTeamPlayerCount + Int(1 * multiplyer)
-        }
-        
-        if firstTeamPlayerCount + secondTeamPlayerCount == Team_Rules.MaxPlayer
-        {
-            isGreen = true
-        }
-        
-        self.updateSummary()
-        tableView.reloadSections(NSIndexSet(index: indexPath.section) as IndexSet, with: .none)
-        
-        // positionSelectorCollectionView.reloadItems(at: [IndexPath.init(item: selectedIndex, section: 0) as IndexPath])
-        positionSelectorCollectionView.reloadData()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-    
-    func updateSummary()
-    {
-        let selectedCount = (firstTeamPlayerCount + secondTeamPlayerCount)
-        let total = 11
-        let progress:Float = Float(selectedCount) / Float(total)
-        progressView.progress = progress
-        
-        
-        firstTeamCode.text = squadData.teams?.firstTeam?.teamKey?.uppercased()
-        secondTeamCode.text = squadData.teams?.secondTeam?.teamKey?.uppercased()
-        firstTeamCount.setTitle("\(firstTeamPlayerCount)".localized, for: .normal)
-        secondTeamCount.setTitle("\(secondTeamPlayerCount)".localized, for: .normal)
-        
-        if Language.language == Language.english{
-            
-            totalPlayersCountLabel.text = "\(firstTeamPlayerCount + secondTeamPlayerCount)/11".localized
-            
-            selectedPlayerCountLabel.setTitle("\(firstTeamPlayerCount + secondTeamPlayerCount)".localized, for: .normal)
-            
-            let pointLeft = Double(Team_Rules.MaxCredit) - totalCreditPoint
-            totalPointsLabel.text = "\(pointLeft)".localized
-            
-        }else{
-            
-            
-            let bnSelectedCount = formatter.string(for: (firstTeamPlayerCount + secondTeamPlayerCount))
-            totalPlayersCountLabel.text = "\(String(describing: bnSelectedCount!))/১১"
-            
-            
-            selectedPlayerCountLabel.setTitle(bnSelectedCount, for: .normal)
-            
-            let pointLeft = Double(Team_Rules.MaxCredit) - totalCreditPoint
-            let bnPointLeft = formatter.string(from: NSNumber(value: pointLeft))
-            print("???????????????????????",pointLeft,bnPointLeft)
-            totalPointsLabel.text = bnPointLeft
-            
-            
-        }
-        
-        
-        
-        if squadData.teams?.firstTeam?.logo != nil{
-            
-            let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(squadData.teams?.firstTeam?.logo ?? "")")
-            firstTeamFlag.kf.setImage(with: url1)
-        }
-        
-        if squadData.teams?.secondTeam?.logo != nil{
-            
-            let url2 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(squadData.teams?.secondTeam?.logo ?? "")")
-            
-            secondTeamFlag.kf.setImage(with: url2)
-        }
-        
-        if (firstTeamPlayerCount + secondTeamPlayerCount) == 11 {
-            
-            nextButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
-            nextButton.isUserInteractionEnabled = true
-            
-            nextButton.layer.shadowColor = UIColor.gray.cgColor
-            nextButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-            nextButton.layer.shadowRadius = 2
-            nextButton.layer.shadowOpacity = 0.5
-            nextButton.layer.masksToBounds = false
-            
-        }else{
-            
-            nextButton.setBackgroundColor(UIColor.init(named: "brand_txt_color_gray")!, for: UIControl.State.normal)
-            nextButton.isUserInteractionEnabled = false
-            
-            nextButton.layer.shadowColor = UIColor.gray.cgColor
-            nextButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-            nextButton.layer.shadowRadius = 2
-            nextButton.layer.shadowOpacity = 0.5
-            nextButton.layer.masksToBounds = false
-            
-            
-        }
-        
-        // print("count.........",(firstTeamPlayerCount + secondTeamPlayerCount))
-    }
-    
+   
     func verify(_ singlePlayer: Player) -> Bool
     {
         if firstTeamPlayerCount+secondTeamPlayerCount < Team_Rules.MaxPlayer
@@ -1069,7 +1072,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             
             
             //credit
-            print("totalCreditPoint in verify.........",totalCreditPoint)
+          //  print("totalCreditPoint in verify.........",totalCreditPoint)
             
             if totalCreditPoint > Team_Rules.MaxCredit
             {

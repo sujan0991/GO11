@@ -74,16 +74,26 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         noContestLabel.text = "You haven't join any upcoming contests. Join the upcoming match contests and prove your skills.".localized
         
         selectAmatchButton.setTitle("SELECT A MATCH".localized, for: .normal)
-        
-        
-        
+  
         self.noContestView.isHidden = true
+        
+        
         
         print(type)
         if type == .next {
             
+            adCollectionView.addConstraint(NSLayoutConstraint(item: adCollectionView,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: adCollectionView,
+            attribute: .width,
+            multiplier: 1350 / 460,
+            constant: 0))
+            
+            print("bannerRatioConstraint..........??@@",bannerRatioConstraint.constant)
             topViewHeight.isActive = false
             bannerRatioConstraint.isActive = true
+            self.view.layoutIfNeeded()
             
             adCollectionView.delegate = self
             adCollectionView.dataSource = self
@@ -98,8 +108,18 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             
         }else {
             
+            adCollectionView.addConstraint(NSLayoutConstraint(item: adCollectionView,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: adCollectionView,
+            attribute: .width,
+            multiplier: 0,
+            constant: 0))
+            
+            print("bannerRatioConstraint..........??",bannerRatioConstraint.constant)
             topViewHeight.isActive = true
             bannerRatioConstraint.isActive = false
+            self.view.layoutIfNeeded()
             
         }
         
@@ -117,6 +137,26 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         // gameSegmentControl.setIndex(1)
         
     }
+    
+//    override func updateViewConstraints() {
+//        super.updateViewConstraints()
+//
+//        if type == .next {
+//
+//            topViewHeight.isActive = false
+//            bannerRatioConstraint.isActive = true
+//            self.view.layoutIfNeeded()
+//            self.view.setNeedsLayout()
+//
+//        }else {
+//
+//            topViewHeight.isActive = true
+//            bannerRatioConstraint.isActive = false
+//            self.view.layoutIfNeeded()
+//            self.view.setNeedsLayout()
+//        }
+//
+//    }
     
     
     @IBAction func gameChangeAction(_ sender:
@@ -169,7 +209,8 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             
             topViewHeight.isActive = true
             bannerRatioConstraint.isActive = false
-            
+            self.view.layoutIfNeeded()
+           
         }
         
         print("viewWillAppear..............match",UserDefaults.standard.string(forKey: "selectedGameType"))
@@ -584,9 +625,9 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                     
                     
                     cell.statusLabel.text = String.init(format:"%@ Left".localized.uppercased(),match.joiningLastTime?.localized.uppercased() ?? "" )
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "on_green")!
                     
                 }else if type == .liveContest{
                     
@@ -600,9 +641,9 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                     
                     
                     cell.statusLabel.text = String.init(format: "COMPLETED".localized )
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.statusBackground.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.firstTeamName.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.secondTeamName.backgroundColor = UIColor.init(named: "on_green")!
                     
                 }
                 

@@ -216,9 +216,9 @@ class PointBreakdownFootballViewController: UIViewController,UITableViewDelegate
                 cell.captainLabel.isHidden = false
                 cell.xLabel.isHidden = false
                 cell.captainLabel.text = "C"
-                cell.captainLabel.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                cell.captainLabel.backgroundColor = UIColor.init(named: "on_green")!
                 cell.xLabel.text = "2x"
-                cell.xLabel.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.xLabel.textColor = UIColor.init(named: "on_green")!
                 
             }else if singlePlayerInfo!.is_vice_captain == 1{
                 

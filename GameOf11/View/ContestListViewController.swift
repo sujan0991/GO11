@@ -14,7 +14,7 @@ import SVProgressHUD
 protocol BackFromTeamSelect {
     func selectedTeam(team: CreatedTeam,contestId: Int)
     func selectedTeamFootball(team: CreatedTeamFootball,contestId: Int)
-  
+    
 }
 
 class ContestListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,BackFromTeamSelect {
@@ -169,22 +169,20 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         
         vsLabel.makeCircular(borderWidth: 1, borderColor: UIColor.init(named: "HighlightGrey")!)
-      //  createTeamButton.makeRound(5, borderWidth: 0, borderColor: .clear)
+        //  createTeamButton.makeRound(5, borderWidth: 0, borderColor: .clear)
         createTeamButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "on_green")!)
         createTeamButton.layer.shadowColor = UIColor.gray.cgColor
         createTeamButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         createTeamButton.layer.shadowRadius = 2
         createTeamButton.layer.shadowOpacity = 0.5
         createTeamButton.layer.masksToBounds = false
-              
+        
         signUpButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
         loginButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
         
         contestTableView.register(UINib(nibName: "ContestTableViewCell", bundle: nil), forCellReuseIdentifier: "contestCell")
         
-        // Register to receive notification in your class
-        NotificationCenter.default.addObserver(self, selector: #selector(self.paymentSuccessful(_:)), name: NSNotification.Name(rawValue: "paymentFromContestList"), object: nil)
-        
+      
         
         contestTableView.delegate = self
         contestTableView.dataSource = self
@@ -208,7 +206,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         createTeamButton.setTitle("CREATE YOUR TEAM".localized, for: .normal)
         
-      
+        
         
         confirmationLabel.text = "CONFIRMATION".localized
         entryLabel.text = "Entry".localized
@@ -242,9 +240,13 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         contestTableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshData(_:)), name: NSNotification.Name(rawValue: "updateContestDetails"), object: nil)
-       
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData(_:)), name: NSNotification.Name(rawValue: "updateContestDetails"), object: nil)
+        
+        // Register to receive notification in your class
+              NotificationCenter.default.addObserver(self, selector: #selector(self.paymentSuccessful(_:)), name: NSNotification.Name(rawValue: "paymentFromContestList"), object: nil)
+              
         //    getData()
         
         //get active contest list
@@ -352,6 +354,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                 self.statusLabel.text = "Completed".localized
             }
             
+            print("match type", type)
+            
             if self.parentMatchFootball?.teams.item(at: 0).logo != nil{
                 
                 let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(self.parentMatchFootball?.teams.item(at: 0).logo ?? "")")
@@ -375,9 +379,12 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         backShadeView.addGestureRecognizer(tap)
     }
     
-
+    
     
     @objc private func refreshData(_ sender: Any) {
+        
+        
+        print("refreshData called................")
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             if type == .next{
@@ -420,21 +427,21 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     
-       override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if #available(iOS 13, *) {
-                  if UserDefaults.standard.bool(forKey: "DarkMode"){
-                      
-                      overrideUserInterfaceStyle = .dark
-                      
-                  }else{
-                      overrideUserInterfaceStyle = .light
-                  }
-              
-              }else{
-                  
-              }
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                
+            }else{
+                overrideUserInterfaceStyle = .light
+            }
+            
+        }else{
+            
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -449,7 +456,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             addCoinView.isHidden = true
             paymentView.isHidden = true
             
-           
+            
             
             //       self.tabBarController?.tabBar.isHidden = false
             
@@ -667,6 +674,10 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     AppSessionManager.shared.save()
                 }
             }
+        }else{
+            
+            self.refreshControl.endRefreshing()
+            
         }
         
     }
@@ -721,6 +732,10 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     AppSessionManager.shared.save()
                 }
             }
+        }else{
+            
+            self.refreshControl.endRefreshing()
+            
         }
         
     }
@@ -767,7 +782,9 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             
             cell.editButton.tag = contest.id ?? 0
             cell.editButton.addTarget(self, action: #selector(teamEditInJoinedContestAction(_:)), for: .touchUpInside)
-         
+            
+            
+            
             
             print("contest type",contest.contestType)
             
@@ -794,14 +811,14 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     bnHighRankString = String(singlePrize.hignRank!)
                 }
                 bnPrizeAmountString = String(singlePrize.amount!)
-         
-               
+                
+                
             }else{
-               
+                
                 bnLowRankString = self.formatter.string(for: singlePrize.lowRank! )
                 if singlePrize.hignRank != nil {
                     bnHighRankString = self.formatter.string(for: singlePrize.hignRank! )
-           
+                    
                 }
                 bnPrizeAmountString = self.formatter.string(for: singlePrize.amount! )
             }
@@ -809,14 +826,14 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             if singlePrize.hignRank == nil{
                 //cell.rankLabel.text = "Rank \(singlePrize.lowRank!)"
                 cell.rankLabel.text =  String.init(format: "Rank %@".localized, bnLowRankString!)
-               
+                
             }else{
                 _ = self.formatter.string(for: singlePrize.lowRank! )
                 _ = self.formatter.string(for: singlePrize.hignRank! )
-           
-              //  cell.rankLabel.text = "Rank \(singlePrize.lowRank!) - Rank \(singlePrize.hignRank!)"
+                
+                //  cell.rankLabel.text = "Rank \(singlePrize.lowRank!) - Rank \(singlePrize.hignRank!)"
                 cell.rankLabel.text =  String.init(format: "Rank %@ - Rank %@".localized, bnLowRankString!,bnHighRankString!)
-         
+                
             }
             cell.amountLabel.text = bnPrizeAmountString //"\(singlePrize.amount!)"
             
@@ -835,6 +852,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         
+        print("type...............",type)
+        
         if let cell = cell as? ContestTableViewCell{
             
             let contest = activeContestList[indexPath.section]
@@ -846,8 +865,15 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                 cell.joinedButton.setBackgroundColor(UIColor.init(named: "dark_to_green")!, for: UIControl.State.normal)
                 cell.joinedButton.setTitle("JOINED".localized, for: UIControl.State.normal)
                 cell.joinedButton.isUserInteractionEnabled = false
-                cell.editButton.isHidden = false
-                
+                cell.joinedButton.isEnabled = false
+                if type == .liveContest || type == .completedContest{
+                    
+                    cell.editButton.isHidden = true
+                    
+                }else{
+                    
+                    cell.editButton.isHidden = false
+                }
                 
             }
             else
@@ -856,7 +882,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                 cell.joinedButton.setTitle("JOIN".localized, for: UIControl.State.normal)
                 cell.joinedButton.isUserInteractionEnabled = true
                 cell.editButton.isHidden = true
-
+                
             }
             
             //            if contest.contestType == "free"{
@@ -1373,23 +1399,36 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     popupVC?.contestId = sender.tag
                     popupVC?.delegate = self
                     popupVC?.forTeamChange = true
-                
-                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
-                        if let index = self.createdTeamList.firstIndex(where: {$0.userTeamId == selectedContest?.userTeamId}){
-                            popupVC?.selectedIndex = index;
-                       
-                        }
                     
+                    if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                        
+                        //                        if let index = self.createdTeamList.firstIndex(where: {$0.userTeamId == selectedContest?.userTeamId}){
+                        //                            popupVC?.selectedIndex = index;
+                        //                            print("selected team id index.........",selectedContest?.userTeamId,index)
+                        //                        }
+                        
+                        let index = self.createdTeamList.filter({($0 as CreatedTeam).userTeamId == selectedContest?.userTeamId})
+                        for team in index
+                        {
+                            popupVC?.selectedTeamId = team.userTeamId
+                            print("selected team id index.........",selectedContest?.userTeamId,team.userTeamId)
+                            
+                        }
                         popupVC?.teams = self.createdTeamList
+                        
                         if (self.createdTeamList.count != 0)
                         {
                             self.present(popupVC!, animated: true) {
                             }
                         }
-                       }else{
-                        if let index = self.createdTeamListFootball.firstIndex(where: {$0.userTeamId == selectedContest?.userTeamId}){
-                            popupVC?.selectedIndex = index;
-                       
+                    }else{
+                        
+                        let index = self.createdTeamListFootball.filter({($0 as CreatedTeamFootball).userTeamId == selectedContest?.userTeamId})
+                        for team in index
+                        {
+                            popupVC?.selectedTeamId = team.userTeamId
+                            print("selected team id index.........",selectedContest?.userTeamId,team.userTeamId)
+                            
                         }
                         popupVC?.teamsFootball = self.createdTeamListFootball
                         if (self.createdTeamListFootball.count != 0)
@@ -1397,14 +1436,13 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                             self.present(popupVC!, animated: true) {
                             }
                         }
-                        self.present(popupVC!, animated: true) {
-                        }
+                        
                     }
                 }
             }
         }
     }
-   
+    
     
     @IBAction func teamEditAction(_ sender: Any) {
         if let um = AppSessionManager.shared.currentUser {
@@ -1434,7 +1472,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             }
         }
     }
-   
+    
     func selectedTeam(team: CreatedTeam,contestId: Int) {
         
         

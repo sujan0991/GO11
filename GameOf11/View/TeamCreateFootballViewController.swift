@@ -89,7 +89,7 @@ class TeamCreateFootballViewController: UIViewController,UICollectionViewDelegat
         
         navTitle.text = String.init(format: "%@ Left".localized,timeLeft ?? "" )
         
-        progressView.gradientColors = [UIColor.init(named: "GreenHighlight")!.cgColor, UIColor.init(named: "GreenHighlight")!.cgColor]
+        progressView.gradientColors = [UIColor.init(named: "on_green")!.cgColor, UIColor.init(named: "on_green")!.cgColor]
         
         
         nextButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)

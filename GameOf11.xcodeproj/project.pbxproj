@@ -110,8 +110,6 @@
 		64CBB4DF23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */; };
 		64CBB4E123EA4A9900F0DBA2 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */; };
 		64CBB4E323EA4AB200F0DBA2 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */; };
-		64E0D8CE240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 640B9D40233D397F00387A2A /* Pods_GameOf11.framework */; };
-		64E0D8CF240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 640B9D40233D397F00387A2A /* Pods_GameOf11.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		64E5B42E23F0009A00D377F0 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E5B42D23F0009A00D377F0 /* OTPViewController.swift */; };
 		64E999D3231B0E84003C7FFE /* sign_up_dialog_anim_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */; };
 		64E999D5231B131E003C7FFE /* Boat_Loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D4231B131E003C7FFE /* Boat_Loader.json */; };
@@ -138,17 +136,6 @@
 				647C5D17233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		64E0D8D0240C5A8F00E8EDE3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				64E0D8CF240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -281,7 +268,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64E0D8CE240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +302,7 @@
 		0C0BE62421DA293F00BE30CF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				64CBB4DC23E9DC5400F0DBA2 /* AnnouncementViewController.swift */,
 				646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */,
 				0C0BE62521DA293F00BE30CF /* BaseViewController.swift */,
 				6448F5BE2293EDC400B31BFC /* BkashPaymentViewController.swift */,
@@ -336,6 +323,7 @@
 				0C78C1FE222450AB0068B5D6 /* MoreViewController.swift */,
 				0C3336D021DF489A00E6EB11 /* MyContestViewController.swift */,
 				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
+				64E5B42D23F0009A00D377F0 /* OTPViewController.swift */,
 				64441E50231C1BD400A21EDA /* ParentTabViewController.swift */,
 				645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */,
 				647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */,
@@ -344,6 +332,7 @@
 				64669C5423E75C8F00288346 /* PromoCodeViewController.swift */,
 				0C78C1F622244F3B0068B5D6 /* RedeemCoinViewController.swift */,
 				6448F5C02294094600B31BFC /* ReferalViewController.swift */,
+				64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */,
 				641E1768222A9A7D00302A19 /* SignUpViewController.swift */,
 				0C33367A21DF3AB100E6EB11 /* SplashViewController.swift */,
 				64522214239C0FCB0091AE28 /* TeamCreateFootballViewController.swift */,
@@ -351,15 +340,12 @@
 				64522218239C50F80091AE28 /* TeamPreviewFootballViewController.swift */,
 				0C85C3482225C5D800B6515C /* TeamPreviewViewController.swift */,
 				0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */,
+				64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */,
 				6412BAF32343C4930081958E /* TutorialViewController.swift */,
 				641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */,
 				0C78C1F722244F3C0068B5D6 /* VerifyAccountViewController.swift */,
 				645F7DF7231598D100515F11 /* WebViewController.swift */,
 				0C78C1F822244F3D0068B5D6 /* WithdrawRequestViewController.swift */,
-				64CBB4DC23E9DC5400F0DBA2 /* AnnouncementViewController.swift */,
-				64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */,
-				64E5B42D23F0009A00D377F0 /* OTPViewController.swift */,
-				64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -570,7 +556,6 @@
 				0CB1B9062268F490003D6C56 /* ShellScript */,
 				647C5D05233D1C7F00E4C3CF /* Embed App Extensions */,
 				0175AB32022525EEB31666A2 /* [CP] Embed Pods Frameworks */,
-				64E0D8D0240C5A8F00E8EDE3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1027,9 +1012,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MS UMBRELLA SOFT (2VBWUYWHX2)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
 				INFOPLIST_FILE = GameOf11/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1037,7 +1022,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1072,7 +1057,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11;
 				PRODUCT_NAME = "GO11 Pro";
-				PROVISIONING_PROFILE_SPECIFIER = "GO11 Dev";
+				PROVISIONING_PROFILE_SPECIFIER = go11Dis;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1085,9 +1070,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MS UMBRELLA SOFT (2VBWUYWHX2)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
 				INFOPLIST_FILE = GameOf11/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1095,7 +1080,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1130,7 +1115,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11;
 				PRODUCT_NAME = "GO11 Pro";
-				PROVISIONING_PROFILE_SPECIFIER = "GO11 Dev";
+				PROVISIONING_PROFILE_SPECIFIER = go11Dis;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1140,9 +1125,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1D9994E50EBEB3202776FEF /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MS UMBRELLA SOFT (2VBWUYWHX2)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1151,10 +1136,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dis";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1165,9 +1150,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E158AAB73C4A0C032EC4EFD1 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: MS UMBRELLA SOFT (2VBWUYWHX2)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1176,10 +1161,10 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dis";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

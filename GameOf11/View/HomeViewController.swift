@@ -286,7 +286,7 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
         pagerController.perferredScrollIndicatorHeight = 2
         pagerController.scrollIndicator.layer.cornerRadius = pagerController.scrollIndicator.frame.height/2
         pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "brand_orange")
-        pagerController.pageSegmentedControl.backgroundColor = UIColor.init(named: "GreenHighlight")
+        pagerController.pageSegmentedControl.backgroundColor = UIColor.init(named: "on_green")
         
     }
     func setImage(_ image: UIImage?, forSegmentAt segment: Int) {

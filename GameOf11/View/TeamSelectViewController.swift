@@ -17,7 +17,10 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
     var contestId: Int = 0
     var forTeamChange = false
    
+    var selectedTeamId : Int!
     var selectedIndex : Int!
+    
+    var isSelectButtonCliked = false
     
     @IBOutlet weak var confirmView: UIView!
     
@@ -27,7 +30,7 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         super.viewDidLoad()
         
         
-        print("teams........ \(selectedIndex)")
+        print("teams........??? \(selectedTeamId)")
         // Do any additional setup after loading the view.
        
       
@@ -97,6 +100,7 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"CreatedTeamTableViewCell") as! CreatedTeamTableViewCell
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
             let singleTeam = teams[indexPath.section] as CreatedTeam
             
             cell.keeperLabel.text = "WK"
@@ -118,16 +122,56 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
             
         }
         
+        print("selectedIndex.......cellForRowAt",selectedIndex,forTeamChange)
         
-        if selectedIndex == indexPath.section
-        {
-            cell.selectTeamButton.isSelected = true
+        if forTeamChange{
+                     
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                
+                let singleTeam = teams[indexPath.section] as CreatedTeam
+                
+                if singleTeam.userTeamId == selectedTeamId{
+                    
+                    cell.selectTeamButton.isSelected = true
+                    
+                }else{
+                    
+                    cell.selectTeamButton.isSelected = false
+                    
+                }
+                
+            }else{
+                
+                let singleTeam = teamsFootball[indexPath.section] as CreatedTeamFootball
+                
+                if singleTeam.userTeamId == selectedTeamId{
+                    
+                    cell.selectTeamButton.isSelected = true
+                    
+                }else{
+                    
+                    cell.selectTeamButton.isSelected = false
+                    
+                }
+
+            }
             
         }
-        else
-        {
-            cell.selectTeamButton.isSelected = false
+        
+        if isSelectButtonCliked{
+            
+            if selectedIndex == indexPath.section
+                   {
+                       cell.selectTeamButton.isSelected = true
+                       
+                   }
+                   else
+                   {
+                       cell.selectTeamButton.isSelected = false
+                   }
         }
+        
+       
         cell.selectTeamButton.tag = indexPath.section
         // cell.confirmButton.tag = singleTeam.userTeamId ?? 0
         
@@ -170,7 +214,7 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
                     delegate.selectedTeam(team: singleTeam,contestId: self.contestId)
                 }
                 
-                print("team name...........?????????",singleTeam.teamName)
+              //  print("team name...........?????????",singleTeam.teamName)
                 dismiss(animated: true, completion: nil)
             }else{
                 let singleTeam = teamsFootball[selectedIndex] as CreatedTeamFootball
@@ -180,7 +224,7 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
                     delegate.selectedTeamFootball(team: singleTeam,contestId: self.contestId)
                 }
                 
-                print("team name...........?????????",singleTeam.teamName)
+         //       print("team name...........?????????",singleTeam.teamName)
                 dismiss(animated: true, completion: nil)
             }
         }
@@ -189,16 +233,11 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     @IBAction func teamSelectAction(_ sender: UIButton) {
         
+        isSelectButtonCliked = true
         selectedIndex = sender.tag
         self.teamTableView.reloadData()
         
         self.confirmView.isHidden = false
-        
-        
-        //        let cell = teamTableView.cellForRow(at: IndexPath.init(item: 0, section: sender.tag)) as! CteatedTableViewCell
-        //
-        //        cell.confirmButton.isHidden = false
-        
         
     }
     

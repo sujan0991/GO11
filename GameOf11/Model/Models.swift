@@ -642,8 +642,9 @@ class Player: Glossy {
         
         playerImage = playerImage?.trimForURL()
         creditPoints = "credit_points" <~~ json
-        teamBelong = "team_belong" <~~ json
         selectedPer = "selected_percentage" <~~ json
+        teamBelong = "team_belong" <~~ json
+        
         //  playerSelected = "playerSelected" <~~ json ?? false
         //  isCaptain = "playerSeisCaptainlected" <~~ json ?? false
         //  isViceCaptain = "isViceCaptain" <~~ json ?? false
@@ -658,12 +659,13 @@ class Player: Glossy {
             "role" ~~> role,
             "player_image" ~~> playerImage,
             "credit_points" ~~> creditPoints,
+            "selected_percentage" ~~> selectedPer,
             "team_belong" ~~> teamBelong,
             
             "playerSelected" ~~> playerSelected,
             "isCaptain" ~~> isCaptain,
-            "isViceCaptain" ~~> isViceCaptain,
-            "selected_percentage" ~~> selectedPer
+            "isViceCaptain" ~~> isViceCaptain
+            
             ])
     }
     func lastName() -> String {

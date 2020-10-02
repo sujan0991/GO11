@@ -323,7 +323,7 @@ func setInfo( players:[Player])  {
                 
                 fourthCap.isHidden = false
                 fourthCap.text = "C"
-                fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                fourthCap.backgroundColor = UIColor.init(named: "on_green")!
             }else if player.isViceCaptain{
                 fourthCap.isHidden = false
                 fourthCap.text = "VC"
@@ -389,7 +389,7 @@ func setInfo( players:[Player])  {
                 
                 fifthCap.isHidden = false
                 fifthCap.text = "C"
-                fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                fifthCap.backgroundColor = UIColor.init(named: "on_green")!
             }else if player.isViceCaptain{
                 fifthCap.isHidden = false
                 fifthCap.text = "VC"
@@ -457,7 +457,7 @@ func setInfo( players:[Player])  {
                 
                 sixthCap.isHidden = false
                 sixthCap.text = "C"
-                sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                sixthCap.backgroundColor = UIColor.init(named: "on_green")!
             }else if player.isViceCaptain{
                 sixthCap.isHidden = false
                 sixthCap.text = "VC"

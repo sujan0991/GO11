@@ -33,7 +33,7 @@ class TutorialViewController: UIViewController,UIScrollViewDelegate {
         pageControl.currentPage = 0
         view.bringSubviewToFront(pageControl)
         
-        self.view.setGradientBackground(colorTop: UIColor.init(named: "GreenHighlight")!, colorBottom: UIColor.white)
+        self.view.setGradientBackground(colorTop: UIColor.init(named: "on_green")!, colorBottom: UIColor.white)
     }
     
     func createSlides() -> [Slide] {

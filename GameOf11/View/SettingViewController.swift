@@ -29,7 +29,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        placeNavBar(withTitle: "SETTING".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
+        placeNavBar(withTitle: "SETTINGS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
         self.tabBarController?.tabBar.isHidden = true
               

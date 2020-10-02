@@ -91,7 +91,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
         
         playerListView.register(UINib(nibName: "PlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "playerCell")
         
-        progressView.gradientColors = [UIColor.init(named: "GreenHighlight")!.cgColor, UIColor.init(named: "GreenHighlight")!.cgColor]
+        progressView.gradientColors = [UIColor.init(named: "on_green")!.cgColor, UIColor.init(named: "on_green")!.cgColor]
         
         previewButton.setTitle("Preview Team".localized, for: .normal)
         nextButton.setTitle("Continue".localized, for: .normal)
@@ -500,6 +500,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
             popupVC?.isFromEdit = true
             popupVC?.userTeamId = userTeamId
             popupVC?.userTeamName = userOldTeam.teamName!
+            popupVC?.timeLeft = timeLeft
             
             self.navigationController?.pushViewController(popupVC ?? self, animated: true)
             // self.present(popupVC!, animated: true, completion: nil)
