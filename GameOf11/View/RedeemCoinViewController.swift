@@ -27,7 +27,8 @@ class RedeemCoinViewController: BaseViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         
         placeNavBar(withTitle: "REDEEM COIN".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
-        redeemButton.makeRound(5, borderWidth: 0, borderColor: .clear)
+        
+        redeemButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
         tkToCoinLabel.text = "1 BDT = 50 Coins".localized
         amountLabel.text = "Amount in BDT".localized
@@ -46,17 +47,17 @@ class RedeemCoinViewController: BaseViewController, UITextFieldDelegate {
         
         
         if #available(iOS 13, *) {
-                  if UserDefaults.standard.bool(forKey: "DarkMode"){
-                      
-                      overrideUserInterfaceStyle = .dark
-                      
-                  }else{
-                      overrideUserInterfaceStyle = .light
-                  }
-              
-              }else{
-                  
-              }
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                
+            }else{
+                overrideUserInterfaceStyle = .light
+            }
+            
+        }else{
+            
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -75,19 +76,27 @@ class RedeemCoinViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func redeemButtonAction(_ sender: Any) {
-       
-        if tkAmountTextField.text?.count != 0 { APIManager.manager.redeemCoinForCash(amount: self.tkAmountTextField.text ?? "0") { (success, msg) in
+        
+        
+        
+        if tkAmountTextField.text?.count != 0 {
+            redeemButton.isUserInteractionEnabled = false
+            
+            APIManager.manager.redeemCoinForCash(amount: self.tkAmountTextField.text ?? "0") { (success, msg) in
+                
             if(success)
             {
+                self.redeemButton.isUserInteractionEnabled = true
                 self.view.makeToast( msg!)
                 self.navigationController?.popViewController(animated: true)
                 
             }
             else{
                 self.view.makeToast(msg!)
+                self.redeemButton.isUserInteractionEnabled = true
             }
             
-            }
+        }
         }
         
     }

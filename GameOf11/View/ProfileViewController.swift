@@ -135,11 +135,12 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         }
         
         //        placeNavBar(withTitle: "My Profile", isBackBtnVisible: false)
-        
-        addCoinButton.buttonRound(5, borderWidth: 0.0, borderColor: UIColor.init(named: "on_green")!)
-        withdrawButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "on_green")!)
-        redeemButton.buttonRound(5, borderWidth: 0.0, borderColor: UIColor.init(named: "on_green")!)
-        coinLogButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "on_green")!)
+        //buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
+        addCoinButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
+      //  withdrawButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "brand_red")!)
+        redeemButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
+     //   coinLogButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "brand_red")!)
+        fullProfileButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
         imagePicker.delegate = self
         
@@ -368,6 +369,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                             }else if um.isVerified == 2{
                                 
                                 self.verifyButton.setTitle("Profile Verification Pending!".localized, for: .normal)
+                                
                             }else{
                                 
                                 if um.metadata?.verification_cancel_reason != nil{

@@ -54,7 +54,7 @@ class JoinedContestListViewController: BaseViewController,UITableViewDelegate,UI
         formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
         
         prizeListTitleLabel.text = "Prize List".localized
-        taxLabel.text = "Tax Msg".localized
+      //  taxLabel.text = "Tax Msg".localized
         
         contestTableView.register(UINib(nibName: "ContestTableViewCell", bundle: nil), forCellReuseIdentifier: "contestCell")
         

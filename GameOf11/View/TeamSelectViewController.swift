@@ -36,7 +36,10 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
       
         
         placeNavBar(withTitle: "SELECT YOUR TEAM".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
+        
         confirmButton.setTitle("JOIN CONTEST".localized, for: .normal)
+        
+        
       
         if (self.forTeamChange)
         {
@@ -45,13 +48,15 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
                
         }
         
-        confirmButton.makeRound(5, borderWidth: 0, borderColor: .clear)
-
-        confirmButton.layer.shadowColor = UIColor.gray.cgColor
-        confirmButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        confirmButton.layer.shadowRadius = 2
-        confirmButton.layer.shadowOpacity = 0.5
-        confirmButton.layer.masksToBounds = false
+        confirmButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
+       
+//        confirmButton.makeRound(5, borderWidth: 0, borderColor: .clear)
+//
+//        confirmButton.layer.shadowColor = UIColor.gray.cgColor
+//        confirmButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+//        confirmButton.layer.shadowRadius = 2
+//        confirmButton.layer.shadowOpacity = 0.5
+//        confirmButton.layer.masksToBounds = false
         
         
         if (teamTableView != nil)

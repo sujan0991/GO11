@@ -281,8 +281,27 @@ class PointBreakdownFootballViewController: UIViewController,UITableViewDelegate
             }
             
             
-            self.playerPointLabel.text = "\(singlePlayerInfo?.player_earning_point ?? 0)"
+            var point = 0.0
             
+            if singlePlayerInfo!.is_captain == 1{
+                
+                point = Double((singlePlayerInfo?.player_earning_point)! * 2.0)
+                
+                print("point/............",point)
+                
+                self.playerPointLabel.text = "\(point)"
+               
+            }else if singlePlayerInfo!.is_vice_captain == 1{
+                
+                point = Double((singlePlayerInfo?.player_earning_point)! * 1.5)
+                
+                self.playerPointLabel.text = "\(point)"
+               
+            }else{
+                
+                self.playerPointLabel.text = "\(singlePlayerInfo?.player_earning_point ?? 0)"
+            }
+
             self.assistValueLabel.text = "\(singlePlayerPoint?.assist ?? 0)"
             self.cleansheetValueLabel.text = "\(singlePlayerPoint?.cleansheet ?? 0)"
             self.goal_concededValueLabel.text = "\(singlePlayerPoint?.goal_conceded ?? 0)"

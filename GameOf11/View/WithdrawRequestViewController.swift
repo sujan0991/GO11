@@ -49,6 +49,7 @@ class WithdrawRequestViewController: BaseViewController {
         pendingLabel.text = "Pending Withdraw".localized
         
         sendButton.setTitle("Send Withdraw Request".localized, for: .normal)
+        sendButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
         cashWithdrawLabel.text = "Cash-Withdrawl!".localized
         firstSuggestionlabel.text = "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT.".localized
@@ -96,6 +97,7 @@ class WithdrawRequestViewController: BaseViewController {
    
     @IBAction func sendRequestButtonAction(_ sender: Any) {
         
+        
         if tkAmountTextField.text?.count != 0 && bKashNoTextField.text?.count != 0 && confirmBkashNoTextField.text?.count != 0{
             
             if  bKashNoTextField.text != confirmBkashNoTextField.text{
@@ -103,16 +105,18 @@ class WithdrawRequestViewController: BaseViewController {
                 self.view.makeToast( "Given bKash numbers are not same!")
                 
             }else{
-                
+                sendButton.isUserInteractionEnabled = false
                 APIManager.manager.postWithdrawRequest(amount: self.tkAmountTextField.text ?? "0", number: self.bKashNoTextField.text ?? "0") { (success, msg) in
                     if(success)
                     {
                         self.view.makeToast(msg!)
                         self.navigationController?.popViewController(animated: true)
+                        self.sendButton.isUserInteractionEnabled = false
                         
                     }
                     else{
                         self.view.makeToast( msg!)
+                        self.sendButton.isUserInteractionEnabled = false
                     }
                 }
             }

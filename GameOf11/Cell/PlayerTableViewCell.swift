@@ -20,17 +20,24 @@ class PlayerTableViewCell: UITableViewCell {
   
     @IBOutlet weak var selectButton: UIButton!
     
+    @IBOutlet weak var isInLineUp: UIImageView!
+    @IBOutlet weak var announcedLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
       
         playerImage.makeCircular(borderWidth: 0, borderColor: .clear)
+        isInLineUp.makeCircular(borderWidth: 0, borderColor: .clear)
+        
+        announcedLabel.text = "Announced".localized
         
     }
 
     
-    func setInfo( player:Player ,  squad : PlayingTeamsData)  {
+    func setInfo( player:Player ,  squad : PlayingTeamsData, isLineUpOut: Int)  {
         
         //print(player.toJSON())
         let formatter = NumberFormatter()
@@ -67,6 +74,27 @@ class PlayerTableViewCell: UITableViewCell {
         let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
         
         playerImage.kf.setImage(with: url1)
+        
+        print("isLineUpOut..........????",isLineUpOut)
+        if isLineUpOut == 1{
+            
+            if player.is_in_playing_xi == 1{
+                
+                isInLineUp.isHidden = false
+                isInLineUp.backgroundColor = UIColor.init(named: "on_green")!
+                announcedLabel.isHidden = false
+                
+            }else{
+                
+                isInLineUp.isHidden = false
+                isInLineUp.backgroundColor = UIColor.init(named: "brand_orange")!
+                announcedLabel.isHidden = true
+            }
+        }else{
+            
+            isInLineUp.isHidden = true
+            announcedLabel.isHidden = true
+        }
         
         
         if player.teamBelong == 1
@@ -115,6 +143,8 @@ class PlayerTableViewCell: UITableViewCell {
             
 
         }
+        
+       
         
         
         self.needsUpdateConstraints()

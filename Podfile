@@ -18,7 +18,7 @@ target 'GameOf11' do
     pod 'Kingfisher', '~> 5.0'
     pod 'ViewUtils', '~> 1.1'
     pod 'SnapKit', '~> 4.0.0'
-    pod 'DTPagerController'
+    
   # pod 'AccountKit'
 
     pod 'Firebase/Core'
@@ -27,7 +27,7 @@ target 'GameOf11' do
     pod 'Fabric', '~> 1.9.0'
     pod 'Crashlytics', '~> 3.12.0'
     pod 'lottie-ios'
-    pod 'OneSignal', '>= 2.6.2', '< 3.0'
+  #  pod 'OneSignal', '>= 2.6.2', '< 3.0'
     pod 'BetterSegmentedControl', '~> 1.3'
 
     
@@ -35,13 +35,13 @@ target 'GameOf11' do
 end
 
 
-target 'OneSignalNotificationServiceExtension' do
-  
-  use_frameworks!
-
-  pod 'OneSignal', '>= 2.6.2', '< 3.0'
-  
-end
+#target 'OneSignalNotificationServiceExtension' do
+#
+#  use_frameworks!
+#
+#  pod 'OneSignal', '>= 2.6.2', '< 3.0'
+#
+#end
 
 
 

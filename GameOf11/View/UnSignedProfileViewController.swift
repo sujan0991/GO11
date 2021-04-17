@@ -29,8 +29,8 @@ class UnSignedProfileViewController: UIViewController {
 //        }
 //        
         
-        signUpButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
-        loginButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
+        signUpButton.buttonRound(5, borderWidth: 1, borderColor: UIColor.init(named: "brand_red")!)
+        loginButton.buttonRound(5, borderWidth: 1, borderColor: UIColor.init(named: "brand_red")!)
 
         suggestionLabel.text = "You are not logged in. You have to Login or Sign Up to perform your desired action.".localized
         

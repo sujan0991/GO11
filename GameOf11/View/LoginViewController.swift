@@ -63,11 +63,12 @@ class LoginViewController: BaseViewController {
         banglaButton.layer.borderColor = UIColor.lightGray.cgColor
         
         
-        //        phoneField.text = "01676330929"  8801770247711
-        //        passwordField.text = "123456"    shaf1234
+        //        phoneField.text = "01676330929"  8801770247711   01880863828
+        //        passwordField.text = "123456"    shaf1234        nataraj
         
         
         signinButton.makeRound(5, borderWidth: 0, borderColor: .clear)
+        
         
         if let currentToken = AppSessionManager.shared.authToken{
             print(currentToken)
@@ -183,9 +184,8 @@ class LoginViewController: BaseViewController {
             }
             
         }
-        
-        
-    }
+ 
+}
     
     
     

@@ -60,6 +60,7 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         suggestionLabel.text = "Write your amount to get equivalent numbers of coins.Click on the 'ADD COINS' and choose your payment method. Minimum amount is 10 BDT.".localized
         tkAmountTextField.placeholder = "Write amount in BDT to buy Coins".localized
         
+        addCoinButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         addCoinButton.setTitle("ADD COINS".localized, for: .normal)
         
         availableCoinPackLabel.text = "Available Coin Packs".localized

@@ -20,6 +20,9 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
     var withdrawListArray : [Any] = []
     var username = AppSessionManager.shared.currentUser?.name
     
+    var page_no = 1
+    var total_page_no : Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,26 +37,44 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
         self.requestTableView.isHidden = true
         self.noRequestView.isHidden = true
         
-        APIManager.manager.getWithdrawList { (status, dataList, msg) in
+       getCompletedWithdraw(pageNo: page_no)
+    }
+    
+    func getCompletedWithdraw(pageNo:Int){
+    
+        let p_no:String = String(describing: page_no)
+
+        APIManager.manager.getWithdrawList(page_no: p_no) { (status, dataList, msg, pageCount) in
             
             if status{
                 
-                self.withdrawListArray = dataList
-                
-                print("self.withdrawListArray.........",self.withdrawListArray)
-                
-                if self.withdrawListArray.count == 0{
+                if self.page_no == 1{
                     
-                    self.requestTableView.isHidden = true
-                    self.noRequestView.isHidden = false
+                    self.total_page_no = pageCount
+                    
+                    self.withdrawListArray = dataList
+                    
+                    print("self.withdrawListArray.........",self.withdrawListArray)
+                    
+                    if self.withdrawListArray.count == 0{
+                        
+                        self.requestTableView.isHidden = true
+                        self.noRequestView.isHidden = false
+                    }else{
+                        
+                        self.noRequestView.isHidden = true
+                        self.requestTableView.isHidden = false
+                        self.requestTableView.reloadData()
+                        
+                    }
+
+                    
                 }else{
                     
-                    self.noRequestView.isHidden = true
-                    self.requestTableView.isHidden = false
-                    self.requestTableView.reloadData()
-                    
+                    self.withdrawListArray.append(contentsOf: dataList)
                 }
                 
+                                
             }else{
                 self.requestTableView.isHidden = true
                 self.noRequestView.isHidden = false
@@ -120,6 +141,24 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
         let sttringFDate = dateFromString.toDateString(format: "dd/MM/yyyy")
         
         cell.dateLabel.text = sttringFDate
+        
+        if indexPath.row == (withdrawListArray.count) - 3 {
+            
+           
+            if total_page_no > page_no { // more items to fetch
+                
+                
+                page_no = page_no + 1
+                
+                getCompletedWithdraw(pageNo: page_no)
+                
+            }else{
+                
+             //   showMoreButton.isHidden = false
+                
+            }
+        }
+
         
         return cell
     }

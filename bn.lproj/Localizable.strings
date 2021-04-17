@@ -66,7 +66,7 @@
 "CONTESTS" = "সকল কন্টেস্ট";
 "Total Prize" = "সর্বমোট পুরস্কার";
 "Prize List" = "পুরস্কার তালিকা";
-"Tax Msg" = "** প্রাইজমানির উপর ২০% সরকারী ট্যাক্স (AIT) প্রযোজ্য";
+
 "Entry %d" = "এন্ট্রি %d";
 "Entry %@" = "এন্ট্রি %@";
 "Entry Free" = "এন্ট্রি ফ্রি";
@@ -336,3 +336,8 @@
 "CHANGE TEAM" = "পরিবর্তন করুন";
 "CHANGE YOUR TEAM" = "টিম পরিবর্তন";
 "You are changing your team, Want to join using the new team" = "আপনি টিম পরিবর্তন করছেন, নতুন টিম নিয়ে জয়েন করতে চান?";
+
+"**You can't search after the date of %@" = "**%@ তারিখের পর সিলেক্ট করতে পারবেন না";
+"MATCH ARCHIVE" = "ম্যাচ আর্কাইভ";
+
+"Announced" = "ঘোষিত";

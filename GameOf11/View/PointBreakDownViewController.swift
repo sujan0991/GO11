@@ -328,7 +328,29 @@ class PointBreakDownViewController: UIViewController,UITableViewDelegate,UITable
                 self.playerImageView.image = UIImage(named: "player_avatar_global.png")
             }
             
-            self.playerPointLabel.text = "\(singlePlayerInfo?.player_earning_point ?? 0)"
+            var point = 0.0
+            
+            if singlePlayerInfo!.is_captain == 1{
+                
+                point = Double((singlePlayerInfo?.player_earning_point)! * 2.0)
+                
+                print("point/............",point)
+                
+                self.playerPointLabel.text = "\(point)"
+               
+            }else if singlePlayerInfo!.is_vice_captain == 1{
+                
+                point = Double((singlePlayerInfo?.player_earning_point)! * 1.5)
+                
+                self.playerPointLabel.text = "\(point)"
+               
+            }else{
+                
+                self.playerPointLabel.text = "\(singlePlayerInfo?.player_earning_point ?? 0)"
+            }
+
+            
+            
             
             self.isInXIValueLabel.text = singlePlayerInfo?.is_in_playing_xi
             self.runsValueLabel.text = "\(singlePlayerPoint?.runs?["1"] ?? 0)"

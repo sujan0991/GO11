@@ -66,7 +66,7 @@
 "CONTESTS" = "CONTESTS";
 "Total Prize" = "Total Prize";
 "Prize List" = "Prize List";
-"Tax Msg" = "** 20% Govt Tax(AIT) will be applicable on Prize money";
+
 "Entry %d" = "Entry %d";
 "Entry %@" = "Entry %@";
 "Entry Free" = "Entry Free";
@@ -340,3 +340,9 @@
 "CHANGE TEAM" = "CHANGE TEAM";
 "CHANGE YOUR TEAM" = "CHANGE YOUR TEAM";
 "You are changing your team, Want to join using the new team" = "You are changing your team, Want to join using the new team";
+
+
+"**You can't search after the date of %@" = "**You can't search after the date of %@";
+"MATCH ARCHIVE" = "MATCH ARCHIVE";
+
+"Announced" = "Announced";

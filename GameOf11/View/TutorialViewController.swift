@@ -40,20 +40,20 @@ class TutorialViewController: UIViewController,UIScrollViewDelegate {
         
         let slide1:Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide1.imageView.image = UIImage(named: "tutorial_1")
-        slide1.labelTitle.text = "Create Your Team & Play"
-        slide1.labelDesc.text = "Simply Sign Up, Select a Match, Create your Team by choosing 11 players and join the contests. Prove your skills on Game of 11, biggest fantasy sports out there!"
-        
+//        slide1.labelTitle.text = "Create Your Team & Play"
+//        slide1.labelDesc.text = "Simply Sign Up, Select a Match, Create your Team by choosing 11 players and join the contests. Prove your skills on Game of 11, biggest fantasy sports out there!"
+//
        
         let slide2:Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide2.imageView.image = UIImage(named: "tutorial_2")
-        slide2.labelTitle.text = "Show Skill & Win Big"
-        slide2.labelDesc.text = "Track your player's performance in real time and be on top of the LeaderBoards to win prizes. Prove your skills and embrace Victory!"
+//        slide2.labelTitle.text = "Show Skill & Win Big"
+//        slide2.labelDesc.text = "Track your player's performance in real time and be on top of the LeaderBoards to win prizes. Prove your skills and embrace Victory!"
         
         let slide3:Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide3.imageView.image = UIImage(named: "tutorial_3")
-        slide3.labelTitle.text = "Know Your Team & Player"
-        slide3.labelDesc.text = "Gather knowledge about players' condition,playing XI, weather and keep track of the real matches to gear up your skills!"
-        
+//        slide3.labelTitle.text = "Know Your Team & Player"
+//        slide3.labelDesc.text = "Gather knowledge about players' condition,playing XI, weather and keep track of the real matches to gear up your skills!"
+//        
         return [slide1, slide2, slide3]
     }
     

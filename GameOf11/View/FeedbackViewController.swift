@@ -29,6 +29,7 @@ class FeedbackViewController: UIViewController,UITextViewDelegate {
         navTitlelabel.text = "YOUR FEEDBACK".localized
         feedbackPlaceHolderLabel.text = "Write your feedback message".localized
         sendButton.setTitle("Send Your Feedback".localized, for: .normal)
+        sendButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         emailTextField.text = String.init(format: "%@", (AppSessionManager.shared.currentUser?.email)!)
         phoneTextField.text = String.init(format: "%@", (AppSessionManager.shared.currentUser?.phone)!)
         

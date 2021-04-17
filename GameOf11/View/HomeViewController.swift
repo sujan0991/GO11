@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DTPagerController
+
 
 
 class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerControllerDelegate {
@@ -138,10 +138,14 @@ class HomeViewController: UIViewController,DTSegmentedControlProtocol,DTPagerCon
             
             if announcementList.isEmpty{
                 
-                
+                self.announcementCountLabel.isHidden = true
             }else{
                 
                 self.announcementArray = announcementList
+                
+                self.announcementCountLabel.isHidden = false
+                self.announcementCountLabel.text = "\(self.announcementArray.count)"
+                
                 
                 //                for singleAnnouncement in self.announcementArray{
                 //

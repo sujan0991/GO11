@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17140" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17115"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,7 +32,7 @@
                         <rect key="frame" x="15" y="5" width="308" height="180"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqA-pe-ddL">
-                                <rect key="frame" x="10" y="9" width="95" height="22"/>
+                                <rect key="frame" x="10" y="10.5" width="85.5" height="19"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
                                 <color key="textColor" name="dark_to_white"/>
                                 <nil key="highlightedColor"/>
@@ -45,7 +44,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="153.5" height="74"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhS-ul-SYW" customClass="PaddingLabel" customModule="GO11_Pro" customModuleProvider="target">
-                                                <rect key="frame" x="49" y="39.5" width="56" height="29.5"/>
+                                                <rect key="frame" x="58" y="52.5" width="37.5" height="16.5"/>
                                                 <color key="backgroundColor" red="0.94509803921568625" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -58,7 +57,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="player_avatar_global" translatesAutoresizingMaskIntoConstraints="NO" id="QIP-UW-9ss">
-                                                <rect key="frame" x="52" y="-8.5" width="50" height="50"/>
+                                                <rect key="frame" x="52" y="4.5" width="50" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Tpv-g2-cjp"/>
@@ -66,7 +65,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9B-aN-Hat">
-                                                <rect key="frame" x="31" y="-8.5" width="26" height="26"/>
+                                                <rect key="frame" x="31" y="4.5" width="26" height="26"/>
                                                 <color key="backgroundColor" name="brand_txt_color_black"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="HLO-fZ-LVB"/>
@@ -97,7 +96,7 @@
                                         <rect key="frame" x="154.5" y="0.0" width="153.5" height="74"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="player_avatar_global" translatesAutoresizingMaskIntoConstraints="NO" id="eNo-vK-Hc3">
-                                                <rect key="frame" x="52" y="-8.5" width="50" height="50"/>
+                                                <rect key="frame" x="52" y="4.5" width="50" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="7U6-G3-7IH"/>
@@ -105,7 +104,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grD-rJ-tel">
-                                                <rect key="frame" x="31" y="-8.5" width="26" height="26"/>
+                                                <rect key="frame" x="31" y="4.5" width="26" height="26"/>
                                                 <color key="backgroundColor" name="brand_txt_color_black"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="6bZ-t0-Z8d"/>
@@ -122,7 +121,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jj7-Jp-B9f" customClass="PaddingLabel" customModule="GO11_Pro" customModuleProvider="target">
-                                                <rect key="frame" x="49" y="39.5" width="56" height="29.5"/>
+                                                <rect key="frame" x="58" y="52.5" width="37.5" height="16.5"/>
                                                 <color key="backgroundColor" red="0.94509803920000002" green="0.20000000000000001" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -185,13 +184,13 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="72" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCP-Lm-Tfb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                                 <color key="textColor" name="GreyTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmE-io-x40">
-                                                                <rect key="frame" x="0.0" y="22.5" width="72" height="27.5"/>
+                                                                <rect key="frame" x="0.0" y="19.5" width="72" height="30.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                                                 <color key="textColor" name="GreyTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -202,13 +201,13 @@
                                                         <rect key="frame" x="77" y="0.0" width="72" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BAT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNY-Lo-zEw">
-                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                                 <color key="textColor" name="GreyTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXX-g5-ljL">
-                                                                <rect key="frame" x="0.0" y="22.5" width="72" height="27.5"/>
+                                                                <rect key="frame" x="0.0" y="19.5" width="72" height="30.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                                                 <color key="textColor" name="GreyTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -219,13 +218,13 @@
                                                         <rect key="frame" x="154" y="0.0" width="72" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHM-BI-bea">
-                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                                 <color key="textColor" name="GreyTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3V-jt-bEN">
-                                                                <rect key="frame" x="0.0" y="22.5" width="72" height="27.5"/>
+                                                                <rect key="frame" x="0.0" y="19.5" width="72" height="30.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                                                 <color key="textColor" name="GreyTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -236,13 +235,13 @@
                                                         <rect key="frame" x="231" y="0.0" width="72" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOWL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x5W-9o-a04">
-                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="19.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                                 <color key="textColor" name="GreyTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXX-ZU-vhw">
-                                                                <rect key="frame" x="0.0" y="22.5" width="72" height="27.5"/>
+                                                                <rect key="frame" x="0.0" y="19.5" width="72" height="30.5"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                                                 <color key="textColor" name="GreyTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -295,7 +294,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PCk-Hs-U1S" userLabel="Edit">
-                                <rect key="frame" x="113" y="5" width="195" height="30"/>
+                                <rect key="frame" x="103.5" y="5" width="204.5" height="30"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7Z-rs-7xg">
                                         <rect key="frame" x="37.5" y="2" width="107" height="28"/>
@@ -308,7 +307,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaR-0T-dw4">
-                                        <rect key="frame" x="160" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="169.5" y="0.0" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="EJT-DC-KkD"/>
@@ -320,7 +319,7 @@
                                         <state key="normal" image="edit_icon"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnE-Xy-JfD">
-                                        <rect key="frame" x="110" y="0.0" width="30" height="30"/>
+                                        <rect key="frame" x="119.5" y="0.0" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="0lW-0z-eY4"/>
@@ -391,14 +390,6 @@
             <point key="canvasLocation" x="110.40000000000001" y="38.680659670164921"/>
         </tableViewCell>
     </objects>
-    <designables>
-        <designable name="jj7-Jp-B9f">
-            <size key="intrinsicContentSize" width="56" height="29.5"/>
-        </designable>
-        <designable name="mhS-ul-SYW">
-            <size key="intrinsicContentSize" width="56" height="29.5"/>
-        </designable>
-    </designables>
     <resources>
         <image name="edit_icon" width="234.5" height="234.5"/>
         <image name="player_avatar_global" width="74.5" height="66"/>

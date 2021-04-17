@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17140" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17115"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -122,12 +122,18 @@
                                 <rect key="frame" x="256" y="14" width="19" height="13"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
-                                <color key="textColor" name="on_green"/>
+                                <color key="textColor" name="brand_red"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oog-XE-vdZ">
                                 <rect key="frame" x="0.0" y="105" width="290" height="20"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lineups Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEI-8k-IkU">
+                                        <rect key="frame" x="220.5" y="4" width="54.5" height="12"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                                        <color key="textColor" name="brand_green"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Contest Available" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="o1n-tG-rOh">
                                         <rect key="frame" x="15" y="0.0" width="94" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -140,6 +146,8 @@
                                     <constraint firstAttribute="height" constant="20" id="HBJ-LP-tCt"/>
                                     <constraint firstItem="o1n-tG-rOh" firstAttribute="leading" secondItem="Oog-XE-vdZ" secondAttribute="leading" constant="15" id="IZK-5U-nnB"/>
                                     <constraint firstItem="o1n-tG-rOh" firstAttribute="top" secondItem="Oog-XE-vdZ" secondAttribute="top" id="Idv-sv-S5v"/>
+                                    <constraint firstAttribute="trailing" secondItem="NEI-8k-IkU" secondAttribute="trailing" constant="15" id="dYo-gF-kdY"/>
+                                    <constraint firstItem="NEI-8k-IkU" firstAttribute="centerY" secondItem="Oog-XE-vdZ" secondAttribute="centerY" id="egV-Q5-TQh"/>
                                     <constraint firstAttribute="bottom" secondItem="o1n-tG-rOh" secondAttribute="bottom" id="fUw-AG-5aL"/>
                                 </constraints>
                             </view>
@@ -181,6 +189,7 @@
                 <outlet property="contestCount" destination="o1n-tG-rOh" id="VVU-4B-sY4"/>
                 <outlet property="firstTeamFlag" destination="Zou-vr-Rk6" id="SdW-DA-u9J"/>
                 <outlet property="firstTeamName" destination="Vea-sp-ICN" id="NJ7-PD-jCr"/>
+                <outlet property="lineupLabel" destination="NEI-8k-IkU" id="AWi-q4-aJy"/>
                 <outlet property="secondTeamFlag" destination="n5D-B4-hUK" id="2hy-4S-148"/>
                 <outlet property="secondTeamName" destination="NTR-OP-nt5" id="r13-FJ-h2J"/>
                 <outlet property="statusLabel" destination="EMX-5P-anD" id="umu-mT-D8j"/>
@@ -192,6 +201,9 @@
     </objects>
     <resources>
         <image name="teamPlaceHolder_icon" width="256" height="256"/>
+        <namedColor name="brand_green">
+            <color red="0.18799999356269836" green="0.72200000286102295" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="brand_red">
             <color red="0.85500001907348633" green="0.24300000071525574" blue="0.25499999523162842" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

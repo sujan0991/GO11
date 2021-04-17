@@ -56,7 +56,7 @@ class VerifyAccountViewController: UIViewController,UIImagePickerControllerDeleg
         frontImageLabel.text = "Front Side Image".localized
         backImageLabel.text = "Back Side Image".localized
         verifyButton.setTitle("VERIFY YOUR PROFILE".localized, for: .normal)
-        
+        verifyButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
         let userData = AppSessionManager.shared.currentUser
         
@@ -79,6 +79,25 @@ class VerifyAccountViewController: UIViewController,UIImagePickerControllerDeleg
             self.backImageView.kf.setImage(with: url)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+
+    }
+
     
     
     @IBAction func frontImageButtonAction(_ sender: UIButton) {

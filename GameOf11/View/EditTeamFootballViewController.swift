@@ -38,6 +38,8 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
     
     let formatter = NumberFormatter()
     
+    var isLineUpOut = 0
+    
     
     @IBOutlet weak var maxPlayerLabel: UILabel!
     
@@ -691,7 +693,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
             
         }
         
-        cell.setInfo(player: player,squad: squadData.teams!)
+        cell.setInfo(player: player,squad: squadData.teams!, isLineUpOut: self.isLineUpOut)
         
         
         return cell

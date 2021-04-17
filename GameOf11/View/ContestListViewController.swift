@@ -160,7 +160,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         navTitleLabel.text = "CONTESTS".localized
         
         prizeListLabel.text = "Prize List".localized
-        taxlabel.text = "Tax Msg".localized
+      //  taxlabel.text = "Tax Msg".localized
         
         
         formatter.numberStyle = .decimal
@@ -170,15 +170,15 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         vsLabel.makeCircular(borderWidth: 1, borderColor: UIColor.init(named: "HighlightGrey")!)
         //  createTeamButton.makeRound(5, borderWidth: 0, borderColor: .clear)
-        createTeamButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "on_green")!)
+        createTeamButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         createTeamButton.layer.shadowColor = UIColor.gray.cgColor
         createTeamButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         createTeamButton.layer.shadowRadius = 2
         createTeamButton.layer.shadowOpacity = 0.5
         createTeamButton.layer.masksToBounds = false
         
-        signUpButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
-        loginButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
+        signUpButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "brand_red")!)
+        loginButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "brand_red")!)
         
         contestTableView.register(UINib(nibName: "ContestTableViewCell", bundle: nil), forCellReuseIdentifier: "contestCell")
         
@@ -777,7 +777,13 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             
             cell.joinedButton.isHidden = false
             cell.joinedButton.tag = contest.id ?? 0
-            cell.joinedButton.addTarget(self, action: #selector(teamSelectAction(_:)), for: .touchUpInside)
+            
+           // cell.joinedButton.addTarget(self, action: #selector(teamSelectAction(_:)), for: .touchUpInside)
+            
+            //added this invisible button,so that user can interect properly
+            cell.joinedShadowButton.tag = contest.id ?? 0
+            cell.joinedShadowButton.addTarget(self, action: #selector(teamSelectAction(_:)), for: .touchUpInside)
+            
             //    }
             
             cell.editButton.tag = contest.id ?? 0
@@ -862,10 +868,11 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             if (contest.isJoined != 0)
             {
                 
-                cell.joinedButton.setBackgroundColor(UIColor.init(named: "dark_to_green")!, for: UIControl.State.normal)
+                cell.joinedButton.setBackgroundColor(UIColor.init(named: "red_light")!, for: UIControl.State.normal)
                 cell.joinedButton.setTitle("JOINED".localized, for: UIControl.State.normal)
                 cell.joinedButton.isUserInteractionEnabled = false
                 cell.joinedButton.isEnabled = false
+                cell.joinedShadowButton.isUserInteractionEnabled = false
                 if type == .liveContest || type == .completedContest{
                     
                     cell.editButton.isHidden = true
@@ -878,9 +885,10 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             }
             else
             {
-                cell.joinedButton.setBackgroundColor(UIColor.init(named: "on_green")!, for: UIControl.State.normal)
+                cell.joinedButton.setBackgroundColor(UIColor.init(named: "brand_red")!, for: UIControl.State.normal)
                 cell.joinedButton.setTitle("JOIN".localized, for: UIControl.State.normal)
                 cell.joinedButton.isUserInteractionEnabled = true
+                cell.joinedShadowButton.isUserInteractionEnabled = true
                 cell.editButton.isHidden = true
                 
             }
@@ -1005,6 +1013,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         
                         popupVC?.squadData = squadData
                         popupVC?.timeLeft = self.parentMatch?.joiningLastTime
+                        popupVC?.isLineUpOut = self.parentMatch?.isLineUpOut ?? 0
                         
                         self.navigationController?.pushViewController(popupVC ?? self, animated: true)
                     }else{
@@ -1013,6 +1022,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         
                         popupVC?.squadData = squadData
                         popupVC?.timeLeft = self.parentMatchFootball?.joiningLastTime
+                        popupVC?.isLineUpOut = self.parentMatch?.isLineUpOut ?? 0
                         
                         self.navigationController?.pushViewController(popupVC ?? self, animated: true)
                         
@@ -1032,6 +1042,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         //            print("")
         //        }
     }
+    
+    
     @IBAction func teamSelectAction(_ sender: UIButton) {
         
         if AppSessionManager.shared.authToken == nil {

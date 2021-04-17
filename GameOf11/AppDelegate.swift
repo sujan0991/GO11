@@ -54,6 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             
             UserDefaults.standard.set( mediaUrl, forKey: "media_base_url")
             
+            
+            let dataArchived = infoDic["data_archived"] as! String
+            
+            UserDefaults.standard.set( dataArchived, forKey: "data_archived")
+
+            
             let shouldUpdate = infoDic["should_update"] as! Int
             
             UserDefaults.standard.set( shouldUpdate, forKey: "shouldUpdate")

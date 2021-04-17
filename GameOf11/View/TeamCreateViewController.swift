@@ -44,6 +44,8 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
     
     let formatter = NumberFormatter()
     
+    var isLineUpOut = 0
+    
     @IBOutlet weak var maxPlayerLabel: UILabel!
     
     @IBOutlet weak var firstTeamCount: UIButton!
@@ -232,7 +234,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
         nextButton.layer.shadowOpacity = 0.5
         nextButton.layer.masksToBounds = false
         
-        
+        print("isLineUpOut..........",isLineUpOut)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -487,7 +489,7 @@ class TeamCreateViewController: UIViewController,UICollectionViewDelegate, UICol
             }
             
             
-            cell.setInfo(player: player,squad: squadData.teams!)
+            cell.setInfo(player: player,squad: squadData.teams!, isLineUpOut: self.isLineUpOut)
             
             
             return cell

@@ -196,8 +196,8 @@ class ContestLeaderBoardViewController: UIViewController,UITableViewDelegate,UIT
     //"\(parentMatch?.matchId ?? 0)"
     func getLeaderBoard(contestId:Int,pageNo:Int) {
         
-        var c_id:String = String(describing: contestId)
-        var p_no:String = String(describing: pageNo)
+        let c_id:String = String(describing: contestId)
+        let p_no:String = String(describing: pageNo)
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             

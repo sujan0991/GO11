@@ -107,6 +107,10 @@ struct API_K {
     static let GET_COMPLETED_CONTEST_MATCH_LIST = "user/completed-match-contests"//
     static let GET_COMPLETED_FOOTBALL_CONTEST_MATCH_LIST = "football/user/completed-match-contests"//
     
+    static let GET_COMPLETED_CONTEST_MATCH_LIST_ARCHIVE = "user/completed-match-contests/archive"//
+    static let GET_COMPLETED_FOOTBALL_CONTEST_MATCH_LIST_ARCHIVE = "football/user/completed-match-contests/archive"//
+
+    
     static let GET_USER_JOINRD_CONTEST_LIST = "user/match/contests"//
     static let GET_USER_JOINRD_FOOTBALL_CONTEST_LIST = "football/user/match/contests"//
     
@@ -1328,11 +1332,12 @@ class APIManager: NSObject {
     
     
     
-    func getUserJoinedCompletedMatchList(completion:(( _ matches: [MatchList])->Void)?) {
+    func getUserJoinedCompletedMatchList(page_no:String,completion:(( _ matches: [MatchList], _ pageCount: Int?)->Void)?) {
         
         //     SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        let params:[String:String] = ["page_number":page_no]
         
-        Request(.get, API_K.GET_COMPLETED_CONTEST_MATCH_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+        Request(.get, API_K.GET_COMPLETED_CONTEST_MATCH_LIST, parameters: params)?.responseJSON(completionHandler: { (responseData) in
             print(responseData)
             
             switch responseData.result {
@@ -1343,33 +1348,88 @@ class APIManager: NSObject {
                 if let jsonDic = json.dictionaryObject {
                     let isSuccess:Bool = jsonDic["status"] as! Bool
                     
+                    let pageCount:Int = jsonDic["total_page_count"] as! Int
+                    
                     if !isSuccess{
-                        completion?([])
+                        completion?([],nil)
                     }
                     else{
                         if let matchArray = json["data"].arrayObject as? [Gloss.JSON] {
                             
                             if let matches = [MatchList].from(jsonArray: matchArray) {
                                 
-                                completion?(matches)
+                                completion?(matches,pageCount)
                                 
                             } else {
                                 
-                                completion?([])
+                                completion?([],nil)
                             }
                         }
                     }
                 }
                 else {
-                    completion?([])
+                    completion?([],nil)
                 }
             case .failure( _):
                 SVProgressHUD.dismiss()
-                completion?([])
+                completion?([],nil)
             }
         })
     }
-    func getUserJoinedCompletedFootballMatchList(completion:(( _ matches: [FootBallMatchList])->Void)?) {
+    
+    func getUserJoinedCompletedMatchListArchive(from_date:String,to_date:String,page_no:String,completion:(( _ matches: [MatchList], _ pageCount: Int?,_ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        //let params:[String:String] = ["contest_id":contestId,"user_team_id":teamId,]
+        let params:[String:String] = ["from_date":from_date,
+                                      "to_date":to_date,
+                                      "page_number":page_no,]
+        
+        Request(.get, API_K.GET_COMPLETED_CONTEST_MATCH_LIST_ARCHIVE, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            print(responseData)
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    let pageCount:Int = jsonDic["total_page_count"] as! Int
+                    
+                    let msg = jsonDic["message"] as! String
+                    
+                    if !isSuccess{
+                        completion?([],0,msg)
+                    }
+                    else{
+                        if let matchArray = json["data"].arrayObject as? [Gloss.JSON] {
+                            
+                            if let matches = [MatchList].from(jsonArray: matchArray) {
+                                
+                                completion?(matches,pageCount,msg)
+                                print("got data......")
+                                
+                            } else {
+                                
+                                completion?([],nil,msg)
+                                print("no data......")
+                            }
+                        }
+                    }
+                }
+                else {
+                    completion?([],nil,"")
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?([],nil,"")
+            }
+        })
+    }
+    
+    func getUserJoinedCompletedFootballMatchList(page_no:String,completion:(( _ matches: [FootBallMatchList], _ pageCount: Int?)->Void)?) {
         
         //     SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
@@ -1383,34 +1443,84 @@ class APIManager: NSObject {
                 let json = JSON(value)
                 if let jsonDic = json.dictionaryObject {
                     let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let pageCount:Int = jsonDic["total_page_count"] as! Int
+                   
                     
                     if !isSuccess{
-                        completion?([])
+                        completion?([], nil)
                     }
                     else{
                         if let matchArray = json["data"].arrayObject as? [Gloss.JSON] {
                             
                             if let matches = [FootBallMatchList].from(jsonArray: matchArray) {
                                 
-                                completion?(matches)
+                                completion?(matches, pageCount)
                                 
                             } else {
                                 
-                                completion?([])
+                                completion?([], nil)
                             }
                         }
                     }
                 }
                 else {
-                    completion?([])
+                    completion?([],nil)
                 }
             case .failure( _):
                 SVProgressHUD.dismiss()
-                completion?([])
+                completion?([],nil)
             }
         })
     }
     
+    func getUserJoinedCompletedFootBallMatchListArchive(from_date:String,to_date:String,page_no:String,completion:(( _ matches: [FootBallMatchList], _ pageCount: Int?,_ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        //let params:[String:String] = ["contest_id":contestId,"user_team_id":teamId,]
+        let params:[String:String] = ["from_date":from_date,
+                                      "to_date":to_date,
+                                      "page_number":page_no,]
+        
+        Request(.get, API_K.GET_COMPLETED_CONTEST_MATCH_LIST_ARCHIVE, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            print(responseData)
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    let pageCount:Int = jsonDic["total_page_count"] as! Int
+                    let msg = jsonDic["message"] as! String
+                    
+                    if !isSuccess{
+                        completion?([],0,msg)
+                    }
+                    else{
+                        if let matchArray = json["data"].arrayObject as? [Gloss.JSON] {
+                            
+                            if let matches = [FootBallMatchList].from(jsonArray: matchArray) {
+                                
+                                completion?(matches,pageCount,msg)
+                                
+                            } else {
+                                
+                                completion?([],nil,msg)
+                            }
+                        }
+                    }
+                }
+                else {
+                    completion?([],nil,"")
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?([],nil,"")
+            }
+        })
+    }
     
     func getTeamForMatch(matchId:String,completion:(( _ status: Bool,_ user:CreatedTeamList?, _ message: String?)->Void)?) {
         
@@ -2206,12 +2316,14 @@ class APIManager: NSObject {
         
     }
     
-    func getWithdrawList( withCompletionHandler completion:((_ status: Bool, _ dataArray: Array<Any>, _ message: String?)->Void)?) {
+    func getWithdrawList(page_no:String, withCompletionHandler completion:((_ status: Bool, _ dataArray: Array<Any>, _ message: String?,_ pageCount: Int?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
+        let params:[String:String] = ["page_number":page_no]
         
-        Request(.get, API_K.GET_WITHDRAW_LIST, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+        
+        Request(.get, API_K.GET_WITHDRAW_LIST, parameters: params)?.responseJSON(completionHandler: { (responseData) in
             
             switch responseData.result {
             case .success(let value):
@@ -2222,21 +2334,23 @@ class APIManager: NSObject {
                     
                     let isSuccess:Bool = jsonDic["status"] as! Bool
                     let msg:String = jsonDic["message"] as! String
+                    let pageCount:Int = jsonDic["total_page_number"] as! Int
+                   
                     
                     if !isSuccess{
-                        completion?(false,[],"")
+                        completion?(false,[],"",nil)
                     }
                     else{
                         let packArray:Array = jsonDic["data"] as! Array<Any>
                         
-                        completion?(true,packArray,msg)
+                        completion?(true,packArray,msg,pageCount)
                     }
                 }
                 
                 
             case .failure(let error):
                 SVProgressHUD.dismiss()
-                completion?(false,[],error.localizedDescription)
+                completion?(false,[],error.localizedDescription,nil)
             }
         })
         

@@ -25,6 +25,7 @@ class MatchList: Glossy {
     var availableContest : Int?
     var totalJoinedContests: Int?
     var teams: [MatchTeams] = []
+    var isLineUpOut: Int?
     
     required init?(json: Gloss.JSON) {
         matchId = "match_id" <~~ json
@@ -37,6 +38,7 @@ class MatchList: Glossy {
         join_ends_before = "join_ends_before" <~~ json
         totalJoinedContests = "total_joined_contests" <~~ json
         teams = ("teams" <~~ json) ?? []
+        isLineUpOut = "is_lineup_out" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -50,6 +52,7 @@ class MatchList: Glossy {
             "join_ends_before" ~~> join_ends_before,
             "total_joined_contests" ~~> totalJoinedContests,
             "teams" ~~> teams,
+            "is_lineup_out" ~~> isLineUpOut,
             "contest_count" ~~> availableContest
             ])
     }
@@ -79,11 +82,16 @@ class FootBallMatchList: Glossy {
     var tournamentName: String?
     var matchName: String?
     var matchTime: String?
+    var format: String?
+   
+    var availableContest : Int?
+
    
     var join_ends_before: Int?
     
     var totalJoinedContests: Int?
     var teams: [FootBallMatchTeams] = []
+    var isLineUpOut: Int?
     
     var joiningLastTime: String? {
         
@@ -105,10 +113,13 @@ class FootBallMatchList: Glossy {
         tournamentName = "tournament_name" <~~ json
         matchName = "match_name" <~~ json
         matchTime = "match_time" <~~ json
+        
+        availableContest = "contest_count" <~~ json
        
         join_ends_before = "join_ends_before" <~~ json
         totalJoinedContests = "total_joined_contests" <~~ json
         teams = ("teams" <~~ json) ?? []
+        isLineUpOut = "is_lineup_out" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -120,7 +131,9 @@ class FootBallMatchList: Glossy {
             "match_time" ~~> matchTime,
             "join_ends_before" ~~> join_ends_before,
             "total_joined_contests" ~~> totalJoinedContests,
-            "teams" ~~> teams
+            "teams" ~~> teams,
+            "is_lineup_out" ~~> isLineUpOut,
+            "contest_count" ~~> availableContest
             ])
     }
     
@@ -632,6 +645,7 @@ class Player: Glossy {
     var playerSelected: Bool = false
     var isCaptain: Bool = false
     var isViceCaptain: Bool = false
+    var is_in_playing_xi: Int?
     
     required init?(json: Gloss.JSON) {
         playerId = "player_id" <~~ json
@@ -644,7 +658,7 @@ class Player: Glossy {
         creditPoints = "credit_points" <~~ json
         selectedPer = "selected_percentage" <~~ json
         teamBelong = "team_belong" <~~ json
-        
+        is_in_playing_xi = "is_in_playing_xi" <~~ json
         //  playerSelected = "playerSelected" <~~ json ?? false
         //  isCaptain = "playerSeisCaptainlected" <~~ json ?? false
         //  isViceCaptain = "isViceCaptain" <~~ json ?? false
@@ -661,7 +675,7 @@ class Player: Glossy {
             "credit_points" ~~> creditPoints,
             "selected_percentage" ~~> selectedPer,
             "team_belong" ~~> teamBelong,
-            
+            "is_in_playing_xi" ~~> is_in_playing_xi,
             "playerSelected" ~~> playerSelected,
             "isCaptain" ~~> isCaptain,
             "isViceCaptain" ~~> isViceCaptain

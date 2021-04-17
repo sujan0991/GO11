@@ -35,6 +35,10 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
     //    var delegate: BackFromOTPView?
     
     
+    
+    @IBOutlet weak var verifyOTPButton: UIButton!
+    @IBOutlet weak var verifyButton: UIButton!
+    
     var countdownTimer: Timer!
     var totalTime = 60
     
@@ -56,6 +60,8 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
         
         phoneNumberTextField.becomeFirstResponder()
         
+        verifyButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
+        verifyOTPButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
     }
     

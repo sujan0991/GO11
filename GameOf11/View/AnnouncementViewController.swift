@@ -22,6 +22,9 @@ class AnnouncementViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var webView: WKWebView!
     
     @IBOutlet weak var navTitle: UILabel!
+    
+    @IBOutlet weak var noAnnouncementView: UIView!
+    
     var announcementArray:[Any] = []
     
 
@@ -36,6 +39,16 @@ class AnnouncementViewController: UIViewController,UITableViewDelegate,UITableVi
         announcementTableView.dataSource = self
         announcementTableView.tableFooterView = UIView()
 
+        print("announcementArray.count",announcementArray.count)
+        
+        if announcementArray.count == 0{
+            
+            noAnnouncementView.isHidden = false
+            
+        }else{
+            
+            noAnnouncementView.isHidden = true
+        }
        
         
         
@@ -96,6 +109,7 @@ class AnnouncementViewController: UIViewController,UITableViewDelegate,UITableVi
         let htmlString = singleAnnouncement["description"]! as! String
         let customizedText = NSMutableAttributedString(string: htmlString)
         customizedText.addAttribute(NSAttributedString.Key.strokeWidth, value: 5.0, range: NSRange(location: 0, length: customizedText.string.count))
+        
         if #available(iOS 13, *) {
                   if UserDefaults.standard.bool(forKey: "DarkMode"){
                       
