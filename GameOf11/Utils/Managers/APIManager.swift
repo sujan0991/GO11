@@ -146,6 +146,13 @@ struct API_K {
     static let POST_PROMO = "promo"
     
     
+    static let WITHDRAW_CHANNELS = "withdraw-channels"
+    
+    static let PAYMENT_CHANNELS = "payment-channels"
+    
+    static let REDEEMABLE_COIN_PACKS = "redeemable-coin-packs"
+    
+    
 }
 
 struct API_STRING {
@@ -956,11 +963,11 @@ class APIManager: NSObject {
             }
         })
     }
-    func postWithdrawRequest(amount:String, number : String , withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+    func postWithdrawRequest(amount:String, number : String, channelType: String , withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
-        let params:[String:String] = ["amount":amount, "transaction_number": number ]
+        let params:[String:String] = ["amount":amount, "transaction_number": number, "channel_type": channelType]
         
         Request(.post, API_K.WITHDRAW_REQUEST, parameters: params)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
@@ -2596,6 +2603,129 @@ class APIManager: NSObject {
         
     }
     
+    
+    func getWithdrawChannelList(lang:String,completion:((_ status: Bool, _ message: String?, _ channels: Array<Any>)->Void)?) {
+        
+        //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["lang":lang,]
+        
+        Request(.get, API_K.WITHDRAW_CHANNELS, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    let msg:String = jsonDic["message"] as! String
+                    
+                    if !isSuccess{
+                        completion?(false, msg,[])
+                    }
+                    else{
+                        
+                        let channelArray:Array = jsonDic["data"] as! Array<Any>
+                        
+                        completion?(isSuccess, msg,channelArray)
+                    }
+                }
+                else {
+                    completion?(false, "Sorry!Somethings went wrong",[])
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false, "Sorry!Somethings went wrong",[])
+            }
+        })
+    }
+    
+    func getPaymentChannelList(lang:String,completion:((_ status: Bool, _ message: String?, _ channels: [PaymentChannels])->Void)?) {
+        
+        //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["lang":lang,]
+        
+        Request(.get, API_K.PAYMENT_CHANNELS, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    let msg:String = jsonDic["message"] as! String
+                    
+                    if !isSuccess{
+                        completion?(false, msg,[])
+                    }
+                    else{
+                        
+                        if let channelArray = json["data"].arrayObject as? [Gloss.JSON] {
+                            
+                            if let channels = [PaymentChannels].from(jsonArray: channelArray) {
+                                completion?(isSuccess, msg, channels)
+                            } else {
+                                completion?(false, msg,[])
+                            }
+                        }
+
+                    }
+                }
+                else {
+                    completion?(false, "Sorry!Somethings went wrong",[])
+                }
+            case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?(false, "Sorry!Somethings went wrong",[])
+            }
+        })
+    }
+    
+    
+    
+    func getRedeemCoinPack( withCompletionHandler completion:((_ status: Bool, _ dataArray: Array<Any>, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
+        Request(.get, API_K.REDEEMABLE_COIN_PACKS, parameters: nil)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    let msg:String = jsonDic["message"] as! String
+                    
+                    if !isSuccess{
+                        completion?(false,[],"")
+                    }
+                    else{
+                        let packArray:Array = jsonDic["data"] as! Array<Any>
+                        
+                        completion?(true,packArray,msg)
+                    }
+                }
+                
+                
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,[],error.localizedDescription)
+            }
+        })
+        
+        
+    }
     
     
     func getDataModel(_ param:[String:Any]? = nil,method:String, withCompletionHandler completion:(( _ status: Bool, _ data: Gloss.JSON?,_ msg:String?)->Void)?) {

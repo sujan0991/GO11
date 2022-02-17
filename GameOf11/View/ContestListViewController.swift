@@ -10,6 +10,7 @@ import UIKit
 
 import SafariServices
 import SVProgressHUD
+import Mixpanel
 
 protocol BackFromTeamSelect {
     func selectedTeam(team: CreatedTeam,contestId: Int)
@@ -100,13 +101,15 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     @IBOutlet weak var paymentView: UIView!
     
-    @IBOutlet weak var selectBkashButton: UIButton!
-    @IBOutlet weak var selectCardButton: UIButton!
+
     @IBOutlet weak var selectTermButton: UIButton!
     @IBOutlet weak var paymentMethodsLabel: UILabel!
-    @IBOutlet weak var bKashLabel: UILabel!
-    @IBOutlet weak var cardLabel: UILabel!
+    
     @IBOutlet weak var payButton: UIButton!
+    
+    @IBOutlet weak var paymentViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var paymentChannelTableView: UITableView!
+    
     
     
     @IBOutlet weak var signUpView: UIView!
@@ -148,10 +151,35 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     let formatter = NumberFormatter()
     
+    
+    struct Channels {
+        let name: String
+        let channelName: String
+        let max: Int
+        let min: Int
+        let icon: String
+        var selected: Bool
+    }
+    
+    var methodLists: [Channels] = []
+    
+    
+    private var selectedPaymentMethod: Int? {
+        didSet {
+            paymentChannelTableView.reloadData()
+        }
+    }
+    
+    var selectedChannelType = "None"
+    
+    var channels:[PaymentChannels] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        
         
         self.tabBarController?.tabBar.isHidden = true
         
@@ -226,12 +254,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         blockSuggestionTextView.text = "Your profile has been blocked! To know about reason of blocking or to resolve the matter please message to our facebook page https://www.facebook.com/gameof11/ . GO11 support team will guide you for further procedure.".localized
         
         
-        
-        
-        paymentMethodsLabel.text = "Payment Methods".localized
-        bKashLabel.text = "bKash Digital Payment".localized
-        cardLabel.text = "Credit/Debit Cards/Mobile\nBanking/Online Banking".localized
-        payButton.setTitle("PAY NOW".localized, for: .normal)
+
         
         blockSuggestionTextView.isEditable = false;
         blockSuggestionTextView.dataDetectorTypes = UIDataDetectorTypes.all;
@@ -246,6 +269,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         // Register to receive notification in your class
               NotificationCenter.default.addObserver(self, selector: #selector(self.paymentSuccessful(_:)), name: NSNotification.Name(rawValue: "paymentFromContestList"), object: nil)
+        //paymentFromContestListMaxPanel
+        NotificationCenter.default.addObserver(self, selector: #selector(self.paymentSuccessfulMaxPanel(_:)), name: NSNotification.Name(rawValue: "paymentFromContestListMixpanel"), object: nil)
               
         //    getData()
         
@@ -371,12 +396,26 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             }
             
         }
-        
-        
-        
+
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         backShadeView.addGestureRecognizer(tap)
+        
+
+        
+        paymentMethodsLabel.text = "Payment Methods".localized
+        payButton.setTitle("PAY NOW".localized, for: .normal)
+        //get payment channel
+        
+      //  getPaymentChannel()
+       
+        
+        paymentChannelTableView.delegate = self
+        paymentChannelTableView.dataSource = self
+        paymentChannelTableView.tableFooterView = UIView()
+        paymentChannelTableView.register(UINib(nibName: "PaymentChannelCell", bundle: nil), forCellReuseIdentifier: "paymentChannelCell")
+
+
     }
     
     
@@ -442,6 +481,14 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         }else{
             
         }
+        
+        if selectedPaymentMethod != nil{
+            
+            selectedPaymentMethod = nil
+            selectedChannelType = "None"
+            
+        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -672,6 +719,22 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     
                     AppSessionManager.shared.currentUser = um
                     AppSessionManager.shared.save()
+                    
+                    //set mixpanel profile
+                    
+//                    Mixpanel.mainInstance().identify(distinctId: um?.phone ?? "0")
+//
+//                    let p: Properties = ["Phone": um?.phone ?? "",
+//                                         "Name": um?.name ?? "",
+//                                         "Email": um?.email ?? "",
+//                                         "Address": um?.address ?? "",
+//                                         "Created_At": um?.created_at ?? ""]
+//
+//                    Mixpanel.mainInstance().people.set(properties: p)
+                    //BD5CD4C4-63FD-4D85-93E1-9A167CC23953
+                    
+                  
+                    
                 }
             }
         }else{
@@ -730,6 +793,21 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     
                     AppSessionManager.shared.currentUser = um
                     AppSessionManager.shared.save()
+                    
+                    
+                    //set mixpanel profile
+                    
+//                    Mixpanel.mainInstance().identify(distinctId: um?.phone ?? "0")
+//
+//                    let p: Properties = ["Phone": um?.phone ?? "",
+//                                         "Name": um?.name ?? "",
+//                                         "Email": um?.email ?? "",
+//                                         "Address": um?.address ?? "",
+//                                         "Created_At": um?.created_at ?? ""]
+//
+//                    Mixpanel.mainInstance().people.set(properties: p)
+                    //BD5CD4C4-63FD-4D85-93E1-9A167CC23953
+                   
                 }
             }
         }else{
@@ -742,9 +820,13 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     
     
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.contestTableView{
             return 1
+        }else if tableView == self.paymentChannelTableView{
+            return methodLists.count
         }else{
             
             return prizeFilteredArray.count
@@ -754,6 +836,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         if tableView == self.contestTableView{
             return activeContestList.count
+        }else if tableView == self.paymentChannelTableView{
+            return 1
         }else{
             
             return 1
@@ -798,6 +882,26 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             
             cell.totalWinnerButton.addTarget(self, action: #selector(prizeCalculation(_:)), for: .touchUpInside)
             
+            return cell
+        }else if tableView == self.paymentChannelTableView{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier:"paymentChannelCell") as! PaymentChannelCell
+
+            
+            // 2
+            cell.selectionStyle = .none
+            // 3
+            let method = methodLists[indexPath.row]
+            
+            // 4
+            let currentIndex = indexPath.row
+            // 5
+            let selected = currentIndex == selectedPaymentMethod
+            // 6
+            cell.configure(method.name,method.icon)
+            // 7
+            cell.isSelected(selected)
+            // 8
             return cell
         }else{
             
@@ -968,6 +1072,17 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     print("open")
                 }
             }
+        }else if tableView == paymentChannelTableView{
+            
+            updateSelectedIndex(indexPath.row)
+            
+
+            let method = methodLists[indexPath.row]
+            
+            selectedChannelType = method.channelName
+
+            
+            
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -992,6 +1107,15 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         return 0;
         
     }
+    
+    
+    private func updateSelectedIndex(_ index: Int) {
+        
+        selectedPaymentMethod = index
+    }
+    
+    
+    
     @IBAction func teamCreateAction(_ sender: Any) {
         
         if let um = AppSessionManager.shared.currentUser {
@@ -1022,7 +1146,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         
                         popupVC?.squadData = squadData
                         popupVC?.timeLeft = self.parentMatchFootball?.joiningLastTime
-                        popupVC?.isLineUpOut = self.parentMatch?.isLineUpOut ?? 0
+                        popupVC?.isLineUpOut = self.parentMatchFootball?.isLineUpOut ?? 0
                         
                         self.navigationController?.pushViewController(popupVC ?? self, animated: true)
                         
@@ -1846,6 +1970,43 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                             }
                         }
                     }
+                    
+                    if self.selectedContest?.contestType == "free"{
+                        var isUnlimited = "yes"
+                        if self.selectedContest?.is_league == 1{
+                             
+                            isUnlimited = "no"
+                        }
+                        //set joined_free_contest_cricket event in mixpanel
+                        let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
+                                             "contest_id": self.selectedContest?.id ?? "",
+                                             "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
+                                             "entry_fee": self.selectedContest?.entryAmount ?? "",
+                                             "total_spot": self.selectedContest?.teamsCapacity ?? "",
+                                             "isUnlimited": isUnlimited ]
+                        Mixpanel.mainInstance().track(event: "joined_free_contest_cricket", properties: p)//
+                       
+                        
+                    }else{
+                        
+                        var isUnlimited = "yes"
+                        if self.selectedContest?.is_league == 1{
+                             
+                            isUnlimited = "no"
+                        }
+                        //set joined_paid_contest_cricket event in mixpanel
+                        let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
+                                             "contest_id": self.selectedContest?.id ?? "",
+                                             "prize_money": self.selectedContest?.winningAmount ?? "",
+                                             "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
+                                             "entry_fee": self.selectedContest?.entryAmount ?? "",
+                                             "total_spot": self.selectedContest?.teamsCapacity ?? "",
+                                             "isUnlimited": isUnlimited ]
+                        Mixpanel.mainInstance().track(event: "joined_paid_contest_cricket", properties: p)//
+                       
+                    }
+                  
+                    
                 }
                 else{
                     
@@ -1904,6 +2065,43 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                 
                             }
                         }
+                    }
+                    
+                    
+                    if self.selectedContest?.contestType == "free"{
+                        
+                        var isUnlimited = "yes"
+                        if self.selectedContest?.is_league == 1{
+                             
+                            isUnlimited = "no"
+                        }
+                        //set joined_free_contest_football event in mixpanel
+                        let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
+                                             "contest_id": self.selectedContest?.id ?? "",
+                                             "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
+                                             "entry_fee": self.selectedContest?.entryAmount ?? "",
+                                             "total_spot": self.selectedContest?.teamsCapacity ?? "",
+                                             "isUnlimited": isUnlimited ]
+                        Mixpanel.mainInstance().track(event: "joined_free_contest_football", properties: p)//
+                       
+                        
+                    }else{
+                        var isUnlimited = "yes"
+                        if self.selectedContest?.is_league == 1{
+                             
+                            isUnlimited = "no"
+                        }
+                        
+                        //set joined_paid_contest_football event in mixpanel
+                        let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
+                                             "contest_id": self.selectedContest?.id ?? "",
+                                             "prize_money": self.selectedContest?.winningAmount ?? "",
+                                             "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
+                                             "entry_fee": self.selectedContest?.entryAmount ?? "",
+                                             "total_spot": self.selectedContest?.teamsCapacity ?? "",
+                                             "isUnlimited": isUnlimited ]
+                        Mixpanel.mainInstance().track(event: "joined_paid_contest_football", properties: p)//
+                       
                     }
                 }
                 else{
@@ -2178,47 +2376,102 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     @IBAction func buyCoinButtonAction(_ sender: Any) {
         
+        getPaymentChannel()
         
         buyCoinView.isHidden = true
         
-        self.paymentView.isHidden = false
-        self.backShadeView.isHidden = false
-        self.paymentView.frame = CGRect(x: 0, y:self.view.frame.height, width: self.paymentView.frame.width, height: self.paymentView.frame.height)
-        
-        let bottonSpace = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 1.0
-        
-        
-        UIView.animate(withDuration:0.2, animations: {
-            
-            
-            self.paymentView.frame = CGRect(x: 0, y:self.view.frame.height - self.paymentView.frame.height - bottonSpace, width: self.paymentView.frame.width, height: self.paymentView.frame.height)
-            
-        }) { _ in
-            
-            
-        }
+
     }
     
-    
-    @IBAction func selectBkashButtonAction(_ sender: UIButton) {
+    func getPaymentChannel(){
         
-        sender.isSelected = !sender.isSelected
-        
-        if selectCardButton.isSelected{
-            
-            selectCardButton.isSelected = false
+        var lang = ""
+        if Language.language == Language.english{
+            lang = "EN"
+        }else{
+            lang = "BN"
         }
-    }
-    
-    @IBAction func selectCardbuttonAction(_ sender: UIButton) {
-        
-        sender.isSelected = !sender.isSelected
-        
-        if selectBkashButton.isSelected{
+        APIManager.manager.getPaymentChannelList(lang: lang) { (status, msg, channelList) in
             
-            selectBkashButton.isSelected = false
+            if status{
+                
+                self.channels = channelList
+                
+                self.paymentView.isHidden = false
+                self.backShadeView.isHidden = false
+                
+                //remove all before inserting
+                self.methodLists.removeAll()
+                
+                for channel in self.channels{
+                    
+                    let name = channel.english_name!
+                    let channelName = channel.channel_name!
+                    let icon = channel.icon!
+                    let maxPay = channel.max_pay_amount!
+                    let minPay = channel.min_pay_amount!
+                    
+                    print("method.min amount", minPay)
+                    let tkAmount = (self.payAmountLabel2.text! as NSString).intValue
+                    
+                    if tkAmount >= minPay && tkAmount <= maxPay{
+                        
+                        //add in methodlist
+                        let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay,icon: icon, selected: false)
+                        
+                        self.methodLists.append(new)
+
+                    }
+
+                }
+                
+                print("self.methodLists.count....", self.methodLists.count)
+                
+                self.paymentChannelTableView.reloadData()
+                
+                // set view height based on tableview height
+                self.paymentViewHeight.constant = self.paymentChannelTableView.contentSize.height + 180
+                
+                
+                
+                
+                self.paymentView.frame = CGRect(x: 0, y:self.view.frame.height, width: self.paymentView.frame.width, height: self.paymentView.frame.height)
+                
+                let bottonSpace = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 1.0
+                
+                
+                UIView.animate(withDuration:0.2, animations: {
+                    
+                    
+                    self.paymentView.frame = CGRect(x: 0, y:self.view.frame.height - self.paymentView.frame.height - bottonSpace, width: self.paymentView.frame.width, height: self.paymentView.frame.height)
+                    
+                }) { _ in
+                    
+                    
+                }
+                
+                
+            }else{
+                
+                print("no channel.......")
+                
+                let alertController = UIAlertController(title: "", message: msg, preferredStyle: UIAlertController.Style.alert)
+                
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    
+                   // self.GoBack()
+                    
+                }))
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
+        
+        
     }
+
+    
+
     
     @IBAction func selectTermButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -2248,40 +2501,40 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             
             let tkAmount = (payAmountLabel2.text! as NSString).floatValue
             
-            var type = "ghoori"
-            if selectBkashButton.isSelected{
-                
-                type = "ghoori"
-                
-            }else if selectCardButton.isSelected{
-                
-                type = "foster"
-            }
+            if selectedChannelType != "None"{
             
-            print("tkAmount and type ",tkAmount,type)
-            
-            APIManager.manager.getInvoice(amount: tkAmount,type:type) { (status, id,url,msg) in
-                
-                print("getInvoice msg",msg!)
-                
-                if status{
-                    self.view.makeToast(msg!)
+                APIManager.manager.getInvoice(amount: tkAmount,type:selectedChannelType) { (status, id,url,msg) in
                     
-                    print("getInvoice id",id ?? "??",url!)
+                    print("getInvoice msg",msg!)
                     
-                    let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BkashPaymentViewController") as? BkashPaymentViewController
-                    
-                    vc?.urlString = url!
-                    vc?.selectedContestId = self.selectedContest!.id!
-                    vc?.createdTeamList = self.createdTeamList
-                    
-                    self.navigationController?.pushViewController(vc!, animated: true)
+                    if status{
+                        self.view.makeToast(msg!)
+                        
+                        print("getInvoice id",id ?? "??",url!)
+                        
+                        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BkashPaymentViewController") as? BkashPaymentViewController
+                        
+                        vc?.urlString = url!
+                        vc?.selectedContestId = self.selectedContest!.id!
+                        vc?.createdTeamList = self.createdTeamList
+                        vc?.isFromDipositCoin = "no"
+                        
+                        //for Mixpanel
+                        
+                        let amount = String(tkAmount)
+                        vc?.rechargAmount = amount
+                        vc?.selectedChannelType = self.selectedChannelType
+                        vc?.isCoinPack = "no"
+                        
+                        
+                        self.navigationController?.pushViewController(vc!, animated: true)
+                        
+                    }
+                    else{
+                        self.view.makeToast(msg!)
+                    }
                     
                 }
-                else{
-                    self.view.makeToast(msg!)
-                }
-                
             }
             
         }
@@ -2338,12 +2591,38 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         }
         
         
+        
+        
         //        let alertVC = UIAlertController(title: nil, message: "Your payment to buy Coins was Successful. Now please choose from your created Teams and join contest".localized, preferredStyle: .alert)
         //        let okAction = UIAlertAction(title: "OK", style: .default, handler: { (aciton) in
         //        })
         //
         //        alertVC.addAction(okAction)
         //        self.present(alertVC, animated: true, completion: nil)
+        
+    }
+    
+    @objc func paymentSuccessfulMaxPanel(_ notification: NSNotification) {
+        
+        if let channel = notification.userInfo?["channel"] as? String {
+            
+            if let isCoinPack = notification.userInfo?["isCoinPack"] as? String {
+                
+                if let amount = notification.userInfo?["amount"] as? String {
+                    
+                    let p: Properties = ["channel": channel,
+                                         "isCoinPack": isCoinPack,
+                                         "amount": amount]
+                    
+                    Mixpanel.mainInstance().track(event: "coin_purchase_done", properties: p)//
+
+                    
+                }
+                
+            }
+            
+        }
+
         
     }
     

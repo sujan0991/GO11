@@ -714,10 +714,15 @@ class UserModel: Glossy {
     var metadata: ProfileMetaData?
     var avatar: ProfileAvatar?
     
+    var paymentMethod: PaymentMethod?
+    
     var referralCode: String?
     var referralLaw: String?
     var referralMessage: String?
     var minWithdrawLimit: Float?
+    var maxWithdrawLimit: Float?
+    
+    var created_at: String?
     
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
@@ -743,8 +748,13 @@ class UserModel: Glossy {
         
         metadata = ("metadata" <~~ json)
         avatar = ("avatar" <~~ json)
+        paymentMethod = ("payment_method" <~~ json)
         
+        maxWithdrawLimit = ("maximum_withdraw_amount" <~~ json)
         minWithdrawLimit = ("minimum_withdraw_amount" <~~ json)
+        
+        created_at = ("created_at" <~~ json)
+        
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -767,12 +777,16 @@ class UserModel: Glossy {
             "referral_message" ~~> referralMessage,
             "is_blocked" ~~> isBlocked,
             
-            
-            
             "metadata" ~~> metadata,
             "avatar" ~~> avatar,
+            "payment_method" ~~> paymentMethod,
             
-            "maximum_withdraw_amount" ~~> minWithdrawLimit
+            "maximum_withdraw_amount" ~~> maxWithdrawLimit,
+            
+            "minimum_withdraw_amount" ~~> minWithdrawLimit,
+            
+            "created_at" ~~> created_at
+            
             ])
     }
 }
@@ -840,6 +854,26 @@ class ProfileMetaData: Glossy {
             "referral_contest_unlocked" ~~> referral_contest_unlocked,
             
             "verification_cancel_reason" ~~> verification_cancel_reason
+            ])
+    }
+}
+
+class PaymentMethod: Glossy {
+    
+    var foster: Int?
+    var ghoori: Int?
+    
+    
+    required init?(json: Gloss.JSON) {
+        foster = "foster" <~~ json
+        ghoori = "ghoori" <~~ json
+  
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "foster" ~~> foster,
+            "ghoori" ~~> ghoori
             ])
     }
 }
@@ -1523,3 +1557,45 @@ class BreakDownData: Glossy {
             ])
     }
 }
+
+
+class PaymentChannels: Glossy {
+    
+    var channel_name:String?
+    var bangla_name:String?
+    var english_name:String?
+    var icon: String?
+    var is_active:Int?
+    var max_pay_amount: Int?
+    var min_pay_amount: Int?
+    
+    
+    
+    required init?(json: Gloss.JSON) {
+        channel_name = "channel_name" <~~ json
+        bangla_name = "bangla_name" <~~ json
+        english_name = "english_name" <~~ json
+        is_active = "is_active" <~~ json
+        icon = "icon" <~~ json
+        max_pay_amount = "max_pay_amount" <~~ json
+        min_pay_amount = "min_pay_amount" <~~ json
+        
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            
+            "channel_name" ~~> channel_name ,
+            "bangla_name" ~~> bangla_name,
+            "english_name" ~~> english_name,
+            "is_active" ~~> is_active,
+            "icon" ~~> icon,
+            "max_pay_amount" ~~> max_pay_amount,
+            "min_pay_amount" ~~> min_pay_amount,
+            
+            
+            ])
+    }
+}
+
+

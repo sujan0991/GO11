@@ -30,6 +30,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
     @IBOutlet weak var bannerRatioConstraint: NSLayoutConstraint!
     @IBOutlet weak var adCollectionView: UICollectionView!
+    
     @IBOutlet weak var selectAmatchLabel: UILabel!
     
     @IBOutlet weak var noMatchView: UIView!
@@ -105,15 +106,19 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             adCollectionView.delegate = self
             adCollectionView.dataSource = self
             
+            
             APIManager.manager.getBannerList(pageName: "homepage") { (bannerArray) in
                 
                 
                 self.bannerArray = bannerArray
                 
                 self.adCollectionView.reloadData()
+                
             }
             
         }else {
+            
+            //don't show ad.
             
             adCollectionView.addConstraint(NSLayoutConstraint(item: adCollectionView,
             attribute: .height,
@@ -324,6 +329,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             APIManager.manager.getUpcomingMatchList { (nextMatches) in
                 self.matches = nextMatches
                 self.matchListTableView.reloadData()
+               
                 
                 if self.matches.count == 0{
                     

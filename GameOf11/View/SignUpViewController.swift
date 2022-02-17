@@ -11,6 +11,8 @@ import SafariServices
 
 import Lottie
 
+import Mixpanel
+
 class SignUpViewController: BaseViewController,UITextFieldDelegate {
     
     
@@ -210,6 +212,26 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
                 
                 if token != nil {
                     //                self.showStatus(status, msg: msg)
+                    
+                    
+                  
+                    
+                    Mixpanel.mainInstance().track(event: "complete_sign_up")// set complete_sign_up event in mixpanel
+                    
+                    //set alias
+                    
+                    //https://help.mixpanel.com/hc/en-us/articles/115004497803-Identity-Management-Best-Practices
+                    
+                    if UserDefaults.standard.bool(forKey: "isAliasSet") == false{
+                        
+                        Mixpanel.mainInstance().createAlias(phn, distinctId: Mixpanel.mainInstance().distinctId)
+                        
+                        UserDefaults.standard.set(true, forKey: "isAliasSet")
+                        
+                        Mixpanel.mainInstance().identify(distinctId: phn)
+                        
+                    }
+                    
                     
                     AppSessionManager.shared.authToken = token
                     AppSessionManager.shared.save()

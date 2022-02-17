@@ -18,7 +18,7 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
     
     
     var withdrawListArray : [Any] = []
-    var username = AppSessionManager.shared.currentUser?.name
+   // var username = AppSessionManager.shared.currentUser?.name
     
     var page_no = 1
     var total_page_no : Int!
@@ -116,14 +116,20 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
         // cell.oldpackLabel.text = "\(String(describing: singlePack["actual_amount"]!)) BDT"
         
         
-        cell.nameLabel.text = username
+       // cell.nameLabel.text = username
         
         if singleRequest["status"] as! String == "pending" {
             
             cell.statusLabel.text = "\(String(describing: singleRequest["status"]!))".uppercased()
             cell.referenceLabel.text = "Ref ID: Processing"
             
-        }else{
+        }else if singleRequest["status"] as! String == "canceled" {
+            
+            cell.statusLabel.text = "\(String(describing: singleRequest["status"]!))".uppercased()
+            cell.referenceLabel.text = "Reason: \(String(describing: singleRequest["reference"]!))"
+            
+        }
+        else{
             
             cell.statusLabel.text = "APPROVED"
             cell.referenceLabel.text = "Ref ID: \(String(describing: singleRequest["reference"]!))"
@@ -132,7 +138,7 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
         cell.transnumberLabel.text = "Trans Num: \(String(describing: singleRequest["transaction_number"]!))"
         cell.transIdLabel.text = "Trans ID: \(String(describing: singleRequest["id"]!))"
         cell.amountLabel.text = "- ৳\(String(describing: singleRequest["amount"]!))"
-        
+        cell.withdrawMethodLabel.text = "Withdraw Method: \(String(describing: singleRequest["channel_type"]!))"
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -175,7 +181,14 @@ class PendingWithdrawViewController: UIViewController,UITableViewDelegate,UITabl
                 cell.statusLabel.textColor = UIColor.init(named: "brand_orange")!
                 cell.amountLabel.textColor = UIColor.init(named: "brand_orange")!
                 cell.statusImageView.image = UIImage(named: "pending_icon")
-            }else{
+                
+             }else if singleRequest["status"] as! String == "canceled" {
+                
+                cell.statusLabel.textColor = UIColor.init(named: "brand_red")!
+                cell.amountLabel.textColor = UIColor.init(named: "brand_red")!
+                cell.statusImageView.image = UIImage(named: "cancel_icon")
+            }
+            else{
                 
                 cell.statusLabel.textColor = UIColor.init(named: "on_green")!
                 cell.amountLabel.textColor = UIColor.init(named: "on_green")!

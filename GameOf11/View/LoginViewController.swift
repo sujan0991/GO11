@@ -9,6 +9,8 @@
 import UIKit
 import SVProgressHUD
 
+import Mixpanel
+
 class LoginViewController: BaseViewController {
     
     
@@ -55,7 +57,7 @@ class LoginViewController: BaseViewController {
             englishButton.setTitleColor(UIColor.white, for: .normal)
             
         }
-
+        
         
         englishButton.layer.borderWidth = 0.5
         englishButton.layer.borderColor = UIColor.lightGray.cgColor
@@ -97,18 +99,18 @@ class LoginViewController: BaseViewController {
         languagEView.isHidden = true
         shadoWView.isHidden = true
         if #available(iOS 13, *) {
-                  if UserDefaults.standard.bool(forKey: "DarkMode"){
-                      
-                      overrideUserInterfaceStyle = .dark
-                      
-                  }else{
-                      overrideUserInterfaceStyle = .light
-                  }
-              
-              }else{
-                  
-              }
-
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                
+            }else{
+                overrideUserInterfaceStyle = .light
+            }
+            
+        }else{
+            
+        }
+        
     }
     @IBAction func signUpButtonAction(_ sender: Any) {
         
@@ -125,6 +127,7 @@ class LoginViewController: BaseViewController {
         if sender.isSelected{
             
             passwordField.isSecureTextEntry = false
+            
         }else{
             
             passwordField.isSecureTextEntry = true
@@ -148,44 +151,61 @@ class LoginViewController: BaseViewController {
     
     @IBAction func signinAction(_ sender: Any) {
         
-        let phn = String.init(format: "+88%@", phoneField.text!)
-        APIManager.manager.login(userName: phn, password: passwordField.text!) { (status, token, msg) in
-            
-            if status{
-                self.view.makeToast( msg!)
+        if phoneField.text?.count != 0 && passwordField.text?.count != 0{
+            let phn = String.init(format: "+88%@", phoneField.text!)
+            APIManager.manager.login(userName: phn, password: passwordField.text!) { (status, token, msg) in
                 
-                AppSessionManager.shared.authToken = token
-                AppSessionManager.shared.save()
-                
-                //                let sb: UIStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-                //                let vc = sb.instantiateInitialViewController()
-                //
-                //                if let window = UIApplication.shared.delegate?.window {
-                //                    window?.rootViewController = vc
-                //                }
-                var oldToken = ""
-                if let oldFcmToken = AppSessionManager.shared.fcmToken{
-                    oldToken = oldFcmToken
-                }
-                APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "login") { (status, msg) in
-                    if status{
-                        print(msg ?? "")
+                if status{
+                    self.view.makeToast( msg!)
+                    
+                    AppSessionManager.shared.authToken = token
+                    AppSessionManager.shared.save()
+                    
+                    //                let sb: UIStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+                    //                let vc = sb.instantiateInitialViewController()
+                    //
+                    //                if let window = UIApplication.shared.delegate?.window {
+                    //                    window?.rootViewController = vc
+                    //                }
+                    var oldToken = ""
+                    if let oldFcmToken = AppSessionManager.shared.fcmToken{
+                        oldToken = oldFcmToken
                     }
-                    else{
-                        print(msg ?? "")
+                    APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "login") { (status, msg) in
+                        if status{
+                            print(msg ?? "")
+                        }
+                        else{
+                            print(msg ?? "")
+                        }
                     }
+                    
+                    //set alias
+                    
+                    //https://help.mixpanel.com/hc/en-us/articles/115004497803-Identity-Management-Best-Practices
+                    
+                    if UserDefaults.standard.bool(forKey: "isAliasSet") == false{
+                        
+                        Mixpanel.mainInstance().createAlias(phn, distinctId: Mixpanel.mainInstance().distinctId)
+                        
+                        UserDefaults.standard.set(true, forKey: "isAliasSet")
+                        
+                        Mixpanel.mainInstance().identify(distinctId: phn)
+                        
+                    }
+                    
+                    
+                    self.navigationController?.popToRootViewController(animated: true)
+                    
                 }
-                
-                self.navigationController?.popToRootViewController(animated: true)
+                else{
+                    self.view.makeToast(msg!)
+                }
                 
             }
-            else{
-                self.view.makeToast(msg!)
-            }
-            
         }
- 
-}
+        
+    }
     
     
     

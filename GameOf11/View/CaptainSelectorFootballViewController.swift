@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Mixpanel
+
 class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
     
     var userTeam : UsersFantasyTeamFootball!
@@ -717,6 +719,9 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
                                 print("Dismiss")
                             }
                         }
+                        
+                        let p: Properties = ["match_id": self.userTeam.matchId ?? ""]
+                        Mixpanel.mainInstance().track(event: "team_created_football", properties: p)// set team_created_football event in mixpanel
                     }
                     
                 }

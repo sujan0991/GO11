@@ -61,6 +61,9 @@
 		64173F622601774600A1947C /* kenyan coffee rg it.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64173F5E2601774600A1947C /* kenyan coffee rg it.ttf */; };
 		64173F632601774600A1947C /* kenyan coffee rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64173F5F2601774600A1947C /* kenyan coffee rg.ttf */; };
 		64173F682606578A00A1947C /* CompletedMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64173F672606578A00A1947C /* CompletedMatchViewController.swift */; };
+		641764B5265B0A8E00E0A74E /* WithdrawMethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 641764B4265B0A8E00E0A74E /* WithdrawMethodCell.xib */; };
+		641DE3BA265EA41900630612 /* PaymentChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 641DE3B8265EA41800630612 /* PaymentChannelCell.xib */; };
+		641DE3BB265EA41900630612 /* PaymentChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DE3B9265EA41900630612 /* PaymentChannelCell.swift */; };
 		641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E1768222A9A7D00302A19 /* SignUpViewController.swift */; };
 		641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */; };
 		64251026240D652900077D25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64251025240D652900077D25 /* GoogleService-Info.plist */; };
@@ -99,6 +102,7 @@
 		646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */; };
 		647825AA239D2BC0007AAC7A /* EditTeamFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */; };
 		647825AC23A02B45007AAC7A /* PointBreakdownFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */; };
+		647ABA12265ADF5800454416 /* WithdrawMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */; };
 		6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */; };
 		64A0EDD7243357BC00B52AE6 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */; };
 		64A0EDD92433590E00B52AE6 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EDD82433590D00B52AE6 /* SettingTableViewCell.swift */; };
@@ -120,6 +124,7 @@
 		64E5B42E23F0009A00D377F0 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E5B42D23F0009A00D377F0 /* OTPViewController.swift */; };
 		64E999D3231B0E84003C7FFE /* sign_up_dialog_anim_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */; };
 		64E999D5231B131E003C7FFE /* Boat_Loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D4231B131E003C7FFE /* Boat_Loader.json */; };
+		64F0383F26CDA0E300609F34 /* ListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0383E26CDA0E300609F34 /* ListLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -193,6 +198,9 @@
 		64173F5E2601774600A1947C /* kenyan coffee rg it.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "kenyan coffee rg it.ttf"; sourceTree = "<group>"; };
 		64173F5F2601774600A1947C /* kenyan coffee rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "kenyan coffee rg.ttf"; sourceTree = "<group>"; };
 		64173F672606578A00A1947C /* CompletedMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedMatchViewController.swift; sourceTree = "<group>"; };
+		641764B4265B0A8E00E0A74E /* WithdrawMethodCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawMethodCell.xib; sourceTree = "<group>"; };
+		641DE3B8265EA41800630612 /* PaymentChannelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentChannelCell.xib; sourceTree = "<group>"; };
+		641DE3B9265EA41900630612 /* PaymentChannelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentChannelCell.swift; sourceTree = "<group>"; };
 		641E1768222A9A7D00302A19 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSignedProfileViewController.swift; sourceTree = "<group>"; };
 		64251025240D652900077D25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -233,6 +241,7 @@
 		646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
 		647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamFootballViewController.swift; sourceTree = "<group>"; };
 		647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBreakdownFootballViewController.swift; sourceTree = "<group>"; };
+		647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawMethodCell.swift; sourceTree = "<group>"; };
 		647C5D0A233D280700E4C3CF /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCell.swift; sourceTree = "<group>"; };
 		64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -255,6 +264,7 @@
 		64E5B42D23F0009A00D377F0 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sign_up_dialog_anim_2.json; sourceTree = "<group>"; };
 		64E999D4231B131E003C7FFE /* Boat_Loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Boat_Loader.json; sourceTree = "<group>"; };
+		64F0383E26CDA0E300609F34 /* ListLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListLoader.swift; sourceTree = "<group>"; };
 		BB3C0DFD4C09C2AC1FBB8A56 /* Pods-GameOf11.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameOf11.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11.debug.xcconfig"; sourceTree = "<group>"; };
 		CECBB971ED7EF347DF27EF25 /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA071A4862D02ED4B1736182 /* Pods-GameOf11.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameOf11.release.xcconfig"; path = "Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11.release.xcconfig"; sourceTree = "<group>"; };
@@ -298,6 +308,7 @@
 				6448F5BE2293EDC400B31BFC /* BkashPaymentViewController.swift */,
 				64522216239C182B0091AE28 /* CaptainSelectorFootballViewController.swift */,
 				0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */,
+				64173F672606578A00A1947C /* CompletedMatchViewController.swift */,
 				6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */,
 				0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */,
 				0C78C1F422244F390068B5D6 /* DepositCoinViewController.swift */,
@@ -310,7 +321,6 @@
 				64476AAD22D8E4C80071C443 /* JoinedContestListViewController.swift */,
 				0CE8836A21E0000E0025A31E /* LoginViewController.swift */,
 				0C390ACF21DF5E0200FA6A15 /* MatchViewController.swift */,
-				64173F672606578A00A1947C /* CompletedMatchViewController.swift */,
 				0C78C1FE222450AB0068B5D6 /* MoreViewController.swift */,
 				0C3336D021DF489A00E6EB11 /* MyContestViewController.swift */,
 				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
@@ -377,6 +387,10 @@
 		0C390AD121DF7FDA00FA6A15 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				641DE3B9265EA41900630612 /* PaymentChannelCell.swift */,
+				641DE3B8265EA41800630612 /* PaymentChannelCell.xib */,
+				647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */,
+				641764B4265B0A8E00E0A74E /* WithdrawMethodCell.xib */,
 				6445274722DB38B800D23734 /* BannerCollectionViewCell.swift */,
 				0CE8836421DFDEDB0025A31E /* ContestTableViewCell.swift */,
 				0CE8836521DFDEDB0025A31E /* ContestTableViewCell.xib */,
@@ -478,6 +492,7 @@
 		6453959A22DA0AEA007273D2 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				64F0383E26CDA0E300609F34 /* ListLoader.swift */,
 				645D06422527EAFE002A3EAC /* DTPagerController */,
 				6455AE702320260A00F9679D /* Toast.swift */,
 				6453959B22DA0AEA007273D2 /* GradientProgress.swift */,
@@ -622,6 +637,7 @@
 				64E999D3231B0E84003C7FFE /* sign_up_dialog_anim_2.json in Resources */,
 				0C0BE64E21DA294000BE30CF /* Main.storyboard in Resources */,
 				0C390AD721DF83E500FA6A15 /* MatchTableViewCell.xib in Resources */,
+				641764B5265B0A8E00E0A74E /* WithdrawMethodCell.xib in Resources */,
 				64C77A5122FEEBC5005161BF /* OpenSans-SemiboldItalic.ttf in Resources */,
 				64C77A4D22FEEBC5005161BF /* OpenSans-Italic.ttf in Resources */,
 				6453F2AE230960F2006A86CF /* UpComingMatchCell.xib in Resources */,
@@ -629,6 +645,7 @@
 				0CE8836721DFDEDB0025A31E /* ContestTableViewCell.xib in Resources */,
 				0CE8836321DFD5730025A31E /* PlayerTableViewCell.xib in Resources */,
 				64E999D5231B131E003C7FFE /* Boat_Loader.json in Resources */,
+				641DE3BA265EA41900630612 /* PaymentChannelCell.xib in Resources */,
 				64173F632601774600A1947C /* kenyan coffee rg.ttf in Resources */,
 				64C77A5322FEEBC5005161BF /* OpenSans-Regular.ttf in Resources */,
 				64C77A4C22FEEBC5005161BF /* OpenSans-Light.ttf in Resources */,
@@ -722,6 +739,8 @@
 				0C78C1FD22244F450068B5D6 /* WithdrawRequestViewController.swift in Sources */,
 				0C7F54F321DA6FBC00049571 /* AppDelegate.swift in Sources */,
 				64CBB4E123EA4A9900F0DBA2 /* TransactionTableViewCell.swift in Sources */,
+				647ABA12265ADF5800454416 /* WithdrawMethodCell.swift in Sources */,
+				64F0383F26CDA0E300609F34 /* ListLoader.swift in Sources */,
 				0CE8836921DFE0AF0025A31E /* ContestListViewController.swift in Sources */,
 				0C3336C721DF419400E6EB11 /* Extension.swift in Sources */,
 				0C33368221DF3B0400E6EB11 /* CustomNavigationBar.swift in Sources */,
@@ -777,6 +796,7 @@
 				6448F5C12294094600B31BFC /* ReferalViewController.swift in Sources */,
 				0CE8836621DFDEDB0025A31E /* ContestTableViewCell.swift in Sources */,
 				0C390AD621DF83E500FA6A15 /* MatchTableViewCell.swift in Sources */,
+				641DE3BB265EA41900630612 /* PaymentChannelCell.swift in Sources */,
 				0C85C3492225C5D800B6515C /* TeamPreviewViewController.swift in Sources */,
 				646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */,
 				0C3336D121DF489A00E6EB11 /* MyContestViewController.swift in Sources */,
@@ -961,7 +981,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 3.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1018,7 +1038,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 3.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",

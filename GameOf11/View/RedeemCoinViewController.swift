@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 class RedeemCoinViewController: BaseViewController, UITextFieldDelegate {
     
@@ -88,7 +89,17 @@ class RedeemCoinViewController: BaseViewController, UITextFieldDelegate {
             {
                 self.redeemButton.isUserInteractionEnabled = true
                 self.view.makeToast( msg!)
+                
+                //set coin_redeem_done event in mixpanel
+                let p: Properties = ["user_id": AppSessionManager.shared.currentUser!.id ?? "",
+                                     "profile_balance": AppSessionManager.shared.currentUser!.metadata!.totalCash ?? "",
+                                     "isFromOffer": "no",
+                                     "amount": self.tkAmountTextField.text ?? "0"]
+                
+                Mixpanel.mainInstance().track(event: "coin_redeem_done", properties: p)//
+               
                 self.navigationController?.popViewController(animated: true)
+                
                 
             }
             else{

@@ -243,11 +243,11 @@
 
 
 "WITHDRAW REQUEST" = "WITHDRAW REQUEST";
-"Personal bKash phone number" = "Personal bKash phone number";
+"Personal phone number" = "Personal phone number";
 "Send Withdraw Request" = "Send Withdraw Request";
 "Cash-Withdrawl!" = "Cash-Withdrawl!";
 "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT." = "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT.";
-"Personal Bkash number is needed while withdrawing the money." = "Personal Bkash number is needed while withdrawing the money.";
+"Personal number is needed while withdrawing the money." = "Personal number is needed while withdrawing the money.";
 
 "COIN PURCHASE" = "COIN PURCHASE";
 "Payment successfull" = "Payment successfull";
@@ -346,3 +346,17 @@
 "MATCH ARCHIVE" = "MATCH ARCHIVE";
 
 "Announced" = "Announced";
+
+"Choose your withdrawl method" = "Choose your withdrawl method";
+
+
+"Special Offer : redeem coins with your prize money to get extra coins!" = "Special Offer : redeem coins with your prize money to get extra coins!";
+
+"Please provide amount and phone number properly" = "Please provide amount and phone number properly";
+
+"Given numbers are not same!" = "Given numbers are not same!";
+"Please select a payment method!" = "Please select a payment method!";
+
+"You are trying to withdraw more than your balance" = "You are trying to withdraw more than your balance";
+
+"Please select a pack!" = "Please select a pack!";

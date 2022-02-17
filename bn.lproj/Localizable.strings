@@ -240,11 +240,11 @@
 "The amount in BDT you would mention here will add the equivalent amount of coins in your profile." = "আপনি এখানে যত টাকা এর পরিমাণ লিখবেন সেই টাকার সমপরিমাণ কয়েন আপনার প্রোফাইলে জমা হয়ে যাবে";
 
 "WITHDRAW REQUEST" = "প্রাইজ তুলুন";
-"Personal bKash phone number" = "বিকাশ পার্সোনাল ফোন নাম্বার";
+"Personal phone number" = "পার্সোনাল ফোন নাম্বার";
 "Send Withdraw Request" = "প্রাইজ তোলার রিকুয়েস্ট করুন";
 "Cash-Withdrawl!" = "প্রাইজ তুলুন!";
 "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT." = "সর্বনিম্ন ২৫০ টাকা প্রাইজ হিসেবে তুলতে পারবেন এবং সর্বোচ্চ ৪৯৯৯ টাকা প্রাইজ হিসেবে তুলতে পারবেন।";
-"Personal Bkash number is needed while withdrawing the money." = "যেই পার্সোনাল বিকাশ নাম্বারে প্রাইজ এর টাকা পেতে চাচ্ছেন সেটা দিন।";
+"Personal number is needed while withdrawing the money." = "যেই পার্সোনাল নাম্বারে প্রাইজ এর টাকা পেতে চাচ্ছেন সেটা দিন।";
 
 "COIN PURCHASE" = "কয়েন ক্রয়";
 "Payment successfull" = "আপনার পেমেন্ট সফল হয়েছে!";
@@ -341,3 +341,16 @@
 "MATCH ARCHIVE" = "ম্যাচ আর্কাইভ";
 
 "Announced" = "ঘোষিত";
+
+"Choose your withdrawl method" = "আপনার প্রাইজ তোলার মাধ্যম সিলেক্ট করুন";
+
+"Special Offer : redeem coins with your prize money to get extra coins!" = "বিশেষ অফার: অতিরিক্ত কয়েন পেতে আপনার পুরস্কারের টাকা দিয়ে কয়েন কনভার্ট করুন!";
+
+"Please provide amount and phone number properly" = "অনুগ্রহ করে টাকার পরিমাণ এবং ফোন নম্বর সঠিকভাবে প্রদান করুন";
+
+"Given numbers are not same!" = "প্রদত্ত ফোন নম্বর এক নয়!";
+"Please select a payment method!" = "অনুগ্রহ পূবর্ক প্রাইজ তোলার মাধ্যম সিলেক্ট করুন!";
+
+"You are trying to withdraw more than your balance" = "আপনি আপনার ব্যালেন্সের চেয়ে বেশি টাকা তোলার চেষ্টা করছেন";
+
+"Please select a pack!" = "দয়া করে একটি প্যাক নির্বাচন করুন!";

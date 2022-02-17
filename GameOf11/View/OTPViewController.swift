@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Mixpanel
 
 //protocol BackFromOTPView {
 //
@@ -62,6 +63,9 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
         
         verifyButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         verifyOTPButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
+        
+        Mixpanel.mainInstance().track(event: "start_signup")
+        //mixpanel.track("Sign Up")
         
     }
     

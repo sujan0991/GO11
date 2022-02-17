@@ -12,6 +12,7 @@ import IQKeyboardManagerSwift
 import Firebase
 import FirebaseMessaging
 import UserNotifications
+import Mixpanel
 //import OneSignal
 
 
@@ -147,6 +148,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
         
+        
+        //Initialize Mixpanel
+        Mixpanel.initialize(token: "3b7ec6d8fdb420d13bce73112f872fdb")
+        
+        Mixpanel.mainInstance().loggingEnabled = true
+        
+        Mixpanel.mainInstance().flushInterval = 5
+        let allTweaks: [TweakClusterType] = [MixpanelTweaks.floatTweak,
+                                             MixpanelTweaks.intTweak,
+                                             MixpanelTweaks.boolTweak,
+                                             MixpanelTweaks.stringTweak]
+        
+        MixpanelTweaks.setTweaks(tweaks: allTweaks)
+        
+        
+        //check if mixpanel alias is set or not. for the 1st time set is false("0")
+        
+        if UserDefaults.standard.object(forKey: "isAliasSet") == nil {
+          
+            UserDefaults.standard.set(false, forKey: "isAliasSet")
+            
+        }
+        
+         
         return true
     }
     
@@ -273,5 +298,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
 
 
+}
+
+
+extension MixpanelTweaks {
+    public static let floatTweak = Tweak<CGFloat>(tweakName: "floatTweak", defaultValue: 20.5, min: 0, max: 30.1)
+    public static let intTweak = Tweak<Int>(tweakName: "intTweak", defaultValue: 10, min: 0)
+    public static let boolTweak = Tweak(tweakName: "boolTweak", defaultValue: true)
+    public static let stringTweak = Tweak(tweakName: "stringTweak", defaultValue: "hello")
 }
 

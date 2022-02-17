@@ -17,8 +17,14 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
     
     var urlString = ""
     
+    var selectedChannelType = "None"
+    var rechargAmount = "0"
+    var isCoinPack = "no"
+    
     var selectedContestId = 0
     var createdTeamList: [CreatedTeam] = []
+    
+    var isFromDipositCoin = "yes"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,17 +46,36 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
         super.viewDidAppear(animated)
         
         if #available(iOS 13, *) {
-                  if UserDefaults.standard.bool(forKey: "DarkMode"){
-                      
-                      overrideUserInterfaceStyle = .dark
-                      
-                  }else{
-                      overrideUserInterfaceStyle = .light
-                  }
-              
-              }else{
-                  
-              }
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                
+            }else{
+                overrideUserInterfaceStyle = .light
+            }
+            
+        }else{
+            
+        }
+        
+        if let vcStack = self.navigationController?.viewControllers
+        {
+            for vc in vcStack {
+                if vc.isKind(of: ProfileViewController.self)
+                {
+                   
+                    print("isfrom diposite coin", isFromDipositCoin)
+                    print("amount", rechargAmount)
+
+                    
+                }else  if vc.isKind(of: ContestListViewController.self)
+                {
+                    print("isfrom diposite coin", isFromDipositCoin)
+                    print("amount?????????/", rechargAmount)
+
+                }
+            }
+        }
     }
     
     //MARK:- WKNavigationDelegate
@@ -95,16 +120,26 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
                     {
                         self.navigationController?.popToViewController(vc, animated: true)
                         
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromProfile"), object: nil, userInfo: nil)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromProfile"), object: nil, userInfo: ["channel":selectedChannelType, "isCoinPack":isCoinPack, "amount":rechargAmount])
                         
                         break
                     }else  if vc.isKind(of: ContestListViewController.self)
                     {
-                        let contestDataDict:[String: Any] = ["contestId": selectedContestId,"teams" : createdTeamList]
+                        if isFromDipositCoin == "no"{
+                            
+                            let contestDataDict:[String: Any] = ["contestId": selectedContestId,"teams" : createdTeamList]
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromContestList"), object: nil, userInfo: contestDataDict)
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromContestListMixpanel"), object: nil, userInfo: ["channel":selectedChannelType, "isCoinPack":isCoinPack, "amount":rechargAmount])
+                            
+                        }else{
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromContestListMixpanel"), object: nil, userInfo: ["channel":selectedChannelType, "isCoinPack":isCoinPack, "amount":rechargAmount])
+                        }
                         
                         self.navigationController?.popToViewController(vc, animated: true)
-                        
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromContestList"), object: nil, userInfo: contestDataDict)
+                       
                         
                         break
                     }

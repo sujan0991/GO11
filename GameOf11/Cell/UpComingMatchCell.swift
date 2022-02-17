@@ -162,6 +162,14 @@ class UpComingMatchCell: UITableViewCell {
             
         }
         
+        if match.isLineUpOut == 1{
+            
+            lineupLabel.isHidden = false
+            
+        }else{
+            
+            lineupLabel.isHidden = true
+        }
         
         
         self.needsUpdateConstraints()

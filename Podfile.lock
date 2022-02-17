@@ -90,6 +90,9 @@ PODS:
   - Kingfisher/Core (5.14.0)
   - lottie-ios (3.1.8)
   - MarqueeLabel/Swift (3.2.1)
+  - Mixpanel-swift (2.10.3):
+    - Mixpanel-swift/Complete (= 2.10.3)
+  - Mixpanel-swift/Complete (2.10.3)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
@@ -120,6 +123,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher (~> 5.0)
   - lottie-ios
+  - Mixpanel-swift
   - NotificationBannerSwift
   - ObjectMapper (~> 3.4)
   - SnapKit (~> 4.0.0)
@@ -151,6 +155,7 @@ SPEC REPOS:
     - Kingfisher
     - lottie-ios
     - MarqueeLabel
+    - Mixpanel-swift
     - nanopb
     - NotificationBannerSwift
     - ObjectMapper
@@ -185,6 +190,7 @@ SPEC CHECKSUMS:
   Kingfisher: 7b64389a43139c903ec434788344c288217c792d
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   MarqueeLabel: 2daf039bf916937c8a4c9adfc13577cc5e51b4ce
+  Mixpanel-swift: 3220daad7d82ff50cf9b8c3e31efed5bad426978
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   NotificationBannerSwift: 49fc4be7fabada55b189b50e72184c92edd5f7f7
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
@@ -196,6 +202,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   ViewUtils: 68e42c708a4b3912e39691cef5080282dc5013fb
 
-PODFILE CHECKSUM: 92c554c192405818e8a766bd90c47ac60e16613a
+PODFILE CHECKSUM: ba9dec2a887ffb9bb62602051af6a6a601cd0286
 
 COCOAPODS: 1.9.3

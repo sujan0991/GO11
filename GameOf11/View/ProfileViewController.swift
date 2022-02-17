@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import SafariServices
+import Mixpanel
 
 class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIScrollViewDelegate {
     
@@ -298,7 +299,26 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                         AppSessionManager.shared.save()
                         // self.fill(u)
                         
+                        
+                        //set mixpanel profile
+                        
+                        print("pnone//////.............",um?.phone ?? "0")
+                        
+                        Mixpanel.mainInstance().identify(distinctId: um?.phone ?? "0")
+                        
+                        let p: Properties = ["Phone": um?.phone ?? "",
+                                             "Name": um?.name ?? "",
+                                             "Email": um?.email ?? "",
+                                             "Address": um?.address ?? "",
+                                             "Created_At": um?.created_at ?? ""]
+
+                        Mixpanel.mainInstance().people.set(properties: p)
+                        //BD5CD4C4-63FD-4D85-93E1-9A167CC23953
+                      
+                        
                         if let um = AppSessionManager.shared.currentUser {
+                            
+                           // print("um.paymentMethod?.ghoori",um.paymentMethod?.ghoori ?? 2)
                             
                             if um.isBlocked == 1{
                                 
@@ -390,6 +410,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                     
                 }
             }
+            
+            
+           
         }
         else
         {
@@ -478,17 +501,20 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     @IBAction func withdrawButtonAction(_ sender: Any) {
         
-        print("........................",AppSessionManager.shared.currentUser!.minWithdrawLimit)
+        
         if AppSessionManager.shared.currentUser?.isBlocked != 1{
             if AppSessionManager.shared.currentUser?.isVerified == 1{
                 
-                let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WithdrawRequestViewController") as? WithdrawRequestViewController
-                
-                self.navigationController?.pushViewController(vc!, animated: true)
-                
-            }else if AppSessionManager.shared.currentUser!.metadata!.totalCash! < AppSessionManager.shared.currentUser!.minWithdrawLimit ?? 250 {
-                
-                self.view.makeToast("You do not have enough money to withdraw.".localized)
+//                if AppSessionManager.shared.currentUser!.metadata!.totalCash! <= AppSessionManager.shared.currentUser!.minWithdrawLimit ?? 250 {
+//
+//                    self.view.makeToast("You do not have enough money to withdraw.".localized)
+//
+//                }else{
+                    
+                    let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WithdrawRequestViewController") as? WithdrawRequestViewController
+                    
+                    self.navigationController?.pushViewController(vc!, animated: true)
+//                }
                 
             }
             else{
@@ -617,6 +643,16 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             AppSessionManager.shared.logOut()
             if status{
                 // SVProgressHUD.showSuccess(withStatus: msg)
+                
+                //set "isAliasSet" false
+                
+                if UserDefaults.standard.bool(forKey: "isAliasSet") == true{
+
+                    UserDefaults.standard.set(false, forKey: "isAliasSet")
+  
+                }
+
+                
                 self.view.makeToast( msg!)
                 
                 var oldToken = ""
@@ -690,6 +726,29 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         alertVC.addAction(okAction)
         self.present(alertVC, animated: true, completion: nil)
+        
+        //set coin_purchase_done event in mixpanel
+        
+        if let channel = notification.userInfo?["channel"] as? String {
+            
+            if let isCoinPack = notification.userInfo?["isCoinPack"] as? String {
+                
+                if let amount = notification.userInfo?["amount"] as? String {
+                    
+                    let p: Properties = ["channel": channel,
+                                         "isCoinPack": isCoinPack,
+                                         "amount": amount]
+                    
+                    Mixpanel.mainInstance().track(event: "coin_purchase_done", properties: p)//
+
+                    
+                }
+                
+            }
+            
+        }
+        
+        
         
     }
     

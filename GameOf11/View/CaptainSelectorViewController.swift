@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Mixpanel
+
 class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
     
     var userTeam : UsersFantasyTeam!
@@ -906,6 +908,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                 
                 //     print("userTeam.captain ",userTeam.captain,userTeam.viceCaptain)
                 
+                
                 APIManager.manager.postTeam(params: userTeam) { (status, msg) in
                     self.view.makeToast(msg!)
                     
@@ -922,6 +925,11 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                                 print("Dismiss")
                             }
                         }
+                        
+                        let p: Properties = ["match_id": self.userTeam.matchId ?? ""]
+                        Mixpanel.mainInstance().track(event: "team_created_cricket", properties: p)// set team_created_cricket event in mixpanel
+                       
+                        
                     }
                     
                 }
