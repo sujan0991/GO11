@@ -30,7 +30,7 @@ target 'GameOf11' do
   #  pod 'OneSignal', '>= 2.6.2', '< 3.0'
     pod 'BetterSegmentedControl', '~> 1.3'
 
-    pod 'Mixpanel-swift'
+#    pod 'Mixpanel-swift'
 
 end
 
