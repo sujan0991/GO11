@@ -29,6 +29,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet var profilePicImageView: UIImageView!
     @IBOutlet var cameraButton: UIButton!
     @IBOutlet var userNameLabel: UILabel!
+    @IBOutlet weak var fullNameLabel: UILabel!
     
     @IBOutlet weak var freeContestLabel: UILabel!
     
@@ -86,6 +87,43 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var cancelReasonLabel: UILabel!
     
     
+    @IBOutlet weak var progressBarNIB: BRCircularProgressView!
+    
+    @IBOutlet weak var profileUpdateInfoView: UIView!
+    
+    @IBOutlet weak var updateInfoBackgroundImageView: UIImageView!
+    @IBOutlet weak var updateInfoViewCoinLabel: UILabel!
+    @IBOutlet weak var updateInfoViewCoinDetailLabel: UILabel!
+    @IBOutlet weak var updateInfoFullNameButton: UIButton!
+    @IBOutlet weak var updateInfoFullNameLabel: UILabel!
+    @IBOutlet weak var updateInfoEmailButton: UIButton!
+    
+    @IBOutlet weak var updateInfoEmailLabel: UILabel!
+    
+    @IBOutlet weak var updateInfoPhoneButton: UIButton!
+    
+    @IBOutlet weak var updateInfoPhoneLabel: UILabel!
+    
+    @IBOutlet weak var updateInfoVerifyProfileButton: UIButton!
+    @IBOutlet weak var updateInfoVerifyProfileLabel: UILabel!
+    @IBOutlet weak var updateInfoGenderButton: UIButton!
+    @IBOutlet weak var updateInfoGenderLabel: UILabel!
+    
+    @IBOutlet weak var percentageLabel: UILabel!
+    @IBOutlet weak var profileUpdatePercentButton: UIButton!
+    @IBOutlet weak var profileCompleteLabel: UILabel!
+    
+    
+    @IBOutlet weak var updateUserNameView: UIView!
+    
+    @IBOutlet weak var updateUserNameLabel: UILabel!
+    
+    @IBOutlet weak var updateUserNameInstructionLabel: UILabel!
+    @IBOutlet weak var updateUsernameTextField: UITextField!
+    @IBOutlet weak var updateUsernameButton: UIButton!
+    
+    
+    
     @IBOutlet weak var historyScrollView: UIScrollView!{
         didSet{
             historyScrollView.delegate = self
@@ -132,6 +170,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             
             SVProgressHUD.dismiss()
             
+            print("view did load - authToken == nil")
             self.navigationController?.pushViewController(popupVC ?? self, animated: true)
         }
         
@@ -198,6 +237,14 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         pageControl.currentPage = 0
         
         
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(self.closeShadowView(_:)))
+        shadowView.addGestureRecognizer(tap2)
+        
+        updateInfoBackgroundImageView.layer.cornerRadius = 15
+        
+        let userNameTap = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.userNameEdit))
+        userNameLabel.addGestureRecognizer(userNameTap)
+        
     }
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         
@@ -205,6 +252,14 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         blockSuggestionView.isHidden = false
         
     }
+    @objc func closeShadowView(_ sender: UITapGestureRecognizer? = nil) {
+        
+        shadowView.isHidden = true
+        profileUpdateInfoView.isHidden = true
+        updateUserNameView.isHidden = true
+    
+    }
+    
     
     @objc func tapContestLabel(sender:UITapGestureRecognizer) {
         
@@ -222,6 +277,14 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         self.tabBarController?.selectedIndex = 1
         
     }
+    
+    @objc func userNameEdit(sender:UITapGestureRecognizer) {
+        
+        shadowView.isHidden = false
+        updateUserNameView.isHidden = false
+    
+    }
+    
     @objc private func refreshData(_ sender: Any) {
         
         getData()
@@ -256,7 +319,24 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
 //                        spread: 0)
 //
 //        }
+        
+        
+        progressBarNIB.setCircleStrokeWidth(3)
 
+        progressBarNIB.setCircleStrokeColor(UIColor.clear, circleFillColor: UIColor.clear, progressCircleStrokeColor: UIColor.systemGreen, progressCircleFillColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.0))
+        
+        //        let completeProgress: CGFloat = 100
+//        var progressCompleted: CGFloat = 0
+//        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { (timer) in
+//            progressCompleted += 1
+//            self.progressBarNIB.progress = progressCompleted / completeProgress
+//            print("progressBarNIB.progress",self.progressBarNIB.progress)
+//            if progressCompleted == 100 {
+//               progressCompleted = 0
+//            }
+//        }
+        
+        
         self.tabBarController?.tabBar.isHidden = false
             
             if #available(iOS 13, *) {
@@ -332,9 +412,73 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 
                             }
                             
+                            
                             self.phoneNoLabel.text = String.init(format: "%@", um.phone ?? "")
-                            self.userNameLabel.text = String.init(format: "%@", um.name ?? "")
-                            self.emailLabel.text = String.init(format: "%@", um.email ?? "")
+                            self.updateInfoPhoneButton.isSelected = true // phone number will always be there
+                            self.updateInfoPhoneLabel.text = String.init(format: "%@", um.phone ?? "")
+                            
+                            if um.name != nil{
+                                self.fullNameLabel.text = String.init(format: "%@", um.name ?? "")
+                                self.updateInfoFullNameLabel.text = String.init(format: "%@", um.name ?? "")
+                                self.updateInfoFullNameButton.isSelected = true
+                            }else{
+                                self.updateInfoFullNameLabel.text = "Full Name"
+                                self.updateInfoFullNameButton.isSelected = false
+                            }
+                            
+                            if um.email != nil{
+                                self.emailLabel.text = String.init(format: "%@", um.email ?? "")
+                                self.updateInfoEmailLabel.text = String.init(format: "%@", um.email ?? "")
+                                self.updateInfoEmailButton.isSelected = true
+                            }else{
+                                self.updateInfoEmailLabel.text = "Email"
+                                self.updateInfoEmailButton.isSelected = false
+                            }
+                            
+                            if um.sex != nil && um.address != nil{
+                                
+                                self.updateInfoGenderLabel.text = String.init(format: "%@,%@", um.sex ?? "", um.address ?? "")
+                                self.updateInfoGenderButton.isSelected = true
+                            }else{
+                                self.updateInfoGenderLabel.text = "Update Gender & Address"
+                                self.updateInfoGenderButton.isSelected = false
+
+                            }
+                            
+                            
+                            if um.profile_completion_bonus != nil{
+                                
+                                self.updateInfoViewCoinLabel.text = String.init(format: "Get %d coins !!!", um.profile_completion_bonus ?? "")
+                                self.updateInfoViewCoinDetailLabel.text = String.init(format: "Complete your profile and get %d coins right now. Lets play!", um.profile_completion_bonus ?? "")
+                                
+                            }else{
+                                
+                                self.updateInfoViewCoinLabel.text = ""
+                                self.updateInfoViewCoinDetailLabel.text = ""
+                                
+                            }
+
+                            
+                            
+                            if um.is_username_updated == 1{
+                                self.userNameLabel.text = String.init(format: "@%@", um.username ?? "")
+                                self.userNameLabel.isUserInteractionEnabled = false
+                            }else{
+                                
+                                self.userNameLabel.text = "@username"
+                                self.userNameLabel.isUserInteractionEnabled = true
+                            }
+                            
+                            
+                            
+                           // profile completion info
+                            self.percentageLabel.text = String.init(format: "%@%%", um.profile_completion_percentage ?? "")
+                            let progress = Float(um.profile_completion_percentage ?? "0") ?? 0
+                            print("progress........",progress)
+                            self.progressBarNIB.progress = CGFloat(progress/100)
+                            
+                            
+
                             
                             if Language.language == Language.english{
                                 
@@ -386,12 +530,21 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 self.verifyInfoButton.isUserInteractionEnabled = false
                                 self.verifyInfoButton.setImage(UIImage(named: "selected_thick"), for: .normal)
                                 
+                                self.updateInfoVerifyProfileLabel.text = "Verified Profile"
+                                self.updateInfoVerifyProfileButton.isSelected = true
+                                
                             }else if um.isVerified == 2{
                                 
                                 self.verifyButton.setTitle("Profile Verification Pending!".localized, for: .normal)
                                 
+                                self.updateInfoVerifyProfileLabel.text = "Verify Profile"
+                                self.updateInfoVerifyProfileButton.isSelected = false
+
                             }else{
                                 
+                                self.updateInfoVerifyProfileLabel.text = "Verify Profile"
+                                self.updateInfoVerifyProfileButton.isSelected = false
+
                                 if um.metadata?.verification_cancel_reason != nil{
                                     self.verificationCancelReasonButton.isHidden = false
                                 }
@@ -416,51 +569,85 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         }
         else
         {
-            self.scrollView.isHidden = true
+//            self.scrollView.isHidden = true
+//
+//            self.performSegue(withIdentifier: "openSignUp", sender: self)
             
-            self.performSegue(withIdentifier: "openSignUp", sender: self)
+            print("get data-authToken == nil ")
         }
         
         self.refreshControl.endRefreshing()
         
     }
     
-    @IBAction func cameraButtonAction(_ sender: UIButton) {
-        //getAvatarList
-        APIManager.manager.getAvatarList { (avatars) in
-            print(avatars)
+    @IBAction func profileUpdatePercentButtonAction(_ sender: Any) {
+        
+        shadowView.isHidden = false
+        profileUpdateInfoView.isHidden = false
+    }
+   
+    @IBAction func updateUserNameButtonAction(_ sender: Any) {
+        
+        var params:[String:String] = [:]
+        if updateUsernameTextField.text!.count > 0{
             
-            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AvaterViewController") as? AvaterViewController
-            vc?.avatars = avatars
-            vc?.currentAvaterId = AppSessionManager.shared.currentUser?.avatarId
-            
-            self.present(vc!, animated: true) {
+            params = ["username":updateUsernameTextField.text!]
+
+            APIManager.manager.updateProfile(params: params) { (status, msg) in
                 
-                print("open")
+                if status{
+                    
+                    self.view.makeToast(msg!)
+                    self.userNameLabel.text = self.updateUsernameTextField.text
+                    self.shadowView.isHidden = true
+                    self.updateUserNameView.isHidden = true
+
+                }
+                
             }
         }
-        //
-        //        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        //        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-        //            self.openCamera()
-        //        }))
-        //
-        //        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-        //            self.openGallary()
-        //        }))
-        //
-        //        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        //
-        //        switch UIDevice.current.userInterfaceIdiom {
-        //        case .pad:
-        //            alert.popoverPresentationController?.sourceView = sender
-        //            alert.popoverPresentationController?.sourceRect = sender.bounds
-        //            alert.popoverPresentationController?.permittedArrowDirections = .up
-        //        default:
-        //            break
-        //        }
-        //
-        //        self.present(alert, animated: true, completion: nil)
+       
+        
+    }
+    
+    
+    
+    @IBAction func cameraButtonAction(_ sender: UIButton) {
+        //getAvatarList
+//        APIManager.manager.getAvatarList { (avatars) in
+//            print(avatars)
+//
+//            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AvaterViewController") as? AvaterViewController
+//            vc?.avatars = avatars
+//            vc?.currentAvaterId = AppSessionManager.shared.currentUser?.avatarId
+//
+//            self.present(vc!, animated: true) {
+//
+//                print("open")
+//            }
+//        }
+        
+                let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+                alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+                    self.openCamera()
+                }))
+        
+                alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+                    self.openGallary()
+                }))
+        
+                alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+                switch UIDevice.current.userInterfaceIdiom {
+                case .pad:
+                    alert.popoverPresentationController?.sourceView = sender
+                    alert.popoverPresentationController?.sourceRect = sender.bounds
+                    alert.popoverPresentationController?.permittedArrowDirections = .up
+                default:
+                    break
+                }
+        
+                self.present(alert, animated: true, completion: nil)
         
     }
     func openCamera()
@@ -638,44 +825,6 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     @IBAction func logoutButtonAction(_ sender: Any) {
         
-        APIManager.manager.logOut { (status, msg) in
-            
-            AppSessionManager.shared.logOut()
-            if status{
-                // SVProgressHUD.showSuccess(withStatus: msg)
-                
-                //set "isAliasSet" false
-                
-                if UserDefaults.standard.bool(forKey: "isAliasSet") == true{
-
-                    UserDefaults.standard.set(false, forKey: "isAliasSet")
-  
-                }
-
-                
-                self.view.makeToast( msg!)
-                
-                var oldToken = ""
-                if let oldFcmToken = AppSessionManager.shared.fcmToken{
-                    oldToken = oldFcmToken
-                }
-                APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "logout") { (status, msg) in
-                    if status{
-                        print(msg ?? "")
-                    }
-                    else{
-                        print(msg ?? "")
-                    }
-                }
-                
-            }
-            else{
-                self.view.makeToast("Something went wrong! Please try again".localized)
-                
-                //SVProgressHUD.showError(withStatus: msg)
-            }
-            
-        }
     }
     
     @IBAction func verificationCancelReasonButtonAction(_ sender: Any) {
@@ -704,7 +853,35 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         imagePicker.dismiss(animated: true) {
             let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
             
-            self.profilePicImageView.image = image
+            //resize
+            
+//            ImageCompressor.compress(image: image!, maxByte: 100) { image in
+//
+//                guard let compressedImage = image else { return }
+//                // Use compressedImage
+//
+//            }
+            
+            let params = ["profile_pic":image!
+                ] as [String : Any]
+            
+            APIManager.manager.postUploadProPic(params: params, withCompletionHandler: { (status, msg) in
+
+                print("msg in post messege",msg!)
+                if status{
+
+                    self.profilePicImageView.image = image
+
+                }else
+                {
+                    self.view.makeToast(msg!)
+
+                }
+
+
+            })
+            
+           
         }
         
     }
@@ -767,3 +944,44 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
 }
 
+
+//struct ImageCompressor {
+//    static func compress(image: UIImage, maxByte: Int,
+//                         completion: @escaping (UIImage?) -> ()) {
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            guard let currentImageSize = image.jpegData(compressionQuality: 1.0)?.count else {
+//                return completion(nil)
+//            }
+//
+//            var iterationImage: UIImage? = image
+//            var iterationImageSize = currentImageSize
+//            var iterationCompression: CGFloat = 1.0
+//
+//            while iterationImageSize > maxByte && iterationCompression > 0.01 {
+//                let percantageDecrease = getPercantageToDecreaseTo(forDataCount: iterationImageSize)
+//
+//                let canvasSize = CGSize(width: image.size.width * iterationCompression,
+//                                        height: image.size.height * iterationCompression)
+//                UIGraphicsBeginImageContextWithOptions(canvasSize, false, image.scale)
+//                defer { UIGraphicsEndImageContext() }
+//                image.draw(in: CGRect(origin: .zero, size: canvasSize))
+//                iterationImage = UIGraphicsGetImageFromCurrentImageContext()
+//
+//                guard let newImageSize = iterationImage?.jpegData(compressionQuality: 1.0)?.count else {
+//                    return completion(nil)
+//                }
+//                iterationImageSize = newImageSize
+//                iterationCompression -= percantageDecrease
+//            }
+//            completion(iterationImage)
+//        }
+//    }
+//
+//    private static func getPercantageToDecreaseTo(forDataCount dataCount: Int) -> CGFloat {
+//        switch dataCount {
+//        case 0..<3000000: return 0.05
+//        case 3000000..<10000000: return 0.1
+//        default: return 0.2
+//        }
+//    }
+//}

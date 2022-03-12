@@ -1,21 +1,22 @@
 //
-//  OTPViewController.swift
+//  LoginOTPViewController.swift
 //  GameOf11
 //
-//  Created by Md.Ballal Hossen on 9/2/20.
-//  Copyright © 2020 Tanvir Palash. All rights reserved.
+//  Created by Md.Ballal Hossen on 6/3/22.
+//  Copyright © 2022 Tanvir Palash. All rights reserved.
 //
 
 import UIKit
 import Mixpanel
+import SafariServices
 
 //protocol BackFromOTPView {
 //
 //    func backFromOTP(phone: String)
 //}
 
-class OTPViewController: UIViewController,UITextFieldDelegate {
-
+class LoginOTPViewController: UIViewController,UITextFieldDelegate {
+    
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
     
@@ -36,14 +37,21 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
     //    var delegate: BackFromOTPView?
     
     
+    @IBOutlet weak var loginWithPassButton: UIButton!
     
     @IBOutlet weak var verifyOTPButton: UIButton!
     @IBOutlet weak var verifyButton: UIButton!
     
+    @IBOutlet weak var thikButton: UIButton!
+    @IBOutlet weak var agreeLabel: UILabel!
+    @IBOutlet weak var termsButton: UIButton!
+    @IBOutlet weak var alreadyAccountLabel: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
+    
     var countdownTimer: Timer!
     var totalTime = 60
     
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,29 +67,38 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
         textField5.delegate = self
         textField6.delegate = self
         
+        //agreeLabel.text = "By verifying the number, I am agreeing the rules of GO11 and I assure that my age is 18+".localized
+        
+        verifyButton.setTitle("VERIFY NUMBER", for: .normal)
+        //alreadyAccountLabel.text = "Already have account?".localized
+        
+        
+        //loginButton.setTitle("Login".localized, for: .normal)
+        
+        
+        
         phoneNumberTextField.becomeFirstResponder()
         
         verifyButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         verifyOTPButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
-        Mixpanel.mainInstance().track(event: "start_signup")
-        //mixpanel.track("Sign Up")
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         if #available(iOS 13, *) {
-                           if UserDefaults.standard.bool(forKey: "DarkMode"){
-                               
-                               overrideUserInterfaceStyle = .dark
-                               
-                           }else{
-                               overrideUserInterfaceStyle = .light
-                           }
-                       
-                       }else{
-                           
-                       }
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                
+            }else{
+                overrideUserInterfaceStyle = .light
+            }
+            
+        }else{
+            
+        }
         
         
         otpView.isHidden = true
@@ -101,32 +118,64 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
         timerLabel.text = "0 : 00"
     }
     
-    @IBAction func nextButtonAction(_ sender: Any) {
+    @IBAction func termsSelectionButtonAction(_ sender: UIButton) {
         
+        
+        sender.isSelected = !sender.isSelected
+        
+        
+    }
+    
+    
+    @IBAction func termsButtonAction(_ sender: Any) {
+        
+        let urlString = "https://www.gameof11.com/terms-and-conditions"
+        
+        if let url = URL(string: urlString) {
+            
+            // UIApplication.shared.open(url, options: [:])
+            let svc = SFSafariViewController(url: url)
+            
+            self.present(svc, animated: true) {
+                
+                print("open safari")
+            }
+        }
+        
+    }
+    
+    
+    @IBAction func loginWithPassButtonAction(_ sender: Any) {
+        
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        
+        
+        self.navigationController?.pushViewController(popupVC!, animated: true)
+        
+    }
+    
+    // verify number button
+    @IBAction func nextButtonAction(_ sender: Any) {
         
         if phoneNumberTextField.text?.count != 0 && phoneNumberTextField.text?.count == 11{
             
             
-           APIManager.manager.sendOTP(phone: phoneNumberTextField.text!) { (status, msg) in
-
-                print("msg..........",msg!)
-
-                if status{
-
+//            APIManager.manager.sendOTP(phone: phoneNumberTextField.text!) { (status, msg) in
+//
+//                print("msg..........",msg!)
+//
+//                if status{
+//
                     self.otpView.isHidden = false
                     self.startTimer()
                     self.textField1.becomeFirstResponder()
-                    
+
                     self.topLabel.text = "We have sent you an OTP(One Time Password) at \(String(describing: self.phoneNumberTextField.text!))"
-                    
-
-
-                }
-            }
+//
+//                }
+//            }
             
         }
-        
-        
         
     }
     
@@ -164,7 +213,7 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
             return false
             
         }
-            
+        
         else if (textField.text!.count >= 1) && (string.count == 0){
             
             if textField == textField6{
@@ -192,7 +241,7 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
             
             return false
         }
-            
+        
         else if (textField.text!.count >= 1){
             
             textField.text = string
@@ -253,7 +302,7 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
                 self.startTimer()
                 self.textField1.becomeFirstResponder()
                 
-               
+                
             }
         }
         
@@ -263,33 +312,61 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
         
         if (textField1.text?.count != 0) && (textField2.text?.count != 0) && (textField3.text?.count != 0) && (textField4.text?.count != 0) && (textField5.text?.count != 0) && (textField6.text?.count != 0) {
             
-        let otpString = "\(String(describing: textField1.text!))\(String(describing: textField2.text!))\(String(describing: textField3.text!))\(String(describing: textField4.text!))\(String(describing: textField5.text!))\(String(describing: textField6.text!))"
-        
-        print("otpString......",otpString)
+            let otpString = "\(String(describing: textField1.text!))\(String(describing: textField2.text!))\(String(describing: textField3.text!))\(String(describing: textField4.text!))\(String(describing: textField5.text!))\(String(describing: textField6.text!))"
             
-
-
-            APIManager.manager.OTPVerification(phone: self.phoneNumberTextField.text!, otp: otpString) { (status, msg) in
-
-                if status{
-
-                    let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
-                    
-                    popupVC?.phoneNo = self.phoneNumberTextField.text!
-                    self.navigationController?.pushViewController(popupVC!, animated: true)
-
+           
+            let phn = String.init(format: "+88%@", phoneNumberTextField.text!)
+            
+            var oldToken = ""
+            if let oldFcmToken = AppSessionManager.shared.fcmToken{
+                oldToken = oldFcmToken
             }
-
+            print("otpString......",phn, oldToken, otpString)
+           
+            
+//            APIManager.manager.signin(phone: phn, otp: otpString, key: oldToken) { (status, token, msg) in
+//                
+//                if status{
+//                    self.view.makeToast( msg!)
+//                    
+//                    AppSessionManager.shared.authToken = token
+//                    AppSessionManager.shared.save()
+//                    
+//                    //set alias
+//                    
+//                    //https://help.mixpanel.com/hc/en-us/articles/115004497803-Identity-Management-Best-Practices
+//                    
+//                    if UserDefaults.standard.bool(forKey: "isAliasSet") == false{
+//                        
+//                        Mixpanel.mainInstance().createAlias(phn, distinctId: Mixpanel.mainInstance().distinctId)
+//                        
+//                        UserDefaults.standard.set(true, forKey: "isAliasSet")
+//                        
+//                        Mixpanel.mainInstance().identify(distinctId: phn)
+//                        
+//                    }
+//                    
+//                    
+//                    self.navigationController?.popToRootViewController(animated: true)
+//                    
+//                }
+//                else{
+//                    self.view.makeToast(msg!)
+//                }
+//                
+//            }
+            
+            
         }
-
+        
+        
     }
-    }
-
+    
     @IBAction func backButtonAction(_ sender: Any) {
         
         self.tabBarController?.tabBar.isHidden = false
         
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
         
     }
     
@@ -299,7 +376,7 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
         otpView.isHidden = true
         countdownTimer.invalidate()
         totalTime = 60
-
+        
         textField1.text = ""
         textField2.text = ""
         textField3.text = ""
@@ -315,5 +392,5 @@ class OTPViewController: UIViewController,UITextFieldDelegate {
         textField6.resignFirstResponder()
     }
     
-
+    
 }

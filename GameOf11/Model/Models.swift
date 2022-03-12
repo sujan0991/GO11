@@ -695,11 +695,15 @@ class UserModel: Glossy {
     
     var id: Int?
     var name: String?
+    var username: String?
     var email: String?
     var phone: String?
    
     var userTypeId: Int?
     var avatarId: Int?//skippable
+    var profile_completion_percentage: String?
+    var is_username_updated: Int?
+    var profile_completion_bonus: Int?
     
     var sex: String?
     var address: String?
@@ -727,11 +731,16 @@ class UserModel: Glossy {
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
         name = "name" <~~ json
+        username = "username" <~~ json
         email = "email" <~~ json
         phone = "phone" <~~ json
         userTypeId = "user_type_id" <~~ json
         avatarId = "avatar_id" <~~ json
         sex = "sex" <~~ json
+        profile_completion_percentage = "profile_completion_percentage" <~~ json
+        is_username_updated = "is_username_updated" <~~ json
+        profile_completion_bonus = "profile_completion_bonus" <~~ json
+        
         
         address = "address" <~~ json
         city = "city" <~~ json
@@ -776,6 +785,11 @@ class UserModel: Glossy {
             "referral_law" ~~> referralLaw,
             "referral_message" ~~> referralMessage,
             "is_blocked" ~~> isBlocked,
+            
+            "username" ~~> username,
+            "profile_completion_percentage" ~~> profile_completion_percentage,
+            "is_username_updated" ~~> is_username_updated,
+            "profile_completion_bonus" ~~> profile_completion_bonus,
             
             "metadata" ~~> metadata,
             "avatar" ~~> avatar,

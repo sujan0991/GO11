@@ -43,6 +43,8 @@ struct API_K {
     static let SIGNUP = "signup"
     static let LOGOUT = "logout"//
     
+    //New
+    static let SIGNIN = "signin"
     
     static let SEND_OTP = "send-otp"//
     static let OTP_VERIFICATION = "otp-verification"//
@@ -52,9 +54,12 @@ struct API_K {
     
     static let REGISTER = "registration"
     static let MY_PROFILE = "user"//
+    static let UPLOAD_PROFILE_PIC = "upload-profile-pic"
     static let OTHER_PROFILE = "othersProfile"
-    static let UPLOAD_PROFILE_PICTURE = "uploadProfilePicture"
-    static let UPLOAD_COVER_PHOTO = "uploadCoverPhoto"
+    
+//    static let UPLOAD_PROFILE_PICTURE = "uploadProfilePicture"
+//    static let UPLOAD_COVER_PHOTO = "uploadCoverPhoto"
+    
     static let UPDATE_PROFILE = "user"
     static let GET_AVATAR_LIST = "avatars"
     static let UPDATE_AVATAR = "update-avatar"
@@ -222,6 +227,49 @@ class APIManager: NSObject {
         ]
         
         Request(.post, API_K.LOGIN, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            switch responseData.result {
+            case .success(let value):
+                print(value)
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    var isSuccess:Bool?
+                    
+                    isSuccess = jsonDic["status"] as? Bool ?? true
+                    
+                    if !isSuccess!{
+                        
+                        let msg:String? = json["message"].stringValue
+                        
+                        completion?(false,nil,msg)
+                    }
+                    else{
+                        let token:String = json["access_token"].stringValue
+                        
+                        completion?(true,token,"Success")
+                    }
+                }
+                else {
+                    completion?(false,nil,nil)
+                }
+            case .failure(let error):
+                SVProgressHUD.dismiss()
+                completion?(false,nil,error.localizedDescription)
+            }
+        })
+    }
+    
+    func signin(phone:String, otp:String,key:String, withCompletionHandler completion:(( _ status: Bool,_ authToken:String?, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        
+        let params:[String:String] = ["phone":phone,
+                                      "otp":otp,
+                                      "gcm_registration_key":key
+        ]
+        
+        Request(.post, API_K.SIGNIN, parameters: params)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
             case .success(let value):
                 print(value)
@@ -2402,6 +2450,68 @@ class APIManager: NSObject {
     }
     
     
+    public func postUploadProPic(params:Dictionary<String, Any>, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+        
+        SVProgressHUD.show()
+        
+        
+        
+        let urlString = "\(API_K.BaseURL)\(API_K.UPLOAD_PROFILE_PIC)"
+        
+        print("API_K.UPLOAD_PROFILE_PIC",params)
+        
+        let params:[String:Any] = params
+        
+        
+        var header: HTTPHeaders = [:]
+        
+        if let currentToken = AppSessionManager.shared.authToken{
+            header["Authorization"] = "Bearer \(currentToken)"
+        }
+        header.add(name: "Version-Number", value: UserDefaults.standard.object(forKey: "currentVersionNumber") as! String)
+        header.add(name: "Device-Type", value: API_K.DEVICE_TYPE)
+   
+        AF.upload(multipartFormData: { (multipartFormData) in
+            
+            let image1 = params["profile_pic"] as! UIImage
+            
+            guard let imgData1 = image1.jpegData(compressionQuality: 0) else { return }
+            
+            print("imgData1.........",imgData1)
+            multipartFormData.append(imgData1, withName: "profile_pic", fileName:"profile_pic.jpeg", mimeType: "image/jpeg")
+            
+            
+            
+        },to: urlString, usingThreshold: UInt64.init(),
+          method: .post,
+          headers: header).response{ response in
+            
+            
+            switch response.result {
+            case .success(let value):
+                
+                let json = JSON(value)
+                
+                print("getPostDataModel......postUploadProPic ",json)
+                
+                completion!(true,json["message"].stringValue)
+                
+            case .failure(let error):
+                
+                completion!(true,"Something went wrong")
+                
+                print("error",error.localizedDescription)
+            }
+            
+            SVProgressHUD.dismiss()
+            
+        }
+        
+        
+        
+    }
+    
+    
     public func postVerifyProfile(params:Dictionary<String, Any>, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
         
         SVProgressHUD.show()
@@ -2481,6 +2591,8 @@ class APIManager: NSObject {
         
         
     }
+    
+    
     
     
     func getCoinLog(lang:String,completion:(( _ banners: Array<Any>)->Void)?) {

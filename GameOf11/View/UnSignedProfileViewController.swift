@@ -88,25 +88,25 @@ class UnSignedProfileViewController: UIViewController {
 //
     @IBAction func signUpButtonAction(_ sender: Any) {
 
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        //self.tabBarController?.tabBar.isHidden = true
+        
 
-       self.navigationController?.pushViewController(popupVC!, animated: true)
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupOTPViewController") as? SignupOTPViewController
 
-//        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
-//
-//        popupVC?.phoneNo = "01768431957"
-//        self.navigationController?.pushViewController(popupVC!, animated: true)
+        print("signUpButtonAction.........")
+       self.navigationController?.pushViewController(popupVC!, animated: false)
+
     }
-//
+
     @IBAction func logInButtonAction(_ sender: Any) {
 
-        self.tabBarController?.tabBar.isHidden = true
+        //self.tabBarController?.tabBar.isHidden = true
 
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginOTPViewController") as? LoginOTPViewController
 
 
 
-        self.navigationController?.pushViewController(popupVC!, animated: true)
+        self.navigationController?.pushViewController(popupVC!, animated: false)
 
 
     }

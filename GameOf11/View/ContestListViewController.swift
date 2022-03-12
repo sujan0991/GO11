@@ -2263,7 +2263,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     @IBAction func signUpButtonAction(_ sender: Any) {
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupOTPViewController") as? SignupOTPViewController
         
         self.navigationController?.pushViewController(popupVC!, animated: true)
         
@@ -2273,7 +2273,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         self.tabBarController?.tabBar.isHidden = true
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginOTPViewController") as? LoginOTPViewController
         
         self.navigationController?.pushViewController(popupVC!, animated: true)
         

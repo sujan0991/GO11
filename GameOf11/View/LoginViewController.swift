@@ -115,7 +115,7 @@ class LoginViewController: BaseViewController {
     @IBAction func signUpButtonAction(_ sender: Any) {
         
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupOTPViewController") as? SignupOTPViewController
         
         self.navigationController?.pushViewController(popupVC!, animated: true)
     }

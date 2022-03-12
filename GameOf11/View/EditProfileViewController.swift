@@ -111,6 +111,7 @@ class EditProfileViewController: BaseViewController {
             if um.isVerified == 1 {
                 
                 nameTextField.isUserInteractionEnabled = false
+                mailTextField.isUserInteractionEnabled = false
             }
             
         }
@@ -226,14 +227,17 @@ class EditProfileViewController: BaseViewController {
             if maleButton.isSelected{
                 
                 params = ["name":nameTextField.text!,
+                          "email":mailTextField.text ?? "",
                           "sex":"Male",
                           "address":mailingAddressTextField.text ?? "",
+                          
                           "city":cityTextField.text ?? "",
                           "zipcode":zipCodeTextField.text ?? "",
                           "dob":dateOfbirthTextField.text ?? ""]
             }else if femaleButton.isSelected{
                 
                 params = ["name":nameTextField.text!,
+                          "email":mailTextField.text ?? "",
                           "sex":"Female",
                           "address":mailingAddressTextField.text ?? "",
                           "city":cityTextField.text ?? "",
@@ -242,6 +246,7 @@ class EditProfileViewController: BaseViewController {
             }else{
                 
                 params = ["name":nameTextField.text!,
+                          "email":mailTextField.text ?? "",
                           "address":mailingAddressTextField.text ?? "",
                           "city":cityTextField.text ?? "",
                           "zipcode":zipCodeTextField.text ?? "",

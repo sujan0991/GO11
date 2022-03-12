@@ -176,7 +176,7 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
     
     @IBAction func verifyButtonAction(_ sender: Any) {
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupOTPViewController") as? SignupOTPViewController
         
         self.navigationController?.pushViewController(popupVC!, animated: true)
     }
@@ -299,7 +299,7 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
     
     @IBAction func loginButtonAction(_ sender: Any) {
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginOTPViewController") as? LoginOTPViewController
         
         //        popupVC?.modalPresentationStyle = .overCurrentContext
         //        popupVC?.modalTransitionStyle = .crossDissolve

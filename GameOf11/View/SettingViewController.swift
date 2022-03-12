@@ -84,12 +84,13 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             menuArray.append(["title":"Change Language".localized, "icon":"language_change_icon"])
        //     menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
             menuArray.append(["title":"Dark Mode".localized, "icon":"night_mode"])
-             
+            menuArray.append(["title":"Logout".localized, "icon":"logout_icon"])
+            
         }else{
             
             menuArray.append(["title":"Change Language".localized, "icon":"language_change_icon"])
-        //    menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
-             
+            menuArray.append(["title":"Logout".localized, "icon":"logout_icon"])
+           
         }
         
         settingTableView.tableFooterView = UIView()
@@ -162,6 +163,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             }else{
                 cell.settingSwitch.isOn = false
             }
+        }else   if indexPath.row == 2{
+            
+            cell.settingSwitch.isHidden = true
         }
 
         
@@ -181,7 +185,51 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
              shadowView.isHidden = false
              languageView.isHidden = false
                
-           }
+           }else if indexPath.row == 2 {
+            
+            APIManager.manager.logOut { (status, msg) in
+                
+                AppSessionManager.shared.logOut()
+                if status{
+                    // SVProgressHUD.showSuccess(withStatus: msg)
+                    
+                    //set "isAliasSet" false
+                    
+                    if UserDefaults.standard.bool(forKey: "isAliasSet") == true{
+
+                        UserDefaults.standard.set(false, forKey: "isAliasSet")
+      
+                    }
+
+                    
+                    self.view.makeToast( msg!)
+                    
+                    var oldToken = ""
+                    if let oldFcmToken = AppSessionManager.shared.fcmToken{
+                        oldToken = oldFcmToken
+                    }
+                    APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "logout") { (status, msg) in
+                        if status{
+                            print(msg ?? "")
+                        }
+                        else{
+                            print(msg ?? "")
+                        }
+                    }
+                    
+                }
+                else{
+                    self.view.makeToast("Something went wrong! Please try again".localized)
+                    
+                    //SVProgressHUD.showError(withStatus: msg)
+                }
+                
+            }
+
+            
+            
+          }
+
     
            
        }

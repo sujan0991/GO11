@@ -100,8 +100,10 @@
 		64669C5523E75C8F00288346 /* PromoCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64669C5423E75C8F00288346 /* PromoCodeViewController.swift */; };
 		646EC5FC230DB5C500E9D1A9 /* AvaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */; };
 		646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */; };
+		6471C59527D6036300DA6CDF /* BRCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6471C59427D6036300DA6CDF /* BRCircularProgressView.swift */; };
 		647825AA239D2BC0007AAC7A /* EditTeamFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */; };
 		647825AC23A02B45007AAC7A /* PointBreakdownFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */; };
+		6479366827D4CD0A00531DC3 /* LoginOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6479366727D4CD0A00531DC3 /* LoginOTPViewController.swift */; };
 		647ABA12265ADF5800454416 /* WithdrawMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */; };
 		6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */; };
 		64A0EDD7243357BC00B52AE6 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */; };
@@ -121,7 +123,7 @@
 		64CBB4DF23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */; };
 		64CBB4E123EA4A9900F0DBA2 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */; };
 		64CBB4E323EA4AB200F0DBA2 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */; };
-		64E5B42E23F0009A00D377F0 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E5B42D23F0009A00D377F0 /* OTPViewController.swift */; };
+		64E5B42E23F0009A00D377F0 /* SignupOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E5B42D23F0009A00D377F0 /* SignupOTPViewController.swift */; };
 		64E999D3231B0E84003C7FFE /* sign_up_dialog_anim_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */; };
 		64E999D5231B131E003C7FFE /* Boat_Loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D4231B131E003C7FFE /* Boat_Loader.json */; };
 		64F0383F26CDA0E300609F34 /* ListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0383E26CDA0E300609F34 /* ListLoader.swift */; };
@@ -239,8 +241,10 @@
 		64669C5423E75C8F00288346 /* PromoCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeViewController.swift; sourceTree = "<group>"; };
 		646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaterViewController.swift; sourceTree = "<group>"; };
 		646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
+		6471C59427D6036300DA6CDF /* BRCircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCircularProgressView.swift; sourceTree = "<group>"; };
 		647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamFootballViewController.swift; sourceTree = "<group>"; };
 		647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBreakdownFootballViewController.swift; sourceTree = "<group>"; };
+		6479366727D4CD0A00531DC3 /* LoginOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOTPViewController.swift; sourceTree = "<group>"; };
 		647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawMethodCell.swift; sourceTree = "<group>"; };
 		647C5D0A233D280700E4C3CF /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCell.swift; sourceTree = "<group>"; };
@@ -261,7 +265,7 @@
 		64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementTableViewCell.swift; sourceTree = "<group>"; };
 		64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
-		64E5B42D23F0009A00D377F0 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
+		64E5B42D23F0009A00D377F0 /* SignupOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupOTPViewController.swift; sourceTree = "<group>"; };
 		64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sign_up_dialog_anim_2.json; sourceTree = "<group>"; };
 		64E999D4231B131E003C7FFE /* Boat_Loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Boat_Loader.json; sourceTree = "<group>"; };
 		64F0383E26CDA0E300609F34 /* ListLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListLoader.swift; sourceTree = "<group>"; };
@@ -324,7 +328,8 @@
 				0C78C1FE222450AB0068B5D6 /* MoreViewController.swift */,
 				0C3336D021DF489A00E6EB11 /* MyContestViewController.swift */,
 				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
-				64E5B42D23F0009A00D377F0 /* OTPViewController.swift */,
+				64E5B42D23F0009A00D377F0 /* SignupOTPViewController.swift */,
+				6479366727D4CD0A00531DC3 /* LoginOTPViewController.swift */,
 				64441E50231C1BD400A21EDA /* ParentTabViewController.swift */,
 				645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */,
 				647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */,
@@ -492,6 +497,7 @@
 		6453959A22DA0AEA007273D2 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				6471C59427D6036300DA6CDF /* BRCircularProgressView.swift */,
 				64F0383E26CDA0E300609F34 /* ListLoader.swift */,
 				645D06422527EAFE002A3EAC /* DTPagerController */,
 				6455AE702320260A00F9679D /* Toast.swift */,
@@ -730,7 +736,7 @@
 				0C8B95F921E1211800ADE46B /* APIManager.swift in Sources */,
 				0CB1B8FC2266FF32003D6C56 /* CteatedTableViewCell.swift in Sources */,
 				0CE8836B21E0000E0025A31E /* LoginViewController.swift in Sources */,
-				64E5B42E23F0009A00D377F0 /* OTPViewController.swift in Sources */,
+				64E5B42E23F0009A00D377F0 /* SignupOTPViewController.swift in Sources */,
 				6453F2B22309638A006A86CF /* UpComingMatchCell.swift in Sources */,
 				0C390AD021DF5E0200FA6A15 /* MatchViewController.swift in Sources */,
 				0CB1B8FF2266FF4C003D6C56 /* MyTeamViewController.swift in Sources */,
@@ -775,12 +781,14 @@
 				0C78C203222451980068B5D6 /* UIColorExtension.swift in Sources */,
 				0C390AD921DFAAA900FA6A15 /* PositionCollectionViewCell.swift in Sources */,
 				0CEB167A2264F73A002D0208 /* CaptainSelectorViewController.swift in Sources */,
+				6479366827D4CD0A00531DC3 /* LoginOTPViewController.swift in Sources */,
 				64522219239C50F80091AE28 /* TeamPreviewFootballViewController.swift in Sources */,
 				0C8B95E921E1022200ADE46B /* AppSessionManager.swift in Sources */,
 				6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */,
 				0CE8835F21DFB6730025A31E /* TeamCreateViewController.swift in Sources */,
 				644526A32237D83C0099FB37 /* PointBreakDownTableViewCell.swift in Sources */,
 				645F7DF6231545FF00515F11 /* WithdrawTableViewCell.swift in Sources */,
+				6471C59527D6036300DA6CDF /* BRCircularProgressView.swift in Sources */,
 				0C8B95EF21E1150A00ADE46B /* AlertManager.swift in Sources */,
 				0CB1B90122686419003D6C56 /* TeamSelectViewController.swift in Sources */,
 				645D064D2527EAFE002A3EAC /* DTPagerController.swift in Sources */,
