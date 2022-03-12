@@ -156,12 +156,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         Mixpanel.mainInstance().loggingEnabled = true
         
         Mixpanel.mainInstance().flushInterval = 5
-        let allTweaks: [TweakClusterType] = [MixpanelTweaks.floatTweak,
-                                             MixpanelTweaks.intTweak,
-                                             MixpanelTweaks.boolTweak,
-                                             MixpanelTweaks.stringTweak]
-        
-        MixpanelTweaks.setTweaks(tweaks: allTweaks)
+//        let allTweaks: [TweakClusterType] = [MixpanelTweaks.floatTweak,
+//                                             MixpanelTweaks.intTweak,
+//                                             MixpanelTweaks.boolTweak,
+//                                             MixpanelTweaks.stringTweak]
+//        
+//        MixpanelTweaks.setTweaks(tweaks: allTweaks)
         
         
         //check if mixpanel alias is set or not. for the 1st time set is false("0")
@@ -202,10 +202,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     
     
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Firebase registration token: \(fcmToken)")
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firebase registration token: \(fcmToken ?? "")")
         
-        let dataDict:[String: String] = ["token": fcmToken]
+       // let dataDict:[String: String] = ["token": fcmToken]
 //        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
@@ -217,7 +217,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         if let oldFcmToken = AppSessionManager.shared.fcmToken{
             oldToken = oldFcmToken
         }
-        APIManager.manager.sendFCMToken(old_token: oldToken, new_token: fcmToken, action_type: "startup") { (status, msg) in
+        APIManager.manager.sendFCMToken(old_token: oldToken, new_token: fcmToken!, action_type: "startup") { (status, msg) in
             if status{
                 AppSessionManager.shared.fcmToken = fcmToken
                 AppSessionManager.shared.save()
@@ -302,10 +302,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 }
 
 
-extension MixpanelTweaks {
-    public static let floatTweak = Tweak<CGFloat>(tweakName: "floatTweak", defaultValue: 20.5, min: 0, max: 30.1)
-    public static let intTweak = Tweak<Int>(tweakName: "intTweak", defaultValue: 10, min: 0)
-    public static let boolTweak = Tweak(tweakName: "boolTweak", defaultValue: true)
-    public static let stringTweak = Tweak(tweakName: "stringTweak", defaultValue: "hello")
-}
+//extension MixpanelTweaks {
+//    public static let floatTweak = Tweak<CGFloat>(tweakName: "floatTweak", defaultValue: 20.5, min: 0, max: 30.1)
+//    public static let intTweak = Tweak<Int>(tweakName: "intTweak", defaultValue: 10, min: 0)
+//    public static let boolTweak = Tweak(tweakName: "boolTweak", defaultValue: true)
+//    public static let stringTweak = Tweak(tweakName: "stringTweak", defaultValue: "hello")
+//}
 
