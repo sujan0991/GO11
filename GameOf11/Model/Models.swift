@@ -704,6 +704,7 @@ class UserModel: Glossy {
     var profile_completion_percentage: String?
     var is_username_updated: Int?
     var profile_completion_bonus: Int?
+    var profile_picture: String?
     
     var sex: String?
     var address: String?
@@ -740,6 +741,7 @@ class UserModel: Glossy {
         profile_completion_percentage = "profile_completion_percentage" <~~ json
         is_username_updated = "is_username_updated" <~~ json
         profile_completion_bonus = "profile_completion_bonus" <~~ json
+        profile_picture = "profile_picture" <~~ json
         
         
         address = "address" <~~ json
@@ -790,6 +792,7 @@ class UserModel: Glossy {
             "profile_completion_percentage" ~~> profile_completion_percentage,
             "is_username_updated" ~~> is_username_updated,
             "profile_completion_bonus" ~~> profile_completion_bonus,
+            "profile_picture" ~~> profile_picture,
             
             "metadata" ~~> metadata,
             "avatar" ~~> avatar,

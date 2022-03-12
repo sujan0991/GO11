@@ -177,9 +177,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         //        placeNavBar(withTitle: "My Profile", isBackBtnVisible: false)
         //buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         addCoinButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
-      //  withdrawButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "brand_red")!)
+        //  withdrawButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "brand_red")!)
         redeemButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
-     //   coinLogButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "brand_red")!)
+        //   coinLogButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "brand_red")!)
         fullProfileButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
         imagePicker.delegate = self
@@ -257,7 +257,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         shadowView.isHidden = true
         profileUpdateInfoView.isHidden = true
         updateUserNameView.isHidden = true
-    
+        
     }
     
     
@@ -282,7 +282,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         shadowView.isHidden = false
         updateUserNameView.isHidden = false
-    
+        
     }
     
     @objc private func refreshData(_ sender: Any) {
@@ -292,70 +292,70 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     override func viewWillAppear(_ animated: Bool) {
         
-//        if UserDefaults.standard.bool(forKey: "DarkMode"){
-//            
-//        }else{
-//                    self.topView.layer.applySketchShadow(
-//                        color: .lightGray,
-//                        alpha: 1.0,
-//                        x: 0,
-//                        y: 2,
-//                        blur: 4,
-//                        spread: 0)
-//                    self.accountInfoView.layer.applySketchShadow(
-//                        color: .lightGray,
-//                        alpha: 1.0,
-//                        x: 0,
-//                        y: 2,
-//                        blur: 4,
-//                        spread: 0)
-//            
-//                    self.historyView.layer.applySketchShadow(
-//                        color: .lightGray,
-//                        alpha: 1.0,
-//                        x: 0,
-//                        y: 2,
-//                        blur: 4,
-//                        spread: 0)
-//
-//        }
+        //        if UserDefaults.standard.bool(forKey: "DarkMode"){
+        //
+        //        }else{
+        //                    self.topView.layer.applySketchShadow(
+        //                        color: .lightGray,
+        //                        alpha: 1.0,
+        //                        x: 0,
+        //                        y: 2,
+        //                        blur: 4,
+        //                        spread: 0)
+        //                    self.accountInfoView.layer.applySketchShadow(
+        //                        color: .lightGray,
+        //                        alpha: 1.0,
+        //                        x: 0,
+        //                        y: 2,
+        //                        blur: 4,
+        //                        spread: 0)
+        //
+        //                    self.historyView.layer.applySketchShadow(
+        //                        color: .lightGray,
+        //                        alpha: 1.0,
+        //                        x: 0,
+        //                        y: 2,
+        //                        blur: 4,
+        //                        spread: 0)
+        //
+        //        }
         
         
         progressBarNIB.setCircleStrokeWidth(3)
-
+        
         progressBarNIB.setCircleStrokeColor(UIColor.clear, circleFillColor: UIColor.clear, progressCircleStrokeColor: UIColor.systemGreen, progressCircleFillColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.0))
         
         //        let completeProgress: CGFloat = 100
-//        var progressCompleted: CGFloat = 0
-//        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { (timer) in
-//            progressCompleted += 1
-//            self.progressBarNIB.progress = progressCompleted / completeProgress
-//            print("progressBarNIB.progress",self.progressBarNIB.progress)
-//            if progressCompleted == 100 {
-//               progressCompleted = 0
-//            }
-//        }
+        //        var progressCompleted: CGFloat = 0
+        //        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { (timer) in
+        //            progressCompleted += 1
+        //            self.progressBarNIB.progress = progressCompleted / completeProgress
+        //            print("progressBarNIB.progress",self.progressBarNIB.progress)
+        //            if progressCompleted == 100 {
+        //               progressCompleted = 0
+        //            }
+        //        }
         
         
         self.tabBarController?.tabBar.isHidden = false
+        
+        if #available(iOS 13, *) {
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                self.tabBarController?.tabBar.backgroundColor = UIColor.init(named: "tab_dark_bg")
+                self.tabBarController?.tabBar.unselectedItemTintColor = .white
+                
+            }else{
+                overrideUserInterfaceStyle = .light
+                self.tabBarController?.tabBar.backgroundColor = .white
+                self.tabBarController?.tabBar.unselectedItemTintColor = .gray
+                
+            }
             
-            if #available(iOS 13, *) {
-                      if UserDefaults.standard.bool(forKey: "DarkMode"){
-                          
-                          overrideUserInterfaceStyle = .dark
-                          self.tabBarController?.tabBar.backgroundColor = UIColor.init(named: "tab_dark_bg")
-                          self.tabBarController?.tabBar.unselectedItemTintColor = .white
-
-                      }else{
-                          overrideUserInterfaceStyle = .light
-                          self.tabBarController?.tabBar.backgroundColor = .white
-                          self.tabBarController?.tabBar.unselectedItemTintColor = .gray
-
-                      }
-                  
-                  }else{
-                      
-                  }
+        }else{
+            
+        }
         
     }
     
@@ -391,14 +391,14 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                              "Email": um?.email ?? "",
                                              "Address": um?.address ?? "",
                                              "Created_At": um?.created_at ?? ""]
-
+                        
                         Mixpanel.mainInstance().people.set(properties: p)
                         //BD5CD4C4-63FD-4D85-93E1-9A167CC23953
-                      
+                        
                         
                         if let um = AppSessionManager.shared.currentUser {
                             
-                           // print("um.paymentMethod?.ghoori",um.paymentMethod?.ghoori ?? 2)
+                            // print("um.paymentMethod?.ghoori",um.paymentMethod?.ghoori ?? 2)
                             
                             if um.isBlocked == 1{
                                 
@@ -442,7 +442,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                             }else{
                                 self.updateInfoGenderLabel.text = "Update Gender & Address"
                                 self.updateInfoGenderButton.isSelected = false
-
+                                
                             }
                             
                             
@@ -457,7 +457,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 self.updateInfoViewCoinDetailLabel.text = ""
                                 
                             }
-
+                            
                             
                             
                             if um.is_username_updated == 1{
@@ -471,20 +471,20 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                             
                             
                             
-                           // profile completion info
+                            // profile completion info
                             self.percentageLabel.text = String.init(format: "%@%%", um.profile_completion_percentage ?? "")
                             let progress = Float(um.profile_completion_percentage ?? "0") ?? 0
                             print("progress........",progress)
                             self.progressBarNIB.progress = CGFloat(progress/100)
                             
                             
-
+                            
                             
                             if Language.language == Language.english{
                                 
                                 self.depositedCoinCountLabel.text = String.init(format: "%d", um.metadata?.totalCoins ?? "")
                                 self.winningAmountLabel.text = String.init(format: "%.2f", um.metadata?.totalCash ?? "")
-                            //    self.pendingReqCountLabel.text = String.init(format: "%d", um.metadata?.totalPendingRequest ?? "")
+                                //    self.pendingReqCountLabel.text = String.init(format: "%d", um.metadata?.totalPendingRequest ?? "")
                                 
                                 self.contestCountLabel.text = String.init(format: "%d", um.metadata?.totalContestParticipation ?? "")
                                 self.topRankCountLabel.text = String.init(format: "%d", um.metadata?.highestRank ?? "")
@@ -513,14 +513,22 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 
                             }
                             
-                            
-                            
-                            if um.avatar != nil{
+                            if um.profile_picture != nil{
                                 
-                                let url = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(um.avatar?.imagePath ?? "")")
+                                let url = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(um.profile_picture ?? "")")
                                 
                                 self.profilePicImageView.kf.setImage(with: url)
+                                
+                            }else{
+                                if um.avatar != nil{
+                                    
+                                    let url = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(um.avatar?.imagePath ?? "")")
+                                    
+                                    self.profilePicImageView.kf.setImage(with: url)
+                                }
+                                
                             }
+                            
                             
                             if um.isVerified == 1{
                                 
@@ -539,12 +547,12 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 
                                 self.updateInfoVerifyProfileLabel.text = "Verify Profile"
                                 self.updateInfoVerifyProfileButton.isSelected = false
-
+                                
                             }else{
                                 
                                 self.updateInfoVerifyProfileLabel.text = "Verify Profile"
                                 self.updateInfoVerifyProfileButton.isSelected = false
-
+                                
                                 if um.metadata?.verification_cancel_reason != nil{
                                     self.verificationCancelReasonButton.isHidden = false
                                 }
@@ -565,13 +573,13 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             }
             
             
-           
+            
         }
         else
         {
-//            self.scrollView.isHidden = true
-//
-//            self.performSegue(withIdentifier: "openSignUp", sender: self)
+            //            self.scrollView.isHidden = true
+            //
+            //            self.performSegue(withIdentifier: "openSignUp", sender: self)
             
             print("get data-authToken == nil ")
         }
@@ -585,14 +593,14 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         shadowView.isHidden = false
         profileUpdateInfoView.isHidden = false
     }
-   
+    
     @IBAction func updateUserNameButtonAction(_ sender: Any) {
         
         var params:[String:String] = [:]
         if updateUsernameTextField.text!.count > 0{
             
             params = ["username":updateUsernameTextField.text!]
-
+            
             APIManager.manager.updateProfile(params: params) { (status, msg) in
                 
                 if status{
@@ -601,12 +609,12 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                     self.userNameLabel.text = self.updateUsernameTextField.text
                     self.shadowView.isHidden = true
                     self.updateUserNameView.isHidden = true
-
+                    
                 }
                 
             }
         }
-       
+        
         
     }
     
@@ -614,40 +622,40 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     @IBAction func cameraButtonAction(_ sender: UIButton) {
         //getAvatarList
-//        APIManager.manager.getAvatarList { (avatars) in
-//            print(avatars)
-//
-//            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AvaterViewController") as? AvaterViewController
-//            vc?.avatars = avatars
-//            vc?.currentAvaterId = AppSessionManager.shared.currentUser?.avatarId
-//
-//            self.present(vc!, animated: true) {
-//
-//                print("open")
-//            }
-//        }
+        //        APIManager.manager.getAvatarList { (avatars) in
+        //            print(avatars)
+        //
+        //            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AvaterViewController") as? AvaterViewController
+        //            vc?.avatars = avatars
+        //            vc?.currentAvaterId = AppSessionManager.shared.currentUser?.avatarId
+        //
+        //            self.present(vc!, animated: true) {
+        //
+        //                print("open")
+        //            }
+        //        }
         
-                let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-                alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-                    self.openCamera()
-                }))
+        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.openCamera()
+        }))
         
-                alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-                    self.openGallary()
-                }))
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+            self.openGallary()
+        }))
         
-                alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
-                switch UIDevice.current.userInterfaceIdiom {
-                case .pad:
-                    alert.popoverPresentationController?.sourceView = sender
-                    alert.popoverPresentationController?.sourceRect = sender.bounds
-                    alert.popoverPresentationController?.permittedArrowDirections = .up
-                default:
-                    break
-                }
+        switch UIDevice.current.userInterfaceIdiom {
+        case .pad:
+            alert.popoverPresentationController?.sourceView = sender
+            alert.popoverPresentationController?.sourceRect = sender.bounds
+            alert.popoverPresentationController?.permittedArrowDirections = .up
+        default:
+            break
+        }
         
-                self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
     }
     func openCamera()
@@ -692,16 +700,16 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         if AppSessionManager.shared.currentUser?.isBlocked != 1{
             if AppSessionManager.shared.currentUser?.isVerified == 1{
                 
-//                if AppSessionManager.shared.currentUser!.metadata!.totalCash! <= AppSessionManager.shared.currentUser!.minWithdrawLimit ?? 250 {
-//
-//                    self.view.makeToast("You do not have enough money to withdraw.".localized)
-//
-//                }else{
-                    
-                    let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WithdrawRequestViewController") as? WithdrawRequestViewController
-                    
-                    self.navigationController?.pushViewController(vc!, animated: true)
-//                }
+                //                if AppSessionManager.shared.currentUser!.metadata!.totalCash! <= AppSessionManager.shared.currentUser!.minWithdrawLimit ?? 250 {
+                //
+                //                    self.view.makeToast("You do not have enough money to withdraw.".localized)
+                //
+                //                }else{
+                
+                let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WithdrawRequestViewController") as? WithdrawRequestViewController
+                
+                self.navigationController?.pushViewController(vc!, animated: true)
+                //                }
                 
             }
             else{
@@ -855,33 +863,34 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             
             //resize
             
-//            ImageCompressor.compress(image: image!, maxByte: 100) { image in
-//
-//                guard let compressedImage = image else { return }
-//                // Use compressedImage
-//
-//            }
+            //            ImageCompressor.compress(image: image!, maxByte: 100) { image in
+            //
+            //                guard let compressedImage = image else { return }
+            //                // Use compressedImage
+            //
+            //            }
             
             let params = ["profile_pic":image!
-                ] as [String : Any]
+            ] as [String : Any]
             
             APIManager.manager.postUploadProPic(params: params, withCompletionHandler: { (status, msg) in
-
+                
                 print("msg in post messege",msg!)
                 if status{
-
+                    
                     self.profilePicImageView.image = image
-
+                    self.view.makeToast(msg!)
+                    
                 }else
                 {
                     self.view.makeToast(msg!)
-
+                    
                 }
-
-
+                
+                
             })
             
-           
+            
         }
         
     }
@@ -917,7 +926,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                          "amount": amount]
                     
                     Mixpanel.mainInstance().track(event: "coin_purchase_done", properties: p)//
-
+                    
                     
                 }
                 

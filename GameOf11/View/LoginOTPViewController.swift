@@ -160,20 +160,20 @@ class LoginOTPViewController: UIViewController,UITextFieldDelegate {
         if phoneNumberTextField.text?.count != 0 && phoneNumberTextField.text?.count == 11{
             
             
-//            APIManager.manager.sendOTP(phone: phoneNumberTextField.text!) { (status, msg) in
-//
-//                print("msg..........",msg!)
-//
-//                if status{
-//
+            APIManager.manager.sendOTP(phone: phoneNumberTextField.text!) { (status, msg) in
+
+                print("msg..........",msg!)
+
+                if status{
+
                     self.otpView.isHidden = false
                     self.startTimer()
                     self.textField1.becomeFirstResponder()
 
                     self.topLabel.text = "We have sent you an OTP(One Time Password) at \(String(describing: self.phoneNumberTextField.text!))"
-//
-//                }
-//            }
+
+                }
+            }
             
         }
         
@@ -324,37 +324,37 @@ class LoginOTPViewController: UIViewController,UITextFieldDelegate {
             print("otpString......",phn, oldToken, otpString)
            
             
-//            APIManager.manager.signin(phone: phn, otp: otpString, key: oldToken) { (status, token, msg) in
-//                
-//                if status{
-//                    self.view.makeToast( msg!)
-//                    
-//                    AppSessionManager.shared.authToken = token
-//                    AppSessionManager.shared.save()
-//                    
-//                    //set alias
-//                    
-//                    //https://help.mixpanel.com/hc/en-us/articles/115004497803-Identity-Management-Best-Practices
-//                    
-//                    if UserDefaults.standard.bool(forKey: "isAliasSet") == false{
-//                        
-//                        Mixpanel.mainInstance().createAlias(phn, distinctId: Mixpanel.mainInstance().distinctId)
-//                        
-//                        UserDefaults.standard.set(true, forKey: "isAliasSet")
-//                        
-//                        Mixpanel.mainInstance().identify(distinctId: phn)
-//                        
-//                    }
-//                    
-//                    
-//                    self.navigationController?.popToRootViewController(animated: true)
-//                    
-//                }
-//                else{
-//                    self.view.makeToast(msg!)
-//                }
-//                
-//            }
+            APIManager.manager.signin(phone: phn, otp: otpString, key: oldToken) { (status, token, msg) in
+                
+                if status{
+                    self.view.makeToast( msg!)
+                    
+                    AppSessionManager.shared.authToken = token
+                    AppSessionManager.shared.save()
+                    
+                    //set alias
+                    
+                    //https://help.mixpanel.com/hc/en-us/articles/115004497803-Identity-Management-Best-Practices
+                    
+                    if UserDefaults.standard.bool(forKey: "isAliasSet") == false{
+                        
+                        Mixpanel.mainInstance().createAlias(phn, distinctId: Mixpanel.mainInstance().distinctId)
+                        
+                        UserDefaults.standard.set(true, forKey: "isAliasSet")
+                        
+                        Mixpanel.mainInstance().identify(distinctId: phn)
+                        
+                    }
+                    
+                    
+                    self.navigationController?.popToRootViewController(animated: true)
+                    
+                }
+                else{
+                    self.view.makeToast(msg!)
+                }
+                
+            }
             
             
         }
