@@ -106,6 +106,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     @IBOutlet weak var updateInfoVerifyProfileButton: UIButton!
     @IBOutlet weak var updateInfoVerifyProfileLabel: UILabel!
+    
+    @IBOutlet weak var updateInfoProficePicButton: UIButton!
+    @IBOutlet weak var updateInfoProfilePicLabel: UILabel!
     @IBOutlet weak var updateInfoGenderButton: UIButton!
     @IBOutlet weak var updateInfoGenderLabel: UILabel!
     
@@ -279,10 +282,21 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     }
     
     @objc func userNameEdit(sender:UITapGestureRecognizer) {
+        if let um = AppSessionManager.shared.currentUser {
+            
+            if um.is_username_updated == 1{
+                
+                self.view.makeToast("You already updated your user name")
+                
+            }else{
+                
+                shadowView.isHidden = false
+                updateUserNameView.isHidden = false
+                
+            }
+        }
         
-        shadowView.isHidden = false
-        updateUserNameView.isHidden = false
-        
+       
     }
     
     @objc private func refreshData(_ sender: Any) {
@@ -422,6 +436,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 self.updateInfoFullNameLabel.text = String.init(format: "%@", um.name ?? "")
                                 self.updateInfoFullNameButton.isSelected = true
                             }else{
+                                self.fullNameLabel.text = "Update Name"
                                 self.updateInfoFullNameLabel.text = "Full Name"
                                 self.updateInfoFullNameButton.isSelected = false
                             }
@@ -462,11 +477,17 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                             
                             if um.is_username_updated == 1{
                                 self.userNameLabel.text = String.init(format: "@%@", um.username ?? "")
-                                self.userNameLabel.isUserInteractionEnabled = false
+                                
                             }else{
                                 
-                                self.userNameLabel.text = "@username"
-                                self.userNameLabel.isUserInteractionEnabled = true
+                                if um.username != nil{
+                                    self.userNameLabel.text = String.init(format: "@%@", um.username ?? "")
+                                    self.userNameLabel.isUserInteractionEnabled = true
+                                }else{
+                                    self.userNameLabel.text = "@username"
+                                    self.userNameLabel.isUserInteractionEnabled = true
+                                }
+                                
                             }
                             
                             
@@ -519,6 +540,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 
                                 self.profilePicImageView.kf.setImage(with: url)
                                 
+                                self.updateInfoProfilePicLabel.text = "Profile Picture Updated"
+                                self.updateInfoProficePicButton.isSelected = true
+                                
                             }else{
                                 if um.avatar != nil{
                                     
@@ -526,6 +550,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                     
                                     self.profilePicImageView.kf.setImage(with: url)
                                 }
+                                self.updateInfoProfilePicLabel.text = "Updated Profile Picture"
+                                self.updateInfoProficePicButton.isSelected = false
+
                                 
                             }
                             
@@ -610,6 +637,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                     self.shadowView.isHidden = true
                     self.updateUserNameView.isHidden = true
                     
+                    self.getData()
                 }
                 
             }
@@ -686,9 +714,23 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBAction func addCoinButtonAction(_ sender: Any) {
         
         if AppSessionManager.shared.currentUser?.isBlocked != 1{
-            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DepositCoinViewController") as? DepositCoinViewController
             
-            self.navigationController?.pushViewController(vc!, animated: true)
+            if let um = AppSessionManager.shared.currentUser {
+                
+                if um.email != nil{
+                    
+                    let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DepositCoinViewController") as? DepositCoinViewController
+                    
+                    self.navigationController?.pushViewController(vc!, animated: true)
+                    
+                }else{
+                    
+                    self.view.makeToast("Please update your email address")
+                    
+                }
+                
+            }
+            
         }
         
         
@@ -744,12 +786,24 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
     }
     @IBAction func verifyButtonAction(_ sender: Any) {
-        
-        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VerifyAccountViewController") as? VerifyAccountViewController
-        
-        
-        self.navigationController?.pushViewController(vc!, animated: true)
-        
+        if let um = AppSessionManager.shared.currentUser {
+            
+            if um.name != nil{
+                
+                let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VerifyAccountViewController") as? VerifyAccountViewController
+                
+                
+                self.navigationController?.pushViewController(vc!, animated: true)
+                
+                
+            }else{
+                
+                self.view.makeToast("Please update your full name")
+                
+            }
+            
+
+        }
     }
     
     @IBAction func referToFriendButtonAction(_ sender: Any) {

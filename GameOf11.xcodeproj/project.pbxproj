@@ -52,7 +52,6 @@
 		0CE8836B21E0000E0025A31E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8836A21E0000E0025A31E /* LoginViewController.swift */; };
 		0CEB167A2264F73A002D0208 /* CaptainSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */; };
 		0CEB167C2265C102002D0208 /* TeamPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */; };
-		16B91834F3A2397A66EA8B41 /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 640B9D40233D397F00387A2A /* Pods_GameOf11.framework */; };
 		37814A5A27BED9390047EA73 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 37814A5927BED9390047EA73 /* Mixpanel */; };
 		6412BAF42343C4930081958E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412BAF32343C4930081958E /* TutorialViewController.swift */; };
 		6412BAF72343C4F40081958E /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412BAF52343C4F40081958E /* Slide.swift */; };
@@ -98,6 +97,7 @@
 		645F7DF423153F4800515F11 /* PendingWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */; };
 		645F7DF6231545FF00515F11 /* WithdrawTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */; };
 		645F7DF8231598D100515F11 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF7231598D100515F11 /* WebViewController.swift */; };
+		6464193E27EC6AD000863151 /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6464193D27EC6AD000863151 /* Pods_GameOf11.framework */; };
 		64669C5523E75C8F00288346 /* PromoCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64669C5423E75C8F00288346 /* PromoCodeViewController.swift */; };
 		646EC5FC230DB5C500E9D1A9 /* AvaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */; };
 		646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */; };
@@ -239,6 +239,7 @@
 		645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingWithdrawViewController.swift; sourceTree = "<group>"; };
 		645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawTableViewCell.swift; sourceTree = "<group>"; };
 		645F7DF7231598D100515F11 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		6464193D27EC6AD000863151 /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64669C5423E75C8F00288346 /* PromoCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeViewController.swift; sourceTree = "<group>"; };
 		646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaterViewController.swift; sourceTree = "<group>"; };
 		646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -280,8 +281,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6464193E27EC6AD000863151 /* Pods_GameOf11.framework in Frameworks */,
 				37814A5A27BED9390047EA73 /* Mixpanel in Frameworks */,
-				16B91834F3A2397A66EA8B41 /* Pods_GameOf11.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +560,7 @@
 		CC9F337D5640148DA3BACEC2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6464193D27EC6AD000863151 /* Pods_GameOf11.framework */,
 				640B9D40233D397F00387A2A /* Pods_GameOf11.framework */,
 				CECBB971ED7EF347DF27EF25 /* Pods_GameOf11.framework */,
 			);
