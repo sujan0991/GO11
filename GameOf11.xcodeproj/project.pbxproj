@@ -66,6 +66,8 @@
 		641DE3BB265EA41900630612 /* PaymentChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DE3B9265EA41900630612 /* PaymentChannelCell.swift */; };
 		641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E1768222A9A7D00302A19 /* SignUpViewController.swift */; };
 		641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */; };
+		6422DF9527F673DA007DF7F9 /* BonusCoinLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6422DF9427F673DA007DF7F9 /* BonusCoinLogViewController.swift */; };
+		6422DF9827F67AB9007DF7F9 /* BonusCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6422DF9727F67AB9007DF7F9 /* BonusCoinViewController.swift */; };
 		64251026240D652900077D25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64251025240D652900077D25 /* GoogleService-Info.plist */; };
 		643488EB230B280800846649 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643488EA230B280800846649 /* ForgotPasswordViewController.swift */; };
 		6438DF9F2318FA1500E29F5D /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6438DF9E2318FA1500E29F5D /* Localizable.swift */; };
@@ -98,6 +100,7 @@
 		645F7DF6231545FF00515F11 /* WithdrawTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */; };
 		645F7DF8231598D100515F11 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF7231598D100515F11 /* WebViewController.swift */; };
 		6464193E27EC6AD000863151 /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6464193D27EC6AD000863151 /* Pods_GameOf11.framework */; };
+		6464198627F2710300863151 /* BonusCoinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6464198527F2710200863151 /* BonusCoinCollectionViewCell.swift */; };
 		64669C5523E75C8F00288346 /* PromoCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64669C5423E75C8F00288346 /* PromoCodeViewController.swift */; };
 		646EC5FC230DB5C500E9D1A9 /* AvaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */; };
 		646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */; };
@@ -124,6 +127,7 @@
 		64CBB4DF23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */; };
 		64CBB4E123EA4A9900F0DBA2 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */; };
 		64CBB4E323EA4AB200F0DBA2 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */; };
+		64DE9D3327F31C040012F1E7 /* BonusCoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DE9D3227F31C040012F1E7 /* BonusCoinTableViewCell.swift */; };
 		64E5B42E23F0009A00D377F0 /* SignupOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E5B42D23F0009A00D377F0 /* SignupOTPViewController.swift */; };
 		64E999D3231B0E84003C7FFE /* sign_up_dialog_anim_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */; };
 		64E999D5231B131E003C7FFE /* Boat_Loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D4231B131E003C7FFE /* Boat_Loader.json */; };
@@ -206,6 +210,8 @@
 		641DE3B9265EA41900630612 /* PaymentChannelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentChannelCell.swift; sourceTree = "<group>"; };
 		641E1768222A9A7D00302A19 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSignedProfileViewController.swift; sourceTree = "<group>"; };
+		6422DF9427F673DA007DF7F9 /* BonusCoinLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusCoinLogViewController.swift; sourceTree = "<group>"; };
+		6422DF9727F67AB9007DF7F9 /* BonusCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusCoinViewController.swift; sourceTree = "<group>"; };
 		64251025240D652900077D25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		643488EA230B280800846649 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		6438DF9E2318FA1500E29F5D /* Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
@@ -240,6 +246,7 @@
 		645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawTableViewCell.swift; sourceTree = "<group>"; };
 		645F7DF7231598D100515F11 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		6464193D27EC6AD000863151 /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6464198527F2710200863151 /* BonusCoinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusCoinCollectionViewCell.swift; sourceTree = "<group>"; };
 		64669C5423E75C8F00288346 /* PromoCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeViewController.swift; sourceTree = "<group>"; };
 		646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaterViewController.swift; sourceTree = "<group>"; };
 		646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -267,6 +274,7 @@
 		64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementTableViewCell.swift; sourceTree = "<group>"; };
 		64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		64DE9D3227F31C040012F1E7 /* BonusCoinTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusCoinTableViewCell.swift; sourceTree = "<group>"; };
 		64E5B42D23F0009A00D377F0 /* SignupOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupOTPViewController.swift; sourceTree = "<group>"; };
 		64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sign_up_dialog_anim_2.json; sourceTree = "<group>"; };
 		64E999D4231B131E003C7FFE /* Boat_Loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Boat_Loader.json; sourceTree = "<group>"; };
@@ -330,6 +338,8 @@
 				0C390ACF21DF5E0200FA6A15 /* MatchViewController.swift */,
 				0C78C1FE222450AB0068B5D6 /* MoreViewController.swift */,
 				0C3336D021DF489A00E6EB11 /* MyContestViewController.swift */,
+				6422DF9427F673DA007DF7F9 /* BonusCoinLogViewController.swift */,
+				6422DF9727F67AB9007DF7F9 /* BonusCoinViewController.swift */,
 				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
 				64E5B42D23F0009A00D377F0 /* SignupOTPViewController.swift */,
 				6479366727D4CD0A00531DC3 /* LoginOTPViewController.swift */,
@@ -395,11 +405,12 @@
 		0C390AD121DF7FDA00FA6A15 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				641DE3B9265EA41900630612 /* PaymentChannelCell.swift */,
-				641DE3B8265EA41800630612 /* PaymentChannelCell.xib */,
-				647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */,
-				641764B4265B0A8E00E0A74E /* WithdrawMethodCell.xib */,
+				64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */,
+				646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */,
 				6445274722DB38B800D23734 /* BannerCollectionViewCell.swift */,
+				6464198527F2710200863151 /* BonusCoinCollectionViewCell.swift */,
+				64DE9D3227F31C040012F1E7 /* BonusCoinTableViewCell.swift */,
+				645037E222F2CEA50013334D /* CoinPackCollectionViewCell.swift */,
 				0CE8836421DFDEDB0025A31E /* ContestTableViewCell.swift */,
 				0CE8836521DFDEDB0025A31E /* ContestTableViewCell.xib */,
 				644A078A22ED72E200DAFE9E /* CreatedTeamTableViewCell.swift */,
@@ -409,22 +420,23 @@
 				6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */,
 				0C390AD421DF83E500FA6A15 /* MatchTableViewCell.swift */,
 				0C390AD521DF83E500FA6A15 /* MatchTableViewCell.xib */,
+				641DE3B9265EA41900630612 /* PaymentChannelCell.swift */,
+				641DE3B8265EA41800630612 /* PaymentChannelCell.xib */,
 				0CE8836021DFD5730025A31E /* PlayerTableViewCell.swift */,
 				0CE8836121DFD5730025A31E /* PlayerTableViewCell.xib */,
 				644526A22237D83C0099FB37 /* PointBreakDownTableViewCell.swift */,
 				0C390AD821DFAAA900FA6A15 /* PositionCollectionViewCell.swift */,
 				0C562CD722700A0A00D3995A /* PreviewTableViewCell.swift */,
 				6445274522DB2BCD00D23734 /* PrizeListTableViewCell.swift */,
-				0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */,
-				645037E222F2CEA50013334D /* CoinPackCollectionViewCell.swift */,
-				6453F2AD230960F2006A86CF /* UpComingMatchCell.xib */,
-				6453F2B12309638A006A86CF /* UpComingMatchCell.swift */,
-				646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */,
-				645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */,
 				64CBB4DA23E9C81100F0DBA2 /* PromoCodeTableViewCell.swift */,
-				64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */,
-				64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */,
 				64A0EDD82433590D00B52AE6 /* SettingTableViewCell.swift */,
+				0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */,
+				64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */,
+				6453F2B12309638A006A86CF /* UpComingMatchCell.swift */,
+				6453F2AD230960F2006A86CF /* UpComingMatchCell.xib */,
+				647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */,
+				641764B4265B0A8E00E0A74E /* WithdrawMethodCell.xib */,
+				645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -760,6 +772,7 @@
 				0CE8836921DFE0AF0025A31E /* ContestListViewController.swift in Sources */,
 				0C3336C721DF419400E6EB11 /* Extension.swift in Sources */,
 				0C33368221DF3B0400E6EB11 /* CustomNavigationBar.swift in Sources */,
+				64DE9D3327F31C040012F1E7 /* BonusCoinTableViewCell.swift in Sources */,
 				64522217239C182B0091AE28 /* CaptainSelectorFootballViewController.swift in Sources */,
 				64A0EDD92433590E00B52AE6 /* SettingTableViewCell.swift in Sources */,
 				641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */,
@@ -793,7 +806,9 @@
 				0CEB167A2264F73A002D0208 /* CaptainSelectorViewController.swift in Sources */,
 				6479366827D4CD0A00531DC3 /* LoginOTPViewController.swift in Sources */,
 				64522219239C50F80091AE28 /* TeamPreviewFootballViewController.swift in Sources */,
+				6464198627F2710300863151 /* BonusCoinCollectionViewCell.swift in Sources */,
 				0C8B95E921E1022200ADE46B /* AppSessionManager.swift in Sources */,
+				6422DF9527F673DA007DF7F9 /* BonusCoinLogViewController.swift in Sources */,
 				6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */,
 				0CE8835F21DFB6730025A31E /* TeamCreateViewController.swift in Sources */,
 				644526A32237D83C0099FB37 /* PointBreakDownTableViewCell.swift in Sources */,
@@ -826,6 +841,7 @@
 				0C3336CF21DF488D00E6EB11 /* HomeViewController.swift in Sources */,
 				647825AA239D2BC0007AAC7A /* EditTeamFootballViewController.swift in Sources */,
 				64522215239C0FCC0091AE28 /* TeamCreateFootballViewController.swift in Sources */,
+				6422DF9827F67AB9007DF7F9 /* BonusCoinViewController.swift in Sources */,
 				643488EB230B280800846649 /* ForgotPasswordViewController.swift in Sources */,
 				0C33367B21DF3AB100E6EB11 /* SplashViewController.swift in Sources */,
 				641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */,

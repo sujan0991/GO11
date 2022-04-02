@@ -6,6 +6,9 @@
 //  Copyright © 2019 Flow_Digital. All rights reserved.
 //
 
+
+
+// ********************************This class is not in use anymore***************
 import UIKit
 import SafariServices
 

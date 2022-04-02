@@ -94,7 +94,7 @@ class UnSignedProfileViewController: UIViewController {
         let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupOTPViewController") as? SignupOTPViewController
 
         print("signUpButtonAction.........")
-       self.navigationController?.pushViewController(popupVC!, animated: false)
+       self.navigationController?.pushViewController(popupVC!, animated: true)
 
     }
 
@@ -106,7 +106,7 @@ class UnSignedProfileViewController: UIViewController {
 
 
 
-        self.navigationController?.pushViewController(popupVC!, animated: false)
+        self.navigationController?.pushViewController(popupVC!, animated: true)
 
 
     }

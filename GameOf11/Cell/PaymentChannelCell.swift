@@ -31,14 +31,20 @@ class PaymentChannelCell: UITableViewCell {
     }
     
     // 5
-    public func configure(_ text: String, _ channelImageLink: String) {
+//    public func configure(_ text: String, _ channelImageLink: String) {
+//
+//        methodName.text = text
+//
+//
+//        let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(channelImageLink)")
+//
+//        self.methodIcon.kf.setImage(with: url1)
+//
+//    }
+    public func configure(_ text: String) {
         
         methodName.text = text
         
-           
-        let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(channelImageLink)")
-        
-        self.methodIcon.kf.setImage(with: url1)
            
     }
     

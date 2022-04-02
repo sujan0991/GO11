@@ -39,13 +39,13 @@ class LeaderBoardTableViewCell: UITableViewCell {
         
         if Language.language == Language.english{
         self.userNameLabel.text = String.init(format: "%d",leaderBoard.rank ?? 0)
-        self.teamNameLabel.text = leaderBoard.team_name
+        self.teamNameLabel.text = leaderBoard.username
         self.pointLabel.text = "\(leaderBoard.team_earning_point ?? 0.0)"
      //   self.rankLabel.text = "\(leaderBoard.rank ?? 0)"
         }else{
             
             self.userNameLabel.text = String.init(format: "%@",formatter.string(from: leaderBoard.rank! as NSNumber) ?? 0)
-            self.teamNameLabel.text = leaderBoard.team_name
+            self.teamNameLabel.text = leaderBoard.username
             self.pointLabel.text = formatter.string(from: leaderBoard.team_earning_point! as NSNumber) ?? "০.০"
             
         }
