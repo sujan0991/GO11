@@ -323,8 +323,13 @@ class LoginOTPViewController: UIViewController,UITextFieldDelegate {
             }
             print("otpString......",phn, oldToken, otpString)
            
+            var params:[String:String] = [:]
+           
+                params = ["phone":phn,
+                          "otp":otpString,
+                          "gcm_registration_key":oldToken]
             
-            APIManager.manager.signin(phone: phn, otp: otpString, key: oldToken) { (status, token, msg) in
+            APIManager.manager.signin(params: params) { (status, token, msg) in
                 
                 if status{
                     self.view.makeToast( msg!)
@@ -366,7 +371,7 @@ class LoginOTPViewController: UIViewController,UITextFieldDelegate {
         
         self.tabBarController?.tabBar.isHidden = false
         
-        navigationController?.popViewController(animated: false)
+        navigationController?.popViewController(animated: true)
         
     }
     

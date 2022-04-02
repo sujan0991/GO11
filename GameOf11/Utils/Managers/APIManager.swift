@@ -32,8 +32,8 @@ struct API_K {
     static let DEVICE_TYPE = "ios"
     
     //  static let API_KEY = "base64:8WGdd0uX3GtRtTxeOyuHd3864Mqfc6C/cbhzpEZUdxA="
-      static let BaseUrlStr:String =  "https://www.gameof11.com/" //live
-  //  static let BaseUrlStr:String =  "http://18.188.54.233/" //"dev
+    //  static let BaseUrlStr:String =  "https://www.gameof11.com/" //live
+    static let BaseUrlStr:String =  "http://18.136.175.216/" //"dev
     //http://159.65.128.173/
     //http://18.224.1.221/
     
@@ -157,6 +157,10 @@ struct API_K {
     
     static let REDEEMABLE_COIN_PACKS = "redeemable-coin-packs"
     
+    static let AVAILABLE_BONAS_COIN = "user/available-bonus-coin"
+
+    static let BONUS_COIN_LOG = "user/bonus-coin-log"
+
     
 }
 
@@ -260,14 +264,11 @@ class APIManager: NSObject {
         })
     }
     
-    func signin(phone:String, otp:String,key:String, withCompletionHandler completion:(( _ status: Bool,_ authToken:String?, _ message: String?)->Void)?) {
+    func signin(params:[String:String], withCompletionHandler completion:(( _ status: Bool,_ authToken:String?, _ message: String?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
-        let params:[String:String] = ["phone":phone,
-                                      "otp":otp,
-                                      "gcm_registration_key":key
-        ]
+        let params:[String:String] = params
         
         Request(.post, API_K.SIGNIN, parameters: params)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
@@ -567,6 +568,8 @@ class APIManager: NSObject {
         //        SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         //
         getDataModel(method: API_K.MY_PROFILE) { (sts, dataModel,msg) in
+            
+            print("sts...........",sts,msg ?? "????")
             if sts{
                 
                 if let jsA = dataModel{
@@ -1866,13 +1869,12 @@ class APIManager: NSObject {
         })
     }
     
-    func joinInContestWith(contestId:String, teamId:String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+    func joinInContestWith(params:Dictionary<String, String>, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
-        let params:[String:String] = ["contest_id":contestId,
-                                      "user_team_id":teamId,
-        ]
+        let params:[String:String] = params
+        
         
         Request(.post, API_K.JOIN_CONTEST, parameters: params)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
@@ -1906,13 +1908,14 @@ class APIManager: NSObject {
         })
     }
     
-    func joinInFootballContestWith(contestId:String, teamId:String, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
+    func joinInFootballContestWith(params:Dictionary<String, String>, withCompletionHandler completion:(( _ status: Bool, _ message: String?)->Void)?) {
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
-        
-        let params:[String:String] = ["contest_id":contestId,
-                                      "user_team_id":teamId,
-        ]
+        let params:[String:String] = params
+       
+//        let params:[String:String] = ["contest_id":contestId,
+//                                      "user_team_id":teamId,
+//        ]
         
         Request(.post, API_K.JOIN_CONTEST_FOOTBALL, parameters: params)?.responseJSON(completionHandler: { (responseData) in
             switch responseData.result {
@@ -2595,7 +2598,7 @@ class APIManager: NSObject {
     
     
     
-    func getCoinLog(lang:String,completion:(( _ banners: Array<Any>)->Void)?) {
+    func getCoinLog(lang:String,completion:(( _ logs: Array<Any>)->Void)?) {
         
         //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
@@ -2627,6 +2630,49 @@ class APIManager: NSObject {
                     completion?([])
                 }
             case .failure( _):
+                SVProgressHUD.dismiss()
+                completion?([])
+            }
+        })
+    }
+    
+    func getAvailableBonusCoin(lang:String,completion:(( _ logs: Array<Any>)->Void)?) {
+        
+        //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
+        print("getAvailableBonusCoin............... api call")
+        let params:[String:String] = ["lang":lang,
+        ]
+        
+        Request(.get, API_K.AVAILABLE_BONAS_COIN, parameters: params)?.responseJSON(completionHandler: { (responseData) in
+            
+            switch responseData.result {
+            
+            case .success(let value):
+                print("??????????????????????????")
+                
+                SVProgressHUD.dismiss()
+                let json = JSON(value)
+                if let jsonDic = json.dictionaryObject {
+                    
+                    let isSuccess:Bool = jsonDic["status"] as! Bool
+                    
+                    print("isSuccess...............",isSuccess)
+                    if !isSuccess{
+                        completion?([])
+                    }
+                    else{
+                        
+                        let logArray:Array = jsonDic["data"] as! Array<Any>
+                        
+                        completion?(logArray)
+                    }
+                }
+                else {
+                    completion?([])
+                }
+            case .failure( _):
+                print("??????????????????????????//////////////")
+                
                 SVProgressHUD.dismiss()
                 completion?([])
             }

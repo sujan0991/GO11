@@ -47,6 +47,19 @@ class SignupOTPViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var alreadyAccountLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     
+    
+    
+    @IBOutlet weak var referralView: UIView!
+    @IBOutlet weak var refferalTitleLabel: UIButton!
+    @IBOutlet weak var referralCodeTextField: UITextField!
+    @IBOutlet weak var referralQuestionLabel: UIButton!
+    @IBOutlet weak var yesButton: UIButton!
+    @IBOutlet weak var noButton: UIButton!
+    
+    @IBOutlet weak var shadowView: UIView!
+    
+    
+    
     var countdownTimer: Timer!
     var totalTime = 60
     
@@ -303,6 +316,26 @@ class SignupOTPViewController: UIViewController,UITextFieldDelegate {
         
         if (textField1.text?.count != 0) && (textField2.text?.count != 0) && (textField3.text?.count != 0) && (textField4.text?.count != 0) && (textField5.text?.count != 0) && (textField6.text?.count != 0) {
             
+            
+            //show the refer view
+            
+            self.shadowView.isHidden = false
+            self.referralView.isHidden = false
+
+            textField1.resignFirstResponder()
+            textField2.resignFirstResponder()
+            textField3.resignFirstResponder()
+            textField4.resignFirstResponder()
+            textField5.resignFirstResponder()
+            textField6.resignFirstResponder()
+        }
+        
+    }
+    
+    @IBAction func yesReferralButtonAction(_ sender: Any) {
+        
+        if referralCodeTextField.text?.count != 0{
+            
             let otpString = "\(String(describing: textField1.text!))\(String(describing: textField2.text!))\(String(describing: textField3.text!))\(String(describing: textField4.text!))\(String(describing: textField5.text!))\(String(describing: textField6.text!))"
             
             
@@ -315,13 +348,25 @@ class SignupOTPViewController: UIViewController,UITextFieldDelegate {
             
             print("otpString......",phn, oldToken, otpString)
             
-            APIManager.manager.signin(phone: phn, otp: otpString, key: oldToken) { (status, token, msg) in
+            let code = self.referralCodeTextField.text!
+            
+            var params:[String:String] = [:]
+           
+                params = ["phone":phn,
+                          "otp":otpString,
+                          "referral":code,
+                          "gcm_registration_key":oldToken]
+            
+            APIManager.manager.signin(params: params) { (status, token, msg) in
 
                 if status{
                     self.view.makeToast( msg!)
 
                     AppSessionManager.shared.authToken = token
                     AppSessionManager.shared.save()
+                    
+                    
+                    print("token after signup...........................", token ?? "no token")
 
                     //set alias
 
@@ -343,18 +388,85 @@ class SignupOTPViewController: UIViewController,UITextFieldDelegate {
                 }
                 else{
                     self.view.makeToast(msg!)
+                    self.shadowView.isHidden = true
+                    self.referralView.isHidden = true
+
                 }
 
             }
+        }else{
             
-            
+            self.view.makeToast("Please provide a referral code")
         }
         
     }
+    
+    @IBAction func noReferralButtonAction(_ sender: Any) {
+        
+        let otpString = "\(String(describing: textField1.text!))\(String(describing: textField2.text!))\(String(describing: textField3.text!))\(String(describing: textField4.text!))\(String(describing: textField5.text!))\(String(describing: textField6.text!))"
+        
+        
+        let phn = String.init(format: "+88%@", phoneNumberTextField.text!)
+        
+        var oldToken = ""
+        if let oldFcmToken = AppSessionManager.shared.fcmToken{
+            oldToken = oldFcmToken
+        }
+        
+        print("otpString......",phn, oldToken, otpString)
+        
+
+        var params:[String:String] = [:]
+       
+            params = ["phone":phn,
+                      "otp":otpString,
+                      "gcm_registration_key":oldToken]
+        
+        APIManager.manager.signin(params: params) { (status, token, msg) in
+
+            if status{
+                self.view.makeToast( msg!)
+
+                AppSessionManager.shared.authToken = token
+                AppSessionManager.shared.save()
+                
+                
+                print("token after signup...........................", token ?? "no token")
+
+                //set alias
+
+                //https://help.mixpanel.com/hc/en-us/articles/115004497803-Identity-Management-Best-Practices
+
+                if UserDefaults.standard.bool(forKey: "isAliasSet") == false{
+
+                    Mixpanel.mainInstance().createAlias(phn, distinctId: Mixpanel.mainInstance().distinctId)
+
+                    UserDefaults.standard.set(true, forKey: "isAliasSet")
+
+                    Mixpanel.mainInstance().identify(distinctId: phn)
+
+                }
+
+
+                self.navigationController?.popToRootViewController(animated: true)
+
+            }
+            else{
+                
+                self.view.makeToast(msg!)
+                self.shadowView.isHidden = true
+                self.referralView.isHidden = true
+
+            }
+
+        }
+    }
+    
+    
     @IBAction func loginButtonAction(_ sender: Any) {
         
         let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginOTPViewController") as? LoginOTPViewController
-        self.navigationController?.pushViewController(popupVC!, animated: false)
+        self.navigationController?.pushViewController(popupVC!, animated: true)
     }
     
     
@@ -362,7 +474,7 @@ class SignupOTPViewController: UIViewController,UITextFieldDelegate {
         
         self.tabBarController?.tabBar.isHidden = false
         
-        navigationController?.popViewController(animated: false)
+        navigationController?.popViewController(animated: true)
         
     }
     

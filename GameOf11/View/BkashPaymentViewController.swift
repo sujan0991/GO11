@@ -105,10 +105,11 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         
-        print("didCommit....",webView.url ?? "no url")
+        print("didCommit....",webView.url?.absoluteString ?? "no url")
         
-        if webView.url?.absoluteString == "https://www.gameof11.com/payment/success"{
-            
+        //if webView.url?.absoluteString == "https://www.gameof11.com/payment/success"{
+        if webView.url?.absoluteString == "http://18.136.175.216/payment/success"{
+        
             print("got success url ")
             //self.view.makeToast("Payment successfull".localized)
             // self.showStatus(true, msg: "Payment successfull")

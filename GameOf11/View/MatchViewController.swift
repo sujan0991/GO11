@@ -68,6 +68,8 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         //            // Fallback on earlier versions
         //        }
         
+        print("fcm............?????", AppSessionManager.shared.fcmToken ?? "no fcm token")
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.moveToContestView(_:)), name: NSNotification.Name(rawValue: "notificationRecieved"), object: nil)
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)

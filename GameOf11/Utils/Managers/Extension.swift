@@ -110,6 +110,9 @@ extension Data{
 }
 
 extension String {
+    
+
+
     func color () -> UIColor {
         var cString:String = self.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
@@ -779,6 +782,7 @@ extension UITextView {
         contentOffset.y = -positiveTopOffset
     }
 }
+
 
 extension UILabel {
     func makeRound() {

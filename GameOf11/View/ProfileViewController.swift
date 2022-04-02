@@ -38,6 +38,9 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var depositedCoinLabel: UILabel!
     @IBOutlet var depositedCoinCountLabel: UILabel!
     
+    @IBOutlet weak var bonusCoinLabel: UILabel!
+    @IBOutlet weak var bonusCoinCountLabel: UILabel!
+    
     @IBOutlet weak var winningLabel: UILabel!
     @IBOutlet var winningAmountLabel: UILabel!
     
@@ -180,7 +183,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         //        placeNavBar(withTitle: "My Profile", isBackBtnVisible: false)
         //buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         addCoinButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
-        //  withdrawButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "brand_red")!)
+        withdrawButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         redeemButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         //   coinLogButton.buttonRound(0, borderWidth: 0.0, borderColor: UIColor.init(named: "brand_red")!)
         fullProfileButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
@@ -190,7 +193,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         blockMessageLabel.text = "Your Profile Is Blocked!".localized
         suggestionTextView.text = "Your profile has been blocked! To know about reason of blocking or to resolve the matter please message to our facebook page https://www.facebook.com/gameof11/ . GO11 support team will guide you for further procedure.".localized
         // freeContestLabel.text = "Your available free contests = 0"
-        accountInfoLabel.text = "Account Info".localized
+        //accountInfoLabel.text = "Account Info".localized
         depositedCoinLabel.text = "Deposited Coins".localized
         winningLabel.text = "Winning Amount".localized
         
@@ -208,7 +211,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         topRankFootballlabel.text = "Top Rank".localized
         matchFootballlabel.text = "Matches".localized
         
-        personalDetailLabel.text = "Personal Details".localized
+        //personalDetailLabel.text = "Personal Details".localized
         
         fullProfileButton.setTitle("Full Profile".localized, for: .normal)
         verifyButton.setTitle("Verify Your Profile!".localized, for: .normal)
@@ -247,6 +250,39 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         let userNameTap = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.userNameEdit))
         userNameLabel.addGestureRecognizer(userNameTap)
+        
+        // set font sizr based on screen wodth
+        if (self.view.frame.width == 320) {
+
+            phoneNoLabel.font = UIFont(name: "OpenSans", size: 9)
+            emailLabel.font = UIFont(name: "OpenSans", size: 9)
+            depositedCoinLabel.font = UIFont(name: "OpenSans", size: 9)
+            depositedCoinCountLabel.font = UIFont(name: "OpenSans-Bold", size: 9)
+            bonusCoinLabel.font = UIFont(name: "OpenSans", size: 9)
+            bonusCoinCountLabel.font = UIFont(name: "OpenSans-Bold", size: 9)
+            
+
+        } else if (self.view.frame.width == 375 || self.view.frame.width == 390 ) {
+
+            phoneNoLabel.font = UIFont(name: "OpenSans", size: 11)
+            emailLabel.font = UIFont(name: "OpenSans", size: 11)
+            depositedCoinLabel.font = UIFont(name: "OpenSans", size: 11)
+            depositedCoinCountLabel.font = UIFont(name: "OpenSans-Bold", size: 11)
+            bonusCoinLabel.font = UIFont(name: "OpenSans", size: 11)
+            bonusCoinCountLabel.font = UIFont(name: "OpenSans-Bold", size: 11)
+            
+
+        } else if (self.view.frame.width >= 414) {
+
+            phoneNoLabel.font = UIFont(name: "OpenSans", size: 12)
+            emailLabel.font = UIFont(name: "OpenSans", size: 12)
+            depositedCoinLabel.font = UIFont(name: "OpenSans", size: 12)
+            depositedCoinCountLabel.font = UIFont(name: "OpenSans-Bold", size: 12)
+            bonusCoinLabel.font = UIFont(name: "OpenSans", size: 12)
+            bonusCoinCountLabel.font = UIFont(name: "OpenSans-Bold", size: 12)
+            
+
+        }
         
     }
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -378,10 +414,12 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         getData()
         
+        
     }
     
     func getData(){
         
+        print("getData.............")
         if AppSessionManager.shared.authToken != nil{
             
             self.scrollView.isHidden = false
@@ -431,31 +469,37 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                             self.updateInfoPhoneButton.isSelected = true // phone number will always be there
                             self.updateInfoPhoneLabel.text = String.init(format: "%@", um.phone ?? "")
                             
-                            if um.name != nil{
+                            if um.name != nil  && !(um.name?.isEmpty ?? true){
+                                print("if........name")
                                 self.fullNameLabel.text = String.init(format: "%@", um.name ?? "")
                                 self.updateInfoFullNameLabel.text = String.init(format: "%@", um.name ?? "")
                                 self.updateInfoFullNameButton.isSelected = true
+                                
                             }else{
+                                print("else........name")
                                 self.fullNameLabel.text = "Update Name"
                                 self.updateInfoFullNameLabel.text = "Full Name"
                                 self.updateInfoFullNameButton.isSelected = false
                             }
                             
-                            if um.email != nil{
+                            if um.email != nil && !(um.email?.isEmpty ?? true){
+                                print("if........email")
                                 self.emailLabel.text = String.init(format: "%@", um.email ?? "")
                                 self.updateInfoEmailLabel.text = String.init(format: "%@", um.email ?? "")
                                 self.updateInfoEmailButton.isSelected = true
                             }else{
+                                print("else........email")
+                                self.emailLabel.text = "Update Email Address"
                                 self.updateInfoEmailLabel.text = "Email"
                                 self.updateInfoEmailButton.isSelected = false
                             }
                             
-                            if um.sex != nil && um.address != nil{
+                            if um.sex != nil{
                                 
-                                self.updateInfoGenderLabel.text = String.init(format: "%@,%@", um.sex ?? "", um.address ?? "")
+                                self.updateInfoGenderLabel.text = String.init(format: "%@", um.sex ?? "")
                                 self.updateInfoGenderButton.isSelected = true
                             }else{
-                                self.updateInfoGenderLabel.text = "Update Gender & Address"
+                                self.updateInfoGenderLabel.text = "Update Gender"
                                 self.updateInfoGenderButton.isSelected = false
                                 
                             }
@@ -709,6 +753,18 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         self.present(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func bonusCoinButtonAction(_ sender: Any) {
+        
+//        print("bonus Coin ButtonAction")
+//        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BonusCoinLogViewController") as? BonusCoinLogViewController
+//
+//        self.navigationController?.pushViewController(vc!, animated: true)
+        
+    }
+    
+    
+    
+    
     
     //DepositCoinViewController
     @IBAction func addCoinButtonAction(_ sender: Any) {
@@ -717,7 +773,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             
             if let um = AppSessionManager.shared.currentUser {
                 
-                if um.email != nil{
+                if um.email != nil && !(um.email?.isEmpty ?? true){
                     
                     let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DepositCoinViewController") as? DepositCoinViewController
                     
@@ -788,7 +844,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBAction func verifyButtonAction(_ sender: Any) {
         if let um = AppSessionManager.shared.currentUser {
             
-            if um.name != nil{
+            if um.name != nil && !(um.name?.isEmpty ?? true){
                 
                 let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VerifyAccountViewController") as? VerifyAccountViewController
                 

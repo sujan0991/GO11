@@ -353,7 +353,9 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         // 5
         let selected = currentIndex == selectedPaymentMethod
         // 6
-        cell.configure(method.name,method.icon)
+        //cell.configure(method.name,method.icon)
+        cell.configure(method.name)
+       
         // 7
         cell.isSelected(selected)
         // 8
