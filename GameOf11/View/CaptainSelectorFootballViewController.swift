@@ -55,10 +55,10 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
         
         chooseCaptainLabel.text = "CHOOSE CAPTAIN (C) & VICE CAPTAIN (VC)".localized
         xPointLabel.text = "Your Captain gets 2x points & Vice Captain gets 1.5x points".localized
-        teamNameTextField.placeholder = "Your Team Name".localized
+       // teamNameTextField.placeholder = "Your Team Name".localized
         saveTeamButton.setTitle("Save Your Team".localized, for: .normal)
-        teamNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
-        teamNameTextField.delegate = self
+        //teamNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
+        //teamNameTextField.delegate = self
         
         
         saveTeamButton.makeRound(5, borderWidth: 0, borderColor: .clear)
@@ -564,14 +564,15 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
             
             self.view.makeToast("Please select Captain and Vice Captain properly".localized)
         }
-        else if teamNameTextField.text!.count > 25{
-            
-            self.view.makeToast("Maximum 24 Character".localized)
-        }
-        else if self.teamNameTextField.text?.count ?? 0 > 0
+        else
+//        if teamNameTextField.text!.count > 25{
+//
+//            self.view.makeToast("Maximum 24 Character".localized)
+//        }
+//        else if self.teamNameTextField.text?.count ?? 0 > 0
         {
-            userTeam.teamName = self.teamNameTextField.text
-            
+//            userTeam.teamName = self.teamNameTextField.text
+//
             print("captain and vice cap id........",userTeam.captain,userTeam.viceCaptain)
             
             
@@ -728,15 +729,15 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
                 
             }
         }
-        else
-        {
-            
-            self.view.makeToast("Please provide a name for your team".localized)
-            //print(userTeam.batsman.toJSONArray())
-            //print(userTeam.bowler.toJSONArray())
-            //print(userTeam.allrounder.toJSONArray())
-            
-        }
+//        else
+//        {
+//
+//            self.view.makeToast("Please provide a name for your team".localized)
+//            //print(userTeam.batsman.toJSONArray())
+//            //print(userTeam.bowler.toJSONArray())
+//            //print(userTeam.allrounder.toJSONArray())
+//
+//        }
         
     }
     

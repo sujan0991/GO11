@@ -22,6 +22,8 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     var isSelectButtonCliked = false
     
+    var isDerectJoinApplicable = false
+    
     @IBOutlet weak var confirmView: UIView!
     
     @IBOutlet weak var confirmButton: UIButton!
@@ -30,7 +32,7 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         super.viewDidLoad()
         
         
-        print("teams........??? \(selectedTeamId)")
+        print("teams........??? \(selectedTeamId)", contestId)
         // Do any additional setup after loading the view.
        
       
@@ -216,17 +218,18 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
                 
                 if let delegate = self.delegate {
                     
-                    delegate.selectedTeam(team: singleTeam,contestId: self.contestId)
+                    delegate.selectedTeam(team: singleTeam,contestId: self.contestId,isDerectJoinApplicable: isDerectJoinApplicable)
                 }
                 
               //  print("team name...........?????????",singleTeam.teamName)
                 dismiss(animated: true, completion: nil)
+                
             }else{
                 let singleTeam = teamsFootball[selectedIndex] as CreatedTeamFootball
                 
                 if let delegate = self.delegate {
                     
-                    delegate.selectedTeamFootball(team: singleTeam,contestId: self.contestId)
+                    delegate.selectedTeamFootball(team: singleTeam,contestId: self.contestId,isDerectJoinApplicable: isDerectJoinApplicable)
                 }
                 
          //       print("team name...........?????????",singleTeam.teamName)
