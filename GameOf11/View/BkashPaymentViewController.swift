@@ -23,6 +23,7 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
     
     var selectedContestId = 0
     var createdTeamList: [CreatedTeam] = []
+    var createdFootballTeamList: [CreatedTeamFootball] = []
     
     var isFromDipositCoin = "yes"
     
@@ -126,10 +127,21 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
                         break
                     }else  if vc.isKind(of: ContestListViewController.self)
                     {
+                        self.navigationController?.popToViewController(vc, animated: true)
+                       
                         if isFromDipositCoin == "no"{
                             
-                            let contestDataDict:[String: Any] = ["contestId": selectedContestId,"teams" : createdTeamList]
+                            var contestDataDict:[String: Any] = [:]
                             
+                            if UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                                
+                                contestDataDict = ["contestId": selectedContestId,"teams" : createdTeamList]
+                                
+                            }else{
+                                contestDataDict = ["contestId": selectedContestId,"teams" : createdFootballTeamList]
+                                
+                            }
+
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromContestList"), object: nil, userInfo: contestDataDict)
                             
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromContestListMixpanel"), object: nil, userInfo: ["channel":selectedChannelType, "isCoinPack":isCoinPack, "amount":rechargAmount])
@@ -139,8 +151,6 @@ class BkashPaymentViewController: BaseViewController,WKNavigationDelegate {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "paymentFromContestListMixpanel"), object: nil, userInfo: ["channel":selectedChannelType, "isCoinPack":isCoinPack, "amount":rechargAmount])
                         }
                         
-                        self.navigationController?.popToViewController(vc, animated: true)
-                       
                         
                         break
                     }

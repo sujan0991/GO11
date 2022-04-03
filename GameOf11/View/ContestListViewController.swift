@@ -13,8 +13,8 @@ import SVProgressHUD
 import Mixpanel
 
 protocol BackFromTeamSelect {
-    func selectedTeam(team: CreatedTeam,contestId: Int)
-    func selectedTeamFootball(team: CreatedTeamFootball,contestId: Int)
+    func selectedTeam(team: CreatedTeam,contestId: Int, isDerectJoinApplicable: Bool)
+    func selectedTeamFootball(team: CreatedTeamFootball,contestId: Int, isDerectJoinApplicable: Bool)
     
 }
 
@@ -147,11 +147,13 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     var availableBonusCoinPack:[Any] = []
     
-    var applicableBonusCoinList = [100,200,300,400,500]
+    var applicableBonusCoinList = [200,300,400,500,750]
     
     var amountLeft = 0
     var bonus_coin_id = 0
     var appliedBonusCoinAmount = 0
+    var userTotalCoin = 0
+    var toPayAmount = 0
     
     struct Channels {
         let name: String
@@ -934,24 +936,31 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                 self.buyCoinButton.isHidden = true
                 self.joinContestButton.isHidden = false
             }else{
+                if toPay > userTotalCoin{
+                    
                 self.buyCoinButton.isHidden = false
                 self.joinContestButton.isHidden = true
+                }else{
+                    self.buyCoinButton.isHidden = true
+                    self.joinContestButton.isHidden = false
+
+                }
 
             }
             
-            if Language.language == Language.english{
+ //           if Language.language == Language.english{
                 
                 self.appliedBonusAmountLabel.text = String.init(format:"-%d",amount)
                 
                 self.payAmountLabel.text = String.init(format:"%d",toPay)
                 
-            }else{
-                let bnNumberString = self.formatter.string(for: amount)
-                let bnNumberString1 = self.formatter.string(for: toPay)
-                
-                self.appliedBonusAmountLabel.text = String.init(format:"-%@",bnNumberString!)
-                self.payAmountLabel.text = String.init(format:"%@",bnNumberString1!)
-            }
+//            }else{
+//                let bnNumberString = self.formatter.string(for: amount)
+//                let bnNumberString1 = self.formatter.string(for: toPay)
+//
+//                self.appliedBonusAmountLabel.text = String.init(format:"-%@",bnNumberString!)
+//                self.payAmountLabel.text = String.init(format:"%@",bnNumberString1!)
+//            }
 
 
             
@@ -1244,20 +1253,20 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             print(" did select amountLeft", amountLeft,bonus_coin_id)
             
             // change previous selection
-            if Language.language == Language.english{
+ //           if Language.language == Language.english{
                 
                 self.appliedBonusAmountLabel.text = "- 0"
                 //let payAmount = entryAmount / 50  // convert coin to tk, 1tk = 50 coin
                 self.payAmountLabel.text = String.init(format:"%d",entryAmount)
                 
-            }else{
-                //let payAmount = entryAmount / 50
-                let bnNumberString1 = self.formatter.string(for: entryAmount)
-                
-                self.appliedBonusAmountLabel.text =  "- ০"
-
-                self.payAmountLabel.text = String.init(format:"%@",bnNumberString1!)
-            }
+//            }else{
+//                //let payAmount = entryAmount / 50
+//                let bnNumberString1 = self.formatter.string(for: entryAmount)
+//
+//                self.appliedBonusAmountLabel.text =  "- ০"
+//
+//                self.payAmountLabel.text = String.init(format:"%@",bnNumberString1!)
+//            }
 
             
             self.bonusCoinListCollectionView.reloadData()
@@ -1375,7 +1384,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         //        }
     }
     
-    
+    //after clicking join button
     @IBAction func teamSelectAction(_ sender: UIButton) {
         
         if AppSessionManager.shared.authToken == nil {
@@ -1389,7 +1398,6 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         {
             
             
-            print("........teamSelectAction............")
             
             if let um = AppSessionManager.shared.currentUser {
                 
@@ -1402,6 +1410,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     
                 }else{
                     
+                  
                     if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                         
                         if self.createdTeamList.count > 0
@@ -1438,6 +1447,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                         
                                      
                                             let totalCoin = dataDic["total_coins"]! as! Int
+                                            self.userTotalCoin = totalCoin
                                             
                                             if  totalCoin < self.selectedContest!.entryAmount!{
                                                 
@@ -1447,12 +1457,21 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                     
                                                     self.backShadeView.isHidden = false
                                                     self.confirmationView.isHidden = false
+                                                    self.applyBonusCoinButton.isSelected = false
+                                                    self.bonusCoinListCollectionView.isHidden = true
+                                                    self.bonusCoinViewHeightConstraint.constant = 0
                                                     self.joinContestButton.isHidden = true
                                                     self.buyCoinButton.isHidden = false
+                                                    self.applyBonusCoinLabel.textColor =  UIColor.init(named: "brand_txt_color_black")!
+                                                    self.applyBonusCoinButton.isUserInteractionEnabled = true
+
+
                                                     
                                                     if Language.language == Language.english{
                                                         
                                                         self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin))
+                                                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
+                                                        
                                                         
                                                         self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                                                         
@@ -1468,15 +1487,20 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                         let bnNumberString = self.formatter.string(for: totalCoin )
                                                         let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
                                                         
-                                                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                                                        self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
+//                                                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
+                                                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin))
+                                                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                                                         
-                                                        self.appliedBonusAmountLabel.text = "- ০"
+
+                                                        self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                                                        
+                                                       // self.appliedBonusAmountLabel.text = "- ০"
+                                                        self.appliedBonusAmountLabel.text = "- 0"
                                                         
                                                        // let payAmount = self.selectedContest!.entryAmount! / 50
                                                         let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
                                                       
-                                                        self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
+                                                        self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                                                         
                                                     }
                                                     
@@ -1484,13 +1508,19 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                     
                                                     self.backShadeView.isHidden = false
                                                     self.confirmationView.isHidden = false
+                                                    self.applyBonusCoinButton.isSelected = false
+                                                    self.bonusCoinListCollectionView.isHidden = true
+                                                    self.bonusCoinViewHeightConstraint.constant = 0
+
                                                     self.joinContestButton.isHidden = true
                                                     self.buyCoinButton.isHidden = false
                                                     
                                                     if Language.language == Language.english{
                                                         
                                                         self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin ?? 0))
+                                                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                                                         
+
                                                         self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                                                         
                                                         
@@ -1509,10 +1539,14 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                         let bnNumberString = self.formatter.string(for: totalCoin )
                                                         let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
                                                         
-                                                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                                                        self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
+                                                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin ?? 0))
+                                                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                                                         
-                                                        self.appliedBonusAmountLabel.text = "- ০"
+
+                                                        self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                                                        
+                                                        //self.appliedBonusAmountLabel.text = "- ০"
+                                                        self.appliedBonusAmountLabel.text = "- 0"
                                                         
                                                     
                                                         self.applyBonusCoinLabel.textColor = UIColor.lightGray
@@ -1522,7 +1556,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                       //  let payAmount = self.selectedContest!.entryAmount! / 50
                                                         let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
                                                       
-                                                        self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
+                                                        self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                                                         
                                                     }
                                                 }
@@ -1593,6 +1627,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         
                     }else{
                         
+                        //Football...........
+                        
                         if self.createdTeamListFootball.count > 0
                         {
                             
@@ -1612,7 +1648,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                     
                                     popupVC?.modalPresentationStyle = .overCurrentContext
                                     popupVC?.modalTransitionStyle = .crossDissolve
-                                    popupVC?.teams = self.createdTeamList
+                                    popupVC?.teamsFootball = self.createdTeamListFootball
                                     popupVC?.contestId = sender.tag
                                     popupVC?.delegate = self
                                     
@@ -1627,7 +1663,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                     
                                  
                                         let totalCoin = dataDic["total_coins"]! as! Int
-                                        
+                                        self.userTotalCoin = totalCoin
+                                    
                                         if  totalCoin < self.selectedContest!.entryAmount!{
                                             
                                             print("not enough coin")
@@ -1636,13 +1673,22 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                 
                                                 self.backShadeView.isHidden = false
                                                 self.confirmationView.isHidden = false
+                                                self.applyBonusCoinButton.isSelected = false
+                                                self.bonusCoinListCollectionView.isHidden = true
+                                                self.bonusCoinViewHeightConstraint.constant = 0
+
                                                 self.joinContestButton.isHidden = true
                                                 self.buyCoinButton.isHidden = false
-                                                
+                                                self.applyBonusCoinLabel.textColor =  UIColor.init(named: "brand_txt_color_black")!
+                                                self.applyBonusCoinButton.isUserInteractionEnabled = true
+
+
                                                 if Language.language == Language.english{
                                                     
                                                     self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin))
+                                                    self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                                                     
+
                                                     self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                                                     
                                                     print("free contest allowed")
@@ -1656,15 +1702,18 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                     let bnNumberString = self.formatter.string(for: totalCoin )
                                                     let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
                                                     
-                                                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                                                    self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
+                                                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin))
+                                                    self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                                                     
-                                                    self.appliedBonusAmountLabel.text = "- ০"
+
+                                                    self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                                                    
+                                                    self.appliedBonusAmountLabel.text = "- 0"
                                                     
                                                     
                                                     let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
                                                                     
-                                                    self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
+                                                    self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                                                     
                                                 }
                                                 
@@ -1672,13 +1721,19 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                 
                                                 self.backShadeView.isHidden = false
                                                 self.confirmationView.isHidden = false
+                                                self.applyBonusCoinButton.isSelected = false
+                                                self.bonusCoinListCollectionView.isHidden = true
+                                                self.bonusCoinViewHeightConstraint.constant = 0
+
                                                 self.joinContestButton.isHidden = true
                                                 self.buyCoinButton.isHidden = false
                                                 
                                                 if Language.language == Language.english{
                                                     
                                                     self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin ?? 0))
+                                                    self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                                                     
+
                                                     self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                                                     
                                                     
@@ -1696,8 +1751,11 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                     let bnNumberString = self.formatter.string(for: totalCoin )
                                                     let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
                                                     
-                                                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                                                    self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
+                                                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin ?? 0))
+                                                    self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
+                                                    
+
+                                                    self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                                                     
                                                     self.appliedBonusAmountLabel.text = "- ০"
                                                     
@@ -1707,7 +1765,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                                     self.applyBonusCoinButton.isUserInteractionEnabled = false
                                                     print("free contest not allowed")
                                                     
-                                                    self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
+                                                    self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                                                     
                                                 }
                                             }
@@ -1886,7 +1944,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     //back from team select
-    func selectedTeam(team: CreatedTeam,contestId: Int) {
+    func selectedTeam(team: CreatedTeam,contestId: Int, isDerectJoinApplicable: Bool) {
         
         
         for contest in activeContestList{
@@ -1894,18 +1952,42 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             if contestId == contest.id{
                 
                 selectedContest = contest
+                
+                print("contestId..............",contestId)
             }
         }
+        
+        print("isDerectJoinApplicable......",isDerectJoinApplicable)
+        
+        if isDerectJoinApplicable{
+            
+            print("derect join")
+            
+            self.backShadeView.isHidden = true
+            self.confirmationView.isHidden = true
+            self.selectedTeamId = team.userTeamId ?? 0
+            self.selectedContestId = contestId
+            
+            self.joinContestButtonAction(nil)
+
+
+        }else{
+            
             APIManager.manager.getWalletInfo{ (dataDic) in
                 
                 
                 let totalCoin = dataDic["total_coins"]! as! Int
+                self.userTotalCoin = totalCoin
                 
                 if self.selectedContest?.contestType == "free"{
                     
                     
                     self.backShadeView.isHidden = false
                     self.confirmationView.isHidden = false
+                    self.applyBonusCoinButton.isSelected = false
+                    self.bonusCoinListCollectionView.isHidden = true
+                    self.bonusCoinViewHeightConstraint.constant = 0
+
                     self.joinContestButton.isHidden = false
                     self.buyCoinButton.isHidden = true
 
@@ -1916,7 +1998,9 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     if Language.language == Language.english{
                         
                         self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin ?? 0))
+                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                         
+
                         self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                         
                         
@@ -1934,17 +2018,20 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         
                         let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
                         
-                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                        self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
+                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin ?? 0))
+                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                         
-                        self.appliedBonusAmountLabel.text = "- ০"
+
+                        self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                        self.appliedBonusAmountLabel.text = "- 0"
                         
                         let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
                         
                         self.applyBonusCoinLabel.textColor = UIColor.lightGray
                         self.applyBonusCoinButton.isUserInteractionEnabled = false
                         
-                        self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
+                        self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                         
                     }
                 }else{
@@ -1954,8 +2041,15 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         
                         self.backShadeView.isHidden = false
                         self.confirmationView.isHidden = false
+                        self.applyBonusCoinButton.isSelected = false
+                        self.bonusCoinListCollectionView.isHidden = true
+                        self.bonusCoinViewHeightConstraint.constant = 0
+
                         self.joinContestButton.isHidden = false
                         self.buyCoinButton.isHidden = true
+                        
+                        self.applyBonusCoinLabel.textColor =  UIColor.init(named: "brand_txt_color_black")!
+                        self.applyBonusCoinButton.isUserInteractionEnabled = true
 
                         
                         self.selectedTeamId = team.userTeamId ?? 0
@@ -1964,7 +2058,9 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         if Language.language == Language.english{
                             
                             self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin))
+                            self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                             
+
                             self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                             
                             print("free contest allowed")
@@ -1979,15 +2075,18 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                            
                             let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
                             
-                            self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                            self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
+                            self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin))
+                            self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                             
-                            self.appliedBonusAmountLabel.text = "- ০"
+
+                            self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                            
+                            self.appliedBonusAmountLabel.text = "- 0"
                             
                             
                             let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
                                             
-                            self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
+                            self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                             
                         }
                         
@@ -1996,6 +2095,10 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                      
                         self.backShadeView.isHidden = false
                         self.confirmationView.isHidden = false
+                        self.applyBonusCoinButton.isSelected = false
+                        self.bonusCoinListCollectionView.isHidden = true
+                        self.bonusCoinViewHeightConstraint.constant = 0
+
                         self.joinContestButton.isHidden = false
                         self.buyCoinButton.isHidden = true
 
@@ -2006,7 +2109,9 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         if Language.language == Language.english{
                             
                             self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin ?? 0))
+                            self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                             
+
                             self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                             
                             
@@ -2025,10 +2130,13 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                             
                             let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
                             
-                            self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                            self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
+                            self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin ?? 0))
+                            self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
                             
-                            self.appliedBonusAmountLabel.text = "- ০"
+
+                            self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                            
+                            self.appliedBonusAmountLabel.text = "- 0"
                             
                             let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
                             
@@ -2036,19 +2144,23 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                             self.applyBonusCoinButton.isUserInteractionEnabled = false
                             print("free contest not allowed")
                             
-                            self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
+                            self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
                             
                         }
                     }
                 }
                 
             }
+
+        }
         
-        
+
        
     }
     
-    func selectedTeamFootball(team: CreatedTeamFootball, contestId: Int) {
+    ////back from team select
+
+    func selectedTeamFootball(team: CreatedTeamFootball, contestId: Int, isDerectJoinApplicable: Bool) {
         
         
         for contest in activeContestList{
@@ -2059,151 +2171,199 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             }
         }
         
-        APIManager.manager.getWalletInfo { (dataDic) in
+        if isDerectJoinApplicable{
             
+            print("derect join")
+            self.backShadeView.isHidden = true
+            self.confirmationView.isHidden = true
+            self.selectedTeamId = team.userTeamId ?? 0
+            self.selectedContestId = contestId
             
-            let totalCoin = dataDic["total_coins"]! as! Int
-            
-            if self.selectedContest?.contestType == "free"{
-                
-                
-                self.backShadeView.isHidden = false
-                self.confirmationView.isHidden = false
-                self.joinContestButton.isHidden = false
-                self.buyCoinButton.isHidden = true
+            self.joinContestButtonAction(nil)
 
+            
+        }else{
+            
+            APIManager.manager.getWalletInfo { (dataDic) in
                 
-                self.selectedTeamId = team.userTeamId ?? 0
-                self.selectedContestId = contestId
                 
-                if Language.language == Language.english{
-                    
-                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin ?? 0))
-                    
-                    self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
-                    
-                    
-                    self.appliedBonusAmountLabel.text = "- 0"
-                    self.applyBonusCoinLabel.textColor = UIColor.lightGray
-                    self.applyBonusCoinButton.isUserInteractionEnabled = false
-                    
-                    self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                let totalCoin = dataDic["total_coins"]! as! Int
+                self.userTotalCoin = totalCoin
+                
+                if self.selectedContest?.contestType == "free"{
                     
                     
+                    self.backShadeView.isHidden = false
+                    self.confirmationView.isHidden = false
+                    self.applyBonusCoinButton.isSelected = false
+                    self.bonusCoinListCollectionView.isHidden = true
+                    self.bonusCoinViewHeightConstraint.constant = 0
+
+                    self.joinContestButton.isHidden = false
+                    self.buyCoinButton.isHidden = true
+
+                    
+                    self.selectedTeamId = team.userTeamId ?? 0
+                    self.selectedContestId = contestId
+                    
+                    if Language.language == Language.english{
+                        
+                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin ?? 0))
+                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
+                        
+
+                        self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                        
+                        self.appliedBonusAmountLabel.text = "- 0"
+                        self.applyBonusCoinLabel.textColor = UIColor.lightGray
+                        self.applyBonusCoinButton.isUserInteractionEnabled = false
+                        
+                        self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                        
+                        
+                    }else{
+                        
+                        let bnNumberString = self.formatter.string(for: totalCoin )
+                        
+                        let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
+                        
+                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin ?? 0))
+                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
+                        
+
+                        self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                        self.appliedBonusAmountLabel.text = "- 0"
+                        
+                        let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
+                        
+                        self.applyBonusCoinLabel.textColor = UIColor.lightGray
+                        self.applyBonusCoinButton.isUserInteractionEnabled = false
+                        
+                        self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                    }
+                }else{
+                
+                if self.availableBonusCoinPack.count > 0 {
+                    
+                    self.backShadeView.isHidden = false
+                    self.confirmationView.isHidden = false
+                    self.applyBonusCoinButton.isSelected = false
+                    self.bonusCoinListCollectionView.isHidden = true
+                    self.bonusCoinViewHeightConstraint.constant = 0
+
+                    self.joinContestButton.isHidden = false
+                    self.buyCoinButton.isHidden = true
+                    
+                    self.applyBonusCoinLabel.textColor =  UIColor.init(named: "brand_txt_color_black")!
+                    self.applyBonusCoinButton.isUserInteractionEnabled = true
+
+
+                    
+                    self.selectedTeamId = team.userTeamId ?? 0
+                    self.selectedContestId = contestId
+                    
+                    if Language.language == Language.english{
+                        
+                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin))
+                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
+                        
+
+                        self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                        print("free contest allowed")
+                        
+                        self.appliedBonusAmountLabel.text = "- 0"
+                        
+                        self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                       
+                    }else{
+                        
+                        let bnNumberString = self.formatter.string(for: totalCoin )
+                       
+                        let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
+                        
+                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin))
+                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
+                        
+
+                        self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                        self.appliedBonusAmountLabel.text = "- 0"
+                        
+                        
+                        let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
+                                        
+                        self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                    }
                     
                 }else{
                     
-                    let bnNumberString = self.formatter.string(for: totalCoin )
-                    
-                    let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
-                    
-                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                    self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
-                    
-                    self.appliedBonusAmountLabel.text = "- ০"
-                    
-                    let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
-                    
-                    self.applyBonusCoinLabel.textColor = UIColor.lightGray
-                    self.applyBonusCoinButton.isUserInteractionEnabled = false
-                    
-                    self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
-                    
-                }
-            }else{
-            
-            if self.availableBonusCoinPack.count > 0 {
-                
-                self.backShadeView.isHidden = false
-                self.confirmationView.isHidden = false
-                self.joinContestButton.isHidden = false
-                self.buyCoinButton.isHidden = true
+                 
+                    self.backShadeView.isHidden = false
+                    self.confirmationView.isHidden = false
+                    self.applyBonusCoinButton.isSelected = false
+                    self.bonusCoinListCollectionView.isHidden = true
+                    self.bonusCoinViewHeightConstraint.constant = 0
 
-                
-                self.selectedTeamId = team.userTeamId ?? 0
-                self.selectedContestId = contestId
-                
-                if Language.language == Language.english{
-                    
-                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin))
-                    
-                    self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
-                    
-                    print("free contest allowed")
-                    
-                    self.appliedBonusAmountLabel.text = "- 0"
-                    
-                    self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
-                   
-                }else{
-                    
-                    let bnNumberString = self.formatter.string(for: totalCoin )
-                   
-                    let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
-                    
-                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                    self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
-                    
-                    self.appliedBonusAmountLabel.text = "- ০"
-                    
-                    
-                    let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
-                                    
-                    self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
-                    
-                }
-                
-            }else{
-                
-             
-                self.backShadeView.isHidden = false
-                self.confirmationView.isHidden = false
-                self.joinContestButton.isHidden = false
-                self.buyCoinButton.isHidden = true
+                    self.joinContestButton.isHidden = false
+                    self.buyCoinButton.isHidden = true
 
-                
-                self.selectedTeamId = team.userTeamId ?? 0
-                self.selectedContestId = contestId
-                
-                if Language.language == Language.english{
                     
-                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin ?? 0))
+                    self.selectedTeamId = team.userTeamId ?? 0
+                    self.selectedContestId = contestId
                     
-                    self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
-                    
-                    
-                    self.appliedBonusAmountLabel.text = "- 0"
-                    self.applyBonusCoinLabel.textColor = UIColor.lightGray
-                    self.applyBonusCoinButton.isUserInteractionEnabled = false
-                    print("No bonus coin pack")
-                    
-                    self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
-                    
-                    
-                    
-                }else{
-                    
-                    let bnNumberString = self.formatter.string(for: totalCoin )
-                    
-                    let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
-                    
-                    self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, bnNumberString!)
-                    self.entryAmountLabel.text = String.init(format:"%@",bnNumberString3!)
-                    
-                    self.appliedBonusAmountLabel.text = "- ০"
-                    
-                    let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
-                    
-                    self.applyBonusCoinLabel.textColor = UIColor.lightGray
-                    self.applyBonusCoinButton.isUserInteractionEnabled = false
-                    print("No bonus coin pack")
-                    
-                    self.payAmountLabel.text = String.init(format:"%@",bnNumberString4!)
-                    
+                    if Language.language == Language.english{
+                        
+                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@",String(totalCoin ?? 0))
+                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
+                        
+
+                        self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                        
+                        self.appliedBonusAmountLabel.text = "- 0"
+                        self.applyBonusCoinLabel.textColor = UIColor.lightGray
+                        self.applyBonusCoinButton.isUserInteractionEnabled = false
+                        print("No bonus coin pack")
+                        
+                        self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                        
+                        
+                    }else{
+                        
+                        let bnNumberString = self.formatter.string(for: totalCoin )
+                        
+                        let bnNumberString3 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0 )
+                        
+                        self.totalCoinCountLabel.text = String.init(format: "Your total coins = %@".localized, String(totalCoin ?? 0))
+                        self.contestNameLabelInConfirmationView.text = String.init(format:"%@",self.selectedContest?.name ?? "")
+                        
+
+                        self.entryAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                        self.appliedBonusAmountLabel.text = "- 0"
+                        
+                        let bnNumberString4 = self.formatter.string(for: self.selectedContest?.entryAmount ?? 0)
+                        
+                        self.applyBonusCoinLabel.textColor = UIColor.lightGray
+                        self.applyBonusCoinButton.isUserInteractionEnabled = false
+                        print("No bonus coin pack")
+                        
+                        self.payAmountLabel.text = String.init(format:"%d",self.selectedContest?.entryAmount ?? 0)
+                        
+                    }
                 }
             }
+            }
         }
-        }
+        
+      
         
     }
     
@@ -2266,249 +2426,339 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     
     
-    @IBAction func joinContestButtonAction(_ sender: Any) {
+    @IBAction func joinContestButtonAction(_ sender: Any?) {
         
-        joinContestButton.isUserInteractionEnabled = false
-        var params:[String:String] = [:]
-       
-        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+        
+        print("selectedContestId........",selectedContestId,selectedTeamId)
+        
+        if selectedTeamId != 0{
             
-            if appliedBonusCoinAmount != 0{
+            joinContestButton.isUserInteractionEnabled = false
+           
+            var params:[String:String] = [:]
+           
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 
-                params = ["contest_id":String.init(format: "%d", selectedContestId),
-                          "user_team_id":String.init(format: "%d", selectedTeamId),
-                          "bonus_coin_id":String.init(format: "%d", bonus_coin_id),
-                          "coin_amount":String.init(format: "%d", appliedBonusCoinAmount)
-                ]
+                if appliedBonusCoinAmount != 0{
+                    
+                    params = ["contest_id":String.init(format: "%d", selectedContestId),
+                              "user_team_id":String.init(format: "%d", selectedTeamId),
+                              "bonus_coin_id":String.init(format: "%d", bonus_coin_id),
+                              "coin_amount":String.init(format: "%d", appliedBonusCoinAmount)
+                    ]
 
-            }else{
+                }else{
+                    
+                    params = ["contest_id":String.init(format: "%d", selectedContestId),
+                              "user_team_id":String.init(format: "%d", selectedTeamId)
+                             ]
+
+                }
+                 
                 
-                params = ["contest_id":String.init(format: "%d", selectedContestId),
-                          "user_team_id":String.init(format: "%d", selectedTeamId)
-                         ]
+                print("joinContestButtonAction .........params",params)
+                APIManager.manager.joinInContestWith(params:params, withCompletionHandler: { (status, msg) in
+                    if status{
+                        self.joinContestButton.isUserInteractionEnabled = true
 
-            }
-             
-
-            APIManager.manager.joinInContestWith(params:params, withCompletionHandler: { (status, msg) in
-                if status{
-                    self.joinContestButton.isUserInteractionEnabled = true
-                    
-                    self.bonusCoinListCollectionView.reloadData()
-                    self.bonusCoinPackListTableView.reloadData()
-                    
-                    self.availableBonusCoin()
-                    
-                    print("Team submitted")
-                    
-                    //update contest list
-                    APIManager.manager.getActiveContestList(matchId: "\(self.parentMatch?.matchId ?? 0)") { (status, cm, msg) in
-                        if status{
-                            if cm != nil{
-                                
-                                // self.fill(u)
-                                self.activeContestList = (cm?.contests)!
-                                self.contestTableView.reloadData()
-                                
-                                self.confirmationView.isHidden = true
-                                self.backShadeView.isHidden = true
-                                
-                                                            }
+                        //so that old value become 0
+                        self.selectedTeamId = 0
+                        self.selectedContestId = 0
+                        
+                        //to remove old value
+                        if self.appliedBonusCoinAmount != 0{
+                            
+                            self.appliedBonusCoinAmount = 0
+                            self.bonus_coin_id = 0
                         }
-                    }
-                    //update joined contest
-                    APIManager.manager.getJoinedActiveContestList(matchId: "\(self.parentMatch?.matchId ?? 0)") { (status, cm, msg) in
-                        if status{
-                            if cm != nil{
-                                
-                                if self.type == .upcomingContest || self.type == .liveContest || self.type == .completedContest{
-                                    
+                        
+                        
+                        self.bonusCoinListCollectionView.reloadData()
+                        self.bonusCoinPackListTableView.reloadData()
+
+                        self.availableBonusCoin()
+
+                        print("Team submitted")
+
+                        //update contest list
+                        APIManager.manager.getActiveContestList(matchId: "\(self.parentMatch?.matchId ?? 0)") { (status, cm, msg) in
+                            if status{
+                                if cm != nil{
+
+                                    // self.fill(u)
                                     self.activeContestList = (cm?.contests)!
-                                    
-                                }else{
-                                    
-                                    self.joinedContestList = (cm?.contests)!
-                                    self.joinedContestCount = (cm?.contests.count)!
-                                    if Language.language == Language.english{
-                                        
-                                        self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
-                                    }else{
-                                        
-                                        let bnNumberString = self.formatter.string(for: self.joinedContestCount )
-                                        self.contestCount.text = String.init(format: "%@",bnNumberString!)
-                                    }
-                                    //                                        self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
-                                }
-                                
+                                    self.contestTableView.reloadData()
+
+                                    self.confirmationView.isHidden = true
+                                    self.backShadeView.isHidden = true
+
+                                                                }
                             }
                         }
-                    }
-                    
-                    if self.selectedContest?.contestType == "free"{
-                        var isUnlimited = "yes"
-                        if self.selectedContest?.is_league == 1{
-                             
-                            isUnlimited = "no"
+                        //update joined contest
+                        APIManager.manager.getJoinedActiveContestList(matchId: "\(self.parentMatch?.matchId ?? 0)") { (status, cm, msg) in
+                            if status{
+                                if cm != nil{
+
+                                    if self.type == .upcomingContest || self.type == .liveContest || self.type == .completedContest{
+
+                                        self.activeContestList = (cm?.contests)!
+
+                                    }else{
+
+                                        self.joinedContestList = (cm?.contests)!
+                                        self.joinedContestCount = (cm?.contests.count)!
+                                        if Language.language == Language.english{
+
+                                            self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
+                                        }else{
+
+                                            let bnNumberString = self.formatter.string(for: self.joinedContestCount )
+                                            self.contestCount.text = String.init(format: "%@",bnNumberString!)
+                                        }
+                                        //                                        self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
+                                    }
+
+                                }
+                            }
                         }
-                        //set joined_free_contest_cricket event in mixpanel
-                        let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
-                                             "contest_id": self.selectedContest?.id ?? "",
-                                             "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
-                                             "entry_fee": self.selectedContest?.entryAmount ?? "",
-                                             "total_spot": self.selectedContest?.teamsCapacity ?? "",
-                                             "isUnlimited": isUnlimited ]
-                        Mixpanel.mainInstance().track(event: "joined_free_contest_cricket", properties: p)//
-                       
-                        
-                    }else{
-                        
-                        var isUnlimited = "yes"
-                        if self.selectedContest?.is_league == 1{
-                             
-                            isUnlimited = "no"
+
+
+
+
+
+                        if self.selectedContest?.contestType == "free"{
+                            var isUnlimited = "yes"
+                            if self.selectedContest?.is_league == 1{
+
+                                isUnlimited = "no"
+                            }
+                            //set joined_free_contest_cricket event in mixpanel
+                            let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
+                                                 "contest_id": self.selectedContest?.id ?? "",
+                                                 "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
+                                                 "entry_fee": self.selectedContest?.entryAmount ?? "",
+                                                 "total_spot": self.selectedContest?.teamsCapacity ?? "",
+                                                 "isUnlimited": isUnlimited ]
+                            Mixpanel.mainInstance().track(event: "joined_free_contest_cricket", properties: p)//
+
+
+                        }else{
+
+                            var isUnlimited = "yes"
+                            if self.selectedContest?.is_league == 1{
+
+                                isUnlimited = "no"
+                            }
+                            //set joined_paid_contest_cricket event in mixpanel
+                            let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
+                                                 "contest_id": self.selectedContest?.id ?? "",
+                                                 "prize_money": self.selectedContest?.winningAmount ?? "",
+                                                 "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
+                                                 "entry_fee": self.selectedContest?.entryAmount ?? "",
+                                                 "total_spot": self.selectedContest?.teamsCapacity ?? "",
+                                                 "isUnlimited": isUnlimited ]
+                            Mixpanel.mainInstance().track(event: "joined_paid_contest_cricket", properties: p)//
+
                         }
-                        //set joined_paid_contest_cricket event in mixpanel
-                        let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
-                                             "contest_id": self.selectedContest?.id ?? "",
-                                             "prize_money": self.selectedContest?.winningAmount ?? "",
-                                             "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
-                                             "entry_fee": self.selectedContest?.entryAmount ?? "",
-                                             "total_spot": self.selectedContest?.teamsCapacity ?? "",
-                                             "isUnlimited": isUnlimited ]
-                        Mixpanel.mainInstance().track(event: "joined_paid_contest_cricket", properties: p)//
-                       
+
+
                     }
-                  
+                    else{
+
+                        self.joinContestButton.isUserInteractionEnabled = true
+
+                        self.view.makeToast(msg!)
+                    }
+                })
+                
+            }else{
+                
+                if appliedBonusCoinAmount != 0{
                     
+                    params = ["contest_id":String.init(format: "%d", selectedContestId),
+                              "user_team_id":String.init(format: "%d", selectedTeamId),
+                              "bonus_coin_id":String.init(format: "%d", bonus_coin_id),
+                              "coin_amount":String.init(format: "%d", appliedBonusCoinAmount)
+                    ]
+
+                }else{
+                    
+                    params = ["contest_id":String.init(format: "%d", selectedContestId),
+                              "user_team_id":String.init(format: "%d", selectedTeamId)
+                             ]
+
                 }
-                else{
-                    
-                    self.joinContestButton.isUserInteractionEnabled = true
-                    
-                    self.view.makeToast(msg!)
-                }
-            })
+                
+                APIManager.manager.joinInFootballContestWith(params:params, withCompletionHandler: { (status, msg) in
+                    if status{
+                        self.joinContestButton.isUserInteractionEnabled = true
+                        
+                        //so that old value become 0
+                        self.selectedTeamId = 0
+                        self.selectedContestId = 0
+                        
+                        //to remove old value
+                        if self.appliedBonusCoinAmount != 0{
+                            
+                            self.appliedBonusCoinAmount = 0
+                            self.bonus_coin_id = 0
+                        }
+
+                        self.bonusCoinListCollectionView.reloadData()
+                        self.bonusCoinPackListTableView.reloadData()
+                        
+                        self.availableBonusCoin()
+
+                        print("Team submitted football")
+                        
+                        //update contest list
+                        APIManager.manager.getActiveFootBallContestList(matchId: "\(self.parentMatchFootball?.matchId ?? 0)") { (status, cm, msg) in
+                            if status{
+                                if cm != nil{
+                                    
+                                    // self.fill(u)
+                                    self.activeContestList = (cm?.contests)!
+                                    self.contestTableView.reloadData()
+                                    
+                                    self.confirmationView.isHidden = true
+                                    self.backShadeView.isHidden = true
+                                    
+                                }
+                            }
+                        }
+                        //update joined contest
+                        APIManager.manager.getJoinedActiveFootballContestList(matchId: "\(self.parentMatchFootball?.matchId ?? 0)") { (status, cm, msg) in
+                            if status{
+                                if cm != nil{
+                                    
+                                    if self.type == .upcomingContest || self.type == .liveContest || self.type == .completedContest{
+                                        
+                                        self.activeContestList = (cm?.contests)!
+                                        
+                                    }else{
+                                        
+                                        self.joinedContestList = (cm?.contests)!
+                                        self.joinedContestCount = (cm?.contests.count)!
+                                        if Language.language == Language.english{
+                                            
+                                            self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
+                                        }else{
+                                            
+                                            let bnNumberString = self.formatter.string(for: self.joinedContestCount )
+                                            self.contestCount.text = String.init(format: "%@",bnNumberString!)
+                                        }
+                                        //                                        self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        
+                        
+                        if self.selectedContest?.contestType == "free"{
+                            
+                            var isUnlimited = "yes"
+                            if self.selectedContest?.is_league == 1{
+                                 
+                                isUnlimited = "no"
+                            }
+                            //set joined_free_contest_football event in mixpanel
+                            let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
+                                                 "contest_id": self.selectedContest?.id ?? "",
+                                                 "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
+                                                 "entry_fee": self.selectedContest?.entryAmount ?? "",
+                                                 "total_spot": self.selectedContest?.teamsCapacity ?? "",
+                                                 "isUnlimited": isUnlimited ]
+                            Mixpanel.mainInstance().track(event: "joined_free_contest_football", properties: p)//
+                           
+                            
+                        }else{
+                            var isUnlimited = "yes"
+                            if self.selectedContest?.is_league == 1{
+                                 
+                                isUnlimited = "no"
+                            }
+                            
+                            //set joined_paid_contest_football event in mixpanel
+                            let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
+                                                 "contest_id": self.selectedContest?.id ?? "",
+                                                 "prize_money": self.selectedContest?.winningAmount ?? "",
+                                                 "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
+                                                 "entry_fee": self.selectedContest?.entryAmount ?? "",
+                                                 "total_spot": self.selectedContest?.teamsCapacity ?? "",
+                                                 "isUnlimited": isUnlimited ]
+                            Mixpanel.mainInstance().track(event: "joined_paid_contest_football", properties: p)//
+                           
+                        }
+                    }
+                    else{
+                        
+                        self.joinContestButton.isUserInteractionEnabled = true
+                        
+                        self.view.makeToast(msg!)
+                    }
+                })
+              
+                
+            }
             
         }else{
             
-            if appliedBonusCoinAmount != 0{
+            joinContestButton.isUserInteractionEnabled = true
+           
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 
-                params = ["contest_id":String.init(format: "%d", selectedContestId),
-                          "user_team_id":String.init(format: "%d", selectedTeamId),
-                          "bonus_coin_id":String.init(format: "%d", bonus_coin_id),
-                          "coin_amount":String.init(format: "%d", appliedBonusCoinAmount)
-                ]
-
+                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
+                
+                popupVC?.modalPresentationStyle = .overCurrentContext
+                popupVC?.modalTransitionStyle = .crossDissolve
+                popupVC?.teams = self.createdTeamList
+                popupVC?.contestId = self.selectedContest!.id!
+                popupVC?.delegate = self
+                popupVC?.isDerectJoinApplicable = true
+                
+                self.present(popupVC!, animated: true) {
+                    
+                    
+                }
+                
             }else{
                 
-                params = ["contest_id":String.init(format: "%d", selectedContestId),
-                          "user_team_id":String.init(format: "%d", selectedTeamId)
-                         ]
-
+                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
+                
+                popupVC?.modalPresentationStyle = .overCurrentContext
+                popupVC?.modalTransitionStyle = .crossDissolve
+                popupVC?.teamsFootball = self.createdTeamListFootball
+                popupVC?.contestId = self.selectedContest!.id!
+                popupVC?.delegate = self
+                popupVC?.isDerectJoinApplicable = true
+                
+                self.present(popupVC!, animated: true) {
+                    
+                    
+                }
             }
             
-            APIManager.manager.joinInFootballContestWith(params:params, withCompletionHandler: { (status, msg) in
-                if status{
-                    self.joinContestButton.isUserInteractionEnabled = true
-                    
-                    print("Team submitted football")
-                    
-                    //update contest list
-                    APIManager.manager.getActiveFootBallContestList(matchId: "\(self.parentMatchFootball?.matchId ?? 0)") { (status, cm, msg) in
-                        if status{
-                            if cm != nil{
-                                
-                                // self.fill(u)
-                                self.activeContestList = (cm?.contests)!
-                                self.contestTableView.reloadData()
-                                
-                                self.confirmationView.isHidden = true
-                                self.backShadeView.isHidden = true
-                                
-                            }
-                        }
-                    }
-                    //update joined contest
-                    APIManager.manager.getJoinedActiveFootballContestList(matchId: "\(self.parentMatchFootball?.matchId ?? 0)") { (status, cm, msg) in
-                        if status{
-                            if cm != nil{
-                                
-                                if self.type == .upcomingContest || self.type == .liveContest || self.type == .completedContest{
-                                    
-                                    self.activeContestList = (cm?.contests)!
-                                    
-                                }else{
-                                    
-                                    self.joinedContestList = (cm?.contests)!
-                                    self.joinedContestCount = (cm?.contests.count)!
-                                    if Language.language == Language.english{
-                                        
-                                        self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
-                                    }else{
-                                        
-                                        let bnNumberString = self.formatter.string(for: self.joinedContestCount )
-                                        self.contestCount.text = String.init(format: "%@",bnNumberString!)
-                                    }
-                                    //                                        self.contestCount.text = String.init(format: "%d",self.joinedContestCount)
-                                }
-                                
-                            }
-                        }
-                    }
-                    
-                    
-                    if self.selectedContest?.contestType == "free"{
-                        
-                        var isUnlimited = "yes"
-                        if self.selectedContest?.is_league == 1{
-                             
-                            isUnlimited = "no"
-                        }
-                        //set joined_free_contest_football event in mixpanel
-                        let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
-                                             "contest_id": self.selectedContest?.id ?? "",
-                                             "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
-                                             "entry_fee": self.selectedContest?.entryAmount ?? "",
-                                             "total_spot": self.selectedContest?.teamsCapacity ?? "",
-                                             "isUnlimited": isUnlimited ]
-                        Mixpanel.mainInstance().track(event: "joined_free_contest_football", properties: p)//
-                       
-                        
-                    }else{
-                        var isUnlimited = "yes"
-                        if self.selectedContest?.is_league == 1{
-                             
-                            isUnlimited = "no"
-                        }
-                        
-                        //set joined_paid_contest_football event in mixpanel
-                        let p: Properties = ["contest_name": self.selectedContest?.name ?? "",
-                                             "contest_id": self.selectedContest?.id ?? "",
-                                             "prize_money": self.selectedContest?.winningAmount ?? "",
-                                             "total_winning_rank": self.selectedContest?.prizes.count ?? 0,
-                                             "entry_fee": self.selectedContest?.entryAmount ?? "",
-                                             "total_spot": self.selectedContest?.teamsCapacity ?? "",
-                                             "isUnlimited": isUnlimited ]
-                        Mixpanel.mainInstance().track(event: "joined_paid_contest_football", properties: p)//
-                       
-                    }
-                }
-                else{
-                    
-                    self.joinContestButton.isUserInteractionEnabled = true
-                    
-                    self.view.makeToast(msg!)
-                }
-            })
             
         }
         
+        
+       
+        
     }
+    
+    
     
     @IBAction func closeConfirmationView(_ sender: Any) {
         
         confirmationView.isHidden = true
         self.backShadeView.isHidden = true
+        
+        //so that old value become 0
+        selectedTeamId = 0
+        selectedContestId = 0
+        self.joinContestButton.isUserInteractionEnabled = true
         
         self.bonusCoinListCollectionView.reloadData()
         self.bonusCoinPackListTableView.reloadData()
@@ -2798,20 +3048,20 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     let maxPay = channel.max_pay_amount!
                     let minPay = channel.min_pay_amount!
                     
-                    print("method.min amount", minPay)
                     let tkAmount = (self.payAmountLabel.text! as NSString).intValue
                     let payAmount = tkAmount/50
-                    
-                    if payAmount >= minPay && payAmount <= maxPay{
-                        
-                        //add in methodlist
-                       // let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay,icon: icon, selected: false)
-                        let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay, selected: false)
-
-                        
-                        self.channelList.append(new)
-
-                    }else{
+                    print("method.min amount payAmount.....", payAmount)
+                   
+//                    if payAmount >= minPay && payAmount <= maxPay{
+//
+//                        //add in methodlist
+//                       // let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay,icon: icon, selected: false)
+//                        let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay, selected: false)
+//
+//
+//                        self.channelList.append(new)
+//
+//                    }else{
                         
                         //add in methodlist
                        // let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay,icon: icon ?? "", selected: false)
@@ -2821,7 +3071,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         self.channelList.append(new)
 
 
-                    }
+                 //   }
 
                 }
                 
@@ -2925,7 +3175,11 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         
                         vc?.urlString = url!
                         vc?.selectedContestId = self.selectedContest!.id!
+                        if UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                         vc?.createdTeamList = self.createdTeamList
+                        }else{
+                            vc?.createdFootballTeamList = self.createdTeamListFootball
+                        }
                         vc?.isFromDipositCoin = "no"
                         
                         //for Mixpanel
@@ -2976,24 +3230,50 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     @objc func paymentSuccessful(_ notification: NSNotification) {
         
+        print("paymentSuccessful..contest list")
+        
         if let contestId = notification.userInfo?["contestId"] as? Int {
             
-            if let teams = notification.userInfo?["teams"] as? [CreatedTeam] {
+            if UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                 
-                let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
-                
-                popupVC?.modalPresentationStyle = .overCurrentContext
-                popupVC?.modalTransitionStyle = .crossDissolve
-                popupVC?.teams = teams
-                popupVC?.contestId = contestId
-                popupVC?.delegate = self
-                
-                self.present(popupVC!, animated: true) {
+                if let teams = notification.userInfo?["teams"] as? [CreatedTeam] {
                     
+                    let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
+                    
+                    popupVC?.modalPresentationStyle = .overCurrentContext
+                    popupVC?.modalTransitionStyle = .crossDissolve
+                    popupVC?.teams = teams
+                    popupVC?.contestId = contestId
+                    popupVC?.delegate = self
+                    
+                    self.present(popupVC!, animated: true) {
+                        
+                        
+                    }
                     
                 }
+
+            }else{
                 
+                if let teams = notification.userInfo?["teams"] as? [CreatedTeamFootball] {
+                    
+                    let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "TeamSelectViewController") as? TeamSelectViewController
+                    
+                    popupVC?.modalPresentationStyle = .overCurrentContext
+                    popupVC?.modalTransitionStyle = .crossDissolve
+                    popupVC?.teamsFootball = teams
+                    popupVC?.contestId = contestId
+                    popupVC?.delegate = self
+                    
+                    self.present(popupVC!, animated: true) {
+                        
+                        
+                    }
+                    
+                }
+
             }
+            
             print("contestId...........",contestId)
             
             

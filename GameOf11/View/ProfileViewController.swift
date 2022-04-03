@@ -559,7 +559,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 self.topRankCountFootballLabel.text = String.init(format: "%d", um.metadata?.highestFootballRank ?? "")
                                 self.matchCountFootbaLabel.text = String.init(format: "%d", um.metadata?.totalFootballMatchParticipation ?? "")
                                 
-                                self.freeContestLabel.text = String.init(format: "Your available free contests = %d", um.metadata?.referral_contest_unlocked ?? 0)
+                               // self.freeContestLabel.text = String.init(format: "Your available free contests = %d", um.metadata?.referral_contest_unlocked ?? 0)
                             }else{
                                 
                                 self.depositedCoinCountLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalCoins as NSNumber? ?? 0)!)
@@ -574,7 +574,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                                 self.topRankCountFootballLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.highestFootballRank as NSNumber? ?? 0)!)
                                 self.matchCountFootbaLabel.text = String.init(format: "%@", self.formatter.string(from: um.metadata?.totalFootballMatchParticipation as NSNumber? ?? 0)!)
                                 
-                                self.freeContestLabel.text = String.init(format: "আপনার অব্যবহৃত ফ্রি কন্টেস্ট = %@", self.formatter.string(from: um.metadata?.referral_contest_unlocked as NSNumber? ?? 0)!)
+                               // self.freeContestLabel.text = String.init(format: "আপনার অব্যবহৃত ফ্রি কন্টেস্ট = %@", self.formatter.string(from: um.metadata?.referral_contest_unlocked as NSNumber? ?? 0)!)
                                 
                             }
                             
@@ -669,6 +669,8 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         var params:[String:String] = [:]
         if updateUsernameTextField.text!.count > 0{
+            
+            updateUsernameTextField.resignFirstResponder()
             
             params = ["username":updateUsernameTextField.text!]
             
