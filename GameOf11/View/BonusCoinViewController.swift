@@ -13,6 +13,9 @@ class BonusCoinViewController : BaseViewController,UITableViewDelegate,UITableVi
     
     @IBOutlet weak var bonusCoinTableView: UITableView!
     
+    @IBOutlet weak var navTitleLabel: UILabel!
+    
+    
     var bonusLogArray:[Any] = []
     var bonusListArray:[Any] = []
     
@@ -21,13 +24,14 @@ class BonusCoinViewController : BaseViewController,UITableViewDelegate,UITableVi
         
         self.tabBarController?.tabBar.isHidden = true
         
-
+        navTitleLabel.text = "BONUS COIN"
+       
         
         bonusCoinTableView.delegate = self
         bonusCoinTableView.dataSource = self
         bonusCoinTableView.tableFooterView = UIView()
         
-       // getData()
+        getData()
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -59,57 +63,84 @@ class BonusCoinViewController : BaseViewController,UITableViewDelegate,UITableVi
             
         }
         
-//        APIManager.manager.getCoinLog(lang: lang) { (logArray) in
-//
-//            if logArray.isEmpty{
-//
-//
-//            }else{
-//
-//                self.coinLogArray = logArray
-//
-//                self.transactionTableView.reloadData()
-//            }
-//        }
+        APIManager.manager.getAvailableBonusCoin(lang: lang) { (logArray) in
+            
+            if logArray.isEmpty{
+                
+                print("availableBonusCoinPack is empty")
+                
+            }else{
+                
+                self.bonusListArray = logArray
+                
+                self.bonusCoinTableView.reloadData()
+            }
+        }
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 4
+        return 1
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return self.bonusListArray.count
+
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    
+            return 5
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if UserDefaults.standard.object(forKey: "BonusLogList") as? String == "Bonus Log"{
+ //       if UserDefaults.standard.object(forKey: "BonusLogList") as? String == "Bonus Log"{
             
-            let cell = tableView.dequeueReusableCell(withIdentifier:"transactionCell") as! TransactionTableViewCell
-            
-            //        let singleLog = coinLogArray[indexPath.row] as! Dictionary<String,Any>
-            //
-            //        cell.titleLabel.text = "\(String(describing: singleLog["title"]!))"
-            //        cell.detailLabel.text = "\(String(describing: singleLog["description"]!))"
-            //        cell.amountLabel.text = "\(String(describing: singleLog["coin"]!))"
-            //
-            //        let dateFormatter = DateFormatter()
-            //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            //        dateFormatter.locale = Locale(identifier: "en_US")//without it app crashes in device
-            //        let dateFromString :Date = dateFormatter.date(from: ((singleLog["log_time"]! as! String)))!
-            //        let sttringFDate = dateFromString.toDateString(format: "MMM d, h:mm a")
-            //
-            //        cell.dateLabel.text = sttringFDate
-
-                   
-                    return cell
-
-        }else {
-            
+//            let cell = tableView.dequeueReusableCell(withIdentifier:"transactionCell") as! TransactionTableViewCell
+//
+//            //        let singleLog = coinLogArray[indexPath.row] as! Dictionary<String,Any>
+//            //
+//            //        cell.titleLabel.text = "\(String(describing: singleLog["title"]!))"
+//            //        cell.detailLabel.text = "\(String(describing: singleLog["description"]!))"
+//            //        cell.amountLabel.text = "\(String(describing: singleLog["coin"]!))"
+//            //
+//            //        let dateFormatter = DateFormatter()
+//            //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            //        dateFormatter.locale = Locale(identifier: "en_US")//without it app crashes in device
+//            //        let dateFromString :Date = dateFormatter.date(from: ((singleLog["log_time"]! as! String)))!
+//            //        let sttringFDate = dateFromString.toDateString(format: "MMM d, h:mm a")
+//            //
+//            //        cell.dateLabel.text = sttringFDate
+//
+//
+//                    return cell
+//
+//        }else {
+//
+//            let cell = tableView.dequeueReusableCell(withIdentifier:"bonusCoinPackCell") as! BonusCoinTableViewCell
+//
             let cell = tableView.dequeueReusableCell(withIdentifier:"bonusCoinPackCell") as! BonusCoinTableViewCell
             
-           
+            let singlePack = bonusListArray[indexPath.section] as! Dictionary<String,Any>
+            
+            cell.bonusPackNameLabel.text = String(describing: singlePack["title"]!)
+            cell.bonusAmountLabel.text = String(describing: singlePack["available_coin"]!)
+            cell.dateLabel.text = String(describing: singlePack["expiry_date"]!)
+            
+            print("singlePac.......",singlePack)
+
                    
             return cell
-        }
+ //       }
         
         
     }
@@ -135,4 +166,9 @@ class BonusCoinViewController : BaseViewController,UITableViewDelegate,UITableVi
     }
 
 
+    @IBAction func backButtonAction(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

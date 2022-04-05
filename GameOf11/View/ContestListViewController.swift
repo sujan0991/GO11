@@ -160,7 +160,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         let channelName: String
         let max: Int
         let min: Int
-        //let icon: String
+        let icon: String
         var selected: Bool
     }
     
@@ -3044,7 +3044,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     
                     let name = channel.english_name!
                     let channelName = channel.channel_name!
-                    //let icon = channel.icon!
+                    let icon = channel.icon!
                     let maxPay = channel.max_pay_amount!
                     let minPay = channel.min_pay_amount!
                     
@@ -3064,9 +3064,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
 //                    }else{
                         
                         //add in methodlist
-                       // let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay,icon: icon ?? "", selected: false)
-                        let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay, selected: false)
-
+                        let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay,icon: icon ?? "", selected: false)
                         
                         self.channelList.append(new)
 

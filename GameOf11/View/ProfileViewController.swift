@@ -216,7 +216,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         fullProfileButton.setTitle("Full Profile".localized, for: .normal)
         verifyButton.setTitle("Verify Your Profile!".localized, for: .normal)
         logoutButton.setTitle("Logout".localized, for: .normal)
-        coinLogButton.setTitle("COINS LOG".localized, for: .normal)
+       // coinLogButton.setTitle("COINS LOG".localized, for: .normal)
         
         
         
@@ -757,10 +757,10 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     @IBAction func bonusCoinButtonAction(_ sender: Any) {
         
-//        print("bonus Coin ButtonAction")
-//        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BonusCoinLogViewController") as? BonusCoinLogViewController
-//
-//        self.navigationController?.pushViewController(vc!, animated: true)
+        print("bonus Coin ButtonAction")
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BonusCoinViewController") as? BonusCoinViewController
+
+        self.navigationController?.pushViewController(vc!, animated: true)
         
     }
     
