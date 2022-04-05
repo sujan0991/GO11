@@ -32,8 +32,8 @@ struct API_K {
     static let DEVICE_TYPE = "ios"
     
     //  static let API_KEY = "base64:8WGdd0uX3GtRtTxeOyuHd3864Mqfc6C/cbhzpEZUdxA="
-    //  static let BaseUrlStr:String =  "https://www.gameof11.com/" //live
-    static let BaseUrlStr:String =  "http://18.136.175.216/" //"dev
+      static let BaseUrlStr:String =  "https://www.gameof11.com/" //live
+   // static let BaseUrlStr:String =  "http://18.136.175.216/" //"dev
     //http://159.65.128.173/
     //http://18.224.1.221/
     
