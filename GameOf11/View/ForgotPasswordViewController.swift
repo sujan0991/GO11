@@ -51,6 +51,8 @@ class ForgotPasswordViewController: UIViewController {
     
     @IBAction func requestPasswordButtonAction(_ sender: Any) {
         
+        self.emailTextField.resignFirstResponder()
+        
         let vmsg = ValidationManager.manager.validateForgotPass(email: emailTextField.text!)
         
         if !vmsg.isEmpty{

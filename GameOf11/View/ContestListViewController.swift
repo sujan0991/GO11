@@ -516,11 +516,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             paymentView.isHidden = true
             
             
-            
-            //       self.tabBarController?.tabBar.isHidden = false
-            
-            
-            if type == .next {
+            if type == .next || type == .upcomingContest{
                 
                 print("type ..",type)
                 
@@ -537,9 +533,6 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                             
                         }
                     }
-                    //                else{
-                    //                    self.showStatus(status, msg: msg)
-                    //                }
                 }
                 
                 
@@ -556,7 +549,11 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                 {
                                     self.stateView.isHidden = false
                                     self.createTeamButton.isHidden = true
-                                    self.footerView.isHidden = false
+                                    if self.type == .next{
+                                      self.footerView.isHidden = false
+                                    }else if self.type == .upcomingContest{
+                                        self.footerView.isHidden = true
+                                    }
                                     
                                     if Language.language == Language.english{
                                         
@@ -606,7 +603,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             //       self.tabBarController?.tabBar.isHidden = false
             
             
-            if type == .next {
+            if type == .next || type == .upcomingContest{
                 
                 print("type ..",type)
                 
@@ -642,8 +639,11 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                                 {
                                     self.stateView.isHidden = false
                                     self.createTeamButton.isHidden = true
-                                    self.footerView.isHidden = false
-                                    
+                                    if self.type == .next{
+                                      self.footerView.isHidden = false
+                                    }else if self.type == .upcomingContest{
+                                        self.footerView.isHidden = true
+                                    }
                                     if Language.language == Language.english{
                                         
                                         self.teamCount.text = String.init(format: "%d",self.createdTeamListFootball.count)
@@ -1841,6 +1841,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     @IBAction func teamEditInJoinedContestAction(_ sender: UIButton) {
         
+        print("teamEditInJoinedContestAction..........")
+        
         if AppSessionManager.shared.authToken == nil {
             
             loginSuggestionLabel.text = "You have to Login or Sign Up to join any contest. Before joining contests you can create your own Fantasy Team. Please Login or Sign Up to prove your skill.".localized
@@ -1872,6 +1874,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                     
                     if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
                         
+                        print("cricket............")
+                       
                         //                        if let index = self.createdTeamList.firstIndex(where: {$0.userTeamId == selectedContest?.userTeamId}){
                         //                            popupVC?.selectedIndex = index;
                         //                            print("selected team id index.........",selectedContest?.userTeamId,index)
@@ -1885,7 +1889,8 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                             
                         }
                         popupVC?.teams = self.createdTeamList
-                        
+                        print("self.createdTeamList.count...",self.createdTeamList.count)
+                       
                         if (self.createdTeamList.count != 0)
                         {
                             self.present(popupVC!, animated: true) {
@@ -1893,6 +1898,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         }
                     }else{
                         
+                     
                         let index = self.createdTeamListFootball.filter({($0 as CreatedTeamFootball).userTeamId == selectedContest?.userTeamId})
                         for team in index
                         {
@@ -1904,6 +1910,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
                         if (self.createdTeamListFootball.count != 0)
                         {
                             self.present(popupVC!, animated: true) {
+                                
                             }
                         }
                         

@@ -114,7 +114,7 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
                 //if comes from edit view
                 if isFromEdit{
                     
-                    self.teamNameTextField.text = userTeamName
+                  //  self.teamNameTextField.text = userTeamName
                     
                 }
             }
