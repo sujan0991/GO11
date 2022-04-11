@@ -63,7 +63,7 @@ class BonusCoinViewController : BaseViewController,UITableViewDelegate,UITableVi
             
         }
         
-        APIManager.manager.getAvailableBonusCoin(lang: lang) { (logArray) in
+        APIManager.manager.getAvailableBonusCoin(lang: lang) { (logArray,useOptions) in
             
             if logArray.isEmpty{
                 

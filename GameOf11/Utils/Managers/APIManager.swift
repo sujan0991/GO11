@@ -2636,7 +2636,7 @@ class APIManager: NSObject {
         })
     }
     
-    func getAvailableBonusCoin(lang:String,completion:(( _ logs: Array<Any>)->Void)?) {
+    func getAvailableBonusCoin(lang:String,completion:(( _ logs: Array<Any>,_ useOptions: Array<Any>)->Void)?) {
         
         //  SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         print("getAvailableBonusCoin............... api call")
@@ -2658,23 +2658,24 @@ class APIManager: NSObject {
                     
                     print("isSuccess...............",isSuccess)
                     if !isSuccess{
-                        completion?([])
+                        completion?([],[])
                     }
                     else{
                         
                         let logArray:Array = jsonDic["data"] as! Array<Any>
+                        let useOptionsArray:Array = jsonDic["bonus_coin_usage_breakdown"] as! Array<Any>
                         
-                        completion?(logArray)
+                        completion?(logArray,useOptionsArray)
                     }
                 }
                 else {
-                    completion?([])
+                    completion?([],[])
                 }
             case .failure( _):
                 print("??????????????????????????//////////////")
                 
                 SVProgressHUD.dismiss()
-                completion?([])
+                completion?([],[])
             }
         })
     }

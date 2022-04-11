@@ -146,8 +146,9 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     let formatter = NumberFormatter()
     
     var availableBonusCoinPack:[Any] = []
+    var bonusCoinUseOptions:[Any] = []
     
-    var applicableBonusCoinList = [200,300,400,500,750]
+    //var applicableBonusCoinList = [200,300,400,500,750]
     
     var amountLeft = 0
     var bonus_coin_id = 0
@@ -698,7 +699,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             
         }
         
-        APIManager.manager.getAvailableBonusCoin(lang: lang) { (logArray) in
+        APIManager.manager.getAvailableBonusCoin(lang: lang) { (logArray,useOptions) in
             
             if logArray.isEmpty{
                 
@@ -707,6 +708,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
             }else{
                 
                 self.availableBonusCoinPack = logArray
+                self.bonusCoinUseOptions = useOptions
                 print("availableBonusCoinPack",self.availableBonusCoinPack)
                 self.bonusCoinPackListTableView.reloadData()
             }
@@ -865,7 +867,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
     //Bonus coin collectionview in confirmationview
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return applicableBonusCoinList.count
+        return self.bonusCoinUseOptions.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -873,7 +875,7 @@ class ContestListViewController: UIViewController,UITableViewDelegate,UITableVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bonusCoinCell", for: indexPath) as! BonusCoinCollectionViewCell
         
         //coinAmountLabel
-        cell.coinAmountLabel.text = String(describing: applicableBonusCoinList[indexPath.item])
+        cell.coinAmountLabel.text = String(describing: self.bonusCoinUseOptions[indexPath.item])
         
         let amount  = Int(cell.coinAmountLabel.text ?? "0")!
         let entryAmount = Int(self.entryAmountLabel.text ?? "0")!
