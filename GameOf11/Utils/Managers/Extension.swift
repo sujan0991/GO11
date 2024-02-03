@@ -110,6 +110,9 @@ extension Data{
 }
 
 extension String {
+    
+
+
     func color () -> UIColor {
         var cString:String = self.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
@@ -167,7 +170,7 @@ extension String {
         
         //Specify Format of String to Parse
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        dateFormatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
         //Parse into NSDate
         
         let dateFromString :Date = dateFormatter.date(from: self)!
@@ -435,10 +438,23 @@ extension String {
     {
         return self.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: " ").inverted)
     }
-    
-    
-    
 }
+
+//extension String {
+//    var htmlToAttributedString: NSAttributedString? {
+//        
+//        
+//        guard let data = data(using: .utf8) else { return NSAttributedString() }
+//        do {
+//            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+//        } catch {
+//            return NSAttributedString()
+//        }
+//    }
+//    var htmlToString: String {
+//        return htmlToAttributedString?.string ?? ""
+//    }
+//}
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
@@ -525,7 +541,7 @@ extension UIButton{
         self.layer.borderColor = borderColor.cgColor
         
     }
-
+    
     
     private func image(withColor color: UIColor) -> UIImage? {
         let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
@@ -727,6 +743,30 @@ extension UITextField {
         self.attributedPlaceholder = NSAttributedString(string: text,
                                                         attributes: [NSAttributedString.Key.foregroundColor: color])
     }
+    
+    
+    func setInputViewDatePicker(target: Any, selector: Selector) {
+        // Create a UIDatePicker object and assign to inputView
+        let screenWidth = UIScreen.main.bounds.width
+        let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 216))//1
+        datePicker.datePickerMode = .date //2
+        self.inputView = datePicker //3
+        
+        // Create a toolbar and assign it to inputAccessoryView
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 44.0)) //4
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) //5
+        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(tapCancel)) // 6
+        let barButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: selector) //7
+        toolBar.setItems([cancel, flexible, barButton], animated: false) //8
+        self.inputAccessoryView = toolBar //9
+        
+    }
+    
+    @objc func tapCancel() {
+        self.resignFirstResponder()
+    }
+    
+    
 }
 
 extension UITextView {
@@ -743,12 +783,21 @@ extension UITextView {
     }
 }
 
+
 extension UILabel {
     func makeRound() {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
         self.layer.borderWidth = 0.5
         self.layer.borderColor = UIColor.gray.cgColor
+    }
+    
+    func makeRoundRed() {
+        self.layer.cornerRadius = 2
+        self.clipsToBounds = true
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.init(named: "brand_red")?.cgColor
+        
     }
 }
 

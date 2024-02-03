@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -52,11 +52,22 @@
 		0CE8836B21E0000E0025A31E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE8836A21E0000E0025A31E /* LoginViewController.swift */; };
 		0CEB167A2264F73A002D0208 /* CaptainSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */; };
 		0CEB167C2265C102002D0208 /* TeamPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */; };
+		37814A5A27BED9390047EA73 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 37814A5927BED9390047EA73 /* Mixpanel */; };
 		6412BAF42343C4930081958E /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412BAF32343C4930081958E /* TutorialViewController.swift */; };
 		6412BAF72343C4F40081958E /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6412BAF52343C4F40081958E /* Slide.swift */; };
 		6412BAF82343C4F40081958E /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6412BAF62343C4F40081958E /* Slide.xib */; };
+		64173F602601774600A1947C /* kenyan coffee bd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64173F5C2601774500A1947C /* kenyan coffee bd.ttf */; };
+		64173F612601774600A1947C /* kenyan coffee bd it.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64173F5D2601774600A1947C /* kenyan coffee bd it.ttf */; };
+		64173F622601774600A1947C /* kenyan coffee rg it.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64173F5E2601774600A1947C /* kenyan coffee rg it.ttf */; };
+		64173F632601774600A1947C /* kenyan coffee rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64173F5F2601774600A1947C /* kenyan coffee rg.ttf */; };
+		64173F682606578A00A1947C /* CompletedMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64173F672606578A00A1947C /* CompletedMatchViewController.swift */; };
+		641764B5265B0A8E00E0A74E /* WithdrawMethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 641764B4265B0A8E00E0A74E /* WithdrawMethodCell.xib */; };
+		641DE3BA265EA41900630612 /* PaymentChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 641DE3B8265EA41800630612 /* PaymentChannelCell.xib */; };
+		641DE3BB265EA41900630612 /* PaymentChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DE3B9265EA41900630612 /* PaymentChannelCell.swift */; };
 		641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E1768222A9A7D00302A19 /* SignUpViewController.swift */; };
 		641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */; };
+		6422DF9527F673DA007DF7F9 /* BonusCoinLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6422DF9427F673DA007DF7F9 /* BonusCoinLogViewController.swift */; };
+		6422DF9827F67AB9007DF7F9 /* BonusCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6422DF9727F67AB9007DF7F9 /* BonusCoinViewController.swift */; };
 		64251026240D652900077D25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 64251025240D652900077D25 /* GoogleService-Info.plist */; };
 		643488EB230B280800846649 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643488EA230B280800846649 /* ForgotPasswordViewController.swift */; };
 		6438DF9F2318FA1500E29F5D /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6438DF9E2318FA1500E29F5D /* Localizable.swift */; };
@@ -82,16 +93,22 @@
 		6453F2AE230960F2006A86CF /* UpComingMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6453F2AD230960F2006A86CF /* UpComingMatchCell.xib */; };
 		6453F2B22309638A006A86CF /* UpComingMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6453F2B12309638A006A86CF /* UpComingMatchCell.swift */; };
 		6455AE712320260A00F9679D /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455AE702320260A00F9679D /* Toast.swift */; };
+		645D064A2527EAFE002A3EAC /* DTSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645D06442527EAFE002A3EAC /* DTSegmentedControl.swift */; };
+		645D064C2527EAFE002A3EAC /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645D06462527EAFE002A3EAC /* UIViewController.swift */; };
+		645D064D2527EAFE002A3EAC /* DTPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645D06472527EAFE002A3EAC /* DTPagerController.swift */; };
 		645F7DF423153F4800515F11 /* PendingWithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */; };
 		645F7DF6231545FF00515F11 /* WithdrawTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */; };
 		645F7DF8231598D100515F11 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F7DF7231598D100515F11 /* WebViewController.swift */; };
+		6464193E27EC6AD000863151 /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6464193D27EC6AD000863151 /* Pods_GameOf11.framework */; };
+		6464198627F2710300863151 /* BonusCoinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6464198527F2710200863151 /* BonusCoinCollectionViewCell.swift */; };
 		64669C5523E75C8F00288346 /* PromoCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64669C5423E75C8F00288346 /* PromoCodeViewController.swift */; };
 		646EC5FC230DB5C500E9D1A9 /* AvaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */; };
 		646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */; };
+		6471C59527D6036300DA6CDF /* BRCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6471C59427D6036300DA6CDF /* BRCircularProgressView.swift */; };
 		647825AA239D2BC0007AAC7A /* EditTeamFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */; };
 		647825AC23A02B45007AAC7A /* PointBreakdownFootballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */; };
-		647C5D13233D35AE00E4C3CF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647C5D12233D35AE00E4C3CF /* NotificationService.swift */; };
-		647C5D17233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 647C5D10233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6479366827D4CD0A00531DC3 /* LoginOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6479366727D4CD0A00531DC3 /* LoginOTPViewController.swift */; };
+		647ABA12265ADF5800454416 /* WithdrawMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */; };
 		6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */; };
 		64A0EDD7243357BC00B52AE6 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */; };
 		64A0EDD92433590E00B52AE6 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EDD82433590D00B52AE6 /* SettingTableViewCell.swift */; };
@@ -110,23 +127,12 @@
 		64CBB4DF23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */; };
 		64CBB4E123EA4A9900F0DBA2 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */; };
 		64CBB4E323EA4AB200F0DBA2 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */; };
-		64E0D8CE240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 640B9D40233D397F00387A2A /* Pods_GameOf11.framework */; };
-		64E0D8CF240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 640B9D40233D397F00387A2A /* Pods_GameOf11.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		64E5B42E23F0009A00D377F0 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E5B42D23F0009A00D377F0 /* OTPViewController.swift */; };
+		64DE9D3327F31C040012F1E7 /* BonusCoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DE9D3227F31C040012F1E7 /* BonusCoinTableViewCell.swift */; };
+		64E5B42E23F0009A00D377F0 /* SignupOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E5B42D23F0009A00D377F0 /* SignupOTPViewController.swift */; };
 		64E999D3231B0E84003C7FFE /* sign_up_dialog_anim_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */; };
 		64E999D5231B131E003C7FFE /* Boat_Loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 64E999D4231B131E003C7FFE /* Boat_Loader.json */; };
-		B1C8ECC19B9C9D4A35DC6C55 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B5353A4D138F254818D385 /* Pods_OneSignalNotificationServiceExtension.framework */; };
+		64F0383F26CDA0E300609F34 /* ListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F0383E26CDA0E300609F34 /* ListLoader.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		647C5D15233D35AE00E4C3CF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0C676CE521B7E97E00F21072 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 647C5D0F233D35AE00E4C3CF;
-			remoteInfo = OneSignalNotificationServiceExtension;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		647C5D05233D1C7F00E4C3CF /* Embed App Extensions */ = {
@@ -135,20 +141,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				647C5D17233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		64E0D8D0240C5A8F00E8EDE3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				64E0D8CF240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -206,8 +200,18 @@
 		6412BAF32343C4930081958E /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		6412BAF52343C4F40081958E /* Slide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
 		6412BAF62343C4F40081958E /* Slide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
+		64173F5C2601774500A1947C /* kenyan coffee bd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "kenyan coffee bd.ttf"; sourceTree = "<group>"; };
+		64173F5D2601774600A1947C /* kenyan coffee bd it.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "kenyan coffee bd it.ttf"; sourceTree = "<group>"; };
+		64173F5E2601774600A1947C /* kenyan coffee rg it.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "kenyan coffee rg it.ttf"; sourceTree = "<group>"; };
+		64173F5F2601774600A1947C /* kenyan coffee rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "kenyan coffee rg.ttf"; sourceTree = "<group>"; };
+		64173F672606578A00A1947C /* CompletedMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedMatchViewController.swift; sourceTree = "<group>"; };
+		641764B4265B0A8E00E0A74E /* WithdrawMethodCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawMethodCell.xib; sourceTree = "<group>"; };
+		641DE3B8265EA41800630612 /* PaymentChannelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentChannelCell.xib; sourceTree = "<group>"; };
+		641DE3B9265EA41900630612 /* PaymentChannelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentChannelCell.swift; sourceTree = "<group>"; };
 		641E1768222A9A7D00302A19 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSignedProfileViewController.swift; sourceTree = "<group>"; };
+		6422DF9427F673DA007DF7F9 /* BonusCoinLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusCoinLogViewController.swift; sourceTree = "<group>"; };
+		6422DF9727F67AB9007DF7F9 /* BonusCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusCoinViewController.swift; sourceTree = "<group>"; };
 		64251025240D652900077D25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		643488EA230B280800846649 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		6438DF9E2318FA1500E29F5D /* Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
@@ -235,18 +239,23 @@
 		6453F2AD230960F2006A86CF /* UpComingMatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpComingMatchCell.xib; sourceTree = "<group>"; };
 		6453F2B12309638A006A86CF /* UpComingMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingMatchCell.swift; sourceTree = "<group>"; };
 		6455AE702320260A00F9679D /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		645D06442527EAFE002A3EAC /* DTSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTSegmentedControl.swift; sourceTree = "<group>"; };
+		645D06462527EAFE002A3EAC /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		645D06472527EAFE002A3EAC /* DTPagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTPagerController.swift; sourceTree = "<group>"; };
 		645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingWithdrawViewController.swift; sourceTree = "<group>"; };
 		645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawTableViewCell.swift; sourceTree = "<group>"; };
 		645F7DF7231598D100515F11 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		6464193D27EC6AD000863151 /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6464198527F2710200863151 /* BonusCoinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusCoinCollectionViewCell.swift; sourceTree = "<group>"; };
 		64669C5423E75C8F00288346 /* PromoCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeViewController.swift; sourceTree = "<group>"; };
 		646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaterViewController.swift; sourceTree = "<group>"; };
 		646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
+		6471C59427D6036300DA6CDF /* BRCircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCircularProgressView.swift; sourceTree = "<group>"; };
 		647825A9239D2BC0007AAC7A /* EditTeamFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamFootballViewController.swift; sourceTree = "<group>"; };
 		647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBreakdownFootballViewController.swift; sourceTree = "<group>"; };
+		6479366727D4CD0A00531DC3 /* LoginOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOTPViewController.swift; sourceTree = "<group>"; };
+		647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawMethodCell.swift; sourceTree = "<group>"; };
 		647C5D0A233D280700E4C3CF /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		647C5D10233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		647C5D12233D35AE00E4C3CF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		647C5D14233D35AE00E4C3CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardTableViewCell.swift; sourceTree = "<group>"; };
 		64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		64A0EDD82433590D00B52AE6 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
@@ -265,15 +274,14 @@
 		64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementTableViewCell.swift; sourceTree = "<group>"; };
 		64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
-		64E5B42D23F0009A00D377F0 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
+		64DE9D3227F31C040012F1E7 /* BonusCoinTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusCoinTableViewCell.swift; sourceTree = "<group>"; };
+		64E5B42D23F0009A00D377F0 /* SignupOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupOTPViewController.swift; sourceTree = "<group>"; };
 		64E999D2231B0E84003C7FFE /* sign_up_dialog_anim_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sign_up_dialog_anim_2.json; sourceTree = "<group>"; };
 		64E999D4231B131E003C7FFE /* Boat_Loader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Boat_Loader.json; sourceTree = "<group>"; };
-		75B5353A4D138F254818D385 /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		64F0383E26CDA0E300609F34 /* ListLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListLoader.swift; sourceTree = "<group>"; };
 		BB3C0DFD4C09C2AC1FBB8A56 /* Pods-GameOf11.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameOf11.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11.debug.xcconfig"; sourceTree = "<group>"; };
 		CECBB971ED7EF347DF27EF25 /* Pods_GameOf11.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GameOf11.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1D9994E50EBEB3202776FEF /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		DA071A4862D02ED4B1736182 /* Pods-GameOf11.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameOf11.release.xcconfig"; path = "Pods/Target Support Files/Pods-GameOf11/Pods-GameOf11.release.xcconfig"; sourceTree = "<group>"; };
-		E158AAB73C4A0C032EC4EFD1 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,15 +289,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64E0D8CE240C5A8F00E8EDE3 /* Pods_GameOf11.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		647C5D0D233D35AE00E4C3CF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B1C8ECC19B9C9D4A35DC6C55 /* Pods_OneSignalNotificationServiceExtension.framework in Frameworks */,
+				6464193E27EC6AD000863151 /* Pods_GameOf11.framework in Frameworks */,
+				37814A5A27BED9390047EA73 /* Mixpanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,11 +317,13 @@
 		0C0BE62421DA293F00BE30CF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				64CBB4DC23E9DC5400F0DBA2 /* AnnouncementViewController.swift */,
 				646EC5FB230DB5C500E9D1A9 /* AvaterViewController.swift */,
 				0C0BE62521DA293F00BE30CF /* BaseViewController.swift */,
 				6448F5BE2293EDC400B31BFC /* BkashPaymentViewController.swift */,
 				64522216239C182B0091AE28 /* CaptainSelectorFootballViewController.swift */,
 				0CEB16792264F73A002D0208 /* CaptainSelectorViewController.swift */,
+				64173F672606578A00A1947C /* CompletedMatchViewController.swift */,
 				6445269E2237D8300099FB37 /* ContestLeaderBoardViewController.swift */,
 				0CE8836821DFE0AF0025A31E /* ContestListViewController.swift */,
 				0C78C1F422244F390068B5D6 /* DepositCoinViewController.swift */,
@@ -335,7 +338,11 @@
 				0C390ACF21DF5E0200FA6A15 /* MatchViewController.swift */,
 				0C78C1FE222450AB0068B5D6 /* MoreViewController.swift */,
 				0C3336D021DF489A00E6EB11 /* MyContestViewController.swift */,
+				6422DF9427F673DA007DF7F9 /* BonusCoinLogViewController.swift */,
+				6422DF9727F67AB9007DF7F9 /* BonusCoinViewController.swift */,
 				0CB1B8FE2266FF4C003D6C56 /* MyTeamViewController.swift */,
+				64E5B42D23F0009A00D377F0 /* SignupOTPViewController.swift */,
+				6479366727D4CD0A00531DC3 /* LoginOTPViewController.swift */,
 				64441E50231C1BD400A21EDA /* ParentTabViewController.swift */,
 				645F7DF323153F4800515F11 /* PendingWithdrawViewController.swift */,
 				647825AB23A02B44007AAC7A /* PointBreakdownFootballViewController.swift */,
@@ -344,6 +351,7 @@
 				64669C5423E75C8F00288346 /* PromoCodeViewController.swift */,
 				0C78C1F622244F3B0068B5D6 /* RedeemCoinViewController.swift */,
 				6448F5C02294094600B31BFC /* ReferalViewController.swift */,
+				64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */,
 				641E1768222A9A7D00302A19 /* SignUpViewController.swift */,
 				0C33367A21DF3AB100E6EB11 /* SplashViewController.swift */,
 				64522214239C0FCB0091AE28 /* TeamCreateFootballViewController.swift */,
@@ -351,15 +359,12 @@
 				64522218239C50F80091AE28 /* TeamPreviewFootballViewController.swift */,
 				0C85C3482225C5D800B6515C /* TeamPreviewViewController.swift */,
 				0CB1B90022686418003D6C56 /* TeamSelectViewController.swift */,
+				64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */,
 				6412BAF32343C4930081958E /* TutorialViewController.swift */,
 				641E176A222A9DE700302A19 /* UnSignedProfileViewController.swift */,
 				0C78C1F722244F3C0068B5D6 /* VerifyAccountViewController.swift */,
 				645F7DF7231598D100515F11 /* WebViewController.swift */,
 				0C78C1F822244F3D0068B5D6 /* WithdrawRequestViewController.swift */,
-				64CBB4DC23E9DC5400F0DBA2 /* AnnouncementViewController.swift */,
-				64CBB4E223EA4AB200F0DBA2 /* TransactionViewController.swift */,
-				64E5B42D23F0009A00D377F0 /* OTPViewController.swift */,
-				64A0EDD6243357BC00B52AE6 /* SettingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -400,7 +405,12 @@
 		0C390AD121DF7FDA00FA6A15 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */,
+				646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */,
 				6445274722DB38B800D23734 /* BannerCollectionViewCell.swift */,
+				6464198527F2710200863151 /* BonusCoinCollectionViewCell.swift */,
+				64DE9D3227F31C040012F1E7 /* BonusCoinTableViewCell.swift */,
+				645037E222F2CEA50013334D /* CoinPackCollectionViewCell.swift */,
 				0CE8836421DFDEDB0025A31E /* ContestTableViewCell.swift */,
 				0CE8836521DFDEDB0025A31E /* ContestTableViewCell.xib */,
 				644A078A22ED72E200DAFE9E /* CreatedTeamTableViewCell.swift */,
@@ -410,22 +420,23 @@
 				6493E169223920C70005E75F /* LeaderBoardTableViewCell.swift */,
 				0C390AD421DF83E500FA6A15 /* MatchTableViewCell.swift */,
 				0C390AD521DF83E500FA6A15 /* MatchTableViewCell.xib */,
+				641DE3B9265EA41900630612 /* PaymentChannelCell.swift */,
+				641DE3B8265EA41800630612 /* PaymentChannelCell.xib */,
 				0CE8836021DFD5730025A31E /* PlayerTableViewCell.swift */,
 				0CE8836121DFD5730025A31E /* PlayerTableViewCell.xib */,
 				644526A22237D83C0099FB37 /* PointBreakDownTableViewCell.swift */,
 				0C390AD821DFAAA900FA6A15 /* PositionCollectionViewCell.swift */,
 				0C562CD722700A0A00D3995A /* PreviewTableViewCell.swift */,
 				6445274522DB2BCD00D23734 /* PrizeListTableViewCell.swift */,
-				0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */,
-				645037E222F2CEA50013334D /* CoinPackCollectionViewCell.swift */,
-				6453F2AD230960F2006A86CF /* UpComingMatchCell.xib */,
-				6453F2B12309638A006A86CF /* UpComingMatchCell.swift */,
-				646EC5FD230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift */,
-				645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */,
 				64CBB4DA23E9C81100F0DBA2 /* PromoCodeTableViewCell.swift */,
-				64CBB4DE23E9DC7400F0DBA2 /* AnnouncementTableViewCell.swift */,
-				64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */,
 				64A0EDD82433590D00B52AE6 /* SettingTableViewCell.swift */,
+				0CEB167B2265C102002D0208 /* TeamPlayerTableViewCell.swift */,
+				64CBB4E023EA4A9900F0DBA2 /* TransactionTableViewCell.swift */,
+				6453F2B12309638A006A86CF /* UpComingMatchCell.swift */,
+				6453F2AD230960F2006A86CF /* UpComingMatchCell.xib */,
+				647ABA10265ADF5700454416 /* WithdrawMethodCell.swift */,
+				641764B4265B0A8E00E0A74E /* WithdrawMethodCell.xib */,
+				645F7DF5231545FF00515F11 /* WithdrawTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -435,7 +446,6 @@
 			children = (
 				6438DFB22319111500E29F5D /* Localizable.strings */,
 				0C676CEF21B7E97F00F21072 /* GameOf11 */,
-				647C5D11233D35AE00E4C3CF /* OneSignalNotificationServiceExtension */,
 				0C676CEE21B7E97F00F21072 /* Products */,
 				1D68AEBECCD6A657DAD120D6 /* Pods */,
 				CC9F337D5640148DA3BACEC2 /* Frameworks */,
@@ -447,7 +457,6 @@
 			isa = PBXGroup;
 			children = (
 				0C676CED21B7E97F00F21072 /* GO11 Pro.app */,
-				647C5D10233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -488,8 +497,6 @@
 			children = (
 				BB3C0DFD4C09C2AC1FBB8A56 /* Pods-GameOf11.debug.xcconfig */,
 				DA071A4862D02ED4B1736182 /* Pods-GameOf11.release.xcconfig */,
-				D1D9994E50EBEB3202776FEF /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
-				E158AAB73C4A0C032EC4EFD1 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -505,19 +512,31 @@
 		6453959A22DA0AEA007273D2 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				6471C59427D6036300DA6CDF /* BRCircularProgressView.swift */,
+				64F0383E26CDA0E300609F34 /* ListLoader.swift */,
+				645D06422527EAFE002A3EAC /* DTPagerController */,
 				6455AE702320260A00F9679D /* Toast.swift */,
 				6453959B22DA0AEA007273D2 /* GradientProgress.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		647C5D11233D35AE00E4C3CF /* OneSignalNotificationServiceExtension */ = {
+		645D06422527EAFE002A3EAC /* DTPagerController */ = {
 			isa = PBXGroup;
 			children = (
-				647C5D12233D35AE00E4C3CF /* NotificationService.swift */,
-				647C5D14233D35AE00E4C3CF /* Info.plist */,
+				645D06432527EAFE002A3EAC /* Classes */,
 			);
-			path = OneSignalNotificationServiceExtension;
+			path = DTPagerController;
+			sourceTree = "<group>";
+		};
+		645D06432527EAFE002A3EAC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				645D06442527EAFE002A3EAC /* DTSegmentedControl.swift */,
+				645D06462527EAFE002A3EAC /* UIViewController.swift */,
+				645D06472527EAFE002A3EAC /* DTPagerController.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		64C77A4022FEEBC5005161BF /* Font */ = {
@@ -525,6 +544,10 @@
 			children = (
 				64C77A4122FEEBC5005161BF /* OpenSans-Semibold.ttf */,
 				64C77A4222FEEBC5005161BF /* OpenSans-Light.ttf */,
+				64173F5D2601774600A1947C /* kenyan coffee bd it.ttf */,
+				64173F5C2601774500A1947C /* kenyan coffee bd.ttf */,
+				64173F5E2601774600A1947C /* kenyan coffee rg it.ttf */,
+				64173F5F2601774600A1947C /* kenyan coffee rg.ttf */,
 				64C77A4322FEEBC5005161BF /* OpenSans-Italic.ttf */,
 				64C77A4422FEEBC5005161BF /* OpenSans-ExtraBold.ttf */,
 				64C77A4522FEEBC5005161BF /* OpenSans-LightItalic.ttf */,
@@ -549,9 +572,9 @@
 		CC9F337D5640148DA3BACEC2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6464193D27EC6AD000863151 /* Pods_GameOf11.framework */,
 				640B9D40233D397F00387A2A /* Pods_GameOf11.framework */,
 				CECBB971ED7EF347DF27EF25 /* Pods_GameOf11.framework */,
-				75B5353A4D138F254818D385 /* Pods_OneSignalNotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -570,35 +593,18 @@
 				0CB1B9062268F490003D6C56 /* ShellScript */,
 				647C5D05233D1C7F00E4C3CF /* Embed App Extensions */,
 				0175AB32022525EEB31666A2 /* [CP] Embed Pods Frameworks */,
-				64E0D8D0240C5A8F00E8EDE3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				647C5D16233D35AE00E4C3CF /* PBXTargetDependency */,
 			);
 			name = GameOf11;
+			packageProductDependencies = (
+				37814A5927BED9390047EA73 /* Mixpanel */,
+			);
 			productName = GameOf11;
 			productReference = 0C676CED21B7E97F00F21072 /* GO11 Pro.app */;
 			productType = "com.apple.product-type.application";
-		};
-		647C5D0F233D35AE00E4C3CF /* OneSignalNotificationServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 647C5D1A233D35AE00E4C3CF /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
-			buildPhases = (
-				2627AEC95BC517F1AAF5A379 /* [CP] Check Pods Manifest.lock */,
-				647C5D0C233D35AE00E4C3CF /* Sources */,
-				647C5D0D233D35AE00E4C3CF /* Frameworks */,
-				647C5D0E233D35AE00E4C3CF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OneSignalNotificationServiceExtension;
-			productName = OneSignalNotificationServiceExtension;
-			productReference = 647C5D10233D35AE00E4C3CF /* OneSignalNotificationServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -622,9 +628,6 @@
 							};
 						};
 					};
-					647C5D0F233D35AE00E4C3CF = {
-						CreatedOnToolsVersion = 10.2.1;
-					};
 				};
 			};
 			buildConfigurationList = 0C676CE821B7E97E00F21072 /* Build configuration list for PBXProject "GameOf11" */;
@@ -637,12 +640,14 @@
 				bn,
 			);
 			mainGroup = 0C676CE421B7E97E00F21072;
+			packageReferences = (
+				37814A5827BED9390047EA73 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+			);
 			productRefGroup = 0C676CEE21B7E97F00F21072 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				0C676CEC21B7E97E00F21072 /* GameOf11 */,
-				647C5D0F233D35AE00E4C3CF /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -660,6 +665,7 @@
 				64E999D3231B0E84003C7FFE /* sign_up_dialog_anim_2.json in Resources */,
 				0C0BE64E21DA294000BE30CF /* Main.storyboard in Resources */,
 				0C390AD721DF83E500FA6A15 /* MatchTableViewCell.xib in Resources */,
+				641764B5265B0A8E00E0A74E /* WithdrawMethodCell.xib in Resources */,
 				64C77A5122FEEBC5005161BF /* OpenSans-SemiboldItalic.ttf in Resources */,
 				64C77A4D22FEEBC5005161BF /* OpenSans-Italic.ttf in Resources */,
 				6453F2AE230960F2006A86CF /* UpComingMatchCell.xib in Resources */,
@@ -667,23 +673,21 @@
 				0CE8836721DFDEDB0025A31E /* ContestTableViewCell.xib in Resources */,
 				0CE8836321DFD5730025A31E /* PlayerTableViewCell.xib in Resources */,
 				64E999D5231B131E003C7FFE /* Boat_Loader.json in Resources */,
+				641DE3BA265EA41900630612 /* PaymentChannelCell.xib in Resources */,
+				64173F632601774600A1947C /* kenyan coffee rg.ttf in Resources */,
 				64C77A5322FEEBC5005161BF /* OpenSans-Regular.ttf in Resources */,
 				64C77A4C22FEEBC5005161BF /* OpenSans-Light.ttf in Resources */,
 				6438DFB02319111500E29F5D /* Localizable.strings in Resources */,
 				0C676CF821B7E98600F21072 /* Assets.xcassets in Resources */,
 				64C77A4E22FEEBC5005161BF /* OpenSans-ExtraBold.ttf in Resources */,
+				64173F602601774600A1947C /* kenyan coffee bd.ttf in Resources */,
 				64C77A5422FEEBC5005161BF /* OpenSans-BoldItalic.ttf in Resources */,
+				64173F612601774600A1947C /* kenyan coffee bd it.ttf in Resources */,
+				64173F622601774600A1947C /* kenyan coffee rg it.ttf in Resources */,
 				644A078922ED729B00DAFE9E /* CreatedTeamTableViewCell.xib in Resources */,
 				0CB1B8FD2266FF32003D6C56 /* CteatedTableViewCell.xib in Resources */,
 				0C0BE64D21DA294000BE30CF /* LaunchScreen.storyboard in Resources */,
 				64C77A4F22FEEBC5005161BF /* OpenSans-LightItalic.ttf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		647C5D0E233D35AE00E4C3CF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,56 +700,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework",
-				"${BUILT_PRODUCTS_DIR}/Bond/Bond.framework",
-				"${BUILT_PRODUCTS_DIR}/DTPagerController/DTPagerController.framework",
-				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
-				"${BUILT_PRODUCTS_DIR}/Gloss/Gloss.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactiveKit/ReactiveKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/ViewUtils/ViewUtils.framework",
-				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BetterSegmentedControl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bond.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTPagerController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differ.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gloss.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ViewUtils.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-GameOf11/Pods-GameOf11-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -769,28 +728,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
-		};
-		2627AEC95BC517F1AAF5A379 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 		CECC40A6D6AA7D0098500A57 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -821,7 +758,7 @@
 				0C8B95F921E1211800ADE46B /* APIManager.swift in Sources */,
 				0CB1B8FC2266FF32003D6C56 /* CteatedTableViewCell.swift in Sources */,
 				0CE8836B21E0000E0025A31E /* LoginViewController.swift in Sources */,
-				64E5B42E23F0009A00D377F0 /* OTPViewController.swift in Sources */,
+				64E5B42E23F0009A00D377F0 /* SignupOTPViewController.swift in Sources */,
 				6453F2B22309638A006A86CF /* UpComingMatchCell.swift in Sources */,
 				0C390AD021DF5E0200FA6A15 /* MatchViewController.swift in Sources */,
 				0CB1B8FF2266FF4C003D6C56 /* MyTeamViewController.swift in Sources */,
@@ -830,9 +767,12 @@
 				0C78C1FD22244F450068B5D6 /* WithdrawRequestViewController.swift in Sources */,
 				0C7F54F321DA6FBC00049571 /* AppDelegate.swift in Sources */,
 				64CBB4E123EA4A9900F0DBA2 /* TransactionTableViewCell.swift in Sources */,
+				647ABA12265ADF5800454416 /* WithdrawMethodCell.swift in Sources */,
+				64F0383F26CDA0E300609F34 /* ListLoader.swift in Sources */,
 				0CE8836921DFE0AF0025A31E /* ContestListViewController.swift in Sources */,
 				0C3336C721DF419400E6EB11 /* Extension.swift in Sources */,
 				0C33368221DF3B0400E6EB11 /* CustomNavigationBar.swift in Sources */,
+				64DE9D3327F31C040012F1E7 /* BonusCoinTableViewCell.swift in Sources */,
 				64522217239C182B0091AE28 /* CaptainSelectorFootballViewController.swift in Sources */,
 				64A0EDD92433590E00B52AE6 /* SettingTableViewCell.swift in Sources */,
 				641E1769222A9A7D00302A19 /* SignUpViewController.swift in Sources */,
@@ -864,15 +804,21 @@
 				0C78C203222451980068B5D6 /* UIColorExtension.swift in Sources */,
 				0C390AD921DFAAA900FA6A15 /* PositionCollectionViewCell.swift in Sources */,
 				0CEB167A2264F73A002D0208 /* CaptainSelectorViewController.swift in Sources */,
+				6479366827D4CD0A00531DC3 /* LoginOTPViewController.swift in Sources */,
 				64522219239C50F80091AE28 /* TeamPreviewFootballViewController.swift in Sources */,
+				6464198627F2710300863151 /* BonusCoinCollectionViewCell.swift in Sources */,
 				0C8B95E921E1022200ADE46B /* AppSessionManager.swift in Sources */,
+				6422DF9527F673DA007DF7F9 /* BonusCoinLogViewController.swift in Sources */,
 				6493E16A223920C70005E75F /* LeaderBoardTableViewCell.swift in Sources */,
 				0CE8835F21DFB6730025A31E /* TeamCreateViewController.swift in Sources */,
 				644526A32237D83C0099FB37 /* PointBreakDownTableViewCell.swift in Sources */,
 				645F7DF6231545FF00515F11 /* WithdrawTableViewCell.swift in Sources */,
+				6471C59527D6036300DA6CDF /* BRCircularProgressView.swift in Sources */,
 				0C8B95EF21E1150A00ADE46B /* AlertManager.swift in Sources */,
 				0CB1B90122686419003D6C56 /* TeamSelectViewController.swift in Sources */,
+				645D064D2527EAFE002A3EAC /* DTPagerController.swift in Sources */,
 				645F7DF8231598D100515F11 /* WebViewController.swift in Sources */,
+				645D064C2527EAFE002A3EAC /* UIViewController.swift in Sources */,
 				6438DF9F2318FA1500E29F5D /* Localizable.swift in Sources */,
 				64CBB4DD23E9DC5400F0DBA2 /* AnnouncementViewController.swift in Sources */,
 				0C8B95EB21E103DC00ADE46B /* UIViewController_Extra.swift in Sources */,
@@ -883,15 +829,19 @@
 				6448F5C12294094600B31BFC /* ReferalViewController.swift in Sources */,
 				0CE8836621DFDEDB0025A31E /* ContestTableViewCell.swift in Sources */,
 				0C390AD621DF83E500FA6A15 /* MatchTableViewCell.swift in Sources */,
+				641DE3BB265EA41900630612 /* PaymentChannelCell.swift in Sources */,
 				0C85C3492225C5D800B6515C /* TeamPreviewViewController.swift in Sources */,
 				646EC5FE230E8A1200E9D1A9 /* AvatarCollectionViewCell.swift in Sources */,
 				0C3336D121DF489A00E6EB11 /* MyContestViewController.swift in Sources */,
+				64173F682606578A00A1947C /* CompletedMatchViewController.swift in Sources */,
 				6448F5BF2293EDC400B31BFC /* BkashPaymentViewController.swift in Sources */,
 				647825AC23A02B45007AAC7A /* PointBreakdownFootballViewController.swift in Sources */,
 				0CE8836221DFD5730025A31E /* PlayerTableViewCell.swift in Sources */,
+				645D064A2527EAFE002A3EAC /* DTSegmentedControl.swift in Sources */,
 				0C3336CF21DF488D00E6EB11 /* HomeViewController.swift in Sources */,
 				647825AA239D2BC0007AAC7A /* EditTeamFootballViewController.swift in Sources */,
 				64522215239C0FCC0091AE28 /* TeamCreateFootballViewController.swift in Sources */,
+				6422DF9827F67AB9007DF7F9 /* BonusCoinViewController.swift in Sources */,
 				643488EB230B280800846649 /* ForgotPasswordViewController.swift in Sources */,
 				0C33367B21DF3AB100E6EB11 /* SplashViewController.swift in Sources */,
 				641E176B222A9DE700302A19 /* UnSignedProfileViewController.swift in Sources */,
@@ -899,23 +849,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		647C5D0C233D35AE00E4C3CF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				647C5D13233D35AE00E4C3CF /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		647C5D16233D35AE00E4C3CF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 647C5D0F233D35AE00E4C3CF /* OneSignalNotificationServiceExtension */;
-			targetProxy = 647C5D15233D35AE00E4C3CF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0C0BE60A21DA293F00BE30CF /* LaunchScreen.storyboard */ = {
@@ -980,7 +914,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1042,7 +976,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1069,12 +1003,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BB3C0DFD4C09C2AC1FBB8A56 /* Pods-GameOf11.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
 				INFOPLIST_FILE = GameOf11/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1082,7 +1015,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 3.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1117,7 +1050,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11;
 				PRODUCT_NAME = "GO11 Pro";
-				PROVISIONING_PROFILE_SPECIFIER = "GO11 Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1127,12 +1060,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DA071A4862D02ED4B1736182 /* Pods-GameOf11.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = GameOf11/GameOf11.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 2VBWUYWHX2;
 				INFOPLIST_FILE = GameOf11/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1140,7 +1072,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 3.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1175,58 +1107,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11;
 				PRODUCT_NAME = "GO11 Pro";
-				PROVISIONING_PROFILE_SPECIFIER = "GO11 Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		647C5D18233D35AE00E4C3CF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D1D9994E50EBEB3202776FEF /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 2VBWUYWHX2;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 2.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dev";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		647C5D19233D35AE00E4C3CF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E158AAB73C4A0C032EC4EFD1 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Md.Ballal Hossen (8DD2GRH2HM)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = 2VBWUYWHX2;
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 2.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.umbrella.go11.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Dev";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1252,16 +1134,26 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		647C5D1A233D35AE00E4C3CF /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				647C5D18233D35AE00E4C3CF /* Debug */,
-				647C5D19233D35AE00E4C3CF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		37814A5827BED9390047EA73 /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		37814A5927BED9390047EA73 /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37814A5827BED9390047EA73 /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0C676CE521B7E97E00F21072 /* Project object */;
 }

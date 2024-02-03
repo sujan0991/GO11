@@ -42,10 +42,10 @@ class VerifyAccountViewController: UIViewController,UIImagePickerControllerDeleg
         
         frontImageView.layer.cornerRadius = 5.0
         frontImageView.layer.borderWidth = 1.0
-        frontImageView.layer.borderColor = UIColor.init(named: "GreenHighlight")?.cgColor
+        frontImageView.layer.borderColor = UIColor.init(named: "on_green")?.cgColor
         backImageView.layer.cornerRadius = 5.0
         backImageView.layer.borderWidth = 1.0
-        backImageView.layer.borderColor = UIColor.init(named: "GreenHighlight")?.cgColor
+        backImageView.layer.borderColor = UIColor.init(named: "on_green")?.cgColor
         
         navTitleLabel.text = "VERIFY YOUR PROFILE".localized
         suggestionLabel.text = "To verify your profile, you need to provide any one of these mentioned Govt. issued ID i.e. NID, Driving License, Passport, Birth Certificate.You need to upload the photo of both the front and back side of the ID. For Passport you can upload the main page and address page in a single image.".localized
@@ -56,7 +56,7 @@ class VerifyAccountViewController: UIViewController,UIImagePickerControllerDeleg
         frontImageLabel.text = "Front Side Image".localized
         backImageLabel.text = "Back Side Image".localized
         verifyButton.setTitle("VERIFY YOUR PROFILE".localized, for: .normal)
-        
+        verifyButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
         let userData = AppSessionManager.shared.currentUser
         
@@ -79,6 +79,25 @@ class VerifyAccountViewController: UIViewController,UIImagePickerControllerDeleg
             self.backImageView.kf.setImage(with: url)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        if #available(iOS 13, *) {
+                  if UserDefaults.standard.bool(forKey: "DarkMode"){
+                      
+                      overrideUserInterfaceStyle = .dark
+                      
+                  }else{
+                      overrideUserInterfaceStyle = .light
+                  }
+              
+              }else{
+                  
+              }
+
+    }
+
     
     
     @IBAction func frontImageButtonAction(_ sender: UIButton) {

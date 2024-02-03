@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Mixpanel
+
 class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
     
     var userTeam : UsersFantasyTeamFootball!
@@ -53,10 +55,10 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
         
         chooseCaptainLabel.text = "CHOOSE CAPTAIN (C) & VICE CAPTAIN (VC)".localized
         xPointLabel.text = "Your Captain gets 2x points & Vice Captain gets 1.5x points".localized
-        teamNameTextField.placeholder = "Your Team Name".localized
+       // teamNameTextField.placeholder = "Your Team Name".localized
         saveTeamButton.setTitle("Save Your Team".localized, for: .normal)
-        teamNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
-        teamNameTextField.delegate = self
+        //teamNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
+        //teamNameTextField.delegate = self
         
         
         saveTeamButton.makeRound(5, borderWidth: 0, borderColor: .clear)
@@ -112,7 +114,7 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
                 //if comes from edit view
                 if isFromEdit{
                     
-                    self.teamNameTextField.text = userTeamName
+                  //  self.teamNameTextField.text = userTeamName
                     
                 }
             }
@@ -227,7 +229,7 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
             }
             
             if player.teamBelong == 1{
-                cell.teamNamelabel.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.teamNamelabel.textColor = UIColor.init(named: "on_green")!
             }else{
                 cell.teamNamelabel.textColor = UIColor.init(named: "brand_orange")!
             }
@@ -562,14 +564,15 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
             
             self.view.makeToast("Please select Captain and Vice Captain properly".localized)
         }
-        else if teamNameTextField.text!.count > 25{
-            
-            self.view.makeToast("Maximum 24 Character".localized)
-        }
-        else if self.teamNameTextField.text?.count ?? 0 > 0
+        else
+//        if teamNameTextField.text!.count > 25{
+//
+//            self.view.makeToast("Maximum 24 Character".localized)
+//        }
+//        else if self.teamNameTextField.text?.count ?? 0 > 0
         {
-            userTeam.teamName = self.teamNameTextField.text
-            
+//            userTeam.teamName = self.teamNameTextField.text
+//
             print("captain and vice cap id........",userTeam.captain,userTeam.viceCaptain)
             
             
@@ -717,21 +720,24 @@ class CaptainSelectorFootballViewController: UIViewController,UITableViewDelegat
                                 print("Dismiss")
                             }
                         }
+                        
+                        let p: Properties = ["match_id": self.userTeam.matchId ?? ""]
+                        Mixpanel.mainInstance().track(event: "team_created_football", properties: p)// set team_created_football event in mixpanel
                     }
                     
                 }
                 
             }
         }
-        else
-        {
-            
-            self.view.makeToast("Please provide a name for your team".localized)
-            //print(userTeam.batsman.toJSONArray())
-            //print(userTeam.bowler.toJSONArray())
-            //print(userTeam.allrounder.toJSONArray())
-            
-        }
+//        else
+//        {
+//
+//            self.view.makeToast("Please provide a name for your team".localized)
+//            //print(userTeam.batsman.toJSONArray())
+//            //print(userTeam.bowler.toJSONArray())
+//            //print(userTeam.allrounder.toJSONArray())
+//
+//        }
         
     }
     

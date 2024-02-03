@@ -111,6 +111,7 @@ class EditProfileViewController: BaseViewController {
             if um.isVerified == 1 {
                 
                 nameTextField.isUserInteractionEnabled = false
+                mailTextField.isUserInteractionEnabled = false
             }
             
         }
@@ -221,19 +222,22 @@ class EditProfileViewController: BaseViewController {
         
         var params:[String:String] = [:]
         
-        if nameTextField.text!.count > 0{
+        if nameTextField.text!.count > 0 && mailTextField.text!.count > 0{
             
             if maleButton.isSelected{
                 
                 params = ["name":nameTextField.text!,
+                          "email":mailTextField.text ?? "",
                           "sex":"Male",
                           "address":mailingAddressTextField.text ?? "",
+                          
                           "city":cityTextField.text ?? "",
                           "zipcode":zipCodeTextField.text ?? "",
                           "dob":dateOfbirthTextField.text ?? ""]
             }else if femaleButton.isSelected{
                 
                 params = ["name":nameTextField.text!,
+                          "email":mailTextField.text ?? "",
                           "sex":"Female",
                           "address":mailingAddressTextField.text ?? "",
                           "city":cityTextField.text ?? "",
@@ -242,22 +246,29 @@ class EditProfileViewController: BaseViewController {
             }else{
                 
                 params = ["name":nameTextField.text!,
+                          "email":mailTextField.text ?? "",
                           "address":mailingAddressTextField.text ?? "",
                           "city":cityTextField.text ?? "",
                           "zipcode":zipCodeTextField.text ?? "",
                           "dob":dateOfbirthTextField.text ?? ""]
             }
-        }
-        
-        APIManager.manager.updateProfile(params: params) { (status, msg) in
             
-            if status{
+            
+            APIManager.manager.updateProfile(params: params) { (status, msg) in
                 
-                self.view.makeToast(msg!)
-                self.navigationController?.popViewController(animated: true)
+                if status{
+                    
+                    self.view.makeToast(msg!)
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
             }
+        }else{
+            
+            self.view.makeToast("Please provide your name and email address")
             
         }
+
         
     }
     

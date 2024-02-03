@@ -41,7 +41,7 @@ class MoreViewController: BaseViewController,UITableViewDelegate,UITableViewData
         menuArray.append(["title":"Watch How To Play".localized, "icon":"play_icon"])
         menuArray.append(["title":"Write Your Feedback".localized, "icon":"feedback"])
         menuArray.append(["title":"Promo Code".localized, "icon":"promotion"])
-        menuArray.append(["title":"Setting".localized, "icon":"language_change_icon"])
+        menuArray.append(["title":"Settings".localized, "icon":"settings_icon"])
         //"Change Language"
         moretableView.tableFooterView = UIView()
         

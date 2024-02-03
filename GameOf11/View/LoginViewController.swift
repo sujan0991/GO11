@@ -9,6 +9,8 @@
 import UIKit
 import SVProgressHUD
 
+import Mixpanel
+
 class LoginViewController: BaseViewController {
     
     
@@ -42,8 +44,8 @@ class LoginViewController: BaseViewController {
         
         if Language.language == Language.bangla{
             
-            banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
-            banglaButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
+            banglaButton.setTitleColor(UIColor.white, for: .normal)
+            banglaButton.backgroundColor = UIColor.init(named: "on_green")!
             
             englishButton.backgroundColor = UIColor.white
             englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
@@ -51,10 +53,11 @@ class LoginViewController: BaseViewController {
             banglaButton.backgroundColor = UIColor.white
             banglaButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
             
-            englishButton.backgroundColor = UIColor.init(named: "GreenHighlight")!
-            englishButton.setTitleColor(UIColor.init(named: "DefaultTextColor")!, for: .normal)
+            englishButton.backgroundColor = UIColor.init(named: "on_green")!
+            englishButton.setTitleColor(UIColor.white, for: .normal)
             
         }
+        
         
         englishButton.layer.borderWidth = 0.5
         englishButton.layer.borderColor = UIColor.lightGray.cgColor
@@ -62,11 +65,12 @@ class LoginViewController: BaseViewController {
         banglaButton.layer.borderColor = UIColor.lightGray.cgColor
         
         
-        //        phoneField.text = "01676330929"
-        //        passwordField.text = "123456"
+        //        phoneField.text = "01676330929"  8801770247711   01880863828
+        //        passwordField.text = "123456"    shaf1234        nataraj
         
         
         signinButton.makeRound(5, borderWidth: 0, borderColor: .clear)
+        
         
         if let currentToken = AppSessionManager.shared.authToken{
             print(currentToken)
@@ -95,23 +99,23 @@ class LoginViewController: BaseViewController {
         languagEView.isHidden = true
         shadoWView.isHidden = true
         if #available(iOS 13, *) {
-                  if UserDefaults.standard.bool(forKey: "DarkMode"){
-                      
-                      overrideUserInterfaceStyle = .dark
-                      
-                  }else{
-                      overrideUserInterfaceStyle = .light
-                  }
-              
-              }else{
-                  
-              }
-
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                
+            }else{
+                overrideUserInterfaceStyle = .light
+            }
+            
+        }else{
+            
+        }
+        
     }
     @IBAction func signUpButtonAction(_ sender: Any) {
         
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupOTPViewController") as? SignupOTPViewController
         
         self.navigationController?.pushViewController(popupVC!, animated: true)
     }
@@ -123,6 +127,7 @@ class LoginViewController: BaseViewController {
         if sender.isSelected{
             
             passwordField.isSecureTextEntry = false
+            
         }else{
             
             passwordField.isSecureTextEntry = true
@@ -146,31 +151,59 @@ class LoginViewController: BaseViewController {
     
     @IBAction func signinAction(_ sender: Any) {
         
-        let phn = String.init(format: "+88%@", phoneField.text!)
-        APIManager.manager.login(userName: phn, password: passwordField.text!) { (status, token, msg) in
-            
-            if status{
-                self.view.makeToast( msg!)
+        if phoneField.text?.count != 0 && passwordField.text?.count != 0{
+            let phn = String.init(format: "+88%@", phoneField.text!)
+            APIManager.manager.login(userName: phn, password: passwordField.text!) { (status, token, msg) in
                 
-                AppSessionManager.shared.authToken = token
-                AppSessionManager.shared.save()
-                
-                //                let sb: UIStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-                //                let vc = sb.instantiateInitialViewController()
-                //
-                //                if let window = UIApplication.shared.delegate?.window {
-                //                    window?.rootViewController = vc
-                //                }
-                
-                self.navigationController?.popToRootViewController(animated: true)
+                if status{
+                    self.view.makeToast( msg!)
+                    
+                    AppSessionManager.shared.authToken = token
+                    AppSessionManager.shared.save()
+                    
+                    //                let sb: UIStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+                    //                let vc = sb.instantiateInitialViewController()
+                    //
+                    //                if let window = UIApplication.shared.delegate?.window {
+                    //                    window?.rootViewController = vc
+                    //                }
+                    var oldToken = ""
+                    if let oldFcmToken = AppSessionManager.shared.fcmToken{
+                        oldToken = oldFcmToken
+                    }
+                    APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "login") { (status, msg) in
+                        if status{
+                            print(msg ?? "")
+                        }
+                        else{
+                            print(msg ?? "")
+                        }
+                    }
+                    
+                    //set alias
+                    
+                    //https://help.mixpanel.com/hc/en-us/articles/115004497803-Identity-Management-Best-Practices
+                    
+                    if UserDefaults.standard.bool(forKey: "isAliasSet") == false{
+                        
+                        Mixpanel.mainInstance().createAlias(phn, distinctId: Mixpanel.mainInstance().distinctId)
+                        
+                        UserDefaults.standard.set(true, forKey: "isAliasSet")
+                        
+                        Mixpanel.mainInstance().identify(distinctId: phn)
+                        
+                    }
+                    
+                    
+                    self.navigationController?.popToRootViewController(animated: true)
+                    
+                }
+                else{
+                    self.view.makeToast(msg!)
+                }
                 
             }
-            else{
-                self.view.makeToast(msg!)
-            }
-            
         }
-        
         
     }
     

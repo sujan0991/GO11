@@ -13,7 +13,7 @@ class WithdrawTableViewCell: UITableViewCell {
     
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var withdrawMethodLabel: UILabel!
     @IBOutlet weak var referenceLabel: UILabel!
     @IBOutlet weak var transnumberLabel: UILabel!
     @IBOutlet weak var transIdLabel: UILabel!

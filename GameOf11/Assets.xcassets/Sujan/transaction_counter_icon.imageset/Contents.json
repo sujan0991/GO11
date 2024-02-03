@@ -5,8 +5,8 @@
       "scale" : "1x"
     },
     {
+      "filename" : "icons8-circle-100.png",
       "idiom" : "universal",
-      "filename" : "transaction_counter_icon.png",
       "scale" : "2x"
     },
     {
@@ -15,7 +15,7 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

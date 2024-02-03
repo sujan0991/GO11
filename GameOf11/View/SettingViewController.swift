@@ -29,7 +29,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        placeNavBar(withTitle: "SETTING".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
+        placeNavBar(withTitle: "SETTINGS".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
         
         self.tabBarController?.tabBar.isHidden = true
               
@@ -39,29 +39,21 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
            let current = UNUserNotificationCenter.current()
            current.getNotificationSettings(completionHandler: { settings in
 
-               switch settings.authorizationStatus {
-
-               case .notDetermined:
-                
-                print("Authorization request has not been made yet")
-                
-               case .denied:
-                   // You could tell them to change this in Settings
-                print("User has denied authorization.")
-                self.isNotiON = false
-                
-               case .authorized:
-                   
-                print("User has given authorization.")
-                self.isNotiON = true
-                
-               case .provisional:
-                
-                print("provisional.")
-            }
+                switch settings.authorizationStatus {
+                    case .notDetermined:
+                        print("Authorization request has not been made yet")
+                    case .denied:
+                        // You could tell them to change this in Settings
+                        print("User has denied authorization.")
+                        self.isNotiON = false
+                    case .authorized:
+                        print("User has given authorization.")
+                        self.isNotiON = true
+                    case .provisional:
+                        print("provisional.")
+                default : break
+                }
            })
-            
-            
         }
 
 
@@ -90,14 +82,15 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         if #available(iOS 13, *) {
             
             menuArray.append(["title":"Change Language".localized, "icon":"language_change_icon"])
-            menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
-            menuArray.append(["title":"Dark Mode".localized, "icon":"language_change_icon"])
-             
+       //     menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
+            menuArray.append(["title":"Dark Mode".localized, "icon":"night_mode"])
+            menuArray.append(["title":"Logout".localized, "icon":"logout_icon"])
+            
         }else{
             
             menuArray.append(["title":"Change Language".localized, "icon":"language_change_icon"])
-            menuArray.append(["title":"Notification".localized, "icon":"language_change_icon"])
-             
+            menuArray.append(["title":"Logout".localized, "icon":"logout_icon"])
+           
         }
         
         settingTableView.tableFooterView = UIView()
@@ -151,16 +144,18 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         if indexPath.row == 0{
             
             cell.settingSwitch.isHidden = true
-        }else if indexPath.row == 1{
-            
-            if isNotiON{
-                                          
-                cell.settingSwitch.isOn = true
-            }else{
-                cell.settingSwitch.isOn = false
-            }
-            
-        }else if indexPath.row == 2{
+        }
+//        else if indexPath.row == 1{
+//
+//            if isNotiON{
+//
+//                cell.settingSwitch.isOn = true
+//            }else{
+//                cell.settingSwitch.isOn = false
+//            }
+//
+//        }
+        else if indexPath.row == 1{
             
              if UserDefaults.standard.bool(forKey: "DarkMode"){
                                
@@ -168,6 +163,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             }else{
                 cell.settingSwitch.isOn = false
             }
+        }else   if indexPath.row == 2{
+            
+            cell.settingSwitch.isHidden = true
         }
 
         
@@ -187,7 +185,51 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
              shadowView.isHidden = false
              languageView.isHidden = false
                
-           }
+           }else if indexPath.row == 2 {
+            
+            APIManager.manager.logOut { (status, msg) in
+                
+                AppSessionManager.shared.logOut()
+                if status{
+                    // SVProgressHUD.showSuccess(withStatus: msg)
+                    
+                    //set "isAliasSet" false
+                    
+                    if UserDefaults.standard.bool(forKey: "isAliasSet") == true{
+
+                        UserDefaults.standard.set(false, forKey: "isAliasSet")
+      
+                    }
+
+                    
+                    self.view.makeToast( msg!)
+                    
+                    var oldToken = ""
+                    if let oldFcmToken = AppSessionManager.shared.fcmToken{
+                        oldToken = oldFcmToken
+                    }
+                    APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "logout") { (status, msg) in
+                        if status{
+                            print(msg ?? "")
+                        }
+                        else{
+                            print(msg ?? "")
+                        }
+                    }
+                    
+                }
+                else{
+                    self.view.makeToast("Something went wrong! Please try again".localized)
+                    
+                    //SVProgressHUD.showError(withStatus: msg)
+                }
+                
+            }
+
+            
+            
+          }
+
     
            
        }
@@ -196,19 +238,19 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         let switchTag = sender.tag
         
         print("switch tag", switchTag)
+//        if sender.tag == 1{
+//            if sender.isOn{
+//
+//                print("noti on")
+//
+//            }else{
+//                print("noti on")
+//            }
+//
+//
+//        }
+
         if sender.tag == 1{
-            if sender.isOn{
-
-                print("noti on")
-
-            }else{
-                print("noti on")
-            }
-
-            
-        }
-
-        else if sender.tag == 2{
         if #available(iOS 13, *) {
             if sender.isOn{
 

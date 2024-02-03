@@ -25,6 +25,8 @@ class ForgotPasswordViewController: UIViewController {
         emailTextField.placeholder = "Email Address".localized
         
         resetButton.setTitle("Request to reset password".localized, for: .normal)
+        resetButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
+
         
     }
     
@@ -48,6 +50,8 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     @IBAction func requestPasswordButtonAction(_ sender: Any) {
+        
+        self.emailTextField.resignFirstResponder()
         
         let vmsg = ValidationManager.manager.validateForgotPass(email: emailTextField.text!)
         

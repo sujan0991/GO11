@@ -38,11 +38,47 @@ class PointBreakDownTableViewCell: UITableViewCell {
         playerRollLabel.text = playerInfo.player_role?.uppercased()
         
         if Language.language == Language.english{
-            pointLabel.text = "\(playerInfo.player_earning_point ?? 0)"
+            
+            var point = 0.0
+            
+            if playerInfo.is_captain == 1{
+                
+                point = Double(playerInfo.player_earning_point! * 2.0)
+                
+                print("point/............",point)
+                
+                pointLabel.text = "\(point)"
+               
+            }else if playerInfo.is_vice_captain == 1{
+                
+                point = Double(playerInfo.player_earning_point! * 1.5)
+                
+                pointLabel.text = "\(point)"
+               
+            }else{
+                
+                pointLabel.text = "\(playerInfo.player_earning_point ?? 0)"
+                
+            }
             
         }else{
             
-            pointLabel.text = formatter.string(from: playerInfo.player_earning_point! as NSNumber) ?? "০.০"
+            var point = 0.0
+            
+            if playerInfo.is_captain == 1{
+                
+                point = Double(playerInfo.player_earning_point ?? 0 * 2.0)
+                pointLabel.text = formatter.string(from: point as NSNumber) ?? "০.০"
+            }else if playerInfo.is_vice_captain == 1{
+                
+                point = Double(playerInfo.player_earning_point ?? 0 * 1.5)
+                pointLabel.text = formatter.string(from: point as NSNumber) ?? "০.০"
+                
+            }else{
+                
+                pointLabel.text = formatter.string(from: playerInfo.player_earning_point! as NSNumber) ?? "০.০"
+                
+            }
             
         }
         

@@ -40,6 +40,14 @@ class PreviewTableViewCell: UITableViewCell {
     @IBOutlet weak var fifthCap: UILabel!
     @IBOutlet weak var sixthCap: UILabel!
     
+    @IBOutlet weak var firstPlayerCP: UILabel!
+    @IBOutlet weak var secondPlayerCP: UILabel!
+    @IBOutlet weak var thirdPlayerCP: UILabel!
+    @IBOutlet weak var fourthPlayerCP: UILabel!
+    @IBOutlet weak var fifthPlayerCP: UILabel!
+    @IBOutlet weak var sixthPlayerCP: UILabel!
+   
+    
     @IBOutlet weak var stackView: UIStackView!
     
     
@@ -89,6 +97,7 @@ func setInfo( players:[Player])  {
         if index == 0
         {
             firstPlayerName.text = player.lastName()
+            firstPlayerCP.text = "\(player.creditPoints ?? 0)"
             if player.playerImage != nil{
                 
                 let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
@@ -139,14 +148,13 @@ func setInfo( players:[Player])  {
                 
             }
             
-       
-            
-           
             
         }
         else if index == 1
         {
             secondPlayerName.text = player.lastName()
+            secondPlayerCP.text = "\(player.creditPoints ?? 0)"
+          
             if player.playerImage != nil{
                 
                 let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
@@ -201,6 +209,8 @@ func setInfo( players:[Player])  {
         else if index == 2
         {
             thirdPlayerName.text = player.lastName()
+            thirdPlayerCP.text = "\(player.creditPoints ?? 0)"
+          
             if player.playerImage != nil{
                 
                 let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
@@ -257,6 +267,8 @@ func setInfo( players:[Player])  {
         else if index == 3
         {
             fourthPlayerName.text = player.lastName()
+            fourthPlayerCP.text = "\(player.creditPoints ?? 0)"
+          
             if player.playerImage != nil{
                 
                 let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
@@ -311,7 +323,7 @@ func setInfo( players:[Player])  {
                 
                 fourthCap.isHidden = false
                 fourthCap.text = "C"
-                fourthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                fourthCap.backgroundColor = UIColor.init(named: "on_green")!
             }else if player.isViceCaptain{
                 fourthCap.isHidden = false
                 fourthCap.text = "VC"
@@ -321,6 +333,8 @@ func setInfo( players:[Player])  {
         else if index == 4
         {
             fifthPlayerName.text = player.lastName()
+            fifthPlayerCP.text = "\(player.creditPoints ?? 0)"
+          
             if player.playerImage != nil{
                 
                 let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
@@ -375,7 +389,7 @@ func setInfo( players:[Player])  {
                 
                 fifthCap.isHidden = false
                 fifthCap.text = "C"
-                fifthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                fifthCap.backgroundColor = UIColor.init(named: "on_green")!
             }else if player.isViceCaptain{
                 fifthCap.isHidden = false
                 fifthCap.text = "VC"
@@ -386,6 +400,8 @@ func setInfo( players:[Player])  {
         else if index == 5
         {
             sixthPlayerName.text = player.lastName()
+            sixthPlayerCP.text = "\(player.creditPoints ?? 0)"
+          
             if player.playerImage != nil{
                 
                 let url1 = URL(string: "\(UserDefaults.standard.object(forKey: "media_base_url") as? String ?? "")\(player.playerImage ?? "")")
@@ -441,7 +457,7 @@ func setInfo( players:[Player])  {
                 
                 sixthCap.isHidden = false
                 sixthCap.text = "C"
-                sixthCap.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                sixthCap.backgroundColor = UIColor.init(named: "on_green")!
             }else if player.isViceCaptain{
                 sixthCap.isHidden = false
                 sixthCap.text = "VC"

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DTPagerController
+
 
 class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTPagerControllerDelegate {
     
@@ -86,7 +86,6 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
             
             addChild(pagerController)
             pagerController.view.frame = containerView.bounds
-            print(pagerController.view)
             containerView.addSubview(pagerController.view)
             pagerController.didMove(toParent: self)
         }
@@ -105,9 +104,9 @@ class MyContestViewController: BaseViewController,DTSegmentedControlProtocol,DTP
         
         pagerController.perferredScrollIndicatorHeight = 2
         pagerController.scrollIndicator.layer.cornerRadius = pagerController.scrollIndicator.frame.height/2
-        pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "brand_orange")
-        pagerController.pageSegmentedControl.backgroundColor = UIColor.init(named: "GreenHighlight")
-        pagerController.view.backgroundColor = UIColor.init(named: "GreenHighlight")
+        pagerController.scrollIndicator.backgroundColor = UIColor.init(named: "on_green")
+        pagerController.pageSegmentedControl.backgroundColor = UIColor.init(named: "header_color")
+        pagerController.view.backgroundColor = UIColor.init(named: "header_color")
         
         if UserDefaults.standard.object(forKey: "selectedMyContest") as? String == "upcoming"{
             

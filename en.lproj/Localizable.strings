@@ -61,9 +61,12 @@
 
 "Change Language" = "Change Language";
 "%@ Left" = "%@ Left";
+"Favourite: %@%%" = "Favourite: %@%%";
 
 "CONTESTS" = "CONTESTS";
 "Total Prize" = "Total Prize";
+"Prize List" = "Prize List";
+
 "Entry %d" = "Entry %d";
 "Entry %@" = "Entry %@";
 "Entry Free" = "Entry Free";
@@ -102,6 +105,7 @@
 "Pick 3-6 Bowlers" = "Pick 3-6 Bowlers";
 "(%d)" = "(%d)";
 
+
 "Your squad can not cross 11 players" = "Your squad can not cross 11 players";
 "Total credit value can not be greater than 100" = "Total credit value can not be greater than 100";
 "Not more than 6 Batsmen" = "Not more than 6 Batsmen";
@@ -126,10 +130,14 @@
 
 "CONFIRMATION" = "CONFIRMATION";
 "Your total coins = %@" = "Your total coins = %@";
+"Contest Available : %@" = "Contest Available : %@";
+"Rank %@" = "Rank %@";
+"Rank %@ - Rank %@" = "Rank %@ - Rank %@";
+
 
 "To Pay" = "To Pay";
 "Entry" = "Entry";
-"Apply Free Contest" = "Apply Free Contest";
+"Apply Bonus Coin" = "Apply Bonus Coin";
 "JOIN CONTEST" ="JOIN CONTEST";
 "You don't have enough coins" = "You don't have enough coins";
 "BUY COINS" = "BUY COINS";
@@ -167,9 +175,9 @@
 "Pending Withdraw" = "Pending Withdraw";
 
 "ADD COINS" = "ADD COINS";
-"WITHDRAW PRIZE" = "WITHDRAW PRIZE";
+"WITHDRAW PRIZE" = "WITHDRAW";
 "REDEEM COINS" = "REDEEM COINS";
-"REFER TO A FRIEND" = "REFER TO A FRIEND";
+"REFER TO A FRIEND" = "Refer a Friend";
 
 "Playing History" = "Playing History";
 "Contests" = "Contests";
@@ -177,7 +185,7 @@
 "Matches" = "Matches";
 
 "Personal Details" = "Personal Details";
-"Full Profile" = "Full Profile";
+"Full Profile" = "EDIT PROFILE";
 "Verify Your Profile!" = "Verify Your Profile!";
 "Verified Profile" = "Verified Profile";
 "Profile Verification Pending!" = "Profile Verification Pending!";
@@ -201,7 +209,7 @@
 "Please upload one image at least!" = "Please upload one image at least!";
 
 "1 BDT = 50 Coins" = "1 BDT = 50 Coins";
-"You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT." = "You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT.";
+"Write your amount to get equivalent numbers of coins.Click on the 'ADD COINS' and choose your payment method. Minimum amount is 10 BDT." = "Write your amount to get equivalent numbers of coins.Click on the 'ADD COINS' and choose your payment method. Minimum amount is 10 BDT.";
 "Write amount in BDT to buy Coins" = "Write amount in BDT to buy Coins";
 "Available Coin Packs" = "Available Coin Packs";
 "Payment Methods" = "Payment Methods";
@@ -235,11 +243,11 @@
 
 
 "WITHDRAW REQUEST" = "WITHDRAW REQUEST";
-"Personal bKash phone number" = "Personal bKash phone number";
+"Personal phone number" = "Personal phone number";
 "Send Withdraw Request" = "Send Withdraw Request";
 "Cash-Withdrawl!" = "Cash-Withdrawl!";
 "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT." = "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT.";
-"Personal Bkash number is needed while withdrawing the money." = "Personal Bkash number is needed while withdrawing the money.";
+"Personal number is needed while withdrawing the money." = "Personal number is needed while withdrawing the money.";
 
 "COIN PURCHASE" = "COIN PURCHASE";
 "Payment successfull" = "Payment successfull";
@@ -326,3 +334,29 @@
 "Enter your promo code" = "Enter your promo code";
 "Apply Promo Code" = "Apply Promo Code";
 "Promo Code"= "Promo Code";
+
+"SEL by %" = "SEL by %";
+"GOT IT" = "GOT IT";
+"CHANGE TEAM" = "CHANGE TEAM";
+"CHANGE YOUR TEAM" = "CHANGE YOUR TEAM";
+"You are changing your team, Want to join using the new team" = "You are changing your team, Want to join using the new team";
+
+
+"**You can't search after the date of %@" = "**You can't search after the date of %@";
+"MATCH ARCHIVE" = "MATCH ARCHIVE";
+
+"Announced" = "Announced";
+
+"Choose your withdrawl method" = "Choose your withdrawl method";
+
+
+"Special Offer : redeem coins with your prize money to get extra coins!" = "Special Offer : redeem coins with your prize money to get extra coins!";
+
+"Please provide amount and phone number properly" = "Please provide amount and phone number properly";
+
+"Given numbers are not same!" = "Given numbers are not same!";
+"Please select a payment method!" = "Please select a payment method!";
+
+"You are trying to withdraw more than your balance" = "You are trying to withdraw more than your balance";
+
+"Please select a pack!" = "Please select a pack!";

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -43,7 +43,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e65-PV-7Hj">
                                         <rect key="frame" x="15" y="43.5" width="43.5" height="20"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" name="on_green"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="jpG-Ya-Ec0"/>
                                         </constraints>
@@ -80,11 +80,11 @@
                                                 <rect key="frame" x="5" y="0.0" width="177" height="25"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" name="on_green"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="bNm-dd-sCG" secondAttribute="trailing" constant="5" id="4h7-mf-S88"/>
                                             <constraint firstAttribute="bottom" secondItem="bNm-dd-sCG" secondAttribute="bottom" id="BZn-8M-XJW"/>
@@ -141,7 +141,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtR-a4-2HH">
                                         <rect key="frame" x="1.5" y="53.5" width="43.5" height="20"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" name="on_green"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="5he-qr-6E1"/>
                                         </constraints>
@@ -180,7 +180,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yr9-2g-RNq">
                                         <rect key="frame" x="111.5" y="0.0" width="0.0" height="25"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                        <color key="textColor" name="GreenHighlight"/>
+                                        <color key="textColor" name="on_green"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzD-Vc-bzV">
@@ -189,11 +189,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Joined Contest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDZ-TH-18Q">
                                         <rect key="frame" x="5" y="0.0" width="101.5" height="25"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
-                                        <color key="textColor" name="DefaultTextColor"/>
+                                        <color key="textColor" name="brand_txt_color_black"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="BackgroundColor"/>
+                                <color key="backgroundColor" name="gray_to_dark"/>
                                 <constraints>
                                     <constraint firstItem="yr9-2g-RNq" firstAttribute="leading" secondItem="lDZ-TH-18Q" secondAttribute="trailing" constant="5" id="8Ls-HC-uZZ"/>
                                     <constraint firstItem="XtI-zg-HJA" firstAttribute="top" secondItem="WBs-Yy-Bo2" secondAttribute="top" id="DKn-cZ-Vse"/>
@@ -211,7 +211,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" name="Bg"/>
+                        <color key="backgroundColor" name="cell_bg"/>
                         <constraints>
                             <constraint firstItem="Rcn-eg-wRI" firstAttribute="leading" secondItem="7c4-I8-vOd" secondAttribute="trailing" constant="10" id="G6I-bV-YIf"/>
                             <constraint firstItem="7c4-I8-vOd" firstAttribute="leading" secondItem="tTu-lN-6ej" secondAttribute="trailing" constant="10" id="Heo-BK-918"/>
@@ -260,23 +260,26 @@
     </objects>
     <resources>
         <image name="teamPlaceHolder_icon" width="256" height="256"/>
-        <namedColor name="BackgroundColor">
-            <color red="0.90980392156862744" green="0.91764705882352937" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Bg">
-            <color red="0.96470588235294119" green="0.96862745098039216" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="DefaultTextColor">
             <color red="0.21176470588235294" green="0.27843137254901962" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="GreenHighlight">
-            <color red="0.18823529411764706" green="0.72156862745098038" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GreyTextColor">
             <color red="0.41568627450980394" green="0.41568627450980394" blue="0.41568627450980394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="HighlightGrey">
             <color red="0.81568627450980391" green="0.83529411764705885" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="brand_txt_color_black">
+            <color red="0.28200000524520874" green="0.29800000786781311" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="cell_bg">
+            <color red="0.9649999737739563" green="0.96899998188018799" blue="0.97600001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gray_to_dark">
+            <color red="0.94099998474121094" green="0.94099998474121094" blue="0.94099998474121094" alpha="0.8970000147819519" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="on_green">
+            <color red="0.18799999356269836" green="0.72200000286102295" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

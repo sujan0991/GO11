@@ -110,7 +110,7 @@ class TransactionViewController: UIViewController,UITableViewDelegate,UITableVie
             
             if singleLog["transaction_type"] as! String == "credited" {
                 
-                cell.amountLabel.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.amountLabel.textColor = UIColor.init(named: "on_green")!
                 cell.transactionTypeImageView.image = UIImage(named: "plus_icon")
 
             }else{

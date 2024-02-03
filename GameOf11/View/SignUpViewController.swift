@@ -6,10 +6,15 @@
 //  Copyright © 2019 Flow_Digital. All rights reserved.
 //
 
+
+
+// ********************************This class is not in use anymore***************
 import UIKit
 import SafariServices
 
 import Lottie
+
+import Mixpanel
 
 class SignUpViewController: BaseViewController,UITextFieldDelegate {
     
@@ -174,7 +179,7 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
     
     @IBAction func verifyButtonAction(_ sender: Any) {
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupOTPViewController") as? SignupOTPViewController
         
         self.navigationController?.pushViewController(popupVC!, animated: true)
     }
@@ -211,8 +216,41 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
                 if token != nil {
                     //                self.showStatus(status, msg: msg)
                     
+                    
+                  
+                    
+                    Mixpanel.mainInstance().track(event: "complete_sign_up")// set complete_sign_up event in mixpanel
+                    
+                    //set alias
+                    
+                    //https://help.mixpanel.com/hc/en-us/articles/115004497803-Identity-Management-Best-Practices
+                    
+                    if UserDefaults.standard.bool(forKey: "isAliasSet") == false{
+                        
+                        Mixpanel.mainInstance().createAlias(phn, distinctId: Mixpanel.mainInstance().distinctId)
+                        
+                        UserDefaults.standard.set(true, forKey: "isAliasSet")
+                        
+                        Mixpanel.mainInstance().identify(distinctId: phn)
+                        
+                    }
+                    
+                    
                     AppSessionManager.shared.authToken = token
                     AppSessionManager.shared.save()
+                    
+                    var oldToken = ""
+                    if let oldFcmToken = AppSessionManager.shared.fcmToken{
+                        oldToken = oldFcmToken
+                    }
+                    APIManager.manager.sendFCMToken(old_token: "", new_token: oldToken, action_type: "signup") { (status, msg) in
+                        if status{
+                            print(msg ?? "")
+                        }
+                        else{
+                            print(msg ?? "")
+                        }
+                    }
                     
                     APIManager.manager.getUserOffer(completion: { (status,isOffer,offerMsg,msg) in
                         
@@ -264,7 +302,7 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
     
     @IBAction func loginButtonAction(_ sender: Any) {
         
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginOTPViewController") as? LoginOTPViewController
         
         //        popupVC?.modalPresentationStyle = .overCurrentContext
         //        popupVC?.modalTransitionStyle = .crossDissolve
@@ -278,6 +316,7 @@ class SignUpViewController: BaseViewController,UITextFieldDelegate {
     }
     
 }
+
 
 
 extension String {

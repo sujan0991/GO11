@@ -29,6 +29,7 @@ class PromoCodeViewController: UIViewController,UITableViewDelegate,UITableViewD
         navTitle.text = "PROMO CODE".localized
         promoTextView.placeholder = "Write your promo code".localized
         applyButton.setTitle("Apply Promo Code".localized, for: .normal)
+        applyButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
         promoTableView.delegate = self
         promoTableView.dataSource = self

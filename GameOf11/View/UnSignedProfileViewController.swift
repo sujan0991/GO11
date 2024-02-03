@@ -29,8 +29,8 @@ class UnSignedProfileViewController: UIViewController {
 //        }
 //        
         
-        signUpButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
-        loginButton.buttonRound(5, borderWidth: 0.5, borderColor: UIColor.init(named: "on_green")!)
+        signUpButton.buttonRound(5, borderWidth: 1, borderColor: UIColor.init(named: "brand_red")!)
+        loginButton.buttonRound(5, borderWidth: 1, borderColor: UIColor.init(named: "brand_red")!)
 
         suggestionLabel.text = "You are not logged in. You have to Login or Sign Up to perform your desired action.".localized
         
@@ -88,21 +88,21 @@ class UnSignedProfileViewController: UIViewController {
 //
     @IBAction func signUpButtonAction(_ sender: Any) {
 
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OTPViewController") as? OTPViewController
+        //self.tabBarController?.tabBar.isHidden = true
+        
 
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignupOTPViewController") as? SignupOTPViewController
+
+        print("signUpButtonAction.........")
        self.navigationController?.pushViewController(popupVC!, animated: true)
 
-//        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
-//
-//        popupVC?.phoneNo = "01768431957"
-//        self.navigationController?.pushViewController(popupVC!, animated: true)
     }
-//
+
     @IBAction func logInButtonAction(_ sender: Any) {
 
-        self.tabBarController?.tabBar.isHidden = true
+        //self.tabBarController?.tabBar.isHidden = true
 
-        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginOTPViewController") as? LoginOTPViewController
 
 
 

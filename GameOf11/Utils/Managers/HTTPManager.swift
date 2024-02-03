@@ -38,7 +38,7 @@ public func Request(
        // header.add(name: "Content-Type", value: "application/json")
         
         
-        print(fullUrl, urlString, parameters)
+    
         return AF.request( fullUrl, method: method, parameters: parameters , encoding: encoding, headers: header)
 }
 

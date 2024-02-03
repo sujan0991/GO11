@@ -216,9 +216,9 @@ class PointBreakdownFootballViewController: UIViewController,UITableViewDelegate
                 cell.captainLabel.isHidden = false
                 cell.xLabel.isHidden = false
                 cell.captainLabel.text = "C"
-                cell.captainLabel.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                cell.captainLabel.backgroundColor = UIColor.init(named: "on_green")!
                 cell.xLabel.text = "2x"
-                cell.xLabel.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.xLabel.textColor = UIColor.init(named: "on_green")!
                 
             }else if singlePlayerInfo!.is_vice_captain == 1{
                 
@@ -281,8 +281,27 @@ class PointBreakdownFootballViewController: UIViewController,UITableViewDelegate
             }
             
             
-            self.playerPointLabel.text = "\(singlePlayerInfo?.player_earning_point ?? 0)"
+            var point = 0.0
             
+            if singlePlayerInfo!.is_captain == 1{
+                
+                point = Double((singlePlayerInfo?.player_earning_point)! * 2.0)
+                
+                print("point/............",point)
+                
+                self.playerPointLabel.text = "\(point)"
+               
+            }else if singlePlayerInfo!.is_vice_captain == 1{
+                
+                point = Double((singlePlayerInfo?.player_earning_point)! * 1.5)
+                
+                self.playerPointLabel.text = "\(point)"
+               
+            }else{
+                
+                self.playerPointLabel.text = "\(singlePlayerInfo?.player_earning_point ?? 0)"
+            }
+
             self.assistValueLabel.text = "\(singlePlayerPoint?.assist ?? 0)"
             self.cleansheetValueLabel.text = "\(singlePlayerPoint?.cleansheet ?? 0)"
             self.goal_concededValueLabel.text = "\(singlePlayerPoint?.goal_conceded ?? 0)"

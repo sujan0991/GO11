@@ -10,20 +10,19 @@ import UIKit
 
 
 public enum MatchType:Int {
-    case next = 0
+    case next = 0           //Upcoming match in Home
     case live = 1
     case completed = 2
-    case upcomingContest = 3
-    case liveContest = 4
-    case completedContest = 5
+    
+    case upcomingContest = 3 //JOINED CONTESTS
+    case liveContest = 4     //JOINED CONTESTS
+    case completedContest = 5 //JOINED CONTESTS
 }
 
 
 class BaseViewController: UIViewController,NavigationBarDelegate {
     
-    
-    
-    
+
     // Private variables
     
     private var navBar: CustomNavigationBar!

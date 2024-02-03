@@ -22,9 +22,15 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     
     var bannerArray:[Any] = []
     
+    var page_no = 1
+    var total_page_no : Int!
+
+    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var bannerRatioConstraint: NSLayoutConstraint!
     @IBOutlet weak var adCollectionView: UICollectionView!
+    
     @IBOutlet weak var selectAmatchLabel: UILabel!
     
     @IBOutlet weak var noMatchView: UIView!
@@ -48,8 +54,9 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var gameSegmentControl: BetterSegmentedControl!
     
     
+    @IBOutlet weak var showMoreButton: UIButton!
     
-    
+
     private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -60,6 +67,10 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         //        } else {
         //            // Fallback on earlier versions
         //        }
+        
+        print("fcm............?????", AppSessionManager.shared.fcmToken ?? "no fcm token")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.moveToContestView(_:)), name: NSNotification.Name(rawValue: "notificationRecieved"), object: nil)
         
         SVProgressHUD.show(withStatus: APP_STRING.PROGRESS_TEXT)
         
@@ -73,15 +84,30 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         noContestLabel.text = "You haven't join any upcoming contests. Join the upcoming match contests and prove your skills.".localized
         
         selectAmatchButton.setTitle("SELECT A MATCH".localized, for: .normal)
-        
-        
-        
+  
         self.noContestView.isHidden = true
         
+        
+        
+        print(type)
         if type == .next {
+            
+            adCollectionView.addConstraint(NSLayoutConstraint(item: adCollectionView,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: adCollectionView,
+            attribute: .width,
+            multiplier: 1350 / 460,
+            constant: 0))
+            
+            print("bannerRatioConstraint..........??@@",bannerRatioConstraint.constant)
+            topViewHeight.isActive = false
+            bannerRatioConstraint.isActive = true
+            self.view.layoutIfNeeded()
             
             adCollectionView.delegate = self
             adCollectionView.dataSource = self
+            
             
             APIManager.manager.getBannerList(pageName: "homepage") { (bannerArray) in
                 
@@ -89,15 +115,27 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                 self.bannerArray = bannerArray
                 
                 self.adCollectionView.reloadData()
+                
             }
             
-        }else{
+        }else {
             
-            topViewHeight.constant = 0
+            //don't show ad.
+            
+            adCollectionView.addConstraint(NSLayoutConstraint(item: adCollectionView,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: adCollectionView,
+            attribute: .width,
+            multiplier: 0,
+            constant: 0))
+            
+            print("bannerRatioConstraint..........??",bannerRatioConstraint.constant)
+            topViewHeight.isActive = true
+            bannerRatioConstraint.isActive = false
+            self.view.layoutIfNeeded()
+            
         }
-        
-        
-        
         
         
         matchListTableView.refreshControl = refreshControl
@@ -109,14 +147,37 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         gameSegmentControl.segments = LabelSegment.segments(withTitles: ["Cricket", "Football"],
                                                             normalFont: UIFont(name: "OpenSans-Bold", size: 13.0)!,
                                                             selectedFont: UIFont(name: "OpenSans-Bold", size: 13.0)!,
-                                                            selectedTextColor: UIColor.init(named: "GreenHighlight")!)
+                                                            selectedTextColor: UIColor.init(named: "brand_red")!)
         // gameSegmentControl.setIndex(1)
         
     }
     
+//    override func updateViewConstraints() {
+//        super.updateViewConstraints()
+//
+//        if type == .next {
+//
+//            topViewHeight.isActive = false
+//            bannerRatioConstraint.isActive = true
+//            self.view.layoutIfNeeded()
+//            self.view.setNeedsLayout()
+//
+//        }else {
+//
+//            topViewHeight.isActive = true
+//            bannerRatioConstraint.isActive = false
+//            self.view.layoutIfNeeded()
+//            self.view.setNeedsLayout()
+//        }
+//
+//    }
+    
     
     @IBAction func gameChangeAction(_ sender:
         BetterSegmentedControl) {
+        
+        
+        self.showMoreButton.isHidden = true
         
         print("The selected index is...... \(sender.index)")
         
@@ -147,9 +208,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-
-            
+    
             if #available(iOS 13, *) {
                       if UserDefaults.standard.bool(forKey: "DarkMode"){
                           
@@ -162,6 +221,14 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                   }else{
                       
                   }
+        
+        if type != .next {
+            
+            topViewHeight.isActive = true
+            bannerRatioConstraint.isActive = false
+            self.view.layoutIfNeeded()
+           
+        }
         
         print("viewWillAppear..............match",UserDefaults.standard.string(forKey: "selectedGameType"))
         self.noMatchView.isHidden = true
@@ -190,13 +257,11 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         // print("viewDidAppear..............match")
         
+        
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.gameSelectAction(_:)), name: NSNotification.Name(rawValue: "gameChange"), object: nil)
         
-        
-        
-        
-        
+       
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -205,10 +270,46 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "gameChange"), object: nil)
     }
     
+    @objc func moveToContestView(_ notification: NSNotification) {
+        
+        print("noti info...........",notification.userInfo)
+       
+        
+        if let totalfup = Int(notification.userInfo?["match_id"] as! String)
+        {
+           
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                
+                getData()
+                gameSegmentControl.setIndex(0)
+                if let index = self.matches.firstIndex(where: {$0.matchId == totalfup}){
+                    let indexPath = IndexPath(row: 0 , section: index)
+                    matchListTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                    matchListTableView.delegate?.tableView!(matchListTableView, didSelectRowAt: indexPath)
+             
+                }
+            }else{
+                
+                getFootBallData()
+                gameSegmentControl.setIndex(1)
+                if let index = self.footBallmatches.firstIndex(where: {$0.matchId == totalfup}){
+                    let indexPath = IndexPath(row: 0 , section: index)
+                    matchListTableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                    matchListTableView.delegate?.tableView!(matchListTableView, didSelectRowAt: indexPath)
+             
+                }
+               
+            }
+            
+            
+        }
+       
+   
+    }
     
     func getData(){
         
-        
+        self.page_no = 1
         self.noMatchView.isHidden = true
         self.noContestView.isHidden = true
         
@@ -230,6 +331,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             APIManager.manager.getUpcomingMatchList { (nextMatches) in
                 self.matches = nextMatches
                 self.matchListTableView.reloadData()
+               
                 
                 if self.matches.count == 0{
                     
@@ -292,27 +394,47 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         }
         else  if type == .completedContest
         {
-            APIManager.manager.getUserJoinedCompletedMatchList { (nextMatches) in
-                
-                
-                self.matches = nextMatches
-                self.matchListTableView.reloadData()
-                //                if self.matches.count == 0{
-                //
-                //                    self.noContestView.isHidden = false
-                //                }else{
-                //                     self.noContestView.isHidden = true
-                //                }
-            }
+           getCompletedMatch(pageNo: 1)
         }
         
         self.refreshControl.endRefreshing()
         
     }
     
+    func getCompletedMatch(pageNo:Int){
+        
+        let p_no:String = String(describing: pageNo)
+
+        APIManager.manager.getUserJoinedCompletedMatchList(page_no: p_no) { (nextMatches,pageCount) in
+            
+            print("pageCount......",pageCount ?? 0)
+            
+            if self.page_no == 1{
+                
+                self.total_page_no = pageCount
+                
+                self.matches = nextMatches
+                
+            }else{
+                
+                self.matches.append(contentsOf: nextMatches)
+            }
+
+            print("self.matches",self.matches.count)
+            self.matchListTableView.reloadData()
+            //                if self.matches.count == 0{
+            //
+            //                    self.noContestView.isHidden = false
+            //                }else{
+            //                     self.noContestView.isHidden = true
+            //                }
+        }
+    }
+    
     func getFootBallData(){
         
         print("get football data...............")
+        self.page_no = 1
         
         self.noMatchView.isHidden = true
         self.noContestView.isHidden = true
@@ -394,23 +516,43 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         }
         else  if type == .completedContest
         {
-            APIManager.manager.getUserJoinedCompletedFootballMatchList { (nextMatches) in
-                
-                
-                self.footBallmatches = nextMatches
-                self.matchListTableView.reloadData()
-                //                if self.matches.count == 0{
-                //
-                //                    self.noContestView.isHidden = false
-                //                }else{
-                //                     self.noContestView.isHidden = true
-                //                }
-            }
+            getCompletedFootballMatch(pageNo: 1)
+        
         }
         
         self.refreshControl.endRefreshing()
     }
     
+    func getCompletedFootballMatch(pageNo:Int){
+        
+        let p_no:String = String(describing: pageNo)
+
+        APIManager.manager.getUserJoinedCompletedFootballMatchList(page_no: p_no) { (nextMatches,pageCount) in
+            
+            print("pageCount......",pageCount ?? 0)
+            
+            if self.page_no == 1{
+                
+                self.total_page_no = pageCount
+                
+                self.footBallmatches = nextMatches
+                
+            }else{
+                
+                self.footBallmatches.append(contentsOf: nextMatches)
+            }
+
+            print("self.matches",self.matches.count)
+            self.matchListTableView.reloadData()
+            //                if self.matches.count == 0{
+            //
+            //                    self.noContestView.isHidden = false
+            //                }else{
+            //                     self.noContestView.isHidden = true
+            //                }
+        }
+    }
+
     
     @IBAction func selectAMatchbuttonAction(_ sender: Any) {
         
@@ -467,31 +609,56 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             }else{
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier:"MatchCell") as! MatchTableViewCell
-                
+                //brand_red
+                //on_green
                 if type == .upcomingContest{
                     
                     
                     cell.statusLabel.text = String.init(format:"%@ Left".localized.uppercased(),match.joiningLastTime?.localized.uppercased() ?? "" )
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "on_green")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "on_green")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.statusLabel.textColor = UIColor.init(named: "brand_red")!
                     
+//                    cell.statusBackground.backgroundColor = UIColor.init(named: "on_green")!
+//                    cell.firstTeamName.backgroundColor = UIColor.init(named: "on_green")!
+//                    cell.secondTeamName.backgroundColor = UIColor.init(named: "on_green")!
+//
                 }else if type == .liveContest{
                     
                     cell.statusLabel.text = String.init(format: "IN PROGRESS".localized)
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "Blue")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "Blue")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "Blue")!
+                    cell.statusLabel.textColor = UIColor.init(named: "Blue")!
+                    
+//                    cell.statusBackground.backgroundColor = UIColor.init(named: "Blue")!
+//                    cell.firstTeamName.backgroundColor = UIColor.init(named: "Blue")!
+//                    cell.secondTeamName.backgroundColor = UIColor.init(named: "Blue")!
                     cell.contestLabel.textColor = UIColor.init(named: "Blue")!
                     
                 }else if type == .completedContest{
                     
                     
                     cell.statusLabel.text = String.init(format: "COMPLETED".localized )
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "on_green")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "on_green")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "on_green")!
+                    cell.statusLabel.textColor = UIColor.init(named: "on_green")!
                     
+//                    cell.statusBackground.backgroundColor = UIColor.init(named: "on_green")!
+//                    cell.firstTeamName.backgroundColor = UIColor.init(named: "on_green")!
+//                    cell.secondTeamName.backgroundColor = UIColor.init(named: "on_green")!
+//
+                    if indexPath.section == (matches.count) - 3 {
+                        
+                        print("(self.matches.count) - 3")
+                        
+                        if total_page_no > page_no { // more items to fetch
+                            
+                            
+                            page_no = page_no + 1
+                            
+                            getCompletedMatch(pageNo: page_no)
+                            
+                        }else{
+                            
+                            showMoreButton.isHidden = false
+                            
+                        }
+                    }
+
                 }
                 
                 cell.setInfo(match)
@@ -541,26 +708,43 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
                     
                     
                     cell.statusLabel.text = String.init(format:"%@ Left".localized.uppercased(),match.joiningLastTime?.localized.uppercased() ?? "" )
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                   cell.statusLabel.textColor = UIColor.init(named: "brand_red")!
                     
                 }else if type == .liveContest{
                     
                     cell.statusLabel.text = String.init(format: "IN PROGRESS".localized)
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "Blue")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "Blue")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "Blue")!
+                    cell.statusLabel.textColor = UIColor.init(named: "Blue")!
+                                        
+                    //                    cell.statusBackground.backgroundColor = UIColor.init(named: "Blue")!
+                    //                    cell.firstTeamName.backgroundColor = UIColor.init(named: "Blue")!
+                    //                    cell.secondTeamName.backgroundColor = UIColor.init(named: "Blue")!
                     cell.contestLabel.textColor = UIColor.init(named: "Blue")!
-                    
+                                        
                 }else if type == .completedContest{
                     
                     
                     cell.statusLabel.text = String.init(format: "COMPLETED".localized )
-                    cell.statusBackground.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.firstTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
-                    cell.secondTeamName.backgroundColor = UIColor.init(named: "GreenHighlight")!
+                    cell.statusLabel.textColor = UIColor.init(named: "on_green")!
                     
+                    if indexPath.section == (matches.count) - 3 {
+                        
+                        print("(self.matches.count) - 3")
+                        
+                        if total_page_no > page_no { // more items to fetch
+                            
+                            
+                            page_no = page_no + 1
+                            
+                            getCompletedFootballMatch(pageNo: page_no)
+                            
+                        }else{
+                            
+                            showMoreButton.isHidden = false
+                            
+                        }
+                    }
+
+                                       
                 }
                 
                 cell.setFootballInfo(match)
@@ -584,7 +768,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         SVProgressHUD.show()
-        print("didSelectRowAt............")
+        print("didSelectRowAt............ \(indexPath.section)")
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
@@ -722,7 +906,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
         if type == .next{
             
-            return 120
+            return 140
         }
         return 150
     }
@@ -776,9 +960,7 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
-        return CGSize(width: collectionView.frame.size.width - 30, height: collectionView.frame.size.height)
+        return CGSize(width: collectionView.frame.size.width , height: collectionView.frame.size.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -795,8 +977,23 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
         
     }
     
-    
-    
+    @IBAction func showMoreButtonAction(_ sender: Any) {
+        
+        let popupVC = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CompletedMatchViewController") as? CompletedMatchViewController
+       
+        popupVC?.modalPresentationStyle = .fullScreen
+        popupVC?.modalTransitionStyle = .crossDissolve
+        
+        let navigationController = UINavigationController.init(rootViewController: popupVC ?? popupVC ?? self)
+        navigationController.isNavigationBarHidden = true
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        self.present(navigationController, animated: true) {
+            
+            SVProgressHUD.dismiss()
+            print("")
+        }
+    }
     
     
     @objc func gameSelectAction(_ notification: NSNotification) {
@@ -810,14 +1007,12 @@ class MatchViewController : BaseViewController,UITableViewDelegate,UITableViewDa
             if notification.userInfo!["isSelected"]! as! Bool == true{
                 
                 UserDefaults.standard.set("cricket", forKey: "selectedGameType")
-                
                 getData()
                 
             }else{
                 
                 
                 UserDefaults.standard.set("football", forKey: "selectedGameType")
-                
                 getFootBallData()
             }
             

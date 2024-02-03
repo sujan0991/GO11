@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="paymentChannelCell" rowHeight="53" id="KGk-i7-Jjw" customClass="PaymentChannelCell" customModule="GO11_Pro" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="317" height="53"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="317" height="53"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bkash_rect_logo" translatesAutoresizingMaskIntoConstraints="NO" id="POc-0O-Yyp">
+                        <rect key="frame" x="0.0" y="12" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="46B-ha-2Hu"/>
+                            <constraint firstAttribute="width" secondItem="POc-0O-Yyp" secondAttribute="height" multiplier="1:1" id="JqP-Aa-g6w"/>
+                            <constraint firstAttribute="height" constant="25" id="yER-Q1-pGJ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="tC3-0a-D8i">
+                        <rect key="frame" x="30" y="5" width="192" height="39"/>
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
+                        <color key="textColor" name="brand_txt_color_black"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radioDeSelected" translatesAutoresizingMaskIntoConstraints="NO" id="C1c-r2-G4e">
+                        <rect key="frame" x="272" y="12" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="46G-NE-z4t"/>
+                            <constraint firstAttribute="width" constant="25" id="lF2-Yd-WBS"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="POc-0O-Yyp" secondAttribute="bottom" constant="12" id="1cc-fo-R3L"/>
+                    <constraint firstItem="C1c-r2-G4e" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7Bz-dV-wUI"/>
+                    <constraint firstAttribute="bottom" secondItem="tC3-0a-D8i" secondAttribute="bottom" constant="5" id="ACN-Lo-K6r"/>
+                    <constraint firstItem="tC3-0a-D8i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ZVx-Na-TLT"/>
+                    <constraint firstItem="POc-0O-Yyp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="dTW-Wo-ttq"/>
+                    <constraint firstItem="tC3-0a-D8i" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eQe-pp-JGa"/>
+                    <constraint firstItem="tC3-0a-D8i" firstAttribute="leading" secondItem="POc-0O-Yyp" secondAttribute="trailing" constant="5" id="fJD-XW-wcB"/>
+                    <constraint firstItem="C1c-r2-G4e" firstAttribute="leading" secondItem="tC3-0a-D8i" secondAttribute="trailing" constant="50" id="hWz-9j-a5u"/>
+                    <constraint firstItem="POc-0O-Yyp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="n1U-V2-SPz"/>
+                    <constraint firstAttribute="trailing" secondItem="C1c-r2-G4e" secondAttribute="trailing" constant="20" id="uk2-Aa-E3z"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="methodIcon" destination="POc-0O-Yyp" id="GRa-qG-Tmp"/>
+                <outlet property="methodName" destination="tC3-0a-D8i" id="YYy-fK-jh2"/>
+                <outlet property="radioButton" destination="C1c-r2-G4e" id="11r-2F-rje"/>
+            </connections>
+            <point key="canvasLocation" x="13.6" y="89.505247376311857"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bkash_rect_logo" width="150" height="150"/>
+        <image name="radioDeSelected" width="30" height="30"/>
+        <namedColor name="brand_txt_color_black">
+            <color red="0.28200000524520874" green="0.29800000786781311" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

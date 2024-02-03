@@ -22,8 +22,10 @@ class MatchList: Glossy {
     var format: String?
     var join_ends_before: Int?
     
+    var availableContest : Int?
     var totalJoinedContests: Int?
     var teams: [MatchTeams] = []
+    var isLineUpOut: Int?
     
     required init?(json: Gloss.JSON) {
         matchId = "match_id" <~~ json
@@ -32,9 +34,11 @@ class MatchList: Glossy {
         matchName = "match_name" <~~ json
         matchTime = "match_time" <~~ json
         format = "format" <~~ json
+        availableContest = "contest_count" <~~ json
         join_ends_before = "join_ends_before" <~~ json
         totalJoinedContests = "total_joined_contests" <~~ json
         teams = ("teams" <~~ json) ?? []
+        isLineUpOut = "is_lineup_out" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -47,7 +51,9 @@ class MatchList: Glossy {
             "format" ~~> format,
             "join_ends_before" ~~> join_ends_before,
             "total_joined_contests" ~~> totalJoinedContests,
-            "teams" ~~> teams
+            "teams" ~~> teams,
+            "is_lineup_out" ~~> isLineUpOut,
+            "contest_count" ~~> availableContest
             ])
     }
     
@@ -76,11 +82,16 @@ class FootBallMatchList: Glossy {
     var tournamentName: String?
     var matchName: String?
     var matchTime: String?
+    var format: String?
+   
+    var availableContest : Int?
+
    
     var join_ends_before: Int?
     
     var totalJoinedContests: Int?
     var teams: [FootBallMatchTeams] = []
+    var isLineUpOut: Int?
     
     var joiningLastTime: String? {
         
@@ -102,10 +113,13 @@ class FootBallMatchList: Glossy {
         tournamentName = "tournament_name" <~~ json
         matchName = "match_name" <~~ json
         matchTime = "match_time" <~~ json
+        
+        availableContest = "contest_count" <~~ json
        
         join_ends_before = "join_ends_before" <~~ json
         totalJoinedContests = "total_joined_contests" <~~ json
         teams = ("teams" <~~ json) ?? []
+        isLineUpOut = "is_lineup_out" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -117,7 +131,9 @@ class FootBallMatchList: Glossy {
             "match_time" ~~> matchTime,
             "join_ends_before" ~~> join_ends_before,
             "total_joined_contests" ~~> totalJoinedContests,
-            "teams" ~~> teams
+            "teams" ~~> teams,
+            "is_lineup_out" ~~> isLineUpOut,
+            "contest_count" ~~> availableContest
             ])
     }
     
@@ -625,9 +641,11 @@ class Player: Glossy {
     var playerImage: String?
     var creditPoints: Double?
     var teamBelong: Int?
+    var selectedPer : Double?
     var playerSelected: Bool = false
     var isCaptain: Bool = false
     var isViceCaptain: Bool = false
+    var is_in_playing_xi: Int?
     
     required init?(json: Gloss.JSON) {
         playerId = "player_id" <~~ json
@@ -638,8 +656,9 @@ class Player: Glossy {
         
         playerImage = playerImage?.trimForURL()
         creditPoints = "credit_points" <~~ json
+        selectedPer = "selected_percentage" <~~ json
         teamBelong = "team_belong" <~~ json
-        
+        is_in_playing_xi = "is_in_playing_xi" <~~ json
         //  playerSelected = "playerSelected" <~~ json ?? false
         //  isCaptain = "playerSeisCaptainlected" <~~ json ?? false
         //  isViceCaptain = "isViceCaptain" <~~ json ?? false
@@ -654,8 +673,9 @@ class Player: Glossy {
             "role" ~~> role,
             "player_image" ~~> playerImage,
             "credit_points" ~~> creditPoints,
+            "selected_percentage" ~~> selectedPer,
             "team_belong" ~~> teamBelong,
-            
+            "is_in_playing_xi" ~~> is_in_playing_xi,
             "playerSelected" ~~> playerSelected,
             "isCaptain" ~~> isCaptain,
             "isViceCaptain" ~~> isViceCaptain
@@ -675,11 +695,16 @@ class UserModel: Glossy {
     
     var id: Int?
     var name: String?
+    var username: String?
     var email: String?
     var phone: String?
    
     var userTypeId: Int?
     var avatarId: Int?//skippable
+    var profile_completion_percentage: String?
+    var is_username_updated: Int?
+    var profile_completion_bonus: Int?
+    var profile_picture: String?
     
     var sex: String?
     var address: String?
@@ -694,19 +719,30 @@ class UserModel: Glossy {
     var metadata: ProfileMetaData?
     var avatar: ProfileAvatar?
     
+    var paymentMethod: PaymentMethod?
+    
     var referralCode: String?
     var referralLaw: String?
     var referralMessage: String?
     var minWithdrawLimit: Float?
+    var maxWithdrawLimit: Float?
+    
+    var created_at: String?
     
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
         name = "name" <~~ json
+        username = "username" <~~ json
         email = "email" <~~ json
         phone = "phone" <~~ json
         userTypeId = "user_type_id" <~~ json
         avatarId = "avatar_id" <~~ json
         sex = "sex" <~~ json
+        profile_completion_percentage = "profile_completion_percentage" <~~ json
+        is_username_updated = "is_username_updated" <~~ json
+        profile_completion_bonus = "profile_completion_bonus" <~~ json
+        profile_picture = "profile_picture" <~~ json
+        
         
         address = "address" <~~ json
         city = "city" <~~ json
@@ -723,8 +759,13 @@ class UserModel: Glossy {
         
         metadata = ("metadata" <~~ json)
         avatar = ("avatar" <~~ json)
+        paymentMethod = ("payment_method" <~~ json)
         
+        maxWithdrawLimit = ("maximum_withdraw_amount" <~~ json)
         minWithdrawLimit = ("minimum_withdraw_amount" <~~ json)
+        
+        created_at = ("created_at" <~~ json)
+        
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -747,12 +788,22 @@ class UserModel: Glossy {
             "referral_message" ~~> referralMessage,
             "is_blocked" ~~> isBlocked,
             
-            
+            "username" ~~> username,
+            "profile_completion_percentage" ~~> profile_completion_percentage,
+            "is_username_updated" ~~> is_username_updated,
+            "profile_completion_bonus" ~~> profile_completion_bonus,
+            "profile_picture" ~~> profile_picture,
             
             "metadata" ~~> metadata,
             "avatar" ~~> avatar,
+            "payment_method" ~~> paymentMethod,
             
-            "maximum_withdraw_amount" ~~> minWithdrawLimit
+            "maximum_withdraw_amount" ~~> maxWithdrawLimit,
+            
+            "minimum_withdraw_amount" ~~> minWithdrawLimit,
+            
+            "created_at" ~~> created_at
+            
             ])
     }
 }
@@ -820,6 +871,26 @@ class ProfileMetaData: Glossy {
             "referral_contest_unlocked" ~~> referral_contest_unlocked,
             
             "verification_cancel_reason" ~~> verification_cancel_reason
+            ])
+    }
+}
+
+class PaymentMethod: Glossy {
+    
+    var foster: Int?
+    var ghoori: Int?
+    
+    
+    required init?(json: Gloss.JSON) {
+        foster = "foster" <~~ json
+        ghoori = "ghoori" <~~ json
+  
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            "foster" ~~> foster,
+            "ghoori" ~~> ghoori
             ])
     }
 }
@@ -915,7 +986,8 @@ class ContestData: Glossy {
     var prizeConditionMsg: String?
     var prizes: [ContestPrizes] = []
     var is_free_allowed : Int?
-    
+    var userTeamId : Int?
+  
     required init?(json: Gloss.JSON) {
         id = "id" <~~ json
         matchId = "match_id" <~~ json
@@ -935,6 +1007,7 @@ class ContestData: Glossy {
         prizeConditionMsg = "prize_condition_message" <~~ json
         prizes = "prize" <~~ json ?? []
         is_free_allowed = "is_free_allowed" <~~ json
+        userTeamId = "user_team_id" <~~ json
     }
     
     func toJSON() -> Gloss.JSON? {
@@ -956,7 +1029,8 @@ class ContestData: Glossy {
             "updated_at" ~~> updatedAt,
             "prize_condition_message" ~~> prizeConditionMsg,
             "prize" ~~> prizes,
-            "is_free_allowed" ~~> is_free_allowed
+            "is_free_allowed" ~~> is_free_allowed,
+            "is_free_allowed" ~~> userTeamId
             ])
     }
 }
@@ -1500,3 +1574,45 @@ class BreakDownData: Glossy {
             ])
     }
 }
+
+
+class PaymentChannels: Glossy {
+    
+    var channel_name:String?
+    var bangla_name:String?
+    var english_name:String?
+    var icon: String?
+    var is_active:Int?
+    var max_pay_amount: Int?
+    var min_pay_amount: Int?
+    
+    
+    
+    required init?(json: Gloss.JSON) {
+        channel_name = "channel_name" <~~ json
+        bangla_name = "bangla_name" <~~ json
+        english_name = "english_name" <~~ json
+        is_active = "is_active" <~~ json
+        icon = "icon" <~~ json
+        max_pay_amount = "max_pay_amount" <~~ json
+        min_pay_amount = "min_pay_amount" <~~ json
+        
+    }
+    
+    func toJSON() -> Gloss.JSON? {
+        return jsonify([
+            
+            "channel_name" ~~> channel_name ,
+            "bangla_name" ~~> bangla_name,
+            "english_name" ~~> english_name,
+            "is_active" ~~> is_active,
+            "icon" ~~> icon,
+            "max_pay_amount" ~~> max_pay_amount,
+            "min_pay_amount" ~~> min_pay_amount,
+            
+            
+            ])
+    }
+}
+
+

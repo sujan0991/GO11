@@ -76,9 +76,6 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
                                 print("userTeam.batsman id",userPlayer.id!)
                                 
                                 player.playerSelected = true
-                                
-                                
-                                
                                 if userPlayer.isCaptain == 1{
                                     
                                     player.isCaptain = true
@@ -677,7 +674,7 @@ class TeamPreviewViewController: BaseViewController, UITableViewDelegate,UITable
         
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        label.textColor = UIColor.init(named: "Bg") // my custom colour
+        label.textColor = UIColor.init(named: "LightGray") // my custom colour
         label.textAlignment = .center
         headerView.addSubview(label)
         

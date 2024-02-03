@@ -16,7 +16,7 @@ final class AppSessionManager: NSObject, Glossy {
     
     var currentUser: UserModel?
     var authToken:String?
-
+    var fcmToken:String?
     //---------------------------------------------------
     // MARK: - Gloss - Decodable
     //---------------------------------------------------
@@ -26,7 +26,8 @@ final class AppSessionManager: NSObject, Glossy {
         // property initializations
         currentUser = "currentUser" <~~ json
         authToken = "authToken" <~~ json
-
+        fcmToken = "fcm" <~~ json
+        
         super.init()
     }
 
@@ -55,7 +56,8 @@ final class AppSessionManager: NSObject, Glossy {
     func toJSON() -> Gloss.JSON? {
         return jsonify([
             "currentUser" ~~> currentUser,
-            "authToken" ~~> authToken
+            "authToken" ~~> authToken,
+            "fcm" ~~> fcmToken
             ])
     }
     
@@ -172,6 +174,7 @@ final class AppSessionManager: NSObject, Glossy {
         
         AppSessionManager.shared.currentUser = nil
         AppSessionManager.shared.authToken = nil
+        
         AppSessionManager.shared.save()
         
         let sb: UIStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)

@@ -11,7 +11,7 @@ import SafariServices
 import IQKeyboardManagerSwift
 
 
-class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelegate,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate {
+class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelegate,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var bDTtoCoinLabel: UILabel!
     
@@ -26,17 +26,44 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var paymentView: UIView!
     
-    @IBOutlet weak var selectBkashButton: UIButton!
-    @IBOutlet weak var selectCardButton: UIButton!
+    
     @IBOutlet weak var selectTermButton: UIButton!
     
     
     @IBOutlet weak var paymentMethodsLabel: UILabel!
-    @IBOutlet weak var bKashLabel: UILabel!
-    @IBOutlet weak var cardLabel: UILabel!
+    
+    @IBOutlet weak var paymentChannelTableView: UITableView!
+    
+    
     
     @IBOutlet weak var payButton: UIButton!
     
+    
+    
+    @IBOutlet weak var paymentViewHeight: NSLayoutConstraint!
+    
+    struct Channels {
+        let name: String
+        let channelName: String
+        let max: Int
+        let min: Int
+        let icon: String
+        var selected: Bool
+    }
+    
+    var methodLists: [Channels] = []
+    
+    
+    private var selectedPaymentMethod: Int? {
+        didSet {
+            paymentChannelTableView.reloadData()
+        }
+    }
+    
+    var selectedChannelType = "None"
+    var isCoinPack = "no"
+    
+    var channels:[PaymentChannels] = []
     
     let formatter = NumberFormatter()
     
@@ -57,16 +84,16 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         tkAmountTextField.delegate = self
         
         bDTtoCoinLabel.text = "1 BDT = 50 Coins".localized
-        suggestionLabel.text = "You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT.".localized
+        suggestionLabel.text = "Write your amount to get equivalent numbers of coins.Click on the 'ADD COINS' and choose your payment method. Minimum amount is 10 BDT.".localized
         tkAmountTextField.placeholder = "Write amount in BDT to buy Coins".localized
         
+        addCoinButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         addCoinButton.setTitle("ADD COINS".localized, for: .normal)
         
         availableCoinPackLabel.text = "Available Coin Packs".localized
         
         paymentMethodsLabel.text = "Payment Methods".localized
-        bKashLabel.text = "bKash Digital Payment".localized
-        cardLabel.text = "Credit/Debit Cards/Mobile\nBanking/Online Banking".localized
+        
         payButton.setTitle("PAY NOW".localized, for: .normal)
         
         
@@ -95,30 +122,91 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         shadowView.addGestureRecognizer(tap)
         
+        //get payment channel
+        
+        getPaymentChannel()
+        
+        paymentChannelTableView.delegate = self
+        paymentChannelTableView.dataSource = self
+        paymentChannelTableView.tableFooterView = UIView()
+        paymentChannelTableView.register(UINib(nibName: "PaymentChannelCell", bundle: nil), forCellReuseIdentifier: "paymentChannelCell")
+        
     }
     
- 
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         
         shadowView.isHidden = true
         paymentView.isHidden = true
         
         if #available(iOS 13, *) {
-                  if UserDefaults.standard.bool(forKey: "DarkMode"){
-                      
-                      overrideUserInterfaceStyle = .dark
-                      
-                  }else{
-                      overrideUserInterfaceStyle = .light
-                  }
-              
-              }else{
-                  
-              }
+            if UserDefaults.standard.bool(forKey: "DarkMode"){
+                
+                overrideUserInterfaceStyle = .dark
+                
+            }else{
+                overrideUserInterfaceStyle = .light
+            }
+            
+        }else{
+            
+        }
+        // to remove previous selection
+        
+        if selectedPaymentMethod != nil{
+            
+            selectedPaymentMethod = nil
+            selectedChannelType = "None"
+            
+        }
+            
+       
+    }
+    
+    
+    func getPaymentChannel(){
+        
+        var lang = ""
+        if Language.language == Language.english{
+            lang = "EN"
+        }else{
+            lang = "BN"
+        }
+        APIManager.manager.getPaymentChannelList(lang: lang) { (status, msg, channelList) in
+            
+            if status{
+                
+                self.channels = channelList
+                
+                
+            }else{
+                
+                print("no channel.......")
+                
+                let alertController = UIAlertController(title: "", message: msg, preferredStyle: UIAlertController.Style.alert)
+                
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    
+                    self.GoBack()
+                    
+                }))
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+        
+        
+    }
+    
+    func GoBack(){
+
+        self.navigationController?.popViewController(animated: true)
     }
 
+    
     
     @IBAction func backButtonAction(_ sender: Any) {
         
@@ -133,6 +221,51 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
             
             self.paymentView.isHidden = false
             self.shadowView.isHidden = false
+            
+            
+            //remove all before inserting
+            self.methodLists.removeAll()
+            
+            // to remove previous selection
+            
+            if selectedPaymentMethod != nil{
+                
+                selectedPaymentMethod = nil
+                selectedChannelType = "None"
+                
+            }
+            
+            for channel in self.channels{
+                
+                let name = channel.english_name!
+                let channelName = channel.channel_name!
+                let icon = channel.icon!
+                let maxPay = channel.max_pay_amount!
+                let minPay = channel.min_pay_amount!
+                
+                print("method.min amount", minPay)
+                let tkAmount = (tkAmountTextField.text! as NSString).intValue
+                
+                if tkAmount >= minPay && tkAmount <= maxPay{
+                    
+                    //add in methodlist
+                    let new = Channels(name: name, channelName: channelName,max:maxPay ,min: minPay,icon: icon, selected: false)
+                    
+                    self.methodLists.append(new)
+
+                }
+
+            }
+            
+            print("self.methodLists.count....", self.methodLists.count)
+            
+            self.paymentChannelTableView.reloadData()
+            
+            // set view height based on tableview height
+            self.paymentViewHeight.constant = self.paymentChannelTableView.contentSize.height + 180
+            
+            
+            
             self.paymentView.frame = CGRect(x: 0, y:self.view.frame.height, width: self.paymentView.frame.width, height: self.paymentView.frame.height)
             
             let bottonSpace = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 1.0
@@ -140,16 +273,16 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
             
             UIView.animate(withDuration:0.2, animations: {
                 
-                
                 self.paymentView.frame = CGRect(x: 0, y:self.view.frame.height - self.paymentView.frame.height - bottonSpace, width: self.paymentView.frame.width, height: self.paymentView.frame.height)
                 
             }) { _ in
                 
                 
             }
+        }else{
             
-            
-            
+            self.view.makeToast("Please give an input")
+
         }
         
     }
@@ -193,7 +326,64 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         let singlePack = coinPackArray[indexPath.item] as! Dictionary<String,Any>
         
         tkAmountTextField.text = "\(String(describing: singlePack["amount"]!))"
+        
+        isCoinPack = "yes"
     }
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        // return withdrawListArray.count
+        return methodLists.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier:"paymentChannelCell") as! PaymentChannelCell
+
+        //cell.radioButton.image =
+        // 2
+        cell.selectionStyle = .none
+        // 3
+        let method = methodLists[indexPath.row]
+        
+        // 4
+        let currentIndex = indexPath.row
+        // 5
+        let selected = currentIndex == selectedPaymentMethod
+        // 6
+        //cell.configure(method.name,method.icon)
+        cell.configure(method.name)
+       
+        // 7
+        cell.isSelected(selected)
+        // 8
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        updateSelectedIndex(indexPath.row)
+
+        let method = methodLists[indexPath.row]
+        
+        selectedChannelType = method.channelName
+        
+        print("method.name..........", selectedChannelType)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
+
+    
+    private func updateSelectedIndex(_ index: Int) {
+        
+        selectedPaymentMethod = index
+    }
+    
+    
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -203,6 +393,9 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
             
             self.packCollectionView.reloadData()
         }
+        
+        isCoinPack = "no"
+
         return true
     }
     
@@ -213,25 +406,7 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
         
     }
     
-    @IBAction func selectBkashButtonAction(_ sender: UIButton) {
-        
-        sender.isSelected = !sender.isSelected
-        
-        if selectCardButton.isSelected{
-            
-            selectCardButton.isSelected = false
-        }
-    }
     
-    @IBAction func selectCardbuttonAction(_ sender: UIButton) {
-        
-        sender.isSelected = !sender.isSelected
-        
-        if selectBkashButton.isSelected{
-            
-            selectBkashButton.isSelected = false
-        }
-    }
     
     @IBAction func selectTermButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -256,44 +431,55 @@ class DepositCoinViewController: BaseViewController,SFSafariViewControllerDelega
     @IBAction func payNowButtonAction(_ sender: Any) {
         
         if tkAmountTextField.text?.count != 0 {
+            
             if selectTermButton.isSelected{
                 
                 let tkAmount = (tkAmountTextField.text! as NSString).floatValue
-                var type = "ghoori"
-                if selectBkashButton.isSelected{
-                    
-                    type = "ghoori"
-                    
-                }else if selectCardButton.isSelected{
-                    
-                    type = "foster"
-                }
                 
-                print("tkAmount and type ",tkAmount,type)
+                print("tkAmount and type ",tkAmount,selectedChannelType)
                 
-                APIManager.manager.getInvoice(amount: tkAmount,type:type) { (status, id,url,msg) in
+                if selectedChannelType != "None"{
                     
-                    print("getInvoice msg",msg!)
-                    
-                    if status{
-                        self.view.makeToast(msg!)
+                    APIManager.manager.getInvoice(amount: tkAmount,type:selectedChannelType) { (status, id,url,msg) in
                         
-                        print("getInvoice id",id ?? "??",url!)
+                        print("getInvoice msg",msg!)
                         
-                        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BkashPaymentViewController") as? BkashPaymentViewController
-                        
-                        vc?.urlString = url!
-                        
-                        self.navigationController?.pushViewController(vc!, animated: true)
+                        if status{
+                            self.view.makeToast(msg!)
+                            
+                            print("getInvoice id",id ?? "??",url!)
+                            
+                            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BkashPaymentViewController") as? BkashPaymentViewController
+                            
+                            vc?.urlString = url!
+                            vc?.selectedChannelType = self.selectedChannelType
+                            vc?.rechargAmount = self.tkAmountTextField.text!
+                            vc?.isCoinPack = self.isCoinPack
+                            
+                            self.navigationController?.pushViewController(vc!, animated: true)
+                            
+                        }
+                        else{
+                            self.view.makeToast(msg!)
+                        }
                         
                     }
-                    else{
-                        self.view.makeToast(msg!)
-                    }
                     
+                }else{
+                    
+                    self.view.makeToast("Please select a payment method")
+
                 }
                 
+            }else{
+                
+                self.view.makeToast("Please accept terms & conditions")
+
             }
+        }else{
+            
+            self.view.makeToast("No amount is given")
+
         }
     }
     

@@ -19,10 +19,16 @@ class UpComingMatchCell: UITableViewCell {
     @IBOutlet weak var secondTeamName: UILabel!
     
     @IBOutlet weak var statusLabel: UILabel!
+    
+    @IBOutlet weak var contestCount: UILabel!
     @IBOutlet weak var tournamentName: UILabel!
 
     @IBOutlet weak var tournamentTypeLabel: UILabel!
+    let formatter = NumberFormatter()
     
+    @IBOutlet weak var lineupLabel: UILabel!
+    
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,6 +42,14 @@ class UpComingMatchCell: UITableViewCell {
             y: 2,
             blur: 6,
             spread: 0)
+        
+        
+        formatter.numberStyle = .decimal
+        formatter.locale = NSLocale(localeIdentifier: "bn") as Locale
+        
+//        firstTeamName.makeRoundRed()
+//        secondTeamName.makeRoundRed()
+        
 
     }
 
@@ -47,8 +61,20 @@ class UpComingMatchCell: UITableViewCell {
         tournamentName.text = String.init(format: "%@",match.tournamentName ?? "")
         tournamentTypeLabel.isHidden = false
         tournamentTypeLabel.text = String.init(format: "%@",match.format!.uppercased() )
+//        contestCount.text = String.init(format: "Contest Available : %d", match.availableContest!)
         
         print("tournamentTypeLabel",match.format!)
+        var availableContest : String!
+        if Language.language == Language.english{
+            
+            availableContest = String.init(format: "%d", match.availableContest! ?? 0)
+            
+        }else{
+            
+            availableContest = String.init(format: "%@",formatter.string(from: NSNumber(value: match.availableContest!))!)
+        }
+        contestCount.text =  String.init(format: "Contest Available : %@".localized, availableContest!)
+ 
         
         if match.teams.item(at: 0).logo != nil{
             
@@ -75,6 +101,15 @@ class UpComingMatchCell: UITableViewCell {
           
         }
         
+        if match.isLineUpOut == 1{
+            
+            lineupLabel.isHidden = false
+            
+        }else{
+            
+            lineupLabel.isHidden = true
+        }
+        
         
 
         self.needsUpdateConstraints()
@@ -91,6 +126,20 @@ class UpComingMatchCell: UITableViewCell {
         tournamentTypeLabel.isHidden = true
       //  tournamentTypeLabel.text = String.init(format: "%@",match.format!.uppercased() )
         
+       
+        var availableContest : String!
+        if Language.language == Language.english{
+            
+            availableContest = String.init(format: "%d", match.availableContest! ?? 0)
+            
+        }else{
+            
+            availableContest = String.init(format: "%@",formatter.string(from: NSNumber(value: match.availableContest!))!)
+        }
+        contestCount.text =  String.init(format: "Contest Available : %@".localized, availableContest!)
+        
+        
+        
         print("match.teams.item(at: 0).logo",match.teams.item(at: 0).logo)
         
         if match.teams.item(at: 0).logo != nil{
@@ -99,8 +148,8 @@ class UpComingMatchCell: UITableViewCell {
             print("logo..................................",url1)
             firstTeamFlag.kf.setImage(with: url1)
         }else{
-            self.firstTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
             
+            self.firstTeamFlag.image = UIImage.init(named: "placeholder_football_team_logo")
         }
         
         if match.teams.item(at: 1).logo != nil{
@@ -113,6 +162,14 @@ class UpComingMatchCell: UITableViewCell {
             
         }
         
+        if match.isLineUpOut == 1{
+            
+            lineupLabel.isHidden = false
+            
+        }else{
+            
+            lineupLabel.isHidden = true
+        }
         
         
         self.needsUpdateConstraints()

@@ -65,6 +65,8 @@
 
 "CONTESTS" = "সকল কন্টেস্ট";
 "Total Prize" = "সর্বমোট পুরস্কার";
+"Prize List" = "পুরস্কার তালিকা";
+
 "Entry %d" = "এন্ট্রি %d";
 "Entry %@" = "এন্ট্রি %@";
 "Entry Free" = "এন্ট্রি ফ্রি";
@@ -129,10 +131,14 @@
 
 "CONFIRMATION" = "কনফার্মেশন";
 "Your total coins = %@" = "আপনার টোটাল কয়েন = %@";
+"Contest Available : %@" = "কন্টেস্ট সংখ্যা : %@";
+"Rank %@" = "রাঙ্ক %@";
+"Rank %@ - Rank %@" = "রাঙ্ক %@ - রাঙ্ক %@";
+
 
 "To Pay" = "পে করবেন";
 "Entry" = "এন্ট্রি";
-"Apply Free Contest" = "অ্যাপ্লাই ফ্রি কন্টেস্ট";
+"Apply Bonus Coin" = "বোনাস কয়েন অ্যাপ্লাই করুন";
 "JOIN CONTEST" ="কন্টেস্টে জয়েন করুন";
 "You don't have enough coins" = "আপনার পর্যাপ্ত পরিমাণ কয়েন নেই";
 "BUY COINS" = "কয়েন কিনুন";
@@ -201,7 +207,7 @@
 "Back Side Image" = "পিছনের সাইডের ছবি";
 "Please upload one image at least!" = "প্লিজ অন্তত একটি ছবি আপলোড করুন!";
 "1 BDT = 50 Coins" = "১ টাকা = ৫০ কয়েন";
-"You can add coins to your profile from here. As highlighted that 1 BDT = 50 coins which means if you want to add 1000 coins to your profile then write 20 in the input field. Then Click 'Add Coins\' and choose your payment method.  After that, required money will be deducted from your given payment account via our secured payment gateway. The coins will be added to your profile instantly on completion of successful payment. Minimum amount of adding coins is 10 BDT." = "আপনি এই স্ক্রিন থেকে আপনার প্রোফাইলে কয়েন কিনে যোগ করতে পারবেন। উপরে হাইলাইট করে দেয়া লেখা অনুযায়ী ১ টাকা = ৫০ কয়েন, যার মানে হচ্ছে আপনি যদি আপনার প্রোফাইলে ১০০০ কয়েন যোগ করতে চান তাহলে নিচের ইনপুট বক্সে ২০ লিখবেন। এরপর কয়েন কিনুন বাটনে ক্লিক করে পেমেন্ট মেথড সিলেক্ট করুন। এরপর অ্যাপ এর পেমেন্ট গেটওয়ের মাধ্যমে আপনার বাছাই করা পেমেন্ট মেথড থেকে ২০ টাকা কেটে নেয়া হবে  সবগুলো পেমেন্ট মেথড পরীক্ষিত এবং সম্পূর্ন নিরাপদ। সফল ভাবে পেমেন্ট হয়ে গেলে আপনার প্রোফাইল সেই টাকার সমপরিমাণ কয়েন যোগ হয়ে যাবে। আপনি সর্বনিম্ন ১০ টাকার কয়েন কিনতে পারবেন।";
+"Write your amount to get equivalent numbers of coins.Click on the 'ADD COINS' and choose your payment method. Minimum amount is 10 BDT." = "কয়েন পেতে আপনার টাকার পরিমাণটি লিখুন। 'ADD COINS' এ ক্লিক করুন এবং আপনার পেমেন্ট মেথড বাছাই করুন। সর্বনিম্ন ১০ টাকার কয়েন কিনতে পারবে।";
 "Write amount in BDT to buy Coins" = "যত টাকার কয়েন কিনতে চান সেটা লিখুন";
 "Available Coin Packs" = "সকল Available কয়েন প্যাকেজ";
 "Payment Methods" = "পেমেন্ট মেথড";
@@ -234,11 +240,11 @@
 "The amount in BDT you would mention here will add the equivalent amount of coins in your profile." = "আপনি এখানে যত টাকা এর পরিমাণ লিখবেন সেই টাকার সমপরিমাণ কয়েন আপনার প্রোফাইলে জমা হয়ে যাবে";
 
 "WITHDRAW REQUEST" = "প্রাইজ তুলুন";
-"Personal bKash phone number" = "বিকাশ পার্সোনাল ফোন নাম্বার";
+"Personal phone number" = "পার্সোনাল ফোন নাম্বার";
 "Send Withdraw Request" = "প্রাইজ তোলার রিকুয়েস্ট করুন";
 "Cash-Withdrawl!" = "প্রাইজ তুলুন!";
 "The minimum withdrawal amount is 250 BDT and the maximum amount is 4999 BDT." = "সর্বনিম্ন ২৫০ টাকা প্রাইজ হিসেবে তুলতে পারবেন এবং সর্বোচ্চ ৪৯৯৯ টাকা প্রাইজ হিসেবে তুলতে পারবেন।";
-"Personal Bkash number is needed while withdrawing the money." = "যেই পার্সোনাল বিকাশ নাম্বারে প্রাইজ এর টাকা পেতে চাচ্ছেন সেটা দিন।";
+"Personal number is needed while withdrawing the money." = "যেই পার্সোনাল নাম্বারে প্রাইজ এর টাকা পেতে চাচ্ছেন সেটা দিন।";
 
 "COIN PURCHASE" = "কয়েন ক্রয়";
 "Payment successfull" = "আপনার পেমেন্ট সফল হয়েছে!";
@@ -323,3 +329,28 @@
 "Write your promo code" = "আপনার প্রোমো লিখুন";
 "Apply Promo Code" = "প্রোমো যোগ করুন";
 "Promo Code" = "প্রোমো কোড";
+"SEL by %" = "নিয়েছেন %";
+"Favourite: %@%%" = "পছন্দ করেছেন: %@%%";
+
+"GOT IT" = "বুঝতে পেরেছি";
+"CHANGE TEAM" = "পরিবর্তন করুন";
+"CHANGE YOUR TEAM" = "টিম পরিবর্তন";
+"You are changing your team, Want to join using the new team" = "আপনি টিম পরিবর্তন করছেন, নতুন টিম নিয়ে জয়েন করতে চান?";
+
+"**You can't search after the date of %@" = "**%@ তারিখের পর সিলেক্ট করতে পারবেন না";
+"MATCH ARCHIVE" = "ম্যাচ আর্কাইভ";
+
+"Announced" = "ঘোষিত";
+
+"Choose your withdrawl method" = "আপনার প্রাইজ তোলার মাধ্যম সিলেক্ট করুন";
+
+"Special Offer : redeem coins with your prize money to get extra coins!" = "বিশেষ অফার: অতিরিক্ত কয়েন পেতে আপনার পুরস্কারের টাকা দিয়ে কয়েন কনভার্ট করুন!";
+
+"Please provide amount and phone number properly" = "অনুগ্রহ করে টাকার পরিমাণ এবং ফোন নম্বর সঠিকভাবে প্রদান করুন";
+
+"Given numbers are not same!" = "প্রদত্ত ফোন নম্বর এক নয়!";
+"Please select a payment method!" = "অনুগ্রহ পূবর্ক প্রাইজ তোলার মাধ্যম সিলেক্ট করুন!";
+
+"You are trying to withdraw more than your balance" = "আপনি আপনার ব্যালেন্সের চেয়ে বেশি টাকা তোলার চেষ্টা করছেন";
+
+"Please select a pack!" = "দয়া করে একটি প্যাক নির্বাচন করুন!";

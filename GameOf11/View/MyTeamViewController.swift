@@ -43,6 +43,7 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         
         
         createTeamButton.setTitle("Create Another Team".localized, for: .normal)
+        createTeamButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
         
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
             
@@ -87,6 +88,7 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         }
         
         
+        print("parentMatch?.isLineUpOut", parentMatch?.isLineUpOut)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -215,7 +217,7 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             
             cell.keeperLabel.text = "WK"
             cell.batsmanLabel.text = "BAT"
-            cell.allrounderLabel.text = "AL"
+            cell.allrounderLabel.text = "ALL"
             cell.bowlerLabel.text = "BOWL"
             
             cell.setInfo(singleTeam)
@@ -263,6 +265,7 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             
             popupVC?.squadData = squadData
             popupVC?.timeLeft = self.parentMatch?.joiningLastTime
+            popupVC?.isLineUpOut = self.parentMatch?.isLineUpOut ?? 0
             
             self.navigationController?.pushViewController(popupVC ?? self, animated: true)
             
@@ -271,6 +274,7 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             
             popupVC?.squadData = squadData
             popupVC?.timeLeft = self.parentMatchFootball?.joiningLastTime
+            popupVC?.isLineUpOut = self.parentMatchFootball?.isLineUpOut ?? 0
             
             self.navigationController?.pushViewController(popupVC ?? self, animated: true)
             
@@ -317,7 +321,8 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             popupVC.squadData = squadData
             popupVC.userTeamId = sender.tag
             popupVC.timeLeft = self.parentMatch?.joiningLastTime
-            
+            popupVC.isLineUpOut = self.parentMatch?.isLineUpOut ?? 0
+           
             
             self.navigationController?.pushViewController(popupVC, animated: true)
             
@@ -329,7 +334,8 @@ class MyTeamViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             popupVC.squadData = squadData
             popupVC.userTeamId = sender.tag
             popupVC.timeLeft = self.parentMatchFootball?.joiningLastTime
-            
+            popupVC.isLineUpOut = self.parentMatchFootball?.isLineUpOut ?? 0
+           
             
             self.navigationController?.pushViewController(popupVC, animated: true)
             

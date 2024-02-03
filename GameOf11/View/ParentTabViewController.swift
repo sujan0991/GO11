@@ -52,7 +52,7 @@ class ParentTabViewController: UITabBarController {
         
         print("view did load")
         
-        self.tabBar.tintColor = UIColor.init(named: "on_green")
+        self.tabBar.tintColor = UIColor.init(named: "brand_red")
         tabBar.shadowImage = UIImage()
         tabBar.backgroundImage = UIImage()
         tabBar.layer.shadowColor = UIColor.black.cgColor

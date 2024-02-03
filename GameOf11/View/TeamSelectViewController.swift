@@ -15,8 +15,14 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
     var teams:[CreatedTeam] = []
     var teamsFootball:[CreatedTeamFootball] = []
     var contestId: Int = 0
-    
+    var forTeamChange = false
+   
+    var selectedTeamId : Int!
     var selectedIndex : Int!
+    
+    var isSelectButtonCliked = false
+    
+    var isDerectJoinApplicable = false
     
     @IBOutlet weak var confirmView: UIView!
     
@@ -26,18 +32,33 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         super.viewDidLoad()
         
         
-        print("teams........",teams)
+        print("teams........??? \(selectedTeamId)", contestId)
         // Do any additional setup after loading the view.
+       
+      
         
         placeNavBar(withTitle: "SELECT YOUR TEAM".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
-        confirmButton.makeRound(5, borderWidth: 0, borderColor: .clear)
         
         confirmButton.setTitle("JOIN CONTEST".localized, for: .normal)
-        confirmButton.layer.shadowColor = UIColor.gray.cgColor
-        confirmButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        confirmButton.layer.shadowRadius = 2
-        confirmButton.layer.shadowOpacity = 0.5
-        confirmButton.layer.masksToBounds = false
+        
+        
+      
+        if (self.forTeamChange)
+        {
+            placeNavBar(withTitle: "CHANGE YOUR TEAM".localized, isBackBtnVisible: true,isLanguageBtnVisible: false, isGameSelectBtnVisible: false,isAnnouncementBtnVisible: false, isCountLabelVisible: false)
+            confirmButton.setTitle("CHANGE TEAM".localized, for: .normal)
+               
+        }
+        
+        confirmButton.buttonRound(5, borderWidth: 1.0, borderColor: UIColor.init(named: "brand_red")!)
+       
+//        confirmButton.makeRound(5, borderWidth: 0, borderColor: .clear)
+//
+//        confirmButton.layer.shadowColor = UIColor.gray.cgColor
+//        confirmButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+//        confirmButton.layer.shadowRadius = 2
+//        confirmButton.layer.shadowOpacity = 0.5
+//        confirmButton.layer.masksToBounds = false
         
         
         if (teamTableView != nil)
@@ -86,6 +107,7 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"CreatedTeamTableViewCell") as! CreatedTeamTableViewCell
         if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            
             let singleTeam = teams[indexPath.section] as CreatedTeam
             
             cell.keeperLabel.text = "WK"
@@ -107,16 +129,56 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
             
         }
         
+        print("selectedIndex.......cellForRowAt",selectedIndex,forTeamChange)
         
-        if selectedIndex == indexPath.section
-        {
-            cell.selectTeamButton.isSelected = true
+        if forTeamChange{
+                     
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                
+                let singleTeam = teams[indexPath.section] as CreatedTeam
+                
+                if singleTeam.userTeamId == selectedTeamId{
+                    
+                    cell.selectTeamButton.isSelected = true
+                    
+                }else{
+                    
+                    cell.selectTeamButton.isSelected = false
+                    
+                }
+                
+            }else{
+                
+                let singleTeam = teamsFootball[indexPath.section] as CreatedTeamFootball
+                
+                if singleTeam.userTeamId == selectedTeamId{
+                    
+                    cell.selectTeamButton.isSelected = true
+                    
+                }else{
+                    
+                    cell.selectTeamButton.isSelected = false
+                    
+                }
+
+            }
             
         }
-        else
-        {
-            cell.selectTeamButton.isSelected = false
+        
+        if isSelectButtonCliked{
+            
+            if selectedIndex == indexPath.section
+                   {
+                       cell.selectTeamButton.isSelected = true
+                       
+                   }
+                   else
+                   {
+                       cell.selectTeamButton.isSelected = false
+                   }
         }
+        
+       
         cell.selectTeamButton.tag = indexPath.section
         // cell.confirmButton.tag = singleTeam.userTeamId ?? 0
         
@@ -133,42 +195,99 @@ class TeamSelectViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     @IBAction func confirmButtonAction(_ sender: Any) {
         
-        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
-            
-            let singleTeam = teams[selectedIndex] as CreatedTeam
-            
-            if let delegate = self.delegate {
-                
-                delegate.selectedTeam(team: singleTeam,contestId: self.contestId)
-            }
-            
-            print("team name...........?????????",singleTeam.teamName)
-            dismiss(animated: true, completion: nil)
-        }else{
-            let singleTeam = teamsFootball[selectedIndex] as CreatedTeamFootball
-            
-            if let delegate = self.delegate {
-                
-                delegate.selectedTeamFootball(team: singleTeam,contestId: self.contestId)
-            }
-            
-            print("team name...........?????????",singleTeam.teamName)
-            dismiss(animated: true, completion: nil)
-        }
         
+        if self.forTeamChange {
+                    let alertVC = UIAlertController(title: nil, message: "You are changing your team, Want to join using the new team".localized, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Confirm", style: .default, handler: { (aciton) in
+                        self.changeContestTeam()
+                    })
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                        alertVC.dismiss(animated: true, completion: nil)
+                    })
+            
+                    alertVC.addAction(okAction)
+                    alertVC.addAction(cancelAction)
+            
+                    self.present(alertVC, animated: true, completion: nil)
+        }
+        else
+        {
+            if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+                
+                let singleTeam = teams[selectedIndex] as CreatedTeam
+                
+                if let delegate = self.delegate {
+                    
+                    delegate.selectedTeam(team: singleTeam,contestId: self.contestId,isDerectJoinApplicable: isDerectJoinApplicable)
+                }
+                
+              //  print("team name...........?????????",singleTeam.teamName)
+                dismiss(animated: true, completion: nil)
+                
+            }else{
+                let singleTeam = teamsFootball[selectedIndex] as CreatedTeamFootball
+                
+                if let delegate = self.delegate {
+                    
+                    delegate.selectedTeamFootball(team: singleTeam,contestId: self.contestId,isDerectJoinApplicable: isDerectJoinApplicable)
+                }
+                
+         //       print("team name...........?????????",singleTeam.teamName)
+                dismiss(animated: true, completion: nil)
+            }
+        }
+    
     }
+    
     @IBAction func teamSelectAction(_ sender: UIButton) {
         
+        isSelectButtonCliked = true
         selectedIndex = sender.tag
         self.teamTableView.reloadData()
         
         self.confirmView.isHidden = false
         
-        
-        //        let cell = teamTableView.cellForRow(at: IndexPath.init(item: 0, section: sender.tag)) as! CteatedTableViewCell
-        //
-        //        cell.confirmButton.isHidden = false
-        
+    }
+    
+    func changeContestTeam() {
+       
+        if  UserDefaults.standard.object(forKey: "selectedGameType") as? String == "cricket"{
+            let singleTeam = teams[selectedIndex] as CreatedTeam
+            
+            APIManager.manager.updateTeamInContestWith(contestId: String.init(format: "%d",  self.contestId), teamId: String.init(format: "%d", singleTeam.userTeamId!), forTeamType: "cricket", withCompletionHandler: { (status, msg) in
+                if status{
+                    
+                    //update joined contest
+                    self.view.makeToast(msg!)
+                    NotificationCenter.default.post(name: Notification.Name("updateContestDetails"), object: nil, userInfo: nil)
+                }
+                else{
+                    self.view.makeToast(msg!)
+                }
+            })
+            
+        }else{
+            let singleFootballTeam = teamsFootball[selectedIndex] as CreatedTeamFootball
+     
+            APIManager.manager.updateTeamInContestWith(contestId: String.init(format: "%d", self.contestId), teamId: String.init(format: "%d", singleFootballTeam.userTeamId!),forTeamType: "football", withCompletionHandler: { (status, msg) in
+                if status{
+                    
+                    //update contest list
+                    self.view.makeToast(msg!)
+                    NotificationCenter.default.post(name: Notification.Name("updateContestDetails"), object: nil, userInfo: nil)
+           
+                }
+                else{
+                    
+                    self.view.makeToast(msg!)
+                }
+            })
+            
+        }
+        dismiss(animated: true) {
+            NotificationCenter.default.post(name: Notification.Name("updateContestDetails"), object: nil, userInfo: nil)
+           
+        }
         
     }
     

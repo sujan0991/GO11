@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Mixpanel
+
 class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
     
     var userTeam : UsersFantasyTeam!
@@ -53,10 +55,10 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
         
         chooseCaptainLabel.text = "CHOOSE CAPTAIN (C) & VICE CAPTAIN (VC)".localized
         xPointLabel.text = "Your Captain gets 2x points & Vice Captain gets 1.5x points".localized
-        teamNameTextField.placeholder = "Your Team Name".localized
+        //teamNameTextField.placeholder = "Your Team Name".localized
         saveTeamButton.setTitle("Save Your Team".localized, for: .normal)
-        teamNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
-        teamNameTextField.delegate = self
+       // teamNameTextField.smartInsertDeleteType = UITextSmartInsertDeleteType.no
+       // teamNameTextField.delegate = self
         
         
         saveTeamButton.makeRound(5, borderWidth: 0, borderColor: .clear)
@@ -110,11 +112,11 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                 }
                 
                 //if comes from edit view
-                if isFromEdit{
-                    
-                    self.teamNameTextField.text = userTeamName
-                    
-                }
+//                if isFromEdit{
+//
+//                    self.teamNameTextField.text = userTeamName
+//
+//                }
             }
         }
         
@@ -230,7 +232,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             }
             
             if player.teamBelong == 1{
-                cell.teamNamelabel.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.teamNamelabel.textColor = UIColor.init(named: "on_green")!
             }else{
                 cell.teamNamelabel.textColor = UIColor.init(named: "brand_orange")!
             }
@@ -767,13 +769,14 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             
             self.view.makeToast("Please select Captain and Vice Captain properly".localized)
         }
-        else if teamNameTextField.text!.count > 25{
-            
-            self.view.makeToast("Maximum 24 Character".localized)
-        }
-        else if self.teamNameTextField.text?.count ?? 0 > 0
+        else
+//        if teamNameTextField.text!.count > 25{
+//
+//            self.view.makeToast("Maximum 24 Character".localized)
+//        }
+//        else if self.teamNameTextField.text?.count ?? 0 > 0
         {
-            userTeam.teamName = self.teamNameTextField.text
+           // userTeam.teamName = self.teamNameTextField.text
             
             print("captain and vice cap id........",userTeam.captain,userTeam.viceCaptain)
             
@@ -861,7 +864,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
             }
             
             
-            
+        }
             
             
             
@@ -906,6 +909,7 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                 
                 //     print("userTeam.captain ",userTeam.captain,userTeam.viceCaptain)
                 
+                
                 APIManager.manager.postTeam(params: userTeam) { (status, msg) in
                     self.view.makeToast(msg!)
                     
@@ -922,23 +926,31 @@ class CaptainSelectorViewController: UIViewController,UITableViewDelegate,UITabl
                                 print("Dismiss")
                             }
                         }
+                        
+                        let p: Properties = ["match_id": self.userTeam.matchId ?? ""]
+                        Mixpanel.mainInstance().track(event: "team_created_cricket", properties: p)// set team_created_cricket event in mixpanel
+                       
+                        
                     }
                     
                 }
                 
             }
-        }
-        else
-        {
-            
-            self.view.makeToast("Please provide a name for your team".localized)
-            //print(userTeam.batsman.toJSONArray())
-            //print(userTeam.bowler.toJSONArray())
-            //print(userTeam.allrounder.toJSONArray())
-            
-        }
+        
+        
+//        else
+//        {
+//
+//            self.view.makeToast("Please provide a name for your team".localized)
+//            //print(userTeam.batsman.toJSONArray())
+//            //print(userTeam.bowler.toJSONArray())
+//            //print(userTeam.allrounder.toJSONArray())
+//
+//        }
         
     }
+    
+
     
     
     @IBAction func backButtonAction(_ sender: Any) {

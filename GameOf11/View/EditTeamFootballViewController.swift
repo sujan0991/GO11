@@ -38,6 +38,8 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
     
     let formatter = NumberFormatter()
     
+    var isLineUpOut = 0
+    
     
     @IBOutlet weak var maxPlayerLabel: UILabel!
     
@@ -91,7 +93,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
         
         playerListView.register(UINib(nibName: "PlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "playerCell")
         
-        progressView.gradientColors = [UIColor.init(named: "GreenHighlight")!.cgColor, UIColor.init(named: "GreenHighlight")!.cgColor]
+        progressView.gradientColors = [UIColor.init(named: "on_green")!.cgColor, UIColor.init(named: "on_green")!.cgColor]
         
         previewButton.setTitle("Preview Team".localized, for: .normal)
         nextButton.setTitle("Continue".localized, for: .normal)
@@ -100,6 +102,8 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
         playersTopLabel.text = "Players".localized
         playersLabel.text = "PLAYERS".localized
         creditsLabel.text = "CREDITS".localized
+//        selectedPerLabel.text = "SEL by %".localized
+        
         creditLeftLabel.text = "Credits Left".localized
         suggestionLabel.text = "Pick 1 Goal-Keepers".localized
         
@@ -498,6 +502,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
             popupVC?.isFromEdit = true
             popupVC?.userTeamId = userTeamId
             popupVC?.userTeamName = userOldTeam.teamName!
+            popupVC?.timeLeft = timeLeft
             
             self.navigationController?.pushViewController(popupVC ?? self, animated: true)
             // self.present(popupVC!, animated: true, completion: nil)
@@ -580,7 +585,8 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
         
         if cell.isSelected {
             
-            cell.positionIcon.backgroundColor = UIColor.red
+            cell.positionIcon.backgroundColor = UIColor.init(named: "green_to_orange")
+         
             
         }else{
             
@@ -687,7 +693,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
             
         }
         
-        cell.setInfo(player: player,squad: squadData.teams!)
+        cell.setInfo(player: player,squad: squadData.teams!, isLineUpOut: self.isLineUpOut)
         
         
         return cell
@@ -730,7 +736,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
             if player.teamBelong == 1
             {
                 
-                cell.teamCode.textColor = UIColor.init(named: "GreenHighlight")!
+                cell.teamCode.textColor = UIColor.init(named: "on_green")!
             }
             else
             {
@@ -1100,7 +1106,7 @@ class EditTeamFootballViewController: UIViewController,UICollectionViewDelegate,
             
         }else{
             
-            nextButton.setBackgroundColor(UIColor.init(named: "HighlightGrey")!, for: UIControl.State.normal)
+            nextButton.setBackgroundColor(UIColor.init(named: "brand_txt_color_gray")!, for: UIControl.State.normal)
             nextButton.isUserInteractionEnabled = false
             
         }
